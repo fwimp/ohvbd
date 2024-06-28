@@ -1,0 +1,11 @@
+Package: ohvbd
+Title: One Health VBD Hub
+Version: 0.0.0.9000
+Authors@R: 
+    person("Francis", "Windram", , "francis.windram17@imperial.ac.uk", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-2129-826X"))
+Description: Interface with the One Health VBD Hub and related repositories directly.
+License: GPL (>= 3)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
