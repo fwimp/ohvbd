@@ -8,3 +8,9 @@ At present this package is very much in its early stages, as such the internal A
 [![R-CMD-check](https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
+To install:
+
+```{r}
+library(devtools)
+install_github("fwimp/ohvbd")
+```
