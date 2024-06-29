@@ -10,7 +10,7 @@ At present this package is very much in its early stages, as such the internal A
 
 To install:
 
-```{r}
+```
 library(devtools)
 install_github("fwimp/ohvbd")
 ```

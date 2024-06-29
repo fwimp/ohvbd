@@ -7,28 +7,26 @@
 extract_vt_data(res, cols = NA, returnunique = FALSE)
 }
 \arguments{
-\item{res}{a response list (such as \code{response$data}) from vectraits}
+\item{res}{a response list (such as \code{response$data}) from vectraits.}
 
-\item{cols}{a character vector of columns to extract from the dataset}
+\item{cols}{a character vector of columns to extract from the dataset.}
 
-\item{returnunique}{whether to return only the unique rows within each dataset according to the filtered columns}
+\item{returnunique}{whether to return only the unique rows within each dataset according to the filtered columns.}
 }
 \value{
-Returns a dataframe containing the requested data
+A dataframe containing the extracted data.
 }
 \description{
-Extract the data returned by a call to \code{\link[=get_vt_dataset_byid]{get_vt_dataset_byid()}}, filter columns of interest, and find unique rows if required.
+Extract the data returned by a call to \code{\link[=get_vt_byid]{get_vt_byid()}}, filter columns of interest, and find unique rows if required.
 }
 \examples{
 \dontrun{
-req <- generate_vb_basereq()
-res <- get_vt_dataset_byid(54, req)
-extract_vt_data(res$data,
-                cols=c(
-                  "DatasetID",
-                  "Interactor1Genus",
-                  "Interactor1Species"),
-                returnunique=TRUE)
+generate_vb_basereq() \%>\%
+  get_vt_dataset_byid(54) \%>\%
+  extract_vt_data(cols=c("DatasetID",
+                         "Interactor1Genus",
+                         "Interactor1Species"),
+                  returnunique=TRUE)
 }
 
 }

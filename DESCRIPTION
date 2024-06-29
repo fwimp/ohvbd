@@ -16,4 +16,3 @@ Imports:
     dplyr,
     httr2,
     magrittr,
-    progress
