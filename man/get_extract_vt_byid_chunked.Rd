@@ -18,6 +18,8 @@ get_extract_vt_byid_chunked(
 
 \item{ids}{a numeric vector of IDs indicating the particular datasets to download.}
 
+\item{chunksize}{an integer defining the size of chunks to retrieve in one iteration.}
+
 \item{cols}{a character vector of columns to extract from the dataset.}
 
 \item{returnunique}{whether to return only the unique rows within each dataset according to the filtered columns.}
