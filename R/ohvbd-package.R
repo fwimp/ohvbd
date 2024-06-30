@@ -4,6 +4,7 @@
 ## usethis namespace: start
 #' @importFrom data.table rbindlist
 #' @importFrom dplyr any_of
+#' @importFrom dplyr bind_cols
 #' @importFrom dplyr select
 #' @importFrom httr2 last_response
 #' @importFrom httr2 req_error

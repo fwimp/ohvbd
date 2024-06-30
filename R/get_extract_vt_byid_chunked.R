@@ -23,7 +23,7 @@
 #'
 
 get_extract_vt_byid_chunked <-
-  function(basereq, ids, chunksize=20, cols=NA, returnunique=FALSE, rate=5){
+function(basereq, ids, chunksize=20, cols=NA, returnunique=FALSE, rate=5){
     # Get and extract vt data by ID in chunks (to save memory)
 
     # Split into chunks
