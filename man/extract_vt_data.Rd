@@ -21,7 +21,7 @@ Extract the data returned by a call to \code{\link[=get_vt_byid]{get_vt_byid()}}
 }
 \examples{
 \dontrun{
-generate_vb_basereq() \%>\%
+vb_basereq() \%>\%
   get_vt_dataset_byid(54) \%>\%
   extract_vt_data(cols=c("DatasetID",
                          "Interactor1Genus",

@@ -10,7 +10,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' generate_vb_basereq() %>%
+#' vb_basereq() %>%
 #'   get_vt_dataset_byid(54) %>%
 #'   extract_vt_data(cols=c("DatasetID",
 #'                          "Interactor1Genus",
