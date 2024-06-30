@@ -6,13 +6,16 @@
 \usage{
 vb_basereq(
   baseurl = "https://vectorbyte.crc.nd.edu/portal/api/",
-  useragent = "ROHVBD"
+  useragent = "ROHVBD",
+  unsafe = FALSE
 )
 }
 \arguments{
 \item{baseurl}{the base url for the vectorbyte API}
 
 \item{useragent}{the user agent string used when contacting vectorbyte}
+
+\item{unsafe}{disable ssl verification (should only ever be required on Linux, \strong{do not enable this by default})}
 }
 \value{
 Returns an httr2 request object, pointing at baseurl using useragent

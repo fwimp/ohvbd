@@ -20,7 +20,13 @@ Typically the process of getting data using ohvbd starts with an `httr2` request
 
 ```{r basereq, echo=TRUE, message=FALSE, results=FALSE}
 library(ohvbd)
-vb_basereq()
+basereq <- vb_basereq()
+```
+
+If you are using Linux, sometimes `httr2` fails to communicate with the VectorByte servers. As such on these systems it is better to start with a basereq with reduced server authentication.
+<!-- Shim to make sure vignette builds on ubuntu-->
+```{r basereq2, echo=TRUE, message=FALSE, results=FALSE}
+basereq <- vb_basereq(unsafe=TRUE)
 ```
 
 ```         
@@ -56,8 +62,8 @@ Another note before we begin: the functions used to interface with VecTraits and
 
 Datasets in VecTraits and VecDyn are organised by id. As such it is often good to be able to see which IDs are currently available. We can do this using the `get_current_x_ids()` family of functions. These return a vector of valid IDs on the given database:
 
-```{r get_vt_ids, eval=FALSE}
-vb_basereq() %>% get_current_vt_ids() %>% head(n=20)
+```{r get_vt_ids}
+basereq %>% get_current_vt_ids() %>% head(n=20)
 ```
 
 The functions `search_x()` and `search_x_smart()` also return a list of IDs that match the query provided in the arguments.
@@ -65,7 +71,7 @@ The functions `search_x()` and `search_x_smart()` also return a list of IDs that
 In this case let's search VecTraits for *Aedes aegypti*, the "Asian tiger mosquito":
 
 ```{r search_vt}
-aedes_ids <- vb_basereq() %>% search_vt("Aedes aegypti")
+aedes_ids <- basereq %>% search_vt("Aedes aegypti")
 aedes_ids
 ```
 
@@ -80,7 +86,7 @@ Now you have a vector of datasets, we need to actually retrieve the data of thes
 To do this we can use the `get_x_byid()` functions. In this case let's get the first 5 *Aedes aegypti* datasets:
 
 ```{r get_vt, echo=TRUE, message=FALSE, results=FALSE}
-aedes_responses <- vb_basereq() %>% get_vt_byid(aedes_ids[1:5])
+aedes_responses <- basereq %>% get_vt_byid(aedes_ids[1:5])
 aedes_responses[[1]]
 ```
 ```
@@ -123,7 +129,7 @@ In some cases you may end up downloading a lot of data. This can cause problems 
 One potential method for mitigating this is to use the `get_extract_x_byid_chunked()` functions. These only download a few records at a time and extract them before moving on to the next chunk of ids. We can perform the filtered extraction from above like so:
 
 ```{r get_extract_vt_chunked}
-vb_basereq() %>% get_extract_vt_byid_chunked(
+basereq %>% get_extract_vt_byid_chunked(
   aedes_ids[1:5],
   chunksize = 2,
   cols = c("LocationText", "OriginalTraitName"),
@@ -136,8 +142,8 @@ In day-to-day use, you will mostly find yourself using all these functions toget
 A typical pipeline would likely only contain two lines of code:
 
 ```{r vt_pipeline, echo=TRUE, message=FALSE, results=FALSE}
-ids <- vb_basereq() %>% search_vt("Aedes aegypti")
-df <- vb_basereq() %>%
+ids <- basereq %>% search_vt("Aedes aegypti")
+df <- basereq %>%
   get_vt_byid(ids) %>%
   extract_vt_data(
     cols=c("Interactor1Genus", "Interactor1Species", "Latitude", "Longitude"),
