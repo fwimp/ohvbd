@@ -16,3 +16,5 @@ Imports:
     dplyr,
     httr2,
     magrittr,
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr

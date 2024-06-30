@@ -1,0 +1,154 @@
+---
+title: "Retrieving and extracting data with ohvbd"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Retrieving and extracting data with ohvbd}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+## Introduction
+
+The ohvbd package allows you to retrieve data from many different databases directly.
+
+Currently these databases include the [VecTraits](https://vectorbyte.crc.nd.edu/vectraits-explorer) and [VecDyn](https://vectorbyte.crc.nd.edu/vecdyn-datasets) projects from [VectorByte](https://www.vectorbyte.org/).
+
+## The base request
+
+Typically the process of getting data using ohvbd starts with an `httr2` request object. This can easily be generated as follows:
+
+```{r basereq, echo=TRUE, message=FALSE, results=FALSE}
+library(ohvbd)
+vb_basereq()
+```
+
+```         
+## <httr2_request>
+## GET https://vectorbyte.crc.nd.edu/portal/api/
+## Body: empty
+## Options:
+## * useragent: 'ROHVBD'
+```
+
+This base request (basereq) provides the basic url and identifying information about the package for interfacing with the API. As such it is generally a good idea to start every call to the API from this point.
+
+For users who are familiar with tidyverse pipes (`%>%`), this approach is generally usable in ohvbd as well.
+
+For users who are not familiar, pipes take the output of one command and feed it forward to the next command as the first argument:
+
+```{r nonpipedemo}
+# Find mean of a vector normally
+x <- c(1,2,3)
+mean(x)
+```
+
+```{r pipedemo}
+# Find mean of a vector using pipes
+c(1,2,3) %>% mean()
+```
+
+For the rest of this vignette we will be using a piped-style approach.
+
+Another note before we begin: the functions used to interface with VecTraits and VecDyn are basically the same, except for a `vt` or `vd` in the function name. So `search_vt()` is the VecTraits equivalent of `search_vd()`. We will use VecTraits functions in this vignette, but the process is the same for VecDyn.
+
+## Finding IDs
+
+Datasets in VecTraits and VecDyn are organised by id. As such it is often good to be able to see which IDs are currently available. We can do this using the `get_current_x_ids()` family of functions. These return a vector of valid IDs on the given database:
+
+```{r get_vt_ids}
+vb_basereq() %>% get_current_vt_ids() %>% head(n=20)
+```
+
+The functions `search_x()` and `search_x_smart()` also return a list of IDs that match the query provided in the arguments.
+
+In this case let's search VecTraits for *Aedes aegypti*, the "Asian tiger mosquito":
+
+```{r search_vt}
+aedes_ids <- vb_basereq() %>% search_vt("Aedes aegypti")
+aedes_ids
+```
+
+This again returns a vector of IDs, this time corresponding to any dataset with *Aedes aegypti* in one of the searchable columns.
+
+You can also find IDs interactively online by using the [VecTraits Explorer](https://vectorbyte.crc.nd.edu/vectraits-explorer) should you so choose.
+
+## Getting data
+
+Now you have a vector of datasets, we need to actually retrieve the data of these datasets through the API.
+
+To do this we can use the `get_x_byid()` functions. In this case let's get the first 5 *Aedes aegypti* datasets:
+
+```{r get_vt, echo=TRUE, message=FALSE, results=FALSE}
+aedes_responses <- vb_basereq() %>% get_vt_byid(aedes_ids[1:5])
+aedes_responses[[1]]
+```
+```
+## <httr2_response>
+## GET https://vectorbyte.crc.nd.edu/portal/api/vectraits-dataset/97/?format=json
+## Status: 200 OK
+## Content-Type: application/json
+## Body: In memory (26362 bytes)
+```
+
+The `get_vt_byid()` function returns a list of the data in the form of the original `httr2` responses. These are useful if you want to know specifics about how the server sent data back, but for most usecases it is more useful to extract the data into a dataframe.
+
+## Extracting data
+
+Now we have a list of responses, we can extract the relevant data from them using the `extract_x_data()` functions.
+
+```{r extract_all_vt}
+aedes_data <- aedes_responses %>% extract_vt_data()
+paste0("Data dimensions: ",ncol(aedes_data), " cols x ", nrow(aedes_data), " rows")
+```
+
+This dataset is a bit too large to print here, and often you may only want a few columns of data rather than the whole dataset.
+
+Fortunately the `cols` argument allows us to filter this data out easily. We can also use the `returnunique` argument to instruct ohvbd to return only unique rows.
+
+So let's get just the unique locations and trait name combinations from our data using the same command as before:
+
+```{r extract_filtered_vt}
+aedes_data_filtered <- aedes_responses %>%
+  extract_vt_data(
+    cols = c("LocationText", "OriginalTraitName"),
+    returnunique = TRUE)
+aedes_data_filtered
+```
+
+## Chunked downloading
+
+In some cases you may end up downloading a lot of data. This can cause problems if you do not have enough memory on your computer to store this data in memory all at once, even if you just want one or two columns, like before,
+
+One potential method for mitigating this is to use the `get_extract_x_byid_chunked()` functions. These only download a few records at a time and extract them before moving on to the next chunk of ids. We can perform the filtered extraction from above like so:
+
+```{r get_extract_vt_chunked}
+vb_basereq() %>% get_extract_vt_byid_chunked(
+  aedes_ids[1:5],
+  chunksize = 2,
+  cols = c("LocationText", "OriginalTraitName"),
+  returnunique = TRUE)
+```
+## Putting it all together
+
+In day-to-day use, you will mostly find yourself using all these functions together to create small pipelines.
+
+A typical pipeline would likely only contain two lines of code:
+
+```{r vt_pipeline, echo=TRUE, message=FALSE, results=FALSE}
+ids <- vb_basereq() %>% search_vt("Aedes aegypti")
+df <- vb_basereq() %>%
+  get_vt_byid(ids) %>%
+  extract_vt_data(
+    cols=c("Interactor1Genus", "Interactor1Species", "Latitude", "Longitude"),
+    returnunique = TRUE)
+```
+```{r df_out}
+df
+```
+
+
+## Futher steps
+
+From here you now have all the data you might need for further analysis, so now it's down to you!
+
+One final note to end on: it can be advisable to save any output data in a csv or parquet format so that you do not need to re-download it every time you run your script. This is as easy as running `write.csv()` on your dataframe, then reading it in later with `read.csv()`.
