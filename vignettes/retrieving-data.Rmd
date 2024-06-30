@@ -17,6 +17,7 @@ Currently these databases include the [VecTraits](https://vectorbyte.crc.nd.edu/
 
 Typically the process of getting data using ohvbd starts with an `httr2` request object. This can easily be generated as follows:
 
+
 ```{r basereq, echo=TRUE, message=FALSE, results=FALSE}
 library(ohvbd)
 vb_basereq()
@@ -55,7 +56,7 @@ Another note before we begin: the functions used to interface with VecTraits and
 
 Datasets in VecTraits and VecDyn are organised by id. As such it is often good to be able to see which IDs are currently available. We can do this using the `get_current_x_ids()` family of functions. These return a vector of valid IDs on the given database:
 
-```{r get_vt_ids}
+```{r get_vt_ids eval=FALSE}
 vb_basereq() %>% get_current_vt_ids() %>% head(n=20)
 ```
 
