@@ -27,7 +27,7 @@ get_extract_vt_byid_chunked <-
     # Get and extract vt data by ID in chunks (to save memory)
 
     # Split into chunks
-    breakpoints <- seq(0, length(ids) + 9, by = 10)
+    breakpoints <- seq(0, length(ids) + (chunksize-1), by = chunksize)
     chunks <- cut(seq_along(ids), breaks=breakpoints , labels=FALSE)
     chunklets <- split(ids, chunks)
 

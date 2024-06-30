@@ -2,7 +2,7 @@
 #' @description Extract the data returned by a call to [ohvbd::get_vt_byid()], filter columns of interest, and find unique rows if required.
 #' @author Francis Windram
 #'
-#' @param res a response list (such as `response$data`) from vectraits.
+#' @param res a list of responses from VecTraits.
 #' @param cols a character vector of columns to extract from the dataset.
 #' @param returnunique whether to return only the unique rows within each dataset according to the filtered columns.
 #'
@@ -21,7 +21,8 @@
 #' @export
 #'
 
-extract_vt_data <- function(res, cols=NA, returnunique=FALSE){
+extract_vt_data <-
+function(res, cols=NA, returnunique=FALSE){
 
   if (any(class(res) == "httr2_response")){
     # Detect if this is a single request

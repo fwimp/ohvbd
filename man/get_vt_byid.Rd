@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_vt_byid.R
 \name{get_vt_byid}
 \alias{get_vt_byid}
-\title{Get VecTraits dataset by ID}
+\title{Get VecTraits dataset/s by ID}
 \usage{
 get_vt_byid(basereq, ids, rate = 5)
 }
@@ -17,7 +17,7 @@ get_vt_byid(basereq, ids, rate = 5)
 A list of \link[httr2:response]{httr2 response} objects.
 }
 \description{
-Retrieve a single VecTraits dataset specified by its dataset ID.
+Retrieve VecTraits dataset/s specified by their dataset ID.
 }
 \examples{
 \dontrun{

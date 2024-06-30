@@ -7,7 +7,7 @@
 extract_vt_data(res, cols = NA, returnunique = FALSE)
 }
 \arguments{
-\item{res}{a response list (such as \code{response$data}) from vectraits.}
+\item{res}{a list of responses from VecTraits.}
 
 \item{cols}{a character vector of columns to extract from the dataset.}
 
