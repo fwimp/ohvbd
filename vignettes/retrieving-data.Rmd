@@ -13,6 +13,20 @@ The ohvbd package allows you to retrieve data from many different databases dire
 
 Currently these databases include the [VecTraits](https://vectorbyte.crc.nd.edu/vectraits-explorer) and [VecDyn](https://vectorbyte.crc.nd.edu/vecdyn-datasets) projects from [VectorByte](https://www.vectorbyte.org/).
 
+Let's imagine you wanted to figure out where a particular vector species - _Aedes aegypti_, for example - was found. Here's how you'd use `ohvbd` to do that:
+
+```{exemplar, echo=TRUE, message=FALSE, results=FALSE}
+ids <- vb_basereq() %>% search_vt("Aedes aegypti")
+df <- basereq %>%
+  get_vt_byid(ids) %>%
+  extract_vt_data(
+    cols=c("Interactor1Genus", "Interactor1Species", "Latitude", "Longitude"),
+    returnunique = TRUE)
+df
+```
+
+Great, lovely. But now... what does that all mean? And how can you build up your own data request? Read on to find out...
+
 ## The base request
 
 Typically the process of getting data using ohvbd starts with an `httr2` request object. This can easily be generated as follows:
@@ -158,4 +172,5 @@ df
 
 From here you now have all the data you might need for further analysis, so now it's down to you!
 
-One final note to end on: it can be advisable to save any output data in a csv or parquet format so that you do not need to re-download it every time you run your script. This is as easy as running `write.csv()` on your dataframe, then reading it in later with `read.csv()`.
+One final note to end on: it can be advisable to save any output data in a csv or parquet format so that you do not need to re-download it every time you run your script. This is as easy as running `write.csv()` on your dataframe, then reading it in later with `read.csv()`
+.
