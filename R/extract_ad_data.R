@@ -8,7 +8,7 @@
 #' @param targetdate either: The date to search for in ISO 8601 (e.g. "2020", "2021-09", or "2022-09-21"). OR the start date for a range of dates.
 #' @param enddate The (exclusive) end of the range of dates to search for. If this is unfilled, only the `targetdate` is searched for.
 #' @param places A character vector or single string describing what locality to search for in the dataset.
-#' @param gid the spatial scale of the AREAdata matrix (this is not needed if the matrix has been supplied by [get_vt()]).
+#' @param gid the spatial scale of the AREAdata matrix (this is not needed if the matrix has been supplied by [get_ad()]).
 #'
 #' @return A matrix containing the extracted data.
 #'

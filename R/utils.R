@@ -51,7 +51,7 @@ vd_extraction_helper <- function(resp, cols=NA){
 
 #' @title Convert a vector of place names to their equivalent at a different gid level
 #' @param resp A vector of places
-#' @return vector of converted place names/gid codes
+#' @return vector of converted place names or gid codes
 #' @keywords internal
 #'
 

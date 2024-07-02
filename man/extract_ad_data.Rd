@@ -21,7 +21,7 @@ extract_ad_data(
 
 \item{places}{A character vector or single string describing what locality to search for in the dataset.}
 
-\item{gid}{the spatial scale of the AREAdata matrix (this is not needed if the matrix has been supplied by \code{\link[=get_vt]{get_vt()}}).}
+\item{gid}{the spatial scale of the AREAdata matrix (this is not needed if the matrix has been supplied by \code{\link[=get_ad]{get_ad()}}).}
 }
 \value{
 A matrix containing the extracted data.

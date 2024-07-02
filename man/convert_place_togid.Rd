@@ -10,7 +10,7 @@ convert_place_togid(places, gid = 0)
 \item{resp}{A vector of places}
 }
 \value{
-vector of converted place names/gid codes
+vector of converted place names or gid codes
 }
 \description{
 Convert a vector of place names to their equivalent at a different gid level
