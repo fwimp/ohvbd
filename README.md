@@ -12,5 +12,5 @@ To install:
 
 ```
 library(devtools)
-install_github("fwimp/ohvbd")
+install_github("fwimp/ohvbd", build_vignettes = TRUE)
 ```

@@ -15,7 +15,7 @@ Currently these databases include the [VecTraits](https://vectorbyte.crc.nd.edu/
 
 Let's imagine you wanted to figure out where a particular vector species - _Aedes aegypti_, for example - was found. Here's how you'd use `ohvbd` to do that:
 
-```{exemplar, echo=TRUE, message=FALSE, results=FALSE}
+```{r exemplar, echo=TRUE, eval=FALSE}
 ids <- vb_basereq() %>% search_vt("Aedes aegypti")
 df <- basereq %>%
   get_vt_byid(ids) %>%
