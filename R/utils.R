@@ -48,3 +48,16 @@ vd_extraction_helper <- function(resp, cols=NA){
   }
   return(df_out)
 }
+
+#' @title Convert a vector of place names to their equivalent at a different gid level
+#' @param resp A vector of places
+#' @return vector of converted place names/gid codes
+#' @keywords internal
+#'
+
+convert_place_togid <- function(places, gid=0){
+  returncolumn <- c("NAME_0", "GID_1", "GID_2")[gid+1]
+  out_places <- gidtable %>% filter_all(any_vars(. %in% places))%>% select(returncolumn)
+  return(unique(out_places[[1]]))
+}
+

@@ -20,6 +20,11 @@
 #' @importFrom httr2 resp_body_json
 #' @importFrom httr2 resps_data
 #' @importFrom httr2 resps_successes
+#' @importFrom lubridate %within%
+#' @importFrom lubridate as_date
+#' @importFrom lubridate days
+#' @importFrom lubridate interval
+#' @importFrom lubridate period
 #' @importFrom magrittr %>%
 ## usethis namespace: end
 NULL

@@ -4,3 +4,4 @@
 ^\.github$
 ^doc$
 ^Meta$
+^data-raw$

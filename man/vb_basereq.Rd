@@ -26,7 +26,7 @@ It does not contain any tokens or session ids, and thus can be regenerated at an
 }
 \examples{
 \dontrun{
-req <- generate_vb_basereq(
+basereq <- vb_basereq(
   baseurl="https://vectorbyte.crc.nd.edu/portal/api/",
   useragent="ROHVBD")
 }

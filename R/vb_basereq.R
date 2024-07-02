@@ -10,7 +10,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' req <- generate_vb_basereq(
+#' basereq <- vb_basereq(
 #'   baseurl="https://vectorbyte.crc.nd.edu/portal/api/",
 #'   useragent="ROHVBD")
 #' }

@@ -15,6 +15,9 @@ Imports:
     data.table,
     dplyr,
     httr2,
-    magrittr,
+    lubridate,
+    magrittr
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
+Depends: 
+    R (>= 2.10)
