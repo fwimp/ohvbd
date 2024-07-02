@@ -16,7 +16,8 @@ Imports:
     dplyr,
     httr2,
     lubridate,
-    magrittr
+    magrittr,
+    rlang
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 Depends: 

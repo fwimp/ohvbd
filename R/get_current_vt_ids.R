@@ -27,7 +27,7 @@ get_current_vt_ids <- function(basereq){
   })
 
   if (resp$status_code == 404){
-    stop(paste("No records found for", paste(keywords, collapse = " ")))
+    stop(paste("No server response. Try again in a bit,"))
   }
 
   body <- resp %>% resp_body_json()

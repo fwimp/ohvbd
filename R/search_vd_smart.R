@@ -114,7 +114,7 @@ function(basereq, field, operator, value){
   body <- resp %>% resp_body_json()
   if (length(body) > 2){
     # This is a bit of a kludge, the API does not return count in the same place if no results are found
-    stop(paste("No records found for", paste(keywords, collapse = " ")))
+    stop(paste("No records found for", paste(field, operator, value)))
   } else {
     return(as.numeric(body$ids))
   }

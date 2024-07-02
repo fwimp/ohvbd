@@ -28,5 +28,6 @@
 #' @importFrom lubridate interval
 #' @importFrom lubridate period
 #' @importFrom magrittr %>%
+#' @importFrom rlang .data
 ## usethis namespace: end
 NULL
