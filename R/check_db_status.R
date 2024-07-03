@@ -28,7 +28,7 @@ check_db_status <- function(){
       out$status_code
     }
     )
-    if (200 <= statuscode & statuscode < 300) {
+    if (200 <= statuscode && statuscode < 300) {
       cat(paste0("\n",names(db_list)[i], ": UP"))
     } else {
       cat(paste0("\n",names(db_list)[i], ": DOWN"))

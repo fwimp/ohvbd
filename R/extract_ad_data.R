@@ -58,11 +58,11 @@ function(ad_matrix, targetdate=NA, enddate=NA, places=NA, gid=NA){
     if (!is.null(pot_gid)){gid <- pot_gid}
   }
 
-  adtype <- attr(ad_matrix, "adtype")
-  if (adtype == "popdens"){
+  metric <- attr(ad_matrix, "metric")
+  if (metric == "popdens"){
     warning("Dataset appears to be Population Density! This does not need extracting.")
     return(ad_matrix)
-  } else if (adtype == "popdens"){
+  } else if (metric == "popdens"){
     warning("Dataset appears to be a Forecast! This is not currently processed by the extractor.")
     return(ad_matrix)
   }
