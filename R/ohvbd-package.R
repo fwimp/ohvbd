@@ -2,6 +2,16 @@
 "_PACKAGE"
 
 ## usethis namespace: start
+#' @importFrom cli cli_abort
+#' @importFrom cli cli_alert_danger
+#' @importFrom cli cli_alert_info
+#' @importFrom cli cli_alert_success
+#' @importFrom cli cli_alert_warning
+#' @importFrom cli cli_progress_done
+#' @importFrom cli cli_progress_message
+#' @importFrom cli cli_rule
+#' @importFrom cli cli_ul
+#' @importFrom curl curl_download
 #' @importFrom data.table rbindlist
 #' @importFrom dplyr any_of
 #' @importFrom dplyr any_vars

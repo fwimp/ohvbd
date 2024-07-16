@@ -60,10 +60,12 @@ function(ad_matrix, targetdate=NA, enddate=NA, places=NA, gid=NA){
 
   metric <- attr(ad_matrix, "metric")
   if (metric == "popdens"){
-    warning("Dataset appears to be Population Density! This does not need extracting.")
+    # warning("Dataset appears to be Population Density! This does not need extracting.")
+    cli_alert_warning("Dataset appears to be Population Density! This does not need extracting.")
     return(ad_matrix)
   } else if (metric == "popdens"){
-    warning("Dataset appears to be a Forecast! This is not currently processed by the extractor.")
+    # warning("Dataset appears to be a Forecast! This is not currently processed by the extractor.")
+    cli_alert_warning("Dataset appears to be a Forecast! This is not currently processed by the extractor.")
     return(ad_matrix)
   }
 
@@ -95,7 +97,10 @@ function(ad_matrix, targetdate=NA, enddate=NA, places=NA, gid=NA){
         if (is.na(targetdate_final)){
           # Dunno, stop filtering date
           filter_date <- FALSE
-          warning(paste0('Could not make "', targetdate, '" into a usable date.\n  Try ISO 8601 yyyy-mm-dd format.\nNot filtering date.'))
+          # warning(paste0('Could not make "', targetdate, '" into a usable date.\n  Try ISO 8601 yyyy-mm-dd format.\nNot filtering date.'))
+          cli_alert_warning('Could not make {.val {targetdate}} into a usable date.')
+          cli_alert_warning("Not filtering by date.")
+          cli_alert_info("Try ISO 8601 {.val yyyy-mm-dd} format")
         }
       }
     }
@@ -113,7 +118,10 @@ function(ad_matrix, targetdate=NA, enddate=NA, places=NA, gid=NA){
           if (is.na(enddate_final)){
             # Dunno, infer enddate
             infer_enddate <- TRUE
-            warning(paste0('Could not make "', enddate, '" into a usable date.\n  Try ISO 8601 yyyy-mm-dd format.\nInferring end date from targetdate.'))
+            # warning(paste0('Could not make "', enddate, '" into a usable date.\n  Try ISO 8601 yyyy-mm-dd format.\nInferring end date from targetdate.'))
+            cli_alert_warning('Could not make {.val targetdate} into a usable date.')
+            cli_alert_warning("Inferring end date from {.arg targetdate}.")
+            cli_alert_info("Try ISO 8601 {.val yyyy-mm-dd} format")
           }
         }
       }
@@ -133,6 +141,8 @@ function(ad_matrix, targetdate=NA, enddate=NA, places=NA, gid=NA){
   }
 
   if (!any(is.na(places))){
+    # Convert places to underscore format
+    places <- gsub(" ", "_", places)
     if (!all(places %in% rownames(ad_matrix))){
       # If any listed places are not in df
       # Try to convert places to equivalents in the correct GID system
