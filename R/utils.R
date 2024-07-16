@@ -19,7 +19,7 @@ vd_error_body <- function(resp) {
 }
 
 #' @title collapse a list of character strings to a JS space-separated single string
-#' @param resp a vector to format
+#' @param v a vector to format
 #' @return collapsed string
 #' @keywords internal
 #'
@@ -50,7 +50,7 @@ vd_extraction_helper <- function(resp, cols=NA){
 }
 
 #' @title Convert a vector of place names to their equivalent at a different gid level
-#' @param resp A vector of places
+#' @param places A vector of places
 #' @return vector of converted place names or gid codes
 #' @keywords internal
 #'

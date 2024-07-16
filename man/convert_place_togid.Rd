@@ -7,7 +7,7 @@
 convert_place_togid(places, gid = 0)
 }
 \arguments{
-\item{resp}{A vector of places}
+\item{places}{A vector of places}
 }
 \value{
 vector of converted place names or gid codes

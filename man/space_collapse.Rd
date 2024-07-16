@@ -7,7 +7,7 @@
 space_collapse(v)
 }
 \arguments{
-\item{resp}{a vector to format}
+\item{v}{a vector to format}
 }
 \value{
 collapsed string
