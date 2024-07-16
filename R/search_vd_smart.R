@@ -93,7 +93,7 @@ function(basereq, field, operator, value){
     cli_alert_warning("Halting execution.")
     cli_abort(c("x"="Invalid field: {.val {field}}"))
   }
-  resp <- tryCatch({
+  resplist <- tryCatch({
     resp <- basereq %>%
       req_url_path_append("vecdynbyprovider") %>%
       req_url_query("format" = "json") %>%
@@ -101,16 +101,16 @@ function(basereq, field, operator, value){
       req_url_query("operator" = final_operator) %>%
       req_url_query("term" = value) %>%
       req_perform()
-    resp
+    list("resp"=resp, "err_code"=0)
   }, error = function(e){
     # Get the last response instead
-    last_response()
+    list("resp"=last_response(), "err_code"=1)
   })
 
-  if (resp$status_code == 404){
+  if (resplist$err_code == 1){
     cli_abort(c("x"="No records found for {.val {paste(final_field, final_operator, value)}}"))
   }
-  body <- resp %>% resp_body_json()
+  body <- resplist$resp %>% resp_body_json()
   if (length(body) > 2){
     # This is a bit of a kludge, the API does not return count in the same place if no results are found
     cli_abort(c("x"="No records found for {.val {paste(final_field, final_operator, value)}}"))

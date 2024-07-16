@@ -1,3 +1,7 @@
+# ohvbd 0.2.4
+
+* VecTraits & VecDyn search functions no longer return stale responses if the search fails.
+
 # ohvbd 0.2.3
 
 * VecTraits functions now use the `cli` package to provide a nicer cli interface.

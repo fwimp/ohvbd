@@ -16,21 +16,21 @@
 
 get_current_vd_ids <-
 function(basereq){
-  resp <- tryCatch({
+  resplist <- tryCatch({
     resp <- basereq %>%
       req_url_path_append("vecdynbyprovider") %>%
       req_url_query("format" = "json") %>%
       req_perform()
-    resp
+    list("resp"=resp, "err_code"=0)
   }, error = function(e){
     # Get the last response instead
-    last_response()
+    list("resp"=last_response(), "err_code"=1)
   })
 
-  if (resp$status_code == 404){
+  if (resplist$err_code == 1){
     cli_abort("No records found.")
   }
 
-  body <- resp %>% resp_body_json()
+  body <- resplist$resp %>% resp_body_json()
   return(as.numeric(body$ids))
 }
