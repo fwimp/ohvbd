@@ -36,7 +36,7 @@ function(basereq, keywords){
   })
 
   if (resp$status_code == 404){
-    stop(paste("No records found for", paste(keywords, collapse = " ")))
+    cli_abort("No records found for {.val {keywords}}")
   }
 
   body <- resp %>% resp_body_json()

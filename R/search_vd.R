@@ -37,14 +37,14 @@ function(basereq, keywords){
   # return(resp)
 
   if (resp$status_code == 404){
-    stop(paste("No records found for", paste(keywords, collapse = " ")))
+    cli_abort("No records found for {.val {keywords}}")
   }
 
   body <- resp %>% resp_body_json()
 
   if (length(body) > 2){
     # This is a bit of a kludge, the API does not return count in the same place if no results are found
-    stop(paste("No records found for", paste(keywords, collapse = " ")))
+    cli_abort("No records found for {.val {keywords}}")
   } else {
     return(as.numeric(body$ids))
   }

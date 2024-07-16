@@ -28,7 +28,7 @@ function(res, cols=NA, returnunique=FALSE){
     # Detect if this is a single request
     out_data <- res %>% resp_body_json()
   } else if (any(class(res) == "httr2_error")){
-    stop("Response contains error! (check to see if ID actually exists?)")
+    cli_abort("Response contains error! (check to see if ID actually exists?)")
   } else {
     # Extract data from all successful responses
     out_data <- res %>%  resps_successes()  %>%  resps_data(\(resp) resp_body_json(resp))

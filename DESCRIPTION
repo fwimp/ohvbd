@@ -1,6 +1,6 @@
 Package: ohvbd
 Title: One Health VBD Hub
-Version: 0.2.2
+Version: 0.2.3
 Authors@R: 
     person("Francis", "Windram", , "francis.windram17@imperial.ac.uk", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-2129-826X"))

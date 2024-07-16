@@ -1,3 +1,8 @@
+# ohvbd 0.2.3
+
+* VecTraits functions now use the `cli` package to provide a nicer cli interface.
+* VecDyn functions now use the `cli` package to provide a nicer cli interface.
+
 # ohvbd 0.2.2
 
 * AREAdata functions now use the `cli` package to provide a nicer cli interface.

@@ -14,7 +14,8 @@
 #' @export
 #'
 
-get_current_vd_ids <- function(basereq){
+get_current_vd_ids <-
+function(basereq){
   resp <- tryCatch({
     resp <- basereq %>%
       req_url_path_append("vecdynbyprovider") %>%
@@ -27,7 +28,7 @@ get_current_vd_ids <- function(basereq){
   })
 
   if (resp$status_code == 404){
-    stop(paste("No server response. Try again in a bit,"))
+    cli_abort("No records found.")
   }
 
   body <- resp %>% resp_body_json()

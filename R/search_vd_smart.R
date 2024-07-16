@@ -63,13 +63,12 @@ function(basereq, field, operator, value){
   } else {
     # Just for warning message
     human_operators <- c("contains", "!contains", "equals", "!equals", "starts", "!starts", "in", "!in", "greater", "less")
-    warning(paste(
-      "Operator",
-      operator,
-      'not an allowed operator!\n  Allowed operators:\n  -',
-      paste(human_operators, collapse = ",\n  - "),
-      '\nDefaulting to "contains"...'))
+    cli_alert_warning("Operator {.val {operator}} not an allowed operator!")
+    cli_rule(left="Allowed operators")
+    cli_ul(human_operators)
+    cli_rule()
     final_operator <- "contains"
+    cli_alert_warning("Defaulting to {.val {final_operator}}")
     # TODO: Could add fuzzy matching using stringdist if that seems necessary
   }
 
@@ -87,11 +86,12 @@ function(basereq, field, operator, value){
   if (field %in% names(poss_fields)){
     final_field <- final_fields[poss_fields[field]]
   } else {
-    stop(paste("\n  Field",
-               field,
-               'not an allowed field!\n  Allowed fields:\n  -',
-               paste(final_fields, collapse = ",\n  - "),
-               '\nHalting execution.\n'))
+    cli_alert_danger("Field {.val {field}} not an allowed field!")
+    cli_rule(left="Allowed fields")
+    cli_ul(final_fields)
+    cli_rule()
+    cli_alert_warning("Halting execution.")
+    cli_abort(c("x"="Invalid field: {.val {field}}"))
   }
   resp <- tryCatch({
     resp <- basereq %>%
@@ -108,13 +108,12 @@ function(basereq, field, operator, value){
   })
 
   if (resp$status_code == 404){
-    stop(paste("No records found for", field, operator, value))
+    cli_abort(c("x"="No records found for {.val {paste(final_field, final_operator, value)}}"))
   }
-
   body <- resp %>% resp_body_json()
   if (length(body) > 2){
     # This is a bit of a kludge, the API does not return count in the same place if no results are found
-    stop(paste("No records found for", paste(field, operator, value)))
+    cli_abort(c("x"="No records found for {.val {paste(final_field, final_operator, value)}}"))
   } else {
     return(as.numeric(body$ids))
   }

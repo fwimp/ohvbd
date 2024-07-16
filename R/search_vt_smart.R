@@ -49,7 +49,7 @@
 #'
 
 search_vt_smart <-
-  function(basereq, field, operator, value){
+function(basereq, field, operator, value){
   # Operator lookup table.
   poss_operators <- c(
     "contains"=1, "contain"=1, "has"=1, "have"=1,
@@ -69,13 +69,12 @@ search_vt_smart <-
   } else {
     # Just for warning message
     human_operators <- c("contains", "!contains", "equals", "!equals", "starts", "!starts", "in", "!in")
-    warning(paste(
-      "Operator",
-      operator,
-      'not an allowed operator!\n  Allowed operators:\n  -',
-      paste(human_operators, collapse = ",\n  - "),
-      '\nDefaulting to "contains"...'))
+    cli_alert_warning("Operator {.val {operator}} not an allowed operator!")
+    cli_rule(left="Allowed operators")
+    cli_ul(human_operators)
+    cli_rule()
     final_operator <- "contains"
+    cli_alert_warning("Defaulting to {.val {final_operator}}")
     # TODO: Could add fuzzy matching using stringdist if that seems necessary
   }
 
@@ -107,11 +106,12 @@ search_vt_smart <-
   if (field %in% names(poss_fields)){
     final_field <- final_fields[poss_fields[field]]
   } else {
-    stop(paste("\n  Field",
-               field,
-               'not an allowed field!\n  Allowed fields:\n  -',
-               paste(final_fields, collapse = ",\n  - "),
-               '\nHalting execution.\n'))
+    cli_alert_danger("Field {.val {field}} not an allowed field!")
+    cli_rule(left="Allowed fields")
+    cli_ul(final_fields)
+    cli_rule()
+    cli_alert_warning("Halting execution.")
+    cli_abort(c("x"="Invalid field: {.val {field}}"))
   }
   resp <- tryCatch({
     resp <- basereq %>%
@@ -128,7 +128,7 @@ search_vt_smart <-
   })
 
   if (resp$status_code == 404){
-    stop(paste("No records found for", field, operator, value))
+    cli_abort(c("x"="No records found for {.val {paste(final_field, final_operator, value)}}"))
   }
 
   body <- resp %>% resp_body_json()
