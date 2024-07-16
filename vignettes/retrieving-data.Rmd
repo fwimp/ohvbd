@@ -158,7 +158,7 @@ A typical pipeline would likely only contain two lines of code:
 ```{r vt_pipeline, echo=TRUE, message=FALSE, results=FALSE}
 ids <- basereq %>% search_vt("Aedes aegypti")
 df <- basereq %>%
-  get_vt_byid(ids) %>%
+  get_vt_byid(ids[1:5]) %>%
   extract_vt_data(
     cols=c("Interactor1Genus", "Interactor1Species", "Latitude", "Longitude"),
     returnunique = TRUE)
