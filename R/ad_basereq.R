@@ -14,7 +14,6 @@
 #' @export
 #'
 
-ad_basereq <-
-function(){
+ad_basereq <- function() {
   return("https://github.com/pearselab/areadata/raw/main/")
 }

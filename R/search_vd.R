@@ -21,28 +21,26 @@
 #' @export
 #'
 
-search_vd <-
-function(basereq, keywords){
+search_vd <- function(basereq, keywords) {
   resplist <- tryCatch({
     resp <- basereq %>%
       req_url_path_append("vecdynbyprovider") %>%
       req_url_query("format" = "json") %>%
       req_url_query("keywords" = keywords, .multi = space_collapse) %>%
       req_perform()
-    list("resp"=resp, "err_code"=0)
-  }, error = function(e){
+    list("resp" = resp, "err_code" = 0)
+  }, error = function(e) {
     # Get the last response instead
-    list("resp"=last_response(), "err_code"=1)
+    list("resp" = last_response(), "err_code" = 1)
   })
-  # return(resp)
 
-  if (resplist$err_code == 1){
+  if (resplist$err_code == 1) {
     cli_abort("No records found for {.val {keywords}}")
   }
 
   body <- resplist$resp %>% resp_body_json()
 
-  if (length(body) > 2){
+  if (length(body) > 2) {
     # This is a bit of a kludge, the API does not return count in the same place if no results are found
     cli_abort("No records found for {.val {keywords}}")
   } else {

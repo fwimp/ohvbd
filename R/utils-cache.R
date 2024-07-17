@@ -12,12 +12,12 @@
 #' @keywords internal
 #'
 
-write_ad_cache <- function(d, path, metric=NA, gid=NA, format="rda", compression_type="bzip2", compression_level=9){
-  if (is.na(metric)){
+write_ad_cache <- function(d, path, metric = NA, gid = NA, format = "rda", compression_type = "bzip2", compression_level = 9) {
+  if (is.na(metric)) {
     metric <- attr(d, "metric")
   }
 
-  if (is.na(gid)){
+  if (is.na(gid)) {
     gid <- attr(d, "gid")
   }
 
@@ -25,8 +25,8 @@ write_ad_cache <- function(d, path, metric=NA, gid=NA, format="rda", compression
   ifelse(!dir.exists(path), dir.create(path), FALSE)
   writetime <- lubridate::now()
   save(d, writetime,
-       file=file.path(path, paste0(metric, "-", gid, ".rda")),
-       compress=compression_type,
+       file = file.path(path, paste0(metric, "-", gid, ".rda")),
+       compress = compression_type,
        compression_level = compression_level)
 }
 
@@ -43,12 +43,12 @@ write_ad_cache <- function(d, path, metric=NA, gid=NA, format="rda", compression
 #'
 
 
-read_ad_cache <- function(path, metric, gid, warn=TRUE){
+read_ad_cache <- function(path, metric, gid, warn = TRUE) {
   writetime <- 0
   d <- NA
   load(file.path(path, paste0(metric, "-", gid, ".rda")))
   readtime <- lubridate::now()
-  if (warn){
+  if (warn) {
     timediff <- readtime - writetime
     if (timediff > months(6))
       warning("Cached data older than 6 months!\nConsider deleting or recreating the cache.")

@@ -19,19 +19,20 @@
 #' @export
 #'
 
-get_vd_byid <-
-function(basereq, ids, rate=5){
+get_vd_byid <- function(basereq, ids, rate = 5) {
   # vd does not return nonexistent piids as 404,
-  reqs <- ids %>% lapply(
-    \(id) basereq %>%
+  reqs <- ids %>% lapply(\(id) {
+    basereq %>%
       req_url_path_append("vecdyncsv") %>%
       req_url_query("format" = "json", "piids" = id) %>%
-      req_error(body=vd_error_body) %>%
-      req_headers(ohvbd=id) %>%  # Add additional header just so we can nicely handle failures
-      req_throttle(rate))
+      req_error(body = vd_error_body) %>%
+      req_headers(ohvbd = id) %>%  # Add additional header just so we can nicely handle failures
+      req_throttle(rate)
+  })
   resps <- reqs %>% req_perform_sequential(on_error = "continue", progress = list(
-    name="VecDyn Data",
-    format="Downloading {cli::pb_name} {cli::pb_current}/{cli::pb_total} {cli::pb_bar} {cli::pb_percent} | ETA: {cli::pb_eta}"))
+    name = "VecDyn Data",
+    format = "Downloading {cli::pb_name} {cli::pb_current}/{cli::pb_total} {cli::pb_bar} {cli::pb_percent} | ETA: {cli::pb_eta}"
+  ))
 
   return(resps)
 }

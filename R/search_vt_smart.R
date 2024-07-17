@@ -48,29 +48,29 @@
 #' @export
 #'
 
-search_vt_smart <-
-function(basereq, field, operator, value){
+search_vt_smart <- function(basereq, field, operator, value) {
   # Operator lookup table.
   poss_operators <- c(
-    "contains"=1, "contain"=1, "has"=1, "have"=1,
-    "!contains"=2, "!contain"=2, "!has"=2, "!have"=2, "ncontains"=2,
-    "="=3, "=="=3, "equal"=3, "equals"=3, "eq"=3,
-    "!="=4, "not"=4, "!equal"=4, "!equals"=4, "!eq"=4, "neq"=4,
-    "starts with"=5, "start with"=5, "start"=5, "starts"=5, "sw"=5,
-    "not starts with"=6, "not start with"=6, "!start"=6, "!starts"=6, "nsw"=6,
-    "in"=7, "within"=7,
-    "not in"=8, "!in"=8, "not within"=8, "!within"=8, "nin"=8)
+    "contains" = 1, "contain" = 1, "has" = 1, "have" = 1,
+    "!contains" = 2, "!contain" = 2, "!has" = 2, "!have" = 2, "ncontains" = 2,
+    "=" = 3, "==" = 3, "equal" = 3, "equals" = 3, "eq" = 3,
+    "!=" = 4, "not" = 4, "!equal" = 4, "!equals" = 4, "!eq" = 4, "neq" = 4,
+    "starts with" = 5, "start with" = 5, "start" = 5, "starts" = 5, "sw" = 5,
+    "not starts with" = 6, "not start with" = 6, "!start" = 6, "!starts" = 6, "nsw" = 6,
+    "in" = 7, "within" = 7,
+    "not in" = 8, "!in" = 8, "not within" = 8, "!within" = 8, "nin" = 8
+  )
   final_operators <- c("contains", "ncontains", "eq", "neq", "sw", "nsw", "in", "nin")
 
   # Translate operator to proper operator name
   operator <- tolower(operator)
-  if (operator %in% names(poss_operators)){
+  if (operator %in% names(poss_operators)) {
     final_operator <- final_operators[poss_operators[operator]]
   } else {
     # Just for warning message
     human_operators <- c("contains", "!contains", "equals", "!equals", "starts", "!starts", "in", "!in")
     cli_alert_warning("Operator {.val {operator}} not an allowed operator!")
-    cli_rule(left="Allowed operators")
+    cli_rule(left = "Allowed operators")
     cli_ul(human_operators)
     cli_rule()
     final_operator <- "contains"
@@ -80,38 +80,40 @@ function(basereq, field, operator, value){
 
   # Fields lookup table
   poss_fields <- c(
-    "datasetid"=1, "id"=1,
-    "originaltraitname"=2, "traitname"=2,
-    "variables"=3,
-    "interactor1order"=4, "order"=4,
-    "interactor1family"=5, "family"=5,
-    "interactor1genus"=6, "genus"=6,
-    "interactor1species"=7, "species"=7, "spp"=7,
-    "interactor1stage"=8, "stage"=8,
-    "interactor1sex"=9, "sex"=9,
-    "interactor2genus"=10, "genus2"=10,
-    "interactor2species"=11, "species2"=10, "spp2"=10,
-    "citation"=12, "cite"=12,
-    "doi"=13,
-    "curatedbydoi"=14,
-    "submittedby"=15, "who"=15)
+    "datasetid" = 1, "id" = 1,
+    "originaltraitname" = 2, "traitname" = 2,
+    "variables" = 3,
+    "interactor1order" = 4, "order" = 4,
+    "interactor1family" = 5, "family" = 5,
+    "interactor1genus" = 6, "genus" = 6,
+    "interactor1species" = 7, "species" = 7, "spp" = 7,
+    "interactor1stage" = 8, "stage" = 8,
+    "interactor1sex" = 9, "sex" = 9,
+    "interactor2genus" = 10, "genus2" = 10,
+    "interactor2species" = 11, "species2" = 10, "spp2" = 10,
+    "citation" = 12, "cite" = 12,
+    "doi" = 13,
+    "curatedbydoi" = 14,
+    "submittedby" = 15, "who" = 15
+  )
   final_fields <- c(
     "DatasetID", "OriginalTraitName", "Variables", "Interactor1Order",
     "Interactor1Family", "Interactor1Genus", "Interactor1Species",
     "Interactor1Stage", "Interactor1Sex", "Interactor2Genus",
-    "Interactor2Species", "Citation", "DOI", "CuratedByDOI", "SubmittedBy")
+    "Interactor2Species", "Citation", "DOI", "CuratedByDOI", "SubmittedBy"
+  )
 
   # Translate field to proper field name
   field <- tolower(field)
-  if (field %in% names(poss_fields)){
+  if (field %in% names(poss_fields)) {
     final_field <- final_fields[poss_fields[field]]
   } else {
     cli_alert_danger("Field {.val {field}} not an allowed field!")
-    cli_rule(left="Allowed fields")
+    cli_rule(left = "Allowed fields")
     cli_ul(final_fields)
     cli_rule()
     cli_alert_warning("Halting execution.")
-    cli_abort(c("x"="Invalid field: {.val {field}}"))
+    cli_abort(c("x" = "Invalid field: {.val {field}}"))
   }
 
   resplist <- tryCatch({
@@ -122,14 +124,14 @@ function(basereq, field, operator, value){
       req_url_query("operator" = final_operator) %>%
       req_url_query("term" = value) %>%
       req_perform()
-    list("resp"=resp, "err_code"=0)
-  }, error = function(e){
+    list("resp" = resp, "err_code" = 0)
+  }, error = function(e) {
     # Get the last response instead
-    list("resp"=last_response(), "err_code"=1)
+    list("resp" = last_response(), "err_code" = 1)
   })
 
-  if (resplist$err_code == 1){
-    cli_abort(c("x"="No records found for {.val {paste(final_field, final_operator, value)}}"))
+  if (resplist$err_code == 1) {
+    cli_abort(c("x" = "No records found for {.val {paste(final_field, final_operator, value)}}"))
   }
 
   body <- resplist$resp %>% resp_body_json()

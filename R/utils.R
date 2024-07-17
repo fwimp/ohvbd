@@ -24,7 +24,7 @@ vd_error_body <- function(resp) {
 #' @keywords internal
 #'
 
-space_collapse <- function(v){
+space_collapse <- function(v) {
   paste(v, collapse = "%20")
 }
 
@@ -34,15 +34,15 @@ space_collapse <- function(v){
 #' @keywords internal
 #'
 
-vd_extraction_helper <- function(resp, cols=NA){
+vd_extraction_helper <- function(resp, cols = NA) {
   resp_parse <- resp %>% resp_body_json()
   df <- rbindlist(resp_parse$results)
   df2 <- as.data.frame(resp_parse$consistent_data)
   df_out <- bind_cols(df2, df)
-  if (resp_parse$count > 0){
+  if (resp_parse$count > 0) {
     df_out$dataset_id <- resp$request$headers$ohvbd
   }
-  if (!any(is.na(cols))){
+  if (!any(is.na(cols))) {
     # Filter cols from each sublist
     df_out <- df_out %>%  select(any_of(cols))
   }
@@ -55,16 +55,17 @@ vd_extraction_helper <- function(resp, cols=NA){
 #' @keywords internal
 #'
 
-convert_place_togid <- function(places, gid=0){
-  returncolumn <- c("NAME_0", "GID_1", "GID_2")[gid+1]
+convert_place_togid <- function(places, gid = 0) {
+  returncolumn <- c("NAME_0", "GID_1", "GID_2")[gid + 1]
   # .data$. is required to silence R CMD build notes about undefined globals.
-  out_places <- gidtable %>% filter_all(any_vars(.data$. %in% places))%>% select(returncolumn)
+  out_places <- gidtable %>% filter_all(any_vars(.data$. %in% places)) %>% select(returncolumn)
   return(unique(out_places[[1]]))
 }
 
 
 # Only used for internal testing and doesnt need to be checked.
 #
+# nolint start
 # get_min_R_version <- function(pkgs=NA){
 #   # Adapted from https://blog.r-hub.io/2022/09/12/r-dependency/
 #   db <- tools::CRAN_package_db()
@@ -98,3 +99,4 @@ convert_place_togid <- function(places, gid=0){
 #   r_vers <- trimws(gsub("^R \\(>=?\\s(.+)\\)", "\\1", r_deps))
 #   return(as.character(max(package_version(r_vers))))
 # }
+# nolint end

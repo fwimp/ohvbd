@@ -22,23 +22,23 @@
 #' @export
 #'
 
-get_extract_vt_byid_chunked <-
-function(basereq, ids, chunksize=20, cols=NA, returnunique=FALSE, rate=5){
-    # Get and extract vt data by ID in chunks (to save memory)
+get_extract_vt_byid_chunked <- function(basereq, ids, chunksize = 20, cols = NA, returnunique = FALSE, rate = 5) {
+  # Get and extract vt data by ID in chunks (to save memory)
 
-    # Split into chunks
-    breakpoints <- seq(0, length(ids) + (chunksize-1), by = chunksize)
-    chunks <- cut(seq_along(ids), breaks=breakpoints , labels=FALSE)
-    chunklets <- split(ids, chunks)
+  # Split into chunks
+  breakpoints <- seq(0, length(ids) + (chunksize - 1), by = chunksize)
+  chunks <- cut(seq_along(ids), breaks = breakpoints, labels = FALSE)
+  chunklets <- split(ids, chunks)
 
-    # Lapply pipeline to chunk list
-    out_list <- chunklets %>% lapply(
-      \(idchunk) basereq %>%
-        get_vt_byid(idchunk, rate=rate) %>%
-        extract_vt_data(cols=cols, returnunique=returnunique))
+  # Lapply pipeline to chunk list
+  out_list <- chunklets %>% lapply(\(idchunk) {
+    basereq %>%
+      get_vt_byid(idchunk, rate = rate) %>%
+      extract_vt_data(cols = cols, returnunique = returnunique)
+  })
 
-    out_df <- rbindlist(out_list)
+  out_df <- rbindlist(out_list)
 
 
-    return(as.data.frame(out_df))
-  }
+  return(as.data.frame(out_df))
+}

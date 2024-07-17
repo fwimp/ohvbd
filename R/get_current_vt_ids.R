@@ -14,20 +14,19 @@
 #' @export
 #'
 
-get_current_vt_ids <-
-function(basereq){
+get_current_vt_ids <- function(basereq) {
   resplist <- tryCatch({
     resp <- basereq %>%
       req_url_path_append("vectraits-explorer") %>%
       req_url_query("format" = "json") %>%
       req_perform()
-    list("resp"=resp, "err_code"=0)
-  }, error = function(e){
+    list("resp" = resp, "err_code" = 0)
+  }, error = function(e) {
     # Get the last response instead
-    list("resp"=last_response(), "err_code"=1)
+    list("resp" = last_response(), "err_code" = 1)
   })
 
-  if (resplist$err_code == 1){
+  if (resplist$err_code == 1) {
     cli_abort("No records found.")
   }
 

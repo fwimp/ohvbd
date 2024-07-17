@@ -63,24 +63,23 @@
 #' @export
 #'
 
-extract_ad_data <-
-function(ad_matrix, targetdate=NA, enddate=NA, places=NA, gid=NA){
+extract_ad_data <- function(ad_matrix, targetdate = NA, enddate = NA, places = NA, gid = NA) {
   # Enddate SHOULD BE EXCLUSIVE
 
   # try to infer gid from ad_matrix
   # This will allow us to automagically fill or filter by countries even when we only have GID codes.
-  if (is.na(gid)){
+  if (is.na(gid)) {
     pot_gid <- attr(ad_matrix, "gid")
-    if (!is.null(pot_gid)){gid <- pot_gid}
+    if (!is.null(pot_gid)) {
+      gid <- pot_gid
+    }
   }
 
   metric <- attr(ad_matrix, "metric")
-  if (metric == "popdens"){
-    # warning("Dataset appears to be Population Density! This does not need extracting.")
+  if (metric == "popdens") {
     cli_alert_warning("Dataset appears to be Population Density! This does not need extracting.")
     return(ad_matrix)
-  } else if (metric == "popdens"){
-    # warning("Dataset appears to be a Forecast! This is not currently processed by the extractor.")
+  } else if (metric == "popdens") {
     cli_alert_warning("Dataset appears to be a Forecast! This is not currently processed by the extractor.")
     return(ad_matrix)
   }
@@ -95,48 +94,46 @@ function(ad_matrix, targetdate=NA, enddate=NA, places=NA, gid=NA){
 
   # All this is just trying to intelligently process possible date searches
 
-  if (!any(is.na(targetdate))){
+  if (!any(is.na(targetdate))) {
     # Search by date
     present_dates <- as.Date(colnames(ad_matrix))
     filter_date <- TRUE
 
     # Try to make targetdate into a date
     suppressWarnings(targetdate_final <- as_date(targetdate))
-    if (any(is.na(targetdate_final))){
+    if (any(is.na(targetdate_final))) {
       # Maybe it's a YYYY-MM
       suppressWarnings(targetdate_final <- as_date(paste0(targetdate, "-01")))
       date_filterlevel <- "months"
-      if (any(is.na(targetdate_final))){
+      if (any(is.na(targetdate_final))) {
         # Maybe it's a YYYY
         suppressWarnings(targetdate_final <- as_date(paste0(targetdate, "-01-01")))
         date_filterlevel <- "years"
-        if (any(is.na(targetdate_final))){
+        if (any(is.na(targetdate_final))) {
           # Dunno, stop filtering date
           filter_date <- FALSE
-          # warning(paste0('Could not make "', targetdate, '" into a usable date.\n  Try ISO 8601 yyyy-mm-dd format.\nNot filtering date.'))
-          cli_alert_warning('Could not make {.val {targetdate}} into a usable date.')
+          cli_alert_warning("Could not make {.val {targetdate}} into a usable date.")
           cli_alert_warning("Not filtering by date.")
           cli_alert_info("Try ISO 8601 {.val yyyy-mm-dd} format")
         }
       }
     }
   }
-  if (filter_date == TRUE){
-    if (length(targetdate) <= 1){
-      if (!is.na(enddate)){
+  if (filter_date == TRUE) {
+    if (length(targetdate) <= 1) {
+      if (!is.na(enddate)) {
         # Try to make enddate into a date
         suppressWarnings(enddate_final <- as_date(enddate))
-        if (is.na(enddate_final)){
+        if (is.na(enddate_final)) {
           # Maybe it's a YYYY-MM
           suppressWarnings(enddate_final <- as_date(paste0(enddate, "-01")))
-          if (is.na(enddate_final)){
+          if (is.na(enddate_final)) {
             # Maybe it's a YYYY
             suppressWarnings(enddate_final <- as_date(paste0(enddate, "-01-01")))
-            if (is.na(enddate_final)){
+            if (is.na(enddate_final)) {
               # Dunno, infer enddate
               infer_enddate <- TRUE
-              # warning(paste0('Could not make "', enddate, '" into a usable date.\n  Try ISO 8601 yyyy-mm-dd format.\nInferring end date from targetdate.'))
-              cli_alert_warning('Could not make {.val targetdate} into a usable date.')
+              cli_alert_warning("Could not make {.val targetdate} into a usable date.")
               cli_alert_warning("Inferring end date from {.arg targetdate}.")
               cli_alert_info("Try ISO 8601 {.val yyyy-mm-dd} format")
             }
@@ -147,31 +144,31 @@ function(ad_matrix, targetdate=NA, enddate=NA, places=NA, gid=NA){
         infer_enddate <- TRUE
       }
 
-      if (infer_enddate == TRUE){
+      if (infer_enddate == TRUE) {
         # Infer enddate at the resolution of the date provided
-        enddate_final <- targetdate_final + period(1, units=date_filterlevel)
+        enddate_final <- targetdate_final + period(1, units = date_filterlevel)
       }
       # Convert enddate to inclusive spec
       enddate_final <- enddate_final - days(1)
       # Actually find the columns
       selected_cols <- which(present_dates %within% interval(targetdate_final, enddate_final))
     } else {
-      if (date_filterlevel == "days"){
+      if (date_filterlevel == "days") {
         # If it's a vector of dates then just check if they're present
         selected_cols <- which(present_dates %in% targetdate_final)
       } else {
-        cli_abort(c("x"="Incomplete dates in {.arg targetdate} vector: {.val {targetdate}}"))
+        cli_abort(c("x" = "Incomplete dates in {.arg targetdate} vector: {.val {targetdate}}"))
       }
     }
   }
 
-  if (!any(is.na(places))){
+  if (!any(is.na(places))) {
     # Convert places to underscore format
     places <- gsub(" ", "_", places)
-    if (!all(places %in% rownames(ad_matrix))){
+    if (!all(places %in% rownames(ad_matrix))) {
       # If any listed places are not in df
       # Try to convert places to equivalents in the correct GID system
-      if(!is.na(gid)){
+      if (!is.na(gid)) {
         places <- convert_place_togid(places, gid)
       }
     }

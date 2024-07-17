@@ -19,20 +19,21 @@
 #' @export
 #'
 
-get_vt_byid <-
-function(basereq, ids, rate=5){
+get_vt_byid <- function(basereq, ids, rate = 5) {
   # ids_to_find can be a single number or a vector and this works just fine!
-  reqs <- ids %>% lapply(
-    \(id) basereq %>%
+  reqs <- ids %>% lapply(\(id) {
+    basereq %>%
       req_url_path_append("vectraits-dataset") %>%
       req_url_path_append(id) %>%
       req_url_query("format" = "json") %>%
-      req_error(body=vt_error_body) %>%
-      req_headers(ohvbd=id) %>%  # Add additional header just so we can nicely handle failures
-      req_throttle(rate))
+      req_error(body = vt_error_body) %>%
+      req_headers(ohvbd = id) %>%  # Add additional header just so we can nicely handle failures
+      req_throttle(rate)
+  })
   resps <- reqs %>% req_perform_sequential(on_error = "continue", progress = list(
-    name="Vectraits Data",
-    format="Downloading {cli::pb_name} {cli::pb_current}/{cli::pb_total} {cli::pb_bar} {cli::pb_percent} | ETA: {cli::pb_eta}"))
+    name = "Vectraits Data",
+    format = "Downloading {cli::pb_name} {cli::pb_current}/{cli::pb_total} {cli::pb_bar} {cli::pb_percent} | ETA: {cli::pb_eta}"
+  ))
 
   return(resps)
 }

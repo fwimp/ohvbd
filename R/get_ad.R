@@ -29,35 +29,34 @@
 #' @export
 #'
 
-get_ad <-
-function(basereq, metric="temp", gid=0, use_cache=FALSE, cache_location = ".adcache", refresh_cache=FALSE){
+get_ad <- function(basereq, metric = "temp", gid = 0, use_cache = FALSE, cache_location = ".adcache", refresh_cache = FALSE) {
 
-  if (gid>1 && !use_cache){
+  if (gid > 1 && !use_cache) {
     cli_alert_warning("GID2 datasets are quite large.")
     cli_alert_info("It is recommended to set {.arg use_cache=TRUE} to enable caching.")
   }
 
-  loaded_cache=FALSE
+  loaded_cache <- FALSE
   final_url <- paste0(basereq, "output/")
   poss_metrics <- c(
-    "temp"=1, "temperature"=1,
-    "spechumid"=2, "specific humidity"=2,
-    "relhumid"=3, "relative humidity"=3,
-    "uv"=4, "ultraviolet"=4,
-    "precip"=5, "precipitation"=5, "rainfall"=5,
-    "popdens"=6, "population density"=6, "population"=6,
-    "forecast"=7, "future climate"=7, "future"=7
+    "temp" = 1, "temperature" = 1,
+    "spechumid" = 2, "specific humidity" = 2,
+    "relhumid" = 3, "relative humidity" = 3,
+    "uv" = 4, "ultraviolet" = 4,
+    "precip" = 5, "precipitation" = 5, "rainfall" = 5,
+    "popdens" = 6, "population density" = 6, "population" = 6,
+    "forecast" = 7, "future climate" = 7, "future" = 7
   )
   final_metrics <- c("temp", "spechumid", "relhumid", "uv", "precip", "popdens", "forecast")
 
   metric <- tolower(metric)
-  if (metric %in% names(poss_metrics)){
+  if (metric %in% names(poss_metrics)) {
     metricid <- poss_metrics[metric]
     final_metric <- final_metrics[metricid]
   } else {
     # Just for warning message
     cli_alert_warning("Metric {.val {metric}} not an allowed metric!")
-    cli_rule(left="Allowed metrics")
+    cli_rule(left = "Allowed metrics")
     cli_ul(final_metrics)
     cli_rule()
     final_metric <- "temp"
@@ -66,38 +65,38 @@ function(basereq, metric="temp", gid=0, use_cache=FALSE, cache_location = ".adca
   }
   outmat <- NA
   # Try to load cache
-  if (use_cache && !refresh_cache){
+  if (use_cache && !refresh_cache) {
     outmat <- tryCatch({
       cli_progress_message("{symbol$pointer} Loading AREAdata cache: {final_metric}-{gid} ...")
       suppressWarnings(read_ad_cache(cache_location, final_metric, gid))
-    }, error= function(e){
+    }, error = function(e) {
       cli_alert_danger("Failed to load AREAdata cache: {final_metric}-{gid}!")
       NA
     })
   }
 
-  if (any(!is.na(outmat))){
-    loaded_cache = TRUE
+  if (any(!is.na(outmat))) {
+    loaded_cache <- TRUE
     cli_alert_success("Loaded AREAdata cache {final_metric}-{gid}.")
   }
 
-  if (!loaded_cache){
+  if (!loaded_cache) {
     cli_progress_message("{symbol$pointer} Loading AREAdata {final_metric}-{gid} from github...")
     gid_str <- c("countries", "GID1", "GID2")[gid + 1]
 
-    if (gid < 2 ){
-      if (metricid <= 5){
+    if (gid < 2) {
+      if (metricid <= 5) {
         # Daily Climate
-        final_url <- paste0(final_url, final_metric, "-dailymean-", gid_str,"-cleaned.RDS")
-      } else if (metricid == 6){
+        final_url <- paste0(final_url, final_metric, "-dailymean-", gid_str, "-cleaned.RDS")
+      } else if (metricid == 6) {
         # Population Density
-        final_url <- paste0(final_url,"population-density-", gid_str,".RDS")
+        final_url <- paste0(final_url, "population-density-", gid_str, ".RDS")
       } else {
         # Future climate Scenario Forecasts
-        final_url <- paste0(final_url,"annual-mean-temperature-forecast-", gid_str,".RDS")
+        final_url <- paste0(final_url, "annual-mean-temperature-forecast-", gid_str, ".RDS")
       }
     } else {
-      if (metricid <= 5){
+      if (metricid <= 5) {
         # These links may change upon new uploads?
         final_url <- switch(final_metric,
                             "temp" = "https://figshare.com/ndownloader/files/35067691",
@@ -107,10 +106,10 @@ function(basereq, metric="temp", gid=0, use_cache=FALSE, cache_location = ".adca
                             "uv" = "https://figshare.com/ndownloader/files/35071861")
       } else if (metricid == 6) {
         cli_alert_warning("{.val {final_metric}} not available at GID level 2. Defaulting to GID level 1...")
-        final_url <- paste0(final_url,"population-density-GID1.RDS")
+        final_url <- paste0(final_url, "population-density-GID1.RDS")
       } else {
         cli_alert_warning("{.val {final_metric}} not available at GID level 2. Defaulting to GID level 1...")
-        final_url <- paste0(final_url,"annual-mean-temperature-forecast-GID1.RDS")
+        final_url <- paste0(final_url, "annual-mean-temperature-forecast-GID1.RDS")
       }
     }
 
@@ -122,10 +121,10 @@ function(basereq, metric="temp", gid=0, use_cache=FALSE, cache_location = ".adca
     attr(outmat, "metric") <- final_metric
   }
 
-  if (use_cache){
-    if (!loaded_cache || refresh_cache){
+  if (use_cache) {
+    if (!loaded_cache || refresh_cache) {
       cli_progress_message("{symbol$pointer} Caching AREAdata {final_metric}-{gid} in {.path {cache_location}}...")
-      write_ad_cache(outmat, path = cache_location, metric=final_metric, gid=gid, format="rda")
+      write_ad_cache(outmat, path = cache_location, metric = final_metric, gid = gid, format = "rda")
       cli_alert_success("Cached AREAdata {final_metric}-{gid} in {.path {cache_location}}.")
     }
   }

@@ -21,13 +21,12 @@
 #' @export
 #'
 
-extract_vt_data <-
-function(res, cols=NA, returnunique=FALSE){
+extract_vt_data <- function(res, cols = NA, returnunique = FALSE) {
 
-  if (any(class(res) == "httr2_response")){
+  if (any(class(res) == "httr2_response")) {
     # Detect if this is a single request
     out_data <- res %>% resp_body_json()
-  } else if (any(class(res) == "httr2_error")){
+  } else if (any(class(res) == "httr2_error")) {
     cli_abort("Response contains error! (check to see if ID actually exists?)")
   } else {
     # Extract data from all successful responses
@@ -35,16 +34,18 @@ function(res, cols=NA, returnunique=FALSE){
   }
 
   # Parse each request in the list
-  suppressWarnings({out_list <- lapply(out_data, rbindlist)})
+  suppressWarnings({
+    out_list <- lapply(out_data, rbindlist)
+  })
 
-  if (!any(is.na(cols))){
+  if (!any(is.na(cols))) {
     # Filter cols from each sublist
     out_list <- lapply(out_list, select, any_of(cols))
   }
   # Finally explode the list into a df
   out_df <- rbindlist(out_list)
 
-  if (returnunique){
+  if (returnunique) {
     out_df <- unique(out_df)
   }
 

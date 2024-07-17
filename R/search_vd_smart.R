@@ -40,31 +40,31 @@
 #' @export
 #'
 
-search_vd_smart <-
-function(basereq, field, operator, value){
+search_vd_smart <- function(basereq, field, operator, value) {
   # Operator lookup table.
   poss_operators <- c(
-    "contains"=1, "contain"=1, "has"=1, "have"=1,
-    "!contains"=2, "!contain"=2, "!has"=2, "!have"=2, "ncontains"=2,
-    "="=3, "=="=3, "equal"=3, "equals"=3, "eq"=3,
-    "!="=4, "not"=4, "!equal"=4, "!equals"=4, "!eq"=4, "neq"=4,
-    "starts with"=5, "start with"=5, "start"=5, "starts"=5, "sw"=5,
-    "not starts with"=6, "not start with"=6, "!start"=6, "!starts"=6, "nsw"=6,
-    "in"=7, "within"=7,
-    "not in"=8, "!in"=8, "not within"=8, "!within"=8, "nin"=8,
-    "greater than"=9, "greater"=9, "gt"=9, ">"=9,
-    "less than"=10, "less"=10, "lt"=10, "<"=10)
+    "contains" = 1, "contain" = 1, "has" = 1, "have" = 1,
+    "!contains" = 2, "!contain" = 2, "!has" = 2, "!have" = 2, "ncontains" = 2,
+    "=" = 3, "==" = 3, "equal" = 3, "equals" = 3, "eq" = 3,
+    "!=" = 4, "not" = 4, "!equal" = 4, "!equals" = 4, "!eq" = 4, "neq" = 4,
+    "starts with" = 5, "start with" = 5, "start" = 5, "starts" = 5, "sw" = 5,
+    "not starts with" = 6, "not start with" = 6, "!start" = 6, "!starts" = 6, "nsw" = 6,
+    "in" = 7, "within" = 7,
+    "not in" = 8, "!in" = 8, "not within" = 8, "!within" = 8, "nin" = 8,
+    "greater than" = 9, "greater" = 9, "gt" = 9, ">" = 9,
+    "less than" = 10, "less" = 10, "lt" = 10, "<" = 10
+  )
   final_operators <- c("contains", "ncontains", "eq", "neq", "sw", "nsw", "in", "nin", "gt", "lt")
 
   # Translate operator to proper operator name
   operator <- tolower(operator)
-  if (operator %in% names(poss_operators)){
+  if (operator %in% names(poss_operators)) {
     final_operator <- final_operators[poss_operators[operator]]
   } else {
     # Just for warning message
     human_operators <- c("contains", "!contains", "equals", "!equals", "starts", "!starts", "in", "!in", "greater", "less")
     cli_alert_warning("Operator {.val {operator}} not an allowed operator!")
-    cli_rule(left="Allowed operators")
+    cli_rule(left = "Allowed operators")
     cli_ul(human_operators)
     cli_rule()
     final_operator <- "contains"
@@ -74,24 +74,25 @@ function(basereq, field, operator, value){
 
   # Fields lookup table
   poss_fields <- c(
-    "speciesname"=1, "species"=1,
-    "title"=2,
-    "collections"=3,
-    "years"=4, "yrs"=4,
-    "collectionmethods"=5, "methods"=5)
+    "speciesname" = 1, "species" = 1,
+    "title" = 2,
+    "collections" = 3,
+    "years" = 4, "yrs" = 4,
+    "collectionmethods" = 5, "methods" = 5
+  )
   final_fields <- c("SpeciesName", "Title", "Collections", "Years", "CollectionMethods")
 
   # Translate field to proper field name
   field <- tolower(field)
-  if (field %in% names(poss_fields)){
+  if (field %in% names(poss_fields)) {
     final_field <- final_fields[poss_fields[field]]
   } else {
     cli_alert_danger("Field {.val {field}} not an allowed field!")
-    cli_rule(left="Allowed fields")
+    cli_rule(left = "Allowed fields")
     cli_ul(final_fields)
     cli_rule()
     cli_alert_warning("Halting execution.")
-    cli_abort(c("x"="Invalid field: {.val {field}}"))
+    cli_abort(c("x" = "Invalid field: {.val {field}}"))
   }
   resplist <- tryCatch({
     resp <- basereq %>%
@@ -101,19 +102,19 @@ function(basereq, field, operator, value){
       req_url_query("operator" = final_operator) %>%
       req_url_query("term" = value) %>%
       req_perform()
-    list("resp"=resp, "err_code"=0)
-  }, error = function(e){
+    list("resp" = resp, "err_code" = 0)
+  }, error = function(e) {
     # Get the last response instead
-    list("resp"=last_response(), "err_code"=1)
+    list("resp" = last_response(), "err_code" = 1)
   })
 
-  if (resplist$err_code == 1){
-    cli_abort(c("x"="No records found for {.val {paste(final_field, final_operator, value)}}"))
+  if (resplist$err_code == 1) {
+    cli_abort(c("x" = "No records found for {.val {paste(final_field, final_operator, value)}}"))
   }
   body <- resplist$resp %>% resp_body_json()
-  if (length(body) > 2){
+  if (length(body) > 2) {
     # This is a bit of a kludge, the API does not return count in the same place if no results are found
-    cli_abort(c("x"="No records found for {.val {paste(final_field, final_operator, value)}}"))
+    cli_abort(c("x" = "No records found for {.val {paste(final_field, final_operator, value)}}"))
   } else {
     return(as.numeric(body$ids))
   }

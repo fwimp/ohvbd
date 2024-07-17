@@ -13,11 +13,10 @@
 #' @export
 #'
 
-check_db_status <-
-function(){
+check_db_status <- function() {
   db_list <- c(
-    VectorByte="https://vectorbyte.crc.nd.edu/portal/api/",
-    Areadata="https://github.com/pearselab/areadata/raw/main/output/"
+    VectorByte = "https://vectorbyte.crc.nd.edu/portal/api/",
+    Areadata = "https://github.com/pearselab/areadata/raw/main/output/"
   )
 
   successes <- 0
@@ -33,7 +32,7 @@ function(){
       out$status_code
     }
     )
-    if (!is.null(statuscode)){
+    if (!is.null(statuscode)) {
       if (200 <= statuscode && statuscode < 300) {
         cli_alert_success("{names(db_list)[i]}")
         successes <- successes + 1
@@ -47,12 +46,11 @@ function(){
 
   cli_rule(left = "Summary")
 
-  if (successes == length(db_list)){
+  if (successes == length(db_list)) {
     cli_alert_success("All databases UP ({successes}/{length(db_list)}).")
-  } else if(successes == 0){
+  } else if (successes == 0) {
     cli_alert_danger("All databases DOWN! Check your internet connection?")
   } else {
     cli_alert_warning("Not all databases UP! {successes}/{length(db_list)}")
   }
-
 }

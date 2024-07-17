@@ -21,13 +21,12 @@
 #' @export
 #'
 
-extract_vd_data <-
-function(res, cols=NA, returnunique=FALSE){
+extract_vd_data <- function(res, cols = NA, returnunique = FALSE) {
 
-  if (any(class(res) == "httr2_response")){
+  if (any(class(res) == "httr2_response")) {
     # Detect if this is a single request
     out_df <- res %>% resp_body_json()
-  } else if (any(class(res) == "httr2_error")){
+  } else if (any(class(res) == "httr2_error")) {
     cli_abort("Response contains error! (check to see if ID actually exists?)")
   } else {
     # Extract data from all successful responses
@@ -35,7 +34,7 @@ function(res, cols=NA, returnunique=FALSE){
   }
 
 
-  if (returnunique){
+  if (returnunique) {
     out_df <- unique(out_df)
   }
 

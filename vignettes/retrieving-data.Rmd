@@ -20,8 +20,9 @@ ids <- vb_basereq() %>% search_vt("Aedes aegypti")
 df <- basereq %>%
   get_vt_byid(ids) %>%
   extract_vt_data(
-    cols=c("Interactor1Genus", "Interactor1Species", "Latitude", "Longitude"),
-    returnunique = TRUE)
+    cols = c("Interactor1Genus", "Interactor1Species", "Latitude", "Longitude"),
+    returnunique = TRUE
+  )
 df
 ```
 
@@ -40,7 +41,7 @@ basereq <- vb_basereq()
 If you are using Linux, sometimes `httr2` fails to communicate with the VectorByte servers. As such on these systems it is better to start with a basereq with reduced server authentication.
 <!-- Shim to make sure vignette builds on ubuntu-->
 ```{r basereq2, echo=TRUE, message=FALSE, results=FALSE}
-basereq <- vb_basereq(unsafe=TRUE)
+basereq <- vb_basereq(unsafe = TRUE)
 ```
 
 ```         
@@ -59,13 +60,13 @@ For users who are not familiar, pipes take the output of one command and feed it
 
 ```{r nonpipedemo}
 # Find mean of a vector normally
-x <- c(1,2,3)
+x <- c(1, 2, 3)
 mean(x)
 ```
 
 ```{r pipedemo}
 # Find mean of a vector using pipes
-c(1,2,3) %>% mean()
+c(1, 2, 3) %>% mean()
 ```
 
 For the rest of this vignette we will be using a piped-style approach.
@@ -77,7 +78,7 @@ Another note before we begin: the functions used to interface with VecTraits and
 Datasets in VecTraits and VecDyn are organised by id. As such it is often good to be able to see which IDs are currently available. We can do this using the `get_current_x_ids()` family of functions. These return a vector of valid IDs on the given database:
 
 ```{r get_vt_ids}
-basereq %>% get_current_vt_ids() %>% head(n=20)
+basereq %>% get_current_vt_ids() %>% head(n = 20)
 ```
 
 The functions `search_x()` and `search_x_smart()` also return a list of IDs that match the query provided in the arguments.
@@ -119,7 +120,7 @@ Now we have a list of responses, we can extract the relevant data from them usin
 
 ```{r extract_all_vt}
 aedes_data <- aedes_responses %>% extract_vt_data()
-paste0("Data dimensions: ",ncol(aedes_data), " cols x ", nrow(aedes_data), " rows")
+paste0("Data dimensions: ", ncol(aedes_data), " cols x ", nrow(aedes_data), " rows")
 ```
 
 This dataset is a bit too large to print here, and often you may only want a few columns of data rather than the whole dataset.
@@ -132,7 +133,8 @@ So let's get just the unique locations and trait name combinations from our data
 aedes_data_filtered <- aedes_responses %>%
   extract_vt_data(
     cols = c("LocationText", "OriginalTraitName"),
-    returnunique = TRUE)
+    returnunique = TRUE
+  )
 aedes_data_filtered
 ```
 
@@ -147,7 +149,8 @@ basereq %>% get_extract_vt_byid_chunked(
   aedes_ids[1:5],
   chunksize = 2,
   cols = c("LocationText", "OriginalTraitName"),
-  returnunique = TRUE)
+  returnunique = TRUE
+)
 ```
 ## Putting it all together
 
@@ -160,8 +163,9 @@ ids <- basereq %>% search_vt("Aedes aegypti")
 df <- basereq %>%
   get_vt_byid(ids[1:5]) %>%
   extract_vt_data(
-    cols=c("Interactor1Genus", "Interactor1Species", "Latitude", "Longitude"),
-    returnunique = TRUE)
+    cols = c("Interactor1Genus", "Interactor1Species", "Latitude", "Longitude"),
+    returnunique = TRUE
+  )
 ```
 ```{r df_out}
 df

@@ -20,8 +20,7 @@
 #'
 
 
-vb_basereq <-
-function(baseurl="https://vectorbyte.crc.nd.edu/portal/api/", useragent="ROHVBD", unsafe=FALSE){
+vb_basereq <- function(baseurl = "https://vectorbyte.crc.nd.edu/portal/api/", useragent = "ROHVBD", unsafe = FALSE) {
   req <- request(baseurl) %>% req_user_agent(useragent)
   if (unsafe) {
     req <- req %>% req_options(ssl_verifypeer = 0)
