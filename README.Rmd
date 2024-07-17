@@ -19,8 +19,6 @@ knitr::opts_chunk$set(
 <!-- # One Health VBD Hub - R Package -->
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml)
-
 ```{r, echo = FALSE}
 dep <- as.vector(read.dcf('DESCRIPTION')[, 'Depends'])
 m <- regexpr('\\d\\.*\\d+\\.*\\d*\\.*\\d*', dep)
@@ -30,14 +28,19 @@ rvers <- rm
 # rm
 ```
 
-[![R](https://img.shields.io/badge/R%3E%3D-`r rvers`-6666ff.svg)](https://cran.r-project.org/)
-
 ```{r, echo = FALSE}
 version <- as.vector(read.dcf('DESCRIPTION')[, 'Version'])
 version <- gsub('-', '.', version)
 ```
-[![packageversion](https://img.shields.io/badge/Package%20version-`r version`-orange.svg?style=flat-square)](commits/master)
+
+[![R](https://img.shields.io/badge/R%3E%3D-`r rvers`-6666ff.svg?style=for-the-badge)](https://cran.r-project.org/)
+[![packageversion](https://img.shields.io/badge/Package%20version-`r version`-orange.svg?style=for-the-badge)](commits/master)
+[![license](https://img.shields.io/badge/license-GPL--3-blue.svg?style=for-the-badge)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+
+[![R-CMD-check](https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
+
+## Introduction
 
 `ohvbd` is an R package for retrieving (and parsing) data from a network of disease vector data sources.
 
@@ -51,3 +54,4 @@ You can install the development version of ohvbd from [GitHub](https://github.co
 # install.packages("devtools")
 devtools::install_github("fwimp/ohvbd", build_vignettes = TRUE)
 ```
+

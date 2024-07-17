@@ -62,3 +62,39 @@ convert_place_togid <- function(places, gid=0){
   return(unique(out_places[[1]]))
 }
 
+
+# Only used for internal testing and doesnt need to be checked.
+#
+# get_min_R_version <- function(pkgs=NA){
+#   # Adapted from https://blog.r-hub.io/2022/09/12/r-dependency/
+#   db <- tools::CRAN_package_db()
+#   # Pull the imports from DESCRIPTION
+#   if (any(is.na(pkgs))){
+#     packages <- strsplit(as.vector(read.dcf('DESCRIPTION')[, 'Imports']), ",\n")[[1]]
+#   }
+#
+#   # Find the reverse dependencies for all packages
+#   recursive_deps <- tools::package_dependencies(
+#     packages,
+#     recursive = TRUE,
+#     db = db
+#   )
+#
+#   # Get a list of all imported packages
+#   v <- names(recursive_deps)
+#   for (x in recursive_deps){
+#     v <- c(v, x)
+#   }
+#   v <- unique(v)
+#   r_deps <- db %>%
+#     dplyr::filter(Package %in% v) %>%
+#     # We exclude recommended pkgs as they're always shown as depending on R-devel
+#     dplyr::filter(is.na(Priority) | Priority != "recommended") %>%
+#     dplyr::pull(Depends) %>%
+#     strsplit(split = ",") %>%
+#     purrr::map(~ grep("^R ", .x, value = TRUE)) %>%
+#     unlist()
+#
+#   r_vers <- trimws(gsub("^R \\(>=?\\s(.+)\\)", "\\1", r_deps))
+#   return(as.character(max(package_version(r_vers))))
+# }
