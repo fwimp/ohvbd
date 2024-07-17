@@ -26,7 +26,7 @@ function(res, cols=NA, returnunique=FALSE){
 
   if (any(class(res) == "httr2_response")){
     # Detect if this is a single request
-    out_data <- res %>% resp_body_json()
+    out_df <- res %>% resp_body_json()
   } else if (any(class(res) == "httr2_error")){
     cli_abort("Response contains error! (check to see if ID actually exists?)")
   } else {
