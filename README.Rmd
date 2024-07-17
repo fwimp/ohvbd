@@ -1,0 +1,53 @@
+---
+title: One Health VBD Hub - R Package
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+<!-- Build with devtools::build_readme() -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+<!-- # One Health VBD Hub - R Package -->
+
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml)
+
+```{r, echo = FALSE}
+dep <- as.vector(read.dcf('DESCRIPTION')[, 'Depends'])
+m <- regexpr('\\d\\.*\\d+\\.*\\d*\\.*\\d*', dep)
+rm <- regmatches(dep, m)
+rvers <- rm
+# rvers <- gsub('.*(\\\\d+.\\\\d+.\\\\d+).*', '\\\\1', rm)
+# rm
+```
+
+[![R](https://img.shields.io/badge/R%3E%3D-`r rvers`-6666ff.svg)](https://cran.r-project.org/)
+
+```{r, echo = FALSE}
+version <- as.vector(read.dcf('DESCRIPTION')[, 'Version'])
+version <- gsub('-', '.', version)
+```
+[![packageversion](https://img.shields.io/badge/Package%20version-`r version`-orange.svg?style=flat-square)](commits/master)
+<!-- badges: end -->
+
+`ohvbd` is an R package for retrieving (and parsing) data from a network of disease vector data sources.
+
+At present this package is very much in its early stages, as such the internal API may change without warning.
+
+## Installation
+
+You can install the development version of ohvbd from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("fwimp/ohvbd", build_vignettes = TRUE)
+```

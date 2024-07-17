@@ -13,15 +13,20 @@ extract_ad_data(
 )
 }
 \arguments{
-\item{ad_matrix}{a matrix of data from AREAdata.}
+\item{ad_matrix}{A matrix of data from AREAdata.}
 
-\item{targetdate}{either: The date to search for in ISO 8601 (e.g. "2020", "2021-09", or "2022-09-21"). OR the start date for a range of dates.}
+\item{targetdate}{\strong{ONE OF} the following:
+\itemize{
+\item The date to search for in ISO 8601 (e.g. "2020", "2021-09", or "2022-09-21").
+\item The start date for a range of dates.
+\item A character vector of fully specified dates to search for (i.e. "yyyy-mm-dd")
+}}
 
 \item{enddate}{The (exclusive) end of the range of dates to search for. If this is unfilled, only the \code{targetdate} is searched for.}
 
 \item{places}{A character vector or single string describing what locality to search for in the dataset.}
 
-\item{gid}{the spatial scale of the AREAdata matrix (this is not needed if the matrix has been supplied by \code{\link[=get_ad]{get_ad()}}).}
+\item{gid}{The spatial scale of the AREAdata matrix (this is not needed if the matrix has been supplied by \code{\link[=get_ad]{get_ad()}}).}
 }
 \value{
 A matrix containing the extracted data.
@@ -63,9 +68,22 @@ For example "2020-04" will be taken to mean the month of April in 2020, and the 
 
 \examples{
 \dontrun{
+# All dates in August 2022
 ad_basereq() \%>\%
   get_ad("temp", gid=0) \%>\%
-  extract_ad_data("2022-08-04", "2022-08-06",
+  extract_ad_data(targetdate="2022-08",
+                  places=c("Albania", "Thailand"))
+
+# 4th, 5th, and 6th of August 2022 (remember the enddate is EXCLUSIVE)
+ad_basereq() \%>\%
+  get_ad("temp", gid=0) \%>\%
+  extract_ad_data(targetdate="2022-08-04", enddate="2022-08-07",
+                  places=c("Albania", "Thailand"))
+
+# 4th of August 2022 and 1st of August 2023
+ad_basereq() \%>\%
+  get_ad("temp", gid=0) \%>\%
+  extract_ad_data(targetdate=c("2022-08-04", "2023-08-01")
                   places=c("Albania", "Thailand"))
 }
 

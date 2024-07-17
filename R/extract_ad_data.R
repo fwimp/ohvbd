@@ -4,11 +4,14 @@
 #' Currently this does not handle Population Density or Forecast matrices, however the other 5 metrics are handled natively.
 #' @author Francis Windram
 #'
-#' @param ad_matrix a matrix of data from AREAdata.
-#' @param targetdate either: The date to search for in ISO 8601 (e.g. "2020", "2021-09", or "2022-09-21"). OR the start date for a range of dates.
+#' @param ad_matrix A matrix of data from AREAdata.
+#' @param targetdate **ONE OF** the following:
+#' * The date to search for in ISO 8601 (e.g. "2020", "2021-09", or "2022-09-21").
+#' * The start date for a range of dates.
+#' * A character vector of fully specified dates to search for (i.e. "yyyy-mm-dd")
 #' @param enddate The (exclusive) end of the range of dates to search for. If this is unfilled, only the `targetdate` is searched for.
 #' @param places A character vector or single string describing what locality to search for in the dataset.
-#' @param gid the spatial scale of the AREAdata matrix (this is not needed if the matrix has been supplied by [get_ad()]).
+#' @param gid The spatial scale of the AREAdata matrix (this is not needed if the matrix has been supplied by [get_ad()]).
 #'
 #' @return A matrix containing the extracted data.
 #'
@@ -38,9 +41,22 @@
 #'
 #' @examples
 #' \dontrun{
+#' # All dates in August 2022
 #' ad_basereq() %>%
 #'   get_ad("temp", gid=0) %>%
-#'   extract_ad_data("2022-08-04", "2022-08-06",
+#'   extract_ad_data(targetdate="2022-08",
+#'                   places=c("Albania", "Thailand"))
+#'
+#' # 4th, 5th, and 6th of August 2022 (remember the enddate is EXCLUSIVE)
+#' ad_basereq() %>%
+#'   get_ad("temp", gid=0) %>%
+#'   extract_ad_data(targetdate="2022-08-04", enddate="2022-08-07",
+#'                   places=c("Albania", "Thailand"))
+#'
+#' # 4th of August 2022 and 1st of August 2023
+#' ad_basereq() %>%
+#'   get_ad("temp", gid=0) %>%
+#'   extract_ad_data(targetdate=c("2022-08-04", "2023-08-01")
 #'                   places=c("Albania", "Thailand"))
 #' }
 #'
@@ -79,22 +95,22 @@ function(ad_matrix, targetdate=NA, enddate=NA, places=NA, gid=NA){
 
   # All this is just trying to intelligently process possible date searches
 
-  if (!is.na(targetdate)){
+  if (!any(is.na(targetdate))){
     # Search by date
     present_dates <- as.Date(colnames(ad_matrix))
     filter_date <- TRUE
 
     # Try to make targetdate into a date
     suppressWarnings(targetdate_final <- as_date(targetdate))
-    if (is.na(targetdate_final)){
+    if (any(is.na(targetdate_final))){
       # Maybe it's a YYYY-MM
       suppressWarnings(targetdate_final <- as_date(paste0(targetdate, "-01")))
       date_filterlevel <- "months"
-      if (is.na(targetdate_final)){
+      if (any(is.na(targetdate_final))){
         # Maybe it's a YYYY
         suppressWarnings(targetdate_final <- as_date(paste0(targetdate, "-01-01")))
         date_filterlevel <- "years"
-        if (is.na(targetdate_final)){
+        if (any(is.na(targetdate_final))){
           # Dunno, stop filtering date
           filter_date <- FALSE
           # warning(paste0('Could not make "', targetdate, '" into a usable date.\n  Try ISO 8601 yyyy-mm-dd format.\nNot filtering date.'))
@@ -106,38 +122,47 @@ function(ad_matrix, targetdate=NA, enddate=NA, places=NA, gid=NA){
     }
   }
   if (filter_date == TRUE){
-    if (!is.na(enddate)){
-      # Try to make enddate into a date
-      suppressWarnings(enddate_final <- as_date(enddate))
-      if (is.na(enddate_final)){
-        # Maybe it's a YYYY-MM
-        suppressWarnings(enddate_final <- as_date(paste0(enddate, "-01")))
+    if (length(targetdate) <= 1){
+      if (!is.na(enddate)){
+        # Try to make enddate into a date
+        suppressWarnings(enddate_final <- as_date(enddate))
         if (is.na(enddate_final)){
-          # Maybe it's a YYYY
-          suppressWarnings(enddate_final <- as_date(paste0(enddate, "-01-01")))
+          # Maybe it's a YYYY-MM
+          suppressWarnings(enddate_final <- as_date(paste0(enddate, "-01")))
           if (is.na(enddate_final)){
-            # Dunno, infer enddate
-            infer_enddate <- TRUE
-            # warning(paste0('Could not make "', enddate, '" into a usable date.\n  Try ISO 8601 yyyy-mm-dd format.\nInferring end date from targetdate.'))
-            cli_alert_warning('Could not make {.val targetdate} into a usable date.')
-            cli_alert_warning("Inferring end date from {.arg targetdate}.")
-            cli_alert_info("Try ISO 8601 {.val yyyy-mm-dd} format")
+            # Maybe it's a YYYY
+            suppressWarnings(enddate_final <- as_date(paste0(enddate, "-01-01")))
+            if (is.na(enddate_final)){
+              # Dunno, infer enddate
+              infer_enddate <- TRUE
+              # warning(paste0('Could not make "', enddate, '" into a usable date.\n  Try ISO 8601 yyyy-mm-dd format.\nInferring end date from targetdate.'))
+              cli_alert_warning('Could not make {.val targetdate} into a usable date.')
+              cli_alert_warning("Inferring end date from {.arg targetdate}.")
+              cli_alert_info("Try ISO 8601 {.val yyyy-mm-dd} format")
+            }
           }
         }
+      } else {
+        # If enddate is NA, infer it.
+        infer_enddate <- TRUE
       }
-    } else {
-      # If enddate is NA, infer it.
-      infer_enddate <- TRUE
-    }
 
-    if (infer_enddate == TRUE){
-      # Infer enddate at the resolution of the date provided
-      enddate_final <- targetdate_final + period(1, units=date_filterlevel)
+      if (infer_enddate == TRUE){
+        # Infer enddate at the resolution of the date provided
+        enddate_final <- targetdate_final + period(1, units=date_filterlevel)
+      }
+      # Convert enddate to inclusive spec
+      enddate_final <- enddate_final - days(1)
+      # Actually find the columns
+      selected_cols <- which(present_dates %within% interval(targetdate_final, enddate_final))
+    } else {
+      if (date_filterlevel == "days"){
+        # If it's a vector of dates then just check if they're present
+        selected_cols <- which(present_dates %in% targetdate_final)
+      } else {
+        cli_abort(c("x"="Incomplete dates in {.arg targetdate} vector: {.val {targetdate}}"))
+      }
     }
-    # Convert enddate to inclusive spec
-    enddate_final <- enddate_final - days(1)
-    # Actually find the columns
-    selected_cols <- which(present_dates %within% interval(targetdate_final, enddate_final))
   }
 
   if (!any(is.na(places))){

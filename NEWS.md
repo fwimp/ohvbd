@@ -1,3 +1,7 @@
+# ohvbd 0.2.5
+
+* `extract_ad_data()` now allows `targetdate` to be specified as a vector of full dates, e.g. `c("2023-08-04", "2023-09-21")`.
+
 # ohvbd 0.2.4
 
 * VecTraits & VecDyn search functions no longer return stale responses if the search fails.

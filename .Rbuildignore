@@ -7,3 +7,4 @@
 ^data-raw$
 ^.adcache$
 pkg_dev_notes.md
+^README\.Rmd$
