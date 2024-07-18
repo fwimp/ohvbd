@@ -35,17 +35,32 @@ space_collapse <- function(v) {
 #'
 
 vd_extraction_helper <- function(resp, cols = NA) {
-  resp_parse <- resp %>% resp_body_json()
-  df <- rbindlist(resp_parse$results)
-  df2 <- as.data.frame(resp_parse$consistent_data)
-  df_out <- bind_cols(df2, df)
-  if (resp_parse$count > 0) {
-    df_out$dataset_id <- resp$request$headers$ohvbd
-  }
-  if (!any(is.na(cols))) {
-    # Filter cols from each sublist
-    df_out <- df_out %>%  select(any_of(cols))
-  }
+  df_out <- tryCatch({
+    resp_parse <- resp %>% resp_body_json()
+    df <- rbindlist(resp_parse$results)
+    df2 <- as.data.frame(resp_parse$consistent_data)
+
+    # Handle missing data in results (or consistent data, not that it's missing often)
+    if (nrow(df) == 0) {
+      df_out <- df2
+    } else if (nrow(df2) == 0) {
+      df_out <- df
+    } else {
+      df_out <- bind_cols(df2, df)
+    }
+
+    if (resp_parse$count > 0) {
+      df_out$dataset_id <- resp$request$headers$ohvbd
+    }
+    if (!any(is.na(cols))) {
+      # Filter cols from each sublist
+      df_out <- df_out %>%  select(any_of(cols))
+    }
+    df_out
+  }, error = function(e) {
+    cli_abort("Error in vd extraction of ID {resp$request$headers$ohvbd}")
+  })
+
   return(df_out)
 }
 
