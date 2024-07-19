@@ -30,3 +30,14 @@ You can install the development version of ohvbd from
 # install.packages("devtools")
 devtools::install_github("fwimp/ohvbd", build_vignettes = TRUE)
 ```
+
+## Latest patch notes
+
+<!-- These are auto-pulled from NEWS.md  -->
+
+### ohvbd 0.2.5
+
+- `extract_ad_data()` now allows `targetdate` to be specified as a
+  vector of full dates, e.g. `c("2023-08-04", "2023-09-21")`.
+- Test2
+- Test3

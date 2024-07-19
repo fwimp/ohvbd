@@ -55,3 +55,15 @@ You can install the development version of ohvbd from [GitHub](https://github.co
 devtools::install_github("fwimp/ohvbd", build_vignettes = TRUE)
 ```
 
+## Latest patch notes
+
+```{r echo=FALSE}
+news <- parsermd::as_tibble(parsermd::parse_rmd(system.file("NEWS.md", package = "ohvbd")))
+md_chunks <- subset(news, type=="rmd_markdown")
+latest_version <- md_chunks[[1,1]]
+notes <- parsermd::as_document(md_chunks[[1,4]], collapse = "\n")
+```
+<!-- These are auto-pulled from NEWS.md  -->
+### `r latest_version`
+
+`r notes`

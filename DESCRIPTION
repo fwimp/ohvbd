@@ -20,7 +20,10 @@ Imports:
     lubridate,
     magrittr,
     rlang
-Suggests: knitr, rmarkdown
+Suggests: 
+    knitr,
+    parsermd,
+    rmarkdown
 VignetteBuilder: knitr
 Depends: 
     R (>= 4.0)
