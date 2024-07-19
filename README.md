@@ -21,6 +21,15 @@ of disease vector data sources.
 At present this package is very much in its early stages, as such the
 internal API may change without warning.
 
+## Databases
+
+`ohvbd` allows for searching and the retrieval of data from the
+following data sources:
+
+- [VecTraits](https://vectorbyte.crc.nd.edu/vectraits-explorer)
+- [VecDyn](https://vectorbyte.crc.nd.edu/vecdyn-datasets)
+- [AreaData](https://pearselab.github.io/areadata/)
+
 ## Installation
 
 You can install the development version of ohvbd from
@@ -39,5 +48,3 @@ devtools::install_github("fwimp/ohvbd", build_vignettes = TRUE)
 
 - `extract_ad_data()` now allows `targetdate` to be specified as a
   vector of full dates, e.g. `c("2023-08-04", "2023-09-21")`.
-- Test2
-- Test3

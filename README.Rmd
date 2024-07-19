@@ -46,6 +46,14 @@ version <- gsub('-', '.', version)
 
 At present this package is very much in its early stages, as such the internal API may change without warning.
 
+## Databases
+
+`ohvbd` allows for searching and the retrieval of data from the following data sources:
+
+- [VecTraits](https://vectorbyte.crc.nd.edu/vectraits-explorer)
+- [VecDyn](https://vectorbyte.crc.nd.edu/vecdyn-datasets)
+- [AreaData](https://pearselab.github.io/areadata/)
+
 ## Installation
 
 You can install the development version of ohvbd from [GitHub](https://github.com/) with:
