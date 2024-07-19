@@ -61,3 +61,5 @@ devtools::install_github("fwimp/ohvbd", build_vignettes = TRUE)
   `set_ohvbd_compat()`.
 - This change breaks any code written prior to this version, and so
   major rewrites may be required.
+
+See [NEWS.md](NEWS.md) for patch notes for previous versions.

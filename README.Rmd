@@ -91,3 +91,5 @@ notes <- tryCatch({
 ### `r latest_version`
 
 `r notes`
+
+See [NEWS.md](NEWS.md) for patch notes for previous versions.
