@@ -16,9 +16,8 @@ Currently these databases include the [VecTraits](https://vectorbyte.crc.nd.edu/
 Let's imagine you wanted to figure out where a particular vector species - _Aedes aegypti_, for example - was found. Here's how you'd use `ohvbd` to do that:
 
 ```{r exemplar, echo=TRUE, eval=FALSE}
-ids <- vb_basereq() %>% search_vt("Aedes aegypti")
-df <- basereq %>%
-  get_vt_byid(ids) %>%
+ids <- search_vt("Aedes aegypti")
+df <- get_vt_byid(ids) %>%
   extract_vt_data(
     cols = c("Interactor1Genus", "Interactor1Species", "Latitude", "Longitude"),
     returnunique = TRUE
@@ -28,35 +27,23 @@ df
 
 Great, lovely. But now... what does that all mean? And how can you build up your own data request? Read on to find out...
 
-## The base request
+## Some notes before we begin
 
-Typically the process of getting data using ohvbd starts with an `httr2` request object. This can easily be generated as follows:
+If you are using Linux, sometimes `httr2` fails to communicate with the VectorByte servers. As such on these systems it is best to set ohvbd to use slightly less stringent identity checks in its calls to the server.
 
-
-```{r basereq, echo=TRUE, message=FALSE, results=FALSE}
+You only need to perform this once.
+```{r earlypkgload, echo=FALSE}
 library(ohvbd)
-basereq <- vb_basereq()
 ```
-
-If you are using Linux, sometimes `httr2` fails to communicate with the VectorByte servers. As such on these systems it is better to start with a basereq with reduced server authentication.
 <!-- Shim to make sure vignette builds on ubuntu-->
-```{r basereq2, echo=TRUE, message=FALSE, results=FALSE}
-basereq <- vb_basereq(unsafe = TRUE)
+```{r option, echo=TRUE, message=FALSE, results=FALSE}
+set_ohvbd_compat()
 ```
-
-```         
-## <httr2_request>
-## GET https://vectorbyte.crc.nd.edu/portal/api/
-## Body: empty
-## Options:
-## * useragent: 'ROHVBD'
-```
-
-This base request (basereq) provides the basic url and identifying information about the package for interfacing with the API. As such it is generally a good idea to start every call to the API from this point.
 
 For users who are familiar with tidyverse pipes (`%>%`), this approach is generally usable in ohvbd as well.
 
 For users who are not familiar, pipes take the output of one command and feed it forward to the next command as the first argument:
+
 
 ```{r nonpipedemo}
 # Find mean of a vector normally
@@ -78,7 +65,8 @@ Another note before we begin: the functions used to interface with VecTraits and
 Datasets in VecTraits and VecDyn are organised by id. As such it is often good to be able to see which IDs are currently available. We can do this using the `get_current_x_ids()` family of functions. These return a vector of valid IDs on the given database:
 
 ```{r get_vt_ids}
-basereq %>% get_current_vt_ids() %>% head(n = 20)
+library(ohvbd)
+get_current_vt_ids() %>% head(n = 20)
 ```
 
 The functions `search_x()` and `search_x_smart()` also return a list of IDs that match the query provided in the arguments.
@@ -86,7 +74,7 @@ The functions `search_x()` and `search_x_smart()` also return a list of IDs that
 In this case let's search VecTraits for *Aedes aegypti*, the "Asian tiger mosquito":
 
 ```{r search_vt}
-aedes_ids <- basereq %>% search_vt("Aedes aegypti")
+aedes_ids <- search_vt("Aedes aegypti")
 aedes_ids
 ```
 
@@ -101,7 +89,7 @@ Now you have a vector of datasets, we need to actually retrieve the data of thes
 To do this we can use the `get_x_byid()` functions. In this case let's get the first 5 *Aedes aegypti* datasets:
 
 ```{r get_vt, echo=TRUE, message=FALSE, results=FALSE}
-aedes_responses <- basereq %>% get_vt_byid(aedes_ids[1:5])
+aedes_responses <- get_vt_byid(aedes_ids[1:5])
 aedes_responses[[1]]
 ```
 ```
@@ -145,7 +133,7 @@ In some cases you may end up downloading a lot of data. This can cause problems 
 One potential method for mitigating this is to use the `get_extract_x_byid_chunked()` functions. These only download a few records at a time and extract them before moving on to the next chunk of ids. We can perform the filtered extraction from above like so:
 
 ```{r get_extract_vt_chunked}
-basereq %>% get_extract_vt_byid_chunked(
+get_extract_vt_byid_chunked(
   aedes_ids[1:5],
   chunksize = 2,
   cols = c("LocationText", "OriginalTraitName"),
@@ -159,9 +147,8 @@ In day-to-day use, you will mostly find yourself using all these functions toget
 A typical pipeline would likely only contain two lines of code:
 
 ```{r vt_pipeline, echo=TRUE, message=FALSE, results=FALSE}
-ids <- basereq %>% search_vt("Aedes aegypti")
-df <- basereq %>%
-  get_vt_byid(ids[1:5]) %>%
+ids <- search_vt("Aedes aegypti")
+df <- get_vt_byid(ids[1:5]) %>%
   extract_vt_data(
     cols = c("Interactor1Genus", "Interactor1Species", "Latitude", "Longitude"),
     returnunique = TRUE
@@ -177,4 +164,3 @@ df
 From here you now have all the data you might need for further analysis, so now it's down to you!
 
 One final note to end on: it can be advisable to save any output data in a csv or parquet format so that you do not need to re-download it every time you run your script. This is as easy as running `write.csv()` on your dataframe, then reading it in later with `read.csv()`
-.

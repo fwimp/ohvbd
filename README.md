@@ -7,7 +7,7 @@ One Health VBD Hub - R Package
 <!-- badges: start -->
 
 [![R](https://img.shields.io/badge/R%3E%3D-4.0-6666ff.svg?style=for-the-badge)](https://cran.r-project.org/)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.2.5-orange.svg?style=for-the-badge)](commits/master)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.3.0-orange.svg?style=for-the-badge)](commits/master)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg?style=for-the-badge)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
 [![R-CMD-check](https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml)
@@ -44,7 +44,20 @@ devtools::install_github("fwimp/ohvbd", build_vignettes = TRUE)
 
 <!-- These are auto-pulled from NEWS.md  -->
 
-### ohvbd 0.2.5
+### ohvbd 0.3.0
 
-- `extract_ad_data()` now allows `targetdate` to be specified as a
-  vector of full dates, e.g. `c("2023-08-04", "2023-09-21")`.
+#### **Major API change**
+
+- `*_basereq()` calls are no longer required as the first argument for
+  functions.
+- As such, data downloads no longer need to start with
+  `vb_basereq() %>%`.
+- Basereq can now be overridden by providing an alternative basereq to
+  the `basereq` argument of these functions, which can be generated
+  using `vb_basereq()`.
+- This is usually only needed if using the argument `unsafe = TRUE` for
+  `vb_basereq()`.
+- It is also possible to set ohvbd to use less safe ssl calls using
+  `set_ohvbd_compat()`.
+- This change breaks any code written prior to this version, and so
+  major rewrites may be required.

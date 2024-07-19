@@ -77,7 +77,6 @@ convert_place_togid <- function(places, gid = 0) {
   return(unique(out_places[[1]]))
 }
 
-
 # Only used for internal testing and doesnt need to be checked.
 #
 # nolint start

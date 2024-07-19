@@ -21,9 +21,33 @@
 
 
 vb_basereq <- function(baseurl = "https://vectorbyte.crc.nd.edu/portal/api/", useragent = "ROHVBD", unsafe = FALSE) {
+
+  if (getOption("ohvbd_compat", default = FALSE) && isFALSE(unsafe)) {
+    unsafe <- TRUE
+  }
+
   req <- request(baseurl) %>% req_user_agent(useragent)
   if (unsafe) {
     req <- req %>% req_options(ssl_verifypeer = 0)
   }
   return(req)
+}
+
+
+#' @title Set ohvbd compatability mode to TRUE
+#' @description Set ohvbd to disable ssl verification for calls to external APIs.
+#' This should not be needed (and not be performed) unless you are running on a linux machine or are otherwise experiencing SSL issues when using the package!
+#'
+#' @author Francis Windram
+#' @return NULL
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' set_ohvbd_compat()
+#' }
+
+set_ohvbd_compat <- function() {
+  options(ohvbd_compat = TRUE)
+  cli_alert_success("Set compatibility mode = {.val {getOption('ohvbd_compat')}}")
 }

@@ -66,10 +66,26 @@ devtools::install_github("fwimp/ohvbd", build_vignettes = TRUE)
 ## Latest patch notes
 
 ```{r echo=FALSE}
+# Note this only handles up to h2 level right now. Will need some fiddling if more is needed further down the line!
+# In that case might be worth detecting and generating arbitrary levels of nesting with some clever recursive programming.
+
 news <- parsermd::as_tibble(parsermd::parse_rmd(system.file("NEWS.md", package = "ohvbd")))
 md_chunks <- subset(news, type=="rmd_markdown")
 latest_version <- md_chunks[[1,1]]
-notes <- parsermd::as_document(md_chunks[[1,4]], collapse = "\n")
+filtered_md_chunks <- subset(md_chunks, md_chunks$sec_h1 == latest_version)
+
+notes <- c()
+notes <- tryCatch({
+  for (i in 1:nrow(filtered_md_chunks)) {
+  # cat(paste0("## ", filtered_md_chunks[i, "sec_h2"], "\n\n", parsermd::as_document(md_chunks[[i,"ast"]], collapse = "\n")))
+  notes <- c(notes, paste0("#### ", filtered_md_chunks[i, "sec_h2"], "\n\n", parsermd::as_document(md_chunks[[i,"ast"]], collapse = "\n")))
+  }
+  paste(notes, collapse = "\n")
+}, error = function(e) {
+  parsermd::as_document(md_chunks[[1,"ast"]], collapse = "\n")
+})
+# notes <- parsermd::as_document(md_chunks[[1,"ast"]], collapse = "\n")
+
 ```
 <!-- These are auto-pulled from NEWS.md  -->
 ### `r latest_version`
