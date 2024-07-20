@@ -56,7 +56,7 @@ At present this package is very much in its early stages, as such the internal A
 
 ## Installation
 
-You can install the development version of ohvbd from [GitHub](https://github.com/) with:
+You can install the development version of ohvbd from [GitHub](https://github.com/fwimp/ohvbd) with:
 
 ``` r
 # install.packages("devtools")

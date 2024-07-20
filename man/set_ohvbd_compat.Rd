@@ -4,7 +4,10 @@
 \alias{set_ohvbd_compat}
 \title{Set ohvbd compatability mode to TRUE}
 \usage{
-set_ohvbd_compat()
+set_ohvbd_compat(value = TRUE)
+}
+\arguments{
+\item{value}{The boolean value to set ohvbd_compat to.}
 }
 \description{
 Set ohvbd to disable ssl verification for calls to external APIs.

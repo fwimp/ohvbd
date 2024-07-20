@@ -5,7 +5,7 @@
 * As such, data downloads no longer need to start with `vb_basereq() %>%`.
 * Basereq can now be overridden by providing an alternative basereq to the `basereq` argument of these functions, which can be generated using `vb_basereq()`.
 * This is usually only needed if using the argument `unsafe = TRUE` for `vb_basereq()`.
-* It is also possible to set ohvbd to use less safe ssl calls using `set_ohvbd_compat()`.
+* It is also possible to set ohvbd to use compatability-mode ssl calls using `set_ohvbd_compat()`.
 * This change breaks any code written prior to this version, and so major rewrites may be required.
 
 # ohvbd 0.2.5

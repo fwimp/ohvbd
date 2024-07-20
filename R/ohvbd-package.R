@@ -39,5 +39,6 @@
 #' @importFrom lubridate period
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
+#' @importFrom rlang is_bool
 ## usethis namespace: end
 NULL

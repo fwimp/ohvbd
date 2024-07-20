@@ -33,7 +33,7 @@ following data sources:
 ## Installation
 
 You can install the development version of ohvbd from
-[GitHub](https://github.com/) with:
+[GitHub](https://github.com/fwimp/ohvbd) with:
 
 ``` r
 # install.packages("devtools")
@@ -57,8 +57,8 @@ devtools::install_github("fwimp/ohvbd", build_vignettes = TRUE)
   using `vb_basereq()`.
 - This is usually only needed if using the argument `unsafe = TRUE` for
   `vb_basereq()`.
-- It is also possible to set ohvbd to use less safe ssl calls using
-  `set_ohvbd_compat()`.
+- It is also possible to set ohvbd to use compatability-mode ssl calls
+  using `set_ohvbd_compat()`.
 - This change breaks any code written prior to this version, and so
   major rewrites may be required.
 
