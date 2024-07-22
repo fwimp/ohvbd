@@ -61,4 +61,5 @@ devtools::install_github("fwimp/ohvbd", build_vignettes = TRUE)
 - This change breaks any code written prior to this version, and so
   major rewrites may be required.
 
-See [NEWS.md](NEWS.md) for patch notes for previous versions.
+See [changelog](https://fwimp.github.io/ohvbd/news/index.html) for patch
+notes for previous versions.

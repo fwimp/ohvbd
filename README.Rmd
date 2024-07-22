@@ -91,4 +91,4 @@ notes <- tryCatch({
 
 `r notes`
 
-See [NEWS.md](NEWS.md) for patch notes for previous versions.
+See [changelog](https://fwimp.github.io/ohvbd/news/index.html) for patch notes for previous versions.

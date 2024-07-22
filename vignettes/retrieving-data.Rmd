@@ -1,8 +1,8 @@
 ---
-title: "Retrieving and extracting data with ohvbd"
+title: "Retrieving data from VectorByte"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Retrieving and extracting data with ohvbd}
+  %\VignetteIndexEntry{Retrieving data from VectorByte}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
@@ -16,8 +16,8 @@ Currently these databases include the [VecTraits](https://vectorbyte.crc.nd.edu/
 Let's imagine you wanted to figure out where a particular vector species - _Aedes aegypti_, for example - was found. Here's how you'd use `ohvbd` to do that:
 
 ```{r exemplar, echo=TRUE, eval=FALSE}
-ids <- search_vt("Aedes aegypti")
-df <- get_vt_byid(ids) %>%
+df <- search_vt("Aedes aegypti") %>% 
+  get_vt_byid() %>%
   extract_vt_data(
     cols = c("Interactor1Genus", "Interactor1Species", "Latitude", "Longitude"),
     returnunique = TRUE
@@ -144,18 +144,25 @@ get_extract_vt_byid_chunked(
 
 In day-to-day use, you will mostly find yourself using all these functions together to create small pipelines.
 
-A typical pipeline would likely only contain two lines of code:
+A typical pipeline would likely only contain a few lines of code:
 
-```{r vt_pipeline, echo=TRUE, message=FALSE, results=FALSE}
+```{r vt_pipeline, eval=FALSE, echo=TRUE, message=FALSE, results=FALSE}
+df <- search_vt("Aedes aegypti") %>% 
+  get_vt_byid() %>%
+  extract_vt_data(
+    cols = c("Interactor1Genus", "Interactor1Species", "Latitude", "Longitude"),
+    returnunique = TRUE
+  )
+head(df)
+```
+```{r vt_pipeline_secret, echo=FALSE, message=FALSE}
 ids <- search_vt("Aedes aegypti")
 df <- get_vt_byid(ids[1:5]) %>%
   extract_vt_data(
     cols = c("Interactor1Genus", "Interactor1Species", "Latitude", "Longitude"),
     returnunique = TRUE
   )
-```
-```{r df_out}
-df
+head(df)
 ```
 
 
