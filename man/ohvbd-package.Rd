@@ -12,6 +12,7 @@ Interface with the One Health VBD Hub and related repositories directly.
 Useful links:
 \itemize{
   \item \url{https://github.com/fwimp/ohvbd}
+  \item \url{https://fwimp.github.io/ohvbd/}
   \item Report bugs at \url{https://github.com/fwimp/ohvbd/issues}
 }
 

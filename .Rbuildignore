@@ -9,3 +9,6 @@
 pkg_dev_notes.md
 ^README\.Rmd$
 .lintr
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

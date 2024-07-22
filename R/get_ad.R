@@ -71,7 +71,7 @@ get_ad <- function(metric = "temp", gid = 0, use_cache = FALSE, cache_location =
   # Try to load cache
   if (use_cache && !refresh_cache) {
     outmat <- tryCatch({
-      cli_progress_message("{symbol$pointer} Loading AREAdata cache: {final_metric}-{gid} ...")
+      cli_progress_message("{cli::symbol$pointer} Loading AREAdata cache: {final_metric}-{gid} ...")
       suppressWarnings(read_ad_cache(cache_location, final_metric, gid))
     }, error = function(e) {
       cli_alert_danger("Failed to load AREAdata cache: {final_metric}-{gid}!")
@@ -85,7 +85,7 @@ get_ad <- function(metric = "temp", gid = 0, use_cache = FALSE, cache_location =
   }
 
   if (!loaded_cache) {
-    cli_progress_message("{symbol$pointer} Loading AREAdata {final_metric}-{gid} from github...")
+    cli_progress_message("{cli::symbol$pointer} Loading AREAdata {final_metric}-{gid} from github...")
     gid_str <- c("countries", "GID1", "GID2")[gid + 1]
 
     if (gid < 2) {
@@ -127,7 +127,7 @@ get_ad <- function(metric = "temp", gid = 0, use_cache = FALSE, cache_location =
 
   if (use_cache) {
     if (!loaded_cache || refresh_cache) {
-      cli_progress_message("{symbol$pointer} Caching AREAdata {final_metric}-{gid} in {.path {cache_location}}...")
+      cli_progress_message("{cli::symbol$pointer} Caching AREAdata {final_metric}-{gid} in {.path {cache_location}}...")
       write_ad_cache(outmat, path = cache_location, metric = final_metric, gid = gid, format = "rda")
       cli_alert_success("Cached AREAdata {final_metric}-{gid} in {.path {cache_location}}.")
     }

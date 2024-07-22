@@ -42,22 +42,25 @@
 #' @examples
 #' \dontrun{
 #' # All dates in August 2022
-#' ad_basereq() %>%
-#'   get_ad("temp", gid=0) %>%
-#'   extract_ad_data(targetdate="2022-08",
-#'                   places=c("Albania", "Thailand"))
+#' get_ad("temp", gid=0) %>%
+#'   extract_ad_data(
+#'     targetdate = "2022-08",
+#'     places = c("Albania", "Thailand")
+#'   )
 #'
 #' # 4th, 5th, and 6th of August 2022 (remember the enddate is EXCLUSIVE)
-#' ad_basereq() %>%
-#'   get_ad("temp", gid=0) %>%
-#'   extract_ad_data(targetdate="2022-08-04", enddate="2022-08-07",
-#'                   places=c("Albania", "Thailand"))
+#' get_ad("temp", gid=0) %>%
+#'   extract_ad_data(
+#'     targetdate = "2022-08-04", enddate="2022-08-07",
+#'     places = c("Albania", "Thailand")
+#'   )
 #'
 #' # 4th of August 2022 and 1st of August 2023
-#' ad_basereq() %>%
-#'   get_ad("temp", gid=0) %>%
-#'   extract_ad_data(targetdate=c("2022-08-04", "2023-08-01")
-#'                   places=c("Albania", "Thailand"))
+#' get_ad("temp", gid=0) %>%
+#'   extract_ad_data(
+#'     targetdate = c("2022-08-04", "2023-08-01"),
+#'     places = c("Albania", "Thailand")
+#'   )
 #' }
 #'
 #' @export
