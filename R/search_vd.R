@@ -16,6 +16,8 @@
 #'
 #' }
 #'
+#' @concept vecdyn
+#'
 #' @export
 #'
 

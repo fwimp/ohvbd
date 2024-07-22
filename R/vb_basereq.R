@@ -15,6 +15,7 @@
 #'   useragent="ROHVBD")
 #' }
 #'
+#' @concept basereq
 #'
 #' @export
 #'
@@ -41,6 +42,8 @@ vb_basereq <- function(baseurl = "https://vectorbyte.crc.nd.edu/portal/api/", us
 #' @param value The boolean value to set ohvbd_compat to.
 #' @author Francis Windram
 #' @return NULL
+#'
+#'
 #' @export
 #'
 #' @examples

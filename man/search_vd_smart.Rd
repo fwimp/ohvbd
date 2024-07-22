@@ -59,3 +59,4 @@ search_vd_smart("Collections", "gt", "1000")
 \author{
 Francis Windram
 }
+\concept{vecdyn}

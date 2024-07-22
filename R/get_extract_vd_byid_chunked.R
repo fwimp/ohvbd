@@ -18,6 +18,8 @@
 #' get_extract_vd_byid_chunked(c(423,424,425), chunksize = 2, rate=5)
 #' }
 #'
+#' @concept vecdyn
+#'
 #' @export
 #'
 

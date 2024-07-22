@@ -43,3 +43,4 @@ get_extract_vt_byid_chunked(c(54,55,56), chunksize = 2, rate=5)
 \author{
 Francis Windram
 }
+\concept{vectraits}

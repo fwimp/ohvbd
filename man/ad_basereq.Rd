@@ -18,8 +18,8 @@ It does not contain any tokens or session ids, and thus can be regenerated at an
 basereq <- ad_basereq()
 }
 
-
 }
 \author{
 Francis Windram
 }
+\concept{basereq}

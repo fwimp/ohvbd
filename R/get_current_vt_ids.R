@@ -10,6 +10,8 @@
 #' get_current_vt_ids()
 #' }
 #'
+#' @concept vectraits
+#'
 #' @export
 #'
 

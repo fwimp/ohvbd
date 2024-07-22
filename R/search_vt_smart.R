@@ -44,6 +44,8 @@
 #' search_vt_smart("Interactor1Genus", "equals", "Anopheles")
 #' }
 #'
+#' @concept vectraits
+#'
 #' @export
 #'
 

@@ -10,6 +10,8 @@
 #' get_current_vd_ids()
 #' }
 #'
+#' @concept vecdyn
+#'
 #' @export
 #'
 

@@ -15,6 +15,8 @@
 #' get_vt_byid(c(54, 55, 56), rate=5)
 #' }
 #'
+#' @concept vectraits
+#'
 #' @export
 #'
 

@@ -36,6 +36,8 @@
 #' search_vd_smart("Collections", "gt", "1000")
 #' }
 #'
+#' @concept vecdyn
+#'
 #' @export
 #'
 

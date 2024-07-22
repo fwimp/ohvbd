@@ -55,3 +55,4 @@ get_ad(metric="temp", gid=0)
 \author{
 Francis Windram
 }
+\concept{areadata}

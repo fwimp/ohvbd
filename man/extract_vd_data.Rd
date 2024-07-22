@@ -21,8 +21,7 @@ Extract the data returned by a call to \code{\link[=get_vd_byid]{get_vd_byid()}}
 }
 \examples{
 \dontrun{
-vb_basereq() \%>\%
-  get_vd_dataset_byid(247) \%>\%
+get_vd_dataset_byid(247) \%>\%
   extract_vd_data(cols=c("species",
                          "sample_start_date",
                          "sample_value"),
@@ -33,3 +32,4 @@ vb_basereq() \%>\%
 \author{
 Francis Windram
 }
+\concept{vecdyn}

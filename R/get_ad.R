@@ -26,6 +26,8 @@
 #' get_ad(metric="temp", gid=0)
 #' }
 #'
+#' @concept areadata
+#'
 #' @export
 #'
 

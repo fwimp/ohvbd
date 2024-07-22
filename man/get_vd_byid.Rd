@@ -30,3 +30,4 @@ get_vd_byid(c(423,424,425), rate=5)
 \author{
 Francis Windram
 }
+\concept{vecdyn}

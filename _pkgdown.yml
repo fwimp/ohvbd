@@ -2,3 +2,24 @@ url: https://fwimp.github.io/ohvbd/
 template:
   bootstrap: 5
   light-switch: true
+reference:
+- title: VecTraits
+  desc: Functions for interfacing with VecTraits.
+- contents:
+  - has_concept("vectraits")
+- title: VecDyn
+  desc: Functions for interfacing with VecDyn.
+- contents:
+  - has_concept("vecdyn")
+- title: AREAdata
+  desc: Functions for interfacing with AREAdata.
+- contents:
+  - has_concept("areadata")
+- title: Other
+  desc: Miscellaneous functions.
+- contents:
+  - lacks_concepts(c("vectraits", "vecdyn", "areadata", "basereq"))
+- subtitle: Base requests
+  desc: Functions for modifying the basic targets of data API requests
+- contents:
+  - has_concept("basereq")

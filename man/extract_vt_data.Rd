@@ -21,8 +21,7 @@ Extract the data returned by a call to \code{\link[=get_vt_byid]{get_vt_byid()}}
 }
 \examples{
 \dontrun{
-vb_basereq() \%>\%
-  get_vt_dataset_byid(54) \%>\%
+get_vt_dataset_byid(54) \%>\%
   extract_vt_data(cols=c("DatasetID",
                          "Interactor1Genus",
                          "Interactor1Species"),
@@ -33,3 +32,4 @@ vb_basereq() \%>\%
 \author{
 Francis Windram
 }
+\concept{vectraits}

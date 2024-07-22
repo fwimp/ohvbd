@@ -16,6 +16,8 @@
 #'
 #' }
 #'
+#' @concept vectraits
+#'
 #' @export
 #'
 

@@ -10,6 +10,7 @@
 #' basereq <- ad_basereq()
 #' }
 #'
+#' @concept basereq
 #'
 #' @export
 #'

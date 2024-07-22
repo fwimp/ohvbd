@@ -29,3 +29,4 @@ search_vt(c("Aedes", "aegypti"))
 \author{
 Francis Windram
 }
+\concept{vecdyn}

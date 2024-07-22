@@ -67,3 +67,4 @@ search_vt_smart("Interactor1Genus", "equals", "Anopheles")
 \author{
 Francis Windram
 }
+\concept{vectraits}

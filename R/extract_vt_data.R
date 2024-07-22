@@ -10,13 +10,14 @@
 #'
 #' @examples
 #' \dontrun{
-#' vb_basereq() %>%
-#'   get_vt_dataset_byid(54) %>%
+#' get_vt_dataset_byid(54) %>%
 #'   extract_vt_data(cols=c("DatasetID",
 #'                          "Interactor1Genus",
 #'                          "Interactor1Species"),
 #'                   returnunique=TRUE)
 #' }
+#'
+#' @concept vectraits
 #'
 #' @export
 #'
