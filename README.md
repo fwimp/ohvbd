@@ -1,8 +1,9 @@
-One Health VBD Hub - R Package
-================
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- Build with devtools::build_readme() -->
+
+# One Health VBD Hub (ohvbd) <a href="https://fwimp.github.io/ohvbd/"><img src="man/figures/logo-0.png" align="right" width="120" alt="ohvbd website" /></a>
+
 <!-- # One Health VBD Hub - R Package -->
 <!-- badges: start -->
 

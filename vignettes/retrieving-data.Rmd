@@ -31,7 +31,7 @@ Great, lovely. But now... what does that all mean? And how can you build up your
 
 If you are using Linux, sometimes `httr2` fails to communicate with the VectorByte servers. As such on these systems it is best to set ohvbd to use slightly less stringent identity checks in its calls to the server.
 
-You only need to perform this once.
+You only need to perform this once per R session / script.
 ```{r earlypkgload, echo=FALSE}
 library(ohvbd)
 ```
