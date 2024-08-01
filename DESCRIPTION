@@ -16,7 +16,7 @@ Imports:
     curl,
     data.table,
     dplyr,
-    httr2,
+    httr2 (>= 1.0.2),
     lubridate,
     magrittr,
     rlang
