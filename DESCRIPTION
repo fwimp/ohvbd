@@ -1,6 +1,6 @@
 Package: ohvbd
 Title: One Health VBD Hub
-Version: 0.3.0
+Version: 0.3.1
 Authors@R: 
     person("Francis", "Windram", , "francis.windram17@imperial.ac.uk", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-2129-826X"))
@@ -19,7 +19,10 @@ Imports:
     httr2 (>= 1.0.2),
     lubridate,
     magrittr,
-    rlang
+    rlang,
+    stats,
+    terra,
+    tibble
 Suggests: 
     knitr,
     parsermd,

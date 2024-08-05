@@ -1,3 +1,14 @@
+# ohvbd 0.3.1
+
+* New function `format_time_overlap_bar()` allows for visually formatting a range of dates combined with another set of target dates to see where overlaps do or do not take place.
+* This is mostly used in the error handling of `extract_ad_data()` however it can also be used independently. It was designed to fill a more general role within UI design using the cli package, and should be usable (or hackable) by others needing the same tool.
+* `extract_ad_data()` now errors when all `targetdate` entries are outside of the range of the AREAdata dataset.
+* New `assoc_ad_data()` associates arbitrary data including lon/lat columns with AREAdata.
+* New `get_vd_columns()` provides quick reference about the currently present VecDyn columns. *(This is currently not possible for VecTraits, but the feasibility is being investigated.)*
+* New `assoc_gadm_id()` function associates gadm ids at all spatial scales with arbitrary data that include lon/lat columns.
+* Documentation now correctly displays favicons.
+* Logo now rotates through a variety of colourschemes according to the version number.
+
 # ohvbd 0.3.0
 
 ## **Major API change**

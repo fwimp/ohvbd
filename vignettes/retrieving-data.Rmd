@@ -16,7 +16,7 @@ Currently these databases include the [VecTraits](https://vectorbyte.crc.nd.edu/
 Let's imagine you wanted to figure out where a particular vector species - _Aedes aegypti_, for example - was found. Here's how you'd use `ohvbd` to do that:
 
 ```{r exemplar, echo=TRUE, eval=FALSE}
-df <- search_vt("Aedes aegypti") %>% 
+df <- search_vt("Aedes aegypti") %>%
   get_vt_byid() %>%
   extract_vt_data(
     cols = c("Interactor1Genus", "Interactor1Species", "Latitude", "Longitude"),
@@ -147,7 +147,7 @@ In day-to-day use, you will mostly find yourself using all these functions toget
 A typical pipeline would likely only contain a few lines of code:
 
 ```{r vt_pipeline, eval=FALSE, echo=TRUE, message=FALSE, results=FALSE}
-df <- search_vt("Aedes aegypti") %>% 
+df <- search_vt("Aedes aegypti") %>%
   get_vt_byid() %>%
   extract_vt_data(
     cols = c("Interactor1Genus", "Interactor1Species", "Latitude", "Longitude"),

@@ -69,6 +69,8 @@
 #'
 
 extract_ad_data <- function(ad_matrix, targetdate = NA, enddate = NA, places = NA, gid = NA) {
+  # TODO: Make extract_ad_data check whether the selected dates are within the range of the AD dump
+
   # Enddate SHOULD BE EXCLUSIVE
 
   # try to infer gid from ad_matrix
@@ -155,12 +157,28 @@ extract_ad_data <- function(ad_matrix, targetdate = NA, enddate = NA, places = N
       }
       # Convert enddate to inclusive spec
       enddate_final <- enddate_final - days(1)
+
       # Actually find the columns
       selected_cols <- which(present_dates %within% interval(targetdate_final, enddate_final))
+
+      if (length(selected_cols) <= 0) {
+        if (targetdate_final == enddate_final) {
+          format_time_overlap_bar(min(present_dates), max(present_dates), targetdate_final, targetrange = FALSE, twobar = TRUE)
+          cli_abort(c("x" = "Date {.val {targetdate_final}} outside of data range {.val {min(present_dates)}} -> {.val {max(present_dates)}}!"))
+        } else {
+          format_time_overlap_bar(min(present_dates), max(present_dates), c(targetdate_final, enddate_final), targetrange = TRUE, twobar = TRUE)
+          cli_abort(c("x" = "Inclusive interval {.val {targetdate_final}} -> {.val {enddate_final}} outside of data range {.val {min(present_dates)}} -> {.val {max(present_dates)}}!"))
+        }
+      }
     } else {
       if (date_filterlevel == "days") {
         # If it's a vector of dates then just check if they're present
         selected_cols <- which(present_dates %in% targetdate_final)
+        # Check if anything was selected. If not then throw error as none of the selected cols are in the AD data
+        if (length(selected_cols) <= 0) {
+          format_time_overlap_bar(min(present_dates), max(present_dates), targetdate_final, targetrange = FALSE, twobar = TRUE)
+          cli_abort(c("x" = "Dates {.val {targetdate_final}} entirely outside of data range {.val {min(present_dates)}} -> {.val {max(present_dates)}}!"))
+        }
       } else {
         cli_abort(c("x" = "Incomplete dates in {.arg targetdate} vector: {.val {targetdate}}"))
       }

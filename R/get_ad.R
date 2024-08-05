@@ -3,7 +3,7 @@
 #' @author Francis Windram
 #'
 #' @param metric the metric to retrieve from areadata.
-#' @param gid the spatial scale to retrieve (0 = country-level, 1=province-level).
+#' @param gid the spatial scale to retrieve (0 = country-level, 1=province-level ...).
 #' @param use_cache load files from cache if possible, and save them if not present.
 #' @param cache_location path to cache location (defaults to `./.adcache`).
 #' @param refresh_cache force a refresh of the relevant cached data.

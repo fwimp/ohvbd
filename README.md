@@ -1,14 +1,15 @@
 
+<!-- force push by editing this number: 42 -->
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- Build with devtools::build_readme() -->
 
-# One Health VBD Hub (ohvbd) <a href="https://fwimp.github.io/ohvbd/"><img src="man/figures/logo-0.png" align="right" width="120" alt="ohvbd website" /></a>
+# One Health VBD Hub (ohvbd) <a href="https://fwimp.github.io/ohvbd/"><img src="man/figures/logo-1.png" align="right" width="120" alt="ohvbd website" /></a>
 
 <!-- # One Health VBD Hub - R Package -->
 <!-- badges: start -->
 
 [![R](https://img.shields.io/badge/R%3E%3D-4.0-6666ff.svg?style=for-the-badge)](https://cran.r-project.org/)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.3.0-orange.svg?style=for-the-badge)](commits/master)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.3.1-orange.svg?style=for-the-badge)](commits/master)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg?style=for-the-badge)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 [![R-CMD-check](https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
@@ -44,23 +45,29 @@ devtools::install_github("fwimp/ohvbd", build_vignettes = TRUE)
 
 <!-- These are auto-pulled from NEWS.md  -->
 
-### ohvbd 0.3.0
+### ohvbd 0.3.1
 
-#### **Major API change**
+#### NA
 
-- `*_basereq()` calls are no longer required as the first argument for
-  functions.
-- As such, data downloads no longer need to start with
-  `vb_basereq() %>%`.
-- Basereq can now be overridden by providing an alternative basereq to
-  the `basereq` argument of these functions, which can be generated
-  using `vb_basereq()`.
-- This is usually only needed if using the argument `unsafe = TRUE` for
-  `vb_basereq()`.
-- It is also possible to set ohvbd to use compatability-mode ssl calls
-  using `set_ohvbd_compat()`.
-- This change breaks any code written prior to this version, and so
-  major rewrites may be required.
+- New function `format_time_overlap_bar()` allows for visually
+  formatting a range of dates combined with another set of target dates
+  to see where overlaps do or do not take place.
+- This is mostly used in the error handling of `extract_ad_data()`
+  however it can also be used independently. It was designed to fill a
+  more general role within UI design using the cli package, and should
+  be usable (or hackable) by others needing the same tool.
+- `extract_ad_data()` now errors when all `targetdate` entries are
+  outside of the range of the AREAdata dataset.
+- New `assoc_ad_data()` associates arbitrary data including lon/lat
+  columns with AREAdata.
+- New `get_vd_columns()` provides quick reference about the currently
+  present VecDyn columns. *(This is currently not possible for
+  VecTraits, but the feasibility is being investigated.)*
+- New `assoc_gadm_id()` function associates gadm ids at all spatial
+  scales with arbitrary data that include lon/lat columns.
+- Documentation now correctly displays favicons.
+- Logo now rotates through a variety of colourschemes according to the
+  version number.
 
 See [changelog](https://fwimp.github.io/ohvbd/news/index.html) for patch
 notes for previous versions.

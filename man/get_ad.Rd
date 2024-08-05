@@ -16,7 +16,7 @@ get_ad(
 \arguments{
 \item{metric}{the metric to retrieve from areadata.}
 
-\item{gid}{the spatial scale to retrieve (0 = country-level, 1=province-level).}
+\item{gid}{the spatial scale to retrieve (0 = country-level, 1=province-level ...).}
 
 \item{use_cache}{load files from cache if possible, and save them if not present.}
 
