@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">ohvbd</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -105,20 +105,22 @@
 </h2>
 <!-- These are auto-pulled from NEWS.md  -->
 <div class="section level3">
-<h3 id="ohvbd-030">ohvbd 0.3.0<a class="anchor" aria-label="anchor" href="#ohvbd-030"></a>
+<h3 id="ohvbd-031">ohvbd 0.3.1<a class="anchor" aria-label="anchor" href="#ohvbd-031"></a>
 </h3>
 <div class="section level4">
-<h4 id="major-api-change">
-<strong>Major API change</strong><a class="anchor" aria-label="anchor" href="#major-api-change"></a>
+<h4 id="na">NA<a class="anchor" aria-label="anchor" href="#na"></a>
 </h4>
 <ul>
+<li>New function <code><a href="reference/format_time_overlap_bar.html">format_time_overlap_bar()</a></code> allows for visually formatting a range of dates combined with another set of target dates to see where overlaps do or do not take place.</li>
+<li>This is mostly used in the error handling of <code><a href="reference/extract_ad_data.html">extract_ad_data()</a></code> however it can also be used independently. It was designed to fill a more general role within UI design using the cli package, and should be usable (or hackable) by others needing the same tool.</li>
 <li>
-<code>*_basereq()</code> calls are no longer required as the first argument for functions.</li>
-<li>As such, data downloads no longer need to start with <code>vb_basereq() %&gt;%</code>.</li>
-<li>Basereq can now be overridden by providing an alternative basereq to the <code>basereq</code> argument of these functions, which can be generated using <code><a href="reference/vb_basereq.html">vb_basereq()</a></code>.</li>
-<li>This is usually only needed if using the argument <code>unsafe = TRUE</code> for <code><a href="reference/vb_basereq.html">vb_basereq()</a></code>.</li>
-<li>It is also possible to set ohvbd to use compatability-mode ssl calls using <code><a href="reference/set_ohvbd_compat.html">set_ohvbd_compat()</a></code>.</li>
-<li>This change breaks any code written prior to this version, and so major rewrites may be required.</li>
+<code><a href="reference/extract_ad_data.html">extract_ad_data()</a></code> now errors when all <code>targetdate</code> entries are outside of the range of the AREAdata dataset.</li>
+<li>New <code><a href="reference/assoc_ad_data.html">assoc_ad_data()</a></code> associates arbitrary data including lon/lat columns with AREAdata.</li>
+<li>New <code><a href="reference/get_vd_columns.html">get_vd_columns()</a></code> provides quick reference about the currently present VecDyn columns. <em>(This is currently not possible for VecTraits, but the feasibility is being investigated.)</em>
+</li>
+<li>New <code><a href="reference/assoc_gadm_id.html">assoc_gadm_id()</a></code> function associates gadm ids at all spatial scales with arbitrary data that include lon/lat columns.</li>
+<li>Documentation now correctly displays favicons.</li>
+<li>Logo now rotates through a variety of colourschemes according to the version number.</li>
 </ul>
 <p>See <a href="https://fwimp.github.io/ohvbd/news/index.html">changelog</a> for patch notes for previous versions.</p>
 </div>
@@ -160,7 +162,7 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/" class="external-link"><img src="https://img.shields.io/badge/R%3E%3D-4.0-6666ff.svg?style=for-the-badge" alt="R"></a></li>
-<li><a href="commits/master"><img src="https://img.shields.io/badge/Package%20version-0.3.0-orange.svg?style=for-the-badge" alt="packageversion"></a></li>
+<li><a href="commits/master"><img src="https://img.shields.io/badge/Package%20version-0.3.1-orange.svg?style=for-the-badge" alt="packageversion"></a></li>
 <li><a href="https://www.gnu.org/licenses/gpl-3.0.en.html" class="external-link"><img src="https://img.shields.io/badge/license-GPL--3-blue.svg?style=for-the-badge" alt="license"></a></li>
 <li><a href="https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>

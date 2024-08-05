@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ohvbd</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,6 +41,19 @@
       <small>Source: <a href="https://github.com/fwimp/ohvbd/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.3.1" id="ohvbd-031">ohvbd 0.3.1<a class="anchor" aria-label="anchor" href="#ohvbd-031"></a></h2>
+<ul><li>New function <code><a href="../reference/format_time_overlap_bar.html">format_time_overlap_bar()</a></code> allows for visually formatting a range of dates combined with another set of target dates to see where overlaps do or do not take place.</li>
+<li>This is mostly used in the error handling of <code><a href="../reference/extract_ad_data.html">extract_ad_data()</a></code> however it can also be used independently. It was designed to fill a more general role within UI design using the cli package, and should be usable (or hackable) by others needing the same tool.</li>
+<li>
+<code><a href="../reference/extract_ad_data.html">extract_ad_data()</a></code> now errors when all <code>targetdate</code> entries are outside of the range of the AREAdata dataset.</li>
+<li>New <code><a href="../reference/assoc_ad_data.html">assoc_ad_data()</a></code> associates arbitrary data including lon/lat columns with AREAdata.</li>
+<li>New <code><a href="../reference/get_vd_columns.html">get_vd_columns()</a></code> provides quick reference about the currently present VecDyn columns. <em>(This is currently not possible for VecTraits, but the feasibility is being investigated.)</em>
+</li>
+<li>New <code><a href="../reference/assoc_gadm_id.html">assoc_gadm_id()</a></code> function associates gadm ids at all spatial scales with arbitrary data that include lon/lat columns.</li>
+<li>Documentation now correctly displays favicons.</li>
+<li>Logo now rotates through a variety of colourschemes according to the version number.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.3.0" id="ohvbd-030">ohvbd 0.3.0<a class="anchor" aria-label="anchor" href="#ohvbd-030"></a></h2>
 <div class="section level3">
