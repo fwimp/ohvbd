@@ -47,8 +47,6 @@ devtools::install_github("fwimp/ohvbd", build_vignettes = TRUE)
 
 ### ohvbd 0.3.1
 
-#### NA
-
 - New function `format_time_overlap_bar()` allows for visually
   formatting a range of dates combined with another set of target dates
   to see where overlaps do or do not take place.

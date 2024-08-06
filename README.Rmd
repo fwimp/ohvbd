@@ -87,16 +87,19 @@ latest_version <- md_chunks[[1,1]]
 filtered_md_chunks <- subset(md_chunks, md_chunks$sec_h1 == latest_version)
 
 notes <- c()
-notes <- tryCatch({
+if (all(is.na(filtered_md_chunks$sec_h2))) {
+  notes <- parsermd::as_document(md_chunks[[1,"ast"]], collapse = "\n")
+} else {
+  notes <- tryCatch({
   for (i in 1:nrow(filtered_md_chunks)) {
-  # cat(paste0("## ", filtered_md_chunks[i, "sec_h2"], "\n\n", parsermd::as_document(md_chunks[[i,"ast"]], collapse = "\n")))
-  notes <- c(notes, paste0("#### ", filtered_md_chunks[i, "sec_h2"], "\n\n", parsermd::as_document(md_chunks[[i,"ast"]], collapse = "\n")))
-  }
-  paste(notes, collapse = "\n")
-}, error = function(e) {
-  parsermd::as_document(md_chunks[[1,"ast"]], collapse = "\n")
-})
-# notes <- parsermd::as_document(md_chunks[[1,"ast"]], collapse = "\n")
+    # cat(paste0("## ", filtered_md_chunks[i, "sec_h2"], "\n\n", parsermd::as_document(md_chunks[[i,"ast"]], collapse = "\n")))
+    notes <- c(notes, paste0("#### ", filtered_md_chunks[i, "sec_h2"], "\n\n", parsermd::as_document(md_chunks[[i,"ast"]], collapse = "\n")))
+    }
+    paste(notes, collapse = "\n")
+  }, error = function(e) {
+    parsermd::as_document(md_chunks[[1,"ast"]], collapse = "\n")
+  })
+}
 
 ```
 <!-- These are auto-pulled from NEWS.md  -->
