@@ -71,7 +71,7 @@ get_current_vt_ids() %>% head(n = 20)
 
 The functions `search_x()` and `search_x_smart()` also return a list of IDs that match the query provided in the arguments.
 
-In this case let's search VecTraits for *Aedes aegypti*, the "Asian tiger mosquito":
+In this case let's search VecTraits for *Aedes aegypti*, the "Yellow Fever mosquito":
 
 ```{r search_vt}
 aedes_ids <- search_vt("Aedes aegypti")
