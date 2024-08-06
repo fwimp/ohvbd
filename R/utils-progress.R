@@ -111,18 +111,22 @@ format_time_overlap_bar <- function(start, end, targets, targetrange = FALSE, tw
     }
   }
 
-  cat(paste0(paste0(rep(" ", 3), collapse = ""), min_time, paste0(rep(" ", width - 10), collapse = ""), max_time, "\n"))
-  cat(paste0(paste0(rep(" ", 8), collapse = ""), "|", paste0(rep(" ", width), collapse = ""), "|\n"))
+  cat(paste0(paste0(rep(" ", 4), collapse = ""), min_time, paste0(rep(" ", width - 7), collapse = ""), max_time, "\n"))
+  cat(paste0(paste0(rep(" ", 9), collapse = ""), "|", paste0(rep(" ", width + 2), collapse = ""), "|\n"))
 
   if (twobar) {
     # Generate bar dates
     coverage_bar <- bar_source[as.numeric(within_coverage) + 1]
     target_bar <- bar_source[as.numeric(within_target) + 1]
     cat(cli::col_green("   Data: "))
+    cat("| ")
     cat(paste0(cli::col_green(coverage_bar), collapse = ""))
+    cat(" |")
     cat("\n")
     cat(cli::col_red("Targets: "))
+    cat("| ")
     cat(paste0(cli::col_red(target_bar), collapse = ""))
+    cat(" |")
     cat("\n")
   } else {
     # Onebar mode
@@ -133,7 +137,10 @@ format_time_overlap_bar <- function(start, end, targets, targetrange = FALSE, tw
     target_bar_numeric <- as.numeric(within_target) * 2
 
     final_bar <- coverage_bar_numeric + target_bar_numeric
+    cat(paste0(rep(" ", 9), collapse = ""))
+    cat("| ")
     cat(paste0(onebar_source[final_bar + 1], collapse = ""))
+    cat(" |")
     cat("\n")
     cat(paste0(onebar_source[1], " = No dates, ", onebar_source[2], " = Data only, ", onebar_source[3], " = Target only, ", onebar_source[4], " = Overlap"))
   }
