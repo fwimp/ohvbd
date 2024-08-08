@@ -1,5 +1,5 @@
 #' @title Parse data from requests to VecTraits
-#' @description Extract the data returned by a call to [ohvbd::get_vt_byid()], filter columns of interest, and find unique rows if required.
+#' @description Extract the data returned by a call to [ohvbd::get_vt()], filter columns of interest, and find unique rows if required.
 #' @author Francis Windram
 #'
 #' @param res a list of responses from VecTraits.
@@ -10,8 +10,8 @@
 #'
 #' @examples
 #' \dontrun{
-#' get_vt_dataset_byid(54) %>%
-#'   extract_vt_data(cols=c("DatasetID",
+#' get_vt(54) %>%
+#'   extract_vt(cols=c("DatasetID",
 #'                          "Interactor1Genus",
 #'                          "Interactor1Species"),
 #'                   returnunique=TRUE)
@@ -22,7 +22,7 @@
 #' @export
 #'
 
-extract_vt_data <- function(res, cols = NA, returnunique = FALSE) {
+extract_vt <- function(res, cols = NA, returnunique = FALSE) {
 
   if (is.null(attr(res, "db"))) {
     cli_alert_warning("Responses not necessarily from VecTraits.")

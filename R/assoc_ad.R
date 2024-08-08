@@ -33,8 +33,8 @@
 #' @examples
 #' \dontrun{
 #' vt_ids <- search_vt(c("Aedes", "aegypti"))
-#' vtdf <- get_vt_byid(vt_ids[(length(vt_ids)-20):length(vt_ids)]) %>%
-#'   extract_vt_data(cols = c(
+#' vtdf <- get_vt(vt_ids[(length(vt_ids)-20):length(vt_ids)]) %>%
+#'   extract_vt(cols = c(
 #'     "DatasetID",
 #'     "Latitude",
 #'     "Longitude",
@@ -42,7 +42,7 @@
 #'     "Interactor1Species"
 #'     ), returnunique = TRUE)
 #' areadata <- get_ad(metric="temp", gid=2, use_cache=TRUE)
-#' ad_extract_working <- assoc_ad_data(vtdf, areadata,
+#' ad_extract_working <- assoc_ad(vtdf, areadata,
 #'                                     targetdate = c("2021-08-04"), enddate=c("2021-08-06"),
 #'                                     gid=2, lonlat_names = c("Longitude", "Latitude"))
 #' }
@@ -54,7 +54,7 @@
 
 
 
-assoc_ad_data <- function(data, areadata, targetdate = NA, enddate = NA, gid = 0, lonlat_names = c("Longitude", "Latitude"), basereq = NA) {
+assoc_ad <- function(data, areadata, targetdate = NA, enddate = NA, gid = 0, lonlat_names = c("Longitude", "Latitude"), basereq = NA) {
 
   # Remember db attr of input data
   datatype <- attr(data, "db")
@@ -65,7 +65,7 @@ assoc_ad_data <- function(data, areadata, targetdate = NA, enddate = NA, gid = 0
     cli_abort(c("x" = "{.arg areadata} not from AREAdata!", "!" = "Detected db = {.val {attr(areadata, 'db')}}"))
   }
 
-  # TODO: Fix this to be in the same form (or just to use) assoc_gadm_id()
+  # TODO: Fix this to be in the same form (or just to use) assoc_gadm()
 
   if (all(is.na(basereq))) {
     basereq <- ad_basereq()
@@ -109,7 +109,7 @@ assoc_ad_data <- function(data, areadata, targetdate = NA, enddate = NA, gid = 0
   places <- gadm_point_ids %>% select(any_of(final_name)) %>% na.omit() %>% unique()
 
   # Pull out the data from AD
-  ad_extracted <- areadata %>% extract_ad_data(targetdate = targetdate, enddate = enddate, places = places[, final_name], gid = gid)
+  ad_extracted <- areadata %>% extract_ad(targetdate = targetdate, enddate = enddate, places = places[, final_name], gid = gid)
 
   # Make rownames into a column ready for left join with ids
   ad_extracted <- rownames_to_column(data.frame(ad_extracted), var = final_name)

@@ -1,5 +1,5 @@
 
-<!-- force push by editing this number: 42 -->
+<!-- force push by editing this number: 420 -->
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- Build with devtools::build_readme() -->
 
@@ -9,7 +9,7 @@
 <!-- badges: start -->
 
 [![R](https://img.shields.io/badge/R%3E%3D-4.0-6666ff.svg?style=for-the-badge)](https://cran.r-project.org/)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.3.1-orange.svg?style=for-the-badge)](commits/master)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.4.0-orange.svg?style=for-the-badge)](commits/master)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg?style=for-the-badge)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 [![R-CMD-check](https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
@@ -45,27 +45,26 @@ devtools::install_github("fwimp/ohvbd", build_vignettes = TRUE)
 
 <!-- These are auto-pulled from NEWS.md  -->
 
-### ohvbd 0.3.1
+### ohvbd 0.4.0
 
-- New function `format_time_overlap_bar()` allows for visually
-  formatting a range of dates combined with another set of target dates
-  to see where overlaps do or do not take place.
-- This is mostly used in the error handling of `extract_ad_data()`
-  however it can also be used independently. It was designed to fill a
-  more general role within UI design using the cli package, and should
-  be usable (or hackable) by others needing the same tool.
-- `extract_ad_data()` now errors when all `targetdate` entries are
-  outside of the range of the AREAdata dataset.
-- New `assoc_ad_data()` associates arbitrary data including lon/lat
-  columns with AREAdata.
-- New `get_vd_columns()` provides quick reference about the currently
-  present VecDyn columns. *(This is currently not possible for
-  VecTraits, but the feasibility is being investigated.)*
-- New `assoc_gadm_id()` function associates gadm ids at all spatial
-  scales with arbitrary data that include lon/lat columns.
-- Documentation now correctly displays favicons.
-- Logo now rotates through a variety of colourschemes according to the
-  version number.
+#### **Major API change**
+
+- Major simplification of function names!
+- `get_x_byid()` -\> `get_x()`
+- `extract_x_data()` -\> `extract_x()`
+- `assoc_x_y()` -\> `assoc_x()`
+- `get_extract_x_byid_chunked()` -\> `get_extract_x_chunked()`
+- This breaks ALL PREVIOUS CODE!
+- Naming now follows a logical scheme of `verb_target_modifier()`.
+- For example `get_x_y()` functions always retrieve data from database
+  `x` with `y` specifying any special type of data.
+- Similarly `extract_x()` functions always extract data.
+- If a function does multiple things, it may get multiple verbs
+  seperated by underscores, e.g. `get_extract_x_chunked()`
+- Pipelines now internally attempt to confirm data integrity by checking
+  that the correct functions are piped together.
+- This means it is no longer easy to accidentally do something like
+  `get_current_vd_ids() %>% get_vt()`.
 
 See [changelog](https://fwimp.github.io/ohvbd/news/index.html) for patch
 notes for previous versions.

@@ -10,9 +10,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' get_vd_byid(54)
+#' get_vd(54)
 #'
-#' get_vd_byid(c(423,424,425), rate=5)
+#' get_vd(c(423,424,425), rate=5)
 #' }
 #'
 #' @concept vecdyn
@@ -20,7 +20,7 @@
 #' @export
 #'
 
-get_vd_byid <- function(ids, rate = 5, basereq = NA) {
+get_vd <- function(ids, rate = 5, basereq = NA) {
 
   if (is.null(attr(ids, "db"))) {
     cli_alert_warning("IDs not necessarily from VecDyn.")

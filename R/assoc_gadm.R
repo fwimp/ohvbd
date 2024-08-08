@@ -15,22 +15,22 @@
 #' @examples
 #' \dontrun{
 #' vt_ids <- search_vt(c("Aedes", "aegypti"))
-#' vtdf <- get_vt_byid(vt_ids[(length(vt_ids)-20):length(vt_ids)]) %>%
-#'   extract_vt_data(cols = c(
+#' vtdf <- get_vt(vt_ids[(length(vt_ids)-20):length(vt_ids)]) %>%
+#'   extract_vt(cols = c(
 #'     "DatasetID",
 #'     "Latitude",
 #'     "Longitude",
 #'     "Interactor1Genus",
 #'     "Interactor1Species"
 #'     ), returnunique = TRUE)
-#' vtdf <- vtdf %>% assoc_gadm_id(lonlat_names = c("Longitude", "Latitude"))
+#' vtdf <- vtdf %>% assoc_gadm(lonlat_names = c("Longitude", "Latitude"))
 #' }
 #'
 #'
 #' @export
 #'
 
-assoc_gadm_id <- function(df, lonlat_names = c("Longitude", "Latitude"), basereq = NA) {
+assoc_gadm <- function(df, lonlat_names = c("Longitude", "Latitude"), basereq = NA) {
 
   # Remember db attr of input data
   datatype <- attr(df, "db")

@@ -1,7 +1,7 @@
 #' @title Get and parse multiple VecTraits datasets by ID in chunks
 #' @description Retrieve and parse VecTraits datasets specified by their dataset IDs in batches.
 #'
-#' This is not usually necessary (generally you just need [get_vt_byid()]) but allows one to release data that is not in use from memory. If you would like more control on extraction or parsing then it is best to wrap [get_vt_byid()] and [extract_vt_data()] in your own chunker instead.
+#' This is not usually necessary (generally you just need [get_vt()]) but allows one to release data that is not in use from memory. If you would like more control on extraction or parsing then it is best to wrap [get_vt()] and [extract_vt()] in your own chunker instead.
 #' @author Francis Windram
 #'
 #' @param ids a numeric vector of IDs indicating the particular datasets to download.
@@ -15,7 +15,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' get_extract_vt_byid_chunked(c(54,55,56), chunksize = 2, rate=5)
+#' get_extract_vt_chunked(c(54,55,56), chunksize = 2, rate=5)
 #' }
 #'
 #' @concept vectraits
@@ -23,7 +23,7 @@
 #' @export
 #'
 
-get_extract_vt_byid_chunked <- function(ids, chunksize = 20, cols = NA, returnunique = FALSE, rate = 5, basereq = NA) {
+get_extract_vt_chunked <- function(ids, chunksize = 20, cols = NA, returnunique = FALSE, rate = 5, basereq = NA) {
 
   if (is.null(attr(ids, "db"))) {
     cli_alert_warning("IDs not necessarily from VecTraits.")
@@ -44,8 +44,8 @@ get_extract_vt_byid_chunked <- function(ids, chunksize = 20, cols = NA, returnun
 
   # Lapply pipeline to chunk list
   out_list <- chunklets %>% lapply(\(idchunk) {
-    get_vt_byid(idchunk, rate = rate, basereq = basereq) %>%
-      extract_vt_data(cols = cols, returnunique = returnunique)
+    get_vt(idchunk, rate = rate, basereq = basereq) %>%
+      extract_vt(cols = cols, returnunique = returnunique)
   })
 
   out_df <- rbindlist(out_list)

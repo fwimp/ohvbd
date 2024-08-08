@@ -10,9 +10,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' get_vt_byid(54)
+#' get_vt(54)
 #'
-#' get_vt_byid(c(54, 55, 56), rate=5)
+#' get_vt(c(54, 55, 56), rate=5)
 #' }
 #'
 #' @concept vectraits
@@ -20,7 +20,7 @@
 #' @export
 #'
 
-get_vt_byid <- function(ids, rate = 5, basereq = NA) {
+get_vt <- function(ids, rate = 5, basereq = NA) {
 
   if (is.null(attr(ids, "db"))) {
     cli_alert_warning("IDs not necessarily from VecTraits.")

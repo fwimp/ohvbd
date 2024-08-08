@@ -43,21 +43,21 @@
 #' \dontrun{
 #' # All dates in August 2022
 #' get_ad("temp", gid=0) %>%
-#'   extract_ad_data(
+#'   extract_ad(
 #'     targetdate = "2022-08",
 #'     places = c("Albania", "Thailand")
 #'   )
 #'
 #' # 4th, 5th, and 6th of August 2022 (remember the enddate is EXCLUSIVE)
 #' get_ad("temp", gid=0) %>%
-#'   extract_ad_data(
+#'   extract_ad(
 #'     targetdate = "2022-08-04", enddate="2022-08-07",
 #'     places = c("Albania", "Thailand")
 #'   )
 #'
 #' # 4th of August 2022 and 1st of August 2023
 #' get_ad("temp", gid=0) %>%
-#'   extract_ad_data(
+#'   extract_ad(
 #'     targetdate = c("2022-08-04", "2023-08-01"),
 #'     places = c("Albania", "Thailand")
 #'   )
@@ -68,8 +68,7 @@
 #' @export
 #'
 
-extract_ad_data <- function(ad_matrix, targetdate = NA, enddate = NA, places = NA, gid = NA) {
-  # TODO: Make extract_ad_data check whether the selected dates are within the range of the AD dump
+extract_ad <- function(ad_matrix, targetdate = NA, enddate = NA, places = NA, gid = NA) {
 
   # Enddate SHOULD BE EXCLUSIVE
 
