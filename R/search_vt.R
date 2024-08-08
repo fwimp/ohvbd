@@ -44,5 +44,7 @@ search_vt <- function(keywords, basereq = NA) {
   }
 
   body <- resplist$resp %>% resp_body_json()
-  return(as.numeric(body$ids))
+  outids <- as.numeric(body$ids)
+  attr(outids, "db") <- "vt"
+  return(outids)
 }

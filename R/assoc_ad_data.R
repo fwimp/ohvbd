@@ -56,6 +56,15 @@
 
 assoc_ad_data <- function(data, areadata, targetdate = NA, enddate = NA, gid = 0, lonlat_names = c("Longitude", "Latitude"), basereq = NA) {
 
+  # Remember db attr of input data
+  datatype <- attr(data, "db")
+
+  if (is.null(attr(areadata, "db"))) {
+    cli_alert_warning("{.arg areadata} not necessarily from AREAdata.")
+  } else if (attr(areadata, "db") != "ad") {
+    cli_abort(c("x" = "{.arg areadata} not from AREAdata!", "!" = "Detected db = {.val {attr(areadata, 'db')}}"))
+  }
+
   # TODO: Fix this to be in the same form (or just to use) assoc_gadm_id()
 
   if (all(is.na(basereq))) {
@@ -120,5 +129,8 @@ assoc_ad_data <- function(data, areadata, targetdate = NA, enddate = NA, gid = 0
   if (ncol(final_extract) == 1) {
     colnames(outdata) <- c(colnames(outdata)[1:length(outdata) - 1], metric) # nolint: seq_linter
   }
+
+  attr(outdata, "db") <- datatype
+
   return(outdata)
 }

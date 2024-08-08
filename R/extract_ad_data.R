@@ -73,6 +73,12 @@ extract_ad_data <- function(ad_matrix, targetdate = NA, enddate = NA, places = N
 
   # Enddate SHOULD BE EXCLUSIVE
 
+  if (is.null(attr(ad_matrix, "db"))) {
+    cli_alert_warning("Data not necessarily from AREAdata.")
+  } else if (attr(ad_matrix, "db") != "ad") {
+    cli_abort(c("x" = "Data not from AREAdata, Please use the appropriate {.fn extract_x} function.", "!" = "Detected db = {.val {attr(ad_matrix, 'db')}}"))
+  }
+
   # try to infer gid from ad_matrix
   # This will allow us to automagically fill or filter by countries even when we only have GID codes.
   if (is.na(gid)) {
@@ -198,5 +204,9 @@ extract_ad_data <- function(ad_matrix, targetdate = NA, enddate = NA, places = N
     selected_rows <- places[which(places %in% rownames(ad_matrix))]
   }
 
-  return(ad_matrix[selected_rows, selected_cols])
+  outmat <- ad_matrix[selected_rows, selected_cols]
+
+  attr(outmat, "db") <- "ad"
+
+  return(outmat)
 }

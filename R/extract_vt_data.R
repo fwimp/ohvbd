@@ -24,6 +24,12 @@
 
 extract_vt_data <- function(res, cols = NA, returnunique = FALSE) {
 
+  if (is.null(attr(res, "db"))) {
+    cli_alert_warning("Responses not necessarily from VecTraits.")
+  } else if (attr(res, "db") != "vt") {
+    cli_abort(c("x" = "Responses not from VecTraits, Please use the appropriate {.fn extract_x} function.", "!" = "Detected db = {.val {attr(res, 'db')}}"))
+  }
+
   if (any(class(res) == "httr2_response")) {
     # Detect if this is a single request
     out_data <- res %>% resp_body_json()
@@ -50,5 +56,8 @@ extract_vt_data <- function(res, cols = NA, returnunique = FALSE) {
     out_df <- unique(out_df)
   }
 
-  return(as.data.frame(out_df))
+  out_final <- as.data.frame(out_df)
+  attr(out_final, "db") <- "vt"
+
+  return(out_final)
 }

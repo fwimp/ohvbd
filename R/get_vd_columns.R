@@ -1,4 +1,4 @@
-#' @title Get current columns in VecDyn datasets.
+#' @title Get current columns in VecDyn datasets
 #' @description Get all the current column names in VecDyn, alongside associated data if desired.
 #' @author Francis Windram
 #'

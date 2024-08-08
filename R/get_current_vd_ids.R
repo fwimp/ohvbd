@@ -37,5 +37,7 @@ get_current_vd_ids <- function(basereq = NA) {
   }
 
   body <- resplist$resp %>% resp_body_json()
-  return(as.numeric(body$ids))
+  outids <- as.numeric(body$ids)
+  attr(outids, "db") <- "vd"
+  return(outids)
 }

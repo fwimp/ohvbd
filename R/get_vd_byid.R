@@ -22,6 +22,12 @@
 
 get_vd_byid <- function(ids, rate = 5, basereq = NA) {
 
+  if (is.null(attr(ids, "db"))) {
+    cli_alert_warning("IDs not necessarily from VecDyn.")
+  } else if (attr(ids, "db") != "vd") {
+    cli_abort(c("x" = "IDs not from VecDyn, Please use the appropriate {.fn get_x} function.", "!" = "Detected db = {.val {attr(ids, 'db')}}"))
+  }
+
   if (all(is.na(basereq))) {
     basereq <- vb_basereq()
   }
@@ -39,6 +45,8 @@ get_vd_byid <- function(ids, rate = 5, basereq = NA) {
     name = "VecDyn Data",
     format = "Downloading {cli::pb_name} {cli::pb_current}/{cli::pb_total} {cli::pb_bar} {cli::pb_percent} | ETA: {cli::pb_eta}"
   ))
+
+  attr(resps, "db") <- "vd"
 
   return(resps)
 }

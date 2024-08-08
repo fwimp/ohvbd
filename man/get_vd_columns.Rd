@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_vd_columns.R
 \name{get_vd_columns}
 \alias{get_vd_columns}
-\title{Get current columns in VecDyn datasets.}
+\title{Get current columns in VecDyn datasets}
 \usage{
 get_vd_columns(full = FALSE, basereq = NA)
 }

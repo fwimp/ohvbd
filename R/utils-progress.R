@@ -41,6 +41,8 @@ progress_style <- function(x) {
 
 #' @title Format and print date overlaps
 #' @description Format and output to the terminal a visualisation of the overlaps between a given period and another set of dates.
+#' This is mostly used in the error handling of [extract_ad_data()] however it can also be used independently.
+#' It was designed to fill a more general role within UI design using the cli package, and should be usable (or hackable) by others needing the same tool.
 #' @author Francis Windram
 #'
 #' @param start the date that the reference period begins (as Date object)

@@ -25,6 +25,12 @@
 
 get_extract_vd_byid_chunked <- function(ids, chunksize = 20, cols = NA, returnunique = FALSE, rate = 5, basereq = NA) {
 
+  if (is.null(attr(ids, "db"))) {
+    cli_alert_warning("IDs not necessarily from VecDyn.")
+  } else if (attr(ids, "db") != "vd") {
+    cli_abort(c("x" = "IDs not from VecDyn, Please use the appropriate {.fn get_extract_x} function.", "!" = "Detected db = {.val {attr(ids, 'db')}}"))
+  }
+
   if (all(is.na(basereq))) {
     basereq <- vb_basereq()
   }
@@ -44,5 +50,8 @@ get_extract_vd_byid_chunked <- function(ids, chunksize = 20, cols = NA, returnun
 
   out_df <- rbindlist(out_list, fill = TRUE)
 
-  return(as.data.frame(out_df))
+  out_final <- as.data.frame(out_df)
+  attr(out_final, "db") <- "vd"
+
+  return(out_final)
 }

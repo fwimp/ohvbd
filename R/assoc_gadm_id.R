@@ -32,6 +32,9 @@
 
 assoc_gadm_id <- function(df, lonlat_names = c("Longitude", "Latitude"), basereq = NA) {
 
+  # Remember db attr of input data
+  datatype <- attr(df, "db")
+
   # Always load gid level 2 as it's quickest AND a complete superset of GID1 and 0
   gid <- 2
 
@@ -98,6 +101,8 @@ assoc_gadm_id <- function(df, lonlat_names = c("Longitude", "Latitude"), basereq
   outdata <- bind_cols(df, gadm_point_ids)
   cli_alert_success("Merge complete.")
   cli_progress_done()
+
+  attr(outdata, "db") <- datatype
 
   return(outdata)
 }

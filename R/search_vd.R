@@ -49,6 +49,8 @@ search_vd <- function(keywords, basereq = NA) {
     # This is a bit of a kludge, the API does not return count in the same place if no results are found
     cli_abort("No records found for {.val {keywords}}")
   } else {
-    return(as.numeric(body$ids))
+    outids <- as.numeric(body$ids)
+    attr(outids, "db") <- "vd"
+    return(outids)
   }
 }

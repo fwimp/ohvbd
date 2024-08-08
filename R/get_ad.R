@@ -44,6 +44,7 @@ get_ad <- function(metric = "temp", gid = 0, use_cache = FALSE, cache_location =
 
   loaded_cache <- FALSE
   final_url <- paste0(basereq, "output/")
+  # TODO: Consider using match.arg() to do fuzzy matching because that'd be super cool
   poss_metrics <- c(
     "temp" = 1, "temperature" = 1,
     "spechumid" = 2, "specific humidity" = 2,
@@ -125,6 +126,7 @@ get_ad <- function(metric = "temp", gid = 0, use_cache = FALSE, cache_location =
 
     attr(outmat, "gid") <- gid
     attr(outmat, "metric") <- final_metric
+    attr(outmat, "db") <- "ad"
   }
 
   if (use_cache) {

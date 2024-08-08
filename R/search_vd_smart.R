@@ -122,6 +122,8 @@ search_vd_smart <- function(field, operator, value, basereq = NA) {
     # This is a bit of a kludge, the API does not return count in the same place if no results are found
     cli_abort(c("x" = "No records found for {.val {paste(final_field, final_operator, value)}}"))
   } else {
-    return(as.numeric(body$ids))
+    outids <- as.numeric(body$ids)
+    attr(outids, "db") <- "vd"
+    return(outids)
   }
 }

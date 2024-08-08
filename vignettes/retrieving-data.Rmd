@@ -113,7 +113,7 @@ paste0("Data dimensions: ", ncol(aedes_data), " cols x ", nrow(aedes_data), " ro
 
 This dataset is a bit too large to print here, and often you may only want a few columns of data rather than the whole dataset.
 
-Fortunately the `cols` argument allows us to filter this data out easily. We can also use the `returnunique` argument to instruct ohvbd to return only unique rows.
+Fortunately the `cols` argument allows us to filter this data out easily. We can also use the argument `returnunique` to instruct ohvbd to return only unique rows.
 
 So let's get just the unique locations and trait name combinations from our data using the same command as before:
 
