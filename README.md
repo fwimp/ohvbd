@@ -1,5 +1,5 @@
 
-<!-- force push by editing this number: 420 -->
+<!-- force push by editing this number: 1337 -->
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- Build with devtools::build_readme() -->
 
@@ -64,7 +64,7 @@ devtools::install_github("fwimp/ohvbd", build_vignettes = TRUE)
 - Pipelines now internally attempt to confirm data integrity by checking
   that the correct functions are piped together.
 - This means it is no longer easy to accidentally do something like
-  `get_current_vd_ids() %>% get_vt()`.
+  `get_vd_current_ids() %>% get_vt()`.
 
 See [changelog](https://fwimp.github.io/ohvbd/news/index.html) for patch
 notes for previous versions.

@@ -11,7 +11,7 @@
 * Similarly `extract_x()` functions always extract data.
 * If a function does multiple things, it may get multiple verbs seperated by underscores, e.g. `get_extract_x_chunked()`
 * Pipelines now internally attempt to confirm data integrity by checking that the correct functions are piped together.
-* This means it is no longer easy to accidentally do something like `get_current_vd_ids() %>% get_vt()`.
+* This means it is no longer easy to accidentally do something like `get_vd_current_ids() %>% get_vt()`.
 
 # ohvbd 0.3.1
 
@@ -90,7 +90,7 @@
 # ohvbd 0.0.5
 
 * New `search_vt()` allows for keyword-based searching of VecTraits.
-* `get_current_vt_ids()` now handles 404 responses gracefully.
+* `get_vt_current_ids()` now handles 404 responses gracefully.
 
 # ohvbd 0.0.4
 

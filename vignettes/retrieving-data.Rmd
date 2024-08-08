@@ -66,7 +66,7 @@ Datasets in VecTraits and VecDyn are organised by id. As such it is often good t
 
 ```{r get_vt_ids}
 library(ohvbd)
-get_current_vt_ids() %>% head(n = 20)
+get_vt_current_ids() %>% head(n = 20)
 ```
 
 The functions `search_x()` and `search_x_smart()` also return a list of IDs that match the query provided in the arguments.

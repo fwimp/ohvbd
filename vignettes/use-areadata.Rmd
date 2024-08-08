@@ -1,0 +1,40 @@
+---
+title: "Sourcing climatic data from AREAdata"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Sourcing climatic data from AREAdata}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(ohvbd)
+cachepath <- "../.adcache"
+```
+
+## Introduction
+
+Often when presented with a set of population dynamic data, we may wish to investigate the abiotic conditions such as temperature or humidity that these dynamics occurred under.
+
+Ideally this sort of data would have been collected at the same time as the dynamics data. However with data collected for one purpose and then repurposed for another, this is often not possible.
+
+In such scenarios it is possible to link the location of the data with other measurements of abiotic variables in the area. These can be retrieved from raster files provided by ..., however often this is a large amount of data for a small number of datapoints. An alternative method for gathering this data is through the AREAdata project, which provides historical and forecast data aggregated to different spatial scales.
+
+<!--Insert more stuff about this.-->
+
+```{r}
+ad_df <- get_ad(metric = "temp", gid = 0, use_cache = TRUE, cache_location = cachepath)
+paste0("Data dimensions: ", ncol(ad_df), " cols x ", nrow(ad_df), " rows")
+```
+
+```{r}
+
+```
+
