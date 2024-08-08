@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ohvbd</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,15 +42,42 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.4.0" id="ohvbd-040">ohvbd 0.4.0<a class="anchor" aria-label="anchor" href="#ohvbd-040"></a></h2>
+<div class="section level3">
+<h3 id="major-api-change-0-4-0"><strong>Major API change</strong><a class="anchor" aria-label="anchor" href="#major-api-change-0-4-0"></a></h3>
+<ul><li>Major simplification of function names!</li>
+<li>
+<code>get_x_byid()</code> -&gt; <code>get_x()</code>
+</li>
+<li>
+<code>extract_x_data()</code> -&gt; <code>extract_x()</code>
+</li>
+<li>
+<code>assoc_x_y()</code> -&gt; <code>assoc_x()</code>
+</li>
+<li>
+<code>get_extract_x_byid_chunked()</code> -&gt; <code>get_extract_x_chunked()</code>
+</li>
+<li>This breaks ALL PREVIOUS CODE!</li>
+<li>Naming now follows a logical scheme of <code>verb_target_modifier()</code>.</li>
+<li>For example <code>get_x_y()</code> functions always retrieve data from database <code>x</code> with <code>y</code> specifying any special type of data.</li>
+<li>Similarly <code>extract_x()</code> functions always extract data.</li>
+<li>If a function does multiple things, it may get multiple verbs seperated by underscores, e.g. <code>get_extract_x_chunked()</code>
+</li>
+<li>Pipelines now internally attempt to confirm data integrity by checking that the correct functions are piped together.</li>
+<li>This means it is no longer easy to accidentally do something like <code>get_current_vd_ids() %&gt;% get_vt()</code>.</li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.3.1" id="ohvbd-031">ohvbd 0.3.1<a class="anchor" aria-label="anchor" href="#ohvbd-031"></a></h2>
 <ul><li>New function <code><a href="../reference/format_time_overlap_bar.html">format_time_overlap_bar()</a></code> allows for visually formatting a range of dates combined with another set of target dates to see where overlaps do or do not take place.</li>
-<li>This is mostly used in the error handling of <code><a href="../reference/extract_ad_data.html">extract_ad_data()</a></code> however it can also be used independently. It was designed to fill a more general role within UI design using the cli package, and should be usable (or hackable) by others needing the same tool.</li>
+<li>This is mostly used in the error handling of <code><a href="../reference/extract_ad.html">extract_ad()</a></code> however it can also be used independently. It was designed to fill a more general role within UI design using the cli package, and should be usable (or hackable) by others needing the same tool.</li>
 <li>
-<code><a href="../reference/extract_ad_data.html">extract_ad_data()</a></code> now errors when all <code>targetdate</code> entries are outside of the range of the AREAdata dataset.</li>
-<li>New <code><a href="../reference/assoc_ad_data.html">assoc_ad_data()</a></code> associates arbitrary data including lon/lat columns with AREAdata.</li>
+<code><a href="../reference/extract_ad.html">extract_ad()</a></code> now errors when all <code>targetdate</code> entries are outside of the range of the AREAdata dataset.</li>
+<li>New <code><a href="../reference/assoc_ad.html">assoc_ad()</a></code> associates arbitrary data including lon/lat columns with AREAdata.</li>
 <li>New <code><a href="../reference/get_vd_columns.html">get_vd_columns()</a></code> provides quick reference about the currently present VecDyn columns. <em>(This is currently not possible for VecTraits, but the feasibility is being investigated.)</em>
 </li>
-<li>New <code><a href="../reference/assoc_gadm_id.html">assoc_gadm_id()</a></code> function associates gadm ids at all spatial scales with arbitrary data that include lon/lat columns.</li>
+<li>New <code><a href="../reference/assoc_gadm.html">assoc_gadm()</a></code> function associates gadm ids at all spatial scales with arbitrary data that include lon/lat columns.</li>
 <li>Documentation now correctly displays favicons.</li>
 <li>Logo now rotates through a variety of colourschemes according to the version number.</li>
 </ul></div>
@@ -70,7 +97,7 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.5" id="ohvbd-025">ohvbd 0.2.5<a class="anchor" aria-label="anchor" href="#ohvbd-025"></a></h2>
 <ul><li>
-<code><a href="../reference/extract_ad_data.html">extract_ad_data()</a></code> now allows <code>targetdate</code> to be specified as a vector of full dates, e.g. <code>c("2023-08-04", "2023-09-21")</code>.</li>
+<code><a href="../reference/extract_ad.html">extract_ad()</a></code> now allows <code>targetdate</code> to be specified as a vector of full dates, e.g. <code>c("2023-08-04", "2023-09-21")</code>.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.4" id="ohvbd-024">ohvbd 0.2.4<a class="anchor" aria-label="anchor" href="#ohvbd-024"></a></h2>
@@ -124,7 +151,7 @@
 <li>
 <code>ohvbd</code> now interfaces with the VecDyn database for vector population dynamic data.</li>
 <li>This includes functions to get ids, get datasets, and to extract data from the responses.</li>
-<li>These functions use the same api structure as for VecTraits data download, but with <code>vd</code> replacing <code>vt</code> in the function names (e.g. <code><a href="../reference/get_vd_byid.html">get_vd_byid()</a></code>)</li>
+<li>These functions use the same api structure as for VecTraits data download, but with <code>vd</code> replacing <code>vt</code> in the function names (e.g. <code><a href="../reference/get_vd.html">get_vd()</a></code>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.5" id="ohvbd-005">ohvbd 0.0.5<a class="anchor" aria-label="anchor" href="#ohvbd-005"></a></h2>
@@ -139,7 +166,7 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.3" id="ohvbd-003">ohvbd 0.0.3<a class="anchor" aria-label="anchor" href="#ohvbd-003"></a></h2>
 <ul><li>
-<code><a href="../reference/get_vt_byid.html">get_vt_byid()</a></code> now leverages <code><a href="https://httr2.r-lib.org/reference/req_perform_sequential.html" class="external-link">httr2::req_perform_sequential()</a></code> for more efficient dataset retrieval.</li>
+<code><a href="../reference/get_vt.html">get_vt()</a></code> now leverages <code><a href="https://httr2.r-lib.org/reference/req_perform_sequential.html" class="external-link">httr2::req_perform_sequential()</a></code> for more efficient dataset retrieval.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.2" id="ohvbd-002">ohvbd 0.0.2<a class="anchor" aria-label="anchor" href="#ohvbd-002"></a></h2>
