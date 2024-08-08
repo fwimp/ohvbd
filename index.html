@@ -43,6 +43,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="articles/retrieving-data.html">Retrieving data from VectorByte</a></li>
+    <li><a class="dropdown-item" href="articles/use-areadata.html">Sourcing climatic data from AREAdata</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
@@ -132,7 +133,7 @@
 <li>If a function does multiple things, it may get multiple verbs seperated by underscores, e.g. <code>get_extract_x_chunked()</code>
 </li>
 <li>Pipelines now internally attempt to confirm data integrity by checking that the correct functions are piped together.</li>
-<li>This means it is no longer easy to accidentally do something like <code>get_current_vd_ids() %&gt;% get_vt()</code>.</li>
+<li>This means it is no longer easy to accidentally do something like <code>get_vd_current_ids() %&gt;% get_vt()</code>.</li>
 </ul>
 <p>See <a href="https://fwimp.github.io/ohvbd/news/index.html">changelog</a> for patch notes for previous versions.</p>
 </div>

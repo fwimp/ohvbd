@@ -3,7 +3,8 @@ pkgdown: 2.1.0
 pkgdown_sha: ~
 articles:
   retrieving-data: retrieving-data.html
-last_built: 2024-08-08T17:52Z
+  use-areadata: use-areadata.html
+last_built: 2024-08-08T18:05Z
 urls:
   reference: https://fwimp.github.io/ohvbd/reference
   article: https://fwimp.github.io/ohvbd/articles

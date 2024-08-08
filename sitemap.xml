@@ -3,6 +3,7 @@
 <url><loc>https://fwimp.github.io/ohvbd/LICENSE.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/articles/index.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/articles/retrieving-data.html</loc></url>
+<url><loc>https://fwimp.github.io/ohvbd/articles/use-areadata.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/authors.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/index.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/news/index.html</loc></url>
@@ -17,14 +18,14 @@
 <url><loc>https://fwimp.github.io/ohvbd/reference/extract_vt.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/format_time_overlap_bar.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/get_ad.html</loc></url>
-<url><loc>https://fwimp.github.io/ohvbd/reference/get_current_vd_ids.html</loc></url>
-<url><loc>https://fwimp.github.io/ohvbd/reference/get_current_vt_ids.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/get_extract_vd_chunked.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/get_extract_vt_chunked.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/get_gadm_sfs.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/get_vd.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/get_vd_columns.html</loc></url>
+<url><loc>https://fwimp.github.io/ohvbd/reference/get_vd_current_ids.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/get_vt.html</loc></url>
+<url><loc>https://fwimp.github.io/ohvbd/reference/get_vt_current_ids.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/index.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/ohvbd-package.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/pipe.html</loc></url>
