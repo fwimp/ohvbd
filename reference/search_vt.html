@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ohvbd</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,6 +68,28 @@
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A numeric vector of VecTraits dataset IDs.</p>
     </div>
+    <div class="section level2">
+    <h2 id="warning">Warning<a class="anchor" aria-label="anchor" href="#warning"></a></h2>
+
+
+<p>The ids returned from the server (and thus this function) do not necessarily precisely match the keywords that were requested.</p>
+<p>For example search_vt("United Kingdom") does not return only items found in the United Kingdom. Instead it returns items where some part of the string "United Kingdom" appears in one of the indexed columns.</p>
+<p>The indexed columns of VecTraits are:</p><ul><li><p><code>DatasetID</code></p></li>
+<li><p><code>OriginalTraitName</code></p></li>
+<li><p><code>Variables</code></p></li>
+<li><p><code>Interactor1Order</code></p></li>
+<li><p><code>Interactor1Family</code></p></li>
+<li><p><code>Interactor1Genus</code></p></li>
+<li><p><code>Interactor1Species</code></p></li>
+<li><p><code>Interactor1Stage</code></p></li>
+<li><p><code>Interactor1Sex</code></p></li>
+<li><p><code>Interactor2Genus</code></p></li>
+<li><p><code>Interactor2Species</code></p></li>
+<li><p><code>Citation</code></p></li>
+<li><p><code>DOI</code></p></li>
+<li><p><code>CuratedByDOI</code></p></li>
+<li><p><code>SubmittedBy</code></p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
     <p>Francis Windram</p>

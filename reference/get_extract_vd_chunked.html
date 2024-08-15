@@ -9,7 +9,7 @@ This is not usually necessary (generally you just need get_vd()) but allows one 
 
     <a class="navbar-brand me-2" href="../index.html">ohvbd</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,6 +58,7 @@ This is not usually necessary (generally you just need get_vd()) but allows one 
 <span>  cols <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  returnunique <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  rate <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  connections <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  basereq <span class="op">=</span> <span class="cn">NA</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -84,6 +85,10 @@ This is not usually necessary (generally you just need get_vd()) but allows one 
 
 <dt id="arg-rate">rate<a class="anchor" aria-label="anchor" href="#arg-rate"></a></dt>
 <dd><p>maximum number of calls to the API per second.</p></dd>
+
+
+<dt id="arg-connections">connections<a class="anchor" aria-label="anchor" href="#arg-connections"></a></dt>
+<dd><p>number of simultaneous connections to the server at once. Maximum 8. <strong>Do not enable unless you really need to</strong> as this hits the server significantly harder than usual.</p></dd>
 
 
 <dt id="arg-basereq">basereq<a class="anchor" aria-label="anchor" href="#arg-basereq"></a></dt>

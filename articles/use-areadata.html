@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ohvbd</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -83,6 +83,10 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/fwimp/ohvbd" class="external-link">ohvbd</a></span><span class="op">)</span></span>
 <span><span class="va">cachepath</span> <span class="op">&lt;-</span> <span class="st">"../.adcache"</span></span></code></pre></div>
 <div class="section level2">
+<h2 id="currently-in-development">CURRENTLY IN DEVELOPMENT<a class="anchor" aria-label="anchor" href="#currently-in-development"></a>
+</h2>
+</div>
+<div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <p>Often when presented with a set of population dynamic data, we may
@@ -99,18 +103,11 @@ for gathering this data is through the AREAdata project, which provides
 historical and forecast data aggregated to different spatial scales.</p>
 <!--Insert more stuff about this.-->
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ad_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_ad.html">get_ad</a></span><span class="op">(</span>metric <span class="op">=</span> <span class="st">"temp"</span>, gid <span class="op">=</span> <span class="fl">0</span>, use_cache <span class="op">=</span> <span class="cn">TRUE</span>, cache_location <span class="op">=</span> <span class="va">cachepath</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ❯ Loading AREAdata cache: temp-0 ...</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Failed to load AREAdata cache: temp-0!</span></span>
-<span><span class="co">#&gt; ❯ Loading AREAdata cache: temp-0 ...❯ Loading AREAdata temp-0 from github...</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Loaded AREAdata temp-0 from github.</span></span>
-<span><span class="co">#&gt; ❯ Loading AREAdata temp-0 from github...❯ Caching AREAdata temp-0 in <span style="color: #0000BB;">../.adcache</span>...</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Cached AREAdata temp-0 in <span style="color: #0000BB;">../.adcache</span>.</span></span>
-<span><span class="co">#&gt; ❯ Caching AREAdata temp-0 in <span style="color: #0000BB;">../.adcache</span>...</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Data dimensions: "</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">ad_df</span><span class="op">)</span>, <span class="st">" cols x "</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">ad_df</span><span class="op">)</span>, <span class="st">" rows"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "Data dimensions: 1461 cols x 256 rows"</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># ad_df &lt;- get_ad(metric = "temp", gid = 0, use_cache = TRUE, cache_location = cachepath)</span></span>
+<span><span class="co"># paste0("Data dimensions: ", ncol(ad_df), " cols x ", nrow(ad_df), " rows")</span></span></code></pre></div>
 </div>
-  </main>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 

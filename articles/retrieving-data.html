@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ohvbd</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -235,10 +235,7 @@ so:</p>
 <span>  cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"LocationText"</span>, <span class="st">"OriginalTraitName"</span><span class="op">)</span>,</span>
 <span>  returnunique <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #BBBB00;">!</span> IDs not necessarily from VecTraits.</span></span>
-<span><span class="co">## <span style="color: #BBBB00;">!</span> IDs not necessarily from VecTraits.</span></span>
-<span><span class="co">## <span style="color: #BBBB00;">!</span> IDs not necessarily from VecTraits.</span></span>
-<span><span class="co">## <span style="color: #BBBB00;">!</span> IDs not necessarily from VecTraits.</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #BBBB00;">!</span> IDs not necessarily from VecTraits.</span></span></code></pre>
 <pre><code><span><span class="co">##        OriginalTraitName</span></span>
 <span><span class="co">## 1              body size</span></span>
 <span><span class="co">## 2        blood meal size</span></span>
@@ -263,6 +260,70 @@ functions together to create small pipelines.</p>
 <pre><code><span><span class="co">##   Interactor1Genus Interactor1Species  Latitude Longitude</span></span>
 <span><span class="co">## 1            Aedes            aegypti  3.120833 101.65639</span></span>
 <span><span class="co">## 2            Aedes            aegypti 16.250000 -61.58333</span></span></code></pre>
+</div>
+<div class="section level2">
+<h2 id="smart-searching">Smart searching<a class="anchor" aria-label="anchor" href="#smart-searching"></a>
+</h2>
+<p>One subtlety of the VectorByte search interfaces is to do with name
+collisions.</p>
+<p>Let’s imagine that we are looking for traits of whitefly species
+(<em>Bemisia</em>). We can just construct a query to investigate this as
+follows:</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/search_vt.html">search_vt</a></span><span class="op">(</span><span class="st">"Bemisia"</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/get_vt.html">get_vt</a></span><span class="op">(</span>check_src <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/extract_vt.html">extract_vt</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"DatasetID"</span>, <span class="st">"Interactor1Genus"</span>, <span class="st">"Interactor1Species"</span>, <span class="st">"Interactor2Genus"</span>, <span class="st">"Interactor2Species"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>Now we would expect this to be traits of <em>Bemisia</em> spp,
+however when we look at the Interactor1Genus column we see something a
+touch odd:</p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Interactor1Genus</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "Bemisia"      "Axinoscymnus"</span></span></code></pre>
+<p><em>Axinoscymnus</em> is a ladybird, but why is it appearing? Let’s
+look at only rows containing <em>Axinoscymnus</em>:</p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Interactor1Genus</span> <span class="op">==</span> <span class="st">"Axinoscymnus"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##   DatasetID Interactor1Genus Interactor1Species Interactor2Genus</span></span>
+<span><span class="co">## 1       158     Axinoscymnus         cardilobus          Bemisia</span></span>
+<span><span class="co">## 2       158     Axinoscymnus         cardilobus          Bemisia</span></span>
+<span><span class="co">## 3       158     Axinoscymnus         cardilobus          Bemisia</span></span>
+<span><span class="co">## 4       158     Axinoscymnus         cardilobus          Bemisia</span></span>
+<span><span class="co">## 5       158     Axinoscymnus         cardilobus          Bemisia</span></span>
+<span><span class="co">## 6       158     Axinoscymnus         cardilobus          Bemisia</span></span>
+<span><span class="co">##   Interactor2Species</span></span>
+<span><span class="co">## 1             tabaci</span></span>
+<span><span class="co">## 2             tabaci</span></span>
+<span><span class="co">## 3             tabaci</span></span>
+<span><span class="co">## 4             tabaci</span></span>
+<span><span class="co">## 5             tabaci</span></span>
+<span><span class="co">## 6             tabaci</span></span></code></pre>
+<p>In this scenario, <em>Bemisia</em> is present in the dataset, but it
+is as the “target” rather than the animal that the trait is referring
+to.</p>
+<p>As such we might want to be more specific about precisely which data
+to retrieve. Enter the <code>search_x_smart()</code> family of
+functions.</p>
+<p>These allow you to construct a more specific search.</p>
+<p>So let’s construct the same search as we were wanting to do before,
+but with the smart search.</p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/search_vt_smart.html">search_vt_smart</a></span><span class="op">(</span><span class="st">"Interactor1Genus"</span>, <span class="st">"contains"</span>, <span class="st">"Bemisia"</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/get_vt.html">get_vt</a></span><span class="op">(</span>check_src <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/extract_vt.html">extract_vt</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"DatasetID"</span>, <span class="st">"Interactor1Genus"</span>, <span class="st">"Interactor1Species"</span>, <span class="st">"Interactor2Genus"</span>, <span class="st">"Interactor2Species"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Interactor1Genus</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "Bemisia"</span></span></code></pre>
+<p>Here we have made sure to only search the
+<code>Interactor1Genus</code> column. As such we have only gotten back
+<em>Bemisia</em> traits!</p>
+<p>This same sort of collision is particularly common in the “Citation”
+column, where papers may mention multiple trait names.</p>
+<p>The <code>search_x_smart()</code> functions have many different
+operators and columns that they can work upon. For full details, run
+<code><a href="../reference/search_vt_smart.html">?search_vt_smart</a></code> or <code><a href="../reference/search_vd_smart.html">?search_vd_smart</a></code> in your
+console.</p>
+<p>In general it is always worthwhile inspecting the data you retrieve
+from VectorByte to make sure that your query returned the data that you
+thought it did.</p>
 </div>
 <div class="section level2">
 <h2 id="futher-steps">Futher steps<a class="anchor" aria-label="anchor" href="#futher-steps"></a>

@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">ohvbd</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -106,37 +106,16 @@
 </h2>
 <!-- These are auto-pulled from NEWS.md  -->
 <div class="section level3">
-<h3 id="ohvbd-040">ohvbd 0.4.0<a class="anchor" aria-label="anchor" href="#ohvbd-040"></a>
+<h3 id="ohvbd-041">ohvbd 0.4.1<a class="anchor" aria-label="anchor" href="#ohvbd-041"></a>
 </h3>
-<div class="section level4">
-<h4 id="major-api-change">
-<strong>Major API change</strong><a class="anchor" aria-label="anchor" href="#major-api-change"></a>
-</h4>
 <ul>
-<li>Major simplification of function names!</li>
+<li>New parallel downloading options for <code>get_x()</code> and <code>get_extract_x()</code> functions.</li>
+<li>These are to be used with caution, as they put significantly more load on the server than a sequential run would.</li>
+<li>New argument <code>check_src</code> allows for toggling of id-sanity checking for most functions.</li>
 <li>
-<code>get_x_byid()</code> -&gt; <code>get_x()</code>
-</li>
-<li>
-<code>extract_x_data()</code> -&gt; <code>extract_x()</code>
-</li>
-<li>
-<code>assoc_x_y()</code> -&gt; <code>assoc_x()</code>
-</li>
-<li>
-<code>get_extract_x_byid_chunked()</code> -&gt; <code>get_extract_x_chunked()</code>
-</li>
-<li>This breaks ALL PREVIOUS CODE!</li>
-<li>Naming now follows a logical scheme of <code>verb_target_modifier()</code>.</li>
-<li>For example <code>get_x_y()</code> functions always retrieve data from database <code>x</code> with <code>y</code> specifying any special type of data.</li>
-<li>Similarly <code>extract_x()</code> functions always extract data.</li>
-<li>If a function does multiple things, it may get multiple verbs seperated by underscores, e.g. <code>get_extract_x_chunked()</code>
-</li>
-<li>Pipelines now internally attempt to confirm data integrity by checking that the correct functions are piped together.</li>
-<li>This means it is no longer easy to accidentally do something like <code>get_vd_current_ids() %&gt;% get_vt()</code>.</li>
+<code>retrieving-data</code> vignette now contains instructions for the use of <code>search_x_smart()</code>.</li>
 </ul>
 <p>See <a href="https://fwimp.github.io/ohvbd/news/index.html">changelog</a> for patch notes for previous versions.</p>
-</div>
 </div>
 </div>
 </div>
@@ -175,7 +154,7 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/" class="external-link"><img src="https://img.shields.io/badge/R%3E%3D-4.0-6666ff.svg?style=for-the-badge" alt="R"></a></li>
-<li><a href="commits/master"><img src="https://img.shields.io/badge/Package%20version-0.4.0-orange.svg?style=for-the-badge" alt="packageversion"></a></li>
+<li><a href="commits/master"><img src="https://img.shields.io/badge/Package%20version-0.4.1-orange.svg?style=for-the-badge" alt="packageversion"></a></li>
 <li><a href="https://www.gnu.org/licenses/gpl-3.0.en.html" class="external-link"><img src="https://img.shields.io/badge/license-GPL--3-blue.svg?style=for-the-badge" alt="license"></a></li>
 <li><a href="https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
