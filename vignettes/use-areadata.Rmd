@@ -19,6 +19,8 @@ library(ohvbd)
 cachepath <- "../.adcache"
 ```
 
+## CURRENTLY IN DEVELOPMENT
+
 ## Introduction
 
 Often when presented with a set of population dynamic data, we may wish to investigate the abiotic conditions such as temperature or humidity that these dynamics occurred under.
@@ -30,8 +32,8 @@ In such scenarios it is possible to link the location of the data with other mea
 <!--Insert more stuff about this.-->
 
 ```{r}
-ad_df <- get_ad(metric = "temp", gid = 0, use_cache = TRUE, cache_location = cachepath)
-paste0("Data dimensions: ", ncol(ad_df), " cols x ", nrow(ad_df), " rows")
+# ad_df <- get_ad(metric = "temp", gid = 0, use_cache = TRUE, cache_location = cachepath)
+# paste0("Data dimensions: ", ncol(ad_df), " cols x ", nrow(ad_df), " rows")
 ```
 
 ```{r}

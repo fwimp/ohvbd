@@ -16,6 +16,28 @@
 #'
 #' }
 #'
+#' @section Warning:
+#' The ids returned from the server (and thus this function) do not necessarily precisely match the keywords that were requested.
+#'
+#' For example search_vt("United Kingdom") does not return only items found in the United Kingdom. Instead it returns items where some part of the string "United Kingdom" appears in one of the indexed columns.
+#'
+#' The indexed columns of VecTraits are:
+#' - `DatasetID`
+#' - `OriginalTraitName`
+#' - `Variables`
+#' - `Interactor1Order`
+#' - `Interactor1Family`
+#' - `Interactor1Genus`
+#' - `Interactor1Species`
+#' - `Interactor1Stage`
+#' - `Interactor1Sex`
+#' - `Interactor2Genus`
+#' - `Interactor2Species`
+#' - `Citation`
+#' - `DOI`
+#' - `CuratedByDOI`
+#' - `SubmittedBy`
+#'
 #' @concept vectraits
 #'
 #' @export

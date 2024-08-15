@@ -4,7 +4,14 @@
 \alias{extract_ad}
 \title{Extract data from AREAdata datasets}
 \usage{
-extract_ad(ad_matrix, targetdate = NA, enddate = NA, places = NA, gid = NA)
+extract_ad(
+  ad_matrix,
+  targetdate = NA,
+  enddate = NA,
+  places = NA,
+  gid = NA,
+  check_src = TRUE
+)
 }
 \arguments{
 \item{ad_matrix}{A matrix of data from AREAdata.}
@@ -21,6 +28,8 @@ extract_ad(ad_matrix, targetdate = NA, enddate = NA, places = NA, gid = NA)
 \item{places}{A character vector or single string describing what locality to search for in the dataset.}
 
 \item{gid}{The spatial scale of the AREAdata matrix (this is not needed if the matrix has been supplied by \code{\link[=get_ad]{get_ad()}}).}
+
+\item{check_src}{toggle pre-checking of source data.}
 }
 \value{
 A matrix containing the extracted data.

@@ -17,6 +17,32 @@ A numeric vector of VecTraits dataset IDs.
 \description{
 Retrieve the IDs for any VecTraits datasets matching the given keywords
 }
+\section{Warning}{
+
+The ids returned from the server (and thus this function) do not necessarily precisely match the keywords that were requested.
+
+For example search_vt("United Kingdom") does not return only items found in the United Kingdom. Instead it returns items where some part of the string "United Kingdom" appears in one of the indexed columns.
+
+The indexed columns of VecTraits are:
+\itemize{
+\item \code{DatasetID}
+\item \code{OriginalTraitName}
+\item \code{Variables}
+\item \code{Interactor1Order}
+\item \code{Interactor1Family}
+\item \code{Interactor1Genus}
+\item \code{Interactor1Species}
+\item \code{Interactor1Stage}
+\item \code{Interactor1Sex}
+\item \code{Interactor2Genus}
+\item \code{Interactor2Species}
+\item \code{Citation}
+\item \code{DOI}
+\item \code{CuratedByDOI}
+\item \code{SubmittedBy}
+}
+}
+
 \examples{
 \dontrun{
 search_vt("Aedes aegypti")

@@ -1,3 +1,10 @@
+# ohvbd 0.4.1
+
+* New parallel downloading options for `get_x()` and `get_extract_x()` functions.
+* These are to be used with caution, as they put significantly more load on the server than a sequential run would.
+* New argument `check_src` allows for toggling of id-sanity checking for most functions.
+* `retrieving-data` vignette now contains instructions for the use of `search_x_smart()`.
+
 # ohvbd 0.4.0
 ## **Major API change**
 * Major simplification of function names!
@@ -9,7 +16,7 @@
 * Naming now follows a logical scheme of `verb_target_modifier()`.
 * For example `get_x_y()` functions always retrieve data from database `x` with `y` specifying any special type of data.
 * Similarly `extract_x()` functions always extract data.
-* If a function does multiple things, it may get multiple verbs seperated by underscores, e.g. `get_extract_x_chunked()`
+* If a function does multiple things, it may get multiple verbs separated by underscores, e.g. `get_extract_x_chunked()`
 * Pipelines now internally attempt to confirm data integrity by checking that the correct functions are piped together.
 * This means it is no longer easy to accidentally do something like `get_vd_current_ids() %>% get_vt()`.
 

@@ -4,7 +4,7 @@
 \alias{extract_vt}
 \title{Parse data from requests to VecTraits}
 \usage{
-extract_vt(res, cols = NA, returnunique = FALSE)
+extract_vt(res, cols = NA, returnunique = FALSE, check_src = TRUE)
 }
 \arguments{
 \item{res}{a list of responses from VecTraits.}
@@ -12,6 +12,8 @@ extract_vt(res, cols = NA, returnunique = FALSE)
 \item{cols}{a character vector of columns to extract from the dataset.}
 
 \item{returnunique}{whether to return only the unique rows within each dataset according to the filtered columns.}
+
+\item{check_src}{toggle pre-checking of source data.}
 }
 \value{
 A dataframe containing the extracted data.

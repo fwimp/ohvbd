@@ -12,6 +12,7 @@
 #' @param enddate The (exclusive) end of the range of dates to search for. If this is unfilled, only the `targetdate` is searched for.
 #' @param places A character vector or single string describing what locality to search for in the dataset.
 #' @param gid The spatial scale of the AREAdata matrix (this is not needed if the matrix has been supplied by [get_ad()]).
+#' @param check_src toggle pre-checking of source data.
 #'
 #' @return A matrix containing the extracted data.
 #'
@@ -68,14 +69,14 @@
 #' @export
 #'
 
-extract_ad <- function(ad_matrix, targetdate = NA, enddate = NA, places = NA, gid = NA) {
+extract_ad <- function(ad_matrix, targetdate = NA, enddate = NA, places = NA, gid = NA, check_src = TRUE) {
 
   # Enddate SHOULD BE EXCLUSIVE
 
-  if (is.null(attr(ad_matrix, "db"))) {
+  if (is.null(attr(ad_matrix, "db")) && check_src) {
     cli_alert_warning("Data not necessarily from AREAdata.")
-  } else if (attr(ad_matrix, "db") != "ad") {
-    cli_abort(c("x" = "Data not from AREAdata, Please use the appropriate {.fn extract_x} function.", "!" = "Detected db = {.val {attr(ad_matrix, 'db')}}"))
+  } else if (attr(ad_matrix, "db") != "ad" && check_src) {
+    cli_abort(c("x" = "Data not from AREAdata, Please use the appropriate {.fn extract_{attr(ad_matrix, 'db')}} function.", "!" = "Detected db = {.val {attr(ad_matrix, 'db')}}"))
   }
 
   # try to infer gid from ad_matrix

@@ -30,6 +30,7 @@
 #' @importFrom httr2 req_headers
 #' @importFrom httr2 req_options
 #' @importFrom httr2 req_perform
+#' @importFrom httr2 req_perform_parallel
 #' @importFrom httr2 req_perform_sequential
 #' @importFrom httr2 req_throttle
 #' @importFrom httr2 req_url_path_append

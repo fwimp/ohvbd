@@ -4,7 +4,7 @@
 \alias{extract_vd}
 \title{Parse data from requests to VecDyn}
 \usage{
-extract_vd(res, cols = NA, returnunique = FALSE)
+extract_vd(res, cols = NA, returnunique = FALSE, check_src = TRUE)
 }
 \arguments{
 \item{res}{a list of responses from VecDyn.}
@@ -12,6 +12,8 @@ extract_vd(res, cols = NA, returnunique = FALSE)
 \item{cols}{a character vector of columns to extract from the dataset.}
 
 \item{returnunique}{whether to return only the unique rows within each dataset according to the filtered columns.}
+
+\item{check_src}{toggle pre-checking of source data.}
 }
 \value{
 A dataframe containing the extracted data.

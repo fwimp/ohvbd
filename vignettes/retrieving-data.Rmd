@@ -157,7 +157,7 @@ head(df)
 ```
 ```{r vt_pipeline_secret, echo=FALSE, message=FALSE}
 ids <- search_vt("Aedes aegypti")
-df <- get_vt(ids[1:5]) %>%
+df <- get_vt(ids[1:5], check_src = FALSE) %>%
   extract_vt(
     cols = c("Interactor1Genus", "Interactor1Species", "Latitude", "Longitude"),
     returnunique = TRUE
@@ -165,6 +165,54 @@ df <- get_vt(ids[1:5]) %>%
 head(df)
 ```
 
+
+## Smart searching
+
+One subtlety of the VectorByte search interfaces is to do with name collisions.
+
+Let's imagine that we are looking for traits of whitefly species (*Bemisia*). We can just construct a query to investigate this as follows:
+
+
+```{r demo_searcherror}
+df <- search_vt("Bemisia")[1:6] %>%
+  get_vt(check_src = FALSE) %>%
+  extract_vt(cols = c("DatasetID", "Interactor1Genus", "Interactor1Species", "Interactor2Genus", "Interactor2Species"))
+```
+
+Now we would expect this to be traits of *Bemisia* spp, however when we look at the Interactor1Genus column we see something a touch odd:
+
+```{r}
+unique(df$Interactor1Genus)
+```
+
+*Axinoscymnus* is a ladybird, but why is it appearing? Let's look at only rows containing *Axinoscymnus*:
+
+```{r}
+df %>% dplyr::filter(Interactor1Genus == "Axinoscymnus") %>% head()
+```
+
+In this scenario, *Bemisia* is present in the dataset, but it is as the "target" rather than the animal that the trait is referring to.
+
+As such we might want to be more specific about precisely which data to retrieve. Enter the `search_x_smart()` family of functions.
+
+These allow you to construct a more specific search.
+
+So let's construct the same search as we were wanting to do before, but with the smart search.
+
+```{r}
+df <- search_vt_smart("Interactor1Genus", "contains", "Bemisia")[1:6] %>%
+  get_vt(check_src = FALSE) %>%
+  extract_vt(cols = c("DatasetID", "Interactor1Genus", "Interactor1Species", "Interactor2Genus", "Interactor2Species"))
+unique(df$Interactor1Genus)
+```
+
+Here we have made sure to only search the `Interactor1Genus` column. As such we have only gotten back *Bemisia* traits!
+
+This same sort of collision is particularly common in the "Citation" column, where papers may mention multiple trait names.
+
+The `search_x_smart()` functions have many different operators and columns that they can work upon. For full details, run `?search_vt_smart` or `?search_vd_smart` in your console.
+
+In general it is always worthwhile inspecting the data you retrieve from VectorByte to make sure that your query returned the data that you thought it did.
 
 ## Futher steps
 

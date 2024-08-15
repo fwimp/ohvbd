@@ -5,6 +5,7 @@
 #' @param res a list of responses from VecDyn.
 #' @param cols a character vector of columns to extract from the dataset.
 #' @param returnunique whether to return only the unique rows within each dataset according to the filtered columns.
+#' @param check_src toggle pre-checking of source data.
 #'
 #' @return A dataframe containing the extracted data.
 #'
@@ -22,12 +23,12 @@
 #' @export
 #'
 
-extract_vd <- function(res, cols = NA, returnunique = FALSE) {
+extract_vd <- function(res, cols = NA, returnunique = FALSE, check_src = TRUE) {
 
-  if (is.null(attr(res, "db"))) {
+  if (is.null(attr(res, "db")) && check_src) {
     cli_alert_warning("Responses not necessarily from VecDyn.")
-  } else if (attr(res, "db") != "vd") {
-    cli_abort(c("x" = "Responses not from VecDyn, Please use the appropriate {.fn extract_x} function.", "!" = "Detected db = {.val {attr(res, 'db')}}"))
+  } else if (attr(res, "db") != "vd" && check_src) {
+    cli_abort(c("x" = "Responses not from VecDyn, Please use the appropriate {.fn extract_{attr(res, 'db')}} function.", "!" = "Detected db = {.val {attr(res, 'db')}}"))
   }
 
   if (any(class(res) == "httr2_response")) {
