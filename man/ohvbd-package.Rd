@@ -18,7 +18,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Francis Windram \email{francis.windram17@imperial.ac.uk} (\href{https://orcid.org/0000-0002-2129-826X}{ORCID})
+\strong{Maintainer}: Francis Windram \email{francis.windram17@imperial.ac.uk} (\href{https://orcid.org/0000-0002-2129-826X}{ORCID}) [copyright holder]
 
 }
 \keyword{internal}

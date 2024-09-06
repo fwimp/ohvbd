@@ -37,7 +37,24 @@ library(ohvbd)
 ```
 <!-- Shim to make sure vignette builds on ubuntu-->
 ```{r option, echo=TRUE, message=FALSE, results=FALSE}
-set_ohvbd_compat()
+get_os <- function() {
+  sysinf <- Sys.info()
+  if (!is.null(sysinf)) {
+    os <- sysinf["sysname"]
+    if (os == "Darwin")
+      os <- "osx"
+  } else { ## mystery machine
+    os <- .Platform$OS.type
+    if (grepl("^darwin", R.version$os))
+      os <- "osx"
+    if (grepl("linux-gnu", R.version$os))
+      os <- "linux"
+  }
+  tolower(os)
+}
+if (get_os() == "linux") {
+  set_ohvbd_compat()
+}
 ```
 
 For users who are familiar with tidyverse pipes (`%>%`), this approach is generally usable in ohvbd as well.

@@ -1,3 +1,10 @@
+# ohvbd 0.4.2
+
+* `set_ohvbd_compat()` now asks for user confirmation in interactive mode. This makes running on linux a little annoying, but is worth it due to the seriousness of disabling SSL identity verification.
+* This is not asked if the R session is running in batch mode, under knittr, or under testthat.
+* `retrieving-data` vignette now only enables compatibility mode if running under linux. Generally it is best to keep package usage of `set_ohvbd_compat()` to an *absolute minimum*.
+* Copyright holder now listed in DESCRIPTION
+
 # ohvbd 0.4.1
 
 * New parallel downloading options for `get_x()` and `get_extract_x()` functions.

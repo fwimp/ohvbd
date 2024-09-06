@@ -12,6 +12,8 @@ set_ohvbd_compat(value = TRUE)
 \description{
 Set ohvbd to disable ssl verification for calls to external APIs.
 This should not be needed (and not be performed) unless you are running on a linux machine or are otherwise experiencing SSL issues when using the package!
+
+When in interactive mode, checks with you to make sure you want to do this. Does not check when run in a script.
 }
 \examples{
 \dontrun{
