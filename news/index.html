@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ohvbd</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,6 +42,14 @@
       <small>Source: <a href="https://github.com/fwimp/ohvbd/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.4.3" id="ohvbd-043">ohvbd 0.4.3<a class="anchor" aria-label="anchor" href="#ohvbd-043"></a></h2>
+<ul><li>Large changes to all vb <code>get_</code> and <code>search_</code> function error handling</li>
+<li>All of these functions now check automatically for SSL issues, and recommend <code><a href="../reference/set_ohvbd_compat.html">set_ohvbd_compat()</a></code> if these are detected.</li>
+<li>All <code>get_</code> calls requesting more than 10 ids run a pre-flight ssl check before attempting the whole thing.</li>
+<li>
+<code><a href="../reference/get_vd.html">get_vd()</a></code> and <code><a href="../reference/get_vt.html">get_vt()</a></code> now also return a list of ids that were missing and any curl errors that were found in the process of trying to get data.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.2" id="ohvbd-042">ohvbd 0.4.2<a class="anchor" aria-label="anchor" href="#ohvbd-042"></a></h2>
 <ul><li>

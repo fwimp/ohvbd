@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ohvbd</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -290,15 +290,17 @@ follows:</p>
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/search_vt.html">search_vt</a></span><span class="op">(</span><span class="st">"Bemisia"</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/get_vt.html">get_vt</a></span><span class="op">(</span>check_src <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/extract_vt.html">extract_vt</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"DatasetID"</span>, <span class="st">"Interactor1Genus"</span>, <span class="st">"Interactor1Species"</span>, <span class="st">"Interactor2Genus"</span>, <span class="st">"Interactor2Species"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Downloading Vectraits Data  3/6 <span style="color: #00BB00;">■■■■■■■■■■■■■■■■                </span>  50% | ETA:  1s</span></span></code></pre>
+<pre><code><span><span class="co">## Downloading Vectraits Data  6/6 <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ </span> 100% | ETA:  0s</span></span></code></pre>
 <p>Now we would expect this to be traits of <em>Bemisia</em> spp,
 however when we look at the Interactor1Genus column we see something a
 touch odd:</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Interactor1Genus</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "Bemisia"      "Axinoscymnus"</span></span></code></pre>
 <p><em>Axinoscymnus</em> is a ladybird, but why is it appearing? Let’s
 look at only rows containing <em>Axinoscymnus</em>:</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Interactor1Genus</span> <span class="op">==</span> <span class="st">"Axinoscymnus"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##   DatasetID Interactor1Genus Interactor1Species Interactor2Genus</span></span>
 <span><span class="co">## 1       158     Axinoscymnus         cardilobus          Bemisia</span></span>
@@ -323,11 +325,14 @@ functions.</p>
 <p>These allow you to construct a more specific search.</p>
 <p>So let’s construct the same search as we were wanting to do before,
 but with the smart search.</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/search_vt_smart.html">search_vt_smart</a></span><span class="op">(</span><span class="st">"Interactor1Genus"</span>, <span class="st">"contains"</span>, <span class="st">"Bemisia"</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/get_vt.html">get_vt</a></span><span class="op">(</span>check_src <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/extract_vt.html">extract_vt</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"DatasetID"</span>, <span class="st">"Interactor1Genus"</span>, <span class="st">"Interactor1Species"</span>, <span class="st">"Interactor2Genus"</span>, <span class="st">"Interactor2Species"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Interactor1Genus</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="../reference/extract_vt.html">extract_vt</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"DatasetID"</span>, <span class="st">"Interactor1Genus"</span>, <span class="st">"Interactor1Species"</span>, <span class="st">"Interactor2Genus"</span>, <span class="st">"Interactor2Species"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Downloading Vectraits Data  3/6 <span style="color: #00BB00;">■■■■■■■■■■■■■■■■                </span>  50% | ETA:  1s</span></span></code></pre>
+<pre><code><span><span class="co">## Downloading Vectraits Data  6/6 <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ </span> 100% | ETA:  0s</span></span></code></pre>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Interactor1Genus</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "Bemisia"</span></span></code></pre>
 <p>Here we have made sure to only search the
 <code>Interactor1Genus</code> column. As such we have only gotten back

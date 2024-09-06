@@ -13,11 +13,15 @@
 <url><loc>https://fwimp.github.io/ohvbd/reference/check_db_status.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/convert_place_togid.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/default_progress_style.html</loc></url>
+<url><loc>https://fwimp.github.io/ohvbd/reference/dot-get_vb_req_id.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/extract_ad.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/extract_vd.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/extract_vt.html</loc></url>
+<url><loc>https://fwimp.github.io/ohvbd/reference/find_vb_404s.html</loc></url>
+<url><loc>https://fwimp.github.io/ohvbd/reference/find_vd_missing.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/format_time_overlap_bar.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/get_ad.html</loc></url>
+<url><loc>https://fwimp.github.io/ohvbd/reference/get_curl_err.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/get_extract_vd_chunked.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/get_extract_vt_chunked.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/get_gadm_sfs.html</loc></url>

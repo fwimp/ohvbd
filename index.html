@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">ohvbd</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -106,15 +106,16 @@
 </h2>
 <!-- These are auto-pulled from NEWS.md  -->
 <div class="section level3">
-<h3 id="ohvbd-042">ohvbd 0.4.2<a class="anchor" aria-label="anchor" href="#ohvbd-042"></a>
+<h3 id="ohvbd-043">ohvbd 0.4.3<a class="anchor" aria-label="anchor" href="#ohvbd-043"></a>
 </h3>
 <ul>
+<li>Large changes to all vb <code>get_</code> and <code>search_</code> function error handling</li>
+<li>All of these functions now check automatically for SSL issues, and recommend <code><a href="reference/set_ohvbd_compat.html">set_ohvbd_compat()</a></code> if these are detected.</li>
+<li>All <code>get_</code> calls requesting more than 10 ids run a pre-flight ssl check before attempting the whole thing.</li>
 <li>
-<code><a href="reference/set_ohvbd_compat.html">set_ohvbd_compat()</a></code> now asks for user confirmation in interactive mode. This makes running on linux a little annoying, but is worth it due to the seriousness of disabling SSL identity verification.</li>
-<li>This is not asked if the R session is running in batch mode, under knittr, or under testthat.</li>
+<code><a href="reference/get_vd.html">get_vd()</a></code> and <code><a href="reference/get_vt.html">get_vt()</a></code> now also return a list of ids that were missing and any curl errors that were found in the process of trying to get data.</li>
 <li>
-<code>retrieving-data</code> vignette now only enables compatibility mode if running under linux. Generally it is best to keep package usage of <code><a href="reference/set_ohvbd_compat.html">set_ohvbd_compat()</a></code> to an <em>absolute minimum</em>.</li>
-<li>Copyright holder now listed in DESCRIPTION</li>
+</li>
 </ul>
 <p>See <a href="https://fwimp.github.io/ohvbd/news/index.html">changelog</a> for patch notes for previous versions.</p>
 </div>
@@ -155,7 +156,7 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/" class="external-link"><img src="https://img.shields.io/badge/R%3E%3D-4.0-6666ff.svg?style=for-the-badge" alt="R"></a></li>
-<li><a href="commits/master"><img src="https://img.shields.io/badge/Package%20version-0.4.2-orange.svg?style=for-the-badge" alt="packageversion"></a></li>
+<li><a href="commits/master"><img src="https://img.shields.io/badge/Package%20version-0.4.3-orange.svg?style=for-the-badge" alt="packageversion"></a></li>
 <li><a href="https://www.gnu.org/licenses/gpl-3.0.en.html" class="external-link"><img src="https://img.shields.io/badge/license-GPL--3-blue.svg?style=for-the-badge" alt="license"></a></li>
 <li><a href="https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
