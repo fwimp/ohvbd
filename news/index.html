@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ohvbd</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,6 +42,15 @@
       <small>Source: <a href="https://github.com/fwimp/ohvbd/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.4.2" id="ohvbd-042">ohvbd 0.4.2<a class="anchor" aria-label="anchor" href="#ohvbd-042"></a></h2>
+<ul><li>
+<code><a href="../reference/set_ohvbd_compat.html">set_ohvbd_compat()</a></code> now asks for user confirmation in interactive mode. This makes running on linux a little annoying, but is worth it due to the seriousness of disabling SSL identity verification.</li>
+<li>This is not asked if the R session is running in batch mode, under knittr, or under testthat.</li>
+<li>
+<code>retrieving-data</code> vignette now only enables compatibility mode if running under linux. Generally it is best to keep package usage of <code><a href="../reference/set_ohvbd_compat.html">set_ohvbd_compat()</a></code> to an <em>absolute minimum</em>.</li>
+<li>Copyright holder now listed in DESCRIPTION</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.1" id="ohvbd-041">ohvbd 0.4.1<a class="anchor" aria-label="anchor" href="#ohvbd-041"></a></h2>
 <ul><li>New parallel downloading options for <code>get_x()</code> and <code>get_extract_x()</code> functions.</li>
