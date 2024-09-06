@@ -1,5 +1,5 @@
 
-<!-- force push by editing this number: 42 -->
+<!-- force push by editing this number: 47 -->
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- Build with devtools::build_readme() -->
 
@@ -55,7 +55,6 @@ devtools::install_github("fwimp/ohvbd", build_vignettes = TRUE)
 - `get_vd()` and `get_vt()` now also return a list of ids that were
   missing and any curl errors that were found in the process of trying
   to get data.
-- 
 
 See [changelog](https://fwimp.github.io/ohvbd/news/index.html) for patch
 notes for previous versions.
