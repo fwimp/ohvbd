@@ -36,6 +36,29 @@ get_vd <- function(ids, rate = 5, connections = 1, check_src = TRUE, basereq = N
     basereq <- vb_basereq()
   }
 
+  if (length(ids) > 10) {
+    # Preflight ssl check
+    status <- tryCatch({
+      preflight_test <- basereq %>% req_perform()  # nolint: object_usage_linter
+      list("err_code" = 0, "err_obj" = NULL)
+    }, error = function(e) {
+      list("err_code" = 1, "err_obj" = e)
+    })
+
+    if (status$err_code == 1) {
+      curl_err <- get_curl_err(status$err_obj)
+      if (grepl("SSL certificate problem: unable to get local issuer certificate", curl_err)) {
+        cat("\n")
+        cli_alert_danger("Could not verify SSL certificate.")
+        cli::cli_text("You may have success running {.fn set_ohvbd_compat} and then trying again.")
+        cat("\n")
+        cli_abort("SSL certificate problem: unable to get local issuer certificate")
+      } else {
+        cli_abort("Preflight found unknown error: {.val {curl_err}}")
+      }
+    }
+  }
+
   # vd does not return nonexistent piids as 404,
   reqs <- ids %>% lapply(\(id) {
     basereq %>%
@@ -60,6 +83,41 @@ get_vd <- function(ids, rate = 5, connections = 1, check_src = TRUE, basereq = N
       name = "VecDyn Data Parallel",
       format = "Downloading {cli::pb_name} {cli::pb_current}/{cli::pb_total} {cli::pb_bar} {cli::pb_percent} | ETA: {cli::pb_eta}"
     ))
+  }
+
+  fails <- resps %>% httr2::resps_failures()
+
+  # Test if any failures were missing files (not 404s here, but counts of 0)
+  missing <- find_vd_missing(resps)
+
+  if (!is.null(missing)) {
+    cli_alert_info("Incorrect ids:")
+    cli::cli_ul(missing)
+
+    # Need an extra check here because failed VD calls don't become 404s.
+    if (length(missing) >= length(resps)) {
+      cli_alert_warning("No records retrieved (are you sure the IDs are correct?).")
+    }
+  }
+
+  # Return the curl errors
+  curl_err <- unique(unlist(lapply(fails, get_curl_err)))
+  if (!is.null(curl_err)) {
+    cli_alert_warning("curl errors: {.val {curl_err}}")
+  }
+
+  # Test to see if we got only errors
+  if (length(fails) >= length(resps)) {
+    # Only got errors!
+    # Test to see if we got only a bunch of ssl errors
+    if (any(grepl("SSL certificate problem: unable to get local issuer certificate", unlist(lapply(resps, get_curl_err))))) {
+      cat("\n")
+      cli_alert_danger("Could not verify SSL certificate.")
+      cli::cli_text("You may have success running {.fn set_ohvbd_compat} and then trying again.")
+      cat("\n")
+      cli_abort("SSL certificate problem: unable to get local issuer certificate")
+    }
+    cli_alert_warning("No records retrieved (are you sure the IDs are correct?).")
   }
 
   attr(resps, "db") <- "vd"

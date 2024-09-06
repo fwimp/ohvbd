@@ -35,6 +35,7 @@ extract_vt <- function(res, cols = NA, returnunique = FALSE, check_src = TRUE) {
     # Detect if this is a single request
     out_data <- res %>% resp_body_json()
   } else if (any(class(res) == "httr2_error")) {
+    # Detect single error
     cli_abort("Response contains error! (check to see if ID actually exists?)")
   } else {
     # Extract data from all successful responses
@@ -51,7 +52,7 @@ extract_vt <- function(res, cols = NA, returnunique = FALSE, check_src = TRUE) {
     out_list <- lapply(out_list, select, any_of(cols))
   }
   # Finally explode the list into a df
-  out_df <- rbindlist(out_list)
+  out_df <- suppressWarnings(rbindlist(out_list))
 
   if (returnunique) {
     out_df <- unique(out_df)

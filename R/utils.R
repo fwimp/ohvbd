@@ -1,3 +1,23 @@
+#' @title Extract request ids from httr2 response objects
+#' @param e A response object
+#' @return the id requested from the call
+#' @keywords internal
+#'
+
+.get_vb_req_id <- function(r) {
+  return(r$request$headers$ohvbd)
+}
+
+#' @title Extract curl errors from httr2 error objects
+#' @param e An error object
+#' @return the curl error message (if present) or NULL
+#' @keywords internal
+#'
+
+get_curl_err <- function(e) {
+  return(e$parent$message)
+}
+
 #' @title Retrieve and format error message from failed vt calls
 #' @param resp An errored response to format
 #' @return error string
@@ -5,7 +25,7 @@
 #'
 
 vt_error_body <- function(resp) {
-  paste("Error retrieving VT ID", resp$request$headers$ohvbd)
+  paste("Error retrieving VT ID", .get_vb_req_id(resp))
 }
 
 #' @title Retrieve and format error message from failed vd calls
@@ -15,7 +35,7 @@ vt_error_body <- function(resp) {
 #'
 
 vd_error_body <- function(resp) {
-  paste("Error retrieving VD ID", resp$request$headers$ohvbd)
+  paste("Error retrieving VD ID", .get_vb_req_id(resp))
 }
 
 #' @title collapse a list of character strings to a JS space-separated single string
@@ -37,7 +57,7 @@ space_collapse <- function(v) {
 vd_extraction_helper <- function(resp, cols = NA) {
   df_out <- tryCatch({
     resp_parse <- resp %>% resp_body_json()
-    df <- rbindlist(resp_parse$results)
+    df <- suppressWarnings(rbindlist(resp_parse$results))
     df2 <- as.data.frame(resp_parse$consistent_data)
 
     # Handle missing data in results (or consistent data, not that it's missing often)
@@ -50,7 +70,7 @@ vd_extraction_helper <- function(resp, cols = NA) {
     }
 
     if (resp_parse$count > 0) {
-      df_out$dataset_id <- resp$request$headers$ohvbd
+      df_out$dataset_id <- .get_vb_req_id(resp)
     }
     if (!any(is.na(cols))) {
       # Filter cols from each sublist
@@ -58,7 +78,7 @@ vd_extraction_helper <- function(resp, cols = NA) {
     }
     df_out
   }, error = function(e) {
-    cli_abort("Error in vd extraction of ID {resp$request$headers$ohvbd}")
+    cli_abort("Error in vd extraction of ID {.get_vb_req_id(resp)}")
   })
 
   return(df_out)
@@ -75,6 +95,31 @@ convert_place_togid <- function(places, gid = 0) {
   # .data$. is required to silence R CMD build notes about undefined globals.
   out_places <- gidtable %>% filter_all(any_vars(.data$. %in% places)) %>% select(returncolumn)
   return(unique(out_places[[1]]))
+}
+
+#' @title Find the ids of any resps that contain 404 errors from a list of them.
+#' @param l A list of httr2 error objects
+#' @return the ids from those found objects
+#' @keywords internal
+#'
+
+find_vb_404s <- function(l) {
+  l_filtered <- l[unlist(lapply(l, inherits, what = "httr2_http_404"))]
+  return(unlist(lapply(l_filtered, .get_vb_req_id)))
+}
+
+
+#' @title Find the ids of any resps that contain a count of 0 list of them.
+#' @param l A list of httr2 error objects
+#' @return the ids from those found objects
+#' @keywords internal
+#'
+
+find_vd_missing <- function(l) {
+  l_filtered <- l[unlist(lapply(l, function(x) {
+    resp_body_json(x)$count == 0
+  }))]
+  return(unlist(lapply(l_filtered, .get_vb_req_id)))
 }
 
 # Only used for internal testing and doesnt need to be checked.

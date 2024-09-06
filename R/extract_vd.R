@@ -35,6 +35,7 @@ extract_vd <- function(res, cols = NA, returnunique = FALSE, check_src = TRUE) {
     # Detect if this is a single request
     out_df <- res %>% resp_body_json()
   } else if (any(class(res) == "httr2_error")) {
+    # Detect single error
     cli_abort("Response contains error! (check to see if ID actually exists?)")
   } else {
     # Extract data from all successful responses

@@ -108,19 +108,27 @@ search_vd_smart <- function(field, operator, value, basereq = NA) {
       req_url_query("operator" = final_operator) %>%
       req_url_query("term" = value) %>%
       req_perform()
-    list("resp" = resp, "err_code" = 0)
+    list("resp" = resp, "err_code" = 0, "err_obj" = NULL)
   }, error = function(e) {
     # Get the last response instead
-    list("resp" = last_response(), "err_code" = 1)
+    list("resp" = last_response(), "err_code" = 1, "err_obj" = e)
   })
 
   if (resplist$err_code == 1) {
-    cli_abort(c("x" = "No records found for {.val {paste(final_field, final_operator, value)}}"))
+    if (grepl("SSL certificate problem: unable to get local issuer certificate", resplist$err_obj$parent$message)) {
+      cat("\n")
+      cli_alert_danger("Could not verify SSL certificate.")
+      cli::cli_text("You may have success running {.fn set_ohvbd_compat} and then trying again.")
+      cat("\n")
+      cli_abort("SSL certificate problem: unable to get local issuer certificate")
+    }
+    cli_abort(c("No records found for {.val {paste(final_field, final_operator, value)}}"))
   }
+
   body <- resplist$resp %>% resp_body_json()
   if (length(body) > 2) {
     # This is a bit of a kludge, the API does not return count in the same place if no results are found
-    cli_abort(c("x" = "No records found for {.val {paste(final_field, final_operator, value)}}"))
+    cli_abort(c("No records found for {.val {paste(final_field, final_operator, value)}}"))
   } else {
     outids <- as.numeric(body$ids)
     attr(outids, "db") <- "vd"

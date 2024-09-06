@@ -1,3 +1,10 @@
+# ohvbd 0.4.3
+
+* Large changes to all vb `get_` and `search_` function error handling
+* All of these functions now check automatically for SSL issues, and recommend `set_ohvbd_compat()` if these are detected.
+* All `get_` calls requesting more than 10 ids run a pre-flight ssl check before attempting the whole thing.
+* `get_vd()` and `get_vt()` now also return a list of ids that were missing and any curl errors that were found in the process of trying to get data.
+
 # ohvbd 0.4.2
 
 * `set_ohvbd_compat()` now asks for user confirmation in interactive mode. This makes running on linux a little annoying, but is worth it due to the seriousness of disabling SSL identity verification.
