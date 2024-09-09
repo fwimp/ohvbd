@@ -40,7 +40,7 @@ search_vd <- function(keywords, basereq = NA) {
   })
 
   if (resplist$err_code == 1) {
-    if (grepl("SSL certificate problem: unable to get local issuer certificate", resplist$err_obj$parent$message)) {
+    if (grepl("SSL certificate problem: unable to get local issuer certificate", get_curl_err(resplist$err_obj, returnfiller = TRUE))) {
       cat("\n")
       cli_alert_danger("Could not verify SSL certificate.")
       cli::cli_text("You may have success running {.fn set_ohvbd_compat} and then trying again.")

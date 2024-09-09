@@ -46,7 +46,7 @@ get_extract_vt_chunked <- function(ids, chunksize = 20, cols = NA, returnunique 
     })
 
     if (status$err_code == 1) {
-      curl_err <- get_curl_err(status$err_obj)
+      curl_err <- get_curl_err(status$err_obj, returnfiller = TRUE)
       if (grepl("SSL certificate problem: unable to get local issuer certificate", curl_err)) {
         cat("\n")
         cli_alert_danger("Could not verify SSL certificate.")

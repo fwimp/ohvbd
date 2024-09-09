@@ -4,13 +4,15 @@
 \alias{get_curl_err}
 \title{Extract curl errors from httr2 error objects}
 \usage{
-get_curl_err(e)
+get_curl_err(e, returnfiller = FALSE)
 }
 \arguments{
 \item{e}{An error object}
+
+\item{returnfiller}{If true return filler message if no curl message is present.}
 }
 \value{
-the curl error message (if present) or NULL
+the curl error message (if present) or NULL (or a filler message)
 }
 \description{
 Extract curl errors from httr2 error objects

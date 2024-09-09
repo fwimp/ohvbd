@@ -7,7 +7,7 @@
 .get_vb_req_id(r)
 }
 \arguments{
-\item{e}{A response object}
+\item{r}{A response object}
 }
 \value{
 the id requested from the call

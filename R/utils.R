@@ -1,5 +1,5 @@
 #' @title Extract request ids from httr2 response objects
-#' @param e A response object
+#' @param r A response object
 #' @return the id requested from the call
 #' @keywords internal
 #'
@@ -10,12 +10,19 @@
 
 #' @title Extract curl errors from httr2 error objects
 #' @param e An error object
-#' @return the curl error message (if present) or NULL
+#' @param returnfiller If true return filler message if no curl message is present.
+#' @return the curl error message (if present) or NULL (or a filler message)
 #' @keywords internal
 #'
 
-get_curl_err <- function(e) {
-  return(e$parent$message)
+get_curl_err <- function(e, returnfiller=FALSE) {
+  out <- e$parent$message
+  if (is.null(out) && returnfiller) {
+    # Makes it possible to force get_curl_err to return SOMETHING.
+    return("Unknown (no curl error present).")
+  } else {
+    return(out)
+  }
 }
 
 #' @title Retrieve and format error message from failed vt calls
