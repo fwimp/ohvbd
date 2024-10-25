@@ -1,3 +1,13 @@
+# ohvbd 0.4.4
+
+* New function `check_ohvbd_config` allows easy printing of the current status of ohvbd's options.
+* New `clean_ad_cache()` function enables users to clean their cached AREAdata files easily.
+* Build timings now appear in all vignettes.
+* Cli outputs are now suppressed when running vignettes in non-interactive mode (e.g. while knitting).
+* Default cache path is now in the user directory (obtained from `tools::R_user_dir()`).
+* `use-areadata` vignette now has part of its content complete.
+* Generally this update is setting the stage for another major API overhaul in 0.5.0.
+
 # ohvbd 0.4.3
 
 * Large changes to all vb `get_` and `search_` function error handling
@@ -76,7 +86,7 @@
 # ohvbd 0.2.1
 
 * `get_ad()` now caches data from AREAdata to reduce extraneous data downloading and speed up re-execution and development.
-* This requires the new argument `use_cache=TRUE` and caches by default in the directory `./.adcache`.
+* This requires the new argument `use_cache=TRUE` and caches by default in the user directory.
 
 # ohvbd 0.2.0
 

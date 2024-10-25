@@ -63,7 +63,17 @@ read_ad_cache <- function(path, metric, gid, warn = TRUE) {
   return(d)
 }
 
-
+#' @title Delete all rda files from ohvbd AREAdata cache
+#'
+#' @param cache_location location within which to remove rda files
+#'
+#' @return NULL
+#'
+#' @examples
+#' \dontrun{
+#' clean_ad_cache()
+#' }
+#'
 #' @export
 #'
 clean_ad_cache <- function(cache_location = "user") {
@@ -80,4 +90,5 @@ clean_ad_cache <- function(cache_location = "user") {
   remaining_files <- list.files(cache_location, "*.rda")
   num_removed <- length(to_remove) - length(remaining_files)  # nolint: object_usage_linter
   cli::cli_alert_success("Removed {num_removed} file{?s}")
+  invisible(NULL)
 }

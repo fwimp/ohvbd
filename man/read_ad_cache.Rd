@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils-cache.R
 \name{read_ad_cache}
 \alias{read_ad_cache}
-\title{Retrieve and format error message from failed vt calls}
+\title{Read AREAdata from cache file}
 \usage{
 read_ad_cache(path, metric, gid, warn = TRUE)
 }
@@ -19,6 +19,6 @@ read_ad_cache(path, metric, gid, warn = TRUE)
 cached data
 }
 \description{
-Retrieve and format error message from failed vt calls
+Read AREAdata from cache file
 }
 \keyword{internal}

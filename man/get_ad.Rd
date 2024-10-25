@@ -8,7 +8,7 @@ get_ad(
   metric = "temp",
   gid = 0,
   use_cache = FALSE,
-  cache_location = ".adcache",
+  cache_location = "user",
   refresh_cache = FALSE,
   basereq = NA
 )
@@ -20,7 +20,7 @@ get_ad(
 
 \item{use_cache}{load files from cache if possible, and save them if not present.}
 
-\item{cache_location}{path to cache location (defaults to \code{./.adcache}).}
+\item{cache_location}{path to cache location (defaults to user directory obtained from \code{\link[tools:userdir]{tools::R_user_dir()}}).}
 
 \item{refresh_cache}{force a refresh of the relevant cached data.}
 

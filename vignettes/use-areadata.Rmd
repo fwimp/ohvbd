@@ -68,9 +68,8 @@ Let's take a look at the format of data retrieved from AREAdata (we will deconst
 
 ```{r example_ad}
 library(ohvbd)
-cachepath <- "../.adcache"
 
-ad_df <- get_ad(metric = "temp", gid = 0, use_cache = TRUE, cache_location = cachepath)
+ad_df <- get_ad(metric = "temp", gid = 0, use_cache = TRUE)
 cat("Data dimensions: ", ncol(ad_df), " cols x ", nrow(ad_df), " rows")
 ```
 
@@ -127,7 +126,7 @@ We can do this by caching the files and retrieving them as needed. Whilst you co
 
 If we set `use_cache = TRUE` then instead of downloading from the repository immediately, `ohvbd` will first try to load any cached version that may be present.
 
-Typically, the cache location is a folder within your current working directory called `.adcache`, however if you want to overwrite it (such as if you want to share the cache between different scripts) you can provide an alternative path to save data to, as we have done here.
+Typically, the cache location is a folder in your user directory, obtained from `tools::R_user_dir()`. However, if you want to overwrite it (such as if you want to share the cache between different scripts) you can provide an alternative path to save data to.
 
 ### Example
 
@@ -136,7 +135,7 @@ So given the above, let's construct another function call to download relative h
 (We will not execute this, just because gid level 1 data is significantly larger than gid level 0)
 
 ```{r relhumid, echo=TRUE, eval=FALSE}
-get_ad(metric = "relhumid", gid = 1, use_cache = TRUE, cache_location = cachepath)
+get_ad(metric = "relhumid", gid = 1, use_cache = TRUE)
 ```
 
 ## Extracting specific data
@@ -165,7 +164,7 @@ If we (for example) want not just one day, we can specify either a vector of dat
 ad_df %>% extract_ad(
   targetdate = c("2020-01-01", "2020-01-02", "2020-01-05"),
   places = "Angola"
-  )
+)
 ```
 
 ```{r extract_month}
@@ -186,7 +185,7 @@ ad_df %>% extract_ad(
   targetdate = "2020-01-01",
   enddate = "2020-01-04",
   places = "Angola"
-  )
+)
 ```
 
 ### Places
@@ -197,7 +196,7 @@ Multiple places to extract data for can also be provided as a vector of places:
 ad_df %>% extract_ad(
   targetdate = "2020-01-01",
   places = c("Angola", "Latvia", "United Kingdom")
-  )
+)
 ```
 
 This can be combined with the date filters above to create a more restrictive extraction:
@@ -207,7 +206,7 @@ ad_df %>% extract_ad(
   targetdate = "2020-01-01",
   enddate = "2020-01-04",
   places = c("Angola", "Latvia", "United Kingdom")
-  )
+)
 ```
 
 ### Resiliance
@@ -219,7 +218,7 @@ ad_df %>% extract_ad(
   targetdate = "2023-12-30",
   enddate = "2024-01-02",
   places = c("Atlantis", "Latvia", "United Kingdom")
-  )
+)
 ```
 
 ## To be completed

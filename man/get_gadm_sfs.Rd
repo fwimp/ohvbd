@@ -6,7 +6,7 @@
 \usage{
 get_gadm_sfs(
   gid = 0,
-  cache_location = ".adcache",
+  cache_location = "user",
   refresh_cache = FALSE,
   basereq = NA
 )
@@ -14,7 +14,7 @@ get_gadm_sfs(
 \arguments{
 \item{gid}{the spatial scale to retrieve (0 = country-level, 1=province-level...).}
 
-\item{cache_location}{path to cache location (defaults to \code{./.adcache}).}
+\item{cache_location}{path to cache location (defaults to user directory obtained from \code{\link[tools:userdir]{tools::R_user_dir()}}).}
 
 \item{refresh_cache}{force a refresh of the relevant cached data.}
 
