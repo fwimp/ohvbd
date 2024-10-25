@@ -15,7 +15,7 @@
 #' @keywords internal
 #'
 
-get_curl_err <- function(e, returnfiller=FALSE) {
+get_curl_err <- function(e, returnfiller = FALSE) {
   out <- e$parent$message
   if (is.null(out) && returnfiller) {
     # Makes it possible to force get_curl_err to return SOMETHING.
