@@ -19,10 +19,15 @@
 #' @export
 #'
 
-get_gadm_sfs <- function(gid = 0, cache_location = ".adcache", refresh_cache = FALSE, basereq = NA) {
+get_gadm_sfs <- function(gid = 0, cache_location = "user", refresh_cache = FALSE, basereq = NA) {
 
   if (all(is.na(basereq))) {
     basereq <- ad_basereq()
+  }
+
+  if (tolower(cache_location) == "user") {
+    # Have to do some horrible path substitution to make this work nicely on windows. It may cause errors later in which case another solution may be better.
+    cache_location <- file.path(gsub("\\\\", "/", tools::R_user_dir("ohvbd", which = "cache")), "adcache")
   }
 
   cachefiles <- c("gadm-countries", "gadm-states", "gadm-counties")

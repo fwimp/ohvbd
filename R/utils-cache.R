@@ -21,16 +21,21 @@ write_ad_cache <- function(d, path, metric = NA, gid = NA, format = "rda", compr
     gid <- attr(d, "gid")
   }
 
+  # Log that this is a cached version of the file.
+  attr(d, "cached") <- TRUE
+
   # Make cache path if necessary
-  ifelse(!dir.exists(path), dir.create(path), FALSE)
+  ifelse(!dir.exists(path), dir.create(path, recursive = TRUE), FALSE)
   writetime <- lubridate::now()
   save(d, writetime,
        file = file.path(path, paste0(metric, "-", gid, ".rda")),
        compress = compression_type,
        compression_level = compression_level)
+  # Return file hash if desired
+  # cli::cli_alert_info(cli::hash_obj_emoji(d)$emojis)  # nolint: commented_code_linter
 }
 
-#' @title Retrieve and format error message from failed vt calls
+#' @title Read AREAdata from cache file
 #'
 #' @param path cache path
 #' @param metric metric to retrieve
@@ -53,5 +58,26 @@ read_ad_cache <- function(path, metric, gid, warn = TRUE) {
     if (timediff > months(6))
       warning("Cached data older than 6 months!\nConsider deleting or recreating the cache.")
   }
+  # Return file hash if desired
+  # cli::cli_alert_info(cli::hash_obj_emoji(d)$emojis)  # nolint: commented_code_linter
   return(d)
+}
+
+
+#' @export
+#'
+clean_ad_cache <- function(cache_location = "user") {
+  if (tolower(cache_location) == "user") {
+    # Have to do some horrible path substitution to make this work nicely on windows. It may cause errors later in which case another solution may be better.
+    cache_location <- file.path(gsub("\\\\", "/", tools::R_user_dir("ohvbd", which = "cache")), "adcache")
+  }
+
+  cli::cli_alert_warning("Removing all rda files from {.path {cache_location}}:")
+  to_remove <- list.files(cache_location, "*.rda")
+  cli::cli_ul(to_remove)
+  remove_path <- file.path(cache_location, "*.rda")
+  unlink(remove_path)
+  remaining_files <- list.files(cache_location, "*.rda")
+  num_removed <- length(to_remove) - length(remaining_files)  # nolint: object_usage_linter
+  cli::cli_alert_success("Removed {num_removed} file{?s}")
 }

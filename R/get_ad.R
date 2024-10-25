@@ -31,7 +31,7 @@
 #' @export
 #'
 
-get_ad <- function(metric = "temp", gid = 0, use_cache = FALSE, cache_location = ".adcache", refresh_cache = FALSE, basereq = NA) {
+get_ad <- function(metric = "temp", gid = 0, use_cache = FALSE, cache_location = "user", refresh_cache = FALSE, basereq = NA) {
 
   if (all(is.na(basereq))) {
     basereq <- ad_basereq()
@@ -40,6 +40,11 @@ get_ad <- function(metric = "temp", gid = 0, use_cache = FALSE, cache_location =
   if (gid > 1 && !use_cache) {
     cli_alert_warning("GID2 datasets are quite large.")
     cli_alert_info("It is recommended to set {.arg use_cache=TRUE} to enable caching.")
+  }
+
+  if (tolower(cache_location) == "user") {
+    # Have to do some horrible path substitution to make this work nicely on windows. It may cause errors later in which case another solution may be better.
+    cache_location <- file.path(gsub("\\\\", "/", tools::R_user_dir("ohvbd", which = "cache")), "adcache")
   }
 
   loaded_cache <- FALSE
@@ -127,6 +132,7 @@ get_ad <- function(metric = "temp", gid = 0, use_cache = FALSE, cache_location =
     attr(outmat, "gid") <- gid
     attr(outmat, "metric") <- final_metric
     attr(outmat, "db") <- "ad"
+    attr(outmat, "cached") <- FALSE
   }
 
   if (use_cache) {
