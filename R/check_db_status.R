@@ -53,4 +53,5 @@ check_db_status <- function() {
   } else {
     cli_alert_warning("Not all databases UP! {successes}/{length(db_list)}")
   }
+  invisible()
 }

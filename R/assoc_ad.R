@@ -80,6 +80,7 @@ assoc_ad <- function(data, areadata, targetdate = NA, enddate = NA, gid = 0, lon
     ))
   }
 
+  # Can replace with %||%
   metric <- attr(areadata, "metric")
   if (is.na(metric)) {
     metric <- "metric"
