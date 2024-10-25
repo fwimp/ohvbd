@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ohvbd</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,6 +42,17 @@
       <small>Source: <a href="https://github.com/fwimp/ohvbd/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.4.4" id="ohvbd-044">ohvbd 0.4.4<a class="anchor" aria-label="anchor" href="#ohvbd-044"></a></h2>
+<ul><li>New function <code>check_ohvbd_config</code> allows easy printing of the current status of ohvbd’s options.</li>
+<li>New <code><a href="../reference/clean_ad_cache.html">clean_ad_cache()</a></code> function enables users to clean their cached AREAdata files easily.</li>
+<li>Build timings now appear in all vignettes.</li>
+<li>Cli outputs are now suppressed when running vignettes in non-interactive mode (e.g. while knitting).</li>
+<li>Default cache path is now in the user directory (obtained from <code><a href="https://rdrr.io/r/tools/userdir.html" class="external-link">tools::R_user_dir()</a></code>).</li>
+<li>
+<code>use-areadata</code> vignette now has part of its content complete.</li>
+<li>Generally this update is setting the stage for another major API overhaul in 0.5.0.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.3" id="ohvbd-043">ohvbd 0.4.3<a class="anchor" aria-label="anchor" href="#ohvbd-043"></a></h2>
 <ul><li>Large changes to all vb <code>get_</code> and <code>search_</code> function error handling</li>
@@ -144,7 +155,7 @@
 <h2 class="pkg-version" data-toc-text="0.2.1" id="ohvbd-021">ohvbd 0.2.1<a class="anchor" aria-label="anchor" href="#ohvbd-021"></a></h2>
 <ul><li>
 <code><a href="../reference/get_ad.html">get_ad()</a></code> now caches data from AREAdata to reduce extraneous data downloading and speed up re-execution and development.</li>
-<li>This requires the new argument <code>use_cache=TRUE</code> and caches by default in the directory <code>./.adcache</code>.</li>
+<li>This requires the new argument <code>use_cache=TRUE</code> and caches by default in the user directory.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.0" id="ohvbd-020">ohvbd 0.2.0<a class="anchor" aria-label="anchor" href="#ohvbd-020"></a></h2>
@@ -211,7 +222,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>

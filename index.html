@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">ohvbd</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -106,14 +106,17 @@
 </h2>
 <!-- These are auto-pulled from NEWS.md  -->
 <div class="section level3">
-<h3 id="ohvbd-043">ohvbd 0.4.3<a class="anchor" aria-label="anchor" href="#ohvbd-043"></a>
+<h3 id="ohvbd-044">ohvbd 0.4.4<a class="anchor" aria-label="anchor" href="#ohvbd-044"></a>
 </h3>
 <ul>
-<li>Large changes to all vb <code>get_</code> and <code>search_</code> function error handling</li>
-<li>All of these functions now check automatically for SSL issues, and recommend <code><a href="reference/set_ohvbd_compat.html">set_ohvbd_compat()</a></code> if these are detected.</li>
-<li>All <code>get_</code> calls requesting more than 10 ids run a pre-flight ssl check before attempting the whole thing.</li>
+<li>New function <code>check_ohvbd_config</code> allows easy printing of the current status of ohvbd’s options.</li>
+<li>New <code><a href="reference/clean_ad_cache.html">clean_ad_cache()</a></code> function enables users to clean their cached AREAdata files easily.</li>
+<li>Build timings now appear in all vignettes.</li>
+<li>Cli outputs are now suppressed when running vignettes in non-interactive mode (e.g. while knitting).</li>
+<li>Default cache path is now in the user directory (obtained from <code><a href="https://rdrr.io/r/tools/userdir.html" class="external-link">tools::R_user_dir()</a></code>).</li>
 <li>
-<code><a href="reference/get_vd.html">get_vd()</a></code> and <code><a href="reference/get_vt.html">get_vt()</a></code> now also return a list of ids that were missing and any curl errors that were found in the process of trying to get data.</li>
+<code>use-areadata</code> vignette now has part of its content complete.</li>
+<li>Generally this update is setting the stage for another major API overhaul in 0.5.0.</li>
 </ul>
 <p>See <a href="https://fwimp.github.io/ohvbd/news/index.html">changelog</a> for patch notes for previous versions.</p>
 </div>
@@ -154,7 +157,7 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/" class="external-link"><img src="https://img.shields.io/badge/R%3E%3D-4.0-6666ff.svg?style=for-the-badge" alt="R"></a></li>
-<li><a href="commits/master"><img src="https://img.shields.io/badge/Package%20version-0.4.3-orange.svg?style=for-the-badge" alt="packageversion"></a></li>
+<li><a href="commits/master"><img src="https://img.shields.io/badge/Package%20version-0.4.4-orange.svg?style=for-the-badge" alt="packageversion"></a></li>
 <li><a href="https://www.gnu.org/licenses/gpl-3.0.en.html" class="external-link"><img src="https://img.shields.io/badge/license-GPL--3-blue.svg?style=for-the-badge" alt="license"></a></li>
 <li><a href="https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
@@ -169,7 +172,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>
