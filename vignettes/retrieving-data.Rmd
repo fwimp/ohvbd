@@ -31,12 +31,13 @@ Great, lovely. But now... what does that all mean? And how can you build up your
 
 If you are using Linux, sometimes `httr2` fails to communicate with the VectorByte servers. As such on these systems it is best to set ohvbd to use slightly less stringent identity checks in its calls to the server.
 
-You only need to perform this once per R session / script.
-```{r earlypkgload, echo=FALSE}
+You do this using the command `set_ohvbd_compat()` however this is only required once per R session/script.
+```{r earlypkgload, include=FALSE}
 library(ohvbd)
+runstart <- lubridate::now()
 ```
 <!-- Shim to make sure vignette builds on ubuntu-->
-```{r option, echo=TRUE, message=FALSE, results=FALSE}
+```{r option, include=FALSE}
 get_os <- function() {
   sysinf <- Sys.info()
   if (!is.null(sysinf)) {
@@ -54,6 +55,13 @@ get_os <- function() {
 }
 if (get_os() == "linux") {
   set_ohvbd_compat()
+}
+
+# Suppress cli output in non-interactive mode
+if (!rlang::is_interactive()) {
+  options(cli.default_handler = function(msg) invisible(NULL))
+} else {
+  options(cli.default_handler = NULL)
 }
 ```
 
@@ -105,10 +113,15 @@ Now you have a vector of datasets, we need to actually retrieve the data of thes
 
 To do this we can use the `get_x()` functions. In this case let's get the first 5 *Aedes aegypti* datasets:
 
-```{r get_vt, echo=TRUE, message=FALSE, results=FALSE}
+```{r get_vt, echo=TRUE, eval=FALSE}
 aedes_responses <- get_vt(aedes_ids[1:5])
 aedes_responses[[1]]
 ```
+```{r get_vt_secret, include=FALSE}
+aedes_responses <- get_vt(aedes_ids[1:5], check_src = FALSE, connections = 5)
+aedes_responses[[1]]
+```
+
 ```
 ## <httr2_response>
 ## GET https://vectorbyte.crc.nd.edu/portal/api/vectraits-dataset/97/?format=json
@@ -125,7 +138,7 @@ Now we have a list of responses, we can extract the relevant data from them usin
 
 ```{r extract_all_vt}
 aedes_data <- aedes_responses %>% extract_vt()
-paste0("Data dimensions: ", ncol(aedes_data), " cols x ", nrow(aedes_data), " rows")
+cat("Data dimensions: ", ncol(aedes_data), " cols x ", nrow(aedes_data), " rows")
 ```
 
 This dataset is a bit too large to print here, and often you may only want a few columns of data rather than the whole dataset.
@@ -163,7 +176,7 @@ In day-to-day use, you will mostly find yourself using all these functions toget
 
 A typical pipeline would likely only contain a few lines of code:
 
-```{r vt_pipeline, eval=FALSE, echo=TRUE, message=FALSE, results=FALSE}
+```{r vt_pipeline, eval=FALSE, echo=TRUE}
 df <- search_vt("Aedes aegypti") %>%
   get_vt() %>%
   extract_vt(
@@ -172,9 +185,9 @@ df <- search_vt("Aedes aegypti") %>%
   )
 head(df)
 ```
-```{r vt_pipeline_secret, echo=FALSE, message=FALSE}
+```{r vt_pipeline_secret, include=FALSE}
 ids <- search_vt("Aedes aegypti")
-df <- get_vt(ids[1:5], check_src = FALSE) %>%
+df <- get_vt(ids[1:5], check_src = FALSE, connections = 5) %>%
   extract_vt(
     cols = c("Interactor1Genus", "Interactor1Species", "Latitude", "Longitude"),
     returnunique = TRUE
@@ -190,21 +203,27 @@ One subtlety of the VectorByte search interfaces is to do with name collisions.
 Let's imagine that we are looking for traits of whitefly species (*Bemisia*). We can just construct a query to investigate this as follows:
 
 
-```{r demo_searcherror}
+```{r demo_searcherror, eval=FALSE, echo=TRUE}
 df <- search_vt("Bemisia")[1:6] %>%
-  get_vt(check_src = FALSE) %>%
+  get_vt() %>%
+  extract_vt(cols = c("DatasetID", "Interactor1Genus", "Interactor1Species", "Interactor2Genus", "Interactor2Species"))
+```
+
+```{r demo_searcherror_secret, include=FALSE}
+df <- search_vt("Bemisia")[1:6] %>%
+  get_vt(check_src = FALSE, connections = 6) %>%
   extract_vt(cols = c("DatasetID", "Interactor1Genus", "Interactor1Species", "Interactor2Genus", "Interactor2Species"))
 ```
 
 Now we would expect this to be traits of *Bemisia* spp, however when we look at the Interactor1Genus column we see something a touch odd:
 
-```{r}
+```{r unique_genus}
 unique(df$Interactor1Genus)
 ```
 
 *Axinoscymnus* is a ladybird, but why is it appearing? Let's look at only rows containing *Axinoscymnus*:
 
-```{r}
+```{r filter_ladybirds}
 df %>% dplyr::filter(Interactor1Genus == "Axinoscymnus") %>% head()
 ```
 
@@ -216,9 +235,16 @@ These allow you to construct a more specific search.
 
 So let's construct the same search as we were wanting to do before, but with the smart search.
 
-```{r}
+```{r searcherror_fixed, eval=FALSE, echo=TRUE}
 df <- search_vt_smart("Interactor1Genus", "contains", "Bemisia")[1:6] %>%
-  get_vt(check_src = FALSE) %>%
+  get_vt() %>%
+  extract_vt(cols = c("DatasetID", "Interactor1Genus", "Interactor1Species", "Interactor2Genus", "Interactor2Species"))
+unique(df$Interactor1Genus)
+```
+
+```{r searcherror_fixed_secret, include=FALSE}
+df <- search_vt_smart("Interactor1Genus", "contains", "Bemisia")[1:6] %>%
+  get_vt(check_src = FALSE, connections = 6) %>%
   extract_vt(cols = c("DatasetID", "Interactor1Genus", "Interactor1Species", "Interactor2Genus", "Interactor2Species"))
 unique(df$Interactor1Genus)
 ```
@@ -236,3 +262,9 @@ In general it is always worthwhile inspecting the data you retrieve from VectorB
 From here you now have all the data you might need for further analysis, so now it's down to you!
 
 One final note to end on: it can be advisable to save any output data in a csv or parquet format so that you do not need to re-download it every time you run your script. This is as easy as running `write.csv()` on your dataframe, then reading it in later with `read.csv()`
+
+```{r tot_time, include=FALSE}
+tot_time <- lubridate::as.duration(lubridate::now() - runstart)
+```
+
+<span style="opacity: 0.1;font-size: small;">Built in `r tot_time`s</span>
