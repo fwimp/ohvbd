@@ -92,7 +92,7 @@ extract_ad <- function(ad_matrix, targetdate = NA, enddate = NA, places = NA, gi
   if (metric == "popdens") {
     cli_alert_warning("Dataset appears to be Population Density! This does not need extracting.")
     return(ad_matrix)
-  } else if (metric == "popdens") {
+  } else if (metric == "forecast") {
     cli_alert_warning("Dataset appears to be a Forecast! This is not currently processed by the extractor.")
     return(ad_matrix)
   }

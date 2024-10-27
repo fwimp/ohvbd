@@ -7,7 +7,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' get_vt_current_ids()
+#' find_vt_ids()
 #' }
 #'
 #' @concept vectraits
@@ -15,7 +15,7 @@
 #' @export
 #'
 
-get_vt_current_ids <- function(basereq = NA) {
+find_vt_ids <- function(basereq = NA) {
 
   if (all(is.na(basereq))) {
     basereq <- vb_basereq()

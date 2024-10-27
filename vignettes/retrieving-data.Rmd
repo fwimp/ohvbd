@@ -87,11 +87,11 @@ Another note before we begin: the functions used to interface with VecTraits and
 
 ## Finding IDs
 
-Datasets in VecTraits and VecDyn are organised by id. As such it is often good to be able to see which IDs are currently available. We can do this using the `get_current_x_ids()` family of functions. These return a vector of valid IDs on the given database:
+Datasets in VecTraits and VecDyn are organised by id. As such it is often good to be able to see which IDs are currently available. We can do this using the `find_x_ids()` family of functions. These return a vector of valid IDs on the given database:
 
-```{r get_vt_ids}
+```{r find_vt_ids}
 library(ohvbd)
-get_vt_current_ids() %>% head(n = 20)
+find_vt_ids() %>% head(n = 20)
 ```
 
 The functions `search_x()` and `search_x_smart()` also return a list of IDs that match the query provided in the arguments.
@@ -111,7 +111,7 @@ You can also find IDs interactively online by using the [VecTraits Explorer](htt
 
 Now you have a vector of datasets, we need to actually retrieve the data of these datasets through the API.
 
-To do this we can use the `get_x()` functions. In this case let's get the first 5 *Aedes aegypti* datasets:
+To do this we can use the `fetch_x()` functions. In this case let's get the first 5 *Aedes aegypti* datasets:
 
 ```{r fetch_vt, echo=TRUE, eval=FALSE}
 aedes_responses <- fetch_vt(aedes_ids[1:5])

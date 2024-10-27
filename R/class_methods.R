@@ -1,23 +1,23 @@
 # nolint start: object_name_linter
 
 #' @export
-print.ohvbd.ids <- function(ids) {
-  cat(paste0("Database: ", attr(ids, "db"), "\n"))
-  print(as.numeric(ids))
+print.ohvbd.ids <- function(x, ...) {
+  cat(paste0("Database: ", attr(x, "db"), "\n"))
+  print(as.numeric(x))
 }
 
 #' @export
-print.ohvbd.data.frame <- function(df) {
-  cat(paste0("Database: ", attr(df, "db"), "\n"))
-  print(as.data.frame(df))
+print.ohvbd.data.frame <- function(x, ...) {
+  cat(paste0("Database: ", attr(x, "db"), "\n"))
+  print(as.data.frame(x))
 }
 
 #' @export
-print.ohvbd.ad.matrix <- function(m, full=FALSE) {
+print.ohvbd.ad.matrix <- function(x, ..., full=FALSE) {
   # If attr is null, default to <missing>
-  metric <- attr(m, 'metric') %||% '<missing>'
-  gid <- attr(m, 'gid') %||% '<missing>'
-  cached <- attr(m, 'cached') %||% 'unknown'
+  metric <- attr(x, 'metric') %||% '<missing>'
+  gid <- attr(x, 'gid') %||% '<missing>'
+  cached <- attr(x, 'cached') %||% 'unknown'
   cli::cli_text("Areadata matrix for {.val {metric}} at gid level {.val {gid}}.")
   cli::cli_text("Cached: {.val {cached}}")
   cli::cli_text("Dates: {.val {head(colnames(m), 1)}}-{.val {tail(colnames(m), 1)}} ({.val {ncol(m)}})")
@@ -50,7 +50,7 @@ print.ohvbd.ad.matrix <- function(m, full=FALSE) {
 #' @export
 #' @examples
 #' \dontrun{
-#' get_vt_current_ids() %>% fetch()
+#' find_vt_ids() %>% fetch()
 #' }
 fetch <- function(ids, ..., rate = 5, connections = 1, check_src = TRUE, db = NULL, basereq = NA) {
   UseMethod("fetch")
@@ -83,7 +83,7 @@ fetch.ohvbd.ids <- function(ids, ..., rate = 5, connections = 1, check_src = TRU
 #' @export
 #' @examples
 #' \dontrun{
-#' get_vt_current_ids() %>% fetch() %>% extract(cols=c("Interactor1Species"))
+#' find_vt_ids() %>% fetch() %>% extract(cols=c("Interactor1Species"))
 #' fetch_ad(use_cache=TRUE) %>% extract(targetdate="2020-08-04")
 #' }
 extract <- function(res, ...) {

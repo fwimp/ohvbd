@@ -29,7 +29,7 @@ fetch_vd <- function(ids, rate = 5, connections = 1, check_src = TRUE, basereq =
   if (is.null(attr(ids, "db")) && check_src) {
     cli_alert_warning("IDs not necessarily from VecDyn.")
   } else if (attr(ids, "db") != "vd" && check_src) {
-    cli_abort(c("x" = "IDs not from VecDyn, Please use the {.fn get_{attr(ids, 'db')}} function.", "!" = "Detected db = {.val {attr(ids, 'db')}}"))
+    cli_abort(c("x" = "IDs not from VecDyn, Please use the {.fn fetch_{attr(ids, 'db')}} function.", "!" = "Detected db = {.val {attr(ids, 'db')}}"))
   }
 
   if (all(is.na(basereq))) {

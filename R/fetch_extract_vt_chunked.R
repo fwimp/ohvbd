@@ -29,7 +29,7 @@ fetch_extract_vt_chunked <- function(ids, chunksize = 20, cols = NA, returnuniqu
   if (is.null(attr(ids, "db"))) {
     cli_alert_warning("IDs not necessarily from VecTraits.")
   } else if (attr(ids, "db") != "vt") {
-    cli_abort(c("x" = "IDs not from VecTraits, Please use the appropriate {.fn get_extract_{attr(ids, 'db')}} function.", "!" = "Detected db = {.val {attr(ids, 'db')}}"))
+    cli_abort(c("x" = "IDs not from VecTraits, Please use the appropriate {.fn fetch_extract_{attr(ids, 'db')}} function.", "!" = "Detected db = {.val {attr(ids, 'db')}}"))
   }
 
   if (all(is.na(basereq))) {

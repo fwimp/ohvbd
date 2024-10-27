@@ -29,7 +29,7 @@ fetch_extract_vd_chunked <- function(ids, chunksize = 20, cols = NA, returnuniqu
   if (is.null(attr(ids, "db"))) {
     cli_alert_warning("IDs not necessarily from VecDyn.")
   } else if (attr(ids, "db") != "vd") {
-    cli_abort(c("x" = "IDs not from VecDyn, Please use the appropriate {.fn get_extract_{attr(ids, 'db')}} function.", "!" = "Detected db = {.val {attr(ids, 'db')}}"))
+    cli_abort(c("x" = "IDs not from VecDyn, Please use the appropriate {.fn fetch_extract_{attr(ids, 'db')}} function.", "!" = "Detected db = {.val {attr(ids, 'db')}}"))
   }
 
   if (all(is.na(basereq))) {
