@@ -72,9 +72,6 @@ progress_style <- function(x) {
 
 format_time_overlap_bar <- function(start, end, targets, targetrange = FALSE, twobar = FALSE, width = NA, style = list()) {
 
-  # Shim to add infix NULL defaulting
-  `%||%` <- rlang::`%||%`
-
   if (is.na(width)) {
     width <- round(cli::console_width() * 0.5)
   }

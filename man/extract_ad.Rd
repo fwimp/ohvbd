@@ -14,7 +14,7 @@ extract_ad(
 )
 }
 \arguments{
-\item{ad_matrix}{A matrix of data from AREAdata.}
+\item{ad_matrix}{A matrix or \code{ohvbd.ad.matrix} of data from AREAdata.}
 
 \item{targetdate}{\strong{ONE OF} the following:
 \itemize{
@@ -32,7 +32,7 @@ extract_ad(
 \item{check_src}{toggle pre-checking of source data.}
 }
 \value{
-A matrix containing the extracted data.
+An \code{ohvbd.ad.matrix} or a named vector containing the extracted data.
 }
 \description{
 Extract the data returned by a call to \code{\link[=fetch_ad]{fetch_ad()}}, filter columns of interest and by dates of interest.

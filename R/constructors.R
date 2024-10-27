@@ -54,7 +54,19 @@ new_ohvbd.data.frame <- function(df, db = NULL) {
   structure(df, class = c("ohvbd.data.frame", "data.frame"))
 }
 
-new_ohvbd.ad.matrix <- function(m, db = NULL) {
+new_ohvbd.ad.matrix <- function(m, metric = NULL, gid = NULL, cached = NULL, db = NULL) {
+  if (is.null(attr(m, "metric"))) {
+    stopifnot(is.character(metric))
+    attr(m, "metric") <- metric
+  }
+  if (is.null(attr(m, "gid"))) {
+    stopifnot(is.numeric(gid))
+    attr(m, "gid") <- gid
+  }
+  if (is.null(attr(m, "cached"))) {
+    stopifnot(rlang::is_bool(cached))
+    attr(m, "cached") <- cached
+  }
   if (is.null(attr(m, "db"))) {
     stopifnot(is.character(db))
     attr(m, "db") <- db

@@ -22,7 +22,8 @@ Imports:
     rlang,
     stats,
     terra,
-    tibble
+    tibble,
+    utils
 Suggests: 
     knitr,
     parsermd,

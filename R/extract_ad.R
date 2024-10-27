@@ -4,7 +4,7 @@
 #' Currently this does not handle Population Density or Forecast matrices, however the other 5 metrics are handled natively.
 #' @author Francis Windram
 #'
-#' @param ad_matrix A matrix of data from AREAdata.
+#' @param ad_matrix A matrix or `ohvbd.ad.matrix` of data from AREAdata.
 #' @param targetdate **ONE OF** the following:
 #' * The date to search for in ISO 8601 (e.g. "2020", "2021-09", or "2022-09-21").
 #' * The start date for a range of dates.
@@ -14,7 +14,7 @@
 #' @param gid The spatial scale of the AREAdata matrix (this is not needed if the matrix has been supplied by [fetch_ad()]).
 #' @param check_src toggle pre-checking of source data.
 #'
-#' @return A matrix containing the extracted data.
+#' @return An `ohvbd.ad.matrix` or a named vector containing the extracted data.
 #'
 #' @section Place matching:
 #' This function attempts to intelligently infer place selections based upon the provided gid and place names.
@@ -205,8 +205,10 @@ extract_ad <- function(ad_matrix, targetdate = NA, enddate = NA, places = NA, gi
   }
 
   outmat <- ad_matrix[selected_rows, selected_cols]
-
-  attr(outmat, "db") <- "ad"
-
+  if (inherits(outmat, "matrix")) {
+    outmat <- new_ohvbd.ad.matrix(m = outmat, metric = metric, gid = gid, cached = attr(ad_matrix, "cached"), db = "ad")
+  } else {
+    attr(outmat, "db") <- "ad"
+  }
   return(outmat)
 }

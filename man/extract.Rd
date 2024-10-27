@@ -27,3 +27,4 @@ fetch_ad(use_cache=TRUE) \%>\% extract(targetdate="2020-08-04")
 \author{
 Francis Windram
 }
+\concept{convenience}

@@ -37,7 +37,7 @@
 #' - `in` (*within*)
 #' - `!in` (*not in, not within, !within, nin*)
 #'
-#' @return A numeric vector of VecTraits dataset IDs.
+#' @return An `ohvbd.ids` vector of VecTraits dataset IDs.
 #'
 #' @examples
 #' \dontrun{
@@ -150,6 +150,6 @@ search_vt_smart <- function(field, operator, value, basereq = NA) {
   body <- resplist$resp %>% resp_body_json()
 
   outids <- as.numeric(body$ids)
-  attr(outids, "db") <- "vt"
+  outids <- new_ohvbd.ids(v = outids, db = "vt")
   return(outids)
 }

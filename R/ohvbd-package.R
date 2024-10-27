@@ -54,5 +54,7 @@
 #' @importFrom terra extract
 #' @importFrom terra vect
 #' @importFrom tibble rownames_to_column
+#' @importFrom utils head
+#' @importFrom utils tail
 ## usethis namespace: end
 NULL

@@ -15,6 +15,10 @@ reference:
   desc: Functions for interfacing with AREAdata.
 - contents:
   - has_concept("areadata")
+- title: Convenience
+  desc: Convenient generalised functions for working with a range of data.
+- contents:
+  - has_concept("convenience")
 - title: Other
   desc: Miscellaneous functions.
 - contents:

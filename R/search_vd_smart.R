@@ -29,7 +29,7 @@
 #' - `greater` (*greater than, gt, >*)
 #' - `less` (*less than, lt, <*)
 #'
-#' @return A numeric vector of VecDyn dataset IDs.
+#' @return An `ohvbd.ids` vector of VecDyn dataset IDs.
 #'
 #' @examples
 #' \dontrun{
@@ -131,7 +131,7 @@ search_vd_smart <- function(field, operator, value, basereq = NA) {
     cli_abort(c("No records found for {.val {paste(final_field, final_operator, value)}}"))
   } else {
     outids <- as.numeric(body$ids)
-    attr(outids, "db") <- "vd"
+    outids <- new_ohvbd.ids(v = outids, db = "vd")
     return(outids)
   }
 }

@@ -2,12 +2,12 @@
 #' @description Extract the data returned by a call to [ohvbd::fetch_vt()], filter columns of interest, and find unique rows if required.
 #' @author Francis Windram
 #'
-#' @param res a list of responses from VecTraits.
+#' @param res a list of responses from VecTraits as an `ohvbd.responses` object.
 #' @param cols a character vector of columns to extract from the dataset.
 #' @param returnunique whether to return only the unique rows within each dataset according to the filtered columns.
 #' @param check_src toggle pre-checking of source data.
 #'
-#' @return A dataframe containing the extracted data.
+#' @return An `ohvbd.data.frame` containing the requested data.
 #'
 #' @examples
 #' \dontrun{
@@ -59,7 +59,7 @@ extract_vt <- function(res, cols = NA, returnunique = FALSE, check_src = TRUE) {
   }
 
   out_final <- as.data.frame(out_df)
-  attr(out_final, "db") <- "vt"
+  out_final <- new_ohvbd.data.frame(df = out_final, db = "vt")
 
   return(out_final)
 }

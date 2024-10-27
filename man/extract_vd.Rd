@@ -7,7 +7,7 @@
 extract_vd(res, cols = NA, returnunique = FALSE, check_src = TRUE)
 }
 \arguments{
-\item{res}{a list of responses from VecDyn.}
+\item{res}{a list of responses from VecDyn as an \code{ohvbd.responses} object.}
 
 \item{cols}{a character vector of columns to extract from the dataset.}
 
@@ -16,7 +16,7 @@ extract_vd(res, cols = NA, returnunique = FALSE, check_src = TRUE)
 \item{check_src}{toggle pre-checking of source data.}
 }
 \value{
-A dataframe containing the extracted data.
+An \code{ohvbd.data.frame} containing the requested data.
 }
 \description{
 Extract the data returned by a call to \code{\link[=fetch_vd]{fetch_vd()}}, filter columns of interest, and find unique rows if required.
