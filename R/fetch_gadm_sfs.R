@@ -1,4 +1,4 @@
-#' @title Get gadm mapping shapefiles
+#' @title Fetch gadm mapping shapefiles
 #' @description Retrieve AREAdata gadm mapping shapefiles specified by spatial scale (GID).
 #' @author Francis Windram
 #'
@@ -11,7 +11,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' get_gadm_sfs(gid=0)
+#' fetch_gadm_sfs(gid=0)
 #' }
 #'
 #' @concept areadata
@@ -19,7 +19,7 @@
 #' @export
 #'
 
-get_gadm_sfs <- function(gid = 0, cache_location = "user", refresh_cache = FALSE, basereq = NA) {
+fetch_gadm_sfs <- function(gid = 0, cache_location = "user", refresh_cache = FALSE, basereq = NA) {
 
   if (all(is.na(basereq))) {
     basereq <- ad_basereq()

@@ -69,7 +69,7 @@ Let's take a look at the format of data retrieved from AREAdata (we will deconst
 ```{r example_ad}
 library(ohvbd)
 
-ad_df <- get_ad(metric = "temp", gid = 0, use_cache = TRUE)
+ad_df <- fetch_ad(metric = "temp", gid = 0, use_cache = TRUE)
 cat("Data dimensions: ", ncol(ad_df), " cols x ", nrow(ad_df), " rows")
 ```
 
@@ -97,9 +97,9 @@ So the value at `ad_df["Angola", "2020-01-01"]` corresponds to the value of the 
 ```{r individual_row}
 ad_df["Angola", "2020-01-01"]
 ```
-## Deconstructing `get_ad()`
+## Deconstructing `fetch_ad()`
 
-That call above to `get_ad()` used some slightly odd parameters, so let's break that down a bit.
+That call above to `fetch_ad()` used some slightly odd parameters, so let's break that down a bit.
 
 The arguments we provided were
 
@@ -110,13 +110,13 @@ The arguments we provided were
 
 ### `metric`
 
-The metric argument tells `get_ad()` what type of data it should retrieve from AREAdata.
+The metric argument tells `fetch_ad()` what type of data it should retrieve from AREAdata.
 
-There are many valid options for this including temperature and humidity. (See [AREAdata](https://pearselab.github.io/areadata/download-links/) or run `?get_ad()` in the R console for a full list).
+There are many valid options for this including temperature and humidity. (See [AREAdata](https://pearselab.github.io/areadata/download-links/) or run `?fetch_ad()` in the R console for a full list).
 
 ### `gid`
 
-The gid argument tells `get_ad()` the spatial scale to download (with higher numbers corresponding to finer scales, at the cost of larger download sizes).
+The gid argument tells `fetch_ad()` the spatial scale to download (with higher numbers corresponding to finer scales, at the cost of larger download sizes).
 
 ### `use_cache` and `cache_location`
 
@@ -135,7 +135,7 @@ So given the above, let's construct another function call to download relative h
 (We will not execute this, just because gid level 1 data is significantly larger than gid level 0)
 
 ```{r relhumid, echo=TRUE, eval=FALSE}
-get_ad(metric = "relhumid", gid = 1, use_cache = TRUE)
+fetch_ad(metric = "relhumid", gid = 1, use_cache = TRUE)
 ```
 
 ## Extracting specific data

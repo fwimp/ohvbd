@@ -21,7 +21,7 @@ This is a convenience method that infers and applies the correct extractor for t
 \examples{
 \dontrun{
 get_vt_current_ids() \%>\% fetch() \%>\% extract(cols=c("Interactor1Species"))
-get_ad(use_cache=TRUE) \%>\% extract(targetdate="2020-08-04")
+fetch_ad(use_cache=TRUE) \%>\% extract(targetdate="2020-08-04")
 }
 }
 \author{

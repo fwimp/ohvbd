@@ -15,7 +15,7 @@
 #' @examples
 #' \dontrun{
 #' vt_ids <- search_vt(c("Aedes", "aegypti"))
-#' vtdf <- get_vt(vt_ids[(length(vt_ids)-20):length(vt_ids)]) %>%
+#' vtdf <- fetch_vt(vt_ids[(length(vt_ids)-20):length(vt_ids)]) %>%
 #'   extract_vt(cols = c(
 #'     "DatasetID",
 #'     "Latitude",
@@ -56,7 +56,7 @@ assoc_gadm <- function(df, lonlat_names = c("Longitude", "Latitude"), basereq = 
   }
 
   # Find GADM shapefile for searching
-  gadm_sf <- get_gadm_sfs(gid = gid)
+  gadm_sf <- fetch_gadm_sfs(gid = gid)
 
   cli_progress_message("{cli::symbol$pointer} Finding distinct lonlats...")
   # Find latlons for quick processing

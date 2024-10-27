@@ -3,7 +3,7 @@
 #' @author Francis Windram
 #'
 #' @param data the source data to bind AREAdata to. This **must** contain decimal lonlat data!
-#' @param areadata the AREAdata to bind, usually from [get_ad()].
+#' @param areadata the AREAdata to bind, usually from [fetch_ad()].
 #' @param targetdate **ONE OF** the following:
 #' * The date to search for in ISO 8601 (e.g. "2020", "2021-09", or "2022-09-21").
 #' * The start date for a range of dates.
@@ -33,7 +33,7 @@
 #' @examples
 #' \dontrun{
 #' vt_ids <- search_vt(c("Aedes", "aegypti"))
-#' vtdf <- get_vt(vt_ids[(length(vt_ids)-20):length(vt_ids)]) %>%
+#' vtdf <- fetch_vt(vt_ids[(length(vt_ids)-20):length(vt_ids)]) %>%
 #'   extract_vt(cols = c(
 #'     "DatasetID",
 #'     "Latitude",
@@ -41,7 +41,7 @@
 #'     "Interactor1Genus",
 #'     "Interactor1Species"
 #'     ), returnunique = TRUE)
-#' areadata <- get_ad(metric="temp", gid=2, use_cache=TRUE)
+#' areadata <- fetch_ad(metric="temp", gid=2, use_cache=TRUE)
 #' ad_extract_working <- assoc_ad(vtdf, areadata,
 #'                                     targetdate = c("2021-08-04"), enddate=c("2021-08-06"),
 #'                                     gid=2, lonlat_names = c("Longitude", "Latitude"))
@@ -88,7 +88,7 @@ assoc_ad <- function(data, areadata, targetdate = NA, enddate = NA, gid = 0, lon
   name_label <- c("NAME_0", "GID_1", "GID_2")
   final_name <- name_label[gid + 1]
   # Find GADM shapefile for searching
-  gadm_sf <- get_gadm_sfs(gid = gid)
+  gadm_sf <- fetch_gadm_sfs(gid = gid)
 
   # Find latlons for quick processing
   orig_lonlat <- data %>% select(all_of(lonlat_names)) %>% mutate_all(function(x) as.numeric(as.character(x)))

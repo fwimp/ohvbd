@@ -19,11 +19,11 @@ extract_vt(res, cols = NA, returnunique = FALSE, check_src = TRUE)
 A dataframe containing the extracted data.
 }
 \description{
-Extract the data returned by a call to \code{\link[=get_vt]{get_vt()}}, filter columns of interest, and find unique rows if required.
+Extract the data returned by a call to \code{\link[=fetch_vt]{fetch_vt()}}, filter columns of interest, and find unique rows if required.
 }
 \examples{
 \dontrun{
-get_vt(54) \%>\%
+fetch_vt(54) \%>\%
   extract_vt(cols=c("DatasetID",
                          "Interactor1Genus",
                          "Interactor1Species"),

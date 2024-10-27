@@ -1,5 +1,5 @@
 #' @title Parse data from requests to VecDyn
-#' @description Extract the data returned by a call to [ohvbd::get_vd()], filter columns of interest, and find unique rows if required.
+#' @description Extract the data returned by a call to [ohvbd::fetch_vd()], filter columns of interest, and find unique rows if required.
 #' @author Francis Windram
 #'
 #' @param res a list of responses from VecDyn.
@@ -11,7 +11,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' get_vd_dataset_byid(247) %>%
+#' fetch_vd(247) %>%
 #'   extract_vd(cols=c("species",
 #'                          "sample_start_date",
 #'                          "sample_value"),

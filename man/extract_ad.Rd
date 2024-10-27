@@ -27,7 +27,7 @@ extract_ad(
 
 \item{places}{A character vector or single string describing what locality to search for in the dataset.}
 
-\item{gid}{The spatial scale of the AREAdata matrix (this is not needed if the matrix has been supplied by \code{\link[=get_ad]{get_ad()}}).}
+\item{gid}{The spatial scale of the AREAdata matrix (this is not needed if the matrix has been supplied by \code{\link[=fetch_ad]{fetch_ad()}}).}
 
 \item{check_src}{toggle pre-checking of source data.}
 }
@@ -35,7 +35,7 @@ extract_ad(
 A matrix containing the extracted data.
 }
 \description{
-Extract the data returned by a call to \code{\link[=get_ad]{get_ad()}}, filter columns of interest and by dates of interest.
+Extract the data returned by a call to \code{\link[=fetch_ad]{fetch_ad()}}, filter columns of interest and by dates of interest.
 
 Currently this does not handle Population Density or Forecast matrices, however the other 5 metrics are handled natively.
 }
@@ -72,21 +72,21 @@ For example "2020-04" will be taken to mean the month of April in 2020, and the 
 \examples{
 \dontrun{
 # All dates in August 2022
-get_ad("temp", gid=0) \%>\%
+fetch_ad("temp", gid=0) \%>\%
   extract_ad(
     targetdate = "2022-08",
     places = c("Albania", "Thailand")
   )
 
 # 4th, 5th, and 6th of August 2022 (remember the enddate is EXCLUSIVE)
-get_ad("temp", gid=0) \%>\%
+fetch_ad("temp", gid=0) \%>\%
   extract_ad(
     targetdate = "2022-08-04", enddate="2022-08-07",
     places = c("Albania", "Thailand")
   )
 
 # 4th of August 2022 and 1st of August 2023
-get_ad("temp", gid=0) \%>\%
+fetch_ad("temp", gid=0) \%>\%
   extract_ad(
     targetdate = c("2022-08-04", "2023-08-01"),
     places = c("Albania", "Thailand")

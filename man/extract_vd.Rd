@@ -19,11 +19,11 @@ extract_vd(res, cols = NA, returnunique = FALSE, check_src = TRUE)
 A dataframe containing the extracted data.
 }
 \description{
-Extract the data returned by a call to \code{\link[=get_vd]{get_vd()}}, filter columns of interest, and find unique rows if required.
+Extract the data returned by a call to \code{\link[=fetch_vd]{fetch_vd()}}, filter columns of interest, and find unique rows if required.
 }
 \examples{
 \dontrun{
-get_vd_dataset_byid(247) \%>\%
+fetch_vd(247) \%>\%
   extract_vd(cols=c("species",
                          "sample_start_date",
                          "sample_value"),

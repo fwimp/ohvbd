@@ -17,7 +17,7 @@ Let's imagine you wanted to figure out where a particular vector species - _Aede
 
 ```{r exemplar, echo=TRUE, eval=FALSE}
 df <- search_vt("Aedes aegypti") %>%
-  get_vt() %>%
+  fetch_vt() %>%
   extract_vt(
     cols = c("Interactor1Genus", "Interactor1Species", "Latitude", "Longitude"),
     returnunique = TRUE
@@ -113,12 +113,12 @@ Now you have a vector of datasets, we need to actually retrieve the data of thes
 
 To do this we can use the `get_x()` functions. In this case let's get the first 5 *Aedes aegypti* datasets:
 
-```{r get_vt, echo=TRUE, eval=FALSE}
-aedes_responses <- get_vt(aedes_ids[1:5])
+```{r fetch_vt, echo=TRUE, eval=FALSE}
+aedes_responses <- fetch_vt(aedes_ids[1:5])
 aedes_responses[[1]]
 ```
-```{r get_vt_secret, include=FALSE}
-aedes_responses <- get_vt(aedes_ids[1:5], check_src = FALSE, connections = 5)
+```{r fetch_vt_vt_secret, include=FALSE}
+aedes_responses <- fetch_vt(aedes_ids[1:5], check_src = FALSE, connections = 5)
 aedes_responses[[1]]
 ```
 
@@ -130,7 +130,7 @@ aedes_responses[[1]]
 ## Body: In memory (26362 bytes)
 ```
 
-The `get_vt()` function returns a list of the data in the form of the original `httr2` responses. These are useful if you want to know specifics about how the server sent data back, but for most usecases it is more useful to extract the data into a dataframe.
+The `fetch_vt()` function returns a list of the data in the form of the original `httr2` responses. These are useful if you want to know specifics about how the server sent data back, but for most usecases it is more useful to extract the data into a dataframe.
 
 ## Extracting data
 
@@ -160,10 +160,10 @@ aedes_data_filtered
 
 In some cases you may end up downloading a lot of data. This can cause problems if you do not have enough memory on your computer to store this data in memory all at once, even if you just want one or two columns, like before,
 
-One potential method for mitigating this is to use the `get_extract_x_chunked()` functions. These only download a few records at a time and extract them before moving on to the next chunk of ids. We can perform the filtered extraction from above like so:
+One potential method for mitigating this is to use the `fetch_extract_x_chunked()` functions. These only download a few records at a time and extract them before moving on to the next chunk of ids. We can perform the filtered extraction from above like so:
 
-```{r get_extract_vt_chunked}
-get_extract_vt_chunked(
+```{r fetch_extract_vt_chunked}
+fetch_extract_vt_chunked(
   aedes_ids[1:5],
   chunksize = 2,
   cols = c("LocationText", "OriginalTraitName"),
@@ -178,7 +178,7 @@ A typical pipeline would likely only contain a few lines of code:
 
 ```{r vt_pipeline, eval=FALSE, echo=TRUE}
 df <- search_vt("Aedes aegypti") %>%
-  get_vt() %>%
+  fetch_vt() %>%
   extract_vt(
     cols = c("Interactor1Genus", "Interactor1Species", "Latitude", "Longitude"),
     returnunique = TRUE
@@ -187,7 +187,7 @@ head(df)
 ```
 ```{r vt_pipeline_secret, include=FALSE}
 ids <- search_vt("Aedes aegypti")
-df <- get_vt(ids[1:5], check_src = FALSE, connections = 5) %>%
+df <- fetch_vt(ids[1:5], check_src = FALSE, connections = 5) %>%
   extract_vt(
     cols = c("Interactor1Genus", "Interactor1Species", "Latitude", "Longitude"),
     returnunique = TRUE
@@ -205,13 +205,13 @@ Let's imagine that we are looking for traits of whitefly species (*Bemisia*). We
 
 ```{r demo_searcherror, eval=FALSE, echo=TRUE}
 df <- search_vt("Bemisia")[1:6] %>%
-  get_vt() %>%
+  fetch_vt() %>%
   extract_vt(cols = c("DatasetID", "Interactor1Genus", "Interactor1Species", "Interactor2Genus", "Interactor2Species"))
 ```
 
 ```{r demo_searcherror_secret, include=FALSE}
 df <- search_vt("Bemisia")[1:6] %>%
-  get_vt(check_src = FALSE, connections = 6) %>%
+  fetch_vt(check_src = FALSE, connections = 6) %>%
   extract_vt(cols = c("DatasetID", "Interactor1Genus", "Interactor1Species", "Interactor2Genus", "Interactor2Species"))
 ```
 
@@ -237,14 +237,14 @@ So let's construct the same search as we were wanting to do before, but with the
 
 ```{r searcherror_fixed, eval=FALSE, echo=TRUE}
 df <- search_vt_smart("Interactor1Genus", "contains", "Bemisia")[1:6] %>%
-  get_vt() %>%
+  fetch_vt() %>%
   extract_vt(cols = c("DatasetID", "Interactor1Genus", "Interactor1Species", "Interactor2Genus", "Interactor2Species"))
 unique(df$Interactor1Genus)
 ```
 
 ```{r searcherror_fixed_secret, include=FALSE}
 df <- search_vt_smart("Interactor1Genus", "contains", "Bemisia")[1:6] %>%
-  get_vt(check_src = FALSE, connections = 6) %>%
+  fetch_vt(check_src = FALSE, connections = 6) %>%
   extract_vt(cols = c("DatasetID", "Interactor1Genus", "Interactor1Species", "Interactor2Genus", "Interactor2Species"))
 unique(df$Interactor1Genus)
 ```

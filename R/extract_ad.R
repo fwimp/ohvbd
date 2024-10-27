@@ -1,5 +1,5 @@
 #' @title Extract data from AREAdata datasets
-#' @description Extract the data returned by a call to [get_ad()], filter columns of interest and by dates of interest.
+#' @description Extract the data returned by a call to [fetch_ad()], filter columns of interest and by dates of interest.
 #'
 #' Currently this does not handle Population Density or Forecast matrices, however the other 5 metrics are handled natively.
 #' @author Francis Windram
@@ -11,7 +11,7 @@
 #' * A character vector of fully specified dates to search for (i.e. "yyyy-mm-dd")
 #' @param enddate The (exclusive) end of the range of dates to search for. If this is unfilled, only the `targetdate` is searched for.
 #' @param places A character vector or single string describing what locality to search for in the dataset.
-#' @param gid The spatial scale of the AREAdata matrix (this is not needed if the matrix has been supplied by [get_ad()]).
+#' @param gid The spatial scale of the AREAdata matrix (this is not needed if the matrix has been supplied by [fetch_ad()]).
 #' @param check_src toggle pre-checking of source data.
 #'
 #' @return A matrix containing the extracted data.
@@ -43,21 +43,21 @@
 #' @examples
 #' \dontrun{
 #' # All dates in August 2022
-#' get_ad("temp", gid=0) %>%
+#' fetch_ad("temp", gid=0) %>%
 #'   extract_ad(
 #'     targetdate = "2022-08",
 #'     places = c("Albania", "Thailand")
 #'   )
 #'
 #' # 4th, 5th, and 6th of August 2022 (remember the enddate is EXCLUSIVE)
-#' get_ad("temp", gid=0) %>%
+#' fetch_ad("temp", gid=0) %>%
 #'   extract_ad(
 #'     targetdate = "2022-08-04", enddate="2022-08-07",
 #'     places = c("Albania", "Thailand")
 #'   )
 #'
 #' # 4th of August 2022 and 1st of August 2023
-#' get_ad("temp", gid=0) %>%
+#' fetch_ad("temp", gid=0) %>%
 #'   extract_ad(
 #'     targetdate = c("2022-08-04", "2023-08-01"),
 #'     places = c("Albania", "Thailand")

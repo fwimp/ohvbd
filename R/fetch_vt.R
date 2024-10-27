@@ -1,5 +1,5 @@
-#' @title Get VecDyn dataset/s by ID
-#' @description Retrieve VecDyn dataset/s specified by their dataset ID.
+#' @title Fetch VecTraits dataset/s by ID
+#' @description Retrieve VecTraits dataset/s specified by their dataset ID.
 #' @author Francis Windram
 #'
 #' @param ids a numeric ID or numeric vector of ids indicating the particular dataset/s to download.
@@ -12,24 +12,24 @@
 #'
 #' @examples
 #' \dontrun{
-#' get_vd(54)
+#' fetch_vt(54)
 #'
-#' get_vd(c(423,424,425), rate=5)
+#' fetch_vt(c(54, 55, 56), rate=5)
 #' }
 #'
-#' @concept vecdyn
+#' @concept vectraits
 #'
 #' @export
 #'
 
-get_vd <- function(ids, rate = 5, connections = 1, check_src = TRUE, basereq = NA) {
+fetch_vt <- function(ids, rate = 5, connections = 1, check_src = TRUE, basereq = NA) {
 
   max_conns <- 8
 
   if (is.null(attr(ids, "db")) && check_src) {
-    cli_alert_warning("IDs not necessarily from VecDyn.")
-  } else if (attr(ids, "db") != "vd" && check_src) {
-    cli_abort(c("x" = "IDs not from VecDyn, Please use the {.fn get_{attr(ids, 'db')}} function.", "!" = "Detected db = {.val {attr(ids, 'db')}}"))
+    cli_alert_warning("IDs not necessarily from VecTraits.")
+  } else if (attr(ids, "db") != "vt" && check_src) {
+    cli_abort(c("x" = "IDs not from VecTraits, Please use the {.fn get_{attr(ids, 'db')}} function.", "!" = "Detected db = {.val {attr(ids, 'db')}}"))
   }
 
   if (all(is.na(basereq))) {
@@ -46,7 +46,7 @@ get_vd <- function(ids, rate = 5, connections = 1, check_src = TRUE, basereq = N
     })
 
     if (status$err_code == 1) {
-      curl_err <- get_curl_err(status$err_obj, returnfiller = TRUE)
+      curl_err <- get_curl_err(status$err_obj)
       if (grepl("SSL certificate problem: unable to get local issuer certificate", curl_err)) {
         cat("\n")
         cli_alert_danger("Could not verify SSL certificate.")
@@ -59,18 +59,19 @@ get_vd <- function(ids, rate = 5, connections = 1, check_src = TRUE, basereq = N
     }
   }
 
-  # vd does not return nonexistent piids as 404,
+  # ids_to_find can be a single number or a vector and this works just fine!
   reqs <- ids %>% lapply(\(id) {
     basereq %>%
-      req_url_path_append("vecdyncsv") %>%
-      req_url_query("format" = "json", "piids" = id) %>%
-      req_error(body = vd_error_body) %>%
+      req_url_path_append("vectraits-dataset") %>%
+      req_url_path_append(id) %>%
+      req_url_query("format" = "json") %>%
+      req_error(body = vt_error_body) %>%
       req_headers(ohvbd = id) %>%  # Add additional header just so we can nicely handle failures
       req_throttle(rate)
   })
   if (connections <= 1) {
     resps <- reqs %>% req_perform_sequential(on_error = "continue", progress = list(
-      name = "VecDyn Data",
+      name = "Vectraits Data",
       format = "Downloading {cli::pb_name} {cli::pb_current}/{cli::pb_total} {cli::pb_bar} {cli::pb_percent} | ETA: {cli::pb_eta}"
     ))
   } else {
@@ -80,24 +81,19 @@ get_vd <- function(ids, rate = 5, connections = 1, check_src = TRUE, basereq = N
       connections <- max_conns
     }
     resps <- reqs %>% req_perform_parallel(on_error = "continue", pool = curl::new_pool(total_con = 100, host_con = connections), progress = list(
-      name = "VecDyn Data Parallel",
+      name = "Vectraits Data Parallel",
       format = "Downloading {cli::pb_name} {cli::pb_current}/{cli::pb_total} {cli::pb_bar} {cli::pb_percent} | ETA: {cli::pb_eta}"
     ))
   }
 
   fails <- resps %>% httr2::resps_failures()
 
-  # Test if any failures were missing files (not 404s here, but counts of 0)
-  missing <- find_vd_missing(resps)
+  # Test if any failures were missing files (404s)
+  missing <- find_vb_404s(fails)
 
   if (!is.null(missing)) {
     cli_alert_info("Incorrect ids:")
     cli::cli_ul(missing)
-
-    # Need an extra check here because failed VD calls don't become 404s.
-    if (length(missing) >= length(resps)) {
-      cli_alert_warning("No records retrieved (are you sure the IDs are correct?).")
-    }
   }
 
   # Return the curl errors
@@ -110,7 +106,7 @@ get_vd <- function(ids, rate = 5, connections = 1, check_src = TRUE, basereq = N
   if (length(fails) >= length(resps)) {
     # Only got errors!
     # Test to see if we got only a bunch of ssl errors
-    if (any(grepl("SSL certificate problem: unable to get local issuer certificate", unlist(lapply(resps, get_curl_err))))) {
+    if (any(grepl("SSL certificate problem: unable to get local issuer certificate", unlist(lapply(resps, get_curl_err, returnfiller = TRUE))))) {
       cat("\n")
       cli_alert_danger("Could not verify SSL certificate.")
       cli::cli_text("You may have success running {.fn set_ohvbd_compat} and then trying again.")
@@ -120,7 +116,7 @@ get_vd <- function(ids, rate = 5, connections = 1, check_src = TRUE, basereq = N
     cli_alert_warning("No records retrieved (are you sure the IDs are correct?).")
   }
 
-  attr(resps, "db") <- "vd"
+  attr(resps, "db") <- "vt"
 
   return(resps)
 }

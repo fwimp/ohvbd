@@ -17,7 +17,7 @@ assoc_ad(
 \arguments{
 \item{data}{the source data to bind AREAdata to. This \strong{must} contain decimal lonlat data!}
 
-\item{areadata}{the AREAdata to bind, usually from \code{\link[=get_ad]{get_ad()}}.}
+\item{areadata}{the AREAdata to bind, usually from \code{\link[=fetch_ad]{fetch_ad()}}.}
 
 \item{targetdate}{\strong{ONE OF} the following:
 \itemize{
@@ -62,7 +62,7 @@ For example "2020-04" will be taken to mean the month of April in 2020, and the 
 \examples{
 \dontrun{
 vt_ids <- search_vt(c("Aedes", "aegypti"))
-vtdf <- get_vt(vt_ids[(length(vt_ids)-20):length(vt_ids)]) \%>\%
+vtdf <- fetch_vt(vt_ids[(length(vt_ids)-20):length(vt_ids)]) \%>\%
   extract_vt(cols = c(
     "DatasetID",
     "Latitude",
@@ -70,7 +70,7 @@ vtdf <- get_vt(vt_ids[(length(vt_ids)-20):length(vt_ids)]) \%>\%
     "Interactor1Genus",
     "Interactor1Species"
     ), returnunique = TRUE)
-areadata <- get_ad(metric="temp", gid=2, use_cache=TRUE)
+areadata <- fetch_ad(metric="temp", gid=2, use_cache=TRUE)
 ad_extract_working <- assoc_ad(vtdf, areadata,
                                     targetdate = c("2021-08-04"), enddate=c("2021-08-06"),
                                     gid=2, lonlat_names = c("Longitude", "Latitude"))

@@ -1,4 +1,4 @@
-#' @title Get AREAdata dataset
+#' @title Fetch AREAdata dataset
 #' @description Retrieve AREAdata dataset/s specified by metric and spatial scale (GID).
 #' @author Francis Windram
 #'
@@ -23,7 +23,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' get_ad(metric="temp", gid=0)
+#' fetch_ad(metric="temp", gid=0)
 #' }
 #'
 #' @concept areadata
@@ -31,7 +31,7 @@
 #' @export
 #'
 
-get_ad <- function(metric = "temp", gid = 0, use_cache = FALSE, cache_location = "user", refresh_cache = FALSE, basereq = NA) {
+fetch_ad <- function(metric = "temp", gid = 0, use_cache = FALSE, cache_location = "user", refresh_cache = FALSE, basereq = NA) {
 
   if (all(is.na(basereq))) {
     basereq <- ad_basereq()

@@ -1,7 +1,7 @@
-#' @title Get and parse multiple VecDyn datasets by ID in chunks
+#' @title Fetch and parse multiple VecDyn datasets by ID in chunks
 #' @description Retrieve and parse VecDyn datasets specified by their dataset IDs in batches.
 #'
-#' This is not usually necessary (generally you just need [get_vd()]) but allows one to release data that is not in use from memory. If you would like more control on extraction or parsing then it is best to wrap [get_vd()] and [extract_vd()] in your own chunker instead.
+#' This is not usually necessary (generally you just need [fetch_vd()]) but allows one to release data that is not in use from memory. If you would like more control on extraction or parsing then it is best to wrap [fetch_vd()] and [extract_vd()] in your own chunker instead.
 #' @author Francis Windram
 #'
 #' @param ids a numeric vector of IDs indicating the particular datasets to download.
@@ -16,7 +16,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' get_extract_vd_chunked(c(423,424,425), chunksize = 2, rate=5)
+#' fetch_extract_vd_chunked(c(423,424,425), chunksize = 2, rate=5)
 #' }
 #'
 #' @concept vecdyn
@@ -24,7 +24,7 @@
 #' @export
 #'
 
-get_extract_vd_chunked <- function(ids, chunksize = 20, cols = NA, returnunique = FALSE, rate = 5, connections = 1, basereq = NA) {
+fetch_extract_vd_chunked <- function(ids, chunksize = 20, cols = NA, returnunique = FALSE, rate = 5, connections = 1, basereq = NA) {
 
   if (is.null(attr(ids, "db"))) {
     cli_alert_warning("IDs not necessarily from VecDyn.")
@@ -68,7 +68,7 @@ get_extract_vd_chunked <- function(ids, chunksize = 20, cols = NA, returnunique 
 
   # Lapply pipeline to chunk list
   out_list <- chunklets %>% lapply(\(idchunk) {
-    get_vd(idchunk, rate = rate, connections = connections, check_src = FALSE, basereq = basereq) %>%
+    fetch_vd(idchunk, rate = rate, connections = connections, check_src = FALSE, basereq = basereq) %>%
       extract_vd(cols = cols, returnunique = returnunique)
   })
 
