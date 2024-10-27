@@ -1,6 +1,6 @@
 # ohvbd 0.4.4
 
-* New function `check_ohvbd_config` allows easy printing of the current status of ohvbd's options.
+* New function `check_ohvbd_config()` allows easy printing of the current status of ohvbd's options.
 * New `clean_ad_cache()` function enables users to clean their cached AREAdata files easily.
 * Build timings now appear in all vignettes.
 * Cli outputs are now suppressed when running vignettes in non-interactive mode (e.g. while knitting).
