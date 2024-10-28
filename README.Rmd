@@ -10,7 +10,7 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
-<!-- force push by editing this number: 52 -->
+<!-- force push by editing this number: 512 -->
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -35,8 +35,7 @@ magicnum <- tryCatch({
 ```{r, echo = FALSE}
 dep <- as.vector(read.dcf('DESCRIPTION')[, 'Depends'])
 m <- regexpr('\\d\\.*\\d+\\.*\\d*\\.*\\d*', dep)
-rm <- regmatches(dep, m)
-rvers <- rm
+rvers <- regmatches(dep, m)
 # rvers <- gsub('.*(\\\\d+.\\\\d+.\\\\d+).*', '\\\\1', rm)
 # rm
 ```

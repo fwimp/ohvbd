@@ -64,6 +64,7 @@ read_ad_cache <- function(path, metric, gid, warn = TRUE) {
 }
 
 #' @title Delete all rda files from ohvbd AREAdata cache
+#' @author Francis Windram
 #'
 #' @param cache_location location within which to remove rda files
 #'
@@ -91,4 +92,22 @@ clean_ad_cache <- function(cache_location = "user") {
   num_removed <- length(to_remove) - length(remaining_files)  # nolint: object_usage_linter
   cli::cli_alert_success("Removed {num_removed} file{?s}")
   invisible(NULL)
+}
+
+#' @title Check whether an object has been loaded from cache by ohvbd.
+#' @author Francis Windram
+#'
+#' @param x The object to check.
+#'
+#' @return NULL
+#'
+#' @examples
+#' \dontrun{
+#' is.cached(c(1,2,3))
+#' }
+#'
+#' @export
+#'
+is_cached <- function(x) {
+  return(attr(x, "cached") %||% FALSE)
 }

@@ -1,3 +1,31 @@
+# ohvbd 0.5.0
+## **Major API change**
+* `get_` functions have been split into two new types of function, based upon exact usage.
+  * `find_` functions retrieve metadata such as column definitions and ids.
+  * `fetch_` functions retrieve actual datasets.
+* New set of S3 classes (`ohvbd.ids`, `ohvbd.responses`, `ohvbd.data.frame`, `ohvbd.ad.matrix`) to allow for nicer checks of data integrity.
+  * This has the side effect of no longer falsely triggering the data continuity checks of `fetch_` functions when indexing the output of `find_x_ids()` functions.
+* New convenience functions `fetch()` and `extract()` leverage method dispatch along with the above classes to infer the correct underlying `fetch_` and `extract_` functions to use.
+  * As such you can now write code such as `find_vt_ids() %>% fetch() %>% extract()` without having to remember the correct extractor to use.
+  * You can still use the specific extractor functions as before should you desire.
+* All major functions interfacing with AD, VD, and VT output one of these classes.
+* Cached data from AD now contains an attribute to signify that it is cached. 
+* New classes are subclassed from other base R classes, and so mostly behave in the same way (i.e. you can subset an `ohvbd.data.frame` in the same way as just subsetting a normal df).
+* New function `ohvbd.ids()` allows users to create objects of the same S3 class as output by the `find_` and `search_` functions.
+* New `is_cached()` function enables a simple check to see if an object has been loaded from the cache by `ohvbd`.
+
+
+## Full list of function name changes:
+* `get_ad()` -> `fetch_ad()`
+* `get_extract_vd_chunked()` -> `fetch_extract_vd_chunked()`
+* `get_extract_vt_chunked()` -> `fetch_extract_vt_chunked()`
+* `get_gadm_sfs()` -> `fetch_gadm_sfs()`
+* `get_vd()` -> `fetch_vd()`
+* `get_vt()` -> `fetch_vt()`
+* `get_vd_columns()` -> `find_vd_columns()`
+* `get_vd_current_ids()` -> `find_vd_ids()`
+* `get_vt_current_ids()` -> `find_vt_ids()`
+
 # ohvbd 0.4.4
 
 * New function `check_ohvbd_config()` allows easy printing of the current status of ohvbd's options.

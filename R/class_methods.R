@@ -14,19 +14,31 @@ print.ohvbd.data.frame <- function(x, ...) {
 
 #' @export
 print.ohvbd.ad.matrix <- function(x, ..., full=FALSE) {
+  # Possibly worthwhile moving most of this to a new summary.ohvbd.ad.matrix function?
   # If attr is null, default to <missing>
   metric <- attr(x, 'metric') %||% '<missing>'
   gid <- attr(x, 'gid') %||% '<missing>'
   cached <- attr(x, 'cached') %||% 'unknown'
   startdate <- head(colnames(x), 1) %||% 'unknown'
   enddate <- tail(colnames(x), 1) %||% 'unknown'
-  cli::cli_text("Areadata matrix for {.val {metric}} at gid level {.val {gid}}.")
-  cli::cli_text("Cached: {.val {cached}}")
-  cli::cli_text("Dates: {.val {startdate}} -> {.val {enddate}} ({.val {ncol(x)}})")
-  cli::cli_text("Locations: {.val {nrow(x)}}")
-  if (full) {
-    cli::cli_h1("Data")
-    NextMethod(object=matrix())
+  if (!is.null(options("cli.default_handler"))) {
+    cat(paste("Areadata matrix for", metric, "at gid level", gid, ".\n"))
+    cat(paste("Cached:", cached, "\n"))
+    cat(paste("Dates:", startdate, "->", enddate, paste0("(", ncol(x), ")\n")))
+    cat(paste("Locations:", nrow(x), "\n"))
+    if (full) {
+      cat("Data:\n")
+      NextMethod(object=matrix())
+    }
+  } else {
+    cli::cli_text("Areadata matrix for {.val {metric}} at gid level {.val {gid}}.")
+    cli::cli_text("Cached: {.val {cached}}")
+    cli::cli_text("Dates: {.val {startdate}} -> {.val {enddate}} ({.val {ncol(x)}})")
+    cli::cli_text("Locations: {.val {nrow(x)}}")
+    if (full) {
+      cli::cli_h1("Data")
+      NextMethod(object=matrix())
+    }
   }
 }
 

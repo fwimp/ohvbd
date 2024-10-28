@@ -22,7 +22,7 @@ reference:
 - title: Other
   desc: Miscellaneous functions.
 - contents:
-  - lacks_concepts(c("vectraits", "vecdyn", "areadata", "basereq"))
+  - lacks_concepts(c("vectraits", "vecdyn", "areadata", "basereq", "convenience"))
 - subtitle: Base requests
   desc: Functions for modifying the basic targets of data API requests
 - contents:

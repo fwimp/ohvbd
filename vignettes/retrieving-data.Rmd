@@ -85,13 +85,15 @@ For the rest of this vignette we will be using a piped-style approach.
 
 Another note before we begin: the functions used to interface with VecTraits and VecDyn are basically the same, except for a `vt` or `vd` in the function name. So `search_vt()` is the VecTraits equivalent of `search_vd()`. We will use VecTraits functions in this vignette, but the process is the same for VecDyn.
 
+There are also generic versions of the `fetch_x()` and `extract_x()` functions (called `fetch()` and `extract()`), which can be used in the place of the db-specific functions.
+
 ## Finding IDs
 
 Datasets in VecTraits and VecDyn are organised by id. As such it is often good to be able to see which IDs are currently available. We can do this using the `find_x_ids()` family of functions. These return a vector of valid IDs on the given database:
 
 ```{r find_vt_ids}
 library(ohvbd)
-find_vt_ids() %>% head(n = 20)
+find_vt_ids()[1:20]
 ```
 
 The functions `search_x()` and `search_x_smart()` also return a list of IDs that match the query provided in the arguments.
@@ -242,11 +244,11 @@ df <- search_vt_smart("Interactor1Genus", "contains", "Bemisia")[1:6] %>%
 unique(df$Interactor1Genus)
 ```
 
-```{r searcherror_fixed_secret, include=FALSE}
+```{r searcherror_fixed_secret, echo=FALSE}
 df <- search_vt_smart("Interactor1Genus", "contains", "Bemisia")[1:6] %>%
   fetch_vt(check_src = FALSE, connections = 6) %>%
   extract_vt(cols = c("DatasetID", "Interactor1Genus", "Interactor1Species", "Interactor2Genus", "Interactor2Species"))
-unique(df$Interactor1Genus)
+print(unique(df$Interactor1Genus))
 ```
 
 Here we have made sure to only search the `Interactor1Genus` column. As such we have only gotten back *Bemisia* traits!

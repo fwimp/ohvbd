@@ -70,7 +70,7 @@ Let's take a look at the format of data retrieved from AREAdata (we will deconst
 library(ohvbd)
 
 ad_df <- fetch_ad(metric = "temp", gid = 0, use_cache = TRUE)
-cat("Data dimensions: ", ncol(ad_df), " cols x ", nrow(ad_df), " rows")
+print(ad_df)
 ```
 
 ```{r ad_num, include=FALSE}
@@ -78,7 +78,11 @@ ad_num <- ncol(ad_df) * nrow(ad_df)
 ```
 
 
-So that is quite a lot of data! Way too much to print here, given that it's `r ad_num` entries.
+So that is quite a lot of data! Way too much to print here, given that it's `r ad_num` entries, however if you want to print all the data rather than just a summary, you can add the argument `full = TRUE` to the print command:
+
+```{r fullprint, eval=FALSE, echo=TRUE}
+print(ad_df, full = TRUE)
+```
 
 AREAdata outputs are formatted as matrices. Here the rows correspond to locations (identified by GADM codes):
 
