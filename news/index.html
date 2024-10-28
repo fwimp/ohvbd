@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ohvbd</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,8 +43,63 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.5.0" id="ohvbd-050">ohvbd 0.5.0<a class="anchor" aria-label="anchor" href="#ohvbd-050"></a></h2>
+<div class="section level3">
+<h3 id="major-api-change-0-5-0"><strong>Major API change</strong><a class="anchor" aria-label="anchor" href="#major-api-change-0-5-0"></a></h3>
+<ul><li>
+<code>get_</code> functions have been split into two new types of function, based upon exact usage.
+<ul><li>
+<code>find_</code> functions retrieve metadata such as column definitions and ids.</li>
+<li>
+<code>fetch_</code> functions retrieve actual datasets.</li>
+</ul></li>
+<li>New set of S3 classes (<code>ohvbd.ids</code>, <code>ohvbd.responses</code>, <code>ohvbd.data.frame</code>, <code>ohvbd.ad.matrix</code>) to allow for nicer checks of data integrity.
+<ul><li>This has the side effect of no longer falsely triggering the data continuity checks of <code>fetch_</code> functions when indexing the output of <code>find_x_ids()</code> functions.</li>
+</ul></li>
+<li>New convenience functions <code><a href="../reference/fetch.html">fetch()</a></code> and <code><a href="../reference/extract.html">extract()</a></code> leverage method dispatch along with the above classes to infer the correct underlying <code>fetch_</code> and <code>extract_</code> functions to use.
+<ul><li>As such you can now write code such as <code>find_vt_ids() %&gt;% fetch() %&gt;% extract()</code> without having to remember the correct extractor to use.</li>
+<li>You can still use the specific extractor functions as before should you desire.</li>
+</ul></li>
+<li>All major functions interfacing with AD, VD, and VT output one of these classes.</li>
+<li>Cached data from AD now contains an attribute to signify that it is cached.</li>
+<li>New classes are subclassed from other base R classes, and so mostly behave in the same way (i.e. you can subset an <code>ohvbd.data.frame</code> in the same way as just subsetting a normal df).</li>
+<li>New function <code><a href="../reference/ohvbd.ids.html">ohvbd.ids()</a></code> allows users to create objects of the same S3 class as output by the <code>find_</code> and <code>search_</code> functions.</li>
+<li>New <code><a href="../reference/is_cached.html">is_cached()</a></code> function enables a simple check to see if an object has been loaded from the cache by <code>ohvbd</code>.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="full-list-of-function-name-changes-0-5-0">Full list of function name changes:<a class="anchor" aria-label="anchor" href="#full-list-of-function-name-changes-0-5-0"></a></h3>
+<ul><li>
+<code>get_ad()</code> -&gt; <code><a href="../reference/fetch_ad.html">fetch_ad()</a></code>
+</li>
+<li>
+<code>get_extract_vd_chunked()</code> -&gt; <code><a href="../reference/fetch_extract_vd_chunked.html">fetch_extract_vd_chunked()</a></code>
+</li>
+<li>
+<code>get_extract_vt_chunked()</code> -&gt; <code><a href="../reference/fetch_extract_vt_chunked.html">fetch_extract_vt_chunked()</a></code>
+</li>
+<li>
+<code>get_gadm_sfs()</code> -&gt; <code><a href="../reference/fetch_gadm_sfs.html">fetch_gadm_sfs()</a></code>
+</li>
+<li>
+<code>get_vd()</code> -&gt; <code><a href="../reference/fetch_vd.html">fetch_vd()</a></code>
+</li>
+<li>
+<code>get_vt()</code> -&gt; <code><a href="../reference/fetch_vt.html">fetch_vt()</a></code>
+</li>
+<li>
+<code>get_vd_columns()</code> -&gt; <code><a href="../reference/find_vd_columns.html">find_vd_columns()</a></code>
+</li>
+<li>
+<code>get_vd_current_ids()</code> -&gt; <code><a href="../reference/find_vd_ids.html">find_vd_ids()</a></code>
+</li>
+<li>
+<code>get_vt_current_ids()</code> -&gt; <code><a href="../reference/find_vt_ids.html">find_vt_ids()</a></code>
+</li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.4" id="ohvbd-044">ohvbd 0.4.4<a class="anchor" aria-label="anchor" href="#ohvbd-044"></a></h2>
-<ul><li>New function <code>check_ohvbd_config</code> allows easy printing of the current status of ohvbd’s options.</li>
+<ul><li>New function <code><a href="../reference/check_ohvbd_config.html">check_ohvbd_config()</a></code> allows easy printing of the current status of ohvbd’s options.</li>
 <li>New <code><a href="../reference/clean_ad_cache.html">clean_ad_cache()</a></code> function enables users to clean their cached AREAdata files easily.</li>
 <li>Build timings now appear in all vignettes.</li>
 <li>Cli outputs are now suppressed when running vignettes in non-interactive mode (e.g. while knitting).</li>
@@ -59,7 +114,7 @@
 <li>All of these functions now check automatically for SSL issues, and recommend <code><a href="../reference/set_ohvbd_compat.html">set_ohvbd_compat()</a></code> if these are detected.</li>
 <li>All <code>get_</code> calls requesting more than 10 ids run a pre-flight ssl check before attempting the whole thing.</li>
 <li>
-<code><a href="../reference/get_vd.html">get_vd()</a></code> and <code><a href="../reference/get_vt.html">get_vt()</a></code> now also return a list of ids that were missing and any curl errors that were found in the process of trying to get data.</li>
+<code>get_vd()</code> and <code>get_vt()</code> now also return a list of ids that were missing and any curl errors that were found in the process of trying to get data.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.2" id="ohvbd-042">ohvbd 0.4.2<a class="anchor" aria-label="anchor" href="#ohvbd-042"></a></h2>
@@ -112,7 +167,7 @@
 <li>
 <code><a href="../reference/extract_ad.html">extract_ad()</a></code> now errors when all <code>targetdate</code> entries are outside of the range of the AREAdata dataset.</li>
 <li>New <code><a href="../reference/assoc_ad.html">assoc_ad()</a></code> associates arbitrary data including lon/lat columns with AREAdata.</li>
-<li>New <code><a href="../reference/get_vd_columns.html">get_vd_columns()</a></code> provides quick reference about the currently present VecDyn columns. <em>(This is currently not possible for VecTraits, but the feasibility is being investigated.)</em>
+<li>New <code>get_vd_columns()</code> provides quick reference about the currently present VecDyn columns. <em>(This is currently not possible for VecTraits, but the feasibility is being investigated.)</em>
 </li>
 <li>New <code><a href="../reference/assoc_gadm.html">assoc_gadm()</a></code> function associates gadm ids at all spatial scales with arbitrary data that include lon/lat columns.</li>
 <li>Documentation now correctly displays favicons.</li>
@@ -154,7 +209,7 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.1" id="ohvbd-021">ohvbd 0.2.1<a class="anchor" aria-label="anchor" href="#ohvbd-021"></a></h2>
 <ul><li>
-<code><a href="../reference/get_ad.html">get_ad()</a></code> now caches data from AREAdata to reduce extraneous data downloading and speed up re-execution and development.</li>
+<code>get_ad()</code> now caches data from AREAdata to reduce extraneous data downloading and speed up re-execution and development.</li>
 <li>This requires the new argument <code>use_cache=TRUE</code> and caches by default in the user directory.</li>
 </ul></div>
     <div class="section level2">
@@ -188,13 +243,13 @@
 <li>
 <code>ohvbd</code> now interfaces with the VecDyn database for vector population dynamic data.</li>
 <li>This includes functions to get ids, get datasets, and to extract data from the responses.</li>
-<li>These functions use the same api structure as for VecTraits data download, but with <code>vd</code> replacing <code>vt</code> in the function names (e.g. <code><a href="../reference/get_vd.html">get_vd()</a></code>)</li>
+<li>These functions use the same api structure as for VecTraits data download, but with <code>vd</code> replacing <code>vt</code> in the function names (e.g. <code>get_vd()</code>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.5" id="ohvbd-005">ohvbd 0.0.5<a class="anchor" aria-label="anchor" href="#ohvbd-005"></a></h2>
 <ul><li>New <code><a href="../reference/search_vt.html">search_vt()</a></code> allows for keyword-based searching of VecTraits.</li>
 <li>
-<code><a href="../reference/get_vt_current_ids.html">get_vt_current_ids()</a></code> now handles 404 responses gracefully.</li>
+<code>get_vt_current_ids()</code> now handles 404 responses gracefully.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.4" id="ohvbd-004">ohvbd 0.0.4<a class="anchor" aria-label="anchor" href="#ohvbd-004"></a></h2>
@@ -203,7 +258,7 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.3" id="ohvbd-003">ohvbd 0.0.3<a class="anchor" aria-label="anchor" href="#ohvbd-003"></a></h2>
 <ul><li>
-<code><a href="../reference/get_vt.html">get_vt()</a></code> now leverages <code><a href="https://httr2.r-lib.org/reference/req_perform_sequential.html" class="external-link">httr2::req_perform_sequential()</a></code> for more efficient dataset retrieval.</li>
+<code>get_vt()</code> now leverages <code><a href="https://httr2.r-lib.org/reference/req_perform_sequential.html" class="external-link">httr2::req_perform_sequential()</a></code> for more efficient dataset retrieval.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.2" id="ohvbd-002">ohvbd 0.0.2<a class="anchor" aria-label="anchor" href="#ohvbd-002"></a></h2>

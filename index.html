@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">ohvbd</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -106,19 +106,74 @@
 </h2>
 <!-- These are auto-pulled from NEWS.md  -->
 <div class="section level3">
-<h3 id="ohvbd-044">ohvbd 0.4.4<a class="anchor" aria-label="anchor" href="#ohvbd-044"></a>
+<h3 id="ohvbd-050">ohvbd 0.5.0<a class="anchor" aria-label="anchor" href="#ohvbd-050"></a>
 </h3>
+<div class="section level4">
+<h4 id="major-api-change">
+<strong>Major API change</strong><a class="anchor" aria-label="anchor" href="#major-api-change"></a>
+</h4>
 <ul>
-<li>New function <code>check_ohvbd_config</code> allows easy printing of the current status of ohvbd’s options.</li>
-<li>New <code><a href="reference/clean_ad_cache.html">clean_ad_cache()</a></code> function enables users to clean their cached AREAdata files easily.</li>
-<li>Build timings now appear in all vignettes.</li>
-<li>Cli outputs are now suppressed when running vignettes in non-interactive mode (e.g. while knitting).</li>
-<li>Default cache path is now in the user directory (obtained from <code><a href="https://rdrr.io/r/tools/userdir.html" class="external-link">tools::R_user_dir()</a></code>).</li>
 <li>
-<code>use-areadata</code> vignette now has part of its content complete.</li>
-<li>Generally this update is setting the stage for another major API overhaul in 0.5.0.</li>
+<code>get_</code> functions have been split into two new types of function, based upon exact usage.
+<ul>
+<li>
+<code>find_</code> functions retrieve metadata such as column definitions and ids.</li>
+<li>
+<code>fetch_</code> functions retrieve actual datasets.</li>
+</ul>
+</li>
+<li>New set of S3 classes (<code>ohvbd.ids</code>, <code>ohvbd.responses</code>, <code>ohvbd.data.frame</code>, <code>ohvbd.ad.matrix</code>) to allow for nicer checks of data integrity.
+<ul>
+<li>This has the side effect of no longer falsely triggering the data continuity checks of <code>fetch_</code> functions when indexing the output of <code>find_x_ids()</code> functions.</li>
+</ul>
+</li>
+<li>New convenience functions <code><a href="reference/fetch.html">fetch()</a></code> and <code><a href="reference/extract.html">extract()</a></code> leverage method dispatch along with the above classes to infer the correct underlying <code>fetch_</code> and <code>extract_</code> functions to use.
+<ul>
+<li>As such you can now write code such as <code>find_vt_ids() %&gt;% fetch() %&gt;% extract()</code> without having to remember the correct extractor to use.</li>
+<li>You can still use the specific extractor functions as before should you desire.</li>
+</ul>
+</li>
+<li>All major functions interfacing with AD, VD, and VT output one of these classes.</li>
+<li>Cached data from AD now contains an attribute to signify that it is cached.</li>
+<li>New classes are subclassed from other base R classes, and so mostly behave in the same way (i.e. you can subset an <code>ohvbd.data.frame</code> in the same way as just subsetting a normal df).</li>
+<li>New function <code><a href="reference/ohvbd.ids.html">ohvbd.ids()</a></code> allows users to create objects of the same S3 class as output by the <code>find_</code> and <code>search_</code> functions.</li>
+<li>New <code><a href="reference/is_cached.html">is_cached()</a></code> function enables a simple check to see if an object has been loaded from the cache by <code>ohvbd</code>.</li>
+</ul>
+</div>
+<div class="section level4">
+<h4 id="full-list-of-function-name-changes">Full list of function name changes:<a class="anchor" aria-label="anchor" href="#full-list-of-function-name-changes"></a>
+</h4>
+<ul>
+<li>
+<code>get_ad()</code> -&gt; <code><a href="reference/fetch_ad.html">fetch_ad()</a></code>
+</li>
+<li>
+<code>get_extract_vd_chunked()</code> -&gt; <code><a href="reference/fetch_extract_vd_chunked.html">fetch_extract_vd_chunked()</a></code>
+</li>
+<li>
+<code>get_extract_vt_chunked()</code> -&gt; <code><a href="reference/fetch_extract_vt_chunked.html">fetch_extract_vt_chunked()</a></code>
+</li>
+<li>
+<code>get_gadm_sfs()</code> -&gt; <code><a href="reference/fetch_gadm_sfs.html">fetch_gadm_sfs()</a></code>
+</li>
+<li>
+<code>get_vd()</code> -&gt; <code><a href="reference/fetch_vd.html">fetch_vd()</a></code>
+</li>
+<li>
+<code>get_vt()</code> -&gt; <code><a href="reference/fetch_vt.html">fetch_vt()</a></code>
+</li>
+<li>
+<code>get_vd_columns()</code> -&gt; <code><a href="reference/find_vd_columns.html">find_vd_columns()</a></code>
+</li>
+<li>
+<code>get_vd_current_ids()</code> -&gt; <code><a href="reference/find_vd_ids.html">find_vd_ids()</a></code>
+</li>
+<li>
+<code>get_vt_current_ids()</code> -&gt; <code><a href="reference/find_vt_ids.html">find_vt_ids()</a></code>
+</li>
 </ul>
 <p>See <a href="https://fwimp.github.io/ohvbd/news/index.html">changelog</a> for patch notes for previous versions.</p>
+</div>
 </div>
 </div>
 </div>
@@ -157,7 +212,7 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/" class="external-link"><img src="https://img.shields.io/badge/R%3E%3D-4.0-6666ff.svg?style=for-the-badge" alt="R"></a></li>
-<li><a href="commits/master"><img src="https://img.shields.io/badge/Package%20version-0.4.4-orange.svg?style=for-the-badge" alt="packageversion"></a></li>
+<li><a href="commits/master"><img src="https://img.shields.io/badge/Package%20version-0.5.0-orange.svg?style=for-the-badge" alt="packageversion"></a></li>
 <li><a href="https://www.gnu.org/licenses/gpl-3.0.en.html" class="external-link"><img src="https://img.shields.io/badge/license-GPL--3-blue.svg?style=for-the-badge" alt="license"></a></li>
 <li><a href="https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>

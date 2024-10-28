@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ohvbd</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,7 +69,7 @@
 
 
 <dt id="arg-areadata">areadata<a class="anchor" aria-label="anchor" href="#arg-areadata"></a></dt>
-<dd><p>the AREAdata to bind, usually from <code><a href="get_ad.html">get_ad()</a></code>.</p></dd>
+<dd><p>the AREAdata to bind, usually from <code><a href="fetch_ad.html">fetch_ad()</a></code>.</p></dd>
 
 
 <dt id="arg-targetdate">targetdate<a class="anchor" aria-label="anchor" href="#arg-targetdate"></a></dt>
@@ -125,7 +125,7 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="va">vt_ids</span> <span class="op">&lt;-</span> <span class="fu"><a href="search_vt.html">search_vt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Aedes"</span>, <span class="st">"aegypti"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">vtdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_vt.html">get_vt</a></span><span class="op">(</span><span class="va">vt_ids</span><span class="op">[</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">vt_ids</span><span class="op">)</span><span class="op">-</span><span class="fl">20</span><span class="op">)</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">vt_ids</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span><span class="va">vtdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="fetch_vt.html">fetch_vt</a></span><span class="op">(</span><span class="va">vt_ids</span><span class="op">[</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">vt_ids</span><span class="op">)</span><span class="op">-</span><span class="fl">20</span><span class="op">)</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">vt_ids</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="extract_vt.html">extract_vt</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="st">"DatasetID"</span>,</span></span>
 <span class="r-in"><span>    <span class="st">"Latitude"</span>,</span></span>
@@ -133,7 +133,7 @@
 <span class="r-in"><span>    <span class="st">"Interactor1Genus"</span>,</span></span>
 <span class="r-in"><span>    <span class="st">"Interactor1Species"</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span>, returnunique <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">areadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_ad.html">get_ad</a></span><span class="op">(</span>metric<span class="op">=</span><span class="st">"temp"</span>, gid<span class="op">=</span><span class="fl">2</span>, use_cache<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">areadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="fetch_ad.html">fetch_ad</a></span><span class="op">(</span>metric<span class="op">=</span><span class="st">"temp"</span>, gid<span class="op">=</span><span class="fl">2</span>, use_cache<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">ad_extract_working</span> <span class="op">&lt;-</span> <span class="fu">assoc_ad</span><span class="op">(</span><span class="va">vtdf</span>, <span class="va">areadata</span>,</span></span>
 <span class="r-in"><span>                                    targetdate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2021-08-04"</span><span class="op">)</span>, enddate<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2021-08-06"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                                    gid<span class="op">=</span><span class="fl">2</span>, lonlat_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Longitude"</span>, <span class="st">"Latitude"</span><span class="op">)</span><span class="op">)</span></span></span>

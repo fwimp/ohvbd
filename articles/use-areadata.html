@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ohvbd</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -106,34 +106,41 @@ will deconstruct this command properly in a bit):</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/fwimp/ohvbd" class="external-link">ohvbd</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">ad_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_ad.html">get_ad</a></span><span class="op">(</span>metric <span class="op">=</span> <span class="st">"temp"</span>, gid <span class="op">=</span> <span class="fl">0</span>, use_cache <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Data dimensions: "</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">ad_df</span><span class="op">)</span>, <span class="st">" cols x "</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">ad_df</span><span class="op">)</span>, <span class="st">" rows"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Data dimensions:  1461  cols x  256  rows</span></span></code></pre></div>
+<span><span class="va">ad_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_ad.html">fetch_ad</a></span><span class="op">(</span>metric <span class="op">=</span> <span class="st">"temp"</span>, gid <span class="op">=</span> <span class="fl">0</span>, use_cache <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">ad_df</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Areadata matrix for temp at gid level 0 .</span></span>
+<span><span class="co">#&gt; Cached: FALSE </span></span>
+<span><span class="co">#&gt; Dates: 2020-01-01 -&gt; 2023-12-31 (1461)</span></span>
+<span><span class="co">#&gt; Locations: 256</span></span></code></pre></div>
 <p>So that is quite a lot of data! Way too much to print here, given
-that it’s 374016 entries.</p>
+that it’s 374016 entries, however if you want to print all the data
+rather than just a summary, you can add the argument
+<code>full = TRUE</code> to the print command:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">ad_df</span>, full <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>AREAdata outputs are formatted as matrices. Here the rows correspond
 to locations (identified by GADM codes):</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">ad_df</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Aruba"       "Afghanistan" "Angola"      "Anguilla"    "Åland"      </span></span>
 <span><span class="co">#&gt; [6] "Albania"</span></span></code></pre></div>
 <p>Meanwhile the column names correspond to the day that the data refers
 to:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">ad_df</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "2020-01-01" "2020-01-02" "2020-01-03" "2020-01-04" "2020-01-05"</span></span>
 <span><span class="co">#&gt; [6] "2020-01-06"</span></span></code></pre></div>
 <p>So the value at <code>ad_df["Angola", "2020-01-01"]</code>
 corresponds to the value of the metric (in this case temperature) in
 Angola on 2020-01-01:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ad_df</span><span class="op">[</span><span class="st">"Angola"</span>, <span class="st">"2020-01-01"</span><span class="op">]</span></span>
 <span><span class="co">#&gt; [1] 29.33611</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="deconstructing-get_ad">Deconstructing <code>get_ad()</code><a class="anchor" aria-label="anchor" href="#deconstructing-get_ad"></a>
+<h2 id="deconstructing-fetch_ad">Deconstructing <code>fetch_ad()</code><a class="anchor" aria-label="anchor" href="#deconstructing-fetch_ad"></a>
 </h2>
-<p>That call above to <code><a href="../reference/get_ad.html">get_ad()</a></code> used some slightly odd
+<p>That call above to <code><a href="../reference/fetch_ad.html">fetch_ad()</a></code> used some slightly odd
 parameters, so let’s break that down a bit.</p>
 <p>The arguments we provided were</p>
 <ol style="list-style-type: decimal">
@@ -146,17 +153,17 @@ parameters, so let’s break that down a bit.</p>
 <h3 id="metric">
 <code>metric</code><a class="anchor" aria-label="anchor" href="#metric"></a>
 </h3>
-<p>The metric argument tells <code><a href="../reference/get_ad.html">get_ad()</a></code> what type of data it
-should retrieve from AREAdata.</p>
+<p>The metric argument tells <code><a href="../reference/fetch_ad.html">fetch_ad()</a></code> what type of data
+it should retrieve from AREAdata.</p>
 <p>There are many valid options for this including temperature and
 humidity. (See <a href="https://pearselab.github.io/areadata/download-links/" class="external-link">AREAdata</a>
-or run <code>?get_ad()</code> in the R console for a full list).</p>
+or run <code>?fetch_ad()</code> in the R console for a full list).</p>
 </div>
 <div class="section level3">
 <h3 id="gid">
 <code>gid</code><a class="anchor" aria-label="anchor" href="#gid"></a>
 </h3>
-<p>The gid argument tells <code><a href="../reference/get_ad.html">get_ad()</a></code> the spatial scale to
+<p>The gid argument tells <code><a href="../reference/fetch_ad.html">fetch_ad()</a></code> the spatial scale to
 download (with higher numbers corresponding to finer scales, at the cost
 of larger download sizes).</p>
 </div>
@@ -185,8 +192,8 @@ relative humidity data at the province level (gid 1), caching in the
 same folder.</p>
 <p>(We will not execute this, just because gid level 1 data is
 significantly larger than gid level 0)</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/get_ad.html">get_ad</a></span><span class="op">(</span>metric <span class="op">=</span> <span class="st">"relhumid"</span>, gid <span class="op">=</span> <span class="fl">1</span>, use_cache <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_ad.html">fetch_ad</a></span><span class="op">(</span>metric <span class="op">=</span> <span class="st">"relhumid"</span>, gid <span class="op">=</span> <span class="fl">1</span>, use_cache <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -197,7 +204,7 @@ significantly larger than gid level 0)</p>
 <code><a href="../reference/extract_ad.html">extract_ad()</a></code>.</p>
 <p>So let’s again try to extract the same data as previously, the
 temperature in Angola on 2020-01-01:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ad_df</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/extract_ad.html">extract_ad</a></span><span class="op">(</span>targetdate <span class="op">=</span> <span class="st">"2020-01-01"</span>, places <span class="op">=</span> <span class="st">"Angola"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 29.33611</span></span>
 <span><span class="co">#&gt; attr(,"db")</span></span>
@@ -216,7 +223,7 @@ are not actually present in the data?</p>
 <code><a href="../reference/extract_ad.html">extract_ad()</a></code>.</p>
 <p>If we (for example) want not just one day, we can specify either a
 vector of dates, or a less exact date as <code>targetdate</code></p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ad_df</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/extract_ad.html">extract_ad</a></span><span class="op">(</span></span>
 <span>  targetdate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2020-01-01"</span>, <span class="st">"2020-01-02"</span>, <span class="st">"2020-01-05"</span><span class="op">)</span>,</span>
 <span>  places <span class="op">=</span> <span class="st">"Angola"</span></span>
@@ -225,7 +232,7 @@ vector of dates, or a less exact date as <code>targetdate</code></p>
 <span><span class="co">#&gt;   29.33611   28.77514   28.13407 </span></span>
 <span><span class="co">#&gt; attr(,"db")</span></span>
 <span><span class="co">#&gt; [1] "ad"</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ad_df</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/extract_ad.html">extract_ad</a></span><span class="op">(</span>targetdate <span class="op">=</span> <span class="st">"2020-01"</span>, places <span class="op">=</span> <span class="st">"Angola"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; 2020-01-01 2020-01-02 2020-01-03 2020-01-04 2020-01-05 2020-01-06 2020-01-07 </span></span>
 <span><span class="co">#&gt;   29.33611   28.77514   28.88312   27.43250   28.13407   28.64046   28.09983 </span></span>
@@ -239,7 +246,7 @@ vector of dates, or a less exact date as <code>targetdate</code></p>
 <span><span class="co">#&gt;   28.44818   28.64745   28.34594 </span></span>
 <span><span class="co">#&gt; attr(,"db")</span></span>
 <span><span class="co">#&gt; [1] "ad"</span></span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 366 days of data return as 2020 is a leap year</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">ad_df</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/extract_ad.html">extract_ad</a></span><span class="op">(</span>targetdate <span class="op">=</span> <span class="st">"2020"</span>, places <span class="op">=</span> <span class="st">"Angola"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 366</span></span></code></pre></div>
@@ -248,7 +255,7 @@ argument <code>enddate</code>.</p>
 <p><em>Note: the end date is defined <strong>exclusively</strong>,
 meaning that any date before it (and on or after the target date) is
 considered to be “in”.</em></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ad_df</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/extract_ad.html">extract_ad</a></span><span class="op">(</span></span>
 <span>  targetdate <span class="op">=</span> <span class="st">"2020-01-01"</span>,</span>
 <span>  enddate <span class="op">=</span> <span class="st">"2020-01-04"</span>,</span>
@@ -264,7 +271,7 @@ considered to be “in”.</em></p>
 </h3>
 <p>Multiple places to extract data for can also be provided as a vector
 of places:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ad_df</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/extract_ad.html">extract_ad</a></span><span class="op">(</span></span>
 <span>  targetdate <span class="op">=</span> <span class="st">"2020-01-01"</span>,</span>
 <span>  places <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Angola"</span>, <span class="st">"Latvia"</span>, <span class="st">"United Kingdom"</span><span class="op">)</span></span>
@@ -275,42 +282,39 @@ of places:</p>
 <span><span class="co">#&gt; [1] "ad"</span></span></code></pre></div>
 <p>This can be combined with the date filters above to create a more
 restrictive extraction:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ad_df</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/extract_ad.html">extract_ad</a></span><span class="op">(</span></span>
 <span>  targetdate <span class="op">=</span> <span class="st">"2020-01-01"</span>,</span>
 <span>  enddate <span class="op">=</span> <span class="st">"2020-01-04"</span>,</span>
 <span>  places <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Angola"</span>, <span class="st">"Latvia"</span>, <span class="st">"United Kingdom"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt;                2020-01-01 2020-01-02 2020-01-03</span></span>
-<span><span class="co">#&gt; Angola          29.336107  28.775145  28.883123</span></span>
-<span><span class="co">#&gt; Latvia           1.765062   3.268600   2.733880</span></span>
-<span><span class="co">#&gt; United_Kingdom   5.113141   8.206171   6.198989</span></span>
-<span><span class="co">#&gt; attr(,"db")</span></span>
-<span><span class="co">#&gt; [1] "ad"</span></span></code></pre></div>
+<span><span class="co">#&gt; Areadata matrix for temp at gid level 0 .</span></span>
+<span><span class="co">#&gt; Cached: FALSE </span></span>
+<span><span class="co">#&gt; Dates: 2020-01-01 -&gt; 2020-01-03 (3)</span></span>
+<span><span class="co">#&gt; Locations: 3</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="resiliance">Resiliance<a class="anchor" aria-label="anchor" href="#resiliance"></a>
 </h3>
 <p>The <code><a href="../reference/extract_ad.html">extract_ad()</a></code> function is also relatively resilient
 to the use of dates or places that are not in AREAdata:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ad_df</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/extract_ad.html">extract_ad</a></span><span class="op">(</span></span>
 <span>  targetdate <span class="op">=</span> <span class="st">"2023-12-30"</span>,</span>
 <span>  enddate <span class="op">=</span> <span class="st">"2024-01-02"</span>,</span>
 <span>  places <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Atlantis"</span>, <span class="st">"Latvia"</span>, <span class="st">"United Kingdom"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt;                2023-12-30 2023-12-31</span></span>
-<span><span class="co">#&gt; United_Kingdom   7.007509   7.715774</span></span>
-<span><span class="co">#&gt; Latvia           4.098629  -2.789258</span></span>
-<span><span class="co">#&gt; attr(,"db")</span></span>
-<span><span class="co">#&gt; [1] "ad"</span></span></code></pre></div>
+<span><span class="co">#&gt; Areadata matrix for temp at gid level 0 .</span></span>
+<span><span class="co">#&gt; Cached: FALSE </span></span>
+<span><span class="co">#&gt; Dates: 2023-12-30 -&gt; 2023-12-31 (2)</span></span>
+<span><span class="co">#&gt; Locations: 2</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
 <h2 id="to-be-completed">To be completed<a class="anchor" aria-label="anchor" href="#to-be-completed"></a>
 </h2>
 <p><span style="opacity: 0.1;font-size: small;">Built in
-2.2905865s</span></p>
+2.003211s</span></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
