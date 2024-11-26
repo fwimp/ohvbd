@@ -5,7 +5,6 @@
 #' @param res a list of responses from VecTraits as an `ohvbd.responses` object.
 #' @param cols a character vector of columns to extract from the dataset.
 #' @param returnunique whether to return only the unique rows within each dataset according to the filtered columns.
-#' @param check_src toggle pre-checking of source data.
 #'
 #' @return An `ohvbd.data.frame` containing the requested data.
 #'
@@ -23,11 +22,11 @@
 #' @export
 #'
 
-extract_vt <- function(res, cols = NA, returnunique = FALSE, check_src = TRUE) {
+extract_vt <- function(res, cols = NA, returnunique = FALSE) {
 
-  if (is.null(attr(res, "db")) && check_src) {
+  if (is.null(attr(res, "db"))) {
     cli_alert_warning("Responses not necessarily from VecTraits.")
-  } else if (attr(res, "db") != "vt" && check_src) {
+  } else if (attr(res, "db") != "vt") {
     cli_abort(c("x" = "Responses not from VecTraits, Please use the appropriate {.fn extract_{attr(res, 'db')}} function.", "!" = "Detected db = {.val {attr(res, 'db')}}"))
   }
 

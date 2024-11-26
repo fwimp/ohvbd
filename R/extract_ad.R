@@ -12,7 +12,6 @@
 #' @param enddate The (exclusive) end of the range of dates to search for. If this is unfilled, only the `targetdate` is searched for.
 #' @param places A character vector or single string describing what locality to search for in the dataset.
 #' @param gid The spatial scale of the AREAdata matrix (this is not needed if the matrix has been supplied by [fetch_ad()]).
-#' @param check_src toggle pre-checking of source data.
 #'
 #' @return An `ohvbd.ad.matrix` or a named vector containing the extracted data.
 #'
@@ -69,13 +68,13 @@
 #' @export
 #'
 
-extract_ad <- function(ad_matrix, targetdate = NA, enddate = NA, places = NA, gid = NA, check_src = TRUE) {
+extract_ad <- function(ad_matrix, targetdate = NA, enddate = NA, places = NA, gid = NA) {
 
   # Enddate SHOULD BE EXCLUSIVE
 
-  if (is.null(attr(ad_matrix, "db")) && check_src) {
+  if (is.null(attr(ad_matrix, "db"))) {
     cli_alert_warning("Data not necessarily from AREAdata.")
-  } else if (attr(ad_matrix, "db") != "ad" && check_src) {
+  } else if (attr(ad_matrix, "db") != "ad") {
     cli_abort(c("x" = "Data not from AREAdata, Please use the appropriate {.fn extract_{attr(ad_matrix, 'db')}} function.", "!" = "Detected db = {.val {attr(ad_matrix, 'db')}}"))
   }
 

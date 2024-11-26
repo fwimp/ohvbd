@@ -68,7 +68,7 @@ fetch_extract_vd_chunked <- function(ids, chunksize = 20, cols = NA, returnuniqu
 
   # Lapply pipeline to chunk list
   out_list <- chunklets %>% lapply(\(idchunk) {
-    fetch_vd(idchunk, rate = rate, connections = connections, check_src = FALSE, basereq = basereq) %>%
+    fetch_vd(idchunk, rate = rate, connections = connections, basereq = basereq) %>%
       extract_vd(cols = cols, returnunique = returnunique)
   })
 

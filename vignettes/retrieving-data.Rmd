@@ -120,7 +120,7 @@ aedes_responses <- fetch_vt(aedes_ids[1:5])
 aedes_responses[[1]]
 ```
 ```{r fetch_vt_vt_secret, include=FALSE}
-aedes_responses <- fetch_vt(aedes_ids[1:5], check_src = FALSE, connections = 5)
+aedes_responses <- fetch_vt(aedes_ids[1:5], connections = 5)
 aedes_responses[[1]]
 ```
 
@@ -189,7 +189,7 @@ head(df)
 ```
 ```{r vt_pipeline_secret, include=FALSE}
 ids <- search_vt("Aedes aegypti")
-df <- fetch_vt(ids[1:5], check_src = FALSE, connections = 5) %>%
+df <- fetch_vt(ids[1:5], connections = 5) %>%
   extract_vt(
     cols = c("Interactor1Genus", "Interactor1Species", "Latitude", "Longitude"),
     returnunique = TRUE
@@ -213,7 +213,7 @@ df <- search_vt("Bemisia")[1:6] %>%
 
 ```{r demo_searcherror_secret, include=FALSE}
 df <- search_vt("Bemisia")[1:6] %>%
-  fetch_vt(check_src = FALSE, connections = 6) %>%
+  fetch_vt(connections = 6) %>%
   extract_vt(cols = c("DatasetID", "Interactor1Genus", "Interactor1Species", "Interactor2Genus", "Interactor2Species"))
 ```
 
@@ -246,7 +246,7 @@ unique(df$Interactor1Genus)
 
 ```{r searcherror_fixed_secret, echo=FALSE}
 df <- search_vt_smart("Interactor1Genus", "contains", "Bemisia")[1:6] %>%
-  fetch_vt(check_src = FALSE, connections = 6) %>%
+  fetch_vt(connections = 6) %>%
   extract_vt(cols = c("DatasetID", "Interactor1Genus", "Interactor1Species", "Interactor2Genus", "Interactor2Species"))
 print(unique(df$Interactor1Genus))
 ```
