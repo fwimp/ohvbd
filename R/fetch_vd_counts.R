@@ -68,22 +68,15 @@ fetch_vd_counts <- function(ids, rate = 5, connections = 1, page_size = 50, chec
       req_throttle(rate)
   })
 
-  if (connections <= 1) {
-    count_resps <- count_reqs %>% req_perform_sequential(on_error = "continue", progress = list(
-      name = "Finding VecDyn data counts",
-      format = "{cli::pb_name} {cli::pb_current}/{cli::pb_total} {cli::pb_bar} {cli::pb_percent} | ETA: {cli::pb_eta}"
-    ))
-  } else {
-    if (connections > max_conns) {
-      cli_alert_warning("No more than {.val {max_conns}} simultaneous connection{?s} allowed!")
-      cli_alert_info("Restricting to {.val {max_conns}} connection{?s}.")
-      connections <- max_conns
-    }
-    count_resps <- count_reqs %>% req_perform_parallel(on_error = "continue", pool = curl::new_pool(total_con = 100, host_con = connections), progress = list(
-      name = "Finding VecDyn data counts",
-      format = "Finding data counts {cli::pb_name} {cli::pb_current}/{cli::pb_total} {cli::pb_bar} {cli::pb_percent} | ETA: {cli::pb_eta}"
-    ))
+  if (connections > max_conns) {
+    cli_alert_warning("No more than {.val {max_conns}} simultaneous connection{?s} allowed!")
+    cli_alert_info("Restricting to {.val {max_conns}} connection{?s}.")
+    connections <- max_conns
   }
+  count_resps <- count_reqs %>% req_perform_parallel(on_error = "continue", pool = curl::new_pool(total_con = 100, host_con = connections), progress = list(
+    name = "VecDyn data counts",
+    format = "Finding {cli::pb_name} {cli::pb_current}/{cli::pb_total} {cli::pb_bar} {cli::pb_percent} | ETA: {cli::pb_eta}"
+  ))
 
   # Find counts and calculate required pages
   resp_parsed <- count_resps %>%

@@ -69,22 +69,16 @@ fetch_vt <- function(ids, rate = 5, connections = 1, check_src = TRUE, basereq =
       req_headers(ohvbd = id) %>%  # Add additional header just so we can nicely handle failures
       req_throttle(rate)
   })
-  if (connections <= 1) {
-    resps <- reqs %>% req_perform_sequential(on_error = "continue", progress = list(
-      name = "Vectraits Data",
-      format = "Downloading {cli::pb_name} {cli::pb_current}/{cli::pb_total} {cli::pb_bar} {cli::pb_percent} | ETA: {cli::pb_eta}"
-    ))
-  } else {
-    if (connections > max_conns) {
-      cli_alert_warning("No more than {.val {max_conns}} simultaneous connection{?s} allowed!")
-      cli_alert_info("Restricting to {.val {max_conns}} connection{?s}.")
-      connections <- max_conns
-    }
-    resps <- reqs %>% req_perform_parallel(on_error = "continue", pool = curl::new_pool(total_con = 100, host_con = connections), progress = list(
-      name = "Vectraits Data Parallel",
-      format = "Downloading {cli::pb_name} {cli::pb_current}/{cli::pb_total} {cli::pb_bar} {cli::pb_percent} | ETA: {cli::pb_eta}"
-    ))
+
+  if (connections > max_conns) {
+    cli_alert_warning("No more than {.val {max_conns}} simultaneous connection{?s} allowed!")
+    cli_alert_info("Restricting to {.val {max_conns}} connection{?s}.")
+    connections <- max_conns
   }
+  resps <- reqs %>% req_perform_parallel(on_error = "continue", pool = curl::new_pool(total_con = 100, host_con = connections), progress = list(
+    name = "Vectraits Data",
+    format = "Downloading {cli::pb_name} {cli::pb_current}/{cli::pb_total} {cli::pb_bar} {cli::pb_percent} | ETA: {cli::pb_eta}"
+  ))
 
   fails <- resps %>% httr2::resps_failures()
 
