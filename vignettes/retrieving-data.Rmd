@@ -152,7 +152,7 @@ So let's get just the unique locations and trait name combinations from our data
 ```{r extract_filtered_vt}
 aedes_data_filtered <- aedes_responses %>%
   extract_vt(
-    cols = c("LocationText", "OriginalTraitName"),
+    cols = c("Location", "OriginalTraitName"),
     returnunique = TRUE
   )
 aedes_data_filtered
@@ -168,7 +168,7 @@ One potential method for mitigating this is to use the `fetch_extract_x_chunked(
 fetch_extract_vt_chunked(
   aedes_ids[1:5],
   chunksize = 2,
-  cols = c("LocationText", "OriginalTraitName"),
+  cols = c("Location", "OriginalTraitName"),
   returnunique = TRUE
 )
 ```

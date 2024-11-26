@@ -45,6 +45,28 @@ vd_error_body <- function(resp) {
   paste("Error retrieving VD ID", .get_vb_req_id(resp))
 }
 
+#' @title Create a query for a given VD id at a given page
+#' @param id ID of the vecdyn dataser
+#' @param pagenum page to retrieve
+#' @param rate rate limit for requests
+#' @param url the base url for the vectorbyte API
+#' @param useragent the user agent string used when contacting vectorbyte
+#' @param unsafe disable ssl verification (should only ever be required on Linux, **do not enable this by default**)
+#'
+#' @return [httr2 request][httr2::request()] containing the requisite call to retrieve the data
+#' @keywords internal
+#'
+
+vd_make_req <- function(id, pagenum, rate, url = "", useragent = "", unsafe = FALSE) {
+  # Rebuild basereq and generate final request
+  return(vb_basereq(baseurl = url, useragent = useragent, unsafe = unsafe) %>%
+           req_url_path_append("vecdyncsv") %>%
+           req_url_query("format" = "json", "page" = pagenum, "piids" = id) %>%
+           req_error(body = vd_error_body) %>%
+           req_headers(ohvbd = id) %>%  # Add additional header just so we can nicely handle failures
+           req_throttle(5))
+}
+
 #' @title collapse a list of character strings to a JS space-separated single string
 #' @param v a vector to format
 #' @return collapsed string

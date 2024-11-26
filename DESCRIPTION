@@ -23,6 +23,7 @@ Imports:
     stats,
     terra,
     tibble,
+    tidyr,
     utils
 Suggests: 
     knitr,

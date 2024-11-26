@@ -58,16 +58,21 @@ fetch_vd <- function(ids, rate = 5, connections = 1, check_src = TRUE, basereq =
       }
     }
   }
+  resp_parsed <- fetch_vd_counts(ids, rate, connections, 50, check_src, basereq)
+  cli::cli_alert_info("Found {.val {sum(resp_parsed$num)}} row{?s} of data.")
+  # Found by fitting an exponential using nls to the performance benchmarks
+  predicted_time <- lubridate::as.duration(lubridate::seconds(ceiling(sum(resp_parsed$num) * (0.01340331 * exp(-0.32535609*min(connections, 5))))))  # nolint: object_usage_linter
+  cli::cli_alert_info("Predicted to take ~{.val {predicted_time}}.")
 
-  # vd does not return nonexistent piids as 404,
-  reqs <- ids %>% lapply(\(id) {
-    basereq %>%
-      req_url_path_append("vecdyncsv") %>%
-      req_url_query("format" = "json", "piids" = id) %>%
-      req_error(body = vd_error_body) %>%
-      req_headers(ohvbd = id) %>%  # Add additional header just so we can nicely handle failures
-      req_throttle(rate)
-  })
+  basereq_url <- basereq$url  # Should always be set!
+  basereq_useragent <- basereq$options$useragent %||% ""
+  basereq_unsafe <- !is.null(basereq$options$ssl_verifypeer)
+
+  # Construct a df containing one row with all appropriate params for each request, and then generate reqs for parallel requesting
+  reqs_df <- resp_parsed %>% dplyr::group_by(.data$id) %>% dplyr::mutate(pages = list(seq(1, .data$pages))) %>% tidyr::unnest(cols = c(.data$pages)) %>% dplyr::ungroup()
+  reqs <- mapply(vd_make_req, reqs_df$id, reqs_df$pages, 5, basereq_url, basereq_useragent, basereq_unsafe, SIMPLIFY = FALSE)
+
+  # TODO: This should always use req_perform_parallel as it's simply quicker (for no discernable reason)
   if (connections <= 1) {
     resps <- reqs %>% req_perform_sequential(on_error = "continue", progress = list(
       name = "VecDyn Data",
