@@ -26,6 +26,7 @@
 <url><loc>https://fwimp.github.io/ohvbd/reference/fetch_extract_vt_chunked.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/fetch_gadm_sfs.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/fetch_vd.html</loc></url>
+<url><loc>https://fwimp.github.io/ohvbd/reference/fetch_vd_counts.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/fetch_vt.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/find_vb_404s.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/find_vd_columns.html</loc></url>
@@ -50,6 +51,7 @@
 <url><loc>https://fwimp.github.io/ohvbd/reference/vb_basereq.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/vd_error_body.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/vd_extraction_helper.html</loc></url>
+<url><loc>https://fwimp.github.io/ohvbd/reference/vd_make_req.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/vt_error_body.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/write_ad_cache.html</loc></url>
 </urlset>
