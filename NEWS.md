@@ -1,5 +1,13 @@
+# ohvbd 0.5.1
+
+* `fetch_vd()` now correctly returns all data from datasets over 50 rows.
+* `fetch_vd()` also now tells you how much data you are retrieving and a *coarse* estimate of how long this will take.
+* New function `fetch_vd_counts()` allows for quick checking of dataset sizes. This is very important as some datasets in VecDyn are over 40,000 rows long!
+* All `fetch_*()` functions (and thus also `fetch()`) now use parallel data retrieval, even when only 1 connection is used. This seems to lead to a 20% gain in download speed for no cost.
+
 # ohvbd 0.5.0
 ## **Major API change**
+
 * `get_` functions have been split into two new types of function, based upon exact usage.
   * `find_` functions retrieve metadata such as column definitions and ids.
   * `fetch_` functions retrieve actual datasets.
