@@ -53,7 +53,7 @@ get_os <- function() {
   }
   tolower(os)
 }
-if (get_os() == "linux") {
+if (get_os() %in% c("linux", "osx")) {
   set_ohvbd_compat()
 }
 
