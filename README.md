@@ -1,5 +1,5 @@
 
-<!-- force push by editing this number: 47 -->
+<!-- force push by editing this number: 42 -->
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- Build with devtools::build_readme() -->
 
@@ -58,6 +58,9 @@ devtools::install_github("fwimp/ohvbd", build_vignettes = TRUE)
   1-dimensional output is returned from `extract_ad()`
 - All `fetch_` functions now have a default `connections` argument of 2,
   leading to faster retrieval across the board.
+- `check_src` argument has been removed from all functions. It no longer
+  serves much of a purpose due to the sanity checking changes
+  implemented in 0.5.0.
 
 See [changelog](https://fwimp.github.io/ohvbd/news/index.html) for patch
 notes for previous versions.

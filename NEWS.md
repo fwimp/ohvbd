@@ -5,6 +5,7 @@
 * `assoc_ad()` now correctly extracts data (this functionality regressed in 0.5.0 as a consequence of the new method dispatch approach to data retrieval)
 * `assoc_ad()` also gives now consistent output even when a 1-dimensional output is returned from `extract_ad()`
 * All `fetch_` functions now have a default `connections` argument of 2, leading to faster retrieval across the board.
+* `check_src` argument has been removed from all functions. It no longer serves much of a purpose due to the sanity checking changes implemented in 0.5.0.
 
 # ohvbd 0.5.1
 
