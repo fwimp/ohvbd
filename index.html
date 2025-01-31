@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">ohvbd</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -106,15 +106,20 @@
 </h2>
 <!-- These are auto-pulled from NEWS.md  -->
 <div class="section level3">
-<h3 id="ohvbd-051">ohvbd 0.5.1<a class="anchor" aria-label="anchor" href="#ohvbd-051"></a>
+<h3 id="ohvbd-052">ohvbd 0.5.2<a class="anchor" aria-label="anchor" href="#ohvbd-052"></a>
 </h3>
 <ul>
 <li>
-<code><a href="reference/fetch_vd.html">fetch_vd()</a></code> now correctly returns all data from datasets over 50 rows.</li>
+<code><a href="reference/fetch_ad.html">fetch_ad()</a></code> now searches for a retrieves the most up-to-date GID2 files from AREAdata.</li>
+<li>New <code>timeout</code> parameter of <code><a href="reference/fetch_ad.html">fetch_ad()</a></code> to control timeouts of AD downloads. Defaults to 4 minutes.</li>
 <li>
-<code><a href="reference/fetch_vd.html">fetch_vd()</a></code> also now tells you how much data you are retrieving and a <em>coarse</em> estimate of how long this will take.</li>
-<li>New function <code><a href="reference/fetch_vd_counts.html">fetch_vd_counts()</a></code> allows for quick checking of dataset sizes. This is very important as some datasets in VecDyn are over 40,000 rows long!</li>
-<li>All <code>fetch_*()</code> functions (and thus also <code><a href="reference/fetch.html">fetch()</a></code>) now use parallel data retrieval, even when only 1 connection is used. This seems to lead to a 20% gain in download speed for no cost.</li>
+<code><a href="reference/assoc_ad.html">assoc_ad()</a></code> now correctly extracts data (this functionality regressed in 0.5.0 as a consequence of the new method dispatch approach to data retrieval)</li>
+<li>
+<code><a href="reference/assoc_ad.html">assoc_ad()</a></code> also gives now consistent output even when a 1-dimensional output is returned from <code><a href="reference/extract_ad.html">extract_ad()</a></code>
+</li>
+<li>All <code>fetch_</code> functions now have a default <code>connections</code> argument of 2, leading to faster retrieval across the board.</li>
+<li>
+<code>check_src</code> argument has been removed from all functions. It no longer serves much of a purpose due to the sanity checking changes implemented in 0.5.0.</li>
 </ul>
 <p>See <a href="https://fwimp.github.io/ohvbd/news/index.html">changelog</a> for patch notes for previous versions.</p>
 </div>
@@ -155,7 +160,7 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/" class="external-link"><img src="https://img.shields.io/badge/R%3E%3D-4.0-6666ff.svg?style=for-the-badge" alt="R"></a></li>
-<li><a href="commits/master"><img src="https://img.shields.io/badge/Package%20version-0.5.1-orange.svg?style=for-the-badge" alt="packageversion"></a></li>
+<li><a href="commits/master"><img src="https://img.shields.io/badge/Package%20version-0.5.2-orange.svg?style=for-the-badge" alt="packageversion"></a></li>
 <li><a href="https://www.gnu.org/licenses/gpl-3.0.en.html" class="external-link"><img src="https://img.shields.io/badge/license-GPL--3-blue.svg?style=for-the-badge" alt="license"></a></li>
 <li><a href="https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>

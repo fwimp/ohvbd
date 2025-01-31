@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ohvbd</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +49,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fetch_vd</span><span class="op">(</span><span class="va">ids</span>, rate <span class="op">=</span> <span class="fl">5</span>, connections <span class="op">=</span> <span class="fl">1</span>, check_src <span class="op">=</span> <span class="cn">TRUE</span>, basereq <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fetch_vd</span><span class="op">(</span><span class="va">ids</span>, rate <span class="op">=</span> <span class="fl">5</span>, connections <span class="op">=</span> <span class="fl">2</span>, basereq <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -66,10 +66,6 @@
 
 <dt id="arg-connections">connections<a class="anchor" aria-label="anchor" href="#arg-connections"></a></dt>
 <dd><p>number of simultaneous connections to the server at once. Maximum 8. <strong>Do not enable unless you really need to</strong> as this hits the server significantly harder than usual.</p></dd>
-
-
-<dt id="arg-check-src">check_src<a class="anchor" aria-label="anchor" href="#arg-check-src"></a></dt>
-<dd><p>toggle pre-checking of source data prior to get.</p></dd>
 
 
 <dt id="arg-basereq">basereq<a class="anchor" aria-label="anchor" href="#arg-basereq"></a></dt>
