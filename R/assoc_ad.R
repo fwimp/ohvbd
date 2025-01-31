@@ -59,6 +59,9 @@ assoc_ad <- function(data, areadata, targetdate = NA, enddate = NA, gid = 0, lon
   # Remember db attr of input data
   datatype <- attr(data, "db")
 
+  # Cast data to a df
+  data <- as.data.frame(data)
+
   if (is.null(attr(areadata, "db"))) {
     cli_alert_warning("{.arg areadata} not necessarily from AREAdata.")
   } else if (attr(areadata, "db") != "ad") {
@@ -88,34 +91,50 @@ assoc_ad <- function(data, areadata, targetdate = NA, enddate = NA, gid = 0, lon
   name_label <- c("NAME_0", "GID_1", "GID_2")
   final_name <- name_label[gid + 1]
   # Find GADM shapefile for searching
+  cli::cli_progress_message("Fetching gadm shapefile...")
   gadm_sf <- fetch_gadm_sfs(gid = gid)
 
   # Find latlons for quick processing
+  cli::cli_progress_message("Selecting latlons...")
   orig_lonlat <- data %>% select(all_of(lonlat_names)) %>% mutate_all(function(x) as.numeric(as.character(x)))
 
   # Make distinct points into a SpatVect
+  cli::cli_progress_message("Casting lonlat points to vector...")
   points <- vect(orig_lonlat %>% distinct(), geom = lonlat_names)
 
   # Locate which shape each point is in and get the appropriate names for aligning with AD
-  gadm_point_ids <- extract(gadm_sf[, final_name], points)
+  cli::cli_progress_message("Extracting points (this may take a while)...")
+  gadm_point_ids <- terra::extract(gadm_sf[, final_name], points)
+
+  cli::cli_alert_success("Extraction complete.")
 
   # Prepare the names for association
   gadm_point_ids[, final_name] <- gsub(" ", "_", gadm_point_ids[, final_name])
 
 
   # Recreate the original dataset at full length
+  cli::cli_progress_message("Lengthening point data...")
   gadm_point_ids <- left_join(orig_lonlat, bind_cols(orig_lonlat %>% distinct(), gadm_point_ids), by = lonlat_names)
 
   # Get only the unique entries (no NAs)
   places <- gadm_point_ids %>% select(any_of(final_name)) %>% na.omit() %>% unique()
 
   # Pull out the data from AD
+  cli::cli_progress_message("Extracting AD data...")
   ad_extracted <- areadata %>% extract_ad(targetdate = targetdate, enddate = enddate, places = places[, final_name], gid = gid)
+
+  # Detect if AD_extracted is 1D, if so then just make a data frame, with a new column called final_name and the value being the unique of places
+  # This should PROBABLY be handled by extract_ad
+  if (is.numeric(ad_extracted)) {
+    ad_extracted <- t(data.frame(ad_extracted))
+    rownames(ad_extracted) <- unique(places[, final_name])
+  }
 
   # Make rownames into a column ready for left join with ids
   ad_extracted <- rownames_to_column(data.frame(ad_extracted), var = final_name)
 
   # Make extracted data the same length as the original data
+  cli::cli_progress_done(result = "Done!")
   suppressMessages(final_extract <- left_join(select(gadm_point_ids, any_of(final_name)), ad_extracted))
 
   # Get rid of joining column
@@ -131,7 +150,10 @@ assoc_ad <- function(data, areadata, targetdate = NA, enddate = NA, gid = 0, lon
     colnames(outdata) <- c(colnames(outdata)[1:length(outdata) - 1], metric) # nolint: seq_linter
   }
 
-  attr(outdata, "db") <- datatype
+  # TODO: Possibly worth filtering returned columns based on the unique dates provided in a date column! This significantly reduced postprocessing effort.
+  if (!is.null(datatype)) {
+    outdata <- new_ohvbd.data.frame(outdata, datatype)
+  }
 
   return(outdata)
 }
