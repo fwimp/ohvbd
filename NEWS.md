@@ -1,9 +1,17 @@
+# ohvbd 0.5.2
+
+* `fetch_ad()` now searches for a retrieves the most up-to-date GID2 files from AREAdata.
+* New `timeout` parameter of `fetch_ad()` to control timeouts of AD downloads. Defaults to 4 minutes.
+* `assoc_ad()` now correctly extracts data (this functionality regressed in 0.5.0 as a consequence of the new method dispatch approach to data retrieval)
+* `assoc_ad()` also gives now consistent output even when a 1-dimensional output is returned from `extract_ad()`
+* All `fetch_` functions now have a default `connections` argument of 2, leading to faster retrieval across the board.
+
 # ohvbd 0.5.1
 
 * `fetch_vd()` now correctly returns all data from datasets over 50 rows.
 * `fetch_vd()` also now tells you how much data you are retrieving and a *coarse* estimate of how long this will take.
 * New function `fetch_vd_counts()` allows for quick checking of dataset sizes. This is very important as some datasets in VecDyn are over 40,000 rows long!
-* All `fetch_*()` functions (and thus also `fetch()`) now use parallel data retrieval, even when only 1 connection is used. This seems to lead to a 20% gain in download speed for no cost.
+* All `fetch_` functions (and thus also `fetch()`) now use parallel data retrieval, even when only 1 connection is used. This seems to lead to a 20% gain in download speed for no cost.
 
 # ohvbd 0.5.0
 ## **Major API change**

@@ -1,15 +1,15 @@
 
-<!-- force push by editing this number: 42 -->
+<!-- force push by editing this number: 47 -->
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- Build with devtools::build_readme() -->
 
-# One Health VBD Hub (ohvbd) <a href="https://fwimp.github.io/ohvbd/"><img src="man/figures/logo-3.png" align="right" width="120" alt="ohvbd website" /></a>
+# One Health VBD Hub (ohvbd) <a href="https://fwimp.github.io/ohvbd/"><img src="man/figures/logo-4.png" align="right" width="120" alt="ohvbd website" /></a>
 
 <!-- # One Health VBD Hub - R Package -->
 <!-- badges: start -->
 
 [![R](https://img.shields.io/badge/R%3E%3D-4.0-6666ff.svg?style=for-the-badge)](https://cran.r-project.org/)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.5.1-orange.svg?style=for-the-badge)](commits/master)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.5.2-orange.svg?style=for-the-badge)](commits/master)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg?style=for-the-badge)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 [![R-CMD-check](https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
@@ -45,18 +45,19 @@ devtools::install_github("fwimp/ohvbd", build_vignettes = TRUE)
 
 <!-- These are auto-pulled from NEWS.md  -->
 
-### ohvbd 0.5.1
+### ohvbd 0.5.2
 
-- `fetch_vd()` now correctly returns all data from datasets over 50
-  rows.
-- `fetch_vd()` also now tells you how much data you are retrieving and a
-  *coarse* estimate of how long this will take.
-- New function `fetch_vd_counts()` allows for quick checking of dataset
-  sizes. This is very important as some datasets in VecDyn are over
-  40,000 rows long!
-- All `fetch_*()` functions (and thus also `fetch()`) now use parallel
-  data retrieval, even when only 1 connection is used. This seems to
-  lead to a 20% gain in download speed for no cost.
+- `fetch_ad()` now searches for a retrieves the most up-to-date GID2
+  files from AREAdata.
+- New `timeout` parameter of `fetch_ad()` to control timeouts of AD
+  downloads. Defaults to 4 minutes.
+- `assoc_ad()` now correctly extracts data (this functionality regressed
+  in 0.5.0 as a consequence of the new method dispatch approach to data
+  retrieval)
+- `assoc_ad()` also gives now consistent output even when a
+  1-dimensional output is returned from `extract_ad()`
+- All `fetch_` functions now have a default `connections` argument of 2,
+  leading to faster retrieval across the board.
 
 See [changelog](https://fwimp.github.io/ohvbd/news/index.html) for patch
 notes for previous versions.
