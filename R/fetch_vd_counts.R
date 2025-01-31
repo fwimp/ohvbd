@@ -22,7 +22,7 @@
 #' @export
 #'
 
-fetch_vd_counts <- function(ids, rate = 5, connections = 1, page_size = 50, basereq = NA) {
+fetch_vd_counts <- function(ids, rate = 5, connections = 2, page_size = 50, basereq = NA) {
   max_conns <- 8
 
   if (is.null(attr(ids, "db"))) {

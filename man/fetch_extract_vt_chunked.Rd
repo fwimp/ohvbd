@@ -10,7 +10,7 @@ fetch_extract_vt_chunked(
   cols = NA,
   returnunique = FALSE,
   rate = 5,
-  connections = 1,
+  connections = 2,
   basereq = NA
 )
 }

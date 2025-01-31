@@ -4,7 +4,7 @@
 \alias{fetch_vd}
 \title{Fetch VecDyn dataset/s by ID}
 \usage{
-fetch_vd(ids, rate = 5, connections = 1, basereq = NA)
+fetch_vd(ids, rate = 5, connections = 2, basereq = NA)
 }
 \arguments{
 \item{ids}{a numeric ID or numeric vector of ids (preferably in an \code{ohvbd.ids} object) indicating the particular dataset/s to download.}

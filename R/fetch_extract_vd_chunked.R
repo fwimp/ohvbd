@@ -24,7 +24,7 @@
 #' @export
 #'
 
-fetch_extract_vd_chunked <- function(ids, chunksize = 20, cols = NA, returnunique = FALSE, rate = 5, connections = 1, basereq = NA) {
+fetch_extract_vd_chunked <- function(ids, chunksize = 20, cols = NA, returnunique = FALSE, rate = 5, connections = 2, basereq = NA) {
 
   if (is.null(attr(ids, "db"))) {
     cli_alert_warning("IDs not necessarily from VecDyn.")

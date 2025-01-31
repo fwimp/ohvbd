@@ -4,7 +4,7 @@
 \alias{fetch_vt}
 \title{Fetch VecTraits dataset/s by ID}
 \usage{
-fetch_vt(ids, rate = 5, connections = 1, basereq = NA)
+fetch_vt(ids, rate = 5, connections = 2, basereq = NA)
 }
 \arguments{
 \item{ids}{a numeric ID or numeric vector of ids (preferably in an \code{ohvbd.ids} object) indicating the particular dataset/s to download.}

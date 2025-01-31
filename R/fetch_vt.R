@@ -21,7 +21,7 @@
 #' @export
 #'
 
-fetch_vt <- function(ids, rate = 5, connections = 1, basereq = NA) {
+fetch_vt <- function(ids, rate = 5, connections = 2, basereq = NA) {
 
   max_conns <- 8
 

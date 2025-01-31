@@ -66,12 +66,12 @@ print.ohvbd.ad.matrix <- function(x, ..., full=FALSE) {
 #' \dontrun{
 #' find_vt_ids() %>% fetch()
 #' }
-fetch <- function(ids, ..., rate = 5, connections = 1, db = NULL, basereq = NA) {
+fetch <- function(ids, ..., rate = 5, connections = 2, db = NULL, basereq = NA) {
   UseMethod("fetch")
 }
 
 #' @export
-fetch.ohvbd.ids <- function(ids, ..., rate = 5, connections = 1, db = NULL, basereq = NA) {
+fetch.ohvbd.ids <- function(ids, ..., rate = 5, connections = 2, db = NULL, basereq = NA) {
   if (is.null(db)) {
     # If not overriding db, just use the one provided
     db <- attr(ids, "db")

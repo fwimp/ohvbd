@@ -4,7 +4,7 @@
 \alias{fetch_vd_counts}
 \title{Fetch VecDyn dataset length by ID}
 \usage{
-fetch_vd_counts(ids, rate = 5, connections = 1, page_size = 50, basereq = NA)
+fetch_vd_counts(ids, rate = 5, connections = 2, page_size = 50, basereq = NA)
 }
 \arguments{
 \item{ids}{a numeric ID or numeric vector of ids (preferably in an \code{ohvbd.ids} object) indicating the particular dataset/s to download.}
