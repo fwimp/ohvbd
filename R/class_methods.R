@@ -4,12 +4,14 @@
 print.ohvbd.ids <- function(x, ...) {
   cat(paste0("Database: ", attr(x, "db"), "\n"))
   print(as.numeric(x))
+  invisible(x)
 }
 
 #' @export
 print.ohvbd.data.frame <- function(x, ...) {
   cat(paste0("Database: ", attr(x, "db"), "\n"))
   print(as.data.frame(x))
+  invisible(x)
 }
 
 #' @export
@@ -40,6 +42,7 @@ print.ohvbd.ad.matrix <- function(x, ..., full=FALSE) {
       NextMethod(object=matrix())
     }
   }
+  invisible(x)
 }
 
 #' @export
