@@ -46,7 +46,6 @@
 #' @importFrom lubridate days
 #' @importFrom lubridate interval
 #' @importFrom lubridate period
-#' @importFrom magrittr |>
 #' @importFrom rlang %||%
 #' @importFrom rlang .data
 #' @importFrom rlang is_bool

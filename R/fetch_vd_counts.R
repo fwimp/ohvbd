@@ -72,7 +72,7 @@ fetch_vd_counts <- function(ids, rate = 5, connections = 2, page_size = 50, base
     cli_alert_info("Restricting to {.val {max_conns}} connection{?s}.")
     connections <- max_conns
   }
-  count_resps <- count_reqs |> req_perform_parallel(on_error = "continue", pool = curl::new_pool(total_con = 100, host_con = connections), progress = list(
+  count_resps <- count_reqs |> req_perform_parallel(on_error = "continue", max_active = connections, progress = list(
     name = "VecDyn data counts",
     format = "Finding {cli::pb_name} {cli::pb_current}/{cli::pb_total} {cli::pb_bar} {cli::pb_percent} | ETA: {cli::pb_eta}"
   ))

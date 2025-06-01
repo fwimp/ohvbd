@@ -76,7 +76,7 @@ fetch_vd <- function(ids, rate = 5, connections = 2, basereq = NA) {
     cli_alert_info("Restricting to {.val {max_conns}} connection{?s}.")
     connections <- max_conns
   }
-  resps <- reqs |> req_perform_parallel(on_error = "continue", pool = curl::new_pool(total_con = 100, host_con = connections), progress = list(
+  resps <- reqs |> req_perform_parallel(on_error = "continue", max_active = connections, progress = list(
     name = "VecDyn Data",
     format = "Downloading {cli::pb_name} {cli::pb_current}/{cli::pb_total} {cli::pb_bar} {cli::pb_percent} | ETA: {cli::pb_eta}"
   ))
