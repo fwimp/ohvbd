@@ -39,7 +39,7 @@ fetch_extract_vd_chunked <- function(ids, chunksize = 20, cols = NA, returnuniqu
   if (length(ids) > 10) {
     # Preflight ssl check
     status <- tryCatch({
-      preflight_test <- basereq %>% req_perform()  # nolint: object_usage_linter
+      preflight_test <- basereq |> req_perform()  # nolint: object_usage_linter
       list("err_code" = 0, "err_obj" = NULL)
     }, error = function(e) {
       list("err_code" = 1, "err_obj" = e)
@@ -67,8 +67,8 @@ fetch_extract_vd_chunked <- function(ids, chunksize = 20, cols = NA, returnuniqu
   chunklets <- split(ids, chunks)
 
   # Lapply pipeline to chunk list
-  out_list <- chunklets %>% lapply(\(idchunk) {
-    fetch_vd(idchunk, rate = rate, connections = connections, basereq = basereq) %>%
+  out_list <- chunklets |> lapply(\(idchunk) {
+    fetch_vd(idchunk, rate = rate, connections = connections, basereq = basereq) |>
       extract_vd(cols = cols, returnunique = returnunique)
   })
 

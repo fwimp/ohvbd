@@ -15,7 +15,7 @@
 #' @examples
 #' \dontrun{
 #' vt_ids <- search_vt(c("Aedes", "aegypti"))
-#' vtdf <- fetch_vt(vt_ids[(length(vt_ids)-20):length(vt_ids)]) %>%
+#' vtdf <- fetch_vt(vt_ids[(length(vt_ids)-20):length(vt_ids)]) |>
 #'   extract_vt(cols = c(
 #'     "DatasetID",
 #'     "Latitude",
@@ -23,7 +23,7 @@
 #'     "Interactor1Genus",
 #'     "Interactor1Species"
 #'     ), returnunique = TRUE)
-#' vtdf <- vtdf %>% assoc_gadm(lonlat_names = c("Longitude", "Latitude"))
+#' vtdf <- vtdf |> assoc_gadm(lonlat_names = c("Longitude", "Latitude"))
 #' }
 #'
 #'
@@ -60,9 +60,9 @@ assoc_gadm <- function(df, lonlat_names = c("Longitude", "Latitude"), basereq = 
 
   cli_progress_message("{cli::symbol$pointer} Finding distinct lonlats...")
   # Find latlons for quick processing
-  orig_lonlat <- df %>% select(all_of(lonlat_names)) %>% mutate_all(function(x) as.numeric(as.character(x)))
+  orig_lonlat <- df |> select(all_of(lonlat_names)) |> mutate_all(function(x) as.numeric(as.character(x)))
   # Make distinct points into a SpatVect
-  points <- vect(orig_lonlat %>% distinct(), geom = lonlat_names)
+  points <- vect(orig_lonlat |> distinct(), geom = lonlat_names)
   cli_alert_success("Created search vector.")
 
   startproc <- lubridate::now()
@@ -89,14 +89,14 @@ assoc_gadm <- function(df, lonlat_names = c("Longitude", "Latitude"), basereq = 
   }
 
 
-  gadm_point_ids <- gadm_point_ids %>% select(starts_with(c("NAME", "GID")))
+  gadm_point_ids <- gadm_point_ids |> select(starts_with(c("NAME", "GID")))
 
   cli_progress_message("{cli::symbol$pointer} Merging with original dataset...")
   # Recreate the original dataset at full length
 
-  gadm_point_ids <- left_join(orig_lonlat, bind_cols(orig_lonlat %>% distinct(), gadm_point_ids), by = lonlat_names)
+  gadm_point_ids <- left_join(orig_lonlat, bind_cols(orig_lonlat |> distinct(), gadm_point_ids), by = lonlat_names)
 
-  gadm_point_ids <- gadm_point_ids %>% select(starts_with(c("NAME", "GID")))
+  gadm_point_ids <- gadm_point_ids |> select(starts_with(c("NAME", "GID")))
 
   outdata <- bind_cols(df, gadm_point_ids)
   cli_alert_success("Merge complete.")

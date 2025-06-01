@@ -123,12 +123,12 @@ search_vt_smart <- function(field, operator, value, basereq = NA) {
   }
 
   resplist <- tryCatch({
-    resp <- basereq %>%
-      req_url_path_append("vectraits-explorer") %>%
-      req_url_query("format" = "json") %>%
-      req_url_query("field" = final_field) %>%
-      req_url_query("operator" = final_operator) %>%
-      req_url_query("term" = value) %>%
+    resp <- basereq |>
+      req_url_path_append("vectraits-explorer") |>
+      req_url_query("format" = "json") |>
+      req_url_query("field" = final_field) |>
+      req_url_query("operator" = final_operator) |>
+      req_url_query("term" = value) |>
       req_perform()
     list("resp" = resp, "err_code" = 0, "err_obj" = NULL)
   }, error = function(e) {
@@ -147,7 +147,7 @@ search_vt_smart <- function(field, operator, value, basereq = NA) {
     cli_abort(c("No records found for {.val {paste(final_field, final_operator, value)}}"))
   }
 
-  body <- resplist$resp %>% resp_body_json()
+  body <- resplist$resp |> resp_body_json()
 
   outids <- as.numeric(body$ids)
   outids <- new_ohvbd.ids(v = outids, db = "vt")

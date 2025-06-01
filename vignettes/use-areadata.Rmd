@@ -149,7 +149,7 @@ Extracting data from this matrix can be fiddly, but luckily `ohvbd` also provide
 So let's again try to extract the same data as previously, the temperature in Angola on 2020-01-01:
 
 ```{r extract_basic}
-ad_df %>% extract_ad(targetdate = "2020-01-01", places = "Angola")
+ad_df |> extract_ad(targetdate = "2020-01-01", places = "Angola")
 ```
 *Note: ignore the `attr` part of the output, this data just allows `ohvbd` to ensure consistency between its functions.*
 
@@ -165,19 +165,19 @@ Let's first look at the flexibility of the date arguments to `extract_ad()`.
 If we (for example) want not just one day, we can specify either a vector of dates, or a less exact date as `targetdate`
 
 ```{r extract_multidate}
-ad_df %>% extract_ad(
+ad_df |> extract_ad(
   targetdate = c("2020-01-01", "2020-01-02", "2020-01-05"),
   places = "Angola"
 )
 ```
 
 ```{r extract_month}
-ad_df %>% extract_ad(targetdate = "2020-01", places = "Angola")
+ad_df |> extract_ad(targetdate = "2020-01", places = "Angola")
 ```
 
 ```{r extract_year}
 # 366 days of data return as 2020 is a leap year
-length(ad_df %>% extract_ad(targetdate = "2020", places = "Angola"))
+length(ad_df |> extract_ad(targetdate = "2020", places = "Angola"))
 ```
 
 If we would instead like to specify a date range, we can add the argument `enddate`.
@@ -185,7 +185,7 @@ If we would instead like to specify a date range, we can add the argument `endda
 _Note: the end date is defined **exclusively**, meaning that any date before it (and on or after the target date) is considered to be "in"._
 
 ```{r extract_range}
-ad_df %>% extract_ad(
+ad_df |> extract_ad(
   targetdate = "2020-01-01",
   enddate = "2020-01-04",
   places = "Angola"
@@ -197,7 +197,7 @@ ad_df %>% extract_ad(
 Multiple places to extract data for can also be provided as a vector of places:
 
 ```{r extract_places}
-ad_df %>% extract_ad(
+ad_df |> extract_ad(
   targetdate = "2020-01-01",
   places = c("Angola", "Latvia", "United Kingdom")
 )
@@ -206,7 +206,7 @@ ad_df %>% extract_ad(
 This can be combined with the date filters above to create a more restrictive extraction:
 
 ```{r extract_exact}
-ad_df %>% extract_ad(
+ad_df |> extract_ad(
   targetdate = "2020-01-01",
   enddate = "2020-01-04",
   places = c("Angola", "Latvia", "United Kingdom")
@@ -218,7 +218,7 @@ ad_df %>% extract_ad(
 The `extract_ad()` function is also relatively resilient to the use of dates or places that are not in AREAdata:
 
 ```{r extract_missing}
-ad_df %>% extract_ad(
+ad_df |> extract_ad(
   targetdate = "2023-12-30",
   enddate = "2024-01-02",
   places = c("Atlantis", "Latvia", "United Kingdom")

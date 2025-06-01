@@ -28,10 +28,10 @@ search_vd <- function(keywords, basereq = NA) {
   }
 
   resplist <- tryCatch({
-    resp <- basereq %>%
-      req_url_path_append("vecdynbyprovider") %>%
-      req_url_query("format" = "json") %>%
-      req_url_query("keywords" = keywords, .multi = space_collapse) %>%
+    resp <- basereq |>
+      req_url_path_append("vecdynbyprovider") |>
+      req_url_query("format" = "json") |>
+      req_url_query("keywords" = keywords, .multi = space_collapse) |>
       req_perform()
     list("resp" = resp, "err_code" = 0, "err_obj" = NULL)
   }, error = function(e) {
@@ -49,7 +49,7 @@ search_vd <- function(keywords, basereq = NA) {
     }
     cli_abort("No records found for {.val {keywords}}")
   }
-  body <- resplist$resp %>% resp_body_json()
+  body <- resplist$resp |> resp_body_json()
 
   if (length(body) > 2) {
     # This is a bit of a kludge, the API does not return count in the same place if no results are found

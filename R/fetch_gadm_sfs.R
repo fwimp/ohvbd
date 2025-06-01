@@ -18,7 +18,7 @@
 #'
 #' @export
 #'
-
+# TODO: Check to make sure cache location is actually in the correct spot.
 fetch_gadm_sfs <- function(gid = 0, cache_location = "user", refresh_cache = FALSE, basereq = NA) {
 
   if (all(is.na(basereq))) {

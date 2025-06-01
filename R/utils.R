@@ -59,11 +59,11 @@ vd_error_body <- function(resp) {
 
 vd_make_req <- function(id, pagenum, rate, url = "", useragent = "", unsafe = FALSE) {
   # Rebuild basereq and generate final request
-  return(vb_basereq(baseurl = url, useragent = useragent, unsafe = unsafe) %>%
-           req_url_path_append("vecdyncsv") %>%
-           req_url_query("format" = "json", "page" = pagenum, "piids" = id) %>%
-           req_error(body = vd_error_body) %>%
-           req_headers(ohvbd = id) %>%  # Add additional header just so we can nicely handle failures
+  return(vb_basereq(baseurl = url, useragent = useragent, unsafe = unsafe) |>
+           req_url_path_append("vecdyncsv") |>
+           req_url_query("format" = "json", "page" = pagenum, "piids" = id) |>
+           req_error(body = vd_error_body) |>
+           req_headers(ohvbd = id) |>  # Add additional header just so we can nicely handle failures
            req_throttle(5))
 }
 
@@ -85,7 +85,7 @@ space_collapse <- function(v) {
 
 vd_extraction_helper <- function(resp, cols = NA) {
   df_out <- tryCatch({
-    resp_parse <- resp %>% resp_body_json()
+    resp_parse <- resp |> resp_body_json()
     df <- suppressWarnings(rbindlist(resp_parse$results))
     df2 <- as.data.frame(resp_parse$consistent_data)
 
@@ -103,7 +103,7 @@ vd_extraction_helper <- function(resp, cols = NA) {
     }
     if (!any(is.na(cols))) {
       # Filter cols from each sublist
-      df_out <- df_out %>%  select(any_of(cols))
+      df_out <- df_out |>  select(any_of(cols))
     }
     df_out
   }, error = function(e) {
@@ -122,7 +122,7 @@ vd_extraction_helper <- function(resp, cols = NA) {
 convert_place_togid <- function(places, gid = 0) {
   returncolumn <- c("NAME_0", "GID_1", "GID_2")[gid + 1]
   # .data$. is required to silence R CMD build notes about undefined globals.
-  out_places <- gidtable %>% filter_all(any_vars(.data$. %in% places)) %>% select(returncolumn)
+  out_places <- gidtable |> filter_all(any_vars(.data$. %in% places)) |> select(returncolumn)
   return(unique(out_places[[1]]))
 }
 
@@ -175,13 +175,13 @@ find_vd_missing <- function(l) {
 #     v <- c(v, x)
 #   }
 #   v <- unique(v)
-#   r_deps <- db %>%
-#     dplyr::filter(Package %in% v) %>%
+#   r_deps <- db |>
+#     dplyr::filter(Package %in% v) |>
 #     # We exclude recommended pkgs as they're always shown as depending on R-devel
-#     dplyr::filter(is.na(Priority) | Priority != "recommended") %>%
-#     dplyr::pull(Depends) %>%
-#     strsplit(split = ",") %>%
-#     purrr::map(~ grep("^R ", .x, value = TRUE)) %>%
+#     dplyr::filter(is.na(Priority) | Priority != "recommended") |>
+#     dplyr::pull(Depends) |>
+#     strsplit(split = ",") |>
+#     purrr::map(~ grep("^R ", .x, value = TRUE)) |>
 #     unlist()
 #
 #   r_vers <- trimws(gsub("^R \\(>=?\\s(.+)\\)", "\\1", r_deps))

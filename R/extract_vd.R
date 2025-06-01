@@ -10,7 +10,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' fetch_vd(247) %>%
+#' fetch_vd(247) |>
 #'   extract_vd(cols=c("species",
 #'                          "sample_start_date",
 #'                          "sample_value"),
@@ -32,13 +32,13 @@ extract_vd <- function(res, cols = NA, returnunique = FALSE) {
 
   if (any(class(res) == "httr2_response")) {
     # Detect if this is a single request
-    out_df <- res %>% resp_body_json()
+    out_df <- res |> resp_body_json()
   } else if (any(class(res) == "httr2_error")) {
     # Detect single error
     cli_abort("Response contains error! (check to see if ID actually exists?)")
   } else {
     # Extract data from all successful responses
-    out_df <- res %>%  resps_successes()  %>%  resps_data(\(resp) vd_extraction_helper(resp, cols))
+    out_df <- res |>  resps_successes()  |>  resps_data(\(resp) vd_extraction_helper(resp, cols))
   }
 
 

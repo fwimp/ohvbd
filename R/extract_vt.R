@@ -10,7 +10,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' fetch_vt(54) %>%
+#' fetch_vt(54) |>
 #'   extract_vt(cols=c("DatasetID",
 #'                          "Interactor1Genus",
 #'                          "Interactor1Species"),
@@ -32,13 +32,13 @@ extract_vt <- function(res, cols = NA, returnunique = FALSE) {
 
   if (any(class(res) == "httr2_response")) {
     # Detect if this is a single request
-    out_data <- res %>% resp_body_json()
+    out_data <- res |> resp_body_json()
   } else if (any(class(res) == "httr2_error")) {
     # Detect single error
     cli_abort("Response contains error! (check to see if ID actually exists?)")
   } else {
     # Extract data from all successful responses
-    out_data <- res %>%  resps_successes()  %>%  resps_data(\(resp) resp_body_json(resp))
+    out_data <- res |>  resps_successes()  |>  resps_data(\(resp) resp_body_json(resp))
   }
 
   # Parse each request in the list

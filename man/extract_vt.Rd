@@ -21,7 +21,7 @@ Extract the data returned by a call to \code{\link[=fetch_vt]{fetch_vt()}}, filt
 }
 \examples{
 \dontrun{
-fetch_vt(54) \%>\%
+fetch_vt(54) |>
   extract_vt(cols=c("DatasetID",
                          "Interactor1Genus",
                          "Interactor1Species"),

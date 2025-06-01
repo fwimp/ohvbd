@@ -16,8 +16,8 @@ Currently these databases include the [VecTraits](https://vectorbyte.crc.nd.edu/
 Let's imagine you wanted to figure out where a particular vector species - _Aedes aegypti_, for example - was found. Here's how you'd use `ohvbd` to do that:
 
 ```{r exemplar, echo=TRUE, eval=FALSE}
-df <- search_vt("Aedes aegypti") %>%
-  fetch_vt() %>%
+df <- search_vt("Aedes aegypti") |>
+  fetch_vt() |>
   extract_vt(
     cols = c("Interactor1Genus", "Interactor1Species", "Latitude", "Longitude"),
     returnunique = TRUE
@@ -65,7 +65,7 @@ if (!rlang::is_interactive()) {
 }
 ```
 
-For users who are familiar with tidyverse pipes (`%>%`), this approach is generally usable in ohvbd as well.
+For users who are familiar with base R pipes (`|>`), this approach is generally usable in ohvbd as well.
 
 For users who are not familiar, pipes take the output of one command and feed it forward to the next command as the first argument:
 
@@ -78,7 +78,7 @@ mean(x)
 
 ```{r pipedemo}
 # Find mean of a vector using pipes
-c(1, 2, 3) %>% mean()
+c(1, 2, 3) |> mean()
 ```
 
 For the rest of this vignette we will be using a piped-style approach.
@@ -139,7 +139,7 @@ The `fetch_vt()` function returns a list of the data in the form of the original
 Now we have a list of responses, we can extract the relevant data from them using the `extract_x()` functions.
 
 ```{r extract_all_vt}
-aedes_data <- aedes_responses %>% extract_vt()
+aedes_data <- aedes_responses |> extract_vt()
 cat("Data dimensions: ", ncol(aedes_data), " cols x ", nrow(aedes_data), " rows")
 ```
 
@@ -150,7 +150,7 @@ Fortunately the `cols` argument allows us to filter this data out easily. We can
 So let's get just the unique locations and trait name combinations from our data using the same command as before:
 
 ```{r extract_filtered_vt}
-aedes_data_filtered <- aedes_responses %>%
+aedes_data_filtered <- aedes_responses |>
   extract_vt(
     cols = c("Location", "OriginalTraitName"),
     returnunique = TRUE
@@ -179,8 +179,8 @@ In day-to-day use, you will mostly find yourself using all these functions toget
 A typical pipeline would likely only contain a few lines of code:
 
 ```{r vt_pipeline, eval=FALSE, echo=TRUE}
-df <- search_vt("Aedes aegypti") %>%
-  fetch_vt() %>%
+df <- search_vt("Aedes aegypti") |>
+  fetch_vt() |>
   extract_vt(
     cols = c("Interactor1Genus", "Interactor1Species", "Latitude", "Longitude"),
     returnunique = TRUE
@@ -189,7 +189,7 @@ head(df)
 ```
 ```{r vt_pipeline_secret, include=FALSE}
 ids <- search_vt("Aedes aegypti")
-df <- fetch_vt(ids[1:5], connections = 5) %>%
+df <- fetch_vt(ids[1:5], connections = 5) |>
   extract_vt(
     cols = c("Interactor1Genus", "Interactor1Species", "Latitude", "Longitude"),
     returnunique = TRUE
@@ -206,14 +206,14 @@ Let's imagine that we are looking for traits of whitefly species (*Bemisia*). We
 
 
 ```{r demo_searcherror, eval=FALSE, echo=TRUE}
-df <- search_vt("Bemisia")[1:6] %>%
-  fetch_vt() %>%
+df <- search_vt("Bemisia")[1:6] |>
+  fetch_vt() |>
   extract_vt(cols = c("DatasetID", "Interactor1Genus", "Interactor1Species", "Interactor2Genus", "Interactor2Species"))
 ```
 
 ```{r demo_searcherror_secret, include=FALSE}
-df <- search_vt("Bemisia")[1:6] %>%
-  fetch_vt(connections = 6) %>%
+df <- search_vt("Bemisia")[1:6] |>
+  fetch_vt(connections = 6) |>
   extract_vt(cols = c("DatasetID", "Interactor1Genus", "Interactor1Species", "Interactor2Genus", "Interactor2Species"))
 ```
 
@@ -226,7 +226,7 @@ unique(df$Interactor1Genus)
 *Axinoscymnus* is a ladybird, but why is it appearing? Let's look at only rows containing *Axinoscymnus*:
 
 ```{r filter_ladybirds}
-df %>% dplyr::filter(Interactor1Genus == "Axinoscymnus") %>% head()
+df |> dplyr::filter(Interactor1Genus == "Axinoscymnus") |> head()
 ```
 
 In this scenario, *Bemisia* is present in the dataset, but it is as the "target" rather than the animal that the trait is referring to.
@@ -238,15 +238,15 @@ These allow you to construct a more specific search.
 So let's construct the same search as we were wanting to do before, but with the smart search.
 
 ```{r searcherror_fixed, eval=FALSE, echo=TRUE}
-df <- search_vt_smart("Interactor1Genus", "contains", "Bemisia")[1:6] %>%
-  fetch_vt() %>%
+df <- search_vt_smart("Interactor1Genus", "contains", "Bemisia")[1:6] |>
+  fetch_vt() |>
   extract_vt(cols = c("DatasetID", "Interactor1Genus", "Interactor1Species", "Interactor2Genus", "Interactor2Species"))
 unique(df$Interactor1Genus)
 ```
 
 ```{r searcherror_fixed_secret, echo=FALSE}
-df <- search_vt_smart("Interactor1Genus", "contains", "Bemisia")[1:6] %>%
-  fetch_vt(connections = 6) %>%
+df <- search_vt_smart("Interactor1Genus", "contains", "Bemisia")[1:6] |>
+  fetch_vt(connections = 6) |>
   extract_vt(cols = c("DatasetID", "Interactor1Genus", "Interactor1Species", "Interactor2Genus", "Interactor2Species"))
 print(unique(df$Interactor1Genus))
 ```

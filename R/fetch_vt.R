@@ -38,7 +38,7 @@ fetch_vt <- function(ids, rate = 5, connections = 2, basereq = NA) {
   if (length(ids) > 10) {
     # Preflight ssl check
     status <- tryCatch({
-      preflight_test <- basereq %>% req_perform()  # nolint: object_usage_linter
+      preflight_test <- basereq |> req_perform()  # nolint: object_usage_linter
       list("err_code" = 0, "err_obj" = NULL)
     }, error = function(e) {
       list("err_code" = 1, "err_obj" = e)
@@ -59,13 +59,13 @@ fetch_vt <- function(ids, rate = 5, connections = 2, basereq = NA) {
   }
 
   # ids_to_find can be a single number or a vector and this works just fine!
-  reqs <- ids %>% lapply(\(id) {
-    basereq %>%
-      req_url_path_append("vectraits-dataset") %>%
-      req_url_path_append(id) %>%
-      req_url_query("format" = "json") %>%
-      req_error(body = vt_error_body) %>%
-      req_headers(ohvbd = id) %>%  # Add additional header just so we can nicely handle failures
+  reqs <- ids |> lapply(\(id) {
+    basereq |>
+      req_url_path_append("vectraits-dataset") |>
+      req_url_path_append(id) |>
+      req_url_query("format" = "json") |>
+      req_error(body = vt_error_body) |>
+      req_headers(ohvbd = id) |>  # Add additional header just so we can nicely handle failures
       req_throttle(rate)
   })
 
@@ -74,12 +74,12 @@ fetch_vt <- function(ids, rate = 5, connections = 2, basereq = NA) {
     cli_alert_info("Restricting to {.val {max_conns}} connection{?s}.")
     connections <- max_conns
   }
-  resps <- reqs %>% req_perform_parallel(on_error = "continue", pool = curl::new_pool(total_con = 100, host_con = connections), progress = list(
+  resps <- reqs |> req_perform_parallel(on_error = "continue", pool = curl::new_pool(total_con = 100, host_con = connections), progress = list(
     name = "Vectraits Data",
     format = "Downloading {cli::pb_name} {cli::pb_current}/{cli::pb_total} {cli::pb_bar} {cli::pb_percent} | ETA: {cli::pb_eta}"
   ))
 
-  fails <- resps %>% httr2::resps_failures()
+  fails <- resps |> httr2::resps_failures()
 
   # Test if any failures were missing files (404s)
   missing <- find_vb_404s(fails)

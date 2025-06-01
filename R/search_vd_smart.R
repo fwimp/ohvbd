@@ -101,12 +101,12 @@ search_vd_smart <- function(field, operator, value, basereq = NA) {
     cli_abort(c("x" = "Invalid field: {.val {field}}"))
   }
   resplist <- tryCatch({
-    resp <- basereq %>%
-      req_url_path_append("vecdynbyprovider") %>%
-      req_url_query("format" = "json") %>%
-      req_url_query("field" = final_field) %>%
-      req_url_query("operator" = final_operator) %>%
-      req_url_query("term" = value) %>%
+    resp <- basereq |>
+      req_url_path_append("vecdynbyprovider") |>
+      req_url_query("format" = "json") |>
+      req_url_query("field" = final_field) |>
+      req_url_query("operator" = final_operator) |>
+      req_url_query("term" = value) |>
       req_perform()
     list("resp" = resp, "err_code" = 0, "err_obj" = NULL)
   }, error = function(e) {
@@ -125,7 +125,7 @@ search_vd_smart <- function(field, operator, value, basereq = NA) {
     cli_abort(c("No records found for {.val {paste(final_field, final_operator, value)}}"))
   }
 
-  body <- resplist$resp %>% resp_body_json()
+  body <- resplist$resp |> resp_body_json()
   if (length(body) > 2) {
     # This is a bit of a kludge, the API does not return count in the same place if no results are found
     cli_abort(c("No records found for {.val {paste(final_field, final_operator, value)}}"))

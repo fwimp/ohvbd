@@ -21,7 +21,7 @@ Extract the data returned by a call to \code{\link[=fetch_vd]{fetch_vd()}}, filt
 }
 \examples{
 \dontrun{
-fetch_vd(247) \%>\%
+fetch_vd(247) |>
   extract_vd(cols=c("species",
                          "sample_start_date",
                          "sample_value"),

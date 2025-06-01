@@ -22,9 +22,9 @@ find_vd_ids <- function(basereq = NA) {
   }
 
   resplist <- tryCatch({
-    resp <- basereq %>%
-      req_url_path_append("vecdynbyprovider") %>%
-      req_url_query("format" = "json") %>%
+    resp <- basereq |>
+      req_url_path_append("vecdynbyprovider") |>
+      req_url_query("format" = "json") |>
       req_perform()
     list("resp" = resp, "err_code" = 0, "err_obj" = NULL)
   }, error = function(e) {
@@ -43,7 +43,7 @@ find_vd_ids <- function(basereq = NA) {
     cli_abort("No records found.")
   }
 
-  body <- resplist$resp %>% resp_body_json()
+  body <- resplist$resp |> resp_body_json()
   outids <- as.numeric(body$ids)
   outids <- new_ohvbd.ids(v = outids, db = "vd")
   return(outids)

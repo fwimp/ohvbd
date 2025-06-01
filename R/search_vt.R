@@ -50,10 +50,10 @@ search_vt <- function(keywords, basereq = NA) {
   }
 
   resplist <- tryCatch({
-    resp <- basereq %>%
-      req_url_path_append("vectraits-explorer") %>%
-      req_url_query("format" = "json") %>%
-      req_url_query("keywords" = keywords, .multi = space_collapse) %>%
+    resp <- basereq |>
+      req_url_path_append("vectraits-explorer") |>
+      req_url_query("format" = "json") |>
+      req_url_query("keywords" = keywords, .multi = space_collapse) |>
       req_perform()
     list("resp" = resp, "err_code" = 0, "err_obj" = NULL)
   }, error = function(e) {
@@ -72,7 +72,7 @@ search_vt <- function(keywords, basereq = NA) {
     cli_abort("No records found for {.val {keywords}}")
   }
 
-  body <- resplist$resp %>% resp_body_json()
+  body <- resplist$resp |> resp_body_json()
   outids <- as.numeric(body$ids)
   outids <- new_ohvbd.ids(v = outids, db = "vt")
   return(outids)

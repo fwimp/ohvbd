@@ -27,9 +27,9 @@ vb_basereq <- function(baseurl = "https://vectorbyte.crc.nd.edu/portal/api/", us
     unsafe <- TRUE
   }
 
-  req <- request(baseurl) %>% req_user_agent(useragent)
+  req <- request(baseurl) |> req_user_agent(useragent)
   if (unsafe) {
-    req <- req %>% req_options(ssl_verifypeer = 0)
+    req <- req |> req_options(ssl_verifypeer = 0)
   }
   return(req)
 }

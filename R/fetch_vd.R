@@ -38,7 +38,7 @@ fetch_vd <- function(ids, rate = 5, connections = 2, basereq = NA) {
   if (length(ids) > 10) {
     # Preflight ssl check
     status <- tryCatch({
-      preflight_test <- basereq %>% req_perform()  # nolint: object_usage_linter
+      preflight_test <- basereq |> req_perform()  # nolint: object_usage_linter
       list("err_code" = 0, "err_obj" = NULL)
     }, error = function(e) {
       list("err_code" = 1, "err_obj" = e)
@@ -68,7 +68,7 @@ fetch_vd <- function(ids, rate = 5, connections = 2, basereq = NA) {
   basereq_unsafe <- !is.null(basereq$options$ssl_verifypeer)
 
   # Construct a df containing one row with all appropriate params for each request, and then generate reqs for parallel requesting
-  reqs_df <- resp_parsed %>% dplyr::group_by(.data$id) %>% dplyr::mutate(pages = list(seq(1, .data$pages))) %>% tidyr::unnest(cols = c(.data$pages)) %>% dplyr::ungroup()
+  reqs_df <- resp_parsed |> dplyr::group_by(.data$id) |> dplyr::mutate(pages = list(seq(1, .data$pages))) |> tidyr::unnest(cols = c(.data$pages)) |> dplyr::ungroup()
   reqs <- mapply(vd_make_req, reqs_df$id, reqs_df$pages, 5, basereq_url, basereq_useragent, basereq_unsafe, SIMPLIFY = FALSE)
 
   if (connections > max_conns) {
@@ -76,12 +76,12 @@ fetch_vd <- function(ids, rate = 5, connections = 2, basereq = NA) {
     cli_alert_info("Restricting to {.val {max_conns}} connection{?s}.")
     connections <- max_conns
   }
-  resps <- reqs %>% req_perform_parallel(on_error = "continue", pool = curl::new_pool(total_con = 100, host_con = connections), progress = list(
+  resps <- reqs |> req_perform_parallel(on_error = "continue", pool = curl::new_pool(total_con = 100, host_con = connections), progress = list(
     name = "VecDyn Data",
     format = "Downloading {cli::pb_name} {cli::pb_current}/{cli::pb_total} {cli::pb_bar} {cli::pb_percent} | ETA: {cli::pb_eta}"
   ))
 
-  fails <- resps %>% httr2::resps_failures()
+  fails <- resps |> httr2::resps_failures()
 
   # Test if any failures were missing files (not 404s here, but counts of 0)
   missing <- find_vd_missing(resps)

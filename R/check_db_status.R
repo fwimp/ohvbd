@@ -17,6 +17,7 @@ check_db_status <- function() {
   db_list <- c(
     VectorByte = "https://vectorbyte.crc.nd.edu/portal/api/",
     Areadata = "https://github.com/pearselab/areadata/raw/main/output/"
+    # Add figshare
   )
 
   successes <- 0
@@ -25,7 +26,7 @@ check_db_status <- function() {
 
   for (i in seq_along(db_list)){
     statuscode <- tryCatch({
-      out <- request(db_list[i]) %>% req_user_agent("ROHVBD") %>% req_perform()
+      out <- request(db_list[i]) |> req_user_agent("ROHVBD") |> req_perform()
       out$status_code
     }, error = function(cnd) {
       out <- last_response()

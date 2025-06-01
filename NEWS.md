@@ -23,7 +23,7 @@
 * New set of S3 classes (`ohvbd.ids`, `ohvbd.responses`, `ohvbd.data.frame`, `ohvbd.ad.matrix`) to allow for nicer checks of data integrity.
   * This has the side effect of no longer falsely triggering the data continuity checks of `fetch_` functions when indexing the output of `find_x_ids()` functions.
 * New convenience functions `fetch()` and `extract()` leverage method dispatch along with the above classes to infer the correct underlying `fetch_` and `extract_` functions to use.
-  * As such you can now write code such as `find_vt_ids() %>% fetch() %>% extract()` without having to remember the correct extractor to use.
+  * As such you can now write code such as `find_vt_ids() |> fetch() |> extract()` without having to remember the correct extractor to use.
   * You can still use the specific extractor functions as before should you desire.
 * All major functions interfacing with AD, VD, and VT output one of these classes.
 * Cached data from AD now contains an attribute to signify that it is cached. 
@@ -87,7 +87,7 @@
 * Similarly `extract_x()` functions always extract data.
 * If a function does multiple things, it may get multiple verbs separated by underscores, e.g. `get_extract_x_chunked()`
 * Pipelines now internally attempt to confirm data integrity by checking that the correct functions are piped together.
-* This means it is no longer easy to accidentally do something like `get_vd_current_ids() %>% get_vt()`.
+* This means it is no longer easy to accidentally do something like `get_vd_current_ids() |> get_vt()`.
 
 # ohvbd 0.3.1
 
@@ -104,7 +104,7 @@
 
 ## **Major API change**
 * `*_basereq()` calls are no longer required as the first argument for functions.
-* As such, data downloads no longer need to start with `vb_basereq() %>%`.
+* As such, data downloads no longer need to start with `vb_basereq() |>`.
 * Basereq can now be overridden by providing an alternative basereq to the `basereq` argument of these functions, which can be generated using `vb_basereq()`.
 * This is usually only needed if using the argument `unsafe = TRUE` for `vb_basereq()`.
 * It is also possible to set ohvbd to use compatability-mode ssl calls using `set_ohvbd_compat()`.

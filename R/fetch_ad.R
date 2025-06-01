@@ -112,21 +112,21 @@ fetch_ad <- function(metric = "temp", gid = 0, use_cache = FALSE, cache_location
     } else {
       if (metricid <= 5) {
         # Retrieve AD article from figshare
-        figshare_data <- httr2::request("https://api.figshare.com/v2/articles/") %>%
-          httr2::req_user_agent("ROHVBD") %>%
-          httr2::req_url_path_append(16587311) %>%
-          httr2::req_perform() %>%
+        figshare_data <- httr2::request("https://api.figshare.com/v2/articles/") |>
+          httr2::req_user_agent("ROHVBD") |>
+          httr2::req_url_path_append(16587311) |>
+          httr2::req_perform() |>
           httr2::resp_body_json()
         figshare_df <- data.table::rbindlist(figshare_data$files)
         # Extract file list
-        figshare_df <- figshare_df %>%
-          dplyr::filter(grepl(".RDS", .data$name, fixed = TRUE)) %>%  # Get only RDS files
-          dplyr::group_by(.data$name) %>%  # Group by name
-          dplyr::slice_max(.data$id, with_ties = FALSE) %>%  # Get max id (assuming ids monotonically increase!)
-          dplyr::ungroup() %>%  # Ungroup as we don't need that any more, should now be 1 row per file
-          tidyr::separate_wider_delim(.data$name, delim = "-", names = c("metric", "agg", "gid", "cleaned")) %>%  # Split name into cols
-          tidyr::separate_wider_delim(.data$cleaned, delim = ".", names = c("cleaned", "fileext")) %>%  # Further split out file extension
-          dplyr::select(-one_of(c("agg", "cleaned"))) %>%  # Drop unnecessary columns
+        figshare_df <- figshare_df |>
+          dplyr::filter(grepl(".RDS", .data$name, fixed = TRUE)) |>  # Get only RDS files
+          dplyr::group_by(.data$name) |>  # Group by name
+          dplyr::slice_max(.data$id, with_ties = FALSE) |>  # Get max id (assuming ids monotonically increase!)
+          dplyr::ungroup() |>  # Ungroup as we don't need that any more, should now be 1 row per file
+          tidyr::separate_wider_delim(.data$name, delim = "-", names = c("metric", "agg", "gid", "cleaned")) |>  # Split name into cols
+          tidyr::separate_wider_delim(.data$cleaned, delim = ".", names = c("cleaned", "fileext")) |>  # Further split out file extension
+          dplyr::select(-one_of(c("agg", "cleaned"))) |>  # Drop unnecessary columns
           dplyr::filter(gid == "GID2")  # Get only GID2
 
         # Could throw an error if not found. Might have to handle that later if necessary

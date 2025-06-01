@@ -27,7 +27,7 @@ This is a convenience method that infers and applies the correct fetch function 
 }
 \examples{
 \dontrun{
-find_vt_ids() \%>\% fetch()
+find_vt_ids() |> fetch()
 }
 }
 \author{

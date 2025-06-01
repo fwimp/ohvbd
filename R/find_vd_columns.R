@@ -23,9 +23,9 @@ find_vd_columns <- function(full = FALSE, basereq = NA) {
   }
 
   resplist <- tryCatch({
-    resp <- basereq %>%
-      req_url_path_append("vecdyn-columns") %>%
-      req_url_query("format" = "json") %>%
+    resp <- basereq |>
+      req_url_path_append("vecdyn-columns") |>
+      req_url_query("format" = "json") |>
       req_perform()
     list("resp" = resp, "err_code" = 0, "err_obj" = NULL)
   }, error = function(e) {
@@ -44,7 +44,7 @@ find_vd_columns <- function(full = FALSE, basereq = NA) {
     cli_abort("No records found.")
   }
 
-  body <- resplist$resp %>% resp_body_json()
+  body <- resplist$resp |> resp_body_json()
   fields <- as.character(lapply(body, function(x) {
     return(x$field_name[[1]])
   }))

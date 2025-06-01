@@ -38,7 +38,7 @@ fetch_vd_counts <- function(ids, rate = 5, connections = 2, page_size = 50, base
   if (length(ids) > 10) {
     # Preflight ssl check
     status <- tryCatch({
-      preflight_test <- basereq %>% req_perform()  # nolint: object_usage_linter
+      preflight_test <- basereq |> req_perform()  # nolint: object_usage_linter
       list("err_code" = 0, "err_obj" = NULL)
     }, error = function(e) {
       list("err_code" = 1, "err_obj" = e)
@@ -58,12 +58,12 @@ fetch_vd_counts <- function(ids, rate = 5, connections = 2, page_size = 50, base
     }
   }
 
-  count_reqs <- ids %>% lapply(\(id) {
-    basereq %>%
-      req_url_path_append("vecdyncsv") %>%
-      req_url_query("format" = "json", "piids" = id) %>%
-      req_error(body = vd_error_body) %>%
-      req_headers(ohvbd = id) %>%  # Add additional header just so we can nicely handle failures
+  count_reqs <- ids |> lapply(\(id) {
+    basereq |>
+      req_url_path_append("vecdyncsv") |>
+      req_url_query("format" = "json", "piids" = id) |>
+      req_error(body = vd_error_body) |>
+      req_headers(ohvbd = id) |>  # Add additional header just so we can nicely handle failures
       req_throttle(rate)
   })
 
@@ -72,14 +72,14 @@ fetch_vd_counts <- function(ids, rate = 5, connections = 2, page_size = 50, base
     cli_alert_info("Restricting to {.val {max_conns}} connection{?s}.")
     connections <- max_conns
   }
-  count_resps <- count_reqs %>% req_perform_parallel(on_error = "continue", pool = curl::new_pool(total_con = 100, host_con = connections), progress = list(
+  count_resps <- count_reqs |> req_perform_parallel(on_error = "continue", pool = curl::new_pool(total_con = 100, host_con = connections), progress = list(
     name = "VecDyn data counts",
     format = "Finding {cli::pb_name} {cli::pb_current}/{cli::pb_total} {cli::pb_bar} {cli::pb_percent} | ETA: {cli::pb_eta}"
   ))
 
   # Find counts and calculate required pages
-  resp_parsed <- count_resps %>%
-    lapply(\(resp) resp_body_json(resp)$count) %>%
+  resp_parsed <- count_resps |>
+    lapply(\(resp) resp_body_json(resp)$count) |>
     as.numeric()
   resp_parsed <- data.frame(id = ids, num = resp_parsed)
   resp_parsed$pages <- ceiling(resp_parsed$num / page_size)

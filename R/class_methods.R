@@ -67,7 +67,7 @@ print.ohvbd.ad.matrix <- function(x, ..., full=FALSE) {
 #' @export
 #' @examples
 #' \dontrun{
-#' find_vt_ids() %>% fetch()
+#' find_vt_ids() |> fetch()
 #' }
 fetch <- function(ids, ..., rate = 5, connections = 2, db = NULL, basereq = NA) {
   UseMethod("fetch")
@@ -101,8 +101,8 @@ fetch.ohvbd.ids <- function(ids, ..., rate = 5, connections = 2, db = NULL, base
 #' @export
 #' @examples
 #' \dontrun{
-#' find_vt_ids() %>% fetch() %>% extract(cols=c("Interactor1Species"))
-#' fetch_ad(use_cache=TRUE) %>% extract(targetdate="2020-08-04")
+#' find_vt_ids() |> fetch() |> extract(cols=c("Interactor1Species"))
+#' fetch_ad(use_cache=TRUE) |> extract(targetdate="2020-08-04")
 #' }
 extract <- function(res, ...) {
   UseMethod("extract")
