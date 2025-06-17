@@ -22,6 +22,8 @@ of disease vector data sources.
 At present this package is very much in its early stages, as such the
 internal API may change without warning.
 
+This package was developed as part of the [One Health Vector-Borne Diseases Hub](https://vbdhub.org).
+
 ## Databases
 
 `ohvbd` allows for searching and the retrieval of data from the
