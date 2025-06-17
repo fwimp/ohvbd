@@ -157,10 +157,10 @@ query provided in the arguments.</p>
 <code class="sourceCode R"><span><span class="va">aedes_ids</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/search_vt.html">search_vt</a></span><span class="op">(</span><span class="st">"Aedes aegypti"</span><span class="op">)</span></span>
 <span><span class="va">aedes_ids</span></span></code></pre></div>
 <pre><code><span><span class="co">## Database: vt</span></span>
-<span><span class="co">##  [1]  97  98 124 125 126 142 143 144 145 146 147 148 149 169 170 214 285 286 287</span></span>
-<span><span class="co">## [20] 346 354 355 356 357 358 359 473 474 475 476 552 553 554 555 556 557 558 564</span></span>
-<span><span class="co">## [39] 565 571 572 573 574 575 576 577 578 579 580 825 826 828 841 842 853 854 855</span></span>
-<span><span class="co">## [58] 860 863 864 865 892 893 901 902 903 906 910 911</span></span></code></pre>
+<span><span class="co">##  [1] 124 125 126 142 143 144 145 146 147 148 149 169 170 214 285 286 287 346 354</span></span>
+<span><span class="co">## [20] 355 356 357 358 359 473 474 475 476 553 554 555 556 557 558 564 565 571 572</span></span>
+<span><span class="co">## [39] 573 574 575 576 577 578 579 580 825 826 828 841 842 853 854 855 860 863 864</span></span>
+<span><span class="co">## [58] 865 892 893 901 902 903 906 910 911</span></span></code></pre>
 <p>This again returns a vector of IDs, this time corresponding to any
 dataset with <em>Aedes aegypti</em> in one of the searchable
 columns.</p>
@@ -196,7 +196,7 @@ from them using the <code>extract_x()</code> functions.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">aedes_data</span> <span class="op">&lt;-</span> <span class="va">aedes_responses</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/extract_vt.html">extract_vt</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Data dimensions: "</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">aedes_data</span><span class="op">)</span>, <span class="st">" cols x "</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">aedes_data</span><span class="op">)</span>, <span class="st">" rows"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Data dimensions:  157  cols x  21  rows</span></span></code></pre>
+<pre><code><span><span class="co">## Data dimensions:  157  cols x  14  rows</span></span></code></pre>
 <p>This dataset is a bit too large to print here, and often you may only
 want a few columns of data rather than the whole dataset.</p>
 <p>Fortunately the <code>cols</code> argument allows us to filter this
@@ -213,11 +213,10 @@ from our data using the same command as before:</p>
 <span><span class="va">aedes_data_filtered</span></span></code></pre></div>
 <pre><code><span><span class="co">## Database: vt</span></span>
 <span><span class="co">##                        Location      OriginalTraitName</span></span>
-<span><span class="co">## 1          University of Malaya              body size</span></span>
-<span><span class="co">## 2          University of Malaya        blood meal size</span></span>
-<span><span class="co">## 3 Guadeloupe French West Indies              longevity</span></span>
-<span><span class="co">## 4 Guadeloupe French West Indies          blood feeding</span></span>
-<span><span class="co">## 5 Guadeloupe French West Indies transmission potential</span></span></code></pre>
+<span><span class="co">## 1 Guadeloupe French West Indies              longevity</span></span>
+<span><span class="co">## 2 Guadeloupe French West Indies          blood feeding</span></span>
+<span><span class="co">## 3 Guadeloupe French West Indies transmission potential</span></span>
+<span><span class="co">## 4      Unversity of Georgia USA              body size</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="chunked-downloading">Chunked downloading<a class="anchor" aria-label="anchor" href="#chunked-downloading"></a>
@@ -240,11 +239,11 @@ so:</p>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Database: vt</span></span>
 <span><span class="co">##                        Location      OriginalTraitName</span></span>
-<span><span class="co">## 1          University of Malaya              body size</span></span>
-<span><span class="co">## 2          University of Malaya        blood meal size</span></span>
-<span><span class="co">## 3 Guadeloupe French West Indies              longevity</span></span>
-<span><span class="co">## 4 Guadeloupe French West Indies          blood feeding</span></span>
-<span><span class="co">## 5 Guadeloupe French West Indies transmission potential</span></span></code></pre>
+<span><span class="co">## 1 Guadeloupe French West Indies              longevity</span></span>
+<span><span class="co">## 2 Guadeloupe French West Indies          blood feeding</span></span>
+<span><span class="co">## 3 Guadeloupe French West Indies transmission potential</span></span>
+<span><span class="co">## 4      Unversity of Georgia USA              body size</span></span>
+<span><span class="co">## 5      Unversity of Georgia USA              body size</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="putting-it-all-together">Putting it all together<a class="anchor" aria-label="anchor" href="#putting-it-all-together"></a>
@@ -337,7 +336,7 @@ every time you run your script. This is as easy as running
 <code><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv()</a></code> on your dataframe, then reading it in later
 with <code><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv()</a></code></p>
 <p><span style="opacity: 0.1;font-size: small;">Built in
-18.97855s</span></p>
+31.9446018s</span></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
