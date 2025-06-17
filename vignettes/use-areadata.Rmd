@@ -36,9 +36,10 @@ get_os <- function() {
   }
   tolower(os)
 }
-if (get_os() == "linux") {
-  set_ohvbd_compat()
-}
+# if (get_os() == "linux") {
+#   set_ohvbd_compat()
+# }
+set_ohvbd_compat() # Just run in compatability mode always to make sure build works.
 
 # Suppress cli output in non-interactive mode
 if (!rlang::is_interactive()) {
