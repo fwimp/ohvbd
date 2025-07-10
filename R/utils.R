@@ -107,7 +107,7 @@ vd_extraction_helper <- function(resp, cols = NA) {
     }
     df_out
   }, error = function(e) {
-    cli_abort("Error in vd extraction of ID {.get_vb_req_id(resp)}")
+    cli_abort("Error in vd extraction of ID {(.get_vb_req_id(resp))}", parent = e)
   })
 
   return(df_out)

@@ -79,7 +79,7 @@ fetch_vd <- function(ids, rate = 5, connections = 2, basereq = NA) {
   resps <- reqs |> req_perform_parallel(on_error = "continue", max_active = connections, progress = list(
     name = "VecDyn Data",
     format = "Downloading {cli::pb_name} {cli::pb_current}/{cli::pb_total} {cli::pb_bar} {cli::pb_percent} | ETA: {cli::pb_eta}"
-  ))
+  ))  # Currently custom formatting for the progress bar does not work (https://github.com/r-lib/httr2/issues/752)
 
   fails <- resps |> httr2::resps_failures()
 
