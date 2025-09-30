@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="index.html">ohvbd</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -80,7 +80,6 @@
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <p><code>ohvbd</code> is an R package for retrieving (and parsing) data from a network of disease vector data sources.</p>
-<p>At present this package is very much in its early stages, as such the internal API may change without warning.</p>
 <p>This package was developed as part of the <a href="https://vbdhub.org" class="external-link">One Health Vector-Borne Diseases Hub</a>.</p>
 </div>
 <div class="section level2">
@@ -88,6 +87,8 @@
 </h2>
 <p><code>ohvbd</code> allows for searching and the retrieval of data from the following data sources:</p>
 <ul>
+<li>
+<a href="https://vbdhub.org" class="external-link">vbdhub</a> (search only)</li>
 <li><a href="https://vectorbyte.crc.nd.edu/vectraits-explorer" class="external-link">VecTraits</a></li>
 <li><a href="https://vectorbyte.crc.nd.edu/vecdyn-datasets" class="external-link">VecDyn</a></li>
 <li><a href="https://pearselab.github.io/areadata/" class="external-link">AreaData</a></li>
@@ -106,15 +107,11 @@
 </h2>
 <!-- These are auto-pulled from NEWS.md  -->
 <div class="section level3">
-<h3 id="ohvbd-060">ohvbd 0.6.0<a class="anchor" aria-label="anchor" href="#ohvbd-060"></a>
+<h3 id="ohvbd-061">ohvbd 0.6.1<a class="anchor" aria-label="anchor" href="#ohvbd-061"></a>
 </h3>
 <ul>
-<li>Internally <code>ohvbd</code> now only uses base R pipes (<code>|&gt;</code>).</li>
-<li>The magrittr pipe (<code>%&gt;%</code>) is no longer used internally, nor is it exported for use.</li>
-<li>
-<code>httr2</code> v1.1.1 deprecated the <code>pool</code> argument of <code>req_perform_parallel()</code> which broke <code><a href="reference/fetch.html">fetch()</a></code> commands across <code>ohvbd</code>.</li>
-<li>These have now been rewritten using the new <code>max_active</code> argument, which does simplify everything a bit.</li>
-<li>This change does bump the required version of <code>httr2</code> to be v1.1.1.</li>
+<li>New <code><a href="reference/search_hub.html">search_hub()</a></code> function enables searching across multiple databases.</li>
+<li>New function <code><a href="reference/generate_vt_template.html">generate_vt_template()</a></code> which quickly generates a VecTraits template for later upload.</li>
 </ul>
 <p>See <a href="https://fwimp.github.io/ohvbd/news/index.html">changelog</a> for patch notes for previous versions.</p>
 </div>
@@ -155,7 +152,7 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/" class="external-link"><img src="https://img.shields.io/badge/R%3E%3D-4.1.0-6666ff.svg?style=for-the-badge" alt="R"></a></li>
-<li><a href="commits/master"><img src="https://img.shields.io/badge/Package%20version-0.6.0-orange.svg?style=for-the-badge" alt="packageversion"></a></li>
+<li><a href="commits/master"><img src="https://img.shields.io/badge/Package%20version-0.6.1-orange.svg?style=for-the-badge" alt="packageversion"></a></li>
 <li><a href="https://www.gnu.org/licenses/gpl-3.0.en.html" class="external-link"><img src="https://img.shields.io/badge/license-GPL--3-blue.svg?style=for-the-badge" alt="license"></a></li>
 <li><a href="https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
