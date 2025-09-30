@@ -10,7 +10,7 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
-<!-- force push by editing this number: 41 -->
+<!-- force push by editing this number: 43 -->
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -75,7 +75,7 @@ You can install the development version of ohvbd from [GitHub](https://github.co
 devtools::install_github("fwimp/ohvbd", build_vignettes = TRUE)
 ```
 
-## Latest patch notes
+## Latest release patch notes
 
 ```{r echo=FALSE}
 # Note this only handles up to h2 level right now. Will need some fiddling if more is needed further down the line!
@@ -84,16 +84,20 @@ devtools::install_github("fwimp/ohvbd", build_vignettes = TRUE)
 news <- parsermd::as_tibble(parsermd::parse_rmd(system.file("NEWS.md", package = "ohvbd")))
 md_chunks <- subset(news, type=="rmd_markdown")
 latest_version <- md_chunks[[1,1]]
+# detect development version and do not include
+if (latest_version == "ohvbd (development version)") {
+  latest_version <- md_chunks[[2,1]]
+}
 filtered_md_chunks <- subset(md_chunks, md_chunks$sec_h1 == latest_version)
 
 notes <- c()
 if (all(is.na(filtered_md_chunks$sec_h2))) {
-  notes <- parsermd::as_document(md_chunks[[1,"ast"]], collapse = "\n")
+  notes <- parsermd::as_document(filtered_md_chunks[[1,"ast"]], collapse = "\n")
 } else {
   notes <- tryCatch({
   for (i in 1:nrow(filtered_md_chunks)) {
     # cat(paste0("## ", filtered_md_chunks[i, "sec_h2"], "\n\n", parsermd::as_document(md_chunks[[i,"ast"]], collapse = "\n")))
-    notes <- c(notes, paste0("#### ", filtered_md_chunks[i, "sec_h2"], "\n\n", parsermd::as_document(md_chunks[[i,"ast"]], collapse = "\n")))
+    notes <- c(notes, paste0("#### ", filtered_md_chunks[i, "sec_h2"], "\n\n", parsermd::as_document(filtered_md_chunksmd_chunks[[i,"ast"]], collapse = "\n")))
     }
     paste(notes, collapse = "\n")
   }, error = function(e) {
@@ -107,4 +111,4 @@ if (all(is.na(filtered_md_chunks$sec_h2))) {
 
 `r notes`
 
-See [changelog](https://fwimp.github.io/ohvbd/news/index.html) for patch notes for previous versions.
+See [changelog](https://fwimp.github.io/ohvbd/news/index.html) for patch notes for all versions.

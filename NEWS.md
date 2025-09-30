@@ -1,8 +1,11 @@
 # ohvbd (development version)
 
+* Code base is now continuously formatted using Air v0.7.1
+
 # ohvbd 0.6.1
 
-* New `search_hub()` function enables searching across multiple databases.
+* New `search_hub()` function enables searching across multiple databases at once via [vbdhub](https://vbdhub.org).
+  * This includes new functionality for specifying searches using spatial extent polygons and generally more intelligent search behaviour.
 * New function `generate_vt_template()` which quickly generates a VecTraits template for later upload.
 
 # ohvbd 0.6.0

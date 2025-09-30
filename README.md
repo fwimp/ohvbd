@@ -1,18 +1,18 @@
 
-<!-- force push by editing this number: 41 -->
+<!-- force push by editing this number: 43 -->
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 <!-- Build with devtools::build_readme() -->
 
-# One Health VBD Hub (ohvbd) <a href="https://fwimp.github.io/ohvbd/"><img src="man/figures/logo-4.png" align="right" width="120" alt="ohvbd website" /></a>
+# One Health VBD Hub (ohvbd) <a href="https://fwimp.github.io/ohvbd/"><img src="man/figures/logo-6.png" align="right" width="120" alt="ohvbd website" /></a>
 
 <!-- # One Health VBD Hub - R Package -->
 
 <!-- badges: start -->
 
 [![R](https://img.shields.io/badge/R%3E%3D-4.1.0-6666ff.svg?style=for-the-badge)](https://cran.r-project.org/)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.6.1-orange.svg?style=for-the-badge)](commits/master)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.6.1.9000-orange.svg?style=for-the-badge)](commits/master)
 [![license](https://img.shields.io/badge/license-GPL--3-blue.svg?style=for-the-badge)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 [![R-CMD-check](https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
@@ -45,16 +45,19 @@ You can install the development version of ohvbd from
 devtools::install_github("fwimp/ohvbd", build_vignettes = TRUE)
 ```
 
-## Latest patch notes
+## Latest release patch notes
 
 <!-- These are auto-pulled from NEWS.md  -->
 
 ### ohvbd 0.6.1
 
 - New `search_hub()` function enables searching across multiple
-  databases.
+  databases at once via [vbdhub](https://vbdhub.org).
+  - This includes new functionality for specifying searches using
+    spatial extent polygons and generally more intelligent search
+    behaviour.
 - New function `generate_vt_template()` which quickly generates a
   VecTraits template for later upload.
 
 See [changelog](https://fwimp.github.io/ohvbd/news/index.html) for patch
-notes for previous versions.
+notes for all versions.
