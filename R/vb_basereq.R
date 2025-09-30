@@ -20,9 +20,11 @@
 #' @export
 #'
 
-
-vb_basereq <- function(baseurl = "https://vectorbyte.crc.nd.edu/portal/api/", useragent = "ROHVBD", unsafe = FALSE) {
-
+vb_basereq <- function(
+  baseurl = "https://vectorbyte.crc.nd.edu/portal/api/",
+  useragent = "ROHVBD",
+  unsafe = FALSE
+) {
   if (getOption("ohvbd_compat", default = FALSE) && isFALSE(unsafe)) {
     unsafe <- TRUE
   }
@@ -54,16 +56,33 @@ vb_basereq <- function(baseurl = "https://vectorbyte.crc.nd.edu/portal/api/", us
 #' }
 
 set_ohvbd_compat <- function(value = TRUE) {
-
   if (!is_bool(value)) {
-    cli_abort(c("x" = "{.arg value} must be a boolean (TRUE/FALSE)! Provided {.val {value}}"))
+    cli_abort(c(
+      "x" = "{.arg value} must be a boolean (TRUE/FALSE)! Provided {.val {value}}"
+    ))
   }
 
   # Choice mechanism derived from ui_yep in usethis/R/utils-ui.R and https://github.com/r-lib/cli/issues/228#issuecomment-1453614104
 
   # Define choices
-  yes_choices <- c("Yes", "Definitely", "For sure", "Yup", "Yeah", "I agree", "Absolutely")
-  no_choices <- c("No way", "Not now", "Negative", "No", "Nope", "Absolutely not", "Get me out of here!")
+  yes_choices <- c(
+    "Yes",
+    "Definitely",
+    "For sure",
+    "Yup",
+    "Yeah",
+    "I agree",
+    "Absolutely"
+  )
+  no_choices <- c(
+    "No way",
+    "Not now",
+    "Negative",
+    "No",
+    "Nope",
+    "Absolutely not",
+    "Get me out of here!"
+  )
 
   # Find choices for this run
   yes_selected <- sample(yes_choices, 1)
@@ -78,16 +97,27 @@ set_ohvbd_compat <- function(value = TRUE) {
   choices_unformatted <- choices_unformatted[choice_idxs]
   choices <- choices[choice_idxs]
 
-
   if (rlang::is_interactive()) {
     cat("\n")
-    cli::cli_inform(c("x" = cli::col_red("Setting this to TRUE disables checking of SSL certificates for this session."),
-                      "",
-                      cli::col_yellow("This is technically dangerous as someone could intercept the traffic between"),
-                      cli::col_yellow("your computer and the servers and force you to download malicious payloads."),
-                      "",
-                      cli::col_yellow("You should NOT enable this unless ohvbd is not working in its standard configuration!"),
-                      "", cli::col_yellow("Do you want to proceed?"), ""))
+    cli::cli_inform(c(
+      "x" = cli::col_red(
+        "Setting this to TRUE disables checking of SSL certificates for this session."
+      ),
+      "",
+      cli::col_yellow(
+        "This is technically dangerous as someone could intercept the traffic between"
+      ),
+      cli::col_yellow(
+        "your computer and the servers and force you to download malicious payloads."
+      ),
+      "",
+      cli::col_yellow(
+        "You should NOT enable this unless ohvbd is not working in its standard configuration!"
+      ),
+      "",
+      cli::col_yellow("Do you want to proceed?"),
+      ""
+    ))
     cli::cli_ol(choices)
     cat("\n")
     repeat {
@@ -99,7 +129,6 @@ set_ohvbd_compat <- function(value = TRUE) {
     }
     selected <- as.integer(selected)
     if (selected == 0) {
-
       cli::cli_alert_danger("Cancelling...")
       return(invisible())
     }
@@ -112,6 +141,8 @@ set_ohvbd_compat <- function(value = TRUE) {
 
   # Actually do the thing
   options(ohvbd_compat = value)
-  cli_alert_success("Set compatibility mode = {.val {getOption('ohvbd_compat')}}")
+  cli_alert_success(
+    "Set compatibility mode = {.val {getOption('ohvbd_compat')}}"
+  )
   invisible(NULL)
 }

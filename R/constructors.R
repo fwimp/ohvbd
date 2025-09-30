@@ -54,7 +54,13 @@ new_ohvbd.data.frame <- function(df, db = NULL) {
   structure(df, class = c("ohvbd.data.frame", "data.frame"))
 }
 
-new_ohvbd.ad.matrix <- function(m, metric = NULL, gid = NULL, cached = NULL, db = NULL) {
+new_ohvbd.ad.matrix <- function(
+  m,
+  metric = NULL,
+  gid = NULL,
+  cached = NULL,
+  db = NULL
+) {
   if (is.null(attr(m, "metric"))) {
     stopifnot(is.character(metric))
     attr(m, "metric") <- metric
@@ -74,8 +80,16 @@ new_ohvbd.ad.matrix <- function(m, metric = NULL, gid = NULL, cached = NULL, db 
   structure(m, class = c("ohvbd.ad.matrix", class(m)))
 }
 
-new_ohvbd.hub.search <- function(l, query=NULL, searchparams=NULL) {
-  outdf <- as.data.frame(lapply(l, \(x) {c(title = x$title, doi = (x$doi %||% NA), db = x$db, type=x$type, id=x$id)}))
+new_ohvbd.hub.search <- function(l, query = NULL, searchparams = NULL) {
+  outdf <- as.data.frame(lapply(l, \(x) {
+    c(
+      title = x$title,
+      doi = (x$doi %||% NA),
+      db = x$db,
+      type = x$type,
+      id = x$id
+    )
+  }))
   outdf <- as.data.frame(t(outdf))
   rownames(outdf) <- NULL
   if (is.null(attr(outdf, "query"))) {

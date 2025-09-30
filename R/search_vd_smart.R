@@ -42,25 +42,70 @@
 #'
 
 search_vd_smart <- function(field, operator, value, basereq = NA) {
-
   if (all(is.na(basereq))) {
     basereq <- vb_basereq()
   }
 
   # Operator lookup table.
   poss_operators <- c(
-    "contains" = 1, "contain" = 1, "has" = 1, "have" = 1,
-    "!contains" = 2, "!contain" = 2, "!has" = 2, "!have" = 2, "ncontains" = 2,
-    "=" = 3, "==" = 3, "equal" = 3, "equals" = 3, "eq" = 3,
-    "!=" = 4, "not" = 4, "!equal" = 4, "!equals" = 4, "!eq" = 4, "neq" = 4,
-    "starts with" = 5, "start with" = 5, "start" = 5, "starts" = 5, "sw" = 5,
-    "not starts with" = 6, "not start with" = 6, "!start" = 6, "!starts" = 6, "nsw" = 6,
-    "in" = 7, "within" = 7,
-    "not in" = 8, "!in" = 8, "not within" = 8, "!within" = 8, "nin" = 8,
-    "greater than" = 9, "greater" = 9, "gt" = 9, ">" = 9,
-    "less than" = 10, "less" = 10, "lt" = 10, "<" = 10
+    "contains" = 1,
+    "contain" = 1,
+    "has" = 1,
+    "have" = 1,
+    "!contains" = 2,
+    "!contain" = 2,
+    "!has" = 2,
+    "!have" = 2,
+    "ncontains" = 2,
+    "=" = 3,
+    "==" = 3,
+    "equal" = 3,
+    "equals" = 3,
+    "eq" = 3,
+    "!=" = 4,
+    "not" = 4,
+    "!equal" = 4,
+    "!equals" = 4,
+    "!eq" = 4,
+    "neq" = 4,
+    "starts with" = 5,
+    "start with" = 5,
+    "start" = 5,
+    "starts" = 5,
+    "sw" = 5,
+    "not starts with" = 6,
+    "not start with" = 6,
+    "!start" = 6,
+    "!starts" = 6,
+    "nsw" = 6,
+    "in" = 7,
+    "within" = 7,
+    "not in" = 8,
+    "!in" = 8,
+    "not within" = 8,
+    "!within" = 8,
+    "nin" = 8,
+    "greater than" = 9,
+    "greater" = 9,
+    "gt" = 9,
+    ">" = 9,
+    "less than" = 10,
+    "less" = 10,
+    "lt" = 10,
+    "<" = 10
   )
-  final_operators <- c("contains", "ncontains", "eq", "neq", "sw", "nsw", "in", "nin", "gt", "lt")
+  final_operators <- c(
+    "contains",
+    "ncontains",
+    "eq",
+    "neq",
+    "sw",
+    "nsw",
+    "in",
+    "nin",
+    "gt",
+    "lt"
+  )
 
   # Translate operator to proper operator name
   operator <- tolower(operator)
@@ -68,7 +113,18 @@ search_vd_smart <- function(field, operator, value, basereq = NA) {
     final_operator <- final_operators[poss_operators[operator]]
   } else {
     # Just for warning message
-    human_operators <- c("contains", "!contains", "equals", "!equals", "starts", "!starts", "in", "!in", "greater", "less")
+    human_operators <- c(
+      "contains",
+      "!contains",
+      "equals",
+      "!equals",
+      "starts",
+      "!starts",
+      "in",
+      "!in",
+      "greater",
+      "less"
+    )
     cli_alert_warning("Operator {.val {operator}} not an allowed operator!")
     cli_rule(left = "Allowed operators")
     cli_ul(human_operators)
@@ -80,13 +136,22 @@ search_vd_smart <- function(field, operator, value, basereq = NA) {
 
   # Fields lookup table
   poss_fields <- c(
-    "speciesname" = 1, "species" = 1,
+    "speciesname" = 1,
+    "species" = 1,
     "title" = 2,
     "collections" = 3,
-    "years" = 4, "yrs" = 4,
-    "collectionmethods" = 5, "methods" = 5
+    "years" = 4,
+    "yrs" = 4,
+    "collectionmethods" = 5,
+    "methods" = 5
   )
-  final_fields <- c("SpeciesName", "Title", "Collections", "Years", "CollectionMethods")
+  final_fields <- c(
+    "SpeciesName",
+    "Title",
+    "Collections",
+    "Years",
+    "CollectionMethods"
+  )
 
   # Translate field to proper field name
   field <- tolower(field)
@@ -100,35 +165,51 @@ search_vd_smart <- function(field, operator, value, basereq = NA) {
     cli_alert_warning("Halting execution.")
     cli_abort(c("x" = "Invalid field: {.val {field}}"))
   }
-  resplist <- tryCatch({
-    resp <- basereq |>
-      req_url_path_append("vecdynbyprovider") |>
-      req_url_query("format" = "json") |>
-      req_url_query("field" = final_field) |>
-      req_url_query("operator" = final_operator) |>
-      req_url_query("term" = value) |>
-      req_perform()
-    list("resp" = resp, "err_code" = 0, "err_obj" = NULL)
-  }, error = function(e) {
-    # Get the last response instead
-    list("resp" = last_response(), "err_code" = 1, "err_obj" = e)
-  })
+  resplist <- tryCatch(
+    {
+      resp <- basereq |>
+        req_url_path_append("vecdynbyprovider") |>
+        req_url_query("format" = "json") |>
+        req_url_query("field" = final_field) |>
+        req_url_query("operator" = final_operator) |>
+        req_url_query("term" = value) |>
+        req_perform()
+      list("resp" = resp, "err_code" = 0, "err_obj" = NULL)
+    },
+    error = function(e) {
+      # Get the last response instead
+      list("resp" = last_response(), "err_code" = 1, "err_obj" = e)
+    }
+  )
 
   if (resplist$err_code == 1) {
-    if (grepl("SSL certificate problem: unable to get local issuer certificate", get_curl_err(resplist$err_obj, returnfiller = TRUE))) {
+    if (
+      grepl(
+        "SSL certificate problem: unable to get local issuer certificate",
+        get_curl_err(resplist$err_obj, returnfiller = TRUE)
+      )
+    ) {
       cat("\n")
       cli_alert_danger("Could not verify SSL certificate.")
-      cli::cli_text("You may have success running {.fn set_ohvbd_compat} and then trying again.")
+      cli::cli_text(
+        "You may have success running {.fn set_ohvbd_compat} and then trying again."
+      )
       cat("\n")
-      cli_abort("SSL certificate problem: unable to get local issuer certificate")
+      cli_abort(
+        "SSL certificate problem: unable to get local issuer certificate"
+      )
     }
-    cli_abort(c("No records found for {.val {paste(final_field, final_operator, value)}}"))
+    cli_abort(c(
+      "No records found for {.val {paste(final_field, final_operator, value)}}"
+    ))
   }
 
   body <- resplist$resp |> resp_body_json()
   if (length(body) > 2) {
     # This is a bit of a kludge, the API does not return count in the same place if no results are found
-    cli_abort(c("No records found for {.val {paste(final_field, final_operator, value)}}"))
+    cli_abort(c(
+      "No records found for {.val {paste(final_field, final_operator, value)}}"
+    ))
   } else {
     outids <- as.numeric(body$ids)
     outids <- new_ohvbd.ids(v = outids, db = "vd")

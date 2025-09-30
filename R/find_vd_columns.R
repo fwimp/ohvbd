@@ -17,29 +17,40 @@
 #'
 
 find_vd_columns <- function(full = FALSE, basereq = NA) {
-
   if (all(is.na(basereq))) {
     basereq <- vb_basereq()
   }
 
-  resplist <- tryCatch({
-    resp <- basereq |>
-      req_url_path_append("vecdyn-columns") |>
-      req_url_query("format" = "json") |>
-      req_perform()
-    list("resp" = resp, "err_code" = 0, "err_obj" = NULL)
-  }, error = function(e) {
-    # Get the last response instead
-    list("resp" = last_response(), "err_code" = 1, "err_obj" = e)
-  })
+  resplist <- tryCatch(
+    {
+      resp <- basereq |>
+        req_url_path_append("vecdyn-columns") |>
+        req_url_query("format" = "json") |>
+        req_perform()
+      list("resp" = resp, "err_code" = 0, "err_obj" = NULL)
+    },
+    error = function(e) {
+      # Get the last response instead
+      list("resp" = last_response(), "err_code" = 1, "err_obj" = e)
+    }
+  )
 
   if (resplist$err_code == 1) {
-    if (grepl("SSL certificate problem: unable to get local issuer certificate", get_curl_err(resplist$err_obj, returnfiller = TRUE))) {
+    if (
+      grepl(
+        "SSL certificate problem: unable to get local issuer certificate",
+        get_curl_err(resplist$err_obj, returnfiller = TRUE)
+      )
+    ) {
       cat("\n")
       cli_alert_danger("Could not verify SSL certificate.")
-      cli::cli_text("You may have success running {.fn set_ohvbd_compat} and then trying again.")
+      cli::cli_text(
+        "You may have success running {.fn set_ohvbd_compat} and then trying again."
+      )
       cat("\n")
-      cli_abort("SSL certificate problem: unable to get local issuer certificate")
+      cli_abort(
+        "SSL certificate problem: unable to get local issuer certificate"
+      )
     }
     cli_abort("No records found.")
   }

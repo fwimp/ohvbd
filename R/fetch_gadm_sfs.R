@@ -19,15 +19,22 @@
 #' @export
 #'
 # TODO: Check to make sure cache location is actually in the correct spot.
-fetch_gadm_sfs <- function(gid = 0, cache_location = "user", refresh_cache = FALSE, basereq = NA) {
-
+fetch_gadm_sfs <- function(
+  gid = 0,
+  cache_location = "user",
+  refresh_cache = FALSE,
+  basereq = NA
+) {
   if (all(is.na(basereq))) {
     basereq <- ad_basereq()
   }
 
   if (tolower(cache_location) == "user") {
     # Have to do some horrible path substitution to make this work nicely on windows. It may cause errors later in which case another solution may be better.
-    cache_location <- file.path(gsub("\\\\", "/", tools::R_user_dir("ohvbd", which = "cache")), "adcache")
+    cache_location <- file.path(
+      gsub("\\\\", "/", tools::R_user_dir("ohvbd", which = "cache")),
+      "adcache"
+    )
   }
 
   cachefiles <- c("gadm-countries", "gadm-states", "gadm-counties")
@@ -36,13 +43,16 @@ fetch_gadm_sfs <- function(gid = 0, cache_location = "user", refresh_cache = FAL
   outshp <- NA
 
   if (!refresh_cache) {
-    outshp <- tryCatch({
-      cli_progress_message("{cli::symbol$pointer} Loading gadm cache...")
-      vect(file.path(cache_location, paste0(target_file, ".shp")))
-    }, error =  function(e) {
-      cli_alert_warning("Loading failed.")
-      NA
-    })
+    outshp <- tryCatch(
+      {
+        cli_progress_message("{cli::symbol$pointer} Loading gadm cache...")
+        vect(file.path(cache_location, paste0(target_file, ".shp")))
+      },
+      error = function(e) {
+        cli_alert_warning("Loading failed.")
+        NA
+      }
+    )
   }
 
   if (any(!is.na(outshp))) {
@@ -52,20 +62,35 @@ fetch_gadm_sfs <- function(gid = 0, cache_location = "user", refresh_cache = FAL
   }
 
   if (refresh_cache) {
-    cli_progress_message("{cli::symbol$pointer} Caching gadm data in {.path {cache_location}}...")
+    cli_progress_message(
+      "{cli::symbol$pointer} Caching gadm data in {.path {cache_location}}..."
+    )
     final_url <- paste0(basereq, "data/gis/")
     # If not, try to retrieve from AD
     for (ext in c(".shp", ".shx", ".dbf", ".prj")) {
-      cli_progress_message("{cli::symbol$pointer} Caching {.file {paste0(target_file, ext)}} in {.path {cache_location}}...")
-      curl_download(paste0(final_url, target_file, ext), file.path(cache_location, paste0(target_file, ext)), quiet = TRUE)
-      cli_alert_success("Cached {.file {paste0(target_file, ext)}} in {.path {cache_location}}.")
+      cli_progress_message(
+        "{cli::symbol$pointer} Caching {.file {paste0(target_file, ext)}} in {.path {cache_location}}..."
+      )
+      curl_download(
+        paste0(final_url, target_file, ext),
+        file.path(cache_location, paste0(target_file, ext)),
+        quiet = TRUE
+      )
+      cli_alert_success(
+        "Cached {.file {paste0(target_file, ext)}} in {.path {cache_location}}."
+      )
     }
-    outshp <- tryCatch({
-      cli_progress_message("{cli::symbol$pointer} Loading gadm cached data...")
-      vect(file.path(cache_location, paste0(target_file, ".shp")))
-    }, error = function(e) {
-      cli_abort(c("x" = "Failed to load recently cached gadm data!"))
-    })
+    outshp <- tryCatch(
+      {
+        cli_progress_message(
+          "{cli::symbol$pointer} Loading gadm cached data..."
+        )
+        vect(file.path(cache_location, paste0(target_file, ".shp")))
+      },
+      error = function(e) {
+        cli_abort(c("x" = "Failed to load recently cached gadm data!"))
+      }
+    )
     cli_alert_success("Loaded gadm cache.")
   }
   cli_progress_done()

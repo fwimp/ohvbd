@@ -24,12 +24,22 @@
 #' @export
 #'
 
-fetch_extract_vd_chunked <- function(ids, chunksize = 20, cols = NA, returnunique = FALSE, rate = 5, connections = 2, basereq = NA) {
-
+fetch_extract_vd_chunked <- function(
+  ids,
+  chunksize = 20,
+  cols = NA,
+  returnunique = FALSE,
+  rate = 5,
+  connections = 2,
+  basereq = NA
+) {
   if (is.null(attr(ids, "db"))) {
     cli_alert_warning("IDs not necessarily from VecDyn.")
   } else if (attr(ids, "db") != "vd") {
-    cli_abort(c("x" = "IDs not from VecDyn, Please use the appropriate {.fn fetch_extract_{attr(ids, 'db')}} function.", "!" = "Detected db = {.val {attr(ids, 'db')}}"))
+    cli_abort(c(
+      "x" = "IDs not from VecDyn, Please use the appropriate {.fn fetch_extract_{attr(ids, 'db')}} function.",
+      "!" = "Detected db = {.val {attr(ids, 'db')}}"
+    ))
   }
 
   if (all(is.na(basereq))) {
@@ -38,21 +48,33 @@ fetch_extract_vd_chunked <- function(ids, chunksize = 20, cols = NA, returnuniqu
 
   if (length(ids) > 10) {
     # Preflight ssl check
-    status <- tryCatch({
-      preflight_test <- basereq |> req_perform()  # nolint: object_usage_linter
-      list("err_code" = 0, "err_obj" = NULL)
-    }, error = function(e) {
-      list("err_code" = 1, "err_obj" = e)
-    })
+    status <- tryCatch(
+      {
+        preflight_test <- basereq |> req_perform() # nolint: object_usage_linter
+        list("err_code" = 0, "err_obj" = NULL)
+      },
+      error = function(e) {
+        list("err_code" = 1, "err_obj" = e)
+      }
+    )
 
     if (status$err_code == 1) {
       curl_err <- get_curl_err(status$err_obj, returnfiller = TRUE)
-      if (grepl("SSL certificate problem: unable to get local issuer certificate", curl_err)) {
+      if (
+        grepl(
+          "SSL certificate problem: unable to get local issuer certificate",
+          curl_err
+        )
+      ) {
         cat("\n")
         cli_alert_danger("Could not verify SSL certificate.")
-        cli::cli_text("You may have success running {.fn set_ohvbd_compat} and then trying again.")
+        cli::cli_text(
+          "You may have success running {.fn set_ohvbd_compat} and then trying again."
+        )
         cat("\n")
-        cli_abort("SSL certificate problem: unable to get local issuer certificate")
+        cli_abort(
+          "SSL certificate problem: unable to get local issuer certificate"
+        )
       } else {
         cli_abort("Preflight found unknown error: {.val {curl_err}}")
       }
@@ -67,10 +89,16 @@ fetch_extract_vd_chunked <- function(ids, chunksize = 20, cols = NA, returnuniqu
   chunklets <- split(ids, chunks)
 
   # Lapply pipeline to chunk list
-  out_list <- chunklets |> lapply(\(idchunk) {
-    fetch_vd(idchunk, rate = rate, connections = connections, basereq = basereq) |>
-      extract_vd(cols = cols, returnunique = returnunique)
-  })
+  out_list <- chunklets |>
+    lapply(\(idchunk) {
+      fetch_vd(
+        idchunk,
+        rate = rate,
+        connections = connections,
+        basereq = basereq
+      ) |>
+        extract_vd(cols = cols, returnunique = returnunique)
+    })
 
   out_df <- suppressWarnings(rbindlist(out_list, fill = TRUE))
 

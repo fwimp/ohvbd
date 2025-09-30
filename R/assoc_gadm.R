@@ -30,8 +30,11 @@
 #' @export
 #'
 
-assoc_gadm <- function(df, lonlat_names = c("Longitude", "Latitude"), basereq = NA) {
-
+assoc_gadm <- function(
+  df,
+  lonlat_names = c("Longitude", "Latitude"),
+  basereq = NA
+) {
   # Remember db attr of input data
   datatype <- attr(df, "db")
 
@@ -60,41 +63,52 @@ assoc_gadm <- function(df, lonlat_names = c("Longitude", "Latitude"), basereq = 
 
   cli_progress_message("{cli::symbol$pointer} Finding distinct lonlats...")
   # Find latlons for quick processing
-  orig_lonlat <- df |> select(all_of(lonlat_names)) |> mutate_all(function(x) as.numeric(as.character(x)))
+  orig_lonlat <- df |>
+    select(all_of(lonlat_names)) |>
+    mutate_all(function(x) as.numeric(as.character(x)))
   # Make distinct points into a SpatVect
   points <- vect(orig_lonlat |> distinct(), geom = lonlat_names)
   cli_alert_success("Created search vector.")
 
   startproc <- lubridate::now()
 
-  cli_progress_message("{cli::symbol$pointer} Finding gadm names for {.val {length(points)}} latlon{?s}...")
+  cli_progress_message(
+    "{cli::symbol$pointer} Finding gadm names for {.val {length(points)}} latlon{?s}..."
+  )
   # Locate which shape each point is in and get the appropriate names for aligning with AD
 
   gadm_point_ids <- extract(gadm_sf, points)
 
   endproc <- lubridate::now()
-  totaltime <- as.duration(interval(startproc, endproc))  # nolint: object_usage_linter
+  totaltime <- as.duration(interval(startproc, endproc)) # nolint: object_usage_linter
   cli_alert_success("Found gadm names in {.val {totaltime}}.")
 
   # Deduplicate ids if necessary.
   # This probably happens when polys overlap in the shapefile
   duplicated_ids <- duplicated(gadm_point_ids$id.y)
   if (any(duplicated_ids)) {
-    cli_alert_warning("Multiple gadm id returns @ data ind{?ex/ices}: {.val {as.character(gadm_point_ids$id.y[which(duplicated_ids)])}}.")
-    cli_alert_info("Removing duplicates {col_yellow('(check the results are what you want!)')}")
+    cli_alert_warning(
+      "Multiple gadm id returns @ data ind{?ex/ices}: {.val {as.character(gadm_point_ids$id.y[which(duplicated_ids)])}}."
+    )
+    cli_alert_info(
+      "Removing duplicates {col_yellow('(check the results are what you want!)')}"
+    )
 
     # Just take the first response. It is likely that both are correct.
     ids_to_remove <- which(duplicated_ids)
     gadm_point_ids <- gadm_point_ids[-ids_to_remove, ]
   }
 
-
   gadm_point_ids <- gadm_point_ids |> select(starts_with(c("NAME", "GID")))
 
   cli_progress_message("{cli::symbol$pointer} Merging with original dataset...")
   # Recreate the original dataset at full length
 
-  gadm_point_ids <- left_join(orig_lonlat, bind_cols(orig_lonlat |> distinct(), gadm_point_ids), by = lonlat_names)
+  gadm_point_ids <- left_join(
+    orig_lonlat,
+    bind_cols(orig_lonlat |> distinct(), gadm_point_ids),
+    by = lonlat_names
+  )
 
   gadm_point_ids <- gadm_point_ids |> select(starts_with(c("NAME", "GID")))
 

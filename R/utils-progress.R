@@ -12,16 +12,22 @@ default_progress_style <- function() {
     opu <- progress_style(getOption("cli.progress_bar_style_unicode"))
     list(
       complete = opu$complete %||% opt$complete %||% "\u25A0",
-      current = opu$current %||% opt$current %||% opu$complete %||%
-        opt$complete %||% "\u25A0",
+      current = opu$current %||%
+        opt$current %||%
+        opu$complete %||%
+        opt$complete %||%
+        "\u25A0",
       incomplete = opu$incomplete %||% opt$incomplete %||% "\u00a0"
     )
   } else {
     opa <- progress_style(getOption("cli.progress_bar_style_ascii"))
     list(
       complete = opa$complete %||% opt$complete %||% "=",
-      current = opa$current %||% opt$current %||% opa$complete %||%
-        opt$complete %||% ">",
+      current = opa$current %||%
+        opt$current %||%
+        opa$complete %||%
+        opt$complete %||%
+        ">",
       incomplete = opa$incomplete %||% opt$incomplete %||% "-"
     )
   }
@@ -34,8 +40,12 @@ default_progress_style <- function() {
 #' @keywords internal
 #'
 progress_style <- function(x) {
-  if (is.null(x)) return(x)
-  if (rlang::is_string(x)) return(cli::cli_progress_styles()[[x]])
+  if (is.null(x)) {
+    return(x)
+  }
+  if (rlang::is_string(x)) {
+    return(cli::cli_progress_styles()[[x]])
+  }
   x
 }
 
@@ -70,8 +80,15 @@ progress_style <- function(x) {
 #' @export
 #'
 
-format_time_overlap_bar <- function(start, end, targets, targetrange = FALSE, twobar = FALSE, width = NA, style = list()) {
-
+format_time_overlap_bar <- function(
+  start,
+  end,
+  targets,
+  targetrange = FALSE,
+  twobar = FALSE,
+  width = NA,
+  style = list()
+) {
   if (is.na(width)) {
     width <- round(cli::console_width() * 0.5)
   }
@@ -79,7 +96,10 @@ format_time_overlap_bar <- function(start, end, targets, targetrange = FALSE, tw
   min_time <- min(c(start, end, targets))
   max_time <- max(c(start, end, targets)) + days(1)
   # Add 1 to interval length to be inclusive
-  total_seconds <- lubridate::time_length(interval(min_time, max_time), "seconds")
+  total_seconds <- lubridate::time_length(
+    interval(min_time, max_time),
+    "seconds"
+  )
   secondsperbar <- total_seconds / width
 
   def <- default_progress_style()
@@ -88,7 +108,6 @@ format_time_overlap_bar <- function(start, end, targets, targetrange = FALSE, tw
   chr_current <- style[["current"]] %||% def[["current"]]
 
   bar_source <- c(chr_incomplete, chr_complete, chr_current)
-
 
   outbar <- min_time + lubridate::seconds(seq(0, width) * secondsperbar)
   bar_intervals <- lubridate::int_diff(outbar)
@@ -106,12 +125,26 @@ format_time_overlap_bar <- function(start, end, targets, targetrange = FALSE, tw
     target_intervals <- interval(targets, targets + days(1))
     within_target <- rep(FALSE, width)
     for (i in 1:width) {
-      within_target[i] <- any(lubridate::int_overlaps(target_intervals, bar_intervals[i]))
+      within_target[i] <- any(lubridate::int_overlaps(
+        target_intervals,
+        bar_intervals[i]
+      ))
     }
   }
 
-  cat(paste0(paste0(rep(" ", 4), collapse = ""), min_time, paste0(rep(" ", width - 7), collapse = ""), max_time, "\n"))
-  cat(paste0(paste0(rep(" ", 9), collapse = ""), "|", paste0(rep(" ", width + 2), collapse = ""), "|\n"))
+  cat(paste0(
+    paste0(rep(" ", 4), collapse = ""),
+    min_time,
+    paste0(rep(" ", width - 7), collapse = ""),
+    max_time,
+    "\n"
+  ))
+  cat(paste0(
+    paste0(rep(" ", 9), collapse = ""),
+    "|",
+    paste0(rep(" ", width + 2), collapse = ""),
+    "|\n"
+  ))
 
   if (twobar) {
     # Generate bar dates
@@ -129,7 +162,12 @@ format_time_overlap_bar <- function(start, end, targets, targetrange = FALSE, tw
     cat("\n")
   } else {
     # Onebar mode
-    onebar_source <- c(chr_incomplete, cli::col_green(chr_complete), cli::col_red(chr_complete), cli::col_blue(chr_complete))
+    onebar_source <- c(
+      chr_incomplete,
+      cli::col_green(chr_complete),
+      cli::col_red(chr_complete),
+      cli::col_blue(chr_complete)
+    )
     # Functionally convert bars into a 2 bit bitmap when summed
     # 0 = nothing, 1 = coverage, 2 = target, 3 = both
     coverage_bar_numeric <- as.numeric(within_coverage)
@@ -141,7 +179,16 @@ format_time_overlap_bar <- function(start, end, targets, targetrange = FALSE, tw
     cat(paste0(onebar_source[final_bar + 1], collapse = ""))
     cat(" |")
     cat("\n")
-    cat(paste0(onebar_source[1], " = No dates, ", onebar_source[2], " = Data only, ", onebar_source[3], " = Target only, ", onebar_source[4], " = Overlap"))
+    cat(paste0(
+      onebar_source[1],
+      " = No dates, ",
+      onebar_source[2],
+      " = Data only, ",
+      onebar_source[3],
+      " = Target only, ",
+      onebar_source[4],
+      " = Overlap"
+    ))
   }
   cat("\n")
   invisible(NULL)

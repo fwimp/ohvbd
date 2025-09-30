@@ -17,7 +17,7 @@ print.ohvbd.data.frame <- function(x, ...) {
 }
 
 #' @export
-print.ohvbd.ad.matrix <- function(x, ..., full=FALSE) {
+print.ohvbd.ad.matrix <- function(x, ..., full = FALSE) {
   # Possibly worthwhile moving most of this to a new summary.ohvbd.ad.matrix function?
   # If attr is null, default to <missing>
   metric <- attr(x, 'metric') %||% '<missing>'
@@ -32,16 +32,20 @@ print.ohvbd.ad.matrix <- function(x, ..., full=FALSE) {
     cat(paste("Locations:", nrow(x), "\n"))
     if (full) {
       cat("Data:\n")
-      NextMethod(object=matrix())
+      NextMethod(object = matrix())
     }
   } else {
-    cli::cli_text("Areadata matrix for {.val {metric}} at gid level {.val {gid}}.")
+    cli::cli_text(
+      "Areadata matrix for {.val {metric}} at gid level {.val {gid}}."
+    )
     cli::cli_text("Cached: {.val {cached}}")
-    cli::cli_text("Dates: {.val {startdate}} -> {.val {enddate}} ({.val {ncol(x)}})")
+    cli::cli_text(
+      "Dates: {.val {startdate}} -> {.val {enddate}} ({.val {ncol(x)}})"
+    )
     cli::cli_text("Locations: {.val {nrow(x)}}")
     if (full) {
       cli::cli_h1("Data")
-      NextMethod(object=matrix())
+      NextMethod(object = matrix())
     }
   }
   invisible(x)
@@ -50,7 +54,7 @@ print.ohvbd.ad.matrix <- function(x, ..., full=FALSE) {
 #' @export
 print.ohvbd.hub.search <- function(x, ...) {
   cli::cat_line(cli::format_inline("{.cls {class(x)[1]}}"))
-  cat(paste0("Rows: ", nrow(x) , ", Query: ", attr(x, "query"), "\n"))
+  cat(paste0("Rows: ", nrow(x), ", Query: ", attr(x, "query"), "\n"))
   print(as.data.frame(x))
   invisible(x)
 }
@@ -88,20 +92,37 @@ summary.ohvbd.hub.search <- function(object, ...) {
 #' \dontrun{
 #' find_vt_ids() |> fetch()
 #' }
-fetch <- function(ids, ..., rate = 5, connections = 2, db = NULL, basereq = NA) {
+fetch <- function(
+  ids,
+  ...,
+  rate = 5,
+  connections = 2,
+  db = NULL,
+  basereq = NA
+) {
   UseMethod("fetch")
 }
 
 #' @export
-fetch.ohvbd.ids <- function(ids, ..., rate = 5, connections = 2, db = NULL, basereq = NA) {
+fetch.ohvbd.ids <- function(
+  ids,
+  ...,
+  rate = 5,
+  connections = 2,
+  db = NULL,
+  basereq = NA
+) {
   if (is.null(db)) {
     # If not overriding db, just use the one provided
     db <- attr(ids, "db")
   }
-  finalfun <- switch(db,
-                     "vt" = fetch_vt,
-                     "vd" = fetch_vd,
-                     cli::cli_abort("No method to fetch data from DB {.val {db}} for class{?es} {.cls {class(x)}}")
+  finalfun <- switch(
+    db,
+    "vt" = fetch_vt,
+    "vd" = fetch_vd,
+    cli::cli_abort(
+      "No method to fetch data from DB {.val {db}} for class{?es} {.cls {class(x)}}"
+    )
   )
   return(finalfun(ids, rate, connections, basereq))
 }
@@ -128,21 +149,37 @@ extract <- function(res, ...) {
 }
 
 #' @export
-extract.ohvbd.responses <- function(res, ..., cols = NA, returnunique = FALSE, db = NULL) {
+extract.ohvbd.responses <- function(
+  res,
+  ...,
+  cols = NA,
+  returnunique = FALSE,
+  db = NULL
+) {
   if (is.null(db)) {
     # If not overriding db, just use the one provided
     db <- attr(res, "db")
   }
-  finalfun <- switch(db,
-                     "vt" = extract_vt,
-                     "vd" = extract_vd,
-                     cli::cli_abort("No method to fetch data from DB {.val {db}} for class{?es} {.cls {class(x)}}")
+  finalfun <- switch(
+    db,
+    "vt" = extract_vt,
+    "vd" = extract_vd,
+    cli::cli_abort(
+      "No method to fetch data from DB {.val {db}} for class{?es} {.cls {class(x)}}"
+    )
   )
   return(finalfun(res, cols, returnunique))
 }
 
 #' @export
-extract.ohvbd.ad.matrix <- function(res, ..., targetdate = NA, enddate = NA, places = NA, gid = NA) {
+extract.ohvbd.ad.matrix <- function(
+  res,
+  ...,
+  targetdate = NA,
+  enddate = NA,
+  places = NA,
+  gid = NA
+) {
   db <- attr(res, "db")
   return(extract_ad(res, targetdate, enddate, places, gid))
 }

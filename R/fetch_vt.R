@@ -22,13 +22,15 @@
 #'
 
 fetch_vt <- function(ids, rate = 5, connections = 2, basereq = NA) {
-
   max_conns <- 8
 
   if (is.null(attr(ids, "db"))) {
     cli_alert_warning("IDs not necessarily from VecTraits.")
   } else if (attr(ids, "db") != "vt") {
-    cli_abort(c("x" = "IDs not from VecTraits, Please use the {.fn fetch_{attr(ids, 'db')}} function.", "!" = "Detected db = {.val {attr(ids, 'db')}}"))
+    cli_abort(c(
+      "x" = "IDs not from VecTraits, Please use the {.fn fetch_{attr(ids, 'db')}} function.",
+      "!" = "Detected db = {.val {attr(ids, 'db')}}"
+    ))
   }
 
   if (all(is.na(basereq))) {
@@ -37,21 +39,33 @@ fetch_vt <- function(ids, rate = 5, connections = 2, basereq = NA) {
 
   if (length(ids) > 10) {
     # Preflight ssl check
-    status <- tryCatch({
-      preflight_test <- basereq |> req_perform()  # nolint: object_usage_linter
-      list("err_code" = 0, "err_obj" = NULL)
-    }, error = function(e) {
-      list("err_code" = 1, "err_obj" = e)
-    })
+    status <- tryCatch(
+      {
+        preflight_test <- basereq |> req_perform() # nolint: object_usage_linter
+        list("err_code" = 0, "err_obj" = NULL)
+      },
+      error = function(e) {
+        list("err_code" = 1, "err_obj" = e)
+      }
+    )
 
     if (status$err_code == 1) {
       curl_err <- get_curl_err(status$err_obj)
-      if (grepl("SSL certificate problem: unable to get local issuer certificate", curl_err)) {
+      if (
+        grepl(
+          "SSL certificate problem: unable to get local issuer certificate",
+          curl_err
+        )
+      ) {
         cat("\n")
         cli_alert_danger("Could not verify SSL certificate.")
-        cli::cli_text("You may have success running {.fn set_ohvbd_compat} and then trying again.")
+        cli::cli_text(
+          "You may have success running {.fn set_ohvbd_compat} and then trying again."
+        )
         cat("\n")
-        cli_abort("SSL certificate problem: unable to get local issuer certificate")
+        cli_abort(
+          "SSL certificate problem: unable to get local issuer certificate"
+        )
       } else {
         cli_abort("Preflight found unknown error: {.val {curl_err}}")
       }
@@ -59,25 +73,33 @@ fetch_vt <- function(ids, rate = 5, connections = 2, basereq = NA) {
   }
 
   # ids_to_find can be a single number or a vector and this works just fine!
-  reqs <- ids |> lapply(\(id) {
-    basereq |>
-      req_url_path_append("vectraits-dataset") |>
-      req_url_path_append(id) |>
-      req_url_query("format" = "json") |>
-      req_error(body = vt_error_body) |>
-      req_headers(ohvbd = id) |>  # Add additional header just so we can nicely handle failures
-      req_throttle(rate)
-  })
+  reqs <- ids |>
+    lapply(\(id) {
+      basereq |>
+        req_url_path_append("vectraits-dataset") |>
+        req_url_path_append(id) |>
+        req_url_query("format" = "json") |>
+        req_error(body = vt_error_body) |>
+        req_headers(ohvbd = id) |> # Add additional header just so we can nicely handle failures
+        req_throttle(rate)
+    })
 
   if (connections > max_conns) {
-    cli_alert_warning("No more than {.val {max_conns}} simultaneous connection{?s} allowed!")
+    cli_alert_warning(
+      "No more than {.val {max_conns}} simultaneous connection{?s} allowed!"
+    )
     cli_alert_info("Restricting to {.val {max_conns}} connection{?s}.")
     connections <- max_conns
   }
-  resps <- reqs |> req_perform_parallel(on_error = "continue", max_active = connections, progress = list(
-    name = "Vectraits Data",
-    format = "Downloading {cli::pb_name} {cli::pb_current}/{cli::pb_total} {cli::pb_bar} {cli::pb_percent} | ETA: {cli::pb_eta}"
-  ))
+  resps <- reqs |>
+    req_perform_parallel(
+      on_error = "continue",
+      max_active = connections,
+      progress = list(
+        name = "Vectraits Data",
+        format = "Downloading {cli::pb_name} {cli::pb_current}/{cli::pb_total} {cli::pb_bar} {cli::pb_percent} | ETA: {cli::pb_eta}"
+      )
+    )
 
   fails <- resps |> httr2::resps_failures()
 
@@ -99,14 +121,25 @@ fetch_vt <- function(ids, rate = 5, connections = 2, basereq = NA) {
   if (length(fails) >= length(resps)) {
     # Only got errors!
     # Test to see if we got only a bunch of ssl errors
-    if (any(grepl("SSL certificate problem: unable to get local issuer certificate", unlist(lapply(resps, get_curl_err, returnfiller = TRUE))))) {
+    if (
+      any(grepl(
+        "SSL certificate problem: unable to get local issuer certificate",
+        unlist(lapply(resps, get_curl_err, returnfiller = TRUE))
+      ))
+    ) {
       cat("\n")
       cli_alert_danger("Could not verify SSL certificate.")
-      cli::cli_text("You may have success running {.fn set_ohvbd_compat} and then trying again.")
+      cli::cli_text(
+        "You may have success running {.fn set_ohvbd_compat} and then trying again."
+      )
       cat("\n")
-      cli_abort("SSL certificate problem: unable to get local issuer certificate")
+      cli_abort(
+        "SSL certificate problem: unable to get local issuer certificate"
+      )
     }
-    cli_alert_warning("No records retrieved (are you sure the IDs are correct?).")
+    cli_alert_warning(
+      "No records retrieved (are you sure the IDs are correct?)."
+    )
   }
 
   resps <- new_ohvbd.responses(l = resps, db = "vt")

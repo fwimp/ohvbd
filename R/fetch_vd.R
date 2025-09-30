@@ -22,13 +22,15 @@
 #'
 
 fetch_vd <- function(ids, rate = 5, connections = 2, basereq = NA) {
-
   max_conns <- 8
 
   if (is.null(attr(ids, "db"))) {
     cli_alert_warning("IDs not necessarily from VecDyn.")
   } else if (attr(ids, "db") != "vd") {
-    cli_abort(c("x" = "IDs not from VecDyn, Please use the {.fn fetch_{attr(ids, 'db')}} function.", "!" = "Detected db = {.val {attr(ids, 'db')}}"))
+    cli_abort(c(
+      "x" = "IDs not from VecDyn, Please use the {.fn fetch_{attr(ids, 'db')}} function.",
+      "!" = "Detected db = {.val {attr(ids, 'db')}}"
+    ))
   }
 
   if (all(is.na(basereq))) {
@@ -37,21 +39,33 @@ fetch_vd <- function(ids, rate = 5, connections = 2, basereq = NA) {
 
   if (length(ids) > 10) {
     # Preflight ssl check
-    status <- tryCatch({
-      preflight_test <- basereq |> req_perform()  # nolint: object_usage_linter
-      list("err_code" = 0, "err_obj" = NULL)
-    }, error = function(e) {
-      list("err_code" = 1, "err_obj" = e)
-    })
+    status <- tryCatch(
+      {
+        preflight_test <- basereq |> req_perform() # nolint: object_usage_linter
+        list("err_code" = 0, "err_obj" = NULL)
+      },
+      error = function(e) {
+        list("err_code" = 1, "err_obj" = e)
+      }
+    )
 
     if (status$err_code == 1) {
       curl_err <- get_curl_err(status$err_obj, returnfiller = TRUE)
-      if (grepl("SSL certificate problem: unable to get local issuer certificate", curl_err)) {
+      if (
+        grepl(
+          "SSL certificate problem: unable to get local issuer certificate",
+          curl_err
+        )
+      ) {
         cat("\n")
         cli_alert_danger("Could not verify SSL certificate.")
-        cli::cli_text("You may have success running {.fn set_ohvbd_compat} and then trying again.")
+        cli::cli_text(
+          "You may have success running {.fn set_ohvbd_compat} and then trying again."
+        )
         cat("\n")
-        cli_abort("SSL certificate problem: unable to get local issuer certificate")
+        cli_abort(
+          "SSL certificate problem: unable to get local issuer certificate"
+        )
       } else {
         cli_abort("Preflight found unknown error: {.val {curl_err}}")
       }
@@ -60,26 +74,48 @@ fetch_vd <- function(ids, rate = 5, connections = 2, basereq = NA) {
   resp_parsed <- fetch_vd_counts(ids, rate, connections, 50, basereq)
   cli::cli_alert_info("Found {.val {sum(resp_parsed$num)}} row{?s} of data.")
   # Found by fitting an exponential using nls to the performance benchmarks
-  predicted_time <- lubridate::as.duration(lubridate::seconds(ceiling(sum(resp_parsed$num) * (0.01340331 * exp(-0.32535609*min(connections, 5))))))  # nolint: object_usage_linter
+  predicted_time <- lubridate::as.duration(lubridate::seconds(ceiling(
+    sum(resp_parsed$num) * (0.01340331 * exp(-0.32535609 * min(connections, 5)))
+  ))) # nolint: object_usage_linter
   cli::cli_alert_info("Predicted to take ~{.val {predicted_time}}.")
 
-  basereq_url <- basereq$url  # Should always be set!
+  basereq_url <- basereq$url # Should always be set!
   basereq_useragent <- basereq$options$useragent %||% ""
   basereq_unsafe <- !is.null(basereq$options$ssl_verifypeer)
 
   # Construct a df containing one row with all appropriate params for each request, and then generate reqs for parallel requesting
-  reqs_df <- resp_parsed |> dplyr::group_by(.data$id) |> dplyr::mutate(pages = list(seq(1, .data$pages))) |> tidyr::unnest(cols = c(.data$pages)) |> dplyr::ungroup()
-  reqs <- mapply(vd_make_req, reqs_df$id, reqs_df$pages, 5, basereq_url, basereq_useragent, basereq_unsafe, SIMPLIFY = FALSE)
+  reqs_df <- resp_parsed |>
+    dplyr::group_by(.data$id) |>
+    dplyr::mutate(pages = list(seq(1, .data$pages))) |>
+    tidyr::unnest(cols = c(.data$pages)) |>
+    dplyr::ungroup()
+  reqs <- mapply(
+    vd_make_req,
+    reqs_df$id,
+    reqs_df$pages,
+    5,
+    basereq_url,
+    basereq_useragent,
+    basereq_unsafe,
+    SIMPLIFY = FALSE
+  )
 
   if (connections > max_conns) {
-    cli_alert_warning("No more than {.val {max_conns}} simultaneous connection{?s} allowed!")
+    cli_alert_warning(
+      "No more than {.val {max_conns}} simultaneous connection{?s} allowed!"
+    )
     cli_alert_info("Restricting to {.val {max_conns}} connection{?s}.")
     connections <- max_conns
   }
-  resps <- reqs |> req_perform_parallel(on_error = "continue", max_active = connections, progress = list(
-    name = "VecDyn Data",
-    format = "Downloading {cli::pb_name} {cli::pb_current}/{cli::pb_total} {cli::pb_bar} {cli::pb_percent} | ETA: {cli::pb_eta}"
-  ))  # Currently custom formatting for the progress bar does not work (https://github.com/r-lib/httr2/issues/752)
+  resps <- reqs |>
+    req_perform_parallel(
+      on_error = "continue",
+      max_active = connections,
+      progress = list(
+        name = "VecDyn Data",
+        format = "Downloading {cli::pb_name} {cli::pb_current}/{cli::pb_total} {cli::pb_bar} {cli::pb_percent} | ETA: {cli::pb_eta}"
+      )
+    ) # Currently custom formatting for the progress bar does not work (https://github.com/r-lib/httr2/issues/752)
 
   fails <- resps |> httr2::resps_failures()
 
@@ -92,7 +128,9 @@ fetch_vd <- function(ids, rate = 5, connections = 2, basereq = NA) {
 
     # Need an extra check here because failed VD calls don't become 404s.
     if (length(missing) >= length(resps)) {
-      cli_alert_warning("No records retrieved (are you sure the IDs are correct?).")
+      cli_alert_warning(
+        "No records retrieved (are you sure the IDs are correct?)."
+      )
     }
   }
 
@@ -106,14 +144,25 @@ fetch_vd <- function(ids, rate = 5, connections = 2, basereq = NA) {
   if (length(fails) >= length(resps)) {
     # Only got errors!
     # Test to see if we got only a bunch of ssl errors
-    if (any(grepl("SSL certificate problem: unable to get local issuer certificate", unlist(lapply(resps, get_curl_err))))) {
+    if (
+      any(grepl(
+        "SSL certificate problem: unable to get local issuer certificate",
+        unlist(lapply(resps, get_curl_err))
+      ))
+    ) {
       cat("\n")
       cli_alert_danger("Could not verify SSL certificate.")
-      cli::cli_text("You may have success running {.fn set_ohvbd_compat} and then trying again.")
+      cli::cli_text(
+        "You may have success running {.fn set_ohvbd_compat} and then trying again."
+      )
       cat("\n")
-      cli_abort("SSL certificate problem: unable to get local issuer certificate")
+      cli_abort(
+        "SSL certificate problem: unable to get local issuer certificate"
+      )
     }
-    cli_alert_warning("No records retrieved (are you sure the IDs are correct?).")
+    cli_alert_warning(
+      "No records retrieved (are you sure the IDs are correct?)."
+    )
   }
 
   resps <- new_ohvbd.responses(l = resps, db = "vd")

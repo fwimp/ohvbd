@@ -52,10 +52,15 @@
 #' @export
 #'
 
-
-
-assoc_ad <- function(data, areadata, targetdate = NA, enddate = NA, gid = 0, lonlat_names = c("Longitude", "Latitude"), basereq = NA) {
-
+assoc_ad <- function(
+  data,
+  areadata,
+  targetdate = NA,
+  enddate = NA,
+  gid = 0,
+  lonlat_names = c("Longitude", "Latitude"),
+  basereq = NA
+) {
   # Remember db attr of input data
   datatype <- attr(data, "db")
 
@@ -65,7 +70,10 @@ assoc_ad <- function(data, areadata, targetdate = NA, enddate = NA, gid = 0, lon
   if (is.null(attr(areadata, "db"))) {
     cli_alert_warning("{.arg areadata} not necessarily from AREAdata.")
   } else if (attr(areadata, "db") != "ad") {
-    cli_abort(c("x" = "{.arg areadata} not from AREAdata!", "!" = "Detected db = {.val {attr(areadata, 'db')}}"))
+    cli_abort(c(
+      "x" = "{.arg areadata} not from AREAdata!",
+      "!" = "Detected db = {.val {attr(areadata, 'db')}}"
+    ))
   }
 
   # TODO: Fix this to be in the same form (or just to use) assoc_gadm()
@@ -96,7 +104,9 @@ assoc_ad <- function(data, areadata, targetdate = NA, enddate = NA, gid = 0, lon
 
   # Find latlons for quick processing
   cli::cli_progress_message("Selecting latlons...")
-  orig_lonlat <- data |> select(all_of(lonlat_names)) |> mutate_all(function(x) as.numeric(as.character(x)))
+  orig_lonlat <- data |>
+    select(all_of(lonlat_names)) |>
+    mutate_all(function(x) as.numeric(as.character(x)))
 
   # Make distinct points into a SpatVect
   cli::cli_progress_message("Casting lonlat points to vector...")
@@ -111,17 +121,29 @@ assoc_ad <- function(data, areadata, targetdate = NA, enddate = NA, gid = 0, lon
   # Prepare the names for association
   gadm_point_ids[, final_name] <- gsub(" ", "_", gadm_point_ids[, final_name])
 
-
   # Recreate the original dataset at full length
   cli::cli_progress_message("Lengthening point data...")
-  gadm_point_ids <- left_join(orig_lonlat, bind_cols(orig_lonlat |> distinct(), gadm_point_ids), by = lonlat_names)
+  gadm_point_ids <- left_join(
+    orig_lonlat,
+    bind_cols(orig_lonlat |> distinct(), gadm_point_ids),
+    by = lonlat_names
+  )
 
   # Get only the unique entries (no NAs)
-  places <- gadm_point_ids |> select(any_of(final_name)) |> na.omit() |> unique()
+  places <- gadm_point_ids |>
+    select(any_of(final_name)) |>
+    na.omit() |>
+    unique()
 
   # Pull out the data from AD
   cli::cli_progress_message("Extracting AD data...")
-  ad_extracted <- areadata |> extract_ad(targetdate = targetdate, enddate = enddate, places = places[, final_name], gid = gid)
+  ad_extracted <- areadata |>
+    extract_ad(
+      targetdate = targetdate,
+      enddate = enddate,
+      places = places[, final_name],
+      gid = gid
+    )
 
   # Detect if AD_extracted is 1D, if so then just make a data frame, with a new column called final_name and the value being the unique of places
   # This should PROBABLY be handled by extract_ad
@@ -135,7 +157,12 @@ assoc_ad <- function(data, areadata, targetdate = NA, enddate = NA, gid = 0, lon
 
   # Make extracted data the same length as the original data
   cli::cli_progress_done(result = "Done!")
-  suppressMessages(final_extract <- left_join(select(gadm_point_ids, any_of(final_name)), ad_extracted))
+  suppressMessages(
+    final_extract <- left_join(
+      select(gadm_point_ids, any_of(final_name)),
+      ad_extracted
+    )
+  )
 
   # Get rid of joining column
   final_extract <- final_extract |> select(-one_of(final_name))
@@ -144,7 +171,8 @@ assoc_ad <- function(data, areadata, targetdate = NA, enddate = NA, gid = 0, lon
   outdata <- bind_cols(data, final_extract)
 
   # Rename the AD variables based upon their metric
-  outdata <- outdata |> rename_with(~ gsub("X", paste0(metric, "_"), .), starts_with("X"))
+  outdata <- outdata |>
+    rename_with(~ gsub("X", paste0(metric, "_"), .), starts_with("X"))
   # When only one metric col is found, just name it as the metric
   if (ncol(final_extract) == 1) {
     colnames(outdata) <- c(colnames(outdata)[1:length(outdata) - 1], metric) # nolint: seq_linter

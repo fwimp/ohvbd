@@ -68,14 +68,22 @@
 #' @export
 #'
 
-extract_ad <- function(ad_matrix, targetdate = NA, enddate = NA, places = NA, gid = NA) {
-
+extract_ad <- function(
+  ad_matrix,
+  targetdate = NA,
+  enddate = NA,
+  places = NA,
+  gid = NA
+) {
   # Enddate SHOULD BE EXCLUSIVE
 
   if (is.null(attr(ad_matrix, "db"))) {
     cli_alert_warning("Data not necessarily from AREAdata.")
   } else if (attr(ad_matrix, "db") != "ad") {
-    cli_abort(c("x" = "Data not from AREAdata, Please use the appropriate {.fn extract_{attr(ad_matrix, 'db')}} function.", "!" = "Detected db = {.val {attr(ad_matrix, 'db')}}"))
+    cli_abort(c(
+      "x" = "Data not from AREAdata, Please use the appropriate {.fn extract_{attr(ad_matrix, 'db')}} function.",
+      "!" = "Detected db = {.val {attr(ad_matrix, 'db')}}"
+    ))
   }
 
   # try to infer gid from ad_matrix
@@ -89,10 +97,14 @@ extract_ad <- function(ad_matrix, targetdate = NA, enddate = NA, places = NA, gi
 
   metric <- attr(ad_matrix, "metric")
   if (metric == "popdens") {
-    cli_alert_warning("Dataset appears to be Population Density! This does not need extracting.")
+    cli_alert_warning(
+      "Dataset appears to be Population Density! This does not need extracting."
+    )
     return(ad_matrix)
   } else if (metric == "forecast") {
-    cli_alert_warning("Dataset appears to be a Forecast! This is not currently processed by the extractor.")
+    cli_alert_warning(
+      "Dataset appears to be a Forecast! This is not currently processed by the extractor."
+    )
     return(ad_matrix)
   }
 
@@ -119,12 +131,16 @@ extract_ad <- function(ad_matrix, targetdate = NA, enddate = NA, places = NA, gi
       date_filterlevel <- "months"
       if (any(is.na(targetdate_final))) {
         # Maybe it's a YYYY
-        suppressWarnings(targetdate_final <- as_date(paste0(targetdate, "-01-01")))
+        suppressWarnings(
+          targetdate_final <- as_date(paste0(targetdate, "-01-01"))
+        )
         date_filterlevel <- "years"
         if (any(is.na(targetdate_final))) {
           # Dunno, stop filtering date
           filter_date <- FALSE
-          cli_alert_warning("Could not make {.val {targetdate}} into a usable date.")
+          cli_alert_warning(
+            "Could not make {.val {targetdate}} into a usable date."
+          )
           cli_alert_warning("Not filtering by date.")
           cli_alert_info("Try ISO 8601 {.val yyyy-mm-dd} format")
         }
@@ -141,11 +157,15 @@ extract_ad <- function(ad_matrix, targetdate = NA, enddate = NA, places = NA, gi
           suppressWarnings(enddate_final <- as_date(paste0(enddate, "-01")))
           if (is.na(enddate_final)) {
             # Maybe it's a YYYY
-            suppressWarnings(enddate_final <- as_date(paste0(enddate, "-01-01")))
+            suppressWarnings(
+              enddate_final <- as_date(paste0(enddate, "-01-01"))
+            )
             if (is.na(enddate_final)) {
               # Dunno, infer enddate
               infer_enddate <- TRUE
-              cli_alert_warning("Could not make {.val targetdate} into a usable date.")
+              cli_alert_warning(
+                "Could not make {.val targetdate} into a usable date."
+              )
               cli_alert_warning("Inferring end date from {.arg targetdate}.")
               cli_alert_info("Try ISO 8601 {.val yyyy-mm-dd} format")
             }
@@ -164,15 +184,33 @@ extract_ad <- function(ad_matrix, targetdate = NA, enddate = NA, places = NA, gi
       enddate_final <- enddate_final - days(1)
 
       # Actually find the columns
-      selected_cols <- which(present_dates %within% interval(targetdate_final, enddate_final))
+      selected_cols <- which(
+        present_dates %within% interval(targetdate_final, enddate_final)
+      )
 
       if (length(selected_cols) <= 0) {
         if (targetdate_final == enddate_final) {
-          format_time_overlap_bar(min(present_dates), max(present_dates), targetdate_final, targetrange = FALSE, twobar = TRUE)
-          cli_abort(c("x" = "Date {.val {targetdate_final}} outside of data range {.val {min(present_dates)}} -> {.val {max(present_dates)}}!"))
+          format_time_overlap_bar(
+            min(present_dates),
+            max(present_dates),
+            targetdate_final,
+            targetrange = FALSE,
+            twobar = TRUE
+          )
+          cli_abort(c(
+            "x" = "Date {.val {targetdate_final}} outside of data range {.val {min(present_dates)}} -> {.val {max(present_dates)}}!"
+          ))
         } else {
-          format_time_overlap_bar(min(present_dates), max(present_dates), c(targetdate_final, enddate_final), targetrange = TRUE, twobar = TRUE)
-          cli_abort(c("x" = "Inclusive interval {.val {targetdate_final}} -> {.val {enddate_final}} outside of data range {.val {min(present_dates)}} -> {.val {max(present_dates)}}!"))
+          format_time_overlap_bar(
+            min(present_dates),
+            max(present_dates),
+            c(targetdate_final, enddate_final),
+            targetrange = TRUE,
+            twobar = TRUE
+          )
+          cli_abort(c(
+            "x" = "Inclusive interval {.val {targetdate_final}} -> {.val {enddate_final}} outside of data range {.val {min(present_dates)}} -> {.val {max(present_dates)}}!"
+          ))
         }
       }
     } else {
@@ -181,11 +219,21 @@ extract_ad <- function(ad_matrix, targetdate = NA, enddate = NA, places = NA, gi
         selected_cols <- which(present_dates %in% targetdate_final)
         # Check if anything was selected. If not then throw error as none of the selected cols are in the AD data
         if (length(selected_cols) <= 0) {
-          format_time_overlap_bar(min(present_dates), max(present_dates), targetdate_final, targetrange = FALSE, twobar = TRUE)
-          cli_abort(c("x" = "Dates {.val {targetdate_final}} entirely outside of data range {.val {min(present_dates)}} -> {.val {max(present_dates)}}!"))
+          format_time_overlap_bar(
+            min(present_dates),
+            max(present_dates),
+            targetdate_final,
+            targetrange = FALSE,
+            twobar = TRUE
+          )
+          cli_abort(c(
+            "x" = "Dates {.val {targetdate_final}} entirely outside of data range {.val {min(present_dates)}} -> {.val {max(present_dates)}}!"
+          ))
         }
       } else {
-        cli_abort(c("x" = "Incomplete dates in {.arg targetdate} vector: {.val {targetdate}}"))
+        cli_abort(c(
+          "x" = "Incomplete dates in {.arg targetdate} vector: {.val {targetdate}}"
+        ))
       }
     }
   }
@@ -205,7 +253,13 @@ extract_ad <- function(ad_matrix, targetdate = NA, enddate = NA, places = NA, gi
 
   outmat <- ad_matrix[selected_rows, selected_cols]
   if (inherits(outmat, "matrix")) {
-    outmat <- new_ohvbd.ad.matrix(m = outmat, metric = metric, gid = gid, cached = attr(ad_matrix, "cached"), db = "ad")
+    outmat <- new_ohvbd.ad.matrix(
+      m = outmat,
+      metric = metric,
+      gid = gid,
+      cached = attr(ad_matrix, "cached"),
+      db = "ad"
+    )
   } else {
     attr(outmat, "db") <- "ad"
   }

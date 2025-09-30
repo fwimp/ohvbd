@@ -68,7 +68,13 @@
 #' @export
 #'
 
-extract_ad_data <- function(ad_matrix, targetdate = NA, enddate = NA, places = NA, gid = NA) {
+extract_ad_data <- function(
+  ad_matrix,
+  targetdate = NA,
+  enddate = NA,
+  places = NA,
+  gid = NA
+) {
   # Enddate SHOULD BE EXCLUSIVE
 
   # try to infer gid from ad_matrix
@@ -82,10 +88,14 @@ extract_ad_data <- function(ad_matrix, targetdate = NA, enddate = NA, places = N
 
   metric <- attr(ad_matrix, "metric")
   if (metric == "popdens") {
-    cli_alert_warning("Dataset appears to be Population Density! This does not need extracting.")
+    cli_alert_warning(
+      "Dataset appears to be Population Density! This does not need extracting."
+    )
     return(ad_matrix)
   } else if (metric == "popdens") {
-    cli_alert_warning("Dataset appears to be a Forecast! This is not currently processed by the extractor.")
+    cli_alert_warning(
+      "Dataset appears to be a Forecast! This is not currently processed by the extractor."
+    )
     return(ad_matrix)
   }
 
@@ -112,12 +122,16 @@ extract_ad_data <- function(ad_matrix, targetdate = NA, enddate = NA, places = N
       date_filterlevel <- "months"
       if (any(is.na(targetdate_final))) {
         # Maybe it's a YYYY
-        suppressWarnings(targetdate_final <- as_date(paste0(targetdate, "-01-01")))
+        suppressWarnings(
+          targetdate_final <- as_date(paste0(targetdate, "-01-01"))
+        )
         date_filterlevel <- "years"
         if (any(is.na(targetdate_final))) {
           # Dunno, stop filtering date
           filter_date <- FALSE
-          cli_alert_warning("Could not make {.val {targetdate}} into a usable date.")
+          cli_alert_warning(
+            "Could not make {.val {targetdate}} into a usable date."
+          )
           cli_alert_warning("Not filtering by date.")
           cli_alert_info("Try ISO 8601 {.val yyyy-mm-dd} format")
         }
@@ -134,11 +148,15 @@ extract_ad_data <- function(ad_matrix, targetdate = NA, enddate = NA, places = N
           suppressWarnings(enddate_final <- as_date(paste0(enddate, "-01")))
           if (is.na(enddate_final)) {
             # Maybe it's a YYYY
-            suppressWarnings(enddate_final <- as_date(paste0(enddate, "-01-01")))
+            suppressWarnings(
+              enddate_final <- as_date(paste0(enddate, "-01-01"))
+            )
             if (is.na(enddate_final)) {
               # Dunno, infer enddate
               infer_enddate <- TRUE
-              cli_alert_warning("Could not make {.val targetdate} into a usable date.")
+              cli_alert_warning(
+                "Could not make {.val targetdate} into a usable date."
+              )
               cli_alert_warning("Inferring end date from {.arg targetdate}.")
               cli_alert_info("Try ISO 8601 {.val yyyy-mm-dd} format")
             }
@@ -156,13 +174,17 @@ extract_ad_data <- function(ad_matrix, targetdate = NA, enddate = NA, places = N
       # Convert enddate to inclusive spec
       enddate_final <- enddate_final - days(1)
       # Actually find the columns
-      selected_cols <- which(present_dates %within% interval(targetdate_final, enddate_final))
+      selected_cols <- which(
+        present_dates %within% interval(targetdate_final, enddate_final)
+      )
     } else {
       if (date_filterlevel == "days") {
         # If it's a vector of dates then just check if they're present
         selected_cols <- which(present_dates %in% targetdate_final)
       } else {
-        cli_abort(c("x" = "Incomplete dates in {.arg targetdate} vector: {.val {targetdate}}"))
+        cli_abort(c(
+          "x" = "Incomplete dates in {.arg targetdate} vector: {.val {targetdate}}"
+        ))
       }
     }
   }

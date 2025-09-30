@@ -50,23 +50,60 @@
 #'
 
 search_vt_smart <- function(field, operator, value, basereq = NA) {
-
   if (all(is.na(basereq))) {
     basereq <- vb_basereq()
   }
 
   # Operator lookup table.
   poss_operators <- c(
-    "contains" = 1, "contain" = 1, "has" = 1, "have" = 1,
-    "!contains" = 2, "!contain" = 2, "!has" = 2, "!have" = 2, "ncontains" = 2,
-    "=" = 3, "==" = 3, "equal" = 3, "equals" = 3, "eq" = 3,
-    "!=" = 4, "not" = 4, "!equal" = 4, "!equals" = 4, "!eq" = 4, "neq" = 4,
-    "starts with" = 5, "start with" = 5, "start" = 5, "starts" = 5, "sw" = 5,
-    "not starts with" = 6, "not start with" = 6, "!start" = 6, "!starts" = 6, "nsw" = 6,
-    "in" = 7, "within" = 7,
-    "not in" = 8, "!in" = 8, "not within" = 8, "!within" = 8, "nin" = 8
+    "contains" = 1,
+    "contain" = 1,
+    "has" = 1,
+    "have" = 1,
+    "!contains" = 2,
+    "!contain" = 2,
+    "!has" = 2,
+    "!have" = 2,
+    "ncontains" = 2,
+    "=" = 3,
+    "==" = 3,
+    "equal" = 3,
+    "equals" = 3,
+    "eq" = 3,
+    "!=" = 4,
+    "not" = 4,
+    "!equal" = 4,
+    "!equals" = 4,
+    "!eq" = 4,
+    "neq" = 4,
+    "starts with" = 5,
+    "start with" = 5,
+    "start" = 5,
+    "starts" = 5,
+    "sw" = 5,
+    "not starts with" = 6,
+    "not start with" = 6,
+    "!start" = 6,
+    "!starts" = 6,
+    "nsw" = 6,
+    "in" = 7,
+    "within" = 7,
+    "not in" = 8,
+    "!in" = 8,
+    "not within" = 8,
+    "!within" = 8,
+    "nin" = 8
   )
-  final_operators <- c("contains", "ncontains", "eq", "neq", "sw", "nsw", "in", "nin")
+  final_operators <- c(
+    "contains",
+    "ncontains",
+    "eq",
+    "neq",
+    "sw",
+    "nsw",
+    "in",
+    "nin"
+  )
 
   # Translate operator to proper operator name
   operator <- tolower(operator)
@@ -74,7 +111,16 @@ search_vt_smart <- function(field, operator, value, basereq = NA) {
     final_operator <- final_operators[poss_operators[operator]]
   } else {
     # Just for warning message
-    human_operators <- c("contains", "!contains", "equals", "!equals", "starts", "!starts", "in", "!in")
+    human_operators <- c(
+      "contains",
+      "!contains",
+      "equals",
+      "!equals",
+      "starts",
+      "!starts",
+      "in",
+      "!in"
+    )
     cli_alert_warning("Operator {.val {operator}} not an allowed operator!")
     cli_rule(left = "Allowed operators")
     cli_ul(human_operators)
@@ -86,27 +132,52 @@ search_vt_smart <- function(field, operator, value, basereq = NA) {
 
   # Fields lookup table
   poss_fields <- c(
-    "datasetid" = 1, "id" = 1,
-    "originaltraitname" = 2, "traitname" = 2,
+    "datasetid" = 1,
+    "id" = 1,
+    "originaltraitname" = 2,
+    "traitname" = 2,
     "variables" = 3,
-    "interactor1order" = 4, "order" = 4,
-    "interactor1family" = 5, "family" = 5,
-    "interactor1genus" = 6, "genus" = 6,
-    "interactor1species" = 7, "species" = 7, "spp" = 7,
-    "interactor1stage" = 8, "stage" = 8,
-    "interactor1sex" = 9, "sex" = 9,
-    "interactor2genus" = 10, "genus2" = 10,
-    "interactor2species" = 11, "species2" = 10, "spp2" = 10,
-    "citation" = 12, "cite" = 12,
+    "interactor1order" = 4,
+    "order" = 4,
+    "interactor1family" = 5,
+    "family" = 5,
+    "interactor1genus" = 6,
+    "genus" = 6,
+    "interactor1species" = 7,
+    "species" = 7,
+    "spp" = 7,
+    "interactor1stage" = 8,
+    "stage" = 8,
+    "interactor1sex" = 9,
+    "sex" = 9,
+    "interactor2genus" = 10,
+    "genus2" = 10,
+    "interactor2species" = 11,
+    "species2" = 10,
+    "spp2" = 10,
+    "citation" = 12,
+    "cite" = 12,
     "doi" = 13,
     "curatedbydoi" = 14,
-    "submittedby" = 15, "who" = 15
+    "submittedby" = 15,
+    "who" = 15
   )
   final_fields <- c(
-    "DatasetID", "OriginalTraitName", "Variables", "Interactor1Order",
-    "Interactor1Family", "Interactor1Genus", "Interactor1Species",
-    "Interactor1Stage", "Interactor1Sex", "Interactor2Genus",
-    "Interactor2Species", "Citation", "DOI", "CuratedByDOI", "SubmittedBy"
+    "DatasetID",
+    "OriginalTraitName",
+    "Variables",
+    "Interactor1Order",
+    "Interactor1Family",
+    "Interactor1Genus",
+    "Interactor1Species",
+    "Interactor1Stage",
+    "Interactor1Sex",
+    "Interactor2Genus",
+    "Interactor2Species",
+    "Citation",
+    "DOI",
+    "CuratedByDOI",
+    "SubmittedBy"
   )
 
   # Translate field to proper field name
@@ -122,29 +193,43 @@ search_vt_smart <- function(field, operator, value, basereq = NA) {
     cli_abort(c("x" = "Invalid field: {.val {field}}"))
   }
 
-  resplist <- tryCatch({
-    resp <- basereq |>
-      req_url_path_append("vectraits-explorer") |>
-      req_url_query("format" = "json") |>
-      req_url_query("field" = final_field) |>
-      req_url_query("operator" = final_operator) |>
-      req_url_query("term" = value) |>
-      req_perform()
-    list("resp" = resp, "err_code" = 0, "err_obj" = NULL)
-  }, error = function(e) {
-    # Get the last response instead
-    list("resp" = last_response(), "err_code" = 1, "err_obj" = e)
-  })
+  resplist <- tryCatch(
+    {
+      resp <- basereq |>
+        req_url_path_append("vectraits-explorer") |>
+        req_url_query("format" = "json") |>
+        req_url_query("field" = final_field) |>
+        req_url_query("operator" = final_operator) |>
+        req_url_query("term" = value) |>
+        req_perform()
+      list("resp" = resp, "err_code" = 0, "err_obj" = NULL)
+    },
+    error = function(e) {
+      # Get the last response instead
+      list("resp" = last_response(), "err_code" = 1, "err_obj" = e)
+    }
+  )
 
   if (resplist$err_code == 1) {
-    if (grepl("SSL certificate problem: unable to get local issuer certificate", get_curl_err(resplist$err_obj, returnfiller = TRUE))) {
+    if (
+      grepl(
+        "SSL certificate problem: unable to get local issuer certificate",
+        get_curl_err(resplist$err_obj, returnfiller = TRUE)
+      )
+    ) {
       cat("\n")
       cli_alert_danger("Could not verify SSL certificate.")
-      cli::cli_text("You may have success running {.fn set_ohvbd_compat} and then trying again.")
+      cli::cli_text(
+        "You may have success running {.fn set_ohvbd_compat} and then trying again."
+      )
       cat("\n")
-      cli_abort("SSL certificate problem: unable to get local issuer certificate")
+      cli_abort(
+        "SSL certificate problem: unable to get local issuer certificate"
+      )
     }
-    cli_abort(c("No records found for {.val {paste(final_field, final_operator, value)}}"))
+    cli_abort(c(
+      "No records found for {.val {paste(final_field, final_operator, value)}}"
+    ))
   }
 
   body <- resplist$resp |> resp_body_json()

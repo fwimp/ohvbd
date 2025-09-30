@@ -23,11 +23,13 @@
 #'
 
 extract_vd <- function(res, cols = NA, returnunique = FALSE) {
-
   if (is.null(attr(res, "db"))) {
     cli_alert_warning("Responses not necessarily from VecDyn.")
   } else if (attr(res, "db") != "vd") {
-    cli_abort(c("x" = "Responses not from VecDyn, Please use the appropriate {.fn extract_{attr(res, 'db')}} function.", "!" = "Detected db = {.val {attr(res, 'db')}}"))
+    cli_abort(c(
+      "x" = "Responses not from VecDyn, Please use the appropriate {.fn extract_{attr(res, 'db')}} function.",
+      "!" = "Detected db = {.val {attr(res, 'db')}}"
+    ))
   }
 
   if (any(class(res) == "httr2_response")) {
@@ -38,9 +40,10 @@ extract_vd <- function(res, cols = NA, returnunique = FALSE) {
     cli_abort("Response contains error! (check to see if ID actually exists?)")
   } else {
     # Extract data from all successful responses
-    out_df <- res |>  resps_successes()  |>  resps_data(\(resp) vd_extraction_helper(resp, cols))
+    out_df <- res |>
+      resps_successes() |>
+      resps_data(\(resp) vd_extraction_helper(resp, cols))
   }
-
 
   if (returnunique) {
     out_df <- unique(out_df)

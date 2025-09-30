@@ -24,14 +24,26 @@
 #' @export
 #'
 
-search_hub <- function(query, db = c("vt", "vd", "gbif", "px"), fromdate = NULL, todate = NULL, locationpoly = NULL, exact = FALSE, withoutpublished = TRUE, returnlist = FALSE, connections = 8) {
+search_hub <- function(
+  query,
+  db = c("vt", "vd", "gbif", "px"),
+  fromdate = NULL,
+  todate = NULL,
+  locationpoly = NULL,
+  exact = FALSE,
+  withoutpublished = TRUE,
+  returnlist = FALSE,
+  connections = 8
+) {
   db_canon <- c("vt", "vd", "gbif", "px")
   select_dbs <- intersect(db_canon, db)
   incorrect_dbs <- setdiff(db, db_canon)
   if (length(incorrect_dbs) > 0) {
     cli::cli_warn(
-      c("!" = "Unknown database{?s} specified: {.val {incorrect_dbs}}",
-        "v" = "Recognised databases: {.val {db_canon}}")
+      c(
+        "!" = "Unknown database{?s} specified: {.val {incorrect_dbs}}",
+        "v" = "Recognised databases: {.val {db_canon}}"
+      )
     )
   }
   if (length(select_dbs) == 0) {
@@ -41,7 +53,7 @@ search_hub <- function(query, db = c("vt", "vd", "gbif", "px"), fromdate = NULL,
   # date parsing
   fromdate <- coercedate(fromdate, return_iso = TRUE, nulliferror = TRUE)
   todate <- coercedate(todate, return_iso = TRUE, nulliferror = TRUE)
-  withoutpublished_str <- tolower(as.character(withoutpublished))  # Needed until the API supports arbitrary capitalisation of bools
+  withoutpublished_str <- tolower(as.character(withoutpublished)) # Needed until the API supports arbitrary capitalisation of bools
   exact_str <- tolower(as.character(exact))
 
   # Parse location
@@ -52,9 +64,10 @@ search_hub <- function(query, db = c("vt", "vd", "gbif", "px"), fromdate = NULL,
     } else if (is.character(locationpoly)) {
       locationpoly <- force_multipolygon(locationpoly)
     } else {
-      cli::cli_alert_warning("{.arg locationpoly} must be of class {.cls SpatVector}... ignoring.")
+      cli::cli_alert_warning(
+        "{.arg locationpoly} must be of class {.cls SpatVector}... ignoring."
+      )
       locationpoly <- NULL
-
     }
   }
 
@@ -94,39 +107,56 @@ search_hub <- function(query, db = c("vt", "vd", "gbif", "px"), fromdate = NULL,
   # Calculate number of pages to retrieve
   pages <- seq(1, ceiling(results / 50))
 
-  reqs <- pages |> lapply(\(pagenum) {
-    req <- searchreq |>
-      req_url_query(query = query, database = select_dbs, limit = 50, page = pagenum)
-    if (!(is.null(fromdate))) {
-      req <- req |> req_url_query(publishedFrom = fromdate)
-    }
-    if (!(is.null(todate))) {
-      req <- req |> req_url_query(publishedTo = todate)
-    }
-    if (withoutpublished) {
-      req <- req |> req_url_query(withoutPublished = withoutpublished_str)
-    }
-    if (exact) {
-      req <- req |> req_url_query(exact = exact_str)
-    }
-    if (!(is.null(locationpoly))) {
-      req <- req |> req_url_query(geometry = locationpoly)
-    }
-    req
-  })
+  reqs <- pages |>
+    lapply(\(pagenum) {
+      req <- searchreq |>
+        req_url_query(
+          query = query,
+          database = select_dbs,
+          limit = 50,
+          page = pagenum
+        )
+      if (!(is.null(fromdate))) {
+        req <- req |> req_url_query(publishedFrom = fromdate)
+      }
+      if (!(is.null(todate))) {
+        req <- req |> req_url_query(publishedTo = todate)
+      }
+      if (withoutpublished) {
+        req <- req |> req_url_query(withoutPublished = withoutpublished_str)
+      }
+      if (exact) {
+        req <- req |> req_url_query(exact = exact_str)
+      }
+      if (!(is.null(locationpoly))) {
+        req <- req |> req_url_query(geometry = locationpoly)
+      }
+      req
+    })
 
   cli::cli_progress_step("Retrieving {results} result{?s}")
 
   # db filter extraction demo out$hits[which(sapply(out$hits, \(x){x$db}) %in% "vt")]
 
-  resps <- reqs |> req_perform_parallel(on_error = "continue", max_active = connections, progress = TRUE)
+  resps <- reqs |>
+    req_perform_parallel(
+      on_error = "continue",
+      max_active = connections,
+      progress = TRUE
+    )
 
-  hits <- resps |> resps_successes() |> resps_data(\(resp) resp_body_json(resp)$hits)
+  hits <- resps |>
+    resps_successes() |>
+    resps_data(\(resp) resp_body_json(resp)$hits)
 
   if (returnlist) {
     return(hits)
   }
-  return(new_ohvbd.hub.search(hits, query = query, searchparams = list(fromdate = fromdate, todate = todate, exact = exact)))
+  return(new_ohvbd.hub.search(
+    hits,
+    query = query,
+    searchparams = list(fromdate = fromdate, todate = todate, exact = exact)
+  ))
 }
 
 

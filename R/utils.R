@@ -57,14 +57,23 @@ vd_error_body <- function(resp) {
 #' @keywords internal
 #'
 
-vd_make_req <- function(id, pagenum, rate, url = "", useragent = "", unsafe = FALSE) {
+vd_make_req <- function(
+  id,
+  pagenum,
+  rate,
+  url = "",
+  useragent = "",
+  unsafe = FALSE
+) {
   # Rebuild basereq and generate final request
-  return(vb_basereq(baseurl = url, useragent = useragent, unsafe = unsafe) |>
-           req_url_path_append("vecdyncsv") |>
-           req_url_query("format" = "json", "page" = pagenum, "piids" = id) |>
-           req_error(body = vd_error_body) |>
-           req_headers(ohvbd = id) |>  # Add additional header just so we can nicely handle failures
-           req_throttle(5))
+  return(
+    vb_basereq(baseurl = url, useragent = useragent, unsafe = unsafe) |>
+      req_url_path_append("vecdyncsv") |>
+      req_url_query("format" = "json", "page" = pagenum, "piids" = id) |>
+      req_error(body = vd_error_body) |>
+      req_headers(ohvbd = id) |> # Add additional header just so we can nicely handle failures
+      req_throttle(5)
+  )
 }
 
 #' @title collapse a list of character strings to a JS space-separated single string
@@ -84,31 +93,37 @@ space_collapse <- function(v) {
 #'
 
 vd_extraction_helper <- function(resp, cols = NA) {
-  df_out <- tryCatch({
-    resp_parse <- resp |> resp_body_json()
-    df <- suppressWarnings(rbindlist(resp_parse$results))
-    df2 <- as.data.frame(resp_parse$consistent_data)
+  df_out <- tryCatch(
+    {
+      resp_parse <- resp |> resp_body_json()
+      df <- suppressWarnings(rbindlist(resp_parse$results))
+      df2 <- as.data.frame(resp_parse$consistent_data)
 
-    # Handle missing data in results (or consistent data, not that it's missing often)
-    if (nrow(df) == 0) {
-      df_out <- df2
-    } else if (nrow(df2) == 0) {
-      df_out <- df
-    } else {
-      df_out <- bind_cols(df2, df)
-    }
+      # Handle missing data in results (or consistent data, not that it's missing often)
+      if (nrow(df) == 0) {
+        df_out <- df2
+      } else if (nrow(df2) == 0) {
+        df_out <- df
+      } else {
+        df_out <- bind_cols(df2, df)
+      }
 
-    if (resp_parse$count > 0) {
-      df_out$dataset_id <- .get_vb_req_id(resp)
+      if (resp_parse$count > 0) {
+        df_out$dataset_id <- .get_vb_req_id(resp)
+      }
+      if (!any(is.na(cols))) {
+        # Filter cols from each sublist
+        df_out <- df_out |> select(any_of(cols))
+      }
+      df_out
+    },
+    error = function(e) {
+      cli_abort(
+        "Error in vd extraction of ID {(.get_vb_req_id(resp))}",
+        parent = e
+      )
     }
-    if (!any(is.na(cols))) {
-      # Filter cols from each sublist
-      df_out <- df_out |>  select(any_of(cols))
-    }
-    df_out
-  }, error = function(e) {
-    cli_abort("Error in vd extraction of ID {(.get_vb_req_id(resp))}", parent = e)
-  })
+  )
 
   return(df_out)
 }
@@ -122,7 +137,9 @@ vd_extraction_helper <- function(resp, cols = NA) {
 convert_place_togid <- function(places, gid = 0) {
   returncolumn <- c("NAME_0", "GID_1", "GID_2")[gid + 1]
   # .data$. is required to silence R CMD build notes about undefined globals.
-  out_places <- gidtable |> filter_all(any_vars(.data$. %in% places)) |> select(returncolumn)
+  out_places <- gidtable |>
+    filter_all(any_vars(.data$. %in% places)) |>
+    select(returncolumn)
   return(unique(out_places[[1]]))
 }
 
@@ -171,7 +188,9 @@ coercedate <- function(dates, return_iso = FALSE, nulliferror = FALSE) {
       suppressWarnings(dates_final <- as_date(paste0(dates, "-01-01")))
       if (any(is.na(dates_final))) {
         # Dunno, stop filtering date
-        cli_alert_warning("Could not make {.val {cli::cli_vec(dates, list('vec-trunc' = 5))}} into a usable date.")
+        cli_alert_warning(
+          "Could not make {.val {cli::cli_vec(dates, list('vec-trunc' = 5))}} into a usable date."
+        )
         cli_alert_info("Try ISO 8601 {.val yyyy-mm-dd} format")
         if (nulliferror) {
           return(NULL)
@@ -198,7 +217,9 @@ force_multipolygon <- function(wkt) {
     if (toupper(substr(wkt, 1, 12)) == "MULTIPOLYGON") {
       return(wkt)
     } else {
-      cli::cli_abort(c("x" = "Must be a POLYGON wkt! Got {toupper(substr(wkt, 1, 7))}"))
+      cli::cli_abort(c(
+        "x" = "Must be a POLYGON wkt! Got {toupper(substr(wkt, 1, 7))}"
+      ))
     }
   }
   return(paste0(gsub("POLYGON", "MULTIPOLYGON(", wkt), ")"))
