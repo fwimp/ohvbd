@@ -61,6 +61,7 @@ print.ohvbd.hub.search <- function(x, ...) {
 
 #' @export
 summary.ohvbd.hub.search <- function(object, ...) {
+  # fmt: skip
   cat(paste0("Rows: ", nrow(object) , ", Query: ", attr(object, "query"), "\n\nSplit by database:"))
   print(table(object$db))
   invisible(object)
