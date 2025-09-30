@@ -151,6 +151,69 @@ find_vd_missing <- function(l) {
   return(unlist(lapply(l_filtered, .get_vb_req_id)))
 }
 
+#' @title Try to coerce a date even when bits are missing
+#' @param dates The date/s to try and coerce
+#' @return Coerced dates.
+#' @keywords internal
+
+coercedate <- function(dates, return_iso = FALSE, nulliferror = FALSE) {
+  if (all(is.null(dates))) {
+    return(NULL)
+  }
+  dates <- as.character(dates)
+  # Fromdate reparse attempt
+  suppressWarnings(dates_final <- as_date(dates))
+  if (any(is.na(dates_final))) {
+    # Maybe it's a YYYY-MM
+    suppressWarnings(dates_final <- as_date(paste0(dates, "-01")))
+    if (any(is.na(dates_final))) {
+      # Maybe it's a YYYY
+      suppressWarnings(dates_final <- as_date(paste0(dates, "-01-01")))
+      if (any(is.na(dates_final))) {
+        # Dunno, stop filtering date
+        cli_alert_warning("Could not make {.val {cli::cli_vec(dates, list('vec-trunc' = 5))}} into a usable date.")
+        cli_alert_info("Try ISO 8601 {.val yyyy-mm-dd} format")
+        if (nulliferror) {
+          return(NULL)
+        } else {
+          return(dates)
+        }
+      }
+    }
+  }
+  if (return_iso) {
+    return(lubridate::format_ISO8601(lubridate::as_datetime(dates_final)))
+  } else {
+    return(dates_final)
+  }
+}
+
+#' @title Force a polygon WKT into multipolygon form
+#' @param wkt The WKT to convert into a multipolygon
+#' @return The multipolygon equivalent of wkt
+#' @keywords internal
+force_multipolygon <- function(wkt) {
+  # TODO: Verify wkt intergrity (using approach here: https://github.com/ropensci/rgbif/blob/ac4e2fff8a7501956ce8a1be3e7429810bb64e2b/R/check_wkt.r)
+  if (toupper(substr(wkt, 1, 7)) != "POLYGON") {
+    if (toupper(substr(wkt, 1, 12)) == "MULTIPOLYGON") {
+      return(wkt)
+    } else {
+      cli::cli_abort(c("x" = "Must be a POLYGON wkt! Got {toupper(substr(wkt, 1, 7))}"))
+    }
+  }
+  return(paste0(gsub("POLYGON", "MULTIPOLYGON(", wkt), ")"))
+}
+
+#' @title Encode spatvector as WKT, and convert to multipolygon if needed
+#' @param wkt The spatvector to format
+#' @return The formatted wkt
+#' @keywords internal
+spatvect_to_hubwkt <- function(v) {
+  wkt <- terra::geom(v, wkt = TRUE)
+  wkt <- force_multipolygon(wkt)
+  return(wkt)
+}
+
 # Only used for internal testing and doesnt need to be checked.
 #
 # nolint start

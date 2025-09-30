@@ -1,5 +1,7 @@
 # nolint start: object_name_linter
 
+# Printers
+
 #' @export
 print.ohvbd.ids <- function(x, ...) {
   cat(paste0("Database: ", attr(x, "db"), "\n"))
@@ -44,6 +46,23 @@ print.ohvbd.ad.matrix <- function(x, ..., full=FALSE) {
   }
   invisible(x)
 }
+
+#' @export
+print.ohvbd.hub.search <- function(x, ...) {
+  cli::cat_line(cli::format_inline("{.cls {class(x)[1]}}"))
+  cat(paste0("Rows: ", nrow(x) , ", Query: ", attr(x, "query"), "\n"))
+  print(as.data.frame(x))
+  invisible(x)
+}
+
+#' @export
+summary.ohvbd.hub.search <- function(object, ...) {
+  cat(paste0("Rows: ", nrow(object) , ", Query: ", attr(object, "query"), "\n\nSplit by database:"))
+  print(table(object$db))
+  invisible(object)
+}
+
+# Indexers
 
 #' @export
 `[.ohvbd.ids` <- function(x, i) {

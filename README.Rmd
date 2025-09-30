@@ -10,7 +10,7 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
-<!-- force push by editing this number: 42 -->
+<!-- force push by editing this number: 41 -->
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -55,14 +55,13 @@ version <- gsub('-', '.', version)
 
 `ohvbd` is an R package for retrieving (and parsing) data from a network of disease vector data sources.
 
-At present this package is very much in its early stages, as such the internal API may change without warning.
-
 This package was developed as part of the [One Health Vector-Borne Diseases Hub](https://vbdhub.org).
 
 ## Databases
 
 `ohvbd` allows for searching and the retrieval of data from the following data sources:
 
+- [vbdhub](https://vbdhub.org) (search only)
 - [VecTraits](https://vectorbyte.crc.nd.edu/vectraits-explorer)
 - [VecDyn](https://vectorbyte.crc.nd.edu/vecdyn-datasets)
 - [AreaData](https://pearselab.github.io/areadata/)
