@@ -64,14 +64,24 @@ fetch_ad <- function(
   final_url <- paste0(basereq, "output/")
   # TODO: Consider using match.arg() to do fuzzy matching because that'd be super cool
   poss_metrics <- c(
-    "temp" = 1, "temperature" = 1,
-    "spechumid" = 2, "specific humidity" = 2,
-    "relhumid" = 3, "relative humidity" = 3,
-    "uv" = 4, "ultraviolet" = 4,
-    "precip" = 5, "precipitation" = 5, "rainfall" = 5,
-    "popdens" = 6, "population density" = 6, "population" = 6,
-    "forecast" = 7, "future climate" = 7, "future" = 7
-    )
+    "temp" = 1,
+    "temperature" = 1,
+    "spechumid" = 2,
+    "specific humidity" = 2,
+    "relhumid" = 3,
+    "relative humidity" = 3,
+    "uv" = 4,
+    "ultraviolet" = 4,
+    "precip" = 5,
+    "precipitation" = 5,
+    "rainfall" = 5,
+    "popdens" = 6,
+    "population density" = 6,
+    "population" = 6,
+    "forecast" = 7,
+    "future climate" = 7,
+    "future" = 7
+  )
   final_metrics <- c(
     "temp",
     "spechumid",

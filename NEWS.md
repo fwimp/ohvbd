@@ -1,6 +1,11 @@
 # ohvbd (development version)
 
-* Code base is now continuously formatted using Air v0.7.1
+* Entire code base is now continuously formatted using Air v0.7.1.
+* `ohvbd` now interfaces with GBIF for occurrence data.
+  * New `*_gbif` functions (e.g. `fetch_gbif()`) allow for retrieving and extracting data from GBIF.
+  * A GBIF account and the `rgbif` package are required to retrieve data from GBIF.
+  * The account details must also be set up as shown in [the rgbif documentation](https://docs.ropensci.org/rgbif/articles/gbif_credentials.html).
+* New `filter_db()` command allows for filtering out of only one database's results from hub searches.
 
 # ohvbd 0.6.1
 

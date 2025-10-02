@@ -28,8 +28,8 @@ new_ohvbd.ids <- function(v, db = NULL) {
 #' }
 
 ohvbd.ids <- function(ids, db) {
-  allowed_dbs <- c("vt", "vd")
-  if (!is.numeric(ids)) {
+  allowed_dbs <- c("vt", "vd", "gbif")
+  if (db %in% c("vt", "vd") && !is.numeric(ids)) {
     cli::cli_abort("IDs must be numeric!")
   }
   if (!(db %in% allowed_dbs)) {

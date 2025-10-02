@@ -21,6 +21,8 @@
 #'
 #' }
 #'
+#' @concept hub
+#'
 #' @export
 #'
 
@@ -168,7 +170,7 @@ search_hub <- function(
 #' @param ids an `ohvbd.hub.search` search result from `search_hub()`
 #' @param db a database name as a string. One of `"vt"`, `"vd"`, `"gbif"`, `"px"`.
 #'
-#' @return An `ohvbd.ids` vector of dataset IDs, or a character vector of dataset ids.
+#' @return An `ohvbd.ids` vector of dataset IDs.
 #'
 #' @examples
 #' \dontrun{
@@ -176,11 +178,16 @@ search_hub <- function(
 #'
 #' }
 #'
+#' @concept hub
+#'
 #' @export
 filter_db <- function(ids, db) {
-  selectedids <- subset(ids, ids$db == db)
-  if (db %in% c("vt", "vd")) {
-    return(ohvbd.ids(as.numeric(selectedids$id), db = db))
+  database <- db # Just to keep the subset happy, but also to keep the API consistent
+  selectedids <- subset(ids, ids$db == database)
+  if (database %in% c("vt", "vd")) {
+    return(ohvbd.ids(as.numeric(selectedids$id), db = database))
+  } else if (db == "gbif") {
+    return(ohvbd.ids(selectedids$id, db = database))
   } else {
     return(selectedids$id)
   }

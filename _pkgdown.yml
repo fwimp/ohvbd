@@ -3,6 +3,10 @@ template:
   bootstrap: 5
   light-switch: true
 reference:
+- title: Hub
+  desc: Functions for interfacing with vbdhub.
+- contents:
+  - has_concept("hub")
 - title: VecTraits
   desc: Functions for interfacing with VecTraits.
 - contents:
@@ -11,6 +15,10 @@ reference:
   desc: Functions for interfacing with VecDyn.
 - contents:
   - has_concept("vecdyn")
+- title: GBIF
+  desc: Functions for interfacing with GBIF.
+- contents:
+  - has_concept("gbif")
 - title: AREAdata
   desc: Functions for interfacing with AREAdata.
 - contents:
@@ -22,7 +30,7 @@ reference:
 - title: Other
   desc: Miscellaneous functions.
 - contents:
-  - lacks_concepts(c("vectraits", "vecdyn", "areadata", "basereq", "convenience"))
+  - lacks_concepts(c("hub", "vectraits", "vecdyn", "gbif", "areadata", "basereq", "convenience"))
 - subtitle: Base requests
   desc: Functions for modifying the basic targets of data API requests
 - contents:

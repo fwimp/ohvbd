@@ -12,7 +12,7 @@ filter_db(ids, db)
 \item{db}{a database name as a string. One of \code{"vt"}, \code{"vd"}, \code{"gbif"}, \code{"px"}.}
 }
 \value{
-An \code{ohvbd.ids} vector of dataset IDs, or a character vector of dataset ids.
+An \code{ohvbd.ids} vector of dataset IDs.
 }
 \description{
 Retrieve the IDs for any datasets matching the given db
@@ -27,3 +27,4 @@ search_hub("Ixodes ricinus") |> filter_db("vt")
 \author{
 Francis Windram
 }
+\concept{hub}
