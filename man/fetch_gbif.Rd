@@ -17,6 +17,12 @@ A list of \link[rgbif:occ_download_get]{rgbif occ_download_get} objects, as an \
 \description{
 Retrieve GBIF dataset/s specified by their dataset ID.
 }
+\note{
+Only 300 datasets can be requested at once (for now) due to technical limitations originating from the GBIF server setup.
+It is worth splitting longer lists of ids into a couple of chunks if you need more than this.
+
+If you regularly use ohvbd to download large numbers of datasets at once and chunking is causing you other issues, please raise an issue at https://github.com/fwimp/ohvbd/issues.
+}
 \examples{
 \dontrun{
 fetch_gbif("dbc4a3ae-680f-44e6-ab25-c70e27b38dbc")

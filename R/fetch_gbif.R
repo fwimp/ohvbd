@@ -5,6 +5,12 @@
 #' @param ids a string or character vector of ids (preferably in an `ohvbd.ids` object) indicating the particular dataset/s to download.
 #' @param filepath directory to save gbif download files into.
 #'
+#' @note
+#' Only 300 datasets can be requested at once (for now) due to technical limitations originating from the GBIF server setup.
+#' It is worth splitting longer lists of ids into a couple of chunks if you need more than this.
+#'
+#' If you regularly use ohvbd to download large numbers of datasets at once and chunking is causing you other issues, please raise an issue at https://github.com/fwimp/ohvbd/issues.
+#'
 #' @return A list of [rgbif occ_download_get][rgbif::occ_download_get] objects, as an `ohvbd.responses` object.
 #'
 #' @examples
@@ -34,6 +40,10 @@ fetch_gbif <- function(ids, filepath = ".") {
     ))
   }
 
+  rowcount <- rgbif::occ_count(datasetKey = paste0(ids, collapse = ";")) # nolint: object_usage_linter
+
+  cli_alert_info("Requesting {.val {rowcount}} occurrence{?s} over {.val {length(ids)}} dataset{?s}...")
+
   # Currently package up entire request into one download request
   preds <- rgbif::pred_in("datasetKey", ids)
 
@@ -46,6 +56,8 @@ fetch_gbif <- function(ids, filepath = ".") {
       rgbif::occ_download(preds, format = "SIMPLE_CSV")
     }
   )
+
+  # Note: If people end up requiring automatic chunking built in, this should wrap the below code.
 
   # Customised version of occ_download_wait with more sensible setup
   wait <- 0
@@ -64,7 +76,7 @@ fetch_gbif <- function(ids, filepath = ".") {
       tmp <- rgbif::occ_download_meta(dlid, list(http_version = 2)) # Download with default curlopts
       status_current <- tolower(tmp$status)
 
-      if (status_current %in% c("succeeded", "killed", "cancelled")) {
+      if (status_current %in% c("succeeded", "killed", "cancelled", "failed")) {
         if (status_current == "succeeded") {
           cli::cli_progress_done()
           break
@@ -84,7 +96,7 @@ fetch_gbif <- function(ids, filepath = ".") {
   if (status_current != "succeeded") {
     cli::cli_abort(
       c(
-        "x" = "Download failed (either cancelled by the user or killed by GBIF)!"
+        "x" = "Download failed (either killed/cancelled by the user or failed during processing)!"
       ),
       call = rlang::env_parent()
     )
