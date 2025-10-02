@@ -5,7 +5,7 @@
 #' @param ids a string or character vector of ids (preferably in an `ohvbd.ids` object) indicating the particular dataset/s to download.
 #' @param filepath directory to save gbif download files into.
 #'
-#' @return Stuff
+#' @return A list of [rgbif occ_download_get][rgbif::occ_download_get] objects, as an `ohvbd.responses` object.
 #'
 #' @examples
 #' \dontrun{

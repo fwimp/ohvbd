@@ -12,7 +12,7 @@ fetch_gbif(ids, filepath = ".")
 \item{filepath}{directory to save gbif download files into.}
 }
 \value{
-Stuff
+A list of \link[rgbif:occ_download_get]{rgbif occ_download_get} objects, as an \code{ohvbd.responses} object.
 }
 \description{
 Retrieve GBIF dataset/s specified by their dataset ID.
