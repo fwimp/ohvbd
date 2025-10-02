@@ -146,7 +146,8 @@ return a vector of valid IDs on the given database:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/fwimp/ohvbd" class="external-link">ohvbd</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/find_vt_ids.html">find_vt_ids</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">## Database: vt</span></span>
+<pre><code><span><span class="co">## <span style="color: #0000BB;">&lt;ohvbd.ids&gt;</span></span></span>
+<span><span class="co">## Database: vt</span></span>
 <span><span class="co">##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20</span></span></code></pre>
 <p>The functions <code>search_x()</code> and
 <code>search_x_smart()</code> also return a list of IDs that match the
@@ -156,7 +157,8 @@ query provided in the arguments.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">aedes_ids</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/search_vt.html">search_vt</a></span><span class="op">(</span><span class="st">"Aedes aegypti"</span><span class="op">)</span></span>
 <span><span class="va">aedes_ids</span></span></code></pre></div>
-<pre><code><span><span class="co">## Database: vt</span></span>
+<pre><code><span><span class="co">## <span style="color: #0000BB;">&lt;ohvbd.ids&gt;</span></span></span>
+<span><span class="co">## Database: vt</span></span>
 <span><span class="co">##  [1] 124 125 126 142 143 144 145 146 147 148 149 169 170 214 285 286 287 346 354</span></span>
 <span><span class="co">## [20] 355 356 357 358 359 473 474 475 476 553 554 555 556 557 558 564 565 571 572</span></span>
 <span><span class="co">## [39] 573 574 575 576 577 578 579 580 825 826 828 841 842 853 854 855 860 863 864</span></span>
@@ -211,7 +213,8 @@ from our data using the same command as before:</p>
 <span>    returnunique <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="va">aedes_data_filtered</span></span></code></pre></div>
-<pre><code><span><span class="co">## Database: vt</span></span>
+<pre><code><span><span class="co">## <span style="color: #0000BB;">&lt;ohvbd.data.frame&gt;</span></span></span>
+<span><span class="co">## Database: vt</span></span>
 <span><span class="co">##                        Location      OriginalTraitName</span></span>
 <span><span class="co">## 1 Guadeloupe French West Indies              longevity</span></span>
 <span><span class="co">## 2 Guadeloupe French West Indies          blood feeding</span></span>
@@ -237,7 +240,8 @@ so:</p>
 <span>  cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Location"</span>, <span class="st">"OriginalTraitName"</span><span class="op">)</span>,</span>
 <span>  returnunique <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Database: vt</span></span>
+<pre><code><span><span class="co">## <span style="color: #0000BB;">&lt;ohvbd.data.frame&gt;</span></span></span>
+<span><span class="co">## Database: vt</span></span>
 <span><span class="co">##                        Location      OriginalTraitName</span></span>
 <span><span class="co">## 1 Guadeloupe French West Indies              longevity</span></span>
 <span><span class="co">## 2 Guadeloupe French West Indies          blood feeding</span></span>
@@ -282,7 +286,8 @@ touch odd:</p>
 look at only rows containing <em>Axinoscymnus</em>:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Interactor1Genus</span> <span class="op">==</span> <span class="st">"Axinoscymnus"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Database: vt</span></span>
+<pre><code><span><span class="co">## <span style="color: #0000BB;">&lt;ohvbd.data.frame&gt;</span></span></span>
+<span><span class="co">## Database: vt</span></span>
 <span><span class="co">##   DatasetID Interactor1Genus Interactor1Species Interactor2Genus</span></span>
 <span><span class="co">## 1       158     Axinoscymnus         cardilobus          Bemisia</span></span>
 <span><span class="co">## 2       158     Axinoscymnus         cardilobus          Bemisia</span></span>
@@ -336,7 +341,7 @@ every time you run your script. This is as easy as running
 <code><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv()</a></code> on your dataframe, then reading it in later
 with <code><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv()</a></code></p>
 <p><span style="opacity: 0.1;font-size: small;">Built in
-24.2008512s</span></p>
+25.4832942s</span></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
