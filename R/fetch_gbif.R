@@ -42,7 +42,9 @@ fetch_gbif <- function(ids, filepath = ".") {
 
   rowcount <- rgbif::occ_count(datasetKey = paste0(ids, collapse = ";")) # nolint: object_usage_linter
 
-  cli_alert_info("Requesting {.val {rowcount}} occurrence{?s} over {.val {length(ids)}} dataset{?s}...")
+  cli_alert_info(
+    "Requesting {.val {rowcount}} occurrence{?s} over {.val {length(ids)}} dataset{?s}..."
+  )
 
   # Currently package up entire request into one download request
   preds <- rgbif::pred_in("datasetKey", ids)

@@ -10,7 +10,7 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
-<!-- force push by editing this number: 43 -->
+<!-- force push by editing this number: 41 -->
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -64,6 +64,7 @@ This package was developed as part of the [One Health Vector-Borne Diseases Hub]
 - [vbdhub](https://vbdhub.org) (search only)
 - [VecTraits](https://vectorbyte.crc.nd.edu/vectraits-explorer)
 - [VecDyn](https://vectorbyte.crc.nd.edu/vecdyn-datasets)
+- [GBIF](https://www.gbif.org/)
 - [AreaData](https://pearselab.github.io/areadata/)
 
 ## Installation

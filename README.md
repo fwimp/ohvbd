@@ -1,5 +1,5 @@
 
-<!-- force push by editing this number: 43 -->
+<!-- force push by editing this number: 41 -->
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -33,6 +33,7 @@ following data sources:
 - [vbdhub](https://vbdhub.org) (search only)
 - [VecTraits](https://vectorbyte.crc.nd.edu/vectraits-explorer)
 - [VecDyn](https://vectorbyte.crc.nd.edu/vecdyn-datasets)
+- [GBIF](https://www.gbif.org/)
 - [AreaData](https://pearselab.github.io/areadata/)
 
 ## Installation

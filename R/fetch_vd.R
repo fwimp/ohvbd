@@ -74,9 +74,15 @@ fetch_vd <- function(ids, rate = 5, connections = 2, basereq = NA) {
   resp_parsed <- fetch_vd_counts(ids, rate, connections, 50, basereq)
   cli::cli_alert_info("Found {.val {sum(resp_parsed$num)}} row{?s} of data.")
   # Found by fitting an exponential using nls to the performance benchmarks
-  predicted_time <- lubridate::as.duration(lubridate::seconds(ceiling( # nolint: object_usage_linter
-    sum(resp_parsed$num) * (0.01340331 * exp(-0.32535609 * min(connections, 5)))
-  )))
+  predicted_time <- lubridate::as.duration(
+    # nolint: object_usage_linter
+    lubridate::seconds(
+      ceiling(
+        sum(resp_parsed$num) *
+          (0.01340331 * exp(-0.32535609 * min(connections, 5)))
+      )
+    )
+  )
   cli::cli_alert_info("Predicted to take ~{.val {predicted_time}}.")
 
   basereq_url <- basereq$url # Should always be set!
