@@ -6,14 +6,16 @@
 \usage{
 check_db_status()
 }
+\value{
+TRUE if all DB checks pass, else FALSE
+}
 \description{
 Attempt to access all presently supported databases and report if they were accessible.
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
   check_db_status()
-}
-
+\dontshow{\}) # examplesIf}
 }
 \author{
 Francis Windram
