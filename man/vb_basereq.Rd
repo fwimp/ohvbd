@@ -25,11 +25,9 @@ This request is used as the basis for all calls to the vectorbyte API.
 It does not contain any tokens or session ids, and thus can be regenerated at any time.
 }
 \examples{
-\dontrun{
 basereq <- vb_basereq(
   baseurl="https://vectorbyte.crc.nd.edu/portal/api/",
   useragent="ROHVBD")
-}
 
 }
 \author{

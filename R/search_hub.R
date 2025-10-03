@@ -15,11 +15,8 @@
 #'
 #' @return an `ohvbd.hub.search` dataframe or a list (if `returnlist=TRUE`) containing the search results
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' search_hub("Ixodes ricinus")
-#'
-#' }
 #'
 #' @concept hub
 #'
@@ -172,11 +169,8 @@ search_hub <- function(
 #'
 #' @return An `ohvbd.ids` vector of dataset IDs.
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' search_hub("Ixodes ricinus") |> filter_db("vt")
-#'
-#' }
 #'
 #' @concept hub
 #'

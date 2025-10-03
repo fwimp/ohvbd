@@ -8,11 +8,9 @@
 #'
 #' @return An `ohvbd.data.frame` containing the requested data.
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' fetch_gbif("dbc4a3ae-680f-44e6-ab25-c70e27b38dbc") |>
 #'   extract_gbif()
-#' }
 #'
 #' @concept gbif
 #'

@@ -83,10 +83,8 @@ read_ad_cache <- function(path, metric, gid, warn = TRUE) {
 #'
 #' @return NULL
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' clean_ad_cache()
-#' }
 #'
 #' @export
 #'
@@ -119,10 +117,8 @@ clean_ad_cache <- function(cache_location = "user") {
 #'
 #' @return NULL
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' is.cached(c(1,2,3))
-#' }
 #'
 #' @export
 #'

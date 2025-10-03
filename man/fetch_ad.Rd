@@ -50,10 +50,9 @@ The following metrics are valid (alternative names are listed in brackets):
 }
 
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 fetch_ad(metric="temp", gid=0)
-}
-
+\dontshow{\}) # examplesIf}
 }
 \author{
 Francis Windram

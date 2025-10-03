@@ -18,10 +18,9 @@ A character vector (or dataframe) of column information
 Get all the current column names in VecDyn, alongside associated data if desired.
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 find_vd_columns()
-}
-
+\dontshow{\}) # examplesIf}
 }
 \author{
 Francis Windram

@@ -60,7 +60,7 @@ For example "2020-04" will be taken to mean the month of April in 2020, and the 
 }
 
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 vt_ids <- search_vt(c("Aedes", "aegypti"))
 vtdf <- fetch_vt(vt_ids[(length(vt_ids)-20):length(vt_ids)]) |>
   extract_vt(cols = c(
@@ -74,8 +74,7 @@ areadata <- fetch_ad(metric="temp", gid=2, use_cache=TRUE)
 ad_extract_working <- assoc_ad(vtdf, areadata,
                                     targetdate = c("2021-08-04"), enddate=c("2021-08-06"),
                                     gid=2, lonlat_names = c("Longitude", "Latitude"))
-}
-
+\dontshow{\}) # examplesIf}
 }
 \author{
 Francis Windram

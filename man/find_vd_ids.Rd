@@ -16,10 +16,9 @@ An \code{ohvbd.ids} vector of VecDyn dataset IDs.
 Get all the current dataset IDs in VecDyn, as a numeric vector.
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 find_vd_ids()
-}
-
+\dontshow{\}) # examplesIf}
 }
 \author{
 Francis Windram

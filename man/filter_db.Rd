@@ -18,11 +18,9 @@ An \code{ohvbd.ids} vector of dataset IDs.
 Retrieve the IDs for any datasets matching the given db
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 search_hub("Ixodes ricinus") |> filter_db("vt")
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \author{
 Francis Windram

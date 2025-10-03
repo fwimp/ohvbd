@@ -18,9 +18,9 @@ The extracted data, as an \code{ohvbd.responses} object.
 This is a convenience method that infers and applies the correct fetch function for the input ids.
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 find_vt_ids() |> fetch()
-}
+\dontshow{\}) # examplesIf}
 }
 \author{
 Francis Windram

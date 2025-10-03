@@ -19,10 +19,10 @@ The extracted data, either as an \code{ohvbd.data.frame} or \code{ohvbd.ad.matri
 This is a convenience method that infers and applies the correct extractor for the input
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 find_vt_ids() |> fetch() |> extract(cols=c("Interactor1Species"))
 fetch_ad(use_cache=TRUE) |> extract(targetdate="2020-08-04")
-}
+\dontshow{\}) # examplesIf}
 }
 \author{
 Francis Windram

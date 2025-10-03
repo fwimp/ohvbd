@@ -9,12 +9,10 @@
 #'
 #' @return A list of [httr2 response][httr2::response()] objects, as an `ohvbd.responses` object.
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' fetch_vd(54)
 #'
 #' fetch_vd(c(423,424,425), rate=5)
-#' }
 #'
 #' @concept vecdyn
 #'
@@ -74,12 +72,11 @@ fetch_vd <- function(ids, rate = 5, connections = 2, basereq = NA) {
   resp_parsed <- fetch_vd_counts(ids, rate, connections, 50, basereq)
   cli::cli_alert_info("Found {.val {sum(resp_parsed$num)}} row{?s} of data.")
   # Found by fitting an exponential using nls to the performance benchmarks
-  predicted_time <- lubridate::as.duration(
-    # nolint: object_usage_linter
+  # fmt: skip
+  predicted_time <- lubridate::as.duration( # nolint: object_usage_linter
     lubridate::seconds(
       ceiling(
-        sum(resp_parsed$num) *
-          (0.01340331 * exp(-0.32535609 * min(connections, 5)))
+        sum(resp_parsed$num) * (0.01340331 * exp(-0.32535609 * min(connections, 5)))
       )
     )
   )

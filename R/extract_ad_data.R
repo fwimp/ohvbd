@@ -4,6 +4,11 @@
 #' Currently this does not handle Population Density or Forecast matrices, however the other 5 metrics are handled natively.
 #' @author Francis Windram
 #'
+#' @note
+#' **IT IS NOT CURRENTLY CLEAR WHETHER THIS IS JUST AN OLD DUPLICATE OF `extract_ad()`!!!**
+#' Nothing seems to depend on it, and thus it has been de-exported for now.
+#' If this causes problems it will be re-worked as a deprecated alias for `extract_ad()`
+#'
 #' @param ad_matrix A matrix of data from AREAdata.
 #' @param targetdate **ONE OF** the following:
 #' * The date to search for in ISO 8601 (e.g. "2020", "2021-09", or "2022-09-21").
@@ -64,8 +69,6 @@
 #' }
 #'
 #' @concept areadata
-#'
-#' @export
 #'
 
 extract_ad_data <- function(

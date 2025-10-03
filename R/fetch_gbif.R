@@ -13,10 +13,8 @@
 #'
 #' @return A list of [rgbif occ_download_get][rgbif::occ_download_get] objects, as an `ohvbd.responses` object.
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' fetch_gbif("dbc4a3ae-680f-44e6-ab25-c70e27b38dbc")
-#' }
 #'
 #' @concept gbif
 #'

@@ -39,8 +39,7 @@
 #'
 #' For example "2020-04" will be taken to mean the month of April in 2020, and the `enddate` will internally be set to "2020-05-01".
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' # All dates in August 2022
 #' fetch_ad("temp", gid=0) |>
 #'   extract_ad(
@@ -61,7 +60,6 @@
 #'     targetdate = c("2022-08-04", "2023-08-01"),
 #'     places = c("Albania", "Thailand")
 #'   )
-#' }
 #'
 #' @concept areadata
 #'

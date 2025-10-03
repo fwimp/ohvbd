@@ -24,12 +24,11 @@ A dataframe describing the number of rows and number of pages for the set of ids
 Retrieve length of VecDyn dataset/s specified by their dataset ID.
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 fetch_vd_counts(54)
 
 fetch_vd_counts(c(423,424,425), rate=5)
-}
-
+\dontshow{\}) # examplesIf}
 }
 \author{
 Francis Windram

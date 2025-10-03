@@ -42,11 +42,9 @@ an \code{ohvbd.hub.search} dataframe or a list (if \code{returnlist=TRUE}) conta
 Retrieve the IDs for any datasets matching the given search parameters
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 search_hub("Ixodes ricinus")
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \author{
 Francis Windram

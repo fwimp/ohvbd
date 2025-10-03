@@ -31,10 +31,8 @@
 #'
 #' @return An `ohvbd.ids` vector of VecDyn dataset IDs.
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' search_vd_smart("Collections", "gt", "1000")
-#' }
 #'
 #' @concept vecdyn
 #'

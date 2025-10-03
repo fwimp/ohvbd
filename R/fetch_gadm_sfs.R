@@ -9,10 +9,8 @@
 #'
 #' @return A SpatVector (from [terra::vect()]) of the requested shapefile.
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' fetch_gadm_sfs(gid=0)
-#' }
 #'
 #' @concept areadata
 #'

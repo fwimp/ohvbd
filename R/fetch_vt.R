@@ -9,12 +9,10 @@
 #'
 #' @return A list of [httr2 response][httr2::response()] objects, as an `ohvbd.responses` object.
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' fetch_vt(54)
 #'
 #' fetch_vt(c(54, 55, 56), rate=5)
-#' }
 #'
 #' @concept vectraits
 #'

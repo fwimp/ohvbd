@@ -61,7 +61,7 @@ For example "2020-04" will be taken to mean the month of April in 2020, and the 
 }
 
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # All dates in August 2022
 fetch_ad("temp", gid=0) |>
   extract_ad(
@@ -82,8 +82,7 @@ fetch_ad("temp", gid=0) |>
     targetdate = c("2022-08-04", "2023-08-01"),
     places = c("Albania", "Thailand")
   )
-}
-
+\dontshow{\}) # examplesIf}
 }
 \author{
 Francis Windram

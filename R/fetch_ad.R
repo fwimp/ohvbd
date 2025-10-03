@@ -22,10 +22,8 @@
 #' - `popdens` (*population density, population*)
 #' - `forecast` (*future climate, future*)
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' fetch_ad(metric="temp", gid=0)
-#' }
 #'
 #' @concept areadata
 #'

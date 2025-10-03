@@ -14,9 +14,7 @@ This string is used as the basis for all calls to AREAdata.
 It does not contain any tokens or session ids, and thus can be regenerated at any time.
 }
 \examples{
-\dontrun{
 basereq <- ad_basereq()
-}
 
 }
 \author{

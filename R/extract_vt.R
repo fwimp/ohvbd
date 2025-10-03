@@ -8,14 +8,12 @@
 #'
 #' @return An `ohvbd.data.frame` containing the requested data.
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' fetch_vt(54) |>
 #'   extract_vt(cols=c("DatasetID",
-#'                          "Interactor1Genus",
-#'                          "Interactor1Species"),
-#'                   returnunique=TRUE)
-#' }
+#'                     "Interactor1Genus",
+#'                     "Interactor1Species"),
+#'              returnunique=TRUE)
 #'
 #' @concept vectraits
 #'

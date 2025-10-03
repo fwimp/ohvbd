@@ -12,8 +12,7 @@
 #' This will **ALWAYS** get and cache gid level 2 data sources. These files are about 80MB total, so if you are running on a metered connection do beware of this.
 #'
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' vt_ids <- search_vt(c("Aedes", "aegypti"))
 #' vtdf <- fetch_vt(vt_ids[(length(vt_ids)-20):length(vt_ids)]) |>
 #'   extract_vt(cols = c(
@@ -24,7 +23,6 @@
 #'     "Interactor1Species"
 #'     ), returnunique = TRUE)
 #' vtdf <- vtdf |> assoc_gadm(lonlat_names = c("Longitude", "Latitude"))
-#' }
 #'
 #'
 #' @export

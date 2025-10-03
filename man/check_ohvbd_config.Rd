@@ -13,9 +13,7 @@ check_ohvbd_config(options_list = NULL)
 Access ohvbd options and configured variables, and print them to the command line.
 }
 \examples{
-\dontrun{
   check_ohvbd_config()
-}
 
 }
 \author{

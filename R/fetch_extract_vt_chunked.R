@@ -14,10 +14,8 @@
 #'
 #' @return An `ohvbd.data.frame` containing the requested data.
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' fetch_extract_vt_chunked(c(54,55,56), chunksize = 2, rate=5)
-#' }
 #'
 #' @concept vectraits
 #'

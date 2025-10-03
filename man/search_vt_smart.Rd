@@ -59,10 +59,9 @@ The following operators are valid (alternative names are listed in brackets):
 }
 
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 search_vt_smart("Interactor1Genus", "equals", "Anopheles")
-}
-
+\dontshow{\}) # examplesIf}
 }
 \author{
 Francis Windram

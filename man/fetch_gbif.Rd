@@ -24,10 +24,9 @@ It is worth splitting longer lists of ids into a couple of chunks if you need mo
 If you regularly use ohvbd to download large numbers of datasets at once and chunking is causing you other issues, please raise an issue at https://github.com/fwimp/ohvbd/issues.
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 fetch_gbif("dbc4a3ae-680f-44e6-ab25-c70e27b38dbc")
-}
-
+\dontshow{\}) # examplesIf}
 }
 \author{
 Francis Windram

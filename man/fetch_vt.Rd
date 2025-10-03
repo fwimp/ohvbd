@@ -22,12 +22,11 @@ A list of \link[httr2:response]{httr2 response} objects, as an \code{ohvbd.respo
 Retrieve VecTraits dataset/s specified by their dataset ID.
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 fetch_vt(54)
 
 fetch_vt(c(54, 55, 56), rate=5)
-}
-
+\dontshow{\}) # examplesIf}
 }
 \author{
 Francis Windram

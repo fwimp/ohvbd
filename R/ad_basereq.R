@@ -6,9 +6,7 @@
 #' @return Returns a string containing the root address of the AREAdata dataset.
 #'
 #' @examples
-#' \dontrun{
 #' basereq <- ad_basereq()
-#' }
 #'
 #' @concept basereq
 #'

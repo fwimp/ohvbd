@@ -8,14 +8,12 @@
 #'
 #' @return An `ohvbd.data.frame` containing the requested data.
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' fetch_vd(247) |>
 #'   extract_vd(cols=c("species",
-#'                          "sample_start_date",
-#'                          "sample_value"),
-#'                   returnunique=TRUE)
-#' }
+#'                     "sample_start_date",
+#'                     "sample_value"),
+#'              returnunique=TRUE)
 #'
 #' @concept vecdyn
 #'

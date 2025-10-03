@@ -13,10 +13,9 @@ is_cached(x)
 Check whether an object has been loaded from cache by ohvbd.
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 is.cached(c(1,2,3))
-}
-
+\dontshow{\}) # examplesIf}
 }
 \author{
 Francis Windram

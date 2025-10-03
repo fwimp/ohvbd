@@ -20,14 +20,13 @@ An \code{ohvbd.data.frame} containing the requested data.
 Extract the data returned by a call to \code{\link[=fetch_vt]{fetch_vt()}}, filter columns of interest, and find unique rows if required.
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 fetch_vt(54) |>
   extract_vt(cols=c("DatasetID",
-                         "Interactor1Genus",
-                         "Interactor1Species"),
-                  returnunique=TRUE)
-}
-
+                    "Interactor1Genus",
+                    "Interactor1Species"),
+             returnunique=TRUE)
+\dontshow{\}) # examplesIf}
 }
 \author{
 Francis Windram

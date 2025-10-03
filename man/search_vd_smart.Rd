@@ -51,10 +51,9 @@ The following operators are valid (alternative names are listed in brackets):
 }
 
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 search_vd_smart("Collections", "gt", "1000")
-}
-
+\dontshow{\}) # examplesIf}
 }
 \author{
 Francis Windram

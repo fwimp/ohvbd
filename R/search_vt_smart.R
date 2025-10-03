@@ -39,10 +39,8 @@
 #'
 #' @return An `ohvbd.ids` vector of VecTraits dataset IDs.
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' search_vt_smart("Interactor1Genus", "equals", "Anopheles")
-#' }
 #'
 #' @concept vectraits
 #'

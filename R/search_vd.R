@@ -8,13 +8,11 @@
 #'
 #' @return An `ohvbd.ids` vector of VecDyn dataset IDs.
 #'
-#' @examples
-#' \dontrun{
-#' search_vt("Aedes aegypti")
+#' @examplesIf interactive()
+#' search_vd("Aedes aegypti")
 #'
-#' search_vt(c("Aedes", "aegypti"))
-#'
-#' }
+#' search_vd(c("Aedes", "aegypti"))
+
 #'
 #' @concept vecdyn
 #'

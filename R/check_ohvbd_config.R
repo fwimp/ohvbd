@@ -7,9 +7,7 @@
 #' @return NULL
 #'
 #' @examples
-#' \dontrun{
 #'   check_ohvbd_config()
-#' }
 #'
 #' @export
 #'

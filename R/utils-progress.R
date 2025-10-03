@@ -67,14 +67,12 @@ progress_style <- function(x) {
 #' @return NULL
 #'
 #' @examples
-#' \dontrun{
 #' format_time_overlap_bar(
 #'   start = as.Date("2022-08-04"),
 #'   end = as.Date("2022-08-11"),
 #'   targets = c(as.Date("2022-08-05"), as.Date("2022-08-12")),
 #'   targetrange = TRUE, twobar=TRUE
 #' )
-#' }
 #'
 #'
 #' @export

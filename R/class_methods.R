@@ -25,7 +25,7 @@ print.ohvbd.data.frame <- function(x, ...) {
 #' @export
 print.ohvbd.ad.matrix <- function(x, ..., full = FALSE) {
   cli::cat_line(cli::format_inline("{.cls {class(x)[1]}}"))
-  # Possibly worthwhile moving most of this to a new summary.ohvbd.ad.matrix function?
+  # TODO: Possibly worthwhile moving most of this to a new summary.ohvbd.ad.matrix function?
   # If attr is null, default to <missing>
   metric <- attr(x, 'metric') %||% '<missing>'
   gid <- attr(x, 'gid') %||% '<missing>'
@@ -92,10 +92,9 @@ summary.ohvbd.hub.search <- function(object, ...) {
 #' @returns The extracted data, as an `ohvbd.responses` object.
 #' @concept convenience
 #' @export
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' find_vt_ids() |> fetch()
-#' }
+#'
 fetch <- function(
   ids,
   ...
@@ -137,11 +136,10 @@ fetch.ohvbd.ids <- function(
 #' @returns The extracted data, either as an `ohvbd.data.frame` or `ohvbd.ad.matrix` object.
 #' @concept convenience
 #' @export
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' find_vt_ids() |> fetch() |> extract(cols=c("Interactor1Species"))
 #' fetch_ad(use_cache=TRUE) |> extract(targetdate="2020-08-04")
-#' }
+#'
 extract <- function(res, ...) {
   UseMethod("extract")
 }

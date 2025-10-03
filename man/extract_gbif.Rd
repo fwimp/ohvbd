@@ -20,11 +20,10 @@ An \code{ohvbd.data.frame} containing the requested data.
 Extract the data returned by a call to \code{\link[=fetch_gbif]{fetch_gbif()}}, filter columns of interest, and find unique rows if required.
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 fetch_gbif("dbc4a3ae-680f-44e6-ab25-c70e27b38dbc") |>
   extract_gbif()
-}
-
+\dontshow{\}) # examplesIf}
 }
 \author{
 Francis Windram

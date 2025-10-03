@@ -35,14 +35,12 @@ This is mostly used in the error handling of \code{\link[=extract_ad]{extract_ad
 It was designed to fill a more general role within UI design using the cli package, and should be usable (or hackable) by others needing the same tool.
 }
 \examples{
-\dontrun{
 format_time_overlap_bar(
   start = as.Date("2022-08-04"),
   end = as.Date("2022-08-11"),
   targets = c(as.Date("2022-08-05"), as.Date("2022-08-12")),
   targetrange = TRUE, twobar=TRUE
 )
-}
 
 
 }

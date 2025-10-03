@@ -36,6 +36,11 @@ Extract the data returned by a call to \code{\link[=fetch_ad]{fetch_ad()}}, filt
 
 Currently this does not handle Population Density or Forecast matrices, however the other 5 metrics are handled natively.
 }
+\note{
+\strong{IT IS NOT CURRENTLY CLEAR WHETHER THIS IS JUST AN OLD DUPLICATE OF \code{extract_ad()}!!!}
+Nothing seems to depend on it, and thus it has been de-exported for now.
+If this causes problems it will be re-worked as a deprecated alias for \code{extract_ad()}
+}
 \section{Place matching}{
 
 This function attempts to intelligently infer place selections based upon the provided gid and place names.

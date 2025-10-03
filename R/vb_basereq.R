@@ -9,11 +9,9 @@
 #' @return Returns an httr2 request object, pointing at baseurl using useragent
 #'
 #' @examples
-#' \dontrun{
 #' basereq <- vb_basereq(
 #'   baseurl="https://vectorbyte.crc.nd.edu/portal/api/",
 #'   useragent="ROHVBD")
-#' }
 #'
 #' @concept basereq
 #'
@@ -50,10 +48,8 @@ vb_basereq <- function(
 #'
 #' @export
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' set_ohvbd_compat()
-#' }
 
 set_ohvbd_compat <- function(value = TRUE) {
   if (!is_bool(value)) {

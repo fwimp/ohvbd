@@ -23,9 +23,17 @@ new_ohvbd.ids <- function(v, db = NULL) {
 #' @returns An id vector: an S3 vector with class `ohvbd.ids`.
 #' @export
 #' @examples
-#' \dontrun{
 #' ohvbd.ids(c(1,2,3,4,5), db="vt")
-#' }
+#'
+#' ohvbd.ids(c(1,2,3,4,5), db="vd")
+#'
+#' ohvbd.ids(
+#'   c(
+#'     "dbc4a3ae-680f-44e6-ab25-c70e27b38dbc",
+#'     "fac87892-68c8-444a-9ae9-46273fdff724"
+#'     ),
+#'   db="gbif"
+#' )
 
 ohvbd.ids <- function(ids, db) {
   allowed_dbs <- c("vt", "vd", "gbif")

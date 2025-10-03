@@ -38,10 +38,9 @@ Retrieve and parse VecTraits datasets specified by their dataset IDs in batches.
 This is not usually necessary (generally you just need \code{\link[=fetch_vt]{fetch_vt()}}) but allows one to release data that is not in use from memory. If you would like more control on extraction or parsing then it is best to wrap \code{\link[=fetch_vt]{fetch_vt()}} and \code{\link[=extract_vt]{extract_vt()}} in your own chunker instead.
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 fetch_extract_vt_chunked(c(54,55,56), chunksize = 2, rate=5)
-}
-
+\dontshow{\}) # examplesIf}
 }
 \author{
 Francis Windram

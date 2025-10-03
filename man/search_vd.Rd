@@ -18,13 +18,11 @@ An \code{ohvbd.ids} vector of VecDyn dataset IDs.
 Retrieve the IDs for any VecDyn datasets matching the given keywords
 }
 \examples{
-\dontrun{
-search_vt("Aedes aegypti")
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+search_vd("Aedes aegypti")
 
-search_vt(c("Aedes", "aegypti"))
-
-}
-
+search_vd(c("Aedes", "aegypti"))
+\dontshow{\}) # examplesIf}
 }
 \author{
 Francis Windram

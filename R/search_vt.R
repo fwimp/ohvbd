@@ -8,13 +8,10 @@
 #'
 #' @return An `ohvbd.ids` vector of VecTraits dataset IDs.
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' search_vt("Aedes aegypti")
 #'
 #' search_vt(c("Aedes", "aegypti"))
-#'
-#' }
 #'
 #' @section Warning:
 #' The ids returned from the server (and thus this function) do not necessarily precisely match the keywords that were requested.
