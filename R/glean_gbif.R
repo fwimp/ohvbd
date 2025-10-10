@@ -1,5 +1,5 @@
 #' @title Parse data from requests to GBIF
-#' @description Extract the data returned by a call to [ohvbd::fetch_gbif()], filter columns of interest, and find unique rows if required.
+#' @description Extract the data returned by a call to [fetch_gbif()], filter columns of interest, and find unique rows if required.
 #' @author Francis Windram
 #'
 #' @param res a list of responses from GBIF as an `ohvbd.responses` object.

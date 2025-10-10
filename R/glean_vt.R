@@ -1,5 +1,5 @@
 #' @title Parse data from requests to VecTraits
-#' @description Extract the data returned by a call to [ohvbd::fetch_vt()], filter columns of interest, and find unique rows if required.
+#' @description Extract the data returned by a call to [fetch_vt()], filter columns of interest, and find unique rows if required.
 #' @author Francis Windram
 #'
 #' @param res a list of responses from VecTraits as an `ohvbd.responses` object.

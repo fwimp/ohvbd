@@ -7,10 +7,10 @@
 extract(res, ...)
 }
 \arguments{
-\item{res}{An object of type \link{ohvbd.responses} or \link{ohvbd.ad.matrix} generated from \code{fetch()}
+\item{res}{An object of type \code{ohvbd.responses} or \code{ohvbd.ad.matrix} generated from \code{\link[=fetch]{fetch()}}
 and containing data from one of the supported databases.}
 
-\item{...}{Any arguments to be passed to the underlying extractors (see \code{glean_vt()} and \code{glean_ad()} for specific arguments).}
+\item{...}{Any arguments to be passed to the underlying extractors (see \code{\link[=glean_vt]{glean_vt()}} and \code{\link[=glean_ad]{glean_ad()}} for specific arguments).}
 }
 \value{
 The extracted data, either as an \code{ohvbd.data.frame} or \code{ohvbd.ad.matrix} object.
@@ -19,7 +19,7 @@ The extracted data, either as an \code{ohvbd.data.frame} or \code{ohvbd.ad.matri
 This is a convenience method that infers and applies the correct extractor for the input.
 }
 \note{
-\code{extract()} is now deprecated and should not be used. Please use \code{\link[=glean]{glean()}} instead.
+\code{\link[=extract]{extract()}} is now deprecated and should not be used. Please use \code{\link[=glean]{glean()}} instead.
 }
 \author{
 Francis Windram
