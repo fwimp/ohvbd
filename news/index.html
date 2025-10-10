@@ -56,6 +56,11 @@
 <code><a href="../reference/check_db_status.html">check_db_status()</a></code> now returns (invisibly) whether all databases are up or not.</li>
 <li>Examples are no longer wrapped in <code>\dontrun{}</code> so they should be runnable from an installed version of the package.</li>
 <li>A good chunk of the functional logic of <code>ohvbd</code> is now covered with unit tests (using the <code>vcr</code> package).</li>
+<li>
+<code>fetch_vd</code> no longer tries to retrieve ids with no pages of data.</li>
+<li>Functions that interface with vectorbyte databases no longer recommend using <code><a href="../reference/set_ohvbd_compat.html">set_ohvbd_compat()</a></code> as <strong>unexpected</strong> SSL errors <em>should</em> break pipelines by default.
+<ul><li>These errors are no longer <em>expected</em> to occur when interfacing with vectorbyte.</li>
+</ul></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.6.1" id="ohvbd-061">ohvbd 0.6.1<a class="anchor" aria-label="anchor" href="#ohvbd-061"></a></h2>
