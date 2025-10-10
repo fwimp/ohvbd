@@ -15,7 +15,7 @@ vb_basereq(
 
 \item{useragent}{the user agent string used when contacting vectorbyte}
 
-\item{unsafe}{disable ssl verification (should only ever be required on Linux, \strong{do not enable this by default})}
+\item{unsafe}{disable ssl verification (shouldn't ever be required unless you are otherwise experiencing SSL issues!)}
 }
 \value{
 Returns an httr2 request object, pointing at baseurl using useragent

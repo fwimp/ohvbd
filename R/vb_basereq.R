@@ -4,7 +4,7 @@
 #'
 #' @param baseurl the base url for the vectorbyte API
 #' @param useragent the user agent string used when contacting vectorbyte
-#' @param unsafe disable ssl verification (should only ever be required on Linux, **do not enable this by default**)
+#' @param unsafe disable ssl verification (shouldn't ever be required unless you are otherwise experiencing SSL issues!)
 #' @author Francis Windram
 #' @return Returns an httr2 request object, pointing at baseurl using useragent
 #'
@@ -37,7 +37,7 @@ vb_basereq <- function(
 
 #' @title Set ohvbd compatability mode to TRUE
 #' @description Set ohvbd to disable ssl verification for calls to external APIs.
-#' This should not be needed (and not be performed) unless you are running on a linux machine or are otherwise experiencing SSL issues when using the package!
+#' This should not be needed (and not be performed) unless you are otherwise experiencing SSL issues when using the package!
 #'
 #' When in interactive mode, checks with you to make sure you want to do this. Does not check when run in a script.
 #'

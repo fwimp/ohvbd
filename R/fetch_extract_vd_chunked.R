@@ -44,43 +44,7 @@ fetch_extract_vd_chunked <- function(
     basereq <- vb_basereq()
   }
 
-  if (length(ids) > 10) {
-    # Preflight ssl check
-    status <- tryCatch(
-      {
-        preflight_test <- basereq |> req_perform() # nolint: object_usage_linter
-        list("err_code" = 0, "err_obj" = NULL)
-      },
-      error = function(e) {
-        list("err_code" = 1, "err_obj" = e)
-      }
-    )
-
-    if (status$err_code == 1) {
-      curl_err <- get_curl_err(status$err_obj, returnfiller = TRUE)
-      if (
-        grepl(
-          "SSL certificate problem: unable to get local issuer certificate",
-          curl_err
-        )
-      ) {
-        cat("\n")
-        cli_alert_danger("Could not verify SSL certificate.")
-        cli::cli_text(
-          "You may have success running {.fn set_ohvbd_compat} and then trying again."
-        )
-        cat("\n")
-        cli_abort(
-          "SSL certificate problem: unable to get local issuer certificate"
-        )
-      } else {
-        cli_abort("Preflight found unknown error: {.val {curl_err}}")
-      }
-    }
-  }
-
   # Get and extract vt data by ID in chunks (to save memory)
-
   # Split into chunks
   breakpoints <- seq(0, length(ids) + (chunksize - 1), by = chunksize)
   chunks <- cut(seq_along(ids), breaks = breakpoints, labels = FALSE)

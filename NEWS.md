@@ -9,6 +9,9 @@
 * `check_db_status()` now returns (invisibly) whether all databases are up or not.
 * Examples are no longer wrapped in `\dontrun{}` so they should be runnable from an installed version of the package.
 * A good chunk of the functional logic of `ohvbd` is now covered with unit tests (using the `vcr` package).
+* `fetch_vd` no longer tries to retrieve ids with no pages of data.
+* Functions that interface with vectorbyte databases no longer recommend using `set_ohvbd_compat()` as **unexpected** SSL errors *should* break pipelines by default.
+  * These errors are no longer *expected* to occur when interfacing with vectorbyte.
 
 # ohvbd 0.6.1
 

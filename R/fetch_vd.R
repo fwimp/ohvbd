@@ -37,10 +37,10 @@ fetch_vd <- function(ids, rate = 5, connections = 2, basereq = NA) {
 
   resp_parsed <- fetch_vd_counts(ids, rate, connections, 50, basereq)
 
-  missing <- resp_parsed |> dplyr::filter(pages == 0)
+  missing <- resp_parsed |> dplyr::filter(.data$pages == 0)
   missing <- missing$id
 
-  resp_parsed <- resp_parsed |> dplyr::filter(pages != 0)
+  resp_parsed <- resp_parsed |> dplyr::filter(.data$pages != 0)
 
   if (nrow(resp_parsed) <= 0) {
     # Short-circuit to return cases where no id is correct
