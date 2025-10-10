@@ -44,6 +44,34 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="ohvbd-development-version">ohvbd (development version)<a class="anchor" aria-label="anchor" href="#ohvbd-development-version"></a></h2>
+<p><strong>Major API change</strong></p>
+<ul><li>
+<code>extract_</code> functions are now <code>glean_</code>.
+<ul><li>This means that if tidyverse is loaded after ohvbd, there are no direct namespace collisions.</li>
+</ul></li>
+</ul><p>Full list of function name changes:</p>
+<ul><li>
+<code><a href="../reference/extract.html">extract()</a></code> -&gt; <code><a href="../reference/glean.html">glean()</a></code>
+</li>
+<li>
+<code>extract_ad()</code> -&gt; <code><a href="../reference/glean_ad.html">glean_ad()</a></code>
+</li>
+<li>
+<code>extract_gbif()</code> -&gt; <code><a href="../reference/glean_gbif.html">glean_gbif()</a></code>
+</li>
+<li>
+<code>extract_vd()</code> -&gt; <code><a href="../reference/glean_vd.html">glean_vd()</a></code>
+</li>
+<li>
+<code>extract_vt()</code> -&gt; <code><a href="../reference/glean_vt.html">glean_vt()</a></code>
+</li>
+<li>
+<code>fetch_extract_vd_chunked()</code> -&gt; <code><a href="../reference/fetch_glean_vd_chunked.html">fetch_glean_vd_chunked()</a></code>
+</li>
+<li>
+<code>fetch_extract_vt_chunked()</code> -&gt; <code><a href="../reference/fetch_glean_vt_chunked.html">fetch_glean_vt_chunked()</a></code>
+</li>
+</ul><p>Other changes</p>
 <ul><li>Entire code base is now continuously formatted using Air v0.7.1.</li>
 <li>
 <code>ohvbd</code> now interfaces with GBIF for occurrence data.
@@ -57,8 +85,8 @@
 <li>Examples are no longer wrapped in <code>\dontrun{}</code> so they should be runnable from an installed version of the package.</li>
 <li>A good chunk of the functional logic of <code>ohvbd</code> is now covered with unit tests (using the <code>vcr</code> package).</li>
 <li>
-<code>fetch_vd</code> no longer tries to retrieve ids with no pages of data.</li>
-<li>Functions that interface with vectorbyte databases no longer recommend using <code><a href="../reference/set_ohvbd_compat.html">set_ohvbd_compat()</a></code> as <strong>unexpected</strong> SSL errors <em>should</em> break pipelines by default.
+<code><a href="../reference/fetch_vd.html">fetch_vd()</a></code> no longer tries to retrieve ids with no pages of data.</li>
+<li>Functions that interface with vectorbyte databases no longer recommend using <code><a href="../reference/set_ohvbd_compat.html">set_ohvbd_compat()</a></code> as <em>unexpected</em> SSL errors <strong>should</strong> break pipelines by default.
 <ul><li>These errors are no longer <em>expected</em> to occur when interfacing with vectorbyte.</li>
 </ul></li>
 </ul></div>
@@ -86,7 +114,7 @@
 <li>
 <code><a href="../reference/assoc_ad.html">assoc_ad()</a></code> now correctly extracts data (this functionality regressed in 0.5.0 as a consequence of the new method dispatch approach to data retrieval)</li>
 <li>
-<code><a href="../reference/assoc_ad.html">assoc_ad()</a></code> also gives now consistent output even when a 1-dimensional output is returned from <code><a href="../reference/extract_ad.html">extract_ad()</a></code>
+<code><a href="../reference/assoc_ad.html">assoc_ad()</a></code> also gives now consistent output even when a 1-dimensional output is returned from <code>extract_ad()</code>
 </li>
 <li>All <code>fetch_</code> functions now have a default <code>connections</code> argument of 2, leading to faster retrieval across the board.</li>
 <li>
@@ -131,10 +159,10 @@
 <code>get_ad()</code> -&gt; <code><a href="../reference/fetch_ad.html">fetch_ad()</a></code>
 </li>
 <li>
-<code>get_extract_vd_chunked()</code> -&gt; <code><a href="../reference/fetch_extract_vd_chunked.html">fetch_extract_vd_chunked()</a></code>
+<code>get_extract_vd_chunked()</code> -&gt; <code>fetch_extract_vd_chunked()</code>
 </li>
 <li>
-<code>get_extract_vt_chunked()</code> -&gt; <code><a href="../reference/fetch_extract_vt_chunked.html">fetch_extract_vt_chunked()</a></code>
+<code>get_extract_vt_chunked()</code> -&gt; <code>fetch_extract_vt_chunked()</code>
 </li>
 <li>
 <code>get_gadm_sfs()</code> -&gt; <code><a href="../reference/fetch_gadm_sfs.html">fetch_gadm_sfs()</a></code>
@@ -222,9 +250,9 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.3.1" id="ohvbd-031">ohvbd 0.3.1<a class="anchor" aria-label="anchor" href="#ohvbd-031"></a></h2>
 <ul><li>New function <code><a href="../reference/format_time_overlap_bar.html">format_time_overlap_bar()</a></code> allows for visually formatting a range of dates combined with another set of target dates to see where overlaps do or do not take place.</li>
-<li>This is mostly used in the error handling of <code><a href="../reference/extract_ad.html">extract_ad()</a></code> however it can also be used independently. It was designed to fill a more general role within UI design using the cli package, and should be usable (or hackable) by others needing the same tool.</li>
+<li>This is mostly used in the error handling of <code>extract_ad()</code> however it can also be used independently. It was designed to fill a more general role within UI design using the cli package, and should be usable (or hackable) by others needing the same tool.</li>
 <li>
-<code><a href="../reference/extract_ad.html">extract_ad()</a></code> now errors when all <code>targetdate</code> entries are outside of the range of the AREAdata dataset.</li>
+<code>extract_ad()</code> now errors when all <code>targetdate</code> entries are outside of the range of the AREAdata dataset.</li>
 <li>New <code><a href="../reference/assoc_ad.html">assoc_ad()</a></code> associates arbitrary data including lon/lat columns with AREAdata.</li>
 <li>New <code>get_vd_columns()</code> provides quick reference about the currently present VecDyn columns. <em>(This is currently not possible for VecTraits, but the feasibility is being investigated.)</em>
 </li>
@@ -248,7 +276,7 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.5" id="ohvbd-025">ohvbd 0.2.5<a class="anchor" aria-label="anchor" href="#ohvbd-025"></a></h2>
 <ul><li>
-<code><a href="../reference/extract_ad.html">extract_ad()</a></code> now allows <code>targetdate</code> to be specified as a vector of full dates, e.g. <code>c("2023-08-04", "2023-09-21")</code>.</li>
+<code>extract_ad()</code> now allows <code>targetdate</code> to be specified as a vector of full dates, e.g. <code>c("2023-08-04", "2023-09-21")</code>.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.4" id="ohvbd-024">ohvbd 0.2.4<a class="anchor" aria-label="anchor" href="#ohvbd-024"></a></h2>
