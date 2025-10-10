@@ -28,7 +28,7 @@ This will \strong{ALWAYS} get and cache gid level 2 data sources. These files ar
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 vt_ids <- search_vt(c("Aedes", "aegypti"))
 vtdf <- fetch_vt(vt_ids[(length(vt_ids)-20):length(vt_ids)]) |>
-  extract_vt(cols = c(
+  glean_vt(cols = c(
     "DatasetID",
     "Latitude",
     "Longitude",

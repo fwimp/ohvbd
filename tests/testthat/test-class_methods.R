@@ -43,4 +43,4 @@ test_that("All S3 print/summary methods create output", {
 
 # TODO: Test fetch
 
-# TODO: Test extract
+# TODO: Test glean

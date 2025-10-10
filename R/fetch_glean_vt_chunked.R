@@ -1,7 +1,7 @@
 #' @title Get and parse multiple VecTraits datasets by ID in chunks
 #' @description Retrieve and parse VecTraits datasets specified by their dataset IDs in batches.
 #'
-#' This is not usually necessary (generally you just need [fetch_vt()]) but allows one to release data that is not in use from memory. If you would like more control on extraction or parsing then it is best to wrap [fetch_vt()] and [extract_vt()] in your own chunker instead.
+#' This is not usually necessary (generally you just need [fetch_vt()]) but allows one to release data that is not in use from memory. If you would like more control on extraction or parsing then it is best to wrap [fetch_vt()] and [glean_vt()] in your own chunker instead.
 #' @author Francis Windram
 #'
 #' @param ids a numeric vector of IDs (preferably in an `ohvbd.ids` object) indicating the particular datasets to download.
@@ -15,14 +15,14 @@
 #' @return An `ohvbd.data.frame` containing the requested data.
 #'
 #' @examplesIf interactive()
-#' fetch_extract_vt_chunked(c(54,55,56), chunksize = 2, rate=5)
+#' fetch_glean_vt_chunked(c(54,55,56), chunksize = 2, rate=5)
 #'
 #' @concept vectraits
 #'
 #' @export
 #'
 
-fetch_extract_vt_chunked <- function(
+fetch_glean_vt_chunked <- function(
   ids,
   chunksize = 20,
   cols = NA,
@@ -35,7 +35,7 @@ fetch_extract_vt_chunked <- function(
     cli_alert_warning("IDs not necessarily from VecTraits.")
   } else if (attr(ids, "db") != "vt") {
     cli_abort(c(
-      "x" = "IDs not from VecTraits, Please use the appropriate {.fn fetch_extract_{attr(ids, 'db')}} function.",
+      "x" = "IDs not from VecTraits, Please use the appropriate {.fn fetch_glean_{attr(ids, 'db')}} function.",
       "!" = "Detected db = {.val {attr(ids, 'db')}}"
     ))
   }
@@ -59,7 +59,7 @@ fetch_extract_vt_chunked <- function(
         connections = connections,
         basereq = basereq
       ) |>
-        extract_vt(cols = cols, returnunique = returnunique)
+        glean_vt(cols = cols, returnunique = returnunique)
     })
 
   out_df <- suppressWarnings(rbindlist(out_list))

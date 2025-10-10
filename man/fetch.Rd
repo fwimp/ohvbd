@@ -12,7 +12,7 @@ fetch(ids, ...)
 \item{...}{Any other arguments to be passed to the underlying fetch functions (see \code{fetch_vt()} and \code{fetch_vd()} for specific arguments).}
 }
 \value{
-The extracted data, as an \code{ohvbd.responses} object.
+The downloaded data, as an \code{ohvbd.responses} object.
 }
 \description{
 This is a convenience method that infers and applies the correct fetch function for the input ids.

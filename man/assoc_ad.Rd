@@ -63,7 +63,7 @@ For example "2020-04" will be taken to mean the month of April in 2020, and the 
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 vt_ids <- search_vt(c("Aedes", "aegypti"))
 vtdf <- fetch_vt(vt_ids[(length(vt_ids)-20):length(vt_ids)]) |>
-  extract_vt(cols = c(
+  glean_vt(cols = c(
     "DatasetID",
     "Latitude",
     "Longitude",

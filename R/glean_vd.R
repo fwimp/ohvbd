@@ -10,7 +10,7 @@
 #'
 #' @examplesIf interactive()
 #' fetch_vd(247) |>
-#'   extract_vd(cols=c("species",
+#'   glean_vd(cols=c("species",
 #'                     "sample_start_date",
 #'                     "sample_value"),
 #'              returnunique=TRUE)
@@ -20,12 +20,12 @@
 #' @export
 #'
 
-extract_vd <- function(res, cols = NA, returnunique = FALSE) {
+glean_vd <- function(res, cols = NA, returnunique = FALSE) {
   if (is.null(attr(res, "db"))) {
     cli_alert_warning("Responses not necessarily from VecDyn.")
   } else if (attr(res, "db") != "vd") {
     cli_abort(c(
-      "x" = "Responses not from VecDyn, Please use the appropriate {.fn extract_{attr(res, 'db')}} function.",
+      "x" = "Responses not from VecDyn, Please use the appropriate {.fn glean_{attr(res, 'db')}} function.",
       "!" = "Detected db = {.val {attr(res, 'db')}}"
     ))
   }

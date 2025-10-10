@@ -124,48 +124,48 @@ fetch_ad(metric = "relhumid", gid = 1, use_cache = TRUE)
 
 ## Extracting specific data
 
-Extracting data from this matrix can be fiddly, but luckily `ohvbd` also provides a function to aid in that: `extract_ad()`.
+Extracting data from this matrix can be fiddly, but luckily `ohvbd` also provides a function to aid in that: `glean_ad()`.
 
 So let's again try to extract the same data as previously, the temperature in Angola on 2020-01-01:
 
-```{r extract_basic}
-ad_df |> extract_ad(targetdate = "2020-01-01", places = "Angola")
+```{r glean_basic}
+ad_df |> glean_ad(targetdate = "2020-01-01", places = "Angola")
 ```
 *Note: ignore the `attr` part of the output, this data just allows `ohvbd` to ensure consistency between its functions.*
 
 
 Wonderful! But what if we want a range of dates, or many places? What if the dates fall outside the dates that we have data for, or the places are not actually present in the data?
 
-This is where `extract_ad()` really shines.
+This is where `glean_ad()` really shines.
 
 ### Dates and date ranges
 
-Let's first look at the flexibility of the date arguments to `extract_ad()`.
+Let's first look at the flexibility of the date arguments to `glean_ad()`.
 
 If we (for example) want not just one day, we can specify either a vector of dates, or a less exact date as `targetdate`
 
-```{r extract_multidate}
-ad_df |> extract_ad(
+```{r glean_multidate}
+ad_df |> glean_ad(
   targetdate = c("2020-01-01", "2020-01-02", "2020-01-05"),
   places = "Angola"
 )
 ```
 
-```{r extract_month}
-ad_df |> extract_ad(targetdate = "2020-01", places = "Angola")
+```{r glean_month}
+ad_df |> glean_ad(targetdate = "2020-01", places = "Angola")
 ```
 
-```{r extract_year}
+```{r glean_year}
 # 366 days of data return as 2020 is a leap year
-length(ad_df |> extract_ad(targetdate = "2020", places = "Angola"))
+length(ad_df |> glean_ad(targetdate = "2020", places = "Angola"))
 ```
 
 If we would instead like to specify a date range, we can add the argument `enddate`.
 
 _Note: the end date is defined **exclusively**, meaning that any date before it (and on or after the target date) is considered to be "in"._
 
-```{r extract_range}
-ad_df |> extract_ad(
+```{r glean_range}
+ad_df |> glean_ad(
   targetdate = "2020-01-01",
   enddate = "2020-01-04",
   places = "Angola"
@@ -176,8 +176,8 @@ ad_df |> extract_ad(
 
 Multiple places to extract data for can also be provided as a vector of places:
 
-```{r extract_places}
-ad_df |> extract_ad(
+```{r glean_places}
+ad_df |> glean_ad(
   targetdate = "2020-01-01",
   places = c("Angola", "Latvia", "United Kingdom")
 )
@@ -185,8 +185,8 @@ ad_df |> extract_ad(
 
 This can be combined with the date filters above to create a more restrictive extraction:
 
-```{r extract_exact}
-ad_df |> extract_ad(
+```{r glean_exact}
+ad_df |> glean_ad(
   targetdate = "2020-01-01",
   enddate = "2020-01-04",
   places = c("Angola", "Latvia", "United Kingdom")
@@ -195,10 +195,10 @@ ad_df |> extract_ad(
 
 ### Resiliance
 
-The `extract_ad()` function is also relatively resilient to the use of dates or places that are not in AREAdata:
+The `glean_ad()` function is also relatively resilient to the use of dates or places that are not in AREAdata:
 
-```{r extract_missing}
-ad_df |> extract_ad(
+```{r glean_missing}
+ad_df |> glean_ad(
   targetdate = "2023-12-30",
   enddate = "2024-01-02",
   places = c("Atlantis", "Latvia", "United Kingdom")

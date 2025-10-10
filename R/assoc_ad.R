@@ -33,7 +33,7 @@
 #' @examplesIf interactive()
 #' vt_ids <- search_vt(c("Aedes", "aegypti"))
 #' vtdf <- fetch_vt(vt_ids[(length(vt_ids)-20):length(vt_ids)]) |>
-#'   extract_vt(cols = c(
+#'   glean_vt(cols = c(
 #'     "DatasetID",
 #'     "Latitude",
 #'     "Longitude",
@@ -136,7 +136,7 @@ assoc_ad <- function(
   # Pull out the data from AD
   cli::cli_progress_message("Extracting AD data...")
   ad_extracted <- areadata |>
-    extract_ad(
+    glean_ad(
       targetdate = targetdate,
       enddate = enddate,
       places = places[, final_name],

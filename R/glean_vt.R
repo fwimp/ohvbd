@@ -10,7 +10,7 @@
 #'
 #' @examplesIf interactive()
 #' fetch_vt(54) |>
-#'   extract_vt(cols=c("DatasetID",
+#'   glean_vt(cols=c("DatasetID",
 #'                     "Interactor1Genus",
 #'                     "Interactor1Species"),
 #'              returnunique=TRUE)
@@ -20,12 +20,12 @@
 #' @export
 #'
 
-extract_vt <- function(res, cols = NA, returnunique = FALSE) {
+glean_vt <- function(res, cols = NA, returnunique = FALSE) {
   if (is.null(attr(res, "db"))) {
     cli_alert_warning("Responses not necessarily from VecTraits.")
   } else if (attr(res, "db") != "vt") {
     cli_abort(c(
-      "x" = "Responses not from VecTraits, Please use the appropriate {.fn extract_{attr(res, 'db')}} function.",
+      "x" = "Responses not from VecTraits, Please use the appropriate {.fn glean_{attr(res, 'db')}} function.",
       "!" = "Detected db = {.val {attr(res, 'db')}}"
     ))
   }

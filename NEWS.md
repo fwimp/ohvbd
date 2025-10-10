@@ -1,4 +1,20 @@
 # ohvbd (development version)
+**Major API change**
+
+* `extract_` functions are now `glean_`.
+  * This means that if tidyverse is loaded after ohvbd, there are no direct namespace collisions.
+
+Full list of function name changes:
+
+* `extract()` -> `glean()`
+* `extract_ad()` -> `glean_ad()`
+* `extract_gbif()` -> `glean_gbif()`
+* `extract_vd()` -> `glean_vd()`
+* `extract_vt()` -> `glean_vt()`
+* `fetch_extract_vd_chunked()` -> `fetch_glean_vd_chunked()`
+* `fetch_extract_vt_chunked()` -> `fetch_glean_vt_chunked()`
+
+Other changes
 
 * Entire code base is now continuously formatted using Air v0.7.1.
 * `ohvbd` now interfaces with GBIF for occurrence data.
@@ -9,8 +25,8 @@
 * `check_db_status()` now returns (invisibly) whether all databases are up or not.
 * Examples are no longer wrapped in `\dontrun{}` so they should be runnable from an installed version of the package.
 * A good chunk of the functional logic of `ohvbd` is now covered with unit tests (using the `vcr` package).
-* `fetch_vd` no longer tries to retrieve ids with no pages of data.
-* Functions that interface with vectorbyte databases no longer recommend using `set_ohvbd_compat()` as **unexpected** SSL errors *should* break pipelines by default.
+* `fetch_vd()` no longer tries to retrieve ids with no pages of data.
+* Functions that interface with vectorbyte databases no longer recommend using `set_ohvbd_compat()` as *unexpected* SSL errors **should** break pipelines by default.
   * These errors are no longer *expected* to occur when interfacing with vectorbyte.
 
 # ohvbd 0.6.1

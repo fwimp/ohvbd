@@ -10,19 +10,19 @@
 #'
 #' @examplesIf interactive()
 #' fetch_gbif("dbc4a3ae-680f-44e6-ab25-c70e27b38dbc") |>
-#'   extract_gbif()
+#'   glean_gbif()
 #'
 #' @concept gbif
 #'
 #' @export
 #'
 
-extract_gbif <- function(res, cols = NA, returnunique = FALSE) {
+glean_gbif <- function(res, cols = NA, returnunique = FALSE) {
   if (is.null(attr(res, "db"))) {
     cli_alert_warning("Responses not necessarily from GBIF.")
   } else if (attr(res, "db") != "gbif") {
     cli_abort(c(
-      "x" = "Responses not from GBIF, Please use the appropriate {.fn extract_{attr(res, 'db')}} function.",
+      "x" = "Responses not from GBIF, Please use the appropriate {.fn glean_{attr(res, 'db')}} function.",
       "!" = "Detected db = {.val {attr(res, 'db')}}"
     ))
   }

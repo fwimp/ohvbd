@@ -15,7 +15,7 @@
 #' @examplesIf interactive()
 #' vt_ids <- search_vt(c("Aedes", "aegypti"))
 #' vtdf <- fetch_vt(vt_ids[(length(vt_ids)-20):length(vt_ids)]) |>
-#'   extract_vt(cols = c(
+#'   glean_vt(cols = c(
 #'     "DatasetID",
 #'     "Latitude",
 #'     "Longitude",
@@ -75,7 +75,7 @@ assoc_gadm <- function(
   )
   # Locate which shape each point is in and get the appropriate names for aligning with AD
 
-  gadm_point_ids <- extract(gadm_sf, points)
+  gadm_point_ids <- terra::extract(gadm_sf, points)
 
   endproc <- lubridate::now()
   totaltime <- as.duration(interval(startproc, endproc)) # nolint: object_usage_linter

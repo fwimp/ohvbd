@@ -42,21 +42,21 @@
 #' @examplesIf interactive()
 #' # All dates in August 2022
 #' fetch_ad("temp", gid=0) |>
-#'   extract_ad(
+#'   glean_ad(
 #'     targetdate = "2022-08",
 #'     places = c("Albania", "Thailand")
 #'   )
 #'
 #' # 4th, 5th, and 6th of August 2022 (remember the enddate is EXCLUSIVE)
 #' fetch_ad("temp", gid=0) |>
-#'   extract_ad(
+#'   glean_ad(
 #'     targetdate = "2022-08-04", enddate="2022-08-07",
 #'     places = c("Albania", "Thailand")
 #'   )
 #'
 #' # 4th of August 2022 and 1st of August 2023
 #' fetch_ad("temp", gid=0) |>
-#'   extract_ad(
+#'   glean_ad(
 #'     targetdate = c("2022-08-04", "2023-08-01"),
 #'     places = c("Albania", "Thailand")
 #'   )
@@ -66,7 +66,7 @@
 #' @export
 #'
 
-extract_ad <- function(
+glean_ad <- function(
   ad_matrix,
   targetdate = NA,
   enddate = NA,
@@ -79,7 +79,7 @@ extract_ad <- function(
     cli_alert_warning("Data not necessarily from AREAdata.")
   } else if (attr(ad_matrix, "db") != "ad") {
     cli_abort(c(
-      "x" = "Data not from AREAdata, Please use the appropriate {.fn extract_{attr(ad_matrix, 'db')}} function.",
+      "x" = "Data not from AREAdata, Please use the appropriate {.fn glean_{attr(ad_matrix, 'db')}} function.",
       "!" = "Detected db = {.val {attr(ad_matrix, 'db')}}"
     ))
   }

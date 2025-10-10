@@ -1,7 +1,7 @@
 #' @title Fetch and parse multiple VecDyn datasets by ID in chunks
 #' @description Retrieve and parse VecDyn datasets specified by their dataset IDs in batches.
 #'
-#' This is not usually necessary (generally you just need [fetch_vd()]) but allows one to release data that is not in use from memory. If you would like more control on extraction or parsing then it is best to wrap [fetch_vd()] and [extract_vd()] in your own chunker instead.
+#' This is not usually necessary (generally you just need [fetch_vd()]) but allows one to release data that is not in use from memory. If you would like more control on extraction or parsing then it is best to wrap [fetch_vd()] and [glean_vd()] in your own chunker instead.
 #' @author Francis Windram
 #'
 #' @param ids a numeric vector of IDs (preferably in an `ohvbd.ids` object) indicating the particular datasets to download.
@@ -15,14 +15,14 @@
 #' @return An `ohvbd.data.frame` containing the requested data.
 #'
 #' @examplesIf interactive()
-#' fetch_extract_vd_chunked(c(423,424,425), chunksize = 2, rate=5)
+#' fetch_glean_vd_chunked(c(423,424,425), chunksize = 2, rate=5)
 #'
 #' @concept vecdyn
 #'
 #' @export
 #'
 
-fetch_extract_vd_chunked <- function(
+fetch_glean_vd_chunked <- function(
   ids,
   chunksize = 20,
   cols = NA,
@@ -35,7 +35,7 @@ fetch_extract_vd_chunked <- function(
     cli_alert_warning("IDs not necessarily from VecDyn.")
   } else if (attr(ids, "db") != "vd") {
     cli_abort(c(
-      "x" = "IDs not from VecDyn, Please use the appropriate {.fn fetch_extract_{attr(ids, 'db')}} function.",
+      "x" = "IDs not from VecDyn, Please use the appropriate {.fn fetch_glean_{attr(ids, 'db')}} function.",
       "!" = "Detected db = {.val {attr(ids, 'db')}}"
     ))
   }
@@ -59,7 +59,7 @@ fetch_extract_vd_chunked <- function(
         connections = connections,
         basereq = basereq
       ) |>
-        extract_vd(cols = cols, returnunique = returnunique)
+        glean_vd(cols = cols, returnunique = returnunique)
     })
 
   out_df <- suppressWarnings(rbindlist(out_list, fill = TRUE))

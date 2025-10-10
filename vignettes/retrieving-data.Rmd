@@ -18,7 +18,7 @@ Let's imagine you wanted to figure out where a particular vector species - _Aede
 ```{r exemplar, echo=TRUE, eval=FALSE}
 df <- search_vt("Aedes aegypti") |>
   fetch_vt() |>
-  extract_vt(
+  glean_vt(
     cols = c("Interactor1Genus", "Interactor1Species", "Latitude", "Longitude"),
     returnunique = TRUE
   )
@@ -66,7 +66,7 @@ For the rest of this vignette we will be using a piped-style approach.
 
 Another note before we begin: the functions used to interface with VecTraits and VecDyn are basically the same, except for a `vt` or `vd` in the function name. So `search_vt()` is the VecTraits equivalent of `search_vd()`. We will use VecTraits functions in this vignette, but the process is the same for VecDyn.
 
-There are also generic versions of the `fetch_x()` and `extract_x()` functions (called `fetch()` and `extract()`), which can be used in the place of the db-specific functions.
+There are also generic versions of the `fetch_x()` and `glean_x()` functions (called `fetch()` and `glean()`), which can be used in the place of the db-specific functions.
 
 ## Finding IDs
 
@@ -117,10 +117,10 @@ The `fetch_vt()` function returns a list of the data in the form of the original
 
 ## Extracting data
 
-Now we have a list of responses, we can extract the relevant data from them using the `extract_x()` functions.
+Now we have a list of responses, we can extract the relevant data from them using the `glean_x()` functions.
 
 ```{r extract_all_vt}
-aedes_data <- aedes_responses |> extract_vt()
+aedes_data <- aedes_responses |> glean_vt()
 cat("Data dimensions: ", ncol(aedes_data), " cols x ", nrow(aedes_data), " rows")
 ```
 
@@ -132,7 +132,7 @@ So let's get just the unique locations and trait name combinations from our data
 
 ```{r extract_filtered_vt}
 aedes_data_filtered <- aedes_responses |>
-  extract_vt(
+  glean_vt(
     cols = c("Location", "OriginalTraitName"),
     returnunique = TRUE
   )
@@ -143,10 +143,10 @@ aedes_data_filtered
 
 In some cases you may end up downloading a lot of data. This can cause problems if you do not have enough memory on your computer to store this data in memory all at once, even if you just want one or two columns, like before,
 
-One potential method for mitigating this is to use the `fetch_extract_x_chunked()` functions. These only download a few records at a time and extract them before moving on to the next chunk of ids. We can perform the filtered extraction from above like so:
+One potential method for mitigating this is to use the `fetch_glean_x_chunked()` functions. These only download a few records at a time and extract them before moving on to the next chunk of ids. We can perform the filtered extraction from above like so:
 
-```{r fetch_extract_vt_chunked}
-fetch_extract_vt_chunked(
+```{r fetch_glean_vt_chunked}
+fetch_glean_vt_chunked(
   aedes_ids[1:5],
   chunksize = 2,
   cols = c("Location", "OriginalTraitName"),
@@ -162,7 +162,7 @@ A typical pipeline would likely only contain a few lines of code:
 ```{r vt_pipeline, eval=FALSE, echo=TRUE}
 df <- search_vt("Aedes aegypti") |>
   fetch_vt() |>
-  extract_vt(
+  glean_vt(
     cols = c("Interactor1Genus", "Interactor1Species", "Latitude", "Longitude"),
     returnunique = TRUE
   )
@@ -171,7 +171,7 @@ head(df)
 ```{r vt_pipeline_secret, include=FALSE}
 ids <- search_vt("Aedes aegypti")
 df <- fetch_vt(ids[1:5], connections = 5) |>
-  extract_vt(
+  glean_vt(
     cols = c("Interactor1Genus", "Interactor1Species", "Latitude", "Longitude"),
     returnunique = TRUE
   )
@@ -189,13 +189,13 @@ Let's imagine that we are looking for traits of whitefly species (*Bemisia*). We
 ```{r demo_searcherror, eval=FALSE, echo=TRUE}
 df <- search_vt("Bemisia")[1:6] |>
   fetch_vt() |>
-  extract_vt(cols = c("DatasetID", "Interactor1Genus", "Interactor1Species", "Interactor2Genus", "Interactor2Species"))
+  glean_vt(cols = c("DatasetID", "Interactor1Genus", "Interactor1Species", "Interactor2Genus", "Interactor2Species"))
 ```
 
 ```{r demo_searcherror_secret, include=FALSE}
 df <- search_vt("Bemisia")[1:6] |>
   fetch_vt(connections = 6) |>
-  extract_vt(cols = c("DatasetID", "Interactor1Genus", "Interactor1Species", "Interactor2Genus", "Interactor2Species"))
+  glean_vt(cols = c("DatasetID", "Interactor1Genus", "Interactor1Species", "Interactor2Genus", "Interactor2Species"))
 ```
 
 Now we would expect this to be traits of *Bemisia* spp, however when we look at the Interactor1Genus column we see something a touch odd:
@@ -221,14 +221,14 @@ So let's construct the same search as we were wanting to do before, but with the
 ```{r searcherror_fixed, eval=FALSE, echo=TRUE}
 df <- search_vt_smart("Interactor1Genus", "contains", "Bemisia")[1:6] |>
   fetch_vt() |>
-  extract_vt(cols = c("DatasetID", "Interactor1Genus", "Interactor1Species", "Interactor2Genus", "Interactor2Species"))
+  glean_vt(cols = c("DatasetID", "Interactor1Genus", "Interactor1Species", "Interactor2Genus", "Interactor2Species"))
 unique(df$Interactor1Genus)
 ```
 
 ```{r searcherror_fixed_secret, echo=FALSE}
 df <- search_vt_smart("Interactor1Genus", "contains", "Bemisia")[1:6] |>
   fetch_vt(connections = 6) |>
-  extract_vt(cols = c("DatasetID", "Interactor1Genus", "Interactor1Species", "Interactor2Genus", "Interactor2Species"))
+  glean_vt(cols = c("DatasetID", "Interactor1Genus", "Interactor1Species", "Interactor2Genus", "Interactor2Species"))
 print(unique(df$Interactor1Genus))
 ```
 
