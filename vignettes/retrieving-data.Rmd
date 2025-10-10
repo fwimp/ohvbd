@@ -36,25 +36,25 @@ You do this using the command `set_ohvbd_compat()` however this is only required
 library(ohvbd)
 runstart <- lubridate::now()
 ```
-<!-- Shim to make sure vignette builds on ubuntu-->
+<!-- Shim to make sure vignette builds on ubuntu - disabled for testing -->
 ```{r option, include=FALSE}
-get_os <- function() {
-  sysinf <- Sys.info()
-  if (!is.null(sysinf)) {
-    os <- sysinf["sysname"]
-    if (os == "Darwin")
-      os <- "osx"
-  } else { ## mystery machine
-    os <- .Platform$OS.type
-    if (grepl("^darwin", R.version$os))
-      os <- "osx"
-    if (grepl("linux-gnu", R.version$os))
-      os <- "linux"
-  }
-  tolower(os)
-}
-
-set_ohvbd_compat() # Just run in compatability mode always to make sure build works.
+# get_os <- function() {
+#   sysinf <- Sys.info()
+#   if (!is.null(sysinf)) {
+#     os <- sysinf["sysname"]
+#     if (os == "Darwin")
+#       os <- "osx"
+#   } else { ## mystery machine
+#     os <- .Platform$OS.type
+#     if (grepl("^darwin", R.version$os))
+#       os <- "osx"
+#     if (grepl("linux-gnu", R.version$os))
+#       os <- "linux"
+#   }
+#   tolower(os)
+# }
+# 
+# set_ohvbd_compat() # Just run in compatability mode always to make sure build works.
 
 # Suppress cli output in non-interactive mode
 if (!rlang::is_interactive()) {

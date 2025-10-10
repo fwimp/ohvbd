@@ -31,7 +31,7 @@ search_hub(
 
 \item{withoutpublished}{whether to return results without a publishing date when filtering by date}
 
-\item{returnlist}{return the raw output list rather than a formatted df}
+\item{returnlist}{return the raw output list rather than a formatted dataframe}
 
 \item{connections}{the number of connections to use to parallelise queries}
 }

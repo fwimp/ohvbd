@@ -10,7 +10,7 @@
 #' @param locationpoly a polygon or set of polygons in `terra::SpatVector` or WKT MULTIPOLYGON format within which to search
 #' @param exact whether to return exact matches only
 #' @param withoutpublished whether to return results without a publishing date when filtering by date
-#' @param returnlist return the raw output list rather than a formatted df
+#' @param returnlist return the raw output list rather than a formatted dataframe
 #' @param connections the number of connections to use to parallelise queries
 #'
 #' @return an `ohvbd.hub.search` dataframe or a list (if `returnlist=TRUE`) containing the search results

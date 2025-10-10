@@ -6,6 +6,9 @@
   * A GBIF account and the `rgbif` package are required to retrieve data from GBIF.
   * The account details must also be set up as shown in [the rgbif documentation](https://docs.ropensci.org/rgbif/articles/gbif_credentials.html).
 * New `filter_db()` command allows for filtering out of only one database's results from hub searches.
+* `check_db_status()` now returns (invisibly) whether all databases are up or not.
+* Examples are no longer wrapped in `\dontrun{}` so they should be runnable from an installed version of the package.
+* A good chunk of the functional logic of `ohvbd` is now covered with unit tests (using the `vcr` package).
 
 # ohvbd 0.6.1
 

@@ -9,6 +9,9 @@ check_ohvbd_config(options_list = NULL)
 \arguments{
 \item{options_list}{An (optional) list of variables to search for.}
 }
+\value{
+TRUE if all desired options are set (though not necessarily turned on), else FALSE
+}
 \description{
 Access ohvbd options and configured variables, and print them to the command line.
 }

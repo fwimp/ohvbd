@@ -31,7 +31,7 @@ check_db_status <- function() {
             req_user_agent("ROHVBD") |>
             req_perform()
           outbody <- out |> resp_body_json()
-          gbifhealth <- rbindlist(outbody$health$components)
+          gbifhealth <- rbindlist(outbody$health$components, fill = TRUE)
           # fmt: skip
           gbifdl_status <- gbifhealth[[which(gbifhealth$component == "DOWNLOAD"), "severity"]] == "OPERATIONAL"
           if (gbifdl_status) {

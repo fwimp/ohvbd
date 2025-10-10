@@ -4,7 +4,7 @@
 #' @param options_list An (optional) list of variables to search for.
 #' @author Francis Windram
 #'
-#' @return NULL
+#' @return TRUE if all desired options are set (though not necessarily turned on), else FALSE
 #'
 #' @examples
 #'   check_ohvbd_config()
@@ -24,6 +24,11 @@ check_ohvbd_config <- function(options_list = NULL) {
   absent_options_list <- options_list[which(
     !(options_list %in% names(curr_options))
   )]
+  success <- TRUE
+  if (length(absent_options_list) > 0) {
+    success <- FALSE
+  }
+
   found_option_values <- curr_options[present_options_list]
   found_option_names <- names(found_option_values)
   for (i in seq_along(found_option_names)) {
@@ -34,5 +39,5 @@ check_ohvbd_config <- function(options_list = NULL) {
   for (x in absent_options_list) {
     cli::cli_alert_danger("{x}: {.val {NA}}")
   }
-  invisible()
+  invisible(success)
 }

@@ -1,5 +1,6 @@
-test_that("ids returned", {
-  out <- find_vd_ids(basereq = vb_basereq(unsafe = TRUE))
-  expect_type(out, "double")
-  expect_gte(length(out), 1)
+test_that("find_vd_ids returns sensible ids", {
+  vcr::local_cassette("find_vd_ids")
+  out <- find_vd_ids()
+  expect_s3_class(out, "ohvbd.ids")
+  expect_equal(attr(out, "db"), "vd")
 })
