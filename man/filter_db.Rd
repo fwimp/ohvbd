@@ -7,7 +7,7 @@
 filter_db(ids, db)
 }
 \arguments{
-\item{ids}{an \code{ohvbd.hub.search} search result from \code{search_hub()}}
+\item{ids}{an \code{ohvbd.hub.search} search result from \code{\link[=search_hub]{search_hub()}}.}
 
 \item{db}{a database name as a string. One of \code{"vt"}, \code{"vd"}, \code{"gbif"}, \code{"px"}.}
 }
@@ -16,6 +16,9 @@ An \code{ohvbd.ids} vector of dataset IDs.
 }
 \description{
 Retrieve the IDs for any datasets matching the given db
+}
+\note{
+If \code{\link[=filter_db]{filter_db()}} recieves an \code{ohvbd.ids} object by mistake, it will transparently return it if the source database matches \code{db}.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

@@ -13,30 +13,33 @@ search_hub(
   exact = FALSE,
   withoutpublished = TRUE,
   returnlist = FALSE,
+  simplify = TRUE,
   connections = 8
 )
 }
 \arguments{
-\item{query}{a search string}
+\item{query}{a search string.}
 
-\item{db}{the databases to search}
+\item{db}{the databases to search.}
 
-\item{fromdate}{the date from which to search (ISO format: yyyy-mm-dd)}
+\item{fromdate}{the date from which to search (ISO format: yyyy-mm-dd).}
 
-\item{todate}{the date up to which to search (ISO format: yyyy-mm-dd)}
+\item{todate}{the date up to which to search (ISO format: yyyy-mm-dd).}
 
-\item{locationpoly}{a polygon or set of polygons in \code{terra::SpatVector} or WKT MULTIPOLYGON format within which to search}
+\item{locationpoly}{a polygon or set of polygons in \code{terra::SpatVector} or WKT MULTIPOLYGON format within which to search.}
 
-\item{exact}{whether to return exact matches only}
+\item{exact}{whether to return exact matches only.}
 
-\item{withoutpublished}{whether to return results without a publishing date when filtering by date}
+\item{withoutpublished}{whether to return results without a publishing date when filtering by date.}
 
-\item{returnlist}{return the raw output list rather than a formatted dataframe}
+\item{returnlist}{return the raw output list rather than a formatted dataframe.}
 
-\item{connections}{the number of connections to use to parallelise queries}
+\item{simplify}{if only a single database was searched, return an \code{ohvbd.ids} object instead (defaults to \code{TRUE}).}
+
+\item{connections}{the number of connections to use to parallelise queries.}
 }
 \value{
-an \code{ohvbd.hub.search} dataframe or a list (if \code{returnlist=TRUE}) containing the search results
+an \code{ohvbd.hub.search} dataframe, an \code{ohvbd.ids} vector (if \code{returnlist=TRUE} and \code{length(db) == 1}) a list (if \code{returnlist=TRUE}) containing the search results
 }
 \description{
 Retrieve the IDs for any datasets matching the given search parameters

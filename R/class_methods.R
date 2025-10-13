@@ -124,6 +124,20 @@ fetch.ohvbd.ids <- function(
   return(finalfun(ids, ...))
 }
 
+#' @export
+fetch.ohvbd.hub.search <- function(
+  ids,
+  ...
+) {
+  # Could consider in the future making this method parse the individual dbs
+  # and run their respective fetchers, but this would add a lot of complexity
+  # when it comes to gleaning.
+  cli::cli_abort(c(
+    "x" = "Cannot fetch an {.cls ohvbd.hub.search} object!",
+    "!" = "Did you forget to use {.fn ohvbd::filter_db} after searching?"
+  ))
+}
+
 #' @title Extract specified data from a set of responses
 #'
 #' @description
@@ -179,5 +193,19 @@ glean.ohvbd.ad.matrix <- function(
 ) {
   db <- attr(res, "db")
   return(glean_ad(res, targetdate, enddate, places, gid))
+}
+
+#' @export
+glean.ohvbd.ids <- function(
+  res,
+  ...
+) {
+  # Could consider in the future making this method parse the individual dbs
+  # and run their respective fetchers, but this would add a lot of complexity
+  # when it comes to gleaning.
+  cli::cli_abort(c(
+    "x" = "Cannot glean an {.cls ohvbd.ids} object!",
+    "!" = "Did you forget to use {.fn ohvbd::fetch} after searching?"
+  ))
 }
 # nolint end

@@ -3,17 +3,18 @@
 #'
 #' @author Francis Windram
 #'
-#' @param query a search string
-#' @param db the databases to search
-#' @param fromdate the date from which to search (ISO format: yyyy-mm-dd)
-#' @param todate the date up to which to search (ISO format: yyyy-mm-dd)
-#' @param locationpoly a polygon or set of polygons in `terra::SpatVector` or WKT MULTIPOLYGON format within which to search
-#' @param exact whether to return exact matches only
-#' @param withoutpublished whether to return results without a publishing date when filtering by date
-#' @param returnlist return the raw output list rather than a formatted dataframe
-#' @param connections the number of connections to use to parallelise queries
+#' @param query a search string.
+#' @param db the databases to search.
+#' @param fromdate the date from which to search (ISO format: yyyy-mm-dd).
+#' @param todate the date up to which to search (ISO format: yyyy-mm-dd).
+#' @param locationpoly a polygon or set of polygons in `terra::SpatVector` or WKT MULTIPOLYGON format within which to search.
+#' @param exact whether to return exact matches only.
+#' @param withoutpublished whether to return results without a publishing date when filtering by date.
+#' @param returnlist return the raw output list rather than a formatted dataframe.
+#' @param simplify if only a single database was searched, return an `ohvbd.ids` object instead (defaults to `TRUE`).
+#' @param connections the number of connections to use to parallelise queries.
 #'
-#' @return an `ohvbd.hub.search` dataframe or a list (if `returnlist=TRUE`) containing the search results
+#' @return an `ohvbd.hub.search` dataframe, an `ohvbd.ids` vector (if `returnlist=TRUE` and `length(db) == 1`) a list (if `returnlist=TRUE`) containing the search results
 #'
 #' @examplesIf interactive()
 #' search_hub("Ixodes ricinus")
@@ -32,6 +33,7 @@ search_hub <- function(
   exact = FALSE,
   withoutpublished = TRUE,
   returnlist = FALSE,
+  simplify = TRUE,
   connections = 8
 ) {
   db_canon <- c("vt", "vd", "gbif", "px")
@@ -135,8 +137,6 @@ search_hub <- function(
 
   cli::cli_progress_step("Retrieving {results} result{?s}")
 
-  # db filter extraction demo out$hits[which(sapply(out$hits, \(x){x$db}) %in% "vt")]
-
   resps <- reqs |>
     req_perform_parallel(
       on_error = "continue",
@@ -150,12 +150,18 @@ search_hub <- function(
 
   if (returnlist) {
     return(hits)
+  } else {
+    hub_search <- new_ohvbd.hub.search(
+      hits,
+      query = query,
+      searchparams = list(fromdate = fromdate, todate = todate, exact = exact)
+    )
+    if (simplify && length(db) == 1) {
+      return(filter_db(hub_search, db[1]))
+    } else {
+      return(hub_search)
+    }
   }
-  return(new_ohvbd.hub.search(
-    hits,
-    query = query,
-    searchparams = list(fromdate = fromdate, todate = todate, exact = exact)
-  ))
 }
 
 
@@ -164,8 +170,11 @@ search_hub <- function(
 #'
 #' @author Francis Windram
 #'
-#' @param ids an `ohvbd.hub.search` search result from `search_hub()`
+#' @param ids an `ohvbd.hub.search` search result from [search_hub()].
 #' @param db a database name as a string. One of `"vt"`, `"vd"`, `"gbif"`, `"px"`.
+#'
+#' @note
+#' If [filter_db()] recieves an `ohvbd.ids` object by mistake, it will transparently return it if the source database matches `db`.
 #'
 #' @return An `ohvbd.ids` vector of dataset IDs.
 #'
@@ -176,8 +185,20 @@ search_hub <- function(
 #'
 #' @export
 filter_db <- function(ids, db) {
+  # If filter_db recieves an ohvbd.ids object, return as is.
+  if (inherits(ids, "ohvbd.ids")) {
+    if (attr(ids, "db") != db) {
+      cli::cli_warn(c(
+        "!" = "{.arg ids} is an {.cls ohvbd.ids} object from {.val {attr(ids, 'db')}}, not {.val {db}}!",
+        "i" = "Leaving {.arg ids} unchanged."
+      ))
+    }
+    return(ids)
+  }
+
   database <- db # Just to keep the subset happy, but also to keep the API consistent
   selectedids <- subset(ids, ids$db == database)
+
   if (database %in% c("vt", "vd")) {
     return(ohvbd.ids(as.numeric(selectedids$id), db = database))
   } else if (db == "gbif") {
