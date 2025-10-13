@@ -28,6 +28,11 @@ Other changes
 * `fetch_vd()` no longer tries to retrieve ids with no pages of data.
 * Functions that interface with vectorbyte databases no longer recommend using `set_ohvbd_compat()` as *unexpected* SSL errors **should** break pipelines by default.
   * These errors are no longer *expected* to occur when interfacing with vectorbyte.
+* New `simplify` argument to `search_hub()` makes hub searches return an `ohvbd.ids` object if only one database was searched for. This behaviour is on by default.
+  * To match this, `filter_db()` will now transparently return `ohvbd.ids` objects if it gets them.
+* Running `fetch()` on an `ohvbd.hub.search` or `glean()` on an `ohvbd.ids` object now provides a hint that you may have forgotten something.
+  * Occasionally users would use forget a `fetch()` command and run `search_hub() |> glean()` which didn't previously give an interpretable error.
+* Vignettes now use `vcr` to massively reduce their build time. This should only matter to developers of `ohvbd`, or users who download from github and build the vignettes themselves.
 
 # ohvbd 0.6.1
 

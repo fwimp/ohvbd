@@ -76,6 +76,23 @@ You can install the development version of ohvbd from [GitHub](https://github.co
 devtools::install_github("fwimp/ohvbd", build_vignettes = TRUE)
 ```
 
+## Basic usage
+
+`ohvbd` has been designed to make finding and retrieving data on disease vectors simple and straightforward.
+
+Typically it uses a "piped"-style approach to find, get, and filter data from the supported databases, however it aims to provide the data to you "as-is", leaving further downstream analysis and filtering down to you.
+
+A basic pipeline for finding and retrieving data on *Ixodes ricinus* from the VecTraits database looks something like this:
+
+``` r
+library(ohvbd)
+
+df <- search_hub("Ixodes ricinus") |>
+  filter_db("vt") |>
+  fetch() |>
+  glean()
+```
+
 ## Latest release patch notes
 
 ```{r echo=FALSE}
