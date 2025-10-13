@@ -39,10 +39,10 @@ search_hub(
 \item{connections}{the number of connections to use to parallelise queries.}
 }
 \value{
-an \code{ohvbd.hub.search} dataframe, an \code{ohvbd.ids} vector (if \code{returnlist=TRUE} and \code{length(db) == 1}) a list (if \code{returnlist=TRUE}) containing the search results
+an \code{ohvbd.hub.search} dataframe, an \code{ohvbd.ids} vector (if \code{returnlist=TRUE} and \code{length(db) == 1}) a list (if \code{returnlist=TRUE}) containing the search results.
 }
 \description{
-Retrieve the IDs for any datasets matching the given search parameters
+Retrieve the IDs for any datasets matching the given search parameters.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

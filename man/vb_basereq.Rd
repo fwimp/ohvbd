@@ -11,14 +11,14 @@ vb_basereq(
 )
 }
 \arguments{
-\item{baseurl}{the base url for the vectorbyte API}
+\item{baseurl}{the base url for the vectorbyte API.}
 
-\item{useragent}{the user agent string used when contacting vectorbyte}
+\item{useragent}{the user agent string used when contacting vectorbyte.}
 
 \item{unsafe}{disable ssl verification (shouldn't ever be required unless you are otherwise experiencing SSL issues!)}
 }
 \value{
-Returns an httr2 request object, pointing at baseurl using useragent
+Returns an httr2 request object, pointing at baseurl using useragent.
 }
 \description{
 This request is used as the basis for all calls to the vectorbyte API.

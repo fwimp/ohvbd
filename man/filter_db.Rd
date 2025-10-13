@@ -15,7 +15,7 @@ filter_db(ids, db)
 An \code{ohvbd.ids} vector of dataset IDs.
 }
 \description{
-Retrieve the IDs for any datasets matching the given db
+Retrieve the IDs for any datasets matching the given db.
 }
 \note{
 If \code{\link[=filter_db]{filter_db()}} recieves an \code{ohvbd.ids} object by mistake, it will transparently return it if the source database matches \code{db}.

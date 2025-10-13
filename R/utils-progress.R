@@ -35,8 +35,8 @@ default_progress_style <- function() {
 
 
 #' @title Reimplementation of cli's progress style shim
-#' @param x a string to find in [cli::cli_progress_styles()]
-#' @return a formatting list from [cli::cli_progress_styles()]
+#' @param x a string to find in [cli::cli_progress_styles()].
+#' @return a formatting list from [cli::cli_progress_styles()].
 #' @keywords internal
 #'
 progress_style <- function(x) {
@@ -55,9 +55,9 @@ progress_style <- function(x) {
 #' It was designed to fill a more general role within UI design using the cli package, and should be usable (or hackable) by others needing the same tool.
 #' @author Francis Windram
 #'
-#' @param start the date that the reference period begins (as Date object)
-#' @param end the date that the reference period ends (as Date object)
-#' @param targets a vector of dates
+#' @param start the date that the reference period begins (as Date object).
+#' @param end the date that the reference period ends (as Date object).
+#' @param targets a vector of dates.
 #' @param targetrange is the target a range? If so this will treat the first two elements of `targets` as the start and end of the range.
 #' @param twobar whether to render as two bars or as one with different colours for overlaps.
 #' @param width the width of the bars in characters. Defaults to 0.5 * console width.

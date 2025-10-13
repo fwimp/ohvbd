@@ -4,7 +4,7 @@
 #' @param options_list An (optional) list of variables to search for.
 #' @author Francis Windram
 #'
-#' @return TRUE if all desired options are set (though not necessarily turned on), else FALSE
+#' @return `TRUE` if all desired options are set (though not necessarily turned on), else `FALSE`.
 #'
 #' @examples
 #'   check_ohvbd_config()

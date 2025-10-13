@@ -2,17 +2,17 @@
 % Please edit documentation in R/utils.R
 \name{find_vb_404s}
 \alias{find_vb_404s}
-\title{Find the ids of any resps that contain 404 errors from a list of them.}
+\title{Find the ids of any resps that contain 404 errors from a list of them}
 \usage{
 find_vb_404s(l)
 }
 \arguments{
-\item{l}{A list of httr2 error objects}
+\item{l}{A list of httr2 error objects.}
 }
 \value{
-the ids from those found objects
+the ids from those found objects.
 }
 \description{
-Find the ids of any resps that contain 404 errors from a list of them.
+Find the ids of any resps that contain 404 errors from a list of them
 }
 \keyword{internal}

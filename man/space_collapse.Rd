@@ -7,10 +7,10 @@
 space_collapse(v)
 }
 \arguments{
-\item{v}{a vector to format}
+\item{v}{a vector to format.}
 }
 \value{
-collapsed string
+collapsed string.
 }
 \description{
 collapse a list of character strings to a JS space-separated single string

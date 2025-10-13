@@ -7,7 +7,7 @@
 glean(res, ...)
 }
 \arguments{
-\item{res}{An object of type \code{ohvbd.responses} or \code{ohvbd.ad.matrix} generated from \code{\link[=fetch]{fetch()}}
+\item{res}{An object of type \code{ohvbd.responses} or \code{ohvbd.ad.matrix} generated from \code{\link[=fetch]{fetch()}}.
 and containing data from one of the supported databases.}
 
 \item{...}{Any arguments to be passed to the underlying extractors (see \code{\link[=glean_vt]{glean_vt()}} and \code{\link[=glean_ad]{glean_ad()}} for specific arguments).}

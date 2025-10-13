@@ -7,10 +7,10 @@
 force_multipolygon(wkt)
 }
 \arguments{
-\item{wkt}{The WKT to convert into a multipolygon}
+\item{wkt}{The WKT to convert into a multipolygon.}
 }
 \value{
-The multipolygon equivalent of wkt
+The multipolygon equivalent of wkt.
 }
 \description{
 Force a polygon WKT into multipolygon form

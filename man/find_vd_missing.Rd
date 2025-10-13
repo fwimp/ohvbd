@@ -2,17 +2,17 @@
 % Please edit documentation in R/utils.R
 \name{find_vd_missing}
 \alias{find_vd_missing}
-\title{Find the ids of any resps that contain a count of 0 list of them.}
+\title{Find the ids of any resps that contain a count of 0 list of them}
 \usage{
 find_vd_missing(l)
 }
 \arguments{
-\item{l}{A list of httr2 error objects}
+\item{l}{A list of httr2 error objects.}
 }
 \value{
-the ids from those found objects
+the ids from those found objects.
 }
 \description{
-Find the ids of any resps that contain a count of 0 list of them.
+Find the ids of any resps that contain a count of 0 list of them
 }
 \keyword{internal}

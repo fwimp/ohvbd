@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils-cache.R
 \name{is_cached}
 \alias{is_cached}
-\title{Check whether an object has been loaded from cache by ohvbd.}
+\title{Check whether an object has been loaded from cache by ohvbd}
 \usage{
 is_cached(x)
 }
@@ -10,7 +10,7 @@ is_cached(x)
 \item{x}{The object to check.}
 }
 \description{
-Check whether an object has been loaded from cache by ohvbd.
+Check whether an object has been loaded from cache by ohvbd
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

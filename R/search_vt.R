@@ -1,5 +1,5 @@
 #' @title Search VecTraits by keyword
-#' @description Retrieve the IDs for any VecTraits datasets matching the given keywords
+#' @description Retrieve the IDs for any VecTraits datasets matching the given keywords.
 #'
 #' @author Francis Windram
 #'

@@ -33,7 +33,7 @@
 #'
 #' In cases where a full date is not provided, the earliest date possible with the available data is chosen.
 #'
-#' So "2020-04" will internally become "2020-04-01"
+#' So "2020-04" will internally become "2020-04-01".
 #'
 #' If an incomplete date is specified as the `targetdate` and no `enddate` is specified, the range to search is inferred from the minimum temporal scale provided in `targetdate`.
 #'

@@ -7,10 +7,10 @@
 vt_error_body(resp)
 }
 \arguments{
-\item{resp}{An errored response to format}
+\item{resp}{An errored response to format.}
 }
 \value{
-error string
+error string.
 }
 \description{
 Retrieve and format error message from failed vt calls

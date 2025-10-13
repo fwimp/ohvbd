@@ -7,7 +7,7 @@
 #' @param targetdate **ONE OF** the following:
 #' * The date to search for in ISO 8601 (e.g. "2020", "2021-09", or "2022-09-21").
 #' * The start date for a range of dates.
-#' * A character vector of fully specified dates to search for (i.e. "yyyy-mm-dd")
+#' * A character vector of fully specified dates to search for (i.e. "yyyy-mm-dd").
 #' @param enddate The (exclusive) end of the range of dates to search for. If this is unfilled, only the `targetdate` is searched for.
 #' @param gid the spatial scale to retrieve (0 = country-level, 1=province-level...).
 #' @param lonlat_names a vector containing the column names of the longitude and latitude columns **IN THAT ORDER**!
@@ -24,7 +24,7 @@
 #'
 #' In cases where a full date is not provided, the earliest date possible with the available data is chosen.
 #'
-#' So "2020-04" will internally become "2020-04-01"
+#' So "2020-04" will internally become "2020-04-01".
 #'
 #' If an incomplete date is specified as the `targetdate` and no `enddate` is specified, the range to search is inferred from the minimum temporal scale provided in `targetdate`.
 #'

@@ -15,11 +15,11 @@ format_time_overlap_bar(
 )
 }
 \arguments{
-\item{start}{the date that the reference period begins (as Date object)}
+\item{start}{the date that the reference period begins (as Date object).}
 
-\item{end}{the date that the reference period ends (as Date object)}
+\item{end}{the date that the reference period ends (as Date object).}
 
-\item{targets}{a vector of dates}
+\item{targets}{a vector of dates.}
 
 \item{targetrange}{is the target a range? If so this will treat the first two elements of \code{targets} as the start and end of the range.}
 

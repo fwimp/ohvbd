@@ -53,7 +53,7 @@ For example a date range of "2020-08-04" - "2020-08-12" will return the 7 days f
 
 In cases where a full date is not provided, the earliest date possible with the available data is chosen.
 
-So "2020-04" will internally become "2020-04-01"
+So "2020-04" will internally become "2020-04-01".
 
 If an incomplete date is specified as the \code{targetdate} and no \code{enddate} is specified, the range to search is inferred from the minimum temporal scale provided in \code{targetdate}.
 

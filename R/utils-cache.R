@@ -1,12 +1,12 @@
 #' @title write data from AREAdata to cache file
 #'
-#' @param d data to write
-#' @param path cache path
-#' @param metric metric downloaded (inferred if not provided)
-#' @param gid gid of data (inferred if not provided)
-#' @param format format to store data in (currenly unused)
-#' @param compression_type type of compression to use when caching
-#' @param compression_level level of compression to use while caching
+#' @param d data to write.
+#' @param path cache path.
+#' @param metric metric downloaded (inferred if not provided).
+#' @param gid gid of data (inferred if not provided).
+#' @param format format to store data in (currenly unused).
+#' @param compression_type type of compression to use when caching.
+#' @param compression_level level of compression to use while caching.
 #'
 #' @return NULL
 #' @keywords internal
@@ -48,12 +48,12 @@ write_ad_cache <- function(
 
 #' @title Read AREAdata from cache file
 #'
-#' @param path cache path
-#' @param metric metric to retrieve
-#' @param gid gid to retrieve
-#' @param warn Whether to warn if a cached file is older than 6 months
+#' @param path cache path.
+#' @param metric metric to retrieve.
+#' @param gid gid to retrieve.
+#' @param warn Whether to warn if a cached file is older than 6 months.
 #'
-#' @return cached data
+#' @return cached data.
 #'
 #' @keywords internal
 #'
@@ -79,7 +79,7 @@ read_ad_cache <- function(path, metric, gid, warn = TRUE) {
 #' @title Delete all rda files from ohvbd AREAdata cache
 #' @author Francis Windram
 #'
-#' @param cache_location location within which to remove rda files
+#' @param cache_location location within which to remove rda files.
 #'
 #' @return NULL
 #'
@@ -110,7 +110,7 @@ clean_ad_cache <- function(cache_location = "user") {
   invisible(NULL)
 }
 
-#' @title Check whether an object has been loaded from cache by ohvbd.
+#' @title Check whether an object has been loaded from cache by ohvbd
 #' @author Francis Windram
 #'
 #' @param x The object to check.

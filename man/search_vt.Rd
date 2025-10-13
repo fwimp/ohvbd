@@ -15,7 +15,7 @@ search_vt(keywords, basereq = NA)
 An \code{ohvbd.ids} vector of VecTraits dataset IDs.
 }
 \description{
-Retrieve the IDs for any VecTraits datasets matching the given keywords
+Retrieve the IDs for any VecTraits datasets matching the given keywords.
 }
 \section{Warning}{
 

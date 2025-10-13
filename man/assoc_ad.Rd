@@ -23,7 +23,7 @@ assoc_ad(
 \itemize{
 \item The date to search for in ISO 8601 (e.g. "2020", "2021-09", or "2022-09-21").
 \item The start date for a range of dates.
-\item A character vector of fully specified dates to search for (i.e. "yyyy-mm-dd")
+\item A character vector of fully specified dates to search for (i.e. "yyyy-mm-dd").
 }}
 
 \item{enddate}{The (exclusive) end of the range of dates to search for. If this is unfilled, only the \code{targetdate} is searched for.}
@@ -52,7 +52,7 @@ For example a date range of "2020-08-04" - "2020-08-12" will return the 7 days f
 
 In cases where a full date is not provided, the earliest date possible with the available data is chosen.
 
-So "2020-04" will internally become "2020-04-01"
+So "2020-04" will internally become "2020-04-01".
 
 If an incomplete date is specified as the \code{targetdate} and no \code{enddate} is specified, the range to search is inferred from the minimum temporal scale provided in \code{targetdate}.
 

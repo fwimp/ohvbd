@@ -7,10 +7,10 @@
 vd_extraction_helper(resp, cols = NA)
 }
 \arguments{
-\item{resp}{A response to extract from}
+\item{resp}{A response to extract from.}
 }
 \value{
-dataframe of all relevant data in the response
+dataframe of all relevant data in the response.
 }
 \description{
 Extract a single vd response, including consistent data

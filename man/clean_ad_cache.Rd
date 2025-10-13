@@ -7,7 +7,7 @@
 clean_ad_cache(cache_location = "user")
 }
 \arguments{
-\item{cache_location}{location within which to remove rda files}
+\item{cache_location}{location within which to remove rda files.}
 }
 \description{
 Delete all rda files from ohvbd AREAdata cache

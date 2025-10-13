@@ -1,6 +1,6 @@
 #' @title Extract request ids from httr2 response objects
-#' @param r A response object
-#' @return the id requested from the call
+#' @param r A response object.
+#' @return the id requested from the call.
 #' @keywords internal
 #'
 
@@ -9,9 +9,9 @@
 }
 
 #' @title Extract curl errors from httr2 error objects
-#' @param e An error object
+#' @param e An error object.
 #' @param returnfiller If true return filler message if no curl message is present.
-#' @return the curl error message (if present) or NULL (or a filler message)
+#' @return the curl error message (if present) or NULL (or a filler message).
 #' @keywords internal
 #'
 
@@ -26,8 +26,8 @@ get_curl_err <- function(e, returnfiller = FALSE) {
 }
 
 #' @title Retrieve and format error message from failed vt calls
-#' @param resp An errored response to format
-#' @return error string
+#' @param resp An errored response to format.
+#' @return error string.
 #' @keywords internal
 #'
 
@@ -36,8 +36,8 @@ vt_error_body <- function(resp) {
 }
 
 #' @title Retrieve and format error message from failed vd calls
-#' @param resp An errored response to format
-#' @return error string
+#' @param resp An errored response to format.
+#' @return error string.
 #' @keywords internal
 #'
 
@@ -46,14 +46,14 @@ vd_error_body <- function(resp) {
 }
 
 #' @title Create a query for a given VD id at a given page
-#' @param id ID of the vecdyn dataser
-#' @param pagenum page to retrieve
-#' @param rate rate limit for requests
-#' @param url the base url for the vectorbyte API
-#' @param useragent the user agent string used when contacting vectorbyte
-#' @param unsafe disable ssl verification (should only ever be required on Linux, **do not enable this by default**)
+#' @param id ID of the vecdyn dataset.
+#' @param pagenum page to retrieve.
+#' @param rate rate limit for requests.
+#' @param url the base url for the vectorbyte API.
+#' @param useragent the user agent string used when contacting vectorbyte.
+#' @param unsafe disable ssl verification (should only ever be required on Linux, **do not enable this by default**).
 #'
-#' @return [httr2 request][httr2::request()] containing the requisite call to retrieve the data
+#' @return [httr2 request][httr2::request()] containing the requisite call to retrieve the data.
 #' @keywords internal
 #'
 
@@ -77,8 +77,8 @@ vd_make_req <- function(
 }
 
 #' @title collapse a list of character strings to a JS space-separated single string
-#' @param v a vector to format
-#' @return collapsed string
+#' @param v a vector to format.
+#' @return collapsed string.
 #' @keywords internal
 #'
 
@@ -87,8 +87,8 @@ space_collapse <- function(v) {
 }
 
 #' @title Extract a single vd response, including consistent data
-#' @param resp A response to extract from
-#' @return dataframe of all relevant data in the response
+#' @param resp A response to extract from.
+#' @return dataframe of all relevant data in the response.
 #' @keywords internal
 #'
 
@@ -129,8 +129,8 @@ vd_extraction_helper <- function(resp, cols = NA) {
 }
 
 #' @title Convert a vector of place names to their equivalent at a different gid level
-#' @param places A vector of places
-#' @return vector of converted place names or gid codes
+#' @param places A vector of places.
+#' @return vector of converted place names or gid codes.
 #' @keywords internal
 #'
 
@@ -143,9 +143,9 @@ convert_place_togid <- function(places, gid = 0) {
   return(unique(out_places[[1]]))
 }
 
-#' @title Find the ids of any resps that contain 404 errors from a list of them.
-#' @param l A list of httr2 error objects
-#' @return the ids from those found objects
+#' @title Find the ids of any resps that contain 404 errors from a list of them
+#' @param l A list of httr2 error objects.
+#' @return the ids from those found objects.
 #' @keywords internal
 #'
 
@@ -155,9 +155,9 @@ find_vb_404s <- function(l) {
 }
 
 
-#' @title Find the ids of any resps that contain a count of 0 list of them.
-#' @param l A list of httr2 error objects
-#' @return the ids from those found objects
+#' @title Find the ids of any resps that contain a count of 0 list of them
+#' @param l A list of httr2 error objects.
+#' @return the ids from those found objects.
 #' @keywords internal
 #'
 
@@ -169,7 +169,7 @@ find_vd_missing <- function(l) {
 }
 
 #' @title Try to coerce a date even when bits are missing
-#' @param dates The date/s to try and coerce
+#' @param dates The date/s to try and coerce.
 #' @return Coerced dates.
 #' @keywords internal
 
@@ -208,8 +208,8 @@ coercedate <- function(dates, return_iso = FALSE, nulliferror = FALSE) {
 }
 
 #' @title Force a polygon WKT into multipolygon form
-#' @param wkt The WKT to convert into a multipolygon
-#' @return The multipolygon equivalent of wkt
+#' @param wkt The WKT to convert into a multipolygon.
+#' @return The multipolygon equivalent of wkt.
 #' @keywords internal
 force_multipolygon <- function(wkt) {
   # TODO: Verify wkt intergrity (using approach here: https://github.com/ropensci/rgbif/blob/ac4e2fff8a7501956ce8a1be3e7429810bb64e2b/R/check_wkt.r)
@@ -226,8 +226,8 @@ force_multipolygon <- function(wkt) {
 }
 
 #' @title Encode spatvector as WKT, and convert to multipolygon if needed
-#' @param wkt The spatvector to format
-#' @return The formatted wkt
+#' @param wkt The spatvector to format.
+#' @return The formatted wkt.
 #' @keywords internal
 spatvect_to_hubwkt <- function(v) {
   wkt <- terra::geom(v, wkt = TRUE)

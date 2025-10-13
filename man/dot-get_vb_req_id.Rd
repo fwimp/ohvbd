@@ -7,10 +7,10 @@
 .get_vb_req_id(r)
 }
 \arguments{
-\item{r}{A response object}
+\item{r}{A response object.}
 }
 \value{
-the id requested from the call
+the id requested from the call.
 }
 \description{
 Extract request ids from httr2 response objects

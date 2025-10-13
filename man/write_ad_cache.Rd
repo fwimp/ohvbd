@@ -15,19 +15,19 @@ write_ad_cache(
 )
 }
 \arguments{
-\item{d}{data to write}
+\item{d}{data to write.}
 
-\item{path}{cache path}
+\item{path}{cache path.}
 
-\item{metric}{metric downloaded (inferred if not provided)}
+\item{metric}{metric downloaded (inferred if not provided).}
 
-\item{gid}{gid of data (inferred if not provided)}
+\item{gid}{gid of data (inferred if not provided).}
 
-\item{format}{format to store data in (currenly unused)}
+\item{format}{format to store data in (currenly unused).}
 
-\item{compression_type}{type of compression to use when caching}
+\item{compression_type}{type of compression to use when caching.}
 
-\item{compression_level}{level of compression to use while caching}
+\item{compression_level}{level of compression to use while caching.}
 }
 \description{
 write data from AREAdata to cache file

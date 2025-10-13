@@ -7,7 +7,7 @@
 coercedate(dates, return_iso = FALSE, nulliferror = FALSE)
 }
 \arguments{
-\item{dates}{The date/s to try and coerce}
+\item{dates}{The date/s to try and coerce.}
 }
 \value{
 Coerced dates.

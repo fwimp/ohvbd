@@ -1,5 +1,5 @@
 #' @title Search vbdhub.org
-#' @description Retrieve the IDs for any datasets matching the given search parameters
+#' @description Retrieve the IDs for any datasets matching the given search parameters.
 #'
 #' @author Francis Windram
 #'
@@ -14,7 +14,7 @@
 #' @param simplify if only a single database was searched, return an `ohvbd.ids` object instead (defaults to `TRUE`).
 #' @param connections the number of connections to use to parallelise queries.
 #'
-#' @return an `ohvbd.hub.search` dataframe, an `ohvbd.ids` vector (if `returnlist=TRUE` and `length(db) == 1`) a list (if `returnlist=TRUE`) containing the search results
+#' @return an `ohvbd.hub.search` dataframe, an `ohvbd.ids` vector (if `returnlist=TRUE` and `length(db) == 1`) a list (if `returnlist=TRUE`) containing the search results.
 #'
 #' @examplesIf interactive()
 #' search_hub("Ixodes ricinus")
@@ -166,7 +166,7 @@ search_hub <- function(
 
 
 #' @title Filter hub search results by db
-#' @description Retrieve the IDs for any datasets matching the given db
+#' @description Retrieve the IDs for any datasets matching the given db.
 #'
 #' @author Francis Windram
 #'

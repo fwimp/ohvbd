@@ -7,10 +7,10 @@
 progress_style(x)
 }
 \arguments{
-\item{x}{a string to find in \code{\link[cli:cli_progress_styles]{cli::cli_progress_styles()}}}
+\item{x}{a string to find in \code{\link[cli:cli_progress_styles]{cli::cli_progress_styles()}}.}
 }
 \value{
-a formatting list from \code{\link[cli:cli_progress_styles]{cli::cli_progress_styles()}}
+a formatting list from \code{\link[cli:cli_progress_styles]{cli::cli_progress_styles()}}.
 }
 \description{
 Reimplementation of cli's progress style shim

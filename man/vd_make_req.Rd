@@ -7,20 +7,20 @@
 vd_make_req(id, pagenum, rate, url = "", useragent = "", unsafe = FALSE)
 }
 \arguments{
-\item{id}{ID of the vecdyn dataser}
+\item{id}{ID of the vecdyn dataset.}
 
-\item{pagenum}{page to retrieve}
+\item{pagenum}{page to retrieve.}
 
-\item{rate}{rate limit for requests}
+\item{rate}{rate limit for requests.}
 
-\item{url}{the base url for the vectorbyte API}
+\item{url}{the base url for the vectorbyte API.}
 
-\item{useragent}{the user agent string used when contacting vectorbyte}
+\item{useragent}{the user agent string used when contacting vectorbyte.}
 
-\item{unsafe}{disable ssl verification (should only ever be required on Linux, \strong{do not enable this by default})}
+\item{unsafe}{disable ssl verification (should only ever be required on Linux, \strong{do not enable this by default}).}
 }
 \value{
-\link[httr2:request]{httr2 request} containing the requisite call to retrieve the data
+\link[httr2:request]{httr2 request} containing the requisite call to retrieve the data.
 }
 \description{
 Create a query for a given VD id at a given page

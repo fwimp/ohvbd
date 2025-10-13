@@ -2,11 +2,11 @@
 #' @description This request is used as the basis for all calls to the vectorbyte API.
 #' It does not contain any tokens or session ids, and thus can be regenerated at any time.
 #'
-#' @param baseurl the base url for the vectorbyte API
-#' @param useragent the user agent string used when contacting vectorbyte
+#' @param baseurl the base url for the vectorbyte API.
+#' @param useragent the user agent string used when contacting vectorbyte.
 #' @param unsafe disable ssl verification (shouldn't ever be required unless you are otherwise experiencing SSL issues!)
 #' @author Francis Windram
-#' @return Returns an httr2 request object, pointing at baseurl using useragent
+#' @return Returns an httr2 request object, pointing at baseurl using useragent.
 #'
 #' @examples
 #' basereq <- vb_basereq(

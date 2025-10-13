@@ -7,7 +7,7 @@ new_ohvbd.ids <- function(v, db = NULL) {
   structure(v, class = c("ohvbd.ids", "numeric"))
 }
 
-#' Create a new ohvbd ID vector
+#' @title Create a new ohvbd ID vector
 #'
 #' @description
 #' When retrieving data from previous searches (or saved lists of IDs), it can

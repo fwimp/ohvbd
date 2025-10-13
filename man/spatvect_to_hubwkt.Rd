@@ -7,10 +7,10 @@
 spatvect_to_hubwkt(v)
 }
 \arguments{
-\item{wkt}{The spatvector to format}
+\item{wkt}{The spatvector to format.}
 }
 \value{
-The formatted wkt
+The formatted wkt.
 }
 \description{
 Encode spatvector as WKT, and convert to multipolygon if needed
