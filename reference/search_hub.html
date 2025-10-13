@@ -58,6 +58,7 @@
 <span>  exact <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  withoutpublished <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  returnlist <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  simplify <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  connections <span class="op">=</span> <span class="fl">8</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -67,44 +68,48 @@
 
 
 <dl><dt id="arg-query">query<a class="anchor" aria-label="anchor" href="#arg-query"></a></dt>
-<dd><p>a search string</p></dd>
+<dd><p>a search string.</p></dd>
 
 
 <dt id="arg-db">db<a class="anchor" aria-label="anchor" href="#arg-db"></a></dt>
-<dd><p>the databases to search</p></dd>
+<dd><p>the databases to search.</p></dd>
 
 
 <dt id="arg-fromdate">fromdate<a class="anchor" aria-label="anchor" href="#arg-fromdate"></a></dt>
-<dd><p>the date from which to search (ISO format: yyyy-mm-dd)</p></dd>
+<dd><p>the date from which to search (ISO format: yyyy-mm-dd).</p></dd>
 
 
 <dt id="arg-todate">todate<a class="anchor" aria-label="anchor" href="#arg-todate"></a></dt>
-<dd><p>the date up to which to search (ISO format: yyyy-mm-dd)</p></dd>
+<dd><p>the date up to which to search (ISO format: yyyy-mm-dd).</p></dd>
 
 
 <dt id="arg-locationpoly">locationpoly<a class="anchor" aria-label="anchor" href="#arg-locationpoly"></a></dt>
-<dd><p>a polygon or set of polygons in <code><a href="https://rspatial.github.io/terra/reference/SpatVector-class.html" class="external-link">terra::SpatVector</a></code> or WKT MULTIPOLYGON format within which to search</p></dd>
+<dd><p>a polygon or set of polygons in <code><a href="https://rspatial.github.io/terra/reference/SpatVector-class.html" class="external-link">terra::SpatVector</a></code> or WKT MULTIPOLYGON format within which to search.</p></dd>
 
 
 <dt id="arg-exact">exact<a class="anchor" aria-label="anchor" href="#arg-exact"></a></dt>
-<dd><p>whether to return exact matches only</p></dd>
+<dd><p>whether to return exact matches only.</p></dd>
 
 
 <dt id="arg-withoutpublished">withoutpublished<a class="anchor" aria-label="anchor" href="#arg-withoutpublished"></a></dt>
-<dd><p>whether to return results without a publishing date when filtering by date</p></dd>
+<dd><p>whether to return results without a publishing date when filtering by date.</p></dd>
 
 
 <dt id="arg-returnlist">returnlist<a class="anchor" aria-label="anchor" href="#arg-returnlist"></a></dt>
-<dd><p>return the raw output list rather than a formatted dataframe</p></dd>
+<dd><p>return the raw output list rather than a formatted dataframe.</p></dd>
+
+
+<dt id="arg-simplify">simplify<a class="anchor" aria-label="anchor" href="#arg-simplify"></a></dt>
+<dd><p>if only a single database was searched, return an <code>ohvbd.ids</code> object instead (defaults to <code>TRUE</code>).</p></dd>
 
 
 <dt id="arg-connections">connections<a class="anchor" aria-label="anchor" href="#arg-connections"></a></dt>
-<dd><p>the number of connections to use to parallelise queries</p></dd>
+<dd><p>the number of connections to use to parallelise queries.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>an <code>ohvbd.hub.search</code> dataframe or a list (if <code>returnlist=TRUE</code>) containing the search results</p>
+    <p>an <code>ohvbd.hub.search</code> dataframe, an <code>ohvbd.ids</code> vector (if <code>returnlist=TRUE</code> and <code>length(db) == 1</code>) a list (if <code>returnlist=TRUE</code>) containing the search results</p>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>

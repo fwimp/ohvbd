@@ -89,6 +89,13 @@
 <li>Functions that interface with vectorbyte databases no longer recommend using <code><a href="../reference/set_ohvbd_compat.html">set_ohvbd_compat()</a></code> as <em>unexpected</em> SSL errors <strong>should</strong> break pipelines by default.
 <ul><li>These errors are no longer <em>expected</em> to occur when interfacing with vectorbyte.</li>
 </ul></li>
+<li>New <code>simplify</code> argument to <code><a href="../reference/search_hub.html">search_hub()</a></code> makes hub searches return an <code>ohvbd.ids</code> object if only one database was searched for. This behaviour is on by default.
+<ul><li>To match this, <code><a href="../reference/filter_db.html">filter_db()</a></code> will now transparently return <code>ohvbd.ids</code> objects if it gets them.</li>
+</ul></li>
+<li>Running <code><a href="../reference/fetch.html">fetch()</a></code> on an <code>ohvbd.hub.search</code> or <code><a href="../reference/glean.html">glean()</a></code> on an <code>ohvbd.ids</code> object now provides a hint that you may have forgotten something.
+<ul><li>Occasionally users would use forget a <code><a href="../reference/fetch.html">fetch()</a></code> command and run <code>search_hub() |&gt; glean()</code> which didn’t previously give an interpretable error.</li>
+</ul></li>
+<li>Vignettes now use <code>vcr</code> to massively reduce their build time. This should only matter to developers of <code>ohvbd</code>, or users who download from github and build the vignettes themselves.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.6.1" id="ohvbd-061">ohvbd 0.6.1<a class="anchor" aria-label="anchor" href="#ohvbd-061"></a></h2>
