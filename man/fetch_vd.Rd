@@ -25,7 +25,10 @@ Retrieve VecDyn dataset/s specified by their dataset ID.
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 fetch_vd(54)
 
-fetch_vd(c(423,424,425), rate=5)
+fetch_vd(c(423,424,425))
+
+ohvbd.ids(c(423,424,425), "vd") |>
+  fetch() # Calls fetch_vd()
 \dontshow{\}) # examplesIf}
 }
 \author{

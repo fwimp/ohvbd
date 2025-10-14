@@ -22,7 +22,12 @@ If \code{\link[=filter_db]{filter_db()}} recieves an \code{ohvbd.ids} object by 
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-search_hub("Ixodes ricinus") |> filter_db("vt")
+search_hub("Ixodes ricinus")
+
+search_hub("Ixodes ricinus") |>
+  filter_db("vt") |>
+  fetch() |>
+  extract()
 \dontshow{\}) # examplesIf}
 }
 \author{

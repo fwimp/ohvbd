@@ -179,7 +179,12 @@ search_hub <- function(
 #' @return An `ohvbd.ids` vector of dataset IDs.
 #'
 #' @examplesIf interactive()
-#' search_hub("Ixodes ricinus") |> filter_db("vt")
+#' search_hub("Ixodes ricinus")
+#'
+#' search_hub("Ixodes ricinus") |>
+#'   filter_db("vt") |>
+#'   fetch() |>
+#'   extract()
 #'
 #' @concept hub
 #'

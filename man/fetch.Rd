@@ -19,7 +19,7 @@ This is a convenience method that infers and applies the correct fetch function 
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-find_vt_ids() |> fetch()
+search_hub("Ixodes", "vt") |> fetch()
 \dontshow{\}) # examplesIf}
 }
 \author{

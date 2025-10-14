@@ -93,7 +93,7 @@ summary.ohvbd.hub.search <- function(object, ...) {
 #' @concept convenience
 #' @export
 #' @examplesIf interactive()
-#' find_vt_ids() |> fetch()
+#' search_hub("Ixodes", "vt") |> fetch()
 #'
 fetch <- function(
   ids,
@@ -151,7 +151,7 @@ fetch.ohvbd.hub.search <- function(
 #' @concept convenience
 #' @export
 #' @examplesIf interactive()
-#' find_vt_ids() |> fetch() |> glean(cols=c("Interactor1Species"))
+#' search_hub("Ixodes", "vt") |> fetch() |> glean(cols=c("Interactor1Species"))
 #' fetch_ad(use_cache=TRUE) |> glean(targetdate="2020-08-04")
 #'
 glean <- function(res, ...) {

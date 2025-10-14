@@ -26,6 +26,9 @@ If you regularly use ohvbd to download large numbers of datasets at once and chu
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 fetch_gbif("dbc4a3ae-680f-44e6-ab25-c70e27b38dbc")
+
+ohvbd.ids("dbc4a3ae-680f-44e6-ab25-c70e27b38dbc", "gbif") |>
+  fetch() # Calls fetch_gbif()
 \dontshow{\}) # examplesIf}
 }
 \author{

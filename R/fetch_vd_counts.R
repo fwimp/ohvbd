@@ -13,7 +13,7 @@
 #' @examplesIf interactive()
 #' fetch_vd_counts(54)
 #'
-#' fetch_vd_counts(c(423,424,425), rate=5)
+#' fetch_vd_counts(c(423,424,425))
 #'
 #' @concept vecdyn
 #'

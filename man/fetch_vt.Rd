@@ -25,7 +25,10 @@ Retrieve VecTraits dataset/s specified by their dataset ID.
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 fetch_vt(54)
 
-fetch_vt(c(54, 55, 56), rate=5)
+fetch_vt(c(54, 55, 56))
+
+ohvbd.ids(c(54, 55, 56), "vt") |>
+  fetch() # Calls fetch_vt()
 \dontshow{\}) # examplesIf}
 }
 \author{

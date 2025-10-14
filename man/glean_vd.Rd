@@ -26,6 +26,10 @@ fetch_vd(247) |>
                     "sample_start_date",
                     "sample_value"),
              returnunique=TRUE)
+
+ohvbd.ids(247, "vd") |>
+  fetch() |>
+  glean() # Calls glean_vd()
 \dontshow{\}) # examplesIf}
 }
 \author{

@@ -12,8 +12,10 @@
 #' @examplesIf interactive()
 #' fetch_vt(54)
 #'
-#' fetch_vt(c(54, 55, 56), rate=5)
+#' fetch_vt(c(54, 55, 56))
 #'
+#' ohvbd.ids(c(54, 55, 56), "vt") |>
+#'   fetch() # Calls fetch_vt()
 #' @concept vectraits
 #'
 #' @export

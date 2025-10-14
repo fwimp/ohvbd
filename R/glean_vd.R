@@ -15,6 +15,10 @@
 #'                     "sample_value"),
 #'              returnunique=TRUE)
 #'
+#' ohvbd.ids(247, "vd") |>
+#'   fetch() |>
+#'   glean() # Calls glean_vd()
+#'
 #' @concept vecdyn
 #'
 #' @export

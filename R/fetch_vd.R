@@ -12,7 +12,10 @@
 #' @examplesIf interactive()
 #' fetch_vd(54)
 #'
-#' fetch_vd(c(423,424,425), rate=5)
+#' fetch_vd(c(423,424,425))
+#'
+#' ohvbd.ids(c(423,424,425), "vd") |>
+#'   fetch() # Calls fetch_vd()
 #'
 #' @concept vecdyn
 #'

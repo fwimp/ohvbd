@@ -20,7 +20,7 @@ This is a convenience method that infers and applies the correct extractor for t
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-find_vt_ids() |> fetch() |> glean(cols=c("Interactor1Species"))
+search_hub("Ixodes", "vt") |> fetch() |> glean(cols=c("Interactor1Species"))
 fetch_ad(use_cache=TRUE) |> glean(targetdate="2020-08-04")
 \dontshow{\}) # examplesIf}
 }

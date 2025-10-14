@@ -26,6 +26,10 @@ fetch_vt(54) |>
                     "Interactor1Genus",
                     "Interactor1Species"),
              returnunique=TRUE)
+
+ohvbd.ids(54, "vt") |>
+  fetch() |>
+  glean() # Calls glean_vt()
 \dontshow{\}) # examplesIf}
 }
 \author{

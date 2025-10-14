@@ -15,6 +15,9 @@
 #'                     "Interactor1Species"),
 #'              returnunique=TRUE)
 #'
+#' ohvbd.ids(54, "vt") |>
+#'   fetch() |>
+#'   glean() # Calls glean_vt()
 #' @concept vectraits
 #'
 #' @export

@@ -26,16 +26,17 @@ This will \strong{ALWAYS} get and cache gid level 2 data sources. These files ar
 
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-vt_ids <- search_vt(c("Aedes", "aegypti"))
-vtdf <- fetch_vt(vt_ids[(length(vt_ids)-20):length(vt_ids)]) |>
-  glean_vt(cols = c(
+vtdf <- search_hub("Aedes aegypti", "vt") |>
+  tail(20) |>
+  fetch() |>
+  glean(cols = c(
     "DatasetID",
     "Latitude",
     "Longitude",
     "Interactor1Genus",
     "Interactor1Species"
-    ), returnunique = TRUE)
-vtdf <- vtdf |> assoc_gadm(lonlat_names = c("Longitude", "Latitude"))
+    ), returnunique = TRUE) |>
+  assoc_gadm(lonlat_names = c("Longitude", "Latitude"))
 
 \dontshow{\}) # examplesIf}
 }
