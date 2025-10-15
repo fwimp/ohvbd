@@ -44,7 +44,7 @@ The indexed columns of VecTraits are:
 }
 
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 search_vt("Aedes aegypti")
 
 search_vt(c("Aedes", "aegypti"))

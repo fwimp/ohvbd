@@ -45,7 +45,7 @@ an \code{ohvbd.hub.search} dataframe, an \code{ohvbd.ids} vector (if \code{retur
 Retrieve the IDs for any datasets matching the given search parameters.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 search_hub("Ixodes ricinus")
 \dontshow{\}) # examplesIf}
 }

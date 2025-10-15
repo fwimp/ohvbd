@@ -18,7 +18,7 @@ An \code{ohvbd.ids} vector of VecDyn dataset IDs.
 Retrieve the IDs for any VecDyn datasets matching the given keywords
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 search_vd("Aedes aegypti")
 
 search_vd(c("Aedes", "aegypti"))

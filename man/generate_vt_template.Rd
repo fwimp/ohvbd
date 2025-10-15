@@ -15,7 +15,7 @@ know which of these you need to fill out. This generator asks a series of
 questions to determine what columns should be included in one's dataset.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 
 generate_vt_template()
 \dontshow{\}) # examplesIf}

@@ -226,7 +226,7 @@ force_multipolygon <- function(wkt) {
 }
 
 #' @title Encode spatvector as WKT, and convert to multipolygon if needed
-#' @param wkt The spatvector to format.
+#' @param v The spatvector to format.
 #' @return The formatted wkt.
 #' @keywords internal
 spatvect_to_hubwkt <- function(v) {

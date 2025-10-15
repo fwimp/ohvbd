@@ -50,7 +50,7 @@ The following metrics are valid (alternative names are listed in brackets):
 }
 
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 fetch_ad(metric="temp", gid=0)
 \dontshow{\}) # examplesIf}
 }

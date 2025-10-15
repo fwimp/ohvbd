@@ -20,7 +20,7 @@ An \code{ohvbd.data.frame} containing the requested data.
 Extract the data returned by a call to \code{\link[=fetch_vt]{fetch_vt()}}, filter columns of interest, and find unique rows if required.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 fetch_vt(54) |>
   glean_vt(cols=c("DatasetID",
                     "Interactor1Genus",

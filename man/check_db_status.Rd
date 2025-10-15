@@ -13,7 +13,7 @@ TRUE if all DB checks pass, else FALSE
 Attempt to access all presently supported databases and report if they were accessible.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
   check_db_status()
 \dontshow{\}) # examplesIf}
 }

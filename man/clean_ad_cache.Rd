@@ -13,7 +13,7 @@ clean_ad_cache(cache_location = "user")
 Delete all rda files from ohvbd AREAdata cache
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 clean_ad_cache()
 \dontshow{\}) # examplesIf}
 }

@@ -27,7 +27,7 @@ A SpatVector (from \code{\link[terra:vect]{terra::vect()}}) of the requested sha
 Retrieve AREAdata gadm mapping shapefiles specified by spatial scale (GID).
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 fetch_gadm_sfs(gid=0)
 \dontshow{\}) # examplesIf}
 }

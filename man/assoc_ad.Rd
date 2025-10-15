@@ -60,7 +60,7 @@ For example "2020-04" will be taken to mean the month of April in 2020, and the 
 }
 
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 vtdf <- search_hub("Aedes aegypti", "vt") |>
   tail(20) |>
   fetch() |>

@@ -16,7 +16,7 @@ An \code{ohvbd.ids} vector of VecTraits dataset IDs.
 Get all the current dataset IDs in VecTraits, as a numeric vector.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 find_vt_ids()
 \dontshow{\}) # examplesIf}
 }

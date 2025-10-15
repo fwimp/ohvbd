@@ -16,7 +16,7 @@ This should not be needed (and not be performed) unless you are otherwise experi
 When in interactive mode, checks with you to make sure you want to do this. Does not check when run in a script.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 set_ohvbd_compat()
 \dontshow{\}) # examplesIf}
 }

@@ -61,7 +61,7 @@ For example "2020-04" will be taken to mean the month of April in 2020, and the 
 }
 
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 # All dates in August 2022
 fetch_ad("temp", gid=0) |>
   glean_ad(

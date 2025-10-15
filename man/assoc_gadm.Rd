@@ -25,7 +25,7 @@ This will \strong{ALWAYS} get and cache gid level 2 data sources. These files ar
 }
 
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 vtdf <- search_hub("Aedes aegypti", "vt") |>
   tail(20) |>
   fetch() |>

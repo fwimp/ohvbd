@@ -38,7 +38,7 @@ Retrieve and parse VecDyn datasets specified by their dataset IDs in batches.
 This is not usually necessary (generally you just need \code{\link[=fetch_vd]{fetch_vd()}}) but allows one to release data that is not in use from memory. If you would like more control on extraction or parsing then it is best to wrap \code{\link[=fetch_vd]{fetch_vd()}} and \code{\link[=glean_vd]{glean_vd()}} in your own chunker instead.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 fetch_glean_vd_chunked(c(423,424,425), chunksize = 2, rate=5)
 \dontshow{\}) # examplesIf}
 }

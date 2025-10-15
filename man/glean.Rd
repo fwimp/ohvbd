@@ -19,7 +19,7 @@ The extracted data, either as an \code{ohvbd.data.frame} or \code{ohvbd.ad.matri
 This is a convenience method that infers and applies the correct extractor for the input
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 search_hub("Ixodes", "vt") |> fetch() |> glean(cols=c("Interactor1Species"))
 fetch_ad(use_cache=TRUE) |> glean(targetdate="2020-08-04")
 \dontshow{\}) # examplesIf}

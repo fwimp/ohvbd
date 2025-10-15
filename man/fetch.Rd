@@ -18,7 +18,7 @@ The downloaded data, as an \code{ohvbd.responses} object.
 This is a convenience method that infers and applies the correct fetch function for the input ids.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 search_hub("Ixodes", "vt") |> fetch()
 \dontshow{\}) # examplesIf}
 }

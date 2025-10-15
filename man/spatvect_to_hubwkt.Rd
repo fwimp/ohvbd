@@ -7,7 +7,7 @@
 spatvect_to_hubwkt(v)
 }
 \arguments{
-\item{wkt}{The spatvector to format.}
+\item{v}{The spatvector to format.}
 }
 \value{
 The formatted wkt.
