@@ -201,6 +201,14 @@ filter_db <- function(ids, db) {
     return(ids)
   }
 
+  if (length(db) > 1) {
+    db <- db[1]
+    cli::cli_warn(c(
+      "!" = "{.fn filter_db} only supports filtering one database at once.",
+      "i" = "Only returning results from {.val {db}}"
+    ))
+  }
+
   database <- db # Just to keep the subset happy, but also to keep the API consistent
   selectedids <- subset(ids, ids$db == database)
 
