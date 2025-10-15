@@ -75,7 +75,7 @@
 <dt id="arg-targetdate">targetdate<a class="anchor" aria-label="anchor" href="#arg-targetdate"></a></dt>
 <dd><p><strong>ONE OF</strong> the following:</p><ul><li><p>The date to search for in ISO 8601 (e.g. "2020", "2021-09", or "2022-09-21").</p></li>
 <li><p>The start date for a range of dates.</p></li>
-<li><p>A character vector of fully specified dates to search for (i.e. "yyyy-mm-dd")</p></li>
+<li><p>A character vector of fully specified dates to search for (i.e. "yyyy-mm-dd").</p></li>
 </ul></dd>
 
 
@@ -112,7 +112,7 @@
 
 
 <p>In cases where a full date is not provided, the earliest date possible with the available data is chosen.</p>
-<p>So "2020-04" will internally become "2020-04-01"</p>
+<p>So "2020-04" will internally become "2020-04-01".</p>
 <p>If an incomplete date is specified as the <code>targetdate</code> and no <code>enddate</code> is specified, the range to search is inferred from the minimum temporal scale provided in <code>targetdate</code>.</p>
 <p>For example "2020-04" will be taken to mean the month of April in 2020, and the <code>enddate</code> will internally be set to "2020-05-01".</p>
     </div>
@@ -124,9 +124,10 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
-<span class="r-in"><span><span class="va">vt_ids</span> <span class="op">&lt;-</span> <span class="fu"><a href="search_vt.html">search_vt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Aedes"</span>, <span class="st">"aegypti"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">vtdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="fetch_vt.html">fetch_vt</a></span><span class="op">(</span><span class="va">vt_ids</span><span class="op">[</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">vt_ids</span><span class="op">)</span><span class="op">-</span><span class="fl">20</span><span class="op">)</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">vt_ids</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="glean_vt.html">glean_vt</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="va">vtdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="search_hub.html">search_hub</a></span><span class="op">(</span><span class="st">"Aedes aegypti"</span>, <span class="st">"vt"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="fetch.html">fetch</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="glean.html">glean</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="st">"DatasetID"</span>,</span></span>
 <span class="r-in"><span>    <span class="st">"Latitude"</span>,</span></span>
 <span class="r-in"><span>    <span class="st">"Longitude"</span>,</span></span>

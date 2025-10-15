@@ -57,7 +57,7 @@
 
 
 <dl><dt id="arg-res">res<a class="anchor" aria-label="anchor" href="#arg-res"></a></dt>
-<dd><p>An object of type <code>ohvbd.responses</code> or <code>ohvbd.ad.matrix</code> generated from <code><a href="fetch.html">fetch()</a></code>
+<dd><p>An object of type <code>ohvbd.responses</code> or <code>ohvbd.ad.matrix</code> generated from <code><a href="fetch.html">fetch()</a></code>.
 and containing data from one of the supported databases.</p></dd>
 
 
@@ -77,7 +77,7 @@ and containing data from one of the supported databases.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="find_vt_ids.html">find_vt_ids</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="fetch.html">fetch</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">glean</span><span class="op">(</span>cols<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Interactor1Species"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="search_hub.html">search_hub</a></span><span class="op">(</span><span class="st">"Ixodes"</span>, <span class="st">"vt"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="fetch.html">fetch</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">glean</span><span class="op">(</span>cols<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Interactor1Species"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="fetch_ad.html">fetch_ad</a></span><span class="op">(</span>use_cache<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">glean</span><span class="op">(</span>targetdate<span class="op">=</span><span class="st">"2020-08-04"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
