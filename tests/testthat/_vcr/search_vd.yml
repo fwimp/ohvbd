@@ -1,0 +1,720 @@
+http_interactions:
+- request:
+    method: GET
+    uri: https://vectorbyte.crc.nd.edu/portal/api/vecdynbyprovider?format=json&keywords=atropalpus
+  response:
+    status: 200
+    headers:
+      Allow: GET, HEAD, OPTIONS
+      Connection: keep-alive
+      Content-Length: '64996'
+      Content-Type: application/json
+      Date: Wed, 15 Oct 2025 17:48:08 GMT
+      Referrer-Policy: same-origin
+      Server: nginx
+      Strict-Transport-Security: max-age=31536000
+      Vary: Accept, Origin, Cookie
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Frame-Options: DENY
+      X-XSS-Protection: 1; mode=block
+    body:
+      string: '{"data":{"count":58,"next":"http://vectorbyte.crc.nd.edu/portal/api/vecdynbyprovider/?format=json&keywords=atropalpus&page=2","previous":null,"results":[{"Id":223,"SpeciesName":["Aedes
+        abserratus","Aedes aegypti","Aedes atropalpus","Aedes c. canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes excrucians","Aedes fitchii","Aedes hendersoni","Aedes
+        japonicus complex","Aedes sp.","Aedes sticticus","Aedes stimulans","Aedes
+        triseriatus","Aedes trivittatus","Aedes vexans","Anopheles barberi","Anopheles
+        perplexens","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        sp.","Anopheles walkeri","BLANK","Coquillettidia perturbans","Coquillettidia
+        sp.","Culex erraticus","Culex pipiens","Culex pipiens morphological group","Culex
+        restuans","Culex salinarius","Culex sp.","Culex tarsalis","Culex territans","Culiseta
+        impatiens","Culiseta inornata","Culiseta morsitans","Culiseta sp.","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora ferox","Psorophora horrida","Psorophora
+        howardii","Psorophora sp.","Psorophora varipes","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"2003-2006
+        Mosquito Surveillance St Joseph County Indiana USA","Tags":null,"Sites":["St.
+        Joseph County, Indiana, USA"],"Collections":1240,"Years":["2003","2004","2005","2006"],"CollectionMethods":["CDCLIGHT
+        co2;light","CDCLIGHT light","GRAVID hay or grass infusion"],"EmbargoReleaseDate":""},{"Id":349,"SpeciesName":["Aedes
+        abserratus","Aedes atropalpus","Aedes aurifer","Aedes canadensis complex","Aedes
+        cinereus","Aedes dorsalis","Aedes excrucians","Aedes fitchii","Aedes flavescens","Aedes
+        hendersoni","Aedes sollicitans","Aedes sp.","Aedes sticticus","Aedes stimulans","Aedes
+        triseriatus","Aedes trivittatus","Aedes vexans","Anopheles barberi","Anopheles
+        crucians","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        sp.","Anopheles walkeri","BLANK","Coquillettidia perturbans","Culex erraticus","Culex
+        pipiens","Culex pipiens morphological group","Culex restuans","Culex salinarius","Culex
+        sp.","Culex tarsalis","Culex territans","Culiseta inornata","Culiseta melanura","Culiseta
+        minnesotae","Culiseta morsitans","Culiseta sp.","Orthopodomyia sp.","Psorophora
+        ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora ferox","Psorophora
+        sp.","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"1976-1997
+        Mosquito Surveillance, St Joseph County, Indiana, USA","Tags":null,"Sites":["St.
+        Joseph County, Indiana"],"Collections":12675,"Years":["1976","1977","1978","1979","1980","1981","1982","1983","1984","1987","1989","1990","1991","1992","1993","1994","1995","1996","1997"],"CollectionMethods":["NJLT
+        light"],"EmbargoReleaseDate":""},{"Id":596,"SpeciesName":["Aedes albopictus","Aedes
+        atropalpus","Aedes japonicus complex","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans sensu lato","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        restuans","Culex salinarius","Culex tarsalis","Culex territans","Culiseta
+        inornata","Orthopodomyia signifera","Psorophora ciliata","Psorophora columbiae","Psorophora
+        ferox","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"Mosquito
+        surveillance in Marion County, Indiana, USA. 2020. (VBP0000768)","Tags":null,"Sites":[null],"Collections":1462,"Years":["2020"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":597,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes japonicus complex","Aedes triseriatus","Aedes
+        trivittatus","Aedes vexans sensu lato","Anopheles punctipennis","Anopheles
+        quadrimaculatus","Anopheles walkeri","Coquillettidia perturbans","Culex erraticus","Culex
+        pipiens","Culex restuans","Culex salinarius","Culex tarsalis","Culex territans","Culiseta
+        inornata","Orthopodomyia signifera","Psorophora ciliata","Psorophora columbiae","Psorophora
+        ferox","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"Mosquito
+        surveillance in Marion County, Indiana, USA. 2020. (VBP0000768)","Tags":null,"Sites":[null],"Collections":1462,"Years":["2020"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":598,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes japonicus complex","Aedes triseriatus","Aedes
+        trivittatus","Aedes vexans sensu lato","Anopheles punctipennis","Anopheles
+        quadrimaculatus","Anopheles walkeri","Coquillettidia perturbans","Culex erraticus","Culex
+        pipiens","Culex restuans","Culex salinarius","Culex tarsalis","Culex territans","Culiseta
+        inornata","Orthopodomyia signifera","Psorophora ciliata","Psorophora columbiae","Psorophora
+        ferox","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"Mosquito
+        surveillance in Marion County, Indiana, USA. 2020. (VBP0000768)","Tags":null,"Sites":[null],"Collections":1462,"Years":["2020"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":599,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes japonicus complex","Aedes triseriatus","Aedes
+        trivittatus","Aedes vexans sensu lato","Anopheles punctipennis","Anopheles
+        quadrimaculatus","Anopheles walkeri","Coquillettidia perturbans","Culex erraticus","Culex
+        pipiens","Culex restuans","Culex salinarius","Culex tarsalis","Culex territans","Culiseta
+        inornata","Orthopodomyia signifera","Psorophora ciliata","Psorophora columbiae","Psorophora
+        ferox","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"Mosquito
+        surveillance in Marion County, Indiana, USA. 2020. (VBP0000768)","Tags":null,"Sites":[null],"Collections":1462,"Years":["2020"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":612,"SpeciesName":["Aedes
+        aegypti","Aedes albopictus","Aedes atlanticus","Aedes atropalpus","Aedes canadensis
+        complex","Aedes cantator","Aedes cinereus","Aedes dupreei","Aedes fulvus pallens","Aedes
+        hendersoni","Aedes infirmatus","Aedes japonicus complex","Aedes sollicitans","Aedes
+        spp.","Aedes sticticus","Aedes taeniorhynchus","Aedes tormentor","Aedes triseriatus","Aedes
+        trivittatus","Aedes vexans sensu lato","Anopheles barberi","Anopheles crucians
+        complex","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles spp.","Coquillettidia
+        perturbans","Culex erraticus","Culex pipiens","Culex pipiens morphological
+        group","Culex restuans","Culex salinarius","Culex spp.","Culex territans","Culiseta
+        melanura","Orthopodomyia signifera","Orthopodomyia spp.","Psorophora ciliata","Psorophora
+        columbiae","Psorophora ferox","Psorophora horrida","Psorophora howardii","Psorophora
+        spp.","Uranotaenia sapphirina","spp."],"Location":[null],"Provider":null,"Title":"Maryland
+        Dept. of Agriculture mosquito surveillance, Maryland, USA, 2020 (VBP0000711)","Tags":null,"Sites":[null],"Collections":535,"Years":["2020"],"CollectionMethods":["CDC
+        light trap  (attractants:  carbon dioxide,visible light )"],"EmbargoReleaseDate":""},{"Id":614,"SpeciesName":["Aedes
+        atropalpus","Aedes canadensis complex","Aedes cinereus","Aedes grossbecki","Aedes
+        japonicus complex","Aedes sollicitans","Aedes sticticus","Aedes stimulans","Aedes
+        triseriatus","Aedes trivittatus","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        perplexens","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        restuans","Culex salinarius","Culex territans","Culiseta inornata","Culiseta
+        melanura","Culiseta minnesotae","Orthopodomyia signifera","Psorophora ciliata","Psorophora
+        ferox","Uranotaenia sapphirina","spp."],"Location":[null],"Provider":null,"Title":"Mosquito
+        surveillance in Lucas County, Ohio, USA. 2018 (VBP0000635)","Tags":null,"Sites":[null],"Collections":1438,"Years":["2018"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":617,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        spp.","Aedes sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex tarsalis","Culex
+        territans","Culiseta impatiens","Culiseta inornata","Culiseta melanura","Culiseta
+        minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia signifera","Psorophora
+        ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora discolor","Psorophora
+        ferox","Psorophora horrida","Psorophora howardii","Psorophora signipennis","Uranotaenia
+        sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide mosquito
+        surveillance in Iowa, USA, 1985 (New Jersey light trap) (VBP0000421)","Tags":null,"Sites":[null],"Collections":921,"Years":["1985"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":618,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        spp.","Aedes sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex tarsalis","Culex
+        territans","Culiseta impatiens","Culiseta inornata","Culiseta melanura","Culiseta
+        minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia signifera","Psorophora
+        ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora discolor","Psorophora
+        ferox","Psorophora horrida","Psorophora howardii","Psorophora signipennis","Uranotaenia
+        sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide mosquito
+        surveillance in Iowa, USA, 1985 (New Jersey light trap) (VBP0000421)","Tags":null,"Sites":[null],"Collections":921,"Years":["1985"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":619,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        spp.","Aedes sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex spp.","Culex
+        tarsalis","Culex territans","Culiseta impatiens","Culiseta inornata","Culiseta
+        melanura","Culiseta minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        discolor","Psorophora ferox","Psorophora horrida","Psorophora howardii","Psorophora
+        signipennis","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide
+        mosquito surveillance in Iowa, USA, 1982 (New Jersey light trap) (VBP0000424)","Tags":null,"Sites":[null],"Collections":986,"Years":["1982"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":625,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        spp.","Aedes sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex spp.","Culex
+        tarsalis","Culex territans","Culiseta impatiens","Culiseta inornata","Culiseta
+        melanura","Culiseta minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        discolor","Psorophora ferox","Psorophora horrida","Psorophora howardii","Psorophora
+        signipennis","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide
+        mosquito surveillance in Iowa, USA, 1988 (New Jersey light trap) (VBP0000418)","Tags":null,"Sites":[null],"Collections":988,"Years":["1988"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":626,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex spp.","Culex
+        tarsalis","Culex territans","Culiseta impatiens","Culiseta inornata","Culiseta
+        melanura","Culiseta minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        discolor","Psorophora ferox","Psorophora horrida","Psorophora howardii","Psorophora
+        signipennis","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide
+        mosquito surveillance in Iowa, USA, 1987 (New Jersey light trap) (VBP0000419)","Tags":null,"Sites":[null],"Collections":1015,"Years":["1987"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":641,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex spp.","Culex
+        tarsalis","Culex territans","Culiseta impatiens","Culiseta inornata","Culiseta
+        melanura","Culiseta minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        discolor","Psorophora ferox","Psorophora horrida","Psorophora howardii","Psorophora
+        signipennis","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide
+        mosquito surveillance in Iowa, USA, 1986 (New Jersey light trap) (VBP0000420)","Tags":null,"Sites":[null],"Collections":1019,"Years":["1986"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":646,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        spp.","Aedes sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex spp.","Culex
+        tarsalis","Culex territans","Culiseta impatiens","Culiseta inornata","Culiseta
+        melanura","Culiseta minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        discolor","Psorophora ferox","Psorophora horrida","Psorophora howardii","Psorophora
+        signipennis","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide
+        mosquito surveillance in Iowa, USA, 2000 (New Jersey light trap) (VBP0000391)","Tags":null,"Sites":[null],"Collections":1031,"Years":["2000"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":651,"SpeciesName":["Aedes
+        aegypti","Aedes albopictus","Aedes atlanticus","Aedes atropalpus","Aedes fulvus
+        pallens","Aedes infirmatus","Aedes sollicitans","Aedes spp.","Aedes taeniorhynchus","Aedes
+        tormentor","Aedes triseriatus","Aedes vexans sensu lato","Anopheles crucians","Anopheles
+        quadrimaculatus","Anopheles spp.","Coquillettidia perturbans","Culex coronator","Culex
+        erraticus","Culex iolambdis","Culex nigripalpus","Culex quinquefasciatus","Culex
+        salinarius","Culex spp.","Culex territans","Culiseta inornata","Culiseta melanura","Mansonia
+        dyari","Mansonia spp.","Mansonia titillans","Psorophora ciliata","Psorophora
+        columbiae","Psorophora cyanescens","Psorophora ferox","Psorophora howardii","Psorophora
+        spp.","Uranotaenia lowii","Uranotaenia sapphirina","Wyeomyia mitchellii","Wyeomyia
+        spp.","Wyeomyia vanduzeei","spp."],"Location":[null],"Provider":null,"Title":"Mosquito
+        surveillance in Manatee County, Florida, USA. 2019 (VBP0000631)","Tags":null,"Sites":[null],"Collections":1859,"Years":["2019"],"CollectionMethods":["CDC
+        light trap  (attractants:  carbon dioxide,visible light )"],"EmbargoReleaseDate":""},{"Id":666,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        spp.","Aedes sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex spp.","Culex
+        tarsalis","Culex territans","Culiseta impatiens","Culiseta inornata","Culiseta
+        melanura","Culiseta minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        discolor","Psorophora ferox","Psorophora horrida","Psorophora howardii","Psorophora
+        signipennis","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide
+        mosquito surveillance in Iowa, USA, 1981 (New Jersey light trap) (VBP0000425)","Tags":null,"Sites":[null],"Collections":1126,"Years":["1981"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":670,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        spp.","Aedes sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex tarsalis","Culex
+        territans","Culiseta impatiens","Culiseta inornata","Culiseta melanura","Culiseta
+        minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia signifera","Psorophora
+        ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora discolor","Psorophora
+        ferox","Psorophora horrida","Psorophora howardii","Psorophora signipennis","Uranotaenia
+        sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide mosquito
+        surveillance in Iowa, USA, 1975 (New Jersey light trap) (VBP0000431)","Tags":null,"Sites":[null],"Collections":112,"Years":["1975"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":671,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        spp.","Aedes sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex spp.","Culex
+        tarsalis","Culex territans","Culiseta impatiens","Culiseta inornata","Culiseta
+        melanura","Culiseta minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        discolor","Psorophora ferox","Psorophora horrida","Psorophora howardii","Psorophora
+        signipennis","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide
+        mosquito surveillance in Iowa, USA, 1970 (New Jersey light trap) (VBP0000432)","Tags":null,"Sites":[null],"Collections":127,"Years":["1970"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":672,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex spp.","Culex
+        tarsalis","Culex territans","Culiseta impatiens","Culiseta inornata","Culiseta
+        melanura","Culiseta minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        discolor","Psorophora ferox","Psorophora horrida","Psorophora howardii","Psorophora
+        signipennis","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide
+        mosquito surveillance in Iowa, USA, 1969 (New Jersey light trap) (VBP0000433)","Tags":null,"Sites":[null],"Collections":107,"Years":["1969"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":680,"SpeciesName":["Aedes
+        abserratus","Aedes atropalpus","Aedes aurifer","Aedes canadensis complex","Aedes
+        cantator","Aedes cinereus","Aedes communis","Aedes excrucians","Aedes fitchii","Aedes
+        grossbecki","Aedes hendersoni","Aedes intrudens","Aedes japonicus complex","Aedes
+        provocans","Aedes sollicitans","Aedes sticticus","Aedes stimulans","Aedes
+        taeniorhynchus","Aedes thibaulti","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans sensu lato","Anopheles barberi","Anopheles punctipennis","Anopheles
+        quadrimaculatus","Anopheles walkeri","Coquillettidia perturbans","Culex pipiens
+        morphological group","Culex salinarius","Culex territans","Culiseta melanura","Culiseta
+        minnesotae","Orthopodomyia signifera","Psorophora ciliata","Psorophora ferox","Uranotaenia
+        sapphirina"],"Location":[null],"Provider":null,"Title":"Mosquito surveillance,
+        Norfolk County Mosquito Control, in Massachusetts, USA, 2020 (VBP0000731)","Tags":null,"Sites":[null],"Collections":687,"Years":["2020"],"CollectionMethods":["CDC
+        light trap","gravid trap  (attractants:  hay or grass infusion )","resting
+        box catch  (attractants:  no attractant used )"],"EmbargoReleaseDate":""},{"Id":686,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex tarsalis","Culex
+        territans","Culiseta impatiens","Culiseta inornata","Culiseta melanura","Culiseta
+        minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia signifera","Psorophora
+        ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora discolor","Psorophora
+        ferox","Psorophora horrida","Psorophora howardii","Psorophora signipennis","Uranotaenia
+        sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide mosquito
+        surveillance in Iowa, USA, 1990 (New Jersey light trap) (VBP0000416)","Tags":null,"Sites":[null],"Collections":1171,"Years":["1990"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":687,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex spp.","Culex
+        tarsalis","Culex territans","Culiseta impatiens","Culiseta inornata","Culiseta
+        melanura","Culiseta minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        discolor","Psorophora ferox","Psorophora horrida","Psorophora howardii","Psorophora
+        signipennis","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide
+        mosquito surveillance in Iowa, USA, 1992 (New Jersey light trap) (VBP0000414)","Tags":null,"Sites":[null],"Collections":1176,"Years":["1992"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":698,"SpeciesName":["Aedes
+        aegypti","Aedes albopictus","Aedes atlanticus","Aedes atropalpus","Aedes fulvus
+        pallens","Aedes infirmatus","Aedes sollicitans","Aedes spp.","Aedes taeniorhynchus","Aedes
+        tormentor","Aedes triseriatus","Aedes vexans sensu lato","Anopheles crucians","Anopheles
+        punctipennis","Anopheles quadrimaculatus","Anopheles spp.","Coquillettidia
+        perturbans","Culex coronator","Culex erraticus","Culex iolambdis","Culex nigripalpus","Culex
+        quinquefasciatus","Culex restuans","Culex salinarius","Culex spp.","Culex
+        tarsalis","Culex territans","Culicinae","Culiseta inornata","Culiseta melanura","Mansonia
+        dyari","Mansonia spp.","Mansonia titillans","Melanoconion","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        ferox","Psorophora howardii","Psorophora spp.","Uranotaenia lowii","Uranotaenia
+        sapphirina","Uranotaenia spp.","Wyeomyia mitchellii","Wyeomyia spp.","Wyeomyia
+        vanduzeei","spp."],"Location":[null],"Provider":null,"Title":"Mosquito surveillance
+        in Manatee County, Florida, USA. 2017 (VBP0000629)","Tags":null,"Sites":[null],"Collections":1845,"Years":["2017"],"CollectionMethods":["CDC
+        light trap  (attractants:  carbon dioxide,visible light )"],"EmbargoReleaseDate":""},{"Id":700,"SpeciesName":["Aedes
+        aegypti","Aedes albopictus","Aedes atlanticus","Aedes atropalpus","Aedes fulvus
+        pallens","Aedes infirmatus","Aedes sollicitans","Aedes spp.","Aedes taeniorhynchus","Aedes
+        tormentor","Aedes triseriatus","Aedes vexans sensu lato","Anopheles crucians","Anopheles
+        punctipennis","Anopheles quadrimaculatus","Anopheles spp.","Coquillettidia
+        perturbans","Culex coronator","Culex erraticus","Culex iolambdis","Culex nigripalpus","Culex
+        quinquefasciatus","Culex restuans","Culex salinarius","Culex spp.","Culex
+        tarsalis","Culex territans","Culicinae","Culiseta inornata","Culiseta melanura","Mansonia
+        dyari","Mansonia spp.","Mansonia titillans","Melanoconion","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        ferox","Psorophora howardii","Psorophora spp.","Uranotaenia lowii","Uranotaenia
+        sapphirina","Uranotaenia spp.","Wyeomyia mitchellii","Wyeomyia spp.","Wyeomyia
+        vanduzeei","spp."],"Location":[null],"Provider":null,"Title":"Mosquito surveillance
+        in Manatee County, Florida, USA. 2017 (VBP0000629)","Tags":null,"Sites":[null],"Collections":1845,"Years":["2017"],"CollectionMethods":["CDC
+        light trap  (attractants:  carbon dioxide,visible light )"],"EmbargoReleaseDate":""},{"Id":702,"SpeciesName":["Aedes
+        aegypti","Aedes albopictus","Aedes atlanticus","Aedes atropalpus","Aedes fulvus
+        pallens","Aedes infirmatus","Aedes sollicitans","Aedes spp.","Aedes taeniorhynchus","Aedes
+        tormentor","Aedes triseriatus","Aedes vexans sensu lato","Anopheles crucians","Anopheles
+        punctipennis","Anopheles quadrimaculatus","Anopheles spp.","Coquillettidia
+        perturbans","Culex coronator","Culex erraticus","Culex iolambdis","Culex nigripalpus","Culex
+        quinquefasciatus","Culex restuans","Culex salinarius","Culex spp.","Culex
+        tarsalis","Culex territans","Culicinae","Culiseta inornata","Culiseta melanura","Mansonia
+        dyari","Mansonia spp.","Mansonia titillans","Melanoconion","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        ferox","Psorophora howardii","Psorophora spp.","Uranotaenia lowii","Uranotaenia
+        sapphirina","Uranotaenia spp.","Wyeomyia mitchellii","Wyeomyia spp.","Wyeomyia
+        vanduzeei","spp."],"Location":[null],"Provider":null,"Title":"Mosquito surveillance
+        in Manatee County, Florida, USA. 2017 (VBP0000629)","Tags":null,"Sites":[null],"Collections":1845,"Years":["2017"],"CollectionMethods":["CDC
+        light trap  (attractants:  carbon dioxide,visible light )"],"EmbargoReleaseDate":""},{"Id":731,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        spp.","Aedes sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex spp.","Culex
+        tarsalis","Culex territans","Culiseta impatiens","Culiseta inornata","Culiseta
+        melanura","Culiseta minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        discolor","Psorophora ferox","Psorophora horrida","Psorophora howardii","Psorophora
+        signipennis","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide
+        mosquito surveillance in Iowa, USA, 1983 (New Jersey light trap) (VBP0000423)","Tags":null,"Sites":[null],"Collections":1345,"Years":["1983"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":732,"SpeciesName":["Aedes
+        atropalpus","Aedes canadensis complex","Aedes cinereus","Aedes grossbecki","Aedes
+        japonicus complex","Aedes sollicitans","Aedes sticticus","Aedes stimulans","Aedes
+        triseriatus","Aedes trivittatus","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        perplexens","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        restuans","Culex territans","Culiseta inornata","Orthopodomyia signifera","Psorophora
+        ciliata","Psorophora ferox","Uranotaenia sapphirina","spp."],"Location":[null],"Provider":null,"Title":"Mosquito
+        surveillance in Lucas County, Ohio, USA. 2019 (VBP0000637)","Tags":null,"Sites":[null],"Collections":1554,"Years":["2019"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":740,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        spp.","Aedes sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex spp.","Culex
+        tarsalis","Culex territans","Culiseta impatiens","Culiseta inornata","Culiseta
+        melanura","Culiseta minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        discolor","Psorophora ferox","Psorophora horrida","Psorophora howardii","Psorophora
+        signipennis","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide
+        mosquito surveillance in Iowa, USA, 1998 (New Jersey light trap) (VBP0000393)","Tags":null,"Sites":[null],"Collections":1331,"Years":["1998"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":767,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        spp.","Aedes sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex spp.","Culex
+        tarsalis","Culex territans","Culiseta impatiens","Culiseta inornata","Culiseta
+        melanura","Culiseta minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        discolor","Psorophora ferox","Psorophora horrida","Psorophora howardii","Psorophora
+        signipennis","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide
+        mosquito surveillance in Iowa, USA, 1991 (New Jersey light trap) (VBP0000415)","Tags":null,"Sites":[null],"Collections":1295,"Years":["1991"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":787,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        spp.","Aedes sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex spp.","Culex
+        tarsalis","Culex territans","Culiseta impatiens","Culiseta inornata","Culiseta
+        melanura","Culiseta minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        discolor","Psorophora ferox","Psorophora horrida","Psorophora howardii","Psorophora
+        signipennis","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide
+        mosquito surveillance in Iowa, USA, 1976 (New Jersey light trap) (VBP0000430)","Tags":null,"Sites":[null],"Collections":1609,"Years":["1976"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":788,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex spp.","Culex
+        tarsalis","Culex territans","Culiseta impatiens","Culiseta inornata","Culiseta
+        melanura","Culiseta minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        discolor","Psorophora ferox","Psorophora horrida","Psorophora howardii","Psorophora
+        signipennis","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide
+        mosquito surveillance in Iowa, USA, 1996 (New Jersey light trap) (VBP0000410)","Tags":null,"Sites":[null],"Collections":1559,"Years":["1996"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":789,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex tarsalis","Culex
+        territans","Culiseta impatiens","Culiseta inornata","Culiseta melanura","Culiseta
+        minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia signifera","Psorophora
+        ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora discolor","Psorophora
+        ferox","Psorophora horrida","Psorophora howardii","Psorophora signipennis","Uranotaenia
+        sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide mosquito
+        surveillance in Iowa, USA, 1984 (New Jersey light trap) (VBP0000422)","Tags":null,"Sites":[null],"Collections":1549,"Years":["1984"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":793,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes canadensis complex","Aedes grossbecki","Aedes
+        japonicus complex","Aedes sticticus","Aedes stimulans","Aedes triseriatus","Aedes
+        trivittatus","Aedes vexans sensu lato","Anopheles punctipennis","Anopheles
+        quadrimaculatus","Anopheles walkeri","Coquillettidia perturbans","Culex erraticus","Culex
+        pipiens","Culex pipiens morphological group","Culex restuans","Culex tarsalis","Culex
+        territans","Culiseta inornata","Culiseta melanura","Culiseta minnesotae","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora ferox","Uranotaenia sapphirina","spp."],"Location":[null],"Provider":null,"Title":"Mosquito
+        surveillance in Desplaines Valley Mosquito Abatement, Illinois, USA, 2020
+        (VBP0000721)","Tags":null,"Sites":[null],"Collections":2139,"Years":["2020"],"CollectionMethods":["gravid
+        trap  (attractants:  alfalfa infusion )","new jersey trap catch  (attractants:  visible
+        light )"],"EmbargoReleaseDate":""},{"Id":810,"SpeciesName":["Aedes albopictus","Aedes
+        atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes cinereus","Aedes
+        dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes japonicus
+        japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        spp.","Aedes sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex spp.","Culex
+        tarsalis","Culex territans","Culiseta impatiens","Culiseta inornata","Culiseta
+        melanura","Culiseta minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        discolor","Psorophora ferox","Psorophora horrida","Psorophora howardii","Psorophora
+        signipennis","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide
+        mosquito surveillance in Iowa, USA, 1999 (New Jersey light trap) (VBP0000392)","Tags":null,"Sites":[null],"Collections":1347,"Years":["1999"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":838,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        spp.","Aedes sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex spp.","Culex
+        tarsalis","Culex territans","Culiseta impatiens","Culiseta inornata","Culiseta
+        melanura","Culiseta minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        discolor","Psorophora ferox","Psorophora horrida","Psorophora howardii","Psorophora
+        signipennis","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide
+        mosquito surveillance in Iowa, USA, 1997 (New Jersey light trap) (VBP0000409)","Tags":null,"Sites":[null],"Collections":1298,"Years":["1997"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":854,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex spp.","Culex
+        tarsalis","Culex territans","Culiseta impatiens","Culiseta inornata","Culiseta
+        melanura","Culiseta minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        discolor","Psorophora ferox","Psorophora horrida","Psorophora howardii","Psorophora
+        signipennis","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide
+        mosquito surveillance in Iowa, USA, 1993 (New Jersey light trap) (VBP0000413)","Tags":null,"Sites":[null],"Collections":1261,"Years":["1993"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":856,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        spp.","Aedes sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex spp.","Culex
+        tarsalis","Culex territans","Culiseta impatiens","Culiseta inornata","Culiseta
+        melanura","Culiseta minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        discolor","Psorophora ferox","Psorophora horrida","Psorophora howardii","Psorophora
+        signipennis","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide
+        mosquito surveillance in Iowa, USA, 1989 (New Jersey light trap) (VBP0000417)","Tags":null,"Sites":[null],"Collections":1195,"Years":["1989"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":864,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        spp.","Aedes sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex spp.","Culex
+        tarsalis","Culex territans","Culiseta impatiens","Culiseta inornata","Culiseta
+        melanura","Culiseta minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        discolor","Psorophora ferox","Psorophora horrida","Psorophora howardii","Psorophora
+        signipennis","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide
+        mosquito surveillance in Iowa, USA, 1979 (New Jersey light trap) (VBP0000427)","Tags":null,"Sites":[null],"Collections":1644,"Years":["1979"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":865,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        spp.","Aedes sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex spp.","Culex
+        tarsalis","Culex territans","Culiseta impatiens","Culiseta inornata","Culiseta
+        melanura","Culiseta minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        discolor","Psorophora ferox","Psorophora horrida","Psorophora howardii","Psorophora
+        signipennis","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide
+        mosquito surveillance in Iowa, USA, 1979 (New Jersey light trap) (VBP0000427)","Tags":null,"Sites":[null],"Collections":1644,"Years":["1979"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":866,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        spp.","Aedes sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex spp.","Culex
+        tarsalis","Culex territans","Culiseta impatiens","Culiseta inornata","Culiseta
+        melanura","Culiseta minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        discolor","Psorophora ferox","Psorophora horrida","Psorophora howardii","Psorophora
+        signipennis","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide
+        mosquito surveillance in Iowa, USA, 1978 (New Jersey light trap) (VBP0000428)","Tags":null,"Sites":[null],"Collections":1653,"Years":["1978"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":867,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        spp.","Aedes sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex spp.","Culex
+        tarsalis","Culex territans","Culiseta impatiens","Culiseta inornata","Culiseta
+        melanura","Culiseta minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        discolor","Psorophora ferox","Psorophora horrida","Psorophora howardii","Psorophora
+        signipennis","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide
+        mosquito surveillance in Iowa, USA, 1995 (New Jersey light trap) (VBP0000411)","Tags":null,"Sites":[null],"Collections":1660,"Years":["1995"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":870,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        spp.","Aedes sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex tarsalis","Culex
+        territans","Culiseta impatiens","Culiseta inornata","Culiseta melanura","Culiseta
+        minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia signifera","Orthopodomyia
+        spp.","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        discolor","Psorophora ferox","Psorophora horrida","Psorophora howardii","Psorophora
+        signipennis","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide
+        mosquito surveillance in Iowa, USA, 2016 (New Jersey light trap) (VBP0000371)","Tags":null,"Sites":[null],"Collections":2095,"Years":["2016"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":872,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        spp.","Aedes sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex spp.","Culex
+        tarsalis","Culex territans","Culiseta impatiens","Culiseta inornata","Culiseta
+        melanura","Culiseta minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        discolor","Psorophora ferox","Psorophora horrida","Psorophora howardii","Psorophora
+        signipennis","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide
+        mosquito surveillance in Iowa, USA, 2002 (New Jersey light trap) (VBP0000389)","Tags":null,"Sites":[null],"Collections":1971,"Years":["2002"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":873,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex spp.","Culex
+        tarsalis","Culex territans","Culiseta impatiens","Culiseta inornata","Culiseta
+        melanura","Culiseta minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        discolor","Psorophora ferox","Psorophora horrida","Psorophora howardii","Psorophora
+        signipennis","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide
+        mosquito surveillance in Iowa, USA, 1980 (New Jersey light trap) (VBP0000426)","Tags":null,"Sites":[null],"Collections":1917,"Years":["1980"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":877,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        spp.","Aedes sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        spp.","Anopheles walkeri","Coquillettidia perturbans","Culex erraticus","Culex
+        pipiens","Culex pipiens morphological group","Culex restuans","Culex salinarius","Culex
+        spp.","Culex tarsalis","Culex territans","Culiseta impatiens","Culiseta inornata","Culiseta
+        melanura","Culiseta minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        discolor","Psorophora ferox","Psorophora horrida","Psorophora howardii","Psorophora
+        signipennis","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide
+        mosquito surveillance in Iowa, USA, 2017 (New Jersey light trap) (VBP0000369)","Tags":null,"Sites":[null],"Collections":2187,"Years":["2017"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":880,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        spp.","Aedes sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex tarsalis","Culex
+        territans","Culiseta","Culiseta impatiens","Culiseta inornata","Culiseta melanura","Culiseta
+        minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia signifera","Psorophora
+        ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora discolor","Psorophora
+        ferox","Psorophora horrida","Psorophora howardii","Psorophora signipennis","Psorophora
+        spp.","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide
+        mosquito surveillance in Iowa, USA, 2008 (New Jersey light trap) (VBP0000381)","Tags":null,"Sites":[null],"Collections":2125,"Years":["2008"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":881,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        spp.","Aedes sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        spp.","Anopheles walkeri","Coquillettidia perturbans","Culex erraticus","Culex
+        pipiens","Culex pipiens morphological group","Culex restuans","Culex salinarius","Culex
+        spp.","Culex tarsalis","Culex territans","Culiseta impatiens","Culiseta inornata","Culiseta
+        melanura","Culiseta minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        discolor","Psorophora ferox","Psorophora horrida","Psorophora howardii","Psorophora
+        signipennis","Psorophora spp.","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide
+        mosquito surveillance in Iowa, USA, 2009 (New Jersey light trap) (VBP0000380)","Tags":null,"Sites":[null],"Collections":2304,"Years":["2009"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":888,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex tarsalis","Culex
+        territans","Culiseta impatiens","Culiseta inornata","Culiseta melanura","Culiseta
+        minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia signifera","Psorophora
+        ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora discolor","Psorophora
+        ferox","Psorophora horrida","Psorophora howardii","Psorophora signipennis","Uranotaenia
+        sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide mosquito
+        surveillance in Iowa, USA, 2007 (New Jersey light trap) (VBP0000382)","Tags":null,"Sites":[null],"Collections":2522,"Years":["2007"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""},{"Id":890,"SpeciesName":["Aedes
+        albopictus","Aedes atropalpus","Aedes aurifer","Aedes campestris","Aedes canadensis","Aedes
+        cinereus","Aedes dorsalis","Aedes dupreei","Aedes flavescens","Aedes hendersoni","Aedes
+        japonicus japonicus","Aedes nigromaculis","Aedes sollicitans","Aedes spencerii","Aedes
+        spp.","Aedes sticticus","Aedes stimulans","Aedes triseriatus","Aedes trivittatus","Aedes
+        vexans arabiensis","Aedes vexans sensu lato","Anopheles barberi","Anopheles
+        crucians","Anopheles earlei","Anopheles punctipennis","Anopheles quadrimaculatus","Anopheles
+        walkeri","Coquillettidia perturbans","Culex erraticus","Culex pipiens","Culex
+        pipiens morphological group","Culex restuans","Culex salinarius","Culex spp.","Culex
+        tarsalis","Culex territans","Culiseta impatiens","Culiseta inornata","Culiseta
+        melanura","Culiseta minnesotae","Culiseta morsitans","Orthopodomyia alba","Orthopodomyia
+        signifera","Psorophora ciliata","Psorophora columbiae","Psorophora cyanescens","Psorophora
+        discolor","Psorophora ferox","Psorophora horrida","Psorophora howardii","Psorophora
+        signipennis","Uranotaenia sapphirina"],"Location":[null],"Provider":null,"Title":"State-wide
+        mosquito surveillance in Iowa, USA, 2001 (New Jersey light trap) (VBP0000390)","Tags":null,"Sites":[null],"Collections":1764,"Years":["2001"],"CollectionMethods":["new
+        jersey trap catch  (attractants:  visible light )"],"EmbargoReleaseDate":""}]},"ids":[223,349,596,597,598,599,612,614,617,618,619,625,626,641,646,651,666,670,671,672,680,686,687,698,700,702,731,732,740,767,787,788,789,793,810,838,854,856,864,865,866,867,870,872,873,877,880,881,888,890,891,892,898,899,901,905,906,908]}'
+  recorded_at: 2025-10-15 17:48:07
+recorded_with: VCR-vcr/2.0.0

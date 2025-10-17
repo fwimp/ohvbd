@@ -1,0 +1,41 @@
+http_interactions:
+- request:
+    method: GET
+    uri: https://vectorbyte.crc.nd.edu/portal/api/vectraits-explorer?format=json&keywords=atropalpus
+  response:
+    status: 200
+    headers:
+      Allow: GET, HEAD, OPTIONS
+      Connection: keep-alive
+      Content-Length: '2421'
+      Content-Type: application/json
+      Date: Wed, 15 Oct 2025 17:46:53 GMT
+      Referrer-Policy: same-origin
+      Server: nginx
+      Strict-Transport-Security: max-age=31536000
+      Vary: Accept, Origin, Cookie
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Frame-Options: DENY
+      X-XSS-Protection: 1; mode=block
+    body:
+      string: '{"data":{"count":4,"next":null,"previous":null,"results":[{"url":"vectorbyte.crc.nd.edu/portal/api/vectraits-dataset/143/","DatasetID":"143","OriginalTraitName":"body
+        size","Variables":["Unplottable",null],"Interactor1Stage":"adult","Interactor1Sex":"female","Interactor1Genus":"Aedes","Interactor1Species":"atropalpus","Interactor2Genus":null,"Interactor2Species":null,"Citation":"Gulia-Nuss
+        et al. 2015. Multiple factors contribute to anautogenous reproduction by the
+        mosquito Aedes aegypti. J Insect Physiol. 82","DOI":"10.1016/j.jinsphys.2015.08.001","CuratedByDOI":null,"SubmittedBy":"Paul
+        Huxley","EmbargoReleaseDate":"2015-01-01"},{"url":"vectorbyte.crc.nd.edu/portal/api/vectraits-dataset/145/","DatasetID":"145","OriginalTraitName":"lipid
+        content","Variables":["Unplottable",null],"Interactor1Stage":"adult","Interactor1Sex":"female","Interactor1Genus":"Aedes","Interactor1Species":"atropalpus","Interactor2Genus":null,"Interactor2Species":null,"Citation":"Gulia-Nuss
+        et al. 2015. Multiple factors contribute to anautogenous reproduction by the
+        mosquito Aedes aegypti. J Insect Physiol. 82","DOI":"10.1016/j.jinsphys.2015.08.001","CuratedByDOI":null,"SubmittedBy":"Paul
+        Huxley","EmbargoReleaseDate":"2015-01-01"},{"url":"vectorbyte.crc.nd.edu/portal/api/vectraits-dataset/147/","DatasetID":"147","OriginalTraitName":"protein
+        content","Variables":["Unplottable",null],"Interactor1Stage":"adult","Interactor1Sex":"female","Interactor1Genus":"Aedes","Interactor1Species":"atropalpus","Interactor2Genus":null,"Interactor2Species":null,"Citation":"Gulia-Nuss
+        et al. 2015. Multiple factors contribute to anautogenous reproduction by the
+        mosquito Aedes aegypti. J Insect Physiol. 82","DOI":"10.1016/j.jinsphys.2015.08.001","CuratedByDOI":null,"SubmittedBy":"Paul
+        Huxley","EmbargoReleaseDate":"2015-01-01"},{"url":"vectorbyte.crc.nd.edu/portal/api/vectraits-dataset/149/","DatasetID":"149","OriginalTraitName":"glycogen
+        content","Variables":["Unplottable",null],"Interactor1Stage":"adult","Interactor1Sex":"female","Interactor1Genus":"Aedes","Interactor1Species":"atropalpus","Interactor2Genus":null,"Interactor2Species":null,"Citation":"Gulia-Nuss
+        et al. 2015. Multiple factors contribute to anautogenous reproduction by the
+        mosquito Aedes aegypti. J Insect Physiol. 82","DOI":"10.1016/j.jinsphys.2015.08.001","CuratedByDOI":null,"SubmittedBy":"Paul
+        Huxley","EmbargoReleaseDate":"2015-01-01"}]},"ids":[143,145,147,149]}'
+  recorded_at: 2025-10-15 17:46:52
+recorded_with: VCR-vcr/2.0.0

@@ -1,0 +1,64 @@
+http_interactions:
+- request:
+    method: GET
+    uri: https://vectorbyte.crc.nd.edu/portal/api/vecdyncsv?format=json&piids=364
+  response:
+    status: 200
+    headers:
+      Allow: GET, HEAD, OPTIONS
+      Connection: keep-alive
+      Content-Length: '1400'
+      Content-Type: application/json
+      Date: Wed, 15 Oct 2025 16:23:42 GMT
+      Referrer-Policy: same-origin
+      Server: nginx
+      Strict-Transport-Security: max-age=31536000
+      Vary: Accept, Origin, Cookie
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Frame-Options: DENY
+      X-XSS-Protection: 1; mode=block
+    body:
+      string: '{"count":6,"digitized_from_graph":true,"consistent_data":{"title":"Aphid
+        Sampling of Infested Orange Shoots in Northeast Algeria (2013)","species":"Aphididae
+        spp.","sample_unit":"Mean number of aphids per orange shoot","sample_sex":"mixed","sample_stage":"Nymphs
+        and Adults","sample_lat_dd":"36.7","sample_long_dd":"6.7833333","species_id_method":"Unknown","sampling_method":"Controlled
+        random sampling of 5 infested orange shoots","location_description":"Emjez
+        Djich, Skikda, Northeast Algeria","contact_name":"Salim Lebbal","digitized_from_graph":"True","date_uncertainty_due_to_graph":"True","time_shift_possible":"True","submittedby":"Chloe
+        Boyea","contributoremail":"cboyea@nd.edu","subsampling_details":"Presumed
+        Aphis spiraecola, Aphis craccivora, Aphis gossypii, and Macrosiphum euphorbiae
+        for Aphididae spp."},"results":[{"sample_start_date":"2012-11-01","sample_end_date":"2012-11-01","sample_value":"240.7725262"},{"sample_start_date":"2012-10-01","sample_end_date":"2012-10-01","sample_value":"39.9141703"},{"sample_start_date":"2012-05-01","sample_end_date":"2012-05-01","sample_value":"85.62233164"},{"sample_start_date":"2012-04-01","sample_end_date":"2012-04-01","sample_value":"232.4034379"},{"sample_start_date":"2012-03-01","sample_end_date":"2012-03-01","sample_value":"2.575126774"},{"sample_start_date":"2012-02-01","sample_end_date":"2012-02-01","sample_value":"14.16310885"}]}'
+  recorded_at: 2025-10-15 16:23:41
+- request:
+    method: GET
+    uri: https://vectorbyte.crc.nd.edu/portal/api/vecdyncsv?format=json&page=1&piids=364
+  response:
+    status: 200
+    headers:
+      Allow: GET, HEAD, OPTIONS
+      Connection: keep-alive
+      Content-Length: '1400'
+      Content-Type: application/json
+      Date: Wed, 15 Oct 2025 16:23:42 GMT
+      Referrer-Policy: same-origin
+      Server: nginx
+      Strict-Transport-Security: max-age=31536000
+      Vary: Accept, Origin, Cookie
+      X-Content-Type-Options:
+      - nosniff
+      - nosniff
+      X-Frame-Options: DENY
+      X-XSS-Protection: 1; mode=block
+    body:
+      string: '{"count":6,"digitized_from_graph":true,"consistent_data":{"title":"Aphid
+        Sampling of Infested Orange Shoots in Northeast Algeria (2013)","species":"Aphididae
+        spp.","sample_unit":"Mean number of aphids per orange shoot","sample_sex":"mixed","sample_stage":"Nymphs
+        and Adults","sample_lat_dd":"36.7","sample_long_dd":"6.7833333","species_id_method":"Unknown","sampling_method":"Controlled
+        random sampling of 5 infested orange shoots","location_description":"Emjez
+        Djich, Skikda, Northeast Algeria","contact_name":"Salim Lebbal","digitized_from_graph":"True","date_uncertainty_due_to_graph":"True","time_shift_possible":"True","submittedby":"Chloe
+        Boyea","contributoremail":"cboyea@nd.edu","subsampling_details":"Presumed
+        Aphis spiraecola, Aphis craccivora, Aphis gossypii, and Macrosiphum euphorbiae
+        for Aphididae spp."},"results":[{"sample_start_date":"2012-11-01","sample_end_date":"2012-11-01","sample_value":"240.7725262"},{"sample_start_date":"2012-10-01","sample_end_date":"2012-10-01","sample_value":"39.9141703"},{"sample_start_date":"2012-05-01","sample_end_date":"2012-05-01","sample_value":"85.62233164"},{"sample_start_date":"2012-04-01","sample_end_date":"2012-04-01","sample_value":"232.4034379"},{"sample_start_date":"2012-03-01","sample_end_date":"2012-03-01","sample_value":"2.575126774"},{"sample_start_date":"2012-02-01","sample_end_date":"2012-02-01","sample_value":"14.16310885"}]}'
+  recorded_at: 2025-10-15 16:23:42
+recorded_with: VCR-vcr/2.0.0

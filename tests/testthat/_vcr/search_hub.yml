@@ -1,0 +1,240 @@
+http_interactions:
+- request:
+    method: GET
+    uri: https://api.vbdhub.org/search?query=Aedes&database=vt%2Cvd%2Cgbif%2Cpx&limit=1&page=1&withoutPublished=true&geometry=MULTIPOLYGON%28++++++++++++++++++++++++%28%28++++++++++++++++++++++++++-4.601692249172345+59.18721395065515%2C++++++++++++++++++++++++++-1.5564374591013461+59.09157727402243%2C++++++++++++++++++++++++++2.7317784697742695+51.70725619550282%2C++++++++++++++++++++++++++-0.3756243772367611+50.100597554419096%2C++++++++++++++++++++++++++-6.27968978655835+49.53924199886393%2C++++++++++++++++++++++++++-5.47176504633498+52.357229445873315%2C++++++++++++++++++++++++++-6.031097558797256+53.92277755807382%2C++++++++++++++++++++++++++-8.889908178047193+54.323411308259836%2C++++++++++++++++++++++++++-8.392723722525744+58.21875779916627%2C++++++++++++++++++++++++++-4.601692249172345+59.18721395065515++++++++++++++++++++++++%29%29++++++++++++++++++++++%29
+  response:
+    status: 200
+    headers:
+      date: Wed, 15 Oct 2025 17:15:55 GMT
+      content-type: application/json; charset=utf-8
+      content-security-policy: 'default-src ''self'';base-uri ''self'';font-src ''self''
+        https: data:;form-action ''self'';frame-ancestors ''self'';img-src ''self''
+        data:;object-src ''none'';script-src ''self'';script-src-attr ''none'';style-src
+        ''self'' https: ''unsafe-inline'';upgrade-insecure-requests'
+      cross-origin-opener-policy: same-origin
+      cross-origin-resource-policy: same-origin
+      origin-agent-cluster: ?1
+      referrer-policy: no-referrer-when-downgrade
+      strict-transport-security: max-age=31536000; includeSubDomains
+      x-content-type-options: nosniff
+      x-dns-prefetch-control: 'off'
+      x-download-options: noopen
+      x-frame-options: SAMEORIGIN
+      x-permitted-cross-domain-policies: none
+      x-xss-protection: 1; mode=block
+      access-control-allow-origin: '*'
+      x-cache: MISS
+      cf-cache-status: DYNAMIC
+      nel: '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      speculation-rules: '"/cdn-cgi/speculation"'
+      expect-ct: max-age=86400, enforce
+      report-to: '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=CKB6DWf3EaXMfHpTReZorFFpApWbHr4t0sfs%2F8VfAOUD%2FfQjDeT5BH1C9nAZsyTXhvo3S9mg32GFCPyOx6phVg417Wh%2BUCYNI%2B1k4g%3D%3D"}]}'
+      content-encoding: gzip
+      server: cloudflare
+      cf-ray: 98f0f60c181eef19-LHR
+      alt-svc: h3=":443"; ma=86400
+    body:
+      string: '{"count":7,"hits":[{"id":"85390b2e-b2dc-451e-aeb0-5ecb8532c033","title":"Mosquito
+        Occurrences in the UK - Review of Literature","description":"This dataset
+        compiles records of mosquito occurrences across the United Kingdom from a
+        systematic review of scientific literature, covering species presence, location
+        coordinates, and seasonal patterns. It focuses on native and invasive mosquito
+        genera, including Culex, Anopheles, and Aedes, to aid in the spatial and temporal
+        understanding of mosquito distribution within the UK.\nThe dataset was compiled
+        following PRISMA guidelines for systematic reviews, using search engines Web
+        of Science, PubMed and Scopus. It includes 503 records extracted from 22 peer-reviewed
+        studies, with presence/absence data, species/genus classification, geographical
+        coordinates (where available), collection methods, and seasonal occurrence.
+        Records without abundance data (136 entries), coordinates (70 entries), or
+        seasonal information (24 entries) were noted.","doi":"10.15468/jrpmxs","type":"occurrence","author":"uknbn","citation":"One
+        Health VBD Hub (2025). Mosquito Occurrences in the UK - Review of Literature.
+        Occurrence dataset https://doi.org/10.15468/jrpmxs accessed via GBIF.org on
+        2025-10-10.","published":"2025-02-14T00:00:00.000Z","kingdom":[],"phylum":[],"class":[],"order":[],"family":[],"genus":[],"species":[],"unknown":[],"db":"gbif"}]}'
+  recorded_at: 2025-10-15 17:15:54
+- request:
+    method: GET
+    uri: https://api.vbdhub.org/search?query=Aedes&database=vt%2Cvd%2Cgbif%2Cpx&limit=50&page=1&withoutPublished=true&geometry=MULTIPOLYGON%28++++++++++++++++++++++++%28%28++++++++++++++++++++++++++-4.601692249172345+59.18721395065515%2C++++++++++++++++++++++++++-1.5564374591013461+59.09157727402243%2C++++++++++++++++++++++++++2.7317784697742695+51.70725619550282%2C++++++++++++++++++++++++++-0.3756243772367611+50.100597554419096%2C++++++++++++++++++++++++++-6.27968978655835+49.53924199886393%2C++++++++++++++++++++++++++-5.47176504633498+52.357229445873315%2C++++++++++++++++++++++++++-6.031097558797256+53.92277755807382%2C++++++++++++++++++++++++++-8.889908178047193+54.323411308259836%2C++++++++++++++++++++++++++-8.392723722525744+58.21875779916627%2C++++++++++++++++++++++++++-4.601692249172345+59.18721395065515++++++++++++++++++++++++%29%29++++++++++++++++++++++%29
+  response:
+    status: 200
+    headers:
+      date: Wed, 15 Oct 2025 17:15:55 GMT
+      content-type: application/json; charset=utf-8
+      content-security-policy: 'default-src ''self'';base-uri ''self'';font-src ''self''
+        https: data:;form-action ''self'';frame-ancestors ''self'';img-src ''self''
+        data:;object-src ''none'';script-src ''self'';script-src-attr ''none'';style-src
+        ''self'' https: ''unsafe-inline'';upgrade-insecure-requests'
+      cross-origin-opener-policy: same-origin
+      cross-origin-resource-policy: same-origin
+      origin-agent-cluster: ?1
+      referrer-policy: no-referrer-when-downgrade
+      strict-transport-security: max-age=31536000; includeSubDomains
+      x-content-type-options: nosniff
+      x-dns-prefetch-control: 'off'
+      x-download-options: noopen
+      x-frame-options: SAMEORIGIN
+      x-permitted-cross-domain-policies: none
+      x-xss-protection: 1; mode=block
+      access-control-allow-origin: '*'
+      x-cache: MISS
+      cf-cache-status: DYNAMIC
+      nel: '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      speculation-rules: '"/cdn-cgi/speculation"'
+      expect-ct: max-age=86400, enforce
+      report-to: '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=DTL35cTOQ1mSyipfkLlfbVBE2Vrnva9iv6RBUDMRcj0nIsQFMXD6k%2FHs1c5i1sZuGJEsSwNDQG1qyEjQuD%2FeYRWZipMpVfsFcdriyw%3D%3D"}]}'
+      content-encoding: gzip
+      server: cloudflare
+      cf-ray: 98f0f6182f38ef19-LHR
+      alt-svc: h3=":443"; ma=86400
+    body:
+      string: '{"count":7,"hits":[{"id":"85390b2e-b2dc-451e-aeb0-5ecb8532c033","title":"Mosquito
+        Occurrences in the UK - Review of Literature","description":"This dataset
+        compiles records of mosquito occurrences across the United Kingdom from a
+        systematic review of scientific literature, covering species presence, location
+        coordinates, and seasonal patterns. It focuses on native and invasive mosquito
+        genera, including Culex, Anopheles, and Aedes, to aid in the spatial and temporal
+        understanding of mosquito distribution within the UK.\nThe dataset was compiled
+        following PRISMA guidelines for systematic reviews, using search engines Web
+        of Science, PubMed and Scopus. It includes 503 records extracted from 22 peer-reviewed
+        studies, with presence/absence data, species/genus classification, geographical
+        coordinates (where available), collection methods, and seasonal occurrence.
+        Records without abundance data (136 entries), coordinates (70 entries), or
+        seasonal information (24 entries) were noted.","doi":"10.15468/jrpmxs","type":"occurrence","author":"uknbn","citation":"One
+        Health VBD Hub (2025). Mosquito Occurrences in the UK - Review of Literature.
+        Occurrence dataset https://doi.org/10.15468/jrpmxs accessed via GBIF.org on
+        2025-10-10.","published":"2025-02-14T00:00:00.000Z","kingdom":[],"phylum":[],"class":[],"order":[],"family":[],"genus":[],"species":[],"unknown":[],"db":"gbif"},{"id":"838","title":"Blagrove
+        et al. 2013. A Wolbachia wMel transinfection in Aedes albopictus is not detrimental
+        to host fitness and inhibits Chikungunya virus. PLoS Negl Trop Dis. 7(3):e2152","doi":"10.1371/journal.pntd.0002152","type":"trait","kingdom":["Animalia"],"phylum":["Arthropoda"],"class":["Insecta"],"order":["Diptera"],"family":["Culicidae"],"genus":["Aedes"],"species":["Aedes
+        albopictus"],"unknown":[],"db":"vt"},{"id":"839","title":"Blagrove et al.
+        2013. A Wolbachia wMel transinfection in Aedes albopictus is not detrimental
+        to host fitness and inhibits Chikungunya virus. PLoS Negl Trop Dis. 7(3):e2152","doi":"10.1371/journal.pntd.0002152","type":"trait","kingdom":["Animalia"],"phylum":["Arthropoda"],"class":["Insecta"],"order":["Diptera"],"family":["Culicidae"],"genus":["Aedes"],"species":["Aedes
+        albopictus"],"unknown":[],"db":"vt"},{"id":"837","title":"Blagrove et al.
+        2013. A Wolbachia wMel transinfection in Aedes albopictus is not detrimental
+        to host fitness and inhibits Chikungunya virus. PLoS Negl Trop Dis. 7(3):e2152","doi":"10.1371/journal.pntd.0002152","type":"trait","kingdom":["Animalia"],"phylum":["Arthropoda"],"class":["Insecta"],"order":["Diptera"],"family":["Culicidae"],"genus":["Aedes"],"species":["Aedes
+        albopictus"],"unknown":[],"db":"vt"},{"id":"5744948f-0530-407d-bdaa-60ef7bba9709","title":"UK
+        Cranefly Recording Scheme - records verified via iRecord","description":"This
+        dataset contains records of the Tipuloidea (cranefly families Tipulidae, Limoniidae,
+        Pediciidae and Cylindrotomidae). Added to this are the families Trichoceridae
+        (winter gnats) and Ptychopteridae (fold-winged craneflies). Records submitted
+        are two-fold; data received via the UK Cranefly Recording Scheme and added
+        to iRecord by Pete Boardman, and data added by other recorders directly.","doi":"10.15468/mjsdup","type":"occurrence","author":"uknbn","citation":"UK
+        Cranefly Recording Scheme (2025). UK Cranefly Recording Scheme - records verified
+        via iRecord. Occurrence dataset https://doi.org/10.15468/mjsdup accessed via
+        GBIF.org on 2025-10-10.","published":"2025-09-02T00:00:00.000Z","kingdom":[],"phylum":[],"class":[],"order":[],"family":[],"genus":[],"species":[],"unknown":[],"db":"gbif"},{"id":"66a51aea-8662-4685-9fd0-9d4b596617d5","title":"General
+        Biodiversity Records from Ireland","description":"The records in this Dataset
+        are general records of different taxonomic groups submitted to the National
+        Biodiversity Data Centre. This provides a temporary facility to store and
+        make available data submitted to the Centre, until such time as subsets of
+        the data can be added to a recognised national database.","doi":"10.15468/w8q1jm","type":"occurrence","author":"registry-migration.gbif.org","citation":"Oisín
+        Duffy. General Biodiversity Records from Ireland. National Biodiversity Data
+        Centre. Occurrence dataset https://doi.org/10.15468/w8q1jm accessed via GBIF.org
+        on 2025-10-10.","kingdom":[],"phylum":[],"class":[],"order":[],"family":[],"genus":[],"species":[],"unknown":[],"db":"gbif"},{"id":"d8cd16ba-bb74-4420-821e-083f2bac17c2","title":"INSDC
+        Sequences","description":"This dataset contains INSDC sequence records not
+        associated with environmental sample identifiers or host organisms. The dataset
+        is prepared periodically using the public ENA API (https://www.ebi.ac.uk/ena/portal/api/)
+        by querying data with search parameters: `environmental_sample=False & host=\"\"`
+        EMBL-EBI also publishes other records in separate datasets (https://www.gbif.org/publisher/ada9d123-ddb4-467d-8891-806ea8d94230).
+        The data was then processed as follows: 1. Human sequences were excluded.
+        2. For non-CONTIG records, the sample accession number (when available) along
+        with the scientific name were used to identify sequence records corresponding
+        to the same individuals (or group of organism of the same species in the same
+        sample). Only one record was kept for each scientific name/sample accession
+        number. 3. Contigs and whole genome shotgun (WGS) records were added individually.
+        4. The records that were missing some information were excluded. Only records
+        associated with a specimen voucher or records containing both a location AND
+        a date were kept. 5. The records associated with the same vouchers are aggregated
+        together. 6. A lot of records left corresponded to individual sequences or
+        reads corresponding to the same organisms. In practise, these were \"duplicate\"
+        occurrence records that weren''t filtered out in STEP 2 because the sample
+        accession sample was missing. To identify those potential duplicates, we grouped
+        all the remaining records by `scientific_name`, `collection_date`, `location`,
+        `country`, `identified_by`, `collected_by` and `sample_accession` (when available).
+        Then we excluded the groups that contained more than 50 records. The rationale
+        behind the choice of threshold is explained here: https://github.com/gbif/embl-adapter/issues/10#issuecomment-855757978
+        7. To improve the matching of the EBI scientific name to the GBIF backbone
+        taxonomy, we incorporated the ENA taxonomic information. The kingdom, Phylum,
+        Class, Order, Family, and genus were obtained from the ENA taxonomy checklist
+        available here: http://ftp.ebi.ac.uk/pub/databases/ena/taxonomy/sdwca.zip
+        More information available here: https://github.com/gbif/embl-adapter#readme
+        You can find the mapping used to format the EMBL data to Darwin Core Archive
+        here: https://github.com/gbif/embl-adapter/blob/master/DATAMAPPING.md","doi":"10.15468/sbmztx","type":"occurrence","author":"trobertson","citation":"European
+        Bioinformatics Institute (EMBL-EBI), GBIF Helpdesk (2025). INSDC Sequences.
+        Version 1.157. European Nucleotide Archive (EMBL-EBI). Occurrence dataset
+        https://doi.org/10.15468/sbmztx accessed via GBIF.org on 2025-10-10.","published":"2025-10-04T00:00:00.000Z","kingdom":[],"phylum":[],"class":[],"order":[],"family":[],"genus":[],"species":[],"unknown":[],"db":"gbif"}]}'
+  recorded_at: 2025-10-15 17:15:54
+- request:
+    method: GET
+    uri: https://api.vbdhub.org/search?query=2000-2010+in+Tyrnava&database=vt%2Cvd%2Cgbif%2Cpx&limit=1&page=1&withoutPublished=true&exact=true
+  response:
+    status: 200
+    headers:
+      date: Wed, 15 Oct 2025 17:15:59 GMT
+      content-type: application/json; charset=utf-8
+      content-security-policy: 'default-src ''self'';base-uri ''self'';font-src ''self''
+        https: data:;form-action ''self'';frame-ancestors ''self'';img-src ''self''
+        data:;object-src ''none'';script-src ''self'';script-src-attr ''none'';style-src
+        ''self'' https: ''unsafe-inline'';upgrade-insecure-requests'
+      cross-origin-opener-policy: same-origin
+      cross-origin-resource-policy: same-origin
+      origin-agent-cluster: ?1
+      referrer-policy: no-referrer-when-downgrade
+      strict-transport-security: max-age=31536000; includeSubDomains
+      x-content-type-options: nosniff
+      x-dns-prefetch-control: 'off'
+      x-download-options: noopen
+      x-frame-options: SAMEORIGIN
+      x-permitted-cross-domain-policies: none
+      x-xss-protection: 1; mode=block
+      access-control-allow-origin: '*'
+      x-cache: MISS
+      cf-cache-status: DYNAMIC
+      nel: '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      speculation-rules: '"/cdn-cgi/speculation"'
+      expect-ct: max-age=86400, enforce
+      report-to: '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=CCQaahI4xdL0oN%2F6ztWejpJD1JZW1VFbXrBqPooHsV8u7wSgPrNGksA8peQQwfWFJ01R1Lqs7vknJkd3I9RPhVjvXXSWhs101slqxw%3D%3D"}]}'
+      content-encoding: gzip
+      server: cloudflare
+      cf-ray: 98f0f6191995ef19-LHR
+      alt-svc: h3=":443"; ma=86400
+    body:
+      string: '{"count":1,"hits":[{"id":"355","title":"Total Aphids caught Annually
+        2000-2010 in Tyrnava-Liminka, Finland in Suction Traps","type":"abundance","kingdom":[],"phylum":[],"class":[],"order":[],"family":[],"genus":[],"species":[],"unknown":[],"db":"vd"}]}'
+  recorded_at: 2025-10-15 17:15:58
+- request:
+    method: GET
+    uri: https://api.vbdhub.org/search?query=2000-2010+in+Tyrnava&database=vt%2Cvd%2Cgbif%2Cpx&limit=50&page=1&withoutPublished=true&exact=true
+  response:
+    status: 200
+    headers:
+      date: Wed, 15 Oct 2025 17:15:59 GMT
+      content-type: application/json; charset=utf-8
+      content-security-policy: 'default-src ''self'';base-uri ''self'';font-src ''self''
+        https: data:;form-action ''self'';frame-ancestors ''self'';img-src ''self''
+        data:;object-src ''none'';script-src ''self'';script-src-attr ''none'';style-src
+        ''self'' https: ''unsafe-inline'';upgrade-insecure-requests'
+      cross-origin-opener-policy: same-origin
+      cross-origin-resource-policy: same-origin
+      origin-agent-cluster: ?1
+      referrer-policy: no-referrer-when-downgrade
+      strict-transport-security: max-age=31536000; includeSubDomains
+      x-content-type-options: nosniff
+      x-dns-prefetch-control: 'off'
+      x-download-options: noopen
+      x-frame-options: SAMEORIGIN
+      x-permitted-cross-domain-policies: none
+      x-xss-protection: 1; mode=block
+      access-control-allow-origin: '*'
+      x-cache: MISS
+      cf-cache-status: DYNAMIC
+      nel: '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      speculation-rules: '"/cdn-cgi/speculation"'
+      expect-ct: max-age=86400, enforce
+      report-to: '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=9F7Ow8cuVweRvA0QBigrvlBe0OqPL4L8XsJFrgW3VprhK85yZc2lcxpqCdJnz0ur79AU97Qzo9xr%2BT3HDEwGiGs7UcXSKQbuNLku8g%3D%3D"}]}'
+      content-encoding: gzip
+      server: cloudflare
+      cf-ray: 98f0f6305f8eef19-LHR
+      alt-svc: h3=":443"; ma=86400
+    body:
+      string: '{"count":1,"hits":[{"id":"355","title":"Total Aphids caught Annually
+        2000-2010 in Tyrnava-Liminka, Finland in Suction Traps","type":"abundance","kingdom":[],"phylum":[],"class":[],"order":[],"family":[],"genus":[],"species":[],"unknown":[],"db":"vd"}]}'
+  recorded_at: 2025-10-15 17:15:59
+recorded_with: VCR-vcr/2.0.0
