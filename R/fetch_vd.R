@@ -73,8 +73,8 @@ fetch_vd <- function(ids, rate = 5, connections = 2, basereq = NA) {
 
   # Construct a df containing one row with all appropriate params for each request, and then generate reqs for parallel requesting
   reqs_df <- resp_parsed |>
-    dplyr::group_by("id") |>
-    dplyr::mutate(pages = list(seq(1, .data$"pages"))) |>
+    dplyr::group_by(.data$id) |>
+    dplyr::mutate(pages = list(seq(1, .data$pages))) |>
     tidyr::unnest(cols = "pages") |>
     dplyr::ungroup()
   reqs <- mapply(
