@@ -73,8 +73,11 @@ You can install the development version of ohvbd from [GitHub](https://github.co
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("fwimp/ohvbd", build_vignettes = TRUE)
+devtools::install_github("fwimp/ohvbd")
 ```
+
+The vignettes are all available online, but if you would like to build them locally, add `build_vignettes` = TRUE into your `install_github()` command.
+However, we do not recommend doing this due to the number of extra R packages utilised in the vignettes.
 
 ## Basic usage
 
@@ -110,7 +113,7 @@ filtered_md_chunks <- subset(md_chunks, md_chunks$sec_h1 == latest_version)
 
 notes <- c()
 if (all(is.na(filtered_md_chunks$sec_h2))) {
-  notes <- parsermd::as_document(filtered_md_chunks[[1,"ast"]], collapse = "\n")
+  notes <- parsermd::as_document(filtered_md_chunks[[1,"ast"]][[1]], collapse = "\n")
 } else {
   notes <- tryCatch({
   for (i in 1:nrow(filtered_md_chunks)) {
@@ -119,10 +122,11 @@ if (all(is.na(filtered_md_chunks$sec_h2))) {
     }
     paste(notes, collapse = "\n")
   }, error = function(e) {
-    parsermd::as_document(md_chunks[[1,"ast"]], collapse = "\n")
+    parsermd::as_document(md_chunks[[1,"ast"]][[1]], collapse = "\n")
   })
 }
 
+notes <- paste(notes, collapse = "\n")
 ```
 <!-- These are auto-pulled from NEWS.md  -->
 ### `r latest_version`

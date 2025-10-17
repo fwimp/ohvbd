@@ -21,6 +21,8 @@ Other changes
   * New `*_gbif` functions (e.g. `fetch_gbif()`) allow for retrieving and extracting data from GBIF.
   * A GBIF account and the `rgbif` package are required to retrieve data from GBIF.
   * The account details must also be set up as shown in [the rgbif documentation](https://docs.ropensci.org/rgbif/articles/gbif_credentials.html).
+* New `tee()` command allows one to extract data from the middle of a pipeline and save it to an environment.
+  * This is definitely not only useful for `ohvbd` workflows, and can be used in any base R pipeline (`|>`). It has not been tested in magrittr pipelines but should work as-is.
 * New `filter_db()` command allows for filtering out of only one database's results from hub searches.
 * `check_db_status()` now returns (invisibly) whether all databases are up or not.
 * Examples are no longer wrapped in `\dontrun{}` so they should be runnable from an installed version of the package.

@@ -43,8 +43,13 @@ You can install the development version of ohvbd from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("fwimp/ohvbd", build_vignettes = TRUE)
+devtools::install_github("fwimp/ohvbd")
 ```
+
+The vignettes are all available online, but if you would like to build
+them locally, add `build_vignettes` = TRUE into your `install_github()`
+command. However, we do not recommend doing this due to the number of
+extra R packages utilised in the vignettes.
 
 ## Basic usage
 
