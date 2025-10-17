@@ -20,12 +20,16 @@
 <url><loc>https://fwimp.github.io/ohvbd/reference/extract.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/fetch.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/fetch_ad.html</loc></url>
+<url><loc>https://fwimp.github.io/ohvbd/reference/fetch_citations.html</loc></url>
+<url><loc>https://fwimp.github.io/ohvbd/reference/fetch_citations_vd.html</loc></url>
+<url><loc>https://fwimp.github.io/ohvbd/reference/fetch_citations_vt.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/fetch_gadm_sfs.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/fetch_gbif.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/fetch_glean_vd_chunked.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/fetch_glean_vt_chunked.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/fetch_vd.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/fetch_vd_counts.html</loc></url>
+<url><loc>https://fwimp.github.io/ohvbd/reference/fetch_vd_meta.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/fetch_vt.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/filter_db.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/find_vb_404s.html</loc></url>
@@ -34,6 +38,7 @@
 <url><loc>https://fwimp.github.io/ohvbd/reference/find_vd_missing.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/find_vt_ids.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/force_MULTIPOLYGON.html</loc></url>
+<url><loc>https://fwimp.github.io/ohvbd/reference/force_db.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/format_time_overlap_bar.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/generate_vt_template.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/get_curl_err.html</loc></url>
@@ -56,6 +61,7 @@
 <url><loc>https://fwimp.github.io/ohvbd/reference/set_ohvbd_compat.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/space_collapse.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/spatvect_to_hubwkt.html</loc></url>
+<url><loc>https://fwimp.github.io/ohvbd/reference/tee.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/vb_basereq.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/vd_error_body.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/vd_extraction_helper.html</loc></url>
