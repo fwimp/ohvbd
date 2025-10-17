@@ -32,16 +32,20 @@ test_that("fetch generic route correctly dispatches", {
 
 test_that("fetch_* functions reject incompatible ids", {
   expect_error(
-    suppressMessages({out_vt <- {
-      vcr::local_cassette("fetch_vt") # Just in case the test fails it will try to
-      ohvbd.ids(1, "vd") |> fetch_vt()
-    }})
+    suppressMessages({
+      out_vt <- {
+        vcr::local_cassette("fetch_vt") # Just in case the test fails it will try to
+        ohvbd.ids(1, "vd") |> fetch_vt()
+      }
+    })
   )
 
   expect_error(
-    suppressMessages({out_vt <- {
-      vcr::local_cassette("fetch_vd") # Just in case the test fails it will try to
-      ohvbd.ids(1, "vt") |> fetch_vd()
-    }})
+    suppressMessages({
+      out_vt <- {
+        vcr::local_cassette("fetch_vd") # Just in case the test fails it will try to
+        ohvbd.ids(1, "vt") |> fetch_vd()
+      }
+    })
   )
 })

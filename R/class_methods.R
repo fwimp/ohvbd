@@ -110,7 +110,13 @@ fetch.ohvbd.ids <- function(
   db <- list(...)$db
   if (is.null(db)) {
     # If not overriding db, just use the one provided
-    db <- attr(ids, "db")
+    db <- attr(ids, "db") %||%
+      cli::cli_abort(
+        c(
+          "x" = "No db attached to the dataset and none specified!",
+          "i" = "Either specify using the {.arg db} argument, or use {.fn ohvbd::force_db}"
+        )
+      )
   }
   finalfun <- switch(
     db,
@@ -144,7 +150,7 @@ fetch.ohvbd.hub.search <- function(
 #' This is a convenience method that infers and applies the correct extractor for the input
 #' @author Francis Windram
 #'
-#' @param res An object of type `ohvbd.responses` or `ohvbd.ad.matrix` generated from [fetch()].
+#' @param res An object of type `ohvbd.responses` or `ohvbd.ad.matrix` generated from [fetch()]
 #' and containing data from one of the supported databases.
 #' @param ... Any arguments to be passed to the underlying extractors (see [glean_vt()] and [glean_ad()] for specific arguments).
 #' @returns The extracted data, either as an `ohvbd.data.frame` or `ohvbd.ad.matrix` object.
@@ -168,7 +174,13 @@ glean.ohvbd.responses <- function(
 ) {
   if (is.null(db)) {
     # If not overriding db, just use the one provided
-    db <- attr(res, "db")
+    db <- attr(res, "db") %||%
+      cli::cli_abort(
+        c(
+          "x" = "No db attached to the dataset and none specified!",
+          "i" = "Either specify using the {.arg db} argument, or use {.fn ohvbd::force_db}"
+        )
+      )
   }
   finalfun <- switch(
     db,
@@ -208,4 +220,59 @@ glean.ohvbd.ids <- function(
     "!" = "Did you forget to use {.fn ohvbd::fetch} after searching?"
   ))
 }
+
+#' @title Try to find the relevant citations for a dataset
+#'
+#' @description
+#' This tries to extract and simplify
+#' @author Francis Windram
+#'
+#' @param dataset An object of type `ohvbd.data.frame` generated from [glean()]
+#' and containing data from one of the supported databases.
+#' @param ... Any arguments to be passed to the underlying funcs.
+#' @returns The extracted data, either as an `ohvbd.data.frame` or `ohvbd.ad.matrix` object.
+#' @concept convenience
+#' @export
+#' @examplesIf interactive()
+#'
+fetch_citations <- function(dataset, ...) {
+  UseMethod("fetch_citations")
+}
+
+#' @export
+fetch_citations.ohvbd.data.frame <- function(
+  dataset,
+  ...
+) {
+  .args <- list(...)
+  db <- .args$db
+  if (is.null(db)) {
+    # If not overriding db, just use the one provided
+    db <- attr(dataset, "db") %||%
+      cli::cli_abort(
+        c(
+          "x" = "No db attached to the dataset and none specified!",
+          "i" = "Either specify using the {.arg db} argument, or use {.fn ohvbd::force_db}"
+        )
+      )
+  }
+  .args$db <- NULL
+
+  if (is.null(attr(dataset, "db"))) {
+    dataset <- force_db(dataset, db)
+  }
+
+  finalfun <- switch(
+    db,
+    "vt" = fetch_citations_vt,
+    "vd" = fetch_citations_vd,
+    # "gbif" = fetch_citations_gbif,
+    cli::cli_abort(
+      "No method to extract citations from {.val {db}} for class{?es} {.cls {class(x)}}"
+    )
+  )
+  .args$dataset <- dataset
+  return(do.call(finalfun, .args))
+}
+
 # nolint end

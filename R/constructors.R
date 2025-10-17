@@ -41,9 +41,18 @@ ohvbd.ids <- function(ids, db) {
     cli::cli_abort("IDs must be numeric!")
   }
   if (!(db %in% allowed_dbs)) {
-    cli::cli_abort("DB must be one of {.val {allowed_dbs}}")
+    cli::cli_abort("DB must be one of {.val {allowed_dbs}}.")
   }
-  new_ohvbd.ids(ids, db)
+  uniq_ids <- unique(ids)
+  if (length(uniq_ids) < length(ids)) {
+    cli::cli_warn(
+      c(
+        "!" = "{.arg ids} should not contain duplicates.",
+        "i" = "These have been deduplicated."
+      )
+    )
+  }
+  new_ohvbd.ids(uniq_ids, db)
 }
 
 new_ohvbd.responses <- function(l, db = NULL) {

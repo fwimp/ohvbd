@@ -2,7 +2,7 @@
 **Major API change**
 
 * `extract_` functions are now `glean_`.
-  * This means that if tidyverse is loaded after ohvbd, there are no direct namespace collisions.
+  * This means that if `tidyverse` is loaded after `ohvbd`, there are no direct namespace collisions.
 
 Full list of function name changes:
 
@@ -14,9 +14,7 @@ Full list of function name changes:
 * `fetch_extract_vd_chunked()` -> `fetch_glean_vd_chunked()`
 * `fetch_extract_vt_chunked()` -> `fetch_glean_vt_chunked()`
 
-Other changes
-
-* Entire code base is now continuously formatted using Air v0.7.1.
+New functions & arguments:
 * `ohvbd` now interfaces with GBIF for occurrence data.
   * New `*_gbif` functions (e.g. `fetch_gbif()`) allow for retrieving and extracting data from GBIF.
   * A GBIF account and the `rgbif` package are required to retrieve data from GBIF.
@@ -25,16 +23,23 @@ Other changes
   * This is definitely not only useful for `ohvbd` workflows, and can be used in any base R pipeline (`|>`). It has not been tested in magrittr pipelines but should work as-is.
 * New `filter_db()` command allows for filtering out of only one database's results from hub searches.
 * `check_db_status()` now returns (invisibly) whether all databases are up or not.
+* New `fetch_citation()` and `fetch_citation_*` commands provide an interface to attempt to retrieve citations from a vectorbyte dataset.
+  * This will (by default) possibly redownload parts or all of the data if the columns are not currently present.
+* New `force_db()` function enables one to force `ohvbd` to consider a particular object has having a particular provenance.
+* New `simplify` argument to `search_hub()` makes hub searches return an `ohvbd.ids` object if only one database was searched for. This behaviour is on by default.
+  * To match this, `filter_db()` will now transparently return `ohvbd.ids` objects if it gets them.
+
+Other:
+* Entire code base is now continuously formatted using Air v0.7.1.
 * Examples are no longer wrapped in `\dontrun{}` so they should be runnable from an installed version of the package.
 * A good chunk of the functional logic of `ohvbd` is now covered with unit tests (using the `vcr` package).
 * `fetch_vd()` no longer tries to retrieve ids with no pages of data.
 * Functions that interface with vectorbyte databases no longer recommend using `set_ohvbd_compat()` as *unexpected* SSL errors **should** break pipelines by default.
   * These errors are no longer *expected* to occur when interfacing with vectorbyte.
-* New `simplify` argument to `search_hub()` makes hub searches return an `ohvbd.ids` object if only one database was searched for. This behaviour is on by default.
-  * To match this, `filter_db()` will now transparently return `ohvbd.ids` objects if it gets them.
 * Running `fetch()` on an `ohvbd.hub.search` or `glean()` on an `ohvbd.ids` object now provides a hint that you may have forgotten something.
   * Occasionally users would use forget a `fetch()` command and run `search_hub() |> glean()` which didn't previously give an interpretable error.
 * Vignettes now use `vcr` to massively reduce their build time. This should only matter to developers of `ohvbd`, or users who download from github and build the vignettes themselves.
+* `ohvbd.ids()` now warns you and fixes the problem if you provide ids with duplicate values.
 
 # ohvbd 0.6.1
 

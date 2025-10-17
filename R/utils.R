@@ -235,6 +235,29 @@ spatvect_to_hubwkt <- function(v) {
   return(wkt)
 }
 
+
+#' @title Force an object to appear to come from a specific database
+#' @author Francis Windram
+#' @param x Object to force.
+#' @param db Database to apply to `x`.
+#' @returns Object with the "db" attribute set to `db`
+#'
+#' @note
+#' **DO NOT** use this function to create ids to feed into [fetch()]!
+#'
+#' Objects created in this way may lack vital underlying data required later.
+#' Instead use [ohvbd.ids()] for this purpose.
+#'
+#' @export
+#'
+#' @examples
+#' force_db(c(1,2,3), "vt")
+#'
+force_db <- function(x, db) {
+  attr(x, "db") <- db
+  x
+}
+
 # Only used for internal testing and doesnt need to be checked.
 #
 # nolint start
