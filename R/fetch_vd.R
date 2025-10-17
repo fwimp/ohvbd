@@ -103,7 +103,7 @@ fetch_vd <- function(ids, rate = 5, connections = 2, basereq = NA) {
         name = "VecDyn Data",
         format = "Downloading {cli::pb_name} {cli::pb_current}/{cli::pb_total} {cli::pb_bar} {cli::pb_percent} | ETA: {cli::pb_eta}"
       )
-    ) # Currently custom formatting for the progress bar does not work (https://github.com/r-lib/httr2/issues/752)
+    )
 
   fails <- resps |> httr2::resps_failures()
 
@@ -112,8 +112,10 @@ fetch_vd <- function(ids, rate = 5, connections = 2, basereq = NA) {
   missing <- c(missing, find_vd_missing(resps))
 
   if (!is.null(missing)) {
-    cli_alert_info("Incorrect ids:")
-    cli::cli_ul(unique(missing))
+    if (!(is.numeric(missing) && length(missing) == 0)) {
+      cli_alert_info("Incorrect ids:")
+      cli::cli_ul(unique(missing))
+    }
 
     # Need an extra check here because failed VD calls don't become 404s.
     if (length(missing) >= length(resps)) {

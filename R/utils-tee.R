@@ -34,7 +34,7 @@
 #' pipeout <- 1:5 |> exp() |> tee("teeout", .env = myenv) |> log()
 #' print(myenv$teeout)
 
-tee <- function(x, .name="teeout", .env=NULL) {
+tee <- function(x, .name = "teeout", .env = NULL) {
   if (is.null(.env)) {
     .env <- rlang::caller_env()
   }

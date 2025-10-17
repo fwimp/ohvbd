@@ -10,12 +10,13 @@
 #' @returns list of `httr2::response` object
 #'
 #' @keywords internal
-fetch_vd_meta <- function(ids,
-                          rate = 5,
-                          connections = 2,
-                          page_size = 50,
-                          pb_name = "data",
-                          basereq = NA
+fetch_vd_meta <- function(
+  ids,
+  rate = 5,
+  connections = 2,
+  page_size = 50,
+  pb_name = "data",
+  basereq = NA
 ) {
   max_conns <- 8
 
@@ -84,14 +85,20 @@ fetch_vd_meta <- function(ids,
 #'
 
 fetch_vd_counts <- function(
-    ids,
-    rate = 5,
-    connections = 2,
-    page_size = 50,
-    basereq = NA
+  ids,
+  rate = 5,
+  connections = 2,
+  page_size = 50,
+  basereq = NA
 ) {
-
-  count_resps <- fetch_vd_meta(ids, rate, connections, page_size, basereq, pb_name = "VecDyn data counts")
+  count_resps <- fetch_vd_meta(
+    ids,
+    rate,
+    connections,
+    page_size,
+    basereq,
+    pb_name = "VecDyn data counts"
+  )
 
   # Find counts and calculate required pages
   resp_parsed <- count_resps |>
