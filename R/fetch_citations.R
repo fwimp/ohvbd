@@ -5,7 +5,8 @@
 #'
 #' @author Francis Windram
 #'
-#' @param dataset
+#' @param dataset The dataset from which you wish to retrieve citations.
+#' @param redownload Redownload data if citation columns are missing.
 #'
 #' @returns `ohvbd.data.frame` of citation data
 #'
@@ -84,7 +85,8 @@ fetch_citations_vt <- function(dataset, redownload = TRUE) {
 #'
 #' @author Francis Windram
 #'
-#' @param dataset
+#' @param dataset The dataset from which you wish to retrieve citations.
+#' @param redownload Redownload data if citation columns are missing.
 #'
 #' @returns `ohvbd.data.frame` of citation data
 #'

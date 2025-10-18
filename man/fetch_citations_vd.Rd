@@ -7,7 +7,9 @@
 fetch_citations_vd(dataset, redownload = TRUE)
 }
 \arguments{
-\item{dataset}{}
+\item{dataset}{The dataset from which you wish to retrieve citations.}
+
+\item{redownload}{Redownload data if citation columns are missing.}
 }
 \value{
 \code{ohvbd.data.frame} of citation data
