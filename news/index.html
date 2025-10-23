@@ -71,9 +71,42 @@
 <li>
 <code>fetch_extract_vt_chunked()</code> -&gt; <code><a href="../reference/fetch_glean_vt_chunked.html">fetch_glean_vt_chunked()</a></code>
 </li>
-</ul><p>New functions &amp; arguments: * <code>ohvbd</code> now interfaces with GBIF for occurrence data. * New <code>*_gbif</code> functions (e.g. <code><a href="../reference/fetch_gbif.html">fetch_gbif()</a></code>) allow for retrieving and extracting data from GBIF. * A GBIF account and the <code>rgbif</code> package are required to retrieve data from GBIF. * The account details must also be set up as shown in <a href="https://docs.ropensci.org/rgbif/articles/gbif_credentials.html" class="external-link">the rgbif documentation</a>. * New <code><a href="../reference/tee.html">tee()</a></code> command allows one to extract data from the middle of a pipeline and save it to an environment. * This is definitely not only useful for <code>ohvbd</code> workflows, and can be used in any base R pipeline (<code>|&gt;</code>). It has not been tested in magrittr pipelines but should work as-is. * New <code><a href="../reference/filter_db.html">filter_db()</a></code> command allows for filtering out of only one database’s results from hub searches. * <code><a href="../reference/check_db_status.html">check_db_status()</a></code> now returns (invisibly) whether all databases are up or not. * New <code>fetch_citation()</code> and <code>fetch_citation_*</code> commands provide an interface to attempt to retrieve citations from a vectorbyte dataset. * This will (by default) possibly redownload parts or all of the data if the columns are not currently present. * New <code><a href="../reference/force_db.html">force_db()</a></code> function enables one to force <code>ohvbd</code> to consider a particular object has having a particular provenance. * New <code>simplify</code> argument to <code><a href="../reference/search_hub.html">search_hub()</a></code> makes hub searches return an <code>ohvbd.ids</code> object if only one database was searched for. This behaviour is on by default. * To match this, <code><a href="../reference/filter_db.html">filter_db()</a></code> will now transparently return <code>ohvbd.ids</code> objects if it gets them.</p>
-<p>Other: * Entire code base is now continuously formatted using Air v0.7.1. * Examples are no longer wrapped in <code>\dontrun{}</code> so they should be runnable from an installed version of the package. * A good chunk of the functional logic of <code>ohvbd</code> is now covered with unit tests (using the <code>vcr</code> package). * <code><a href="../reference/fetch_vd.html">fetch_vd()</a></code> no longer tries to retrieve ids with no pages of data. * Functions that interface with vectorbyte databases no longer recommend using <code><a href="../reference/set_ohvbd_compat.html">set_ohvbd_compat()</a></code> as <em>unexpected</em> SSL errors <strong>should</strong> break pipelines by default. * These errors are no longer <em>expected</em> to occur when interfacing with vectorbyte. * Running <code><a href="../reference/fetch.html">fetch()</a></code> on an <code>ohvbd.hub.search</code> or <code><a href="../reference/glean.html">glean()</a></code> on an <code>ohvbd.ids</code> object now provides a hint that you may have forgotten something. * Occasionally users would use forget a <code><a href="../reference/fetch.html">fetch()</a></code> command and run <code>search_hub() |&gt; glean()</code> which didn’t previously give an interpretable error. * Vignettes now use <code>vcr</code> to massively reduce their build time. This should only matter to developers of <code>ohvbd</code>, or users who download from github and build the vignettes themselves. * <code><a href="../reference/ohvbd.ids.html">ohvbd.ids()</a></code> now warns you and fixes the problem if you provide ids with duplicate values.</p>
-</div>
+</ul><p>New functions &amp; arguments:</p>
+<ul><li>
+<code>ohvbd</code> now interfaces with GBIF for occurrence data.
+<ul><li>New <code>*_gbif</code> functions (e.g. <code><a href="../reference/fetch_gbif.html">fetch_gbif()</a></code>) allow for retrieving and extracting data from GBIF.</li>
+<li>A GBIF account and the <code>rgbif</code> package are required to retrieve data from GBIF.</li>
+<li>The account details must also be set up as shown in <a href="https://docs.ropensci.org/rgbif/articles/gbif_credentials.html" class="external-link">the rgbif documentation</a>.</li>
+</ul></li>
+<li>New <code><a href="../reference/tee.html">tee()</a></code> command allows one to extract data from the middle of a pipeline and save it to an environment.
+<ul><li>This is definitely not only useful for <code>ohvbd</code> workflows, and can be used in any base R pipeline (<code>|&gt;</code>). It has not been tested in magrittr pipelines but should work as-is.</li>
+</ul></li>
+<li>New <code><a href="../reference/filter_db.html">filter_db()</a></code> command allows for filtering out of only one database’s results from hub searches.</li>
+<li>
+<code><a href="../reference/check_db_status.html">check_db_status()</a></code> now returns (invisibly) whether all databases are up or not.</li>
+<li>New <code>fetch_citation()</code> and <code>fetch_citation_*</code> commands provide an interface to attempt to retrieve citations from a vectorbyte dataset.
+<ul><li>This will (by default) possibly redownload parts or all of the data if the columns are not currently present.</li>
+</ul></li>
+<li>New <code><a href="../reference/force_db.html">force_db()</a></code> function enables one to force <code>ohvbd</code> to consider a particular object has having a particular provenance.</li>
+<li>New <code>simplify</code> argument to <code><a href="../reference/search_hub.html">search_hub()</a></code> makes hub searches return an <code>ohvbd.ids</code> object if only one database was searched for. This behaviour is on by default.
+<ul><li>To match this, <code><a href="../reference/filter_db.html">filter_db()</a></code> will now transparently return <code>ohvbd.ids</code> objects if it gets them.</li>
+</ul></li>
+</ul><p>Other:</p>
+<ul><li>Entire code base is now continuously formatted using Air v0.7.1.</li>
+<li>Examples are no longer wrapped in <code>\dontrun{}</code> so they should be runnable from an installed version of the package.</li>
+<li>A good chunk of the functional logic of <code>ohvbd</code> is now covered with unit tests (using the <code>vcr</code> package).</li>
+<li>
+<code><a href="../reference/fetch_vd.html">fetch_vd()</a></code> no longer tries to retrieve ids with no pages of data.</li>
+<li>Functions that interface with vectorbyte databases no longer recommend using <code><a href="../reference/set_ohvbd_compat.html">set_ohvbd_compat()</a></code> as <em>unexpected</em> SSL errors <strong>should</strong> break pipelines by default.
+<ul><li>These errors are no longer <em>expected</em> to occur when interfacing with vectorbyte.</li>
+</ul></li>
+<li>Running <code><a href="../reference/fetch.html">fetch()</a></code> on an <code>ohvbd.hub.search</code> or <code><a href="../reference/glean.html">glean()</a></code> on an <code>ohvbd.ids</code> object now provides a hint that you may have forgotten something.
+<ul><li>Occasionally users would use forget a <code><a href="../reference/fetch.html">fetch()</a></code> command and run <code>search_hub() |&gt; glean()</code> which didn’t previously give an interpretable error.</li>
+</ul></li>
+<li>Vignettes now use <code>vcr</code> to massively reduce their build time. This should only matter to developers of <code>ohvbd</code>, or users who download from github and build the vignettes themselves.</li>
+<li>
+<code><a href="../reference/ohvbd.ids.html">ohvbd.ids()</a></code> now warns you and fixes the problem if you provide ids with duplicate values.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.6.1" id="ohvbd-061">ohvbd 0.6.1<a class="anchor" aria-label="anchor" href="#ohvbd-061"></a></h2>
 <ul><li>New <code><a href="../reference/search_hub.html">search_hub()</a></code> function enables searching across multiple databases at once via <a href="https://vbdhub.org" class="external-link">vbdhub</a>.
