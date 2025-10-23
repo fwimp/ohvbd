@@ -15,6 +15,7 @@ Full list of function name changes:
 * `fetch_extract_vt_chunked()` -> `fetch_glean_vt_chunked()`
 
 New functions & arguments:
+
 * `ohvbd` now interfaces with GBIF for occurrence data.
   * New `*_gbif` functions (e.g. `fetch_gbif()`) allow for retrieving and extracting data from GBIF.
   * A GBIF account and the `rgbif` package are required to retrieve data from GBIF.
@@ -30,6 +31,7 @@ New functions & arguments:
   * To match this, `filter_db()` will now transparently return `ohvbd.ids` objects if it gets them.
 
 Other:
+
 * Entire code base is now continuously formatted using Air v0.7.1.
 * Examples are no longer wrapped in `\dontrun{}` so they should be runnable from an installed version of the package.
 * A good chunk of the functional logic of `ohvbd` is now covered with unit tests (using the `vcr` package).
