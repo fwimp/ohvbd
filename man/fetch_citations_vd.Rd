@@ -4,12 +4,14 @@
 \alias{fetch_citations_vd}
 \title{Retrieve citations for vecdyn data}
 \usage{
-fetch_citations_vd(dataset, redownload = TRUE)
+fetch_citations_vd(dataset, redownload = TRUE, minimise = FALSE)
 }
 \arguments{
 \item{dataset}{The dataset from which you wish to retrieve citations.}
 
 \item{redownload}{Redownload data if citation columns are missing.}
+
+\item{minimise}{Whether to return one row per citation (rather than one per dataset ID).}
 }
 \value{
 \code{ohvbd.data.frame} of citation data

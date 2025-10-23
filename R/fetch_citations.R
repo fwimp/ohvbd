@@ -7,6 +7,7 @@
 #'
 #' @param dataset The dataset from which you wish to retrieve citations.
 #' @param redownload Redownload data if citation columns are missing.
+#' @param minimise Whether to return one row per citation (rather than one per dataset ID).
 #'
 #' @returns `ohvbd.data.frame` of citation data
 #'
@@ -14,7 +15,7 @@
 #' @export
 #'
 
-fetch_citations_vt <- function(dataset, redownload = TRUE) {
+fetch_citations_vt <- function(dataset, redownload = TRUE, minimise=FALSE) {
   if (is.null(attr(dataset, "db"))) {
     cli::cli_alert_warning("IDs not necessarily from VecTraits.")
   } else if (attr(dataset, "db") != "vt") {
@@ -75,7 +76,12 @@ fetch_citations_vt <- function(dataset, redownload = TRUE) {
     # Just get citation columns
     citations <- dataset[, c("DatasetID", cite_cols)]
   }
-  return(new_ohvbd.data.frame(dplyr::distinct(citations), "vt"))
+  if (minimise) {
+    outcites <- citations |> dplyr::select(-c("DatasetID")) |> dplyr::distinct()
+  } else {
+    outcites <- dplyr::distinct(citations)
+  }
+  return(new_ohvbd.data.frame(outcites, "vt"))
 }
 
 #' @title Retrieve citations for vecdyn data
@@ -87,6 +93,7 @@ fetch_citations_vt <- function(dataset, redownload = TRUE) {
 #'
 #' @param dataset The dataset from which you wish to retrieve citations.
 #' @param redownload Redownload data if citation columns are missing.
+#' @param minimise Whether to return one row per citation (rather than one per dataset ID).
 #'
 #' @returns `ohvbd.data.frame` of citation data
 #'
@@ -94,7 +101,7 @@ fetch_citations_vt <- function(dataset, redownload = TRUE) {
 #' @export
 #'
 
-fetch_citations_vd <- function(dataset, redownload = TRUE) {
+fetch_citations_vd <- function(dataset, redownload = TRUE, minimise = FALSE) {
   if (is.null(attr(dataset, "db"))) {
     cli::cli_alert_warning("IDs not necessarily from VecDyn.")
   } else if (attr(dataset, "db") != "vd") {
@@ -171,5 +178,12 @@ fetch_citations_vd <- function(dataset, redownload = TRUE) {
     # Just get citation columns
     citations <- dataset[, c("dataset_id", cite_cols)]
   }
-  return(new_ohvbd.data.frame(dplyr::distinct(citations), "vd"))
+
+  if (minimise) {
+    outcites <- citations |> dplyr::select(-c("dataset_id")) |> dplyr::distinct()
+  } else {
+    outcites <- dplyr::distinct(citations)
+  }
+
+  return(new_ohvbd.data.frame(outcites, "vd"))
 }
