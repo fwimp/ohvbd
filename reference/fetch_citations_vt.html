@@ -52,7 +52,7 @@ redownloading the appropriate data.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fetch_citations_vt</span><span class="op">(</span><span class="va">dataset</span>, redownload <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fetch_citations_vt</span><span class="op">(</span><span class="va">dataset</span>, redownload <span class="op">=</span> <span class="cn">TRUE</span>, minimise <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -65,6 +65,10 @@ redownloading the appropriate data.</p>
 
 <dt id="arg-redownload">redownload<a class="anchor" aria-label="anchor" href="#arg-redownload"></a></dt>
 <dd><p>Redownload data if citation columns are missing.</p></dd>
+
+
+<dt id="arg-minimise">minimise<a class="anchor" aria-label="anchor" href="#arg-minimise"></a></dt>
+<dd><p>Whether to return one row per citation (rather than one per dataset ID).</p></dd>
 
 </dl></div>
     <div class="section level2">
