@@ -32,9 +32,9 @@ fetch_glean_vt_chunked <- function(
   basereq = NA
 ) {
   if (is.null(attr(ids, "db"))) {
-    cli_alert_warning("IDs not necessarily from VecTraits.")
+    cli::cli_alert_warning("IDs not necessarily from VecTraits.")
   } else if (attr(ids, "db") != "vt") {
-    cli_abort(c(
+    cli::cli_abort(c(
       "x" = "IDs not from VecTraits, Please use the appropriate {.fn fetch_glean_{attr(ids, 'db')}} function.",
       "!" = "Detected db = {.val {attr(ids, 'db')}}"
     ))

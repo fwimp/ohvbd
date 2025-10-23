@@ -25,9 +25,9 @@
 
 glean_vt <- function(res, cols = NA, returnunique = FALSE) {
   if (is.null(attr(res, "db"))) {
-    cli_alert_warning("Responses not necessarily from VecTraits.")
+    cli::cli_alert_warning("Responses not necessarily from VecTraits.")
   } else if (attr(res, "db") != "vt") {
-    cli_abort(c(
+    cli::cli_abort(c(
       "x" = "Responses not from VecTraits, Please use the appropriate {.fn glean_{attr(res, 'db')}} function.",
       "!" = "Detected db = {.val {attr(res, 'db')}}"
     ))
@@ -38,7 +38,7 @@ glean_vt <- function(res, cols = NA, returnunique = FALSE) {
     out_data <- res |> resp_body_json()
   } else if (any(class(res) == "httr2_error")) {
     # Detect single error
-    cli_abort("Response contains error! (check to see if ID actually exists?)")
+    cli::cli_abort("Response contains error! (check to see if ID actually exists?)")
   } else {
     # Extract data from all successful responses
     out_data <- res |>

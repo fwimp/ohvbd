@@ -61,7 +61,7 @@ search_vt <- function(keywords, basereq = NA) {
   )
 
   if (resplist$err_code == 1) {
-    cli_abort("No records found for {.val {keywords}}")
+    cli::cli_abort("No records found for {.val {keywords}}")
   }
 
   body <- resplist$resp |> resp_body_json()

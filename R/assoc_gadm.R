@@ -51,7 +51,7 @@ assoc_gadm <- function(
   # Use LonLats to find an appropriate gadm id
 
   if (length(lonlat_names) != 2) {
-    cli_abort(c(
+    cli::cli_abort(c(
       "x" = "Longitude and Latitude column names must be provided as vector of length 2!",
       "i" = "You provided {.val {lonlat_names}} (detected length = {col_red(length(lonlat_names))})."
     ))
@@ -60,18 +60,18 @@ assoc_gadm <- function(
   # Find GADM shapefile for searching
   gadm_sf <- fetch_gadm_sfs(gid = gid)
 
-  cli_progress_message("{cli::symbol$pointer} Finding distinct lonlats...")
+  cli::cli_progress_message("{cli::symbol$pointer} Finding distinct lonlats...")
   # Find latlons for quick processing
   orig_lonlat <- df |>
     select(all_of(lonlat_names)) |>
     mutate_all(function(x) as.numeric(as.character(x)))
   # Make distinct points into a SpatVect
   points <- vect(orig_lonlat |> distinct(), geom = lonlat_names)
-  cli_alert_success("Created search vector.")
+  cli::cli_alert_success("Created search vector.")
 
   startproc <- lubridate::now()
 
-  cli_progress_message(
+  cli::cli_progress_message(
     "{cli::symbol$pointer} Finding gadm names for {.val {length(points)}} latlon{?s}..."
   )
   # Locate which shape each point is in and get the appropriate names for aligning with AD
@@ -80,16 +80,16 @@ assoc_gadm <- function(
 
   endproc <- lubridate::now()
   totaltime <- as.duration(interval(startproc, endproc)) # nolint: object_usage_linter
-  cli_alert_success("Found gadm names in {.val {totaltime}}.")
+  cli::cli_alert_success("Found gadm names in {.val {totaltime}}.")
 
   # Deduplicate ids if necessary.
   # This probably happens when polys overlap in the shapefile
   duplicated_ids <- duplicated(gadm_point_ids$id.y)
   if (any(duplicated_ids)) {
-    cli_alert_warning(
+    cli::cli_alert_warning(
       "Multiple gadm id returns @ data ind{?ex/ices}: {.val {as.character(gadm_point_ids$id.y[which(duplicated_ids)])}}."
     )
-    cli_alert_info(
+    cli::cli_alert_info(
       "Removing duplicates {col_yellow('(check the results are what you want!)')}"
     )
 
@@ -100,7 +100,7 @@ assoc_gadm <- function(
 
   gadm_point_ids <- gadm_point_ids |> select(starts_with(c("NAME", "GID")))
 
-  cli_progress_message("{cli::symbol$pointer} Merging with original dataset...")
+  cli::cli_progress_message("{cli::symbol$pointer} Merging with original dataset...")
   # Recreate the original dataset at full length
 
   gadm_point_ids <- left_join(
@@ -112,8 +112,8 @@ assoc_gadm <- function(
   gadm_point_ids <- gadm_point_ids |> select(starts_with(c("NAME", "GID")))
 
   outdata <- bind_cols(df, gadm_point_ids)
-  cli_alert_success("Merge complete.")
-  cli_progress_done()
+  cli::cli_alert_success("Merge complete.")
+  cli::cli_progress_done()
 
   attr(outdata, "db") <- datatype
 

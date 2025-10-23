@@ -40,13 +40,13 @@ search_vd <- function(keywords, basereq = NA) {
   )
 
   if (resplist$err_code == 1) {
-    cli_abort("No records found for {.val {keywords}}")
+    cli::cli_abort("No records found for {.val {keywords}}")
   }
   body <- resplist$resp |> resp_body_json()
 
   if (length(body) > 2) {
     # This is a bit of a kludge, the API does not return count in the same place if no results are found
-    cli_abort("No records found for {.val {keywords}}")
+    cli::cli_abort("No records found for {.val {keywords}}")
   } else {
     outids <- as.numeric(body$ids)
     outids <- new_ohvbd.ids(v = outids, db = "vd")

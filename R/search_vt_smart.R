@@ -119,12 +119,12 @@ search_vt_smart <- function(field, operator, value, basereq = NA) {
       "in",
       "!in"
     )
-    cli_alert_warning("Operator {.val {operator}} not an allowed operator!")
-    cli_rule(left = "Allowed operators")
-    cli_ul(human_operators)
-    cli_rule()
+    cli::cli_alert_warning("Operator {.val {operator}} not an allowed operator!")
+    cli::cli_rule(left = "Allowed operators")
+    cli::cli_ul(human_operators)
+    cli::cli_rule()
     final_operator <- "contains"
-    cli_alert_warning("Defaulting to {.val {final_operator}}")
+    cli::cli_alert_warning("Defaulting to {.val {final_operator}}")
     # TODO: Could add fuzzy matching using stringdist if that seems necessary
   }
 
@@ -183,12 +183,12 @@ search_vt_smart <- function(field, operator, value, basereq = NA) {
   if (field %in% names(poss_fields)) {
     final_field <- final_fields[poss_fields[field]]
   } else {
-    cli_alert_danger("Field {.val {field}} not an allowed field!")
-    cli_rule(left = "Allowed fields")
-    cli_ul(final_fields)
-    cli_rule()
-    cli_alert_warning("Halting execution.")
-    cli_abort(c("x" = "Invalid field: {.val {field}}"))
+    cli::cli_alert_danger("Field {.val {field}} not an allowed field!")
+    cli::cli_rule(left = "Allowed fields")
+    cli::cli_ul(final_fields)
+    cli::cli_rule()
+    cli::cli_alert_warning("Halting execution.")
+    cli::cli_abort(c("x" = "Invalid field: {.val {field}}"))
   }
 
   resplist <- tryCatch(
@@ -209,7 +209,7 @@ search_vt_smart <- function(field, operator, value, basereq = NA) {
   )
 
   if (resplist$err_code == 1) {
-    cli_abort(c(
+    cli::cli_abort(c(
       "No records found for {.val {paste(final_field, final_operator, value)}}"
     ))
   }

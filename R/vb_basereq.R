@@ -53,7 +53,7 @@ vb_basereq <- function(
 
 set_ohvbd_compat <- function(value = TRUE) {
   if (!is_bool(value)) {
-    cli_abort(c(
+    cli::cli_abort(c(
       "x" = "{.arg value} must be a boolean (TRUE/FALSE)! Provided {.val {value}}"
     ))
   }
@@ -137,7 +137,7 @@ set_ohvbd_compat <- function(value = TRUE) {
 
   # Actually do the thing
   options(ohvbd_compat = value)
-  cli_alert_success(
+  cli::cli_alert_success(
     "Set compatibility mode = {.val {getOption('ohvbd_compat')}}"
   )
   invisible(NULL)

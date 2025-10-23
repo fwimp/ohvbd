@@ -26,9 +26,9 @@ fetch_vd <- function(ids, rate = 5, connections = 2, basereq = NA) {
   max_conns <- 8
 
   if (is.null(attr(ids, "db"))) {
-    cli_alert_warning("IDs not necessarily from VecDyn.")
+    cli::cli_alert_warning("IDs not necessarily from VecDyn.")
   } else if (attr(ids, "db") != "vd") {
-    cli_abort(c(
+    cli::cli_abort(c(
       "x" = "IDs not from VecDyn, Please use the {.fn fetch_{attr(ids, 'db')}} function.",
       "!" = "Detected db = {.val {attr(ids, 'db')}}"
     ))
@@ -47,9 +47,9 @@ fetch_vd <- function(ids, rate = 5, connections = 2, basereq = NA) {
 
   if (nrow(resp_parsed) <= 0) {
     # Short-circuit to return cases where no id is correct
-    cli_alert_info("Incorrect ids:")
+    cli::cli_alert_info("Incorrect ids:")
     cli::cli_ul(unique(missing))
-    cli_alert_warning(
+    cli::cli_alert_warning(
       "No records retrieved (are you sure the IDs are correct?)."
     )
     return(new_ohvbd.responses(l = list(), db = "vd"))
@@ -89,10 +89,10 @@ fetch_vd <- function(ids, rate = 5, connections = 2, basereq = NA) {
   )
 
   if (connections > max_conns) {
-    cli_alert_warning(
+    cli::cli_alert_warning(
       "No more than {.val {max_conns}} simultaneous connection{?s} allowed!"
     )
-    cli_alert_info("Restricting to {.val {max_conns}} connection{?s}.")
+    cli::cli_alert_info("Restricting to {.val {max_conns}} connection{?s}.")
     connections <- max_conns
   }
   resps <- reqs |>
@@ -113,13 +113,13 @@ fetch_vd <- function(ids, rate = 5, connections = 2, basereq = NA) {
 
   if (!is.null(missing)) {
     if (!(is.numeric(missing) && length(missing) == 0)) {
-      cli_alert_info("Incorrect ids:")
+      cli::cli_alert_info("Incorrect ids:")
       cli::cli_ul(unique(missing))
     }
 
     # Need an extra check here because failed VD calls don't become 404s.
     if (length(missing) >= length(resps)) {
-      cli_alert_warning(
+      cli::cli_alert_warning(
         "No records retrieved (are you sure the IDs are correct?)."
       )
     }
@@ -128,7 +128,7 @@ fetch_vd <- function(ids, rate = 5, connections = 2, basereq = NA) {
   # Test to see if we got only errors
   if (length(fails) >= length(resps)) {
     # Only got errors!
-    cli_alert_warning(
+    cli::cli_alert_warning(
       "No records retrieved (are you sure the IDs are correct?)."
     )
   }

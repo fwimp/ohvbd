@@ -43,54 +43,54 @@ fetch_gadm_sfs <- function(
   if (!refresh_cache) {
     outshp <- tryCatch(
       {
-        cli_progress_message("{cli::symbol$pointer} Loading gadm cache...")
+        cli::cli_progress_message("{cli::symbol$pointer} Loading gadm cache...")
         vect(file.path(cache_location, paste0(target_file, ".shp")))
       },
       error = function(e) {
-        cli_alert_warning("Loading failed.")
+        cli::cli_alert_warning("Loading failed.")
         NA
       }
     )
   }
 
   if (any(!is.na(outshp))) {
-    cli_alert_success("Loaded gadm cache.")
+    cli::cli_alert_success("Loaded gadm cache.")
   } else {
     refresh_cache <- TRUE
   }
 
   if (refresh_cache) {
-    cli_progress_message(
+    cli::cli_progress_message(
       "{cli::symbol$pointer} Caching gadm data in {.path {cache_location}}..."
     )
     final_url <- paste0(basereq, "data/gis/")
     # If not, try to retrieve from AD
     for (ext in c(".shp", ".shx", ".dbf", ".prj")) {
-      cli_progress_message(
+      cli::cli_progress_message(
         "{cli::symbol$pointer} Caching {.file {paste0(target_file, ext)}} in {.path {cache_location}}..."
       )
-      curl_download(
+      curl::curl_download(
         paste0(final_url, target_file, ext),
         file.path(cache_location, paste0(target_file, ext)),
         quiet = TRUE
       )
-      cli_alert_success(
+      cli::cli_alert_success(
         "Cached {.file {paste0(target_file, ext)}} in {.path {cache_location}}."
       )
     }
     outshp <- tryCatch(
       {
-        cli_progress_message(
+        cli::cli_progress_message(
           "{cli::symbol$pointer} Loading gadm cached data..."
         )
         vect(file.path(cache_location, paste0(target_file, ".shp")))
       },
       error = function(e) {
-        cli_abort(c("x" = "Failed to load recently cached gadm data!"))
+        cli::cli_abort(c("x" = "Failed to load recently cached gadm data!"))
       }
     )
-    cli_alert_success("Loaded gadm cache.")
+    cli::cli_alert_success("Loaded gadm cache.")
   }
-  cli_progress_done()
+  cli::cli_progress_done()
   return(outshp)
 }

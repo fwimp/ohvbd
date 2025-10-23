@@ -67,9 +67,9 @@ assoc_ad <- function(
   data <- as.data.frame(data)
 
   if (is.null(attr(areadata, "db"))) {
-    cli_alert_warning("{.arg areadata} not necessarily from AREAdata.")
+    cli::cli_alert_warning("{.arg areadata} not necessarily from AREAdata.")
   } else if (attr(areadata, "db") != "ad") {
-    cli_abort(c(
+    cli::cli_abort(c(
       "x" = "{.arg areadata} not from AREAdata!",
       "!" = "Detected db = {.val {attr(areadata, 'db')}}"
     ))
@@ -84,7 +84,7 @@ assoc_ad <- function(
   # TODO: Implement way of either looking up latlon_names in a table, or inferring from attr
 
   if (length(lonlat_names) != 2) {
-    cli_abort(c(
+    cli::cli_abort(c(
       "x" = "Longitude and Latitude column names must be provided as vector of length 2!",
       "i" = "You provided {.val {lonlat_names}} (detected length = {col_red(length(lonlat_names))})."
     ))

@@ -76,9 +76,9 @@ glean_ad <- function(
   # Enddate SHOULD BE EXCLUSIVE
 
   if (is.null(attr(ad_matrix, "db"))) {
-    cli_alert_warning("Data not necessarily from AREAdata.")
+    cli::cli_alert_warning("Data not necessarily from AREAdata.")
   } else if (attr(ad_matrix, "db") != "ad") {
-    cli_abort(c(
+    cli::cli_abort(c(
       "x" = "Data not from AREAdata, Please use the appropriate {.fn glean_{attr(ad_matrix, 'db')}} function.",
       "!" = "Detected db = {.val {attr(ad_matrix, 'db')}}"
     ))
@@ -95,12 +95,12 @@ glean_ad <- function(
 
   metric <- attr(ad_matrix, "metric")
   if (metric == "popdens") {
-    cli_alert_warning(
+    cli::cli_alert_warning(
       "Dataset appears to be Population Density! This does not need extracting."
     )
     return(ad_matrix)
   } else if (metric == "forecast") {
-    cli_alert_warning(
+    cli::cli_alert_warning(
       "Dataset appears to be a Forecast! This is not currently processed by the extractor."
     )
     return(ad_matrix)
@@ -136,11 +136,11 @@ glean_ad <- function(
         if (any(is.na(targetdate_final))) {
           # Dunno, stop filtering date
           filter_date <- FALSE
-          cli_alert_warning(
+          cli::cli_alert_warning(
             "Could not make {.val {targetdate}} into a usable date."
           )
-          cli_alert_warning("Not filtering by date.")
-          cli_alert_info("Try ISO 8601 {.val yyyy-mm-dd} format")
+          cli::cli_alert_warning("Not filtering by date.")
+          cli::cli_alert_info("Try ISO 8601 {.val yyyy-mm-dd} format")
         }
       }
     }
@@ -161,11 +161,11 @@ glean_ad <- function(
             if (is.na(enddate_final)) {
               # Dunno, infer enddate
               infer_enddate <- TRUE
-              cli_alert_warning(
+              cli::cli_alert_warning(
                 "Could not make {.val targetdate} into a usable date."
               )
-              cli_alert_warning("Inferring end date from {.arg targetdate}.")
-              cli_alert_info("Try ISO 8601 {.val yyyy-mm-dd} format")
+              cli::cli_alert_warning("Inferring end date from {.arg targetdate}.")
+              cli::cli_alert_info("Try ISO 8601 {.val yyyy-mm-dd} format")
             }
           }
         }
@@ -195,7 +195,7 @@ glean_ad <- function(
             targetrange = FALSE,
             twobar = TRUE
           )
-          cli_abort(c(
+          cli::cli_abort(c(
             "x" = "Date {.val {targetdate_final}} outside of data range {.val {min(present_dates)}} -> {.val {max(present_dates)}}!"
           ))
         } else {
@@ -206,7 +206,7 @@ glean_ad <- function(
             targetrange = TRUE,
             twobar = TRUE
           )
-          cli_abort(c(
+          cli::cli_abort(c(
             "x" = "Inclusive interval {.val {targetdate_final}} -> {.val {enddate_final}} outside of data range {.val {min(present_dates)}} -> {.val {max(present_dates)}}!"
           ))
         }
@@ -224,12 +224,12 @@ glean_ad <- function(
             targetrange = FALSE,
             twobar = TRUE
           )
-          cli_abort(c(
+          cli::cli_abort(c(
             "x" = "Dates {.val {targetdate_final}} entirely outside of data range {.val {min(present_dates)}} -> {.val {max(present_dates)}}!"
           ))
         }
       } else {
-        cli_abort(c(
+        cli::cli_abort(c(
           "x" = "Incomplete dates in {.arg targetdate} vector: {.val {targetdate}}"
         ))
       }

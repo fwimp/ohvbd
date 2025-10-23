@@ -43,7 +43,7 @@ fetch_gbif <- function(ids, filepath = ".") {
 
   rowcount <- rgbif::occ_count(datasetKey = paste0(ids, collapse = ";")) # nolint: object_usage_linter
 
-  cli_alert_info(
+  cli::cli_alert_info(
     "Requesting {.val {rowcount}} occurrence{?s} over {.val {length(ids)}} dataset{?s}..."
   )
 

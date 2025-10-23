@@ -21,7 +21,7 @@ check_db_status <- function() {
 
   successes <- 0
 
-  cli_rule(left = "Database Status Check")
+  cli::cli_rule(left = "Database Status Check")
 
   for (i in seq_along(db_list)) {
     if (names(db_list)[i] == "GBIF") {
@@ -61,24 +61,24 @@ check_db_status <- function() {
     }
     if (!is.null(statuscode)) {
       if (200 <= statuscode && statuscode < 300) {
-        cli_alert_success("{names(db_list)[i]}")
+        cli::cli_alert_success("{names(db_list)[i]}")
         successes <- successes + 1
       } else {
-        cli_alert_danger("{names(db_list)[i]}")
+        cli::cli_alert_danger("{names(db_list)[i]}")
       }
     } else {
-      cli_alert_danger("{names(db_list)[i]} db unresolved")
+      cli::cli_alert_danger("{names(db_list)[i]} db unresolved")
     }
   }
 
-  cli_rule(left = "Summary")
+  cli::cli_rule(left = "Summary")
 
   if (successes == length(db_list)) {
-    cli_alert_success("All databases UP ({successes}/{length(db_list)}).")
+    cli::cli_alert_success("All databases UP ({successes}/{length(db_list)}).")
   } else if (successes == 0) {
-    cli_alert_danger("All databases DOWN! Check your internet connection?")
+    cli::cli_alert_danger("All databases DOWN! Check your internet connection?")
   } else {
-    cli_alert_warning("Not all databases UP! {successes}/{length(db_list)}")
+    cli::cli_alert_warning("Not all databases UP! {successes}/{length(db_list)}")
   }
   invisible(successes == length(db_list))
 }

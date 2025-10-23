@@ -44,8 +44,8 @@ fetch_ad <- function(
   }
 
   if (gid > 1 && !use_cache) {
-    cli_alert_warning("GID2 datasets are quite large.")
-    cli_alert_info(
+    cli::cli_alert_warning("GID2 datasets are quite large.")
+    cli::cli_alert_info(
       "It is recommended to set {.arg use_cache=TRUE} to enable caching."
     )
   }
@@ -96,26 +96,26 @@ fetch_ad <- function(
     final_metric <- final_metrics[metricid]
   } else {
     # Just for warning message
-    cli_alert_warning("Metric {.val {metric}} not an allowed metric!")
-    cli_rule(left = "Allowed metrics")
-    cli_ul(final_metrics)
-    cli_rule()
+    cli::cli_alert_warning("Metric {.val {metric}} not an allowed metric!")
+    cli::cli_rule(left = "Allowed metrics")
+    cli::cli_ul(final_metrics)
+    cli::cli_rule()
     final_metric <- "temp"
     metricid <- 1
-    cli_alert_warning("Defaulting to {.val {final_metric}}")
+    cli::cli_alert_warning("Defaulting to {.val {final_metric}}")
   }
   outmat <- NA
   # Try to load cache
   if (use_cache && !refresh_cache) {
     outmat <- tryCatch(
       {
-        cli_progress_message(
+        cli::cli_progress_message(
           "{cli::symbol$pointer} Loading AREAdata cache: {final_metric}-{gid} ..."
         )
         suppressWarnings(read_ad_cache(cache_location, final_metric, gid))
       },
       error = function(e) {
-        cli_alert_danger("Failed to load AREAdata cache: {final_metric}-{gid}!")
+        cli::cli_alert_danger("Failed to load AREAdata cache: {final_metric}-{gid}!")
         NA
       }
     )
@@ -123,12 +123,12 @@ fetch_ad <- function(
 
   if (any(!is.na(outmat))) {
     loaded_cache <- TRUE
-    cli_alert_success("Loaded AREAdata cache {final_metric}-{gid}.")
+    cli::cli_alert_success("Loaded AREAdata cache {final_metric}-{gid}.")
   }
 
   if (!loaded_cache) {
     loadloc <- c("github", "github", "figshare") # nolint: object_usage_linter
-    cli_progress_message(
+    cli::cli_progress_message(
       "{cli::symbol$pointer} Loading AREAdata {final_metric}-{gid} from {loadloc[gid + 1]}..."
     )
     gid_str <- c("countries", "GID1", "GID2")[gid + 1]
@@ -181,12 +181,12 @@ fetch_ad <- function(
           figshare_df$metric == final_metric
         )][1]
       } else if (metricid == 6) {
-        cli_alert_warning(
+        cli::cli_alert_warning(
           "{.val {final_metric}} not available at GID level 2. Defaulting to GID level 1..."
         )
         final_url <- paste0(final_url, "population-density-GID1.RDS")
       } else {
-        cli_alert_warning(
+        cli::cli_alert_warning(
           "{.val {final_metric}} not available at GID level 2. Defaulting to GID level 1..."
         )
         final_url <- paste0(
@@ -202,7 +202,7 @@ fetch_ad <- function(
       {
         options(timeout = timeout)
         suppressWarnings(outmat <- readRDS(url(final_url)))
-        cli_alert_success(
+        cli::cli_alert_success(
           "Loaded AREAdata {final_metric}-{gid} from {loadloc[gid + 1]}."
         )
         outmat
@@ -216,8 +216,8 @@ fetch_ad <- function(
       }
     )
     if (is.null(outmat)) {
-      cli_progress_done()
-      cli_abort(c(
+      cli::cli_progress_done()
+      cli::cli_abort(c(
         "x" = "Failed to load AREAdata {final_metric}-{gid} from {loadloc[gid + 1]}.",
         "!" = "Try increasing the {.arg timeout} parameter."
       ))
@@ -235,7 +235,7 @@ fetch_ad <- function(
 
   if (use_cache) {
     if (!loaded_cache || refresh_cache) {
-      cli_progress_message(
+      cli::cli_progress_message(
         "{cli::symbol$pointer} Caching AREAdata {final_metric}-{gid} in {.path {cache_location}}..."
       )
       write_ad_cache(
@@ -245,13 +245,13 @@ fetch_ad <- function(
         gid = gid,
         format = "rda"
       )
-      cli_alert_success(
+      cli::cli_alert_success(
         "Cached AREAdata {final_metric}-{gid} in {.path {cache_location}}."
       )
     }
   }
 
-  cli_progress_done()
+  cli::cli_progress_done()
 
   return(outmat)
 }

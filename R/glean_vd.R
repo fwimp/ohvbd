@@ -26,9 +26,9 @@
 
 glean_vd <- function(res, cols = NA, returnunique = FALSE) {
   if (is.null(attr(res, "db"))) {
-    cli_alert_warning("Responses not necessarily from VecDyn.")
+    cli::cli_alert_warning("Responses not necessarily from VecDyn.")
   } else if (attr(res, "db") != "vd") {
-    cli_abort(c(
+    cli::cli_abort(c(
       "x" = "Responses not from VecDyn, Please use the appropriate {.fn glean_{attr(res, 'db')}} function.",
       "!" = "Detected db = {.val {attr(res, 'db')}}"
     ))
@@ -39,7 +39,7 @@ glean_vd <- function(res, cols = NA, returnunique = FALSE) {
     out_df <- res |> resp_body_json()
   } else if (any(class(res) == "httr2_error")) {
     # Detect single error
-    cli_abort("Response contains error! (check to see if ID actually exists?)")
+    cli::cli_abort("Response contains error! (check to see if ID actually exists?)")
   } else {
     # Extract data from all successful responses
     out_df <- res |>

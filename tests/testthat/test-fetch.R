@@ -34,7 +34,7 @@ test_that("fetch_* functions reject incompatible ids", {
   expect_error(
     suppressMessages({
       out_vt <- {
-        vcr::local_cassette("fetch_vt") # Just in case the test fails it will try to
+        vcr::local_cassette("fetch_vt") # Just in case the test fails, will still pull from vcr
         ohvbd.ids(1, "vd") |> fetch_vt()
       }
     })
@@ -43,9 +43,11 @@ test_that("fetch_* functions reject incompatible ids", {
   expect_error(
     suppressMessages({
       out_vt <- {
-        vcr::local_cassette("fetch_vd") # Just in case the test fails it will try to
+        vcr::local_cassette("fetch_vd") # Just in case the test fails, will still pull from vcr
         ohvbd.ids(1, "vt") |> fetch_vd()
       }
     })
   )
 })
+
+# TODO: Test handling of non-ohvbd.ids inputs

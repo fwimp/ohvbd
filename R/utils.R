@@ -118,7 +118,7 @@ vd_extraction_helper <- function(resp, cols = NA) {
       df_out
     },
     error = function(e) {
-      cli_abort(
+      cli::cli_abort(
         "Error in vd extraction of ID {(.get_vb_req_id(resp))}",
         parent = e
       )
@@ -188,10 +188,10 @@ coercedate <- function(dates, return_iso = FALSE, nulliferror = FALSE) {
       suppressWarnings(dates_final <- as_date(paste0(dates, "-01-01")))
       if (any(is.na(dates_final))) {
         # Dunno, stop filtering date
-        cli_alert_warning(
+        cli::cli_alert_warning(
           "Could not make {.val {cli::cli_vec(dates, list('vec-trunc' = 5))}} into a usable date."
         )
-        cli_alert_info("Try ISO 8601 {.val yyyy-mm-dd} format")
+        cli::cli_alert_info("Try ISO 8601 {.val yyyy-mm-dd} format")
         if (nulliferror) {
           return(NULL)
         } else {

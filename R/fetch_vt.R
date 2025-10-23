@@ -25,9 +25,9 @@ fetch_vt <- function(ids, rate = 5, connections = 2, basereq = NA) {
   max_conns <- 8
 
   if (is.null(attr(ids, "db"))) {
-    cli_alert_warning("IDs not necessarily from VecTraits.")
+    cli::cli_alert_warning("IDs not necessarily from VecTraits.")
   } else if (attr(ids, "db") != "vt") {
-    cli_abort(c(
+    cli::cli_abort(c(
       "x" = "IDs not from VecTraits, Please use the {.fn fetch_{attr(ids, 'db')}} function.",
       "!" = "Detected db = {.val {attr(ids, 'db')}}"
     ))
@@ -50,10 +50,10 @@ fetch_vt <- function(ids, rate = 5, connections = 2, basereq = NA) {
     })
 
   if (connections > max_conns) {
-    cli_alert_warning(
+    cli::cli_alert_warning(
       "No more than {.val {max_conns}} simultaneous connection{?s} allowed!"
     )
-    cli_alert_info("Restricting to {.val {max_conns}} connection{?s}.")
+    cli::cli_alert_info("Restricting to {.val {max_conns}} connection{?s}.")
     connections <- max_conns
   }
   resps <- reqs |>
@@ -72,14 +72,14 @@ fetch_vt <- function(ids, rate = 5, connections = 2, basereq = NA) {
   missing <- find_vb_404s(fails)
 
   if (!is.null(missing)) {
-    cli_alert_info("Incorrect ids:")
+    cli::cli_alert_info("Incorrect ids:")
     cli::cli_ul(missing)
   }
 
   # Test to see if we got only errors
   if (length(fails) >= length(resps)) {
     # Only got errors!
-    cli_alert_warning(
+    cli::cli_alert_warning(
       "No records retrieved (are you sure the IDs are correct?)."
     )
   }

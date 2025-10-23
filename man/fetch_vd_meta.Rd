@@ -4,14 +4,7 @@
 \alias{fetch_vd_meta}
 \title{Find vecdyn metadata}
 \usage{
-fetch_vd_meta(
-  ids,
-  rate = 5,
-  connections = 2,
-  page_size = 50,
-  pb_name = "data",
-  basereq = NA
-)
+fetch_vd_meta(ids, rate = 5, connections = 2, pb_name = "data", basereq = NA)
 }
 \arguments{
 \item{ids}{a numeric ID or numeric vector of ids (preferably in an \code{ohvbd.ids} object) indicating the particular dataset/s to download.}
@@ -19,8 +12,6 @@ fetch_vd_meta(
 \item{rate}{maximum number of calls to the API per second.}
 
 \item{connections}{number of simultaneous connections to the server at once. Maximum 8. \strong{Do not enable unless you really need to} as this hits the server significantly harder than usual.}
-
-\item{page_size}{the page size returned by VecDyn (default is 50).}
 
 \item{pb_name}{the name of the download progress bar}
 

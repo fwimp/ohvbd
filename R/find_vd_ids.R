@@ -33,7 +33,7 @@ find_vd_ids <- function(basereq = NA) {
   )
 
   if (resplist$err_code == 1) {
-    cli_abort("No records found.")
+    cli::cli_abort("No records found.")
   }
 
   body <- resplist$resp |> resp_body_json()

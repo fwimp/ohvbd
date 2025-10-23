@@ -48,7 +48,7 @@ search_hub <- function(
     )
   }
   if (length(select_dbs) == 0) {
-    cli_abort(c("x" = "No valid database selected!"))
+    cli::cli_abort(c("x" = "No valid database selected!"))
   }
   select_dbs <- paste(select_dbs, collapse = ",")
   # date parsing
@@ -102,7 +102,7 @@ search_hub <- function(
   results <- resp$count
 
   if (results == 0) {
-    cli_alert_warning("No results found!")
+    cli::cli_alert_warning("No results found!")
     return()
   }
   # Calculate number of pages to retrieve

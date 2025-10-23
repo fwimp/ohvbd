@@ -47,7 +47,7 @@ devtools::install_github("fwimp/ohvbd")
 ```
 
 The vignettes are all available online, but if you would like to build
-them locally, add `build_vignettes` = TRUE into your `install_github()`
+them locally, add `build_vignettes = TRUE` into your `install_github()`
 command. However, we do not recommend doing this due to the number of
 extra R packages utilised in the vignettes.
 

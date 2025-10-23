@@ -152,7 +152,7 @@ fetch.ohvbd.hub.search <- function(
 #'
 #' @param res An object of type `ohvbd.responses` or `ohvbd.ad.matrix` generated from [fetch()]
 #' and containing data from one of the supported databases.
-#' @param ... Any arguments to be passed to the underlying extractors (see [glean_vt()] and [glean_ad()] for specific arguments).
+#' @param ... Any arguments to be passed to the underlying extractors (unused)
 #' @returns The extracted data, either as an `ohvbd.data.frame` or `ohvbd.ad.matrix` object.
 #' @concept convenience
 #' @export
