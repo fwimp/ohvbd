@@ -238,12 +238,12 @@ from our data using the same command as before:</p>
 <span><span class="va">aedes_data_filtered</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #0000BB;">&lt;ohvbd.data.frame&gt;</span></span></span>
 <span><span class="co">## Database: vt</span></span>
-<span><span class="co">##                   Location OriginalTraitName</span></span>
-<span><span class="co">## 1           Marilia Brazil    fecundity rate</span></span>
-<span><span class="co">## 2           Marilia Brazil         longevity</span></span>
-<span><span class="co">## 3 Unversity of Georgia USA  glycogen content</span></span>
-<span><span class="co">## 4       Fort Myers Florida  development time</span></span>
-<span><span class="co">## 5 Unversity of Georgia USA     lipid content</span></span></code></pre>
+<span><span class="co">##   DatasetID                 Location OriginalTraitName</span></span>
+<span><span class="co">## 1       474           Marilia Brazil    fecundity rate</span></span>
+<span><span class="co">## 2       475           Marilia Brazil         longevity</span></span>
+<span><span class="co">## 3       148 Unversity of Georgia USA  glycogen content</span></span>
+<span><span class="co">## 4       578       Fort Myers Florida  development time</span></span>
+<span><span class="co">## 5       144 Unversity of Georgia USA     lipid content</span></span></code></pre>
 <div class="section level3">
 <h3 id="specific-glean-functions">Specific glean functions<a class="anchor" aria-label="anchor" href="#specific-glean-functions"></a>
 </h3>
@@ -271,10 +271,12 @@ functions together to create small pipelines.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #0000BB;">&lt;ohvbd.data.frame&gt;</span></span></span>
 <span><span class="co">## Database: vt</span></span>
-<span><span class="co">##   Interactor1Genus Interactor1Species  Latitude Longitude</span></span>
-<span><span class="co">## 1            Aedes            aegypti -22.21389 -49.94583</span></span>
-<span><span class="co">## 2            Aedes            aegypti        NA        NA</span></span>
-<span><span class="co">## 3            Aedes            aegypti  26.61667 -81.83333</span></span></code></pre>
+<span><span class="co">##   DatasetID Interactor1Genus Interactor1Species  Latitude Longitude</span></span>
+<span><span class="co">## 1       474            Aedes            aegypti -22.21389 -49.94583</span></span>
+<span><span class="co">## 2       475            Aedes            aegypti -22.21389 -49.94583</span></span>
+<span><span class="co">## 3       148            Aedes            aegypti        NA        NA</span></span>
+<span><span class="co">## 4       578            Aedes            aegypti  26.61667 -81.83333</span></span>
+<span><span class="co">## 5       144            Aedes            aegypti        NA        NA</span></span></code></pre>
 <p>A similar pipeline taking advantage of the autofiltering in
 <code><a href="../reference/search_hub.html">search_hub()</a></code> might look like this:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
@@ -381,7 +383,7 @@ every time you run your script. This is as easy as running
 <code><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv()</a></code> on your dataframe, then reading it in later
 with <code><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv()</a></code></p>
 <p><span style="opacity: 0.1;font-size: small;">Built in
-5.1256135s</span></p>
+5.0816479s</span></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

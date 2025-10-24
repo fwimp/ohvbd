@@ -42,13 +42,16 @@
 <url><loc>https://fwimp.github.io/ohvbd/reference/format_time_overlap_bar.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/generate_vt_template.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/get_curl_err.html</loc></url>
+<url><loc>https://fwimp.github.io/ohvbd/reference/get_db.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/glean.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/glean_ad.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/glean_gbif.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/glean_vd.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/glean_vt.html</loc></url>
+<url><loc>https://fwimp.github.io/ohvbd/reference/has_db.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/index.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/is_cached.html</loc></url>
+<url><loc>https://fwimp.github.io/ohvbd/reference/is_from.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/ohvbd-package.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/ohvbd.ids.html</loc></url>
 <url><loc>https://fwimp.github.io/ohvbd/reference/progress_style.html</loc></url>
