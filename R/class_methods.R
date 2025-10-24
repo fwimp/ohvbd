@@ -227,7 +227,7 @@ glean.ohvbd.ids <- function(
 #' This tries to extract and simplify the citations from a dataset downloaded using `ohvbd`.
 #' @author Francis Windram
 #'
-#' @param dataset An object of type `ohvbd.data.frame` generated from [glean()]
+#' @param dataset An object of type `ohvbd.data.frame` (generated from [glean()], preferred) or of type `ohvbd.ids`
 #' and containing data from one of the supported databases.
 #' @param ... Any arguments to be passed to the underlying funcs.
 #' @returns The extracted data, either as an `ohvbd.data.frame` or `ohvbd.ad.matrix` object.
@@ -241,6 +241,25 @@ glean.ohvbd.ids <- function(
 #'
 fetch_citations <- function(dataset, ...) {
   UseMethod("fetch_citations")
+}
+
+#' @export
+fetch_citations.ohvbd.ids <- function(
+    dataset,
+    ...
+) {
+  cli::cli_alert_info("Treating {.cls ohvbd.ids} object as a 1-column {.cls ohvbd.data.frame}.")
+  id_col_name <- switch(get_db(dataset),
+                        "vt" = "DatasetID",
+                        "vd" = "dataset_id",
+                        "dataset_id_col_name"
+
+  )
+  dataset_df <- data.frame(dataset)
+  colnames(dataset_df) <- id_col_name
+  dataset_df <- new_ohvbd.data.frame(dataset_df, get_db(dataset))
+
+  fetch_citations.ohvbd.data.frame(dataset_df, ...)
 }
 
 #' @export
