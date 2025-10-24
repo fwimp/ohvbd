@@ -15,7 +15,7 @@ check_db_status <- function() {
   db_list <- c(
     VectorByte = "https://vectorbyte.crc.nd.edu/portal/api/",
     Areadata = "https://github.com/pearselab/areadata/raw/main/output/",
-    GBIF = "https://www.gbif.org/api/health"
+    GBIF = "https://api.gbif.org/v1/"
     # TODO: Add figshare
   )
 
@@ -24,28 +24,6 @@ check_db_status <- function() {
   cli::cli_rule(left = "Database Status Check")
 
   for (i in seq_along(db_list)) {
-    if (names(db_list)[i] == "GBIF") {
-      statuscode <- tryCatch(
-        {
-          out <- request(db_list[i]) |>
-            req_user_agent("ROHVBD") |>
-            req_perform()
-          outbody <- out |> resp_body_json()
-          gbifhealth <- rbindlist(outbody$health$components, fill = TRUE)
-          # fmt: skip
-          gbifdl_status <- gbifhealth[[which(gbifhealth$component == "DOWNLOAD"), "severity"]] == "OPERATIONAL"
-          if (gbifdl_status) {
-            200
-          } else {
-            404
-          }
-        },
-        error = function(cnd) {
-          out <- last_response()
-          out$status_code
-        }
-      )
-    } else {
       statuscode <- tryCatch(
         {
           out <- request(db_list[i]) |>
@@ -58,7 +36,6 @@ check_db_status <- function() {
           out$status_code
         }
       )
-    }
     if (!is.null(statuscode)) {
       if (200 <= statuscode && statuscode < 300) {
         cli::cli_alert_success("{names(db_list)[i]}")
