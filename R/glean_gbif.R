@@ -22,12 +22,12 @@
 #'
 
 glean_gbif <- function(res, cols = NA, returnunique = FALSE) {
-  if (is.null(attr(res, "db"))) {
+  if (!has_db(res)) {
     cli::cli_alert_warning("Responses not necessarily from GBIF.")
-  } else if (attr(res, "db") != "gbif") {
+  } else if (!is_from(res, "gbif")) {
     cli::cli_abort(c(
-      "x" = "Responses not from GBIF, Please use the appropriate {.fn glean_{attr(res, 'db')}} function.",
-      "!" = "Detected db = {.val {attr(res, 'db')}}"
+      "x" = "Responses not from GBIF, Please use the appropriate {.fn glean_{get_db(res)}} function.",
+      "!" = "Detected db = {.val {get_db(res)}}"
     ))
   }
 

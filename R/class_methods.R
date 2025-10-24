@@ -5,7 +5,7 @@
 #' @export
 print.ohvbd.ids <- function(x, ...) {
   cli::cat_line(cli::format_inline("{.cls {class(x)[1]}}"))
-  cat(paste0("Database: ", attr(x, "db"), "\n"))
+  cat(paste0("Database: ", get_db(x), "\n"))
   if (is.numeric(x)) {
     print(as.numeric(x))
   } else {
@@ -17,7 +17,7 @@ print.ohvbd.ids <- function(x, ...) {
 #' @export
 print.ohvbd.data.frame <- function(x, ...) {
   cli::cat_line(cli::format_inline("{.cls {class(x)[1]}}"))
-  cat(paste0("Database: ", attr(x, "db"), "\n"))
+  cat(paste0("Database: ", get_db(x), "\n"))
   print(as.data.frame(x))
   invisible(x)
 }
@@ -78,7 +78,7 @@ summary.ohvbd.hub.search <- function(object, ...) {
 
 #' @export
 `[.ohvbd.ids` <- function(x, i) {
-  new_ohvbd.ids(NextMethod(), db = attr(x, "db"))
+  new_ohvbd.ids(NextMethod(), db = get_db(x))
 }
 
 #' @title Fetch specified data from a set of ids
@@ -110,7 +110,7 @@ fetch.ohvbd.ids <- function(
   db <- list(...)$db
   if (is.null(db)) {
     # If not overriding db, just use the one provided
-    db <- attr(ids, "db") %||%
+    db <- get_db(ids) %||%
       cli::cli_abort(
         c(
           "x" = "No db attached to the dataset and none specified!",
@@ -152,7 +152,7 @@ fetch.ohvbd.hub.search <- function(
 #'
 #' @param res An object of type `ohvbd.responses` or `ohvbd.ad.matrix` generated from [fetch()]
 #' and containing data from one of the supported databases.
-#' @param ... Any arguments to be passed to the underlying extractors (unused)
+#' @param ... Any arguments to be passed to the underlying extractors (unused).
 #' @returns The extracted data, either as an `ohvbd.data.frame` or `ohvbd.ad.matrix` object.
 #' @concept convenience
 #' @export
@@ -174,7 +174,7 @@ glean.ohvbd.responses <- function(
 ) {
   if (is.null(db)) {
     # If not overriding db, just use the one provided
-    db <- attr(res, "db") %||%
+    db <- get_db(res) %||%
       cli::cli_abort(
         c(
           "x" = "No db attached to the dataset and none specified!",
@@ -203,7 +203,7 @@ glean.ohvbd.ad.matrix <- function(
   places = NA,
   gid = NA
 ) {
-  db <- attr(res, "db")
+  db <- get_db(res)
   return(glean_ad(res, targetdate, enddate, places, gid))
 }
 
@@ -224,7 +224,7 @@ glean.ohvbd.ids <- function(
 #' @title Try to find the relevant citations for a dataset
 #'
 #' @description
-#' This tries to extract and simplify
+#' This tries to extract and simplify the citations from a dataset downloaded using `ohvbd`.
 #' @author Francis Windram
 #'
 #' @param dataset An object of type `ohvbd.data.frame` generated from [glean()]
@@ -234,6 +234,10 @@ glean.ohvbd.ids <- function(
 #' @concept convenience
 #' @export
 #' @examplesIf interactive()
+#' search_hub("Ixodes", "vt") |>
+#'   fetch() |>
+#'   glean() |>
+#'   fetch_citations()
 #'
 fetch_citations <- function(dataset, ...) {
   UseMethod("fetch_citations")
@@ -248,7 +252,7 @@ fetch_citations.ohvbd.data.frame <- function(
   db <- .args$db
   if (is.null(db)) {
     # If not overriding db, just use the one provided
-    db <- attr(dataset, "db") %||%
+    db <- get_db(dataset) %||%
       cli::cli_abort(
         c(
           "x" = "No db attached to the dataset and none specified!",
@@ -258,7 +262,7 @@ fetch_citations.ohvbd.data.frame <- function(
   }
   .args$db <- NULL
 
-  if (is.null(attr(dataset, "db"))) {
+  if (!has_db(dataset)) {
     dataset <- force_db(dataset, db)
   }
 
@@ -273,6 +277,86 @@ fetch_citations.ohvbd.data.frame <- function(
   )
   .args$dataset <- dataset
   return(do.call(finalfun, .args))
+}
+
+#' @title Get the db associated with an object
+#'
+#' @description
+#' This function retrieves the provenance information expected by `ohvbd` from an object. If there is no provenance then this returns `NULL`.
+#'
+#' @author Francis Windram
+#'
+#' @param x An object to test.
+#' @param ... Any arguments to be passed to the underlying functions (unused).
+#'
+#' @returns The database identifier associated with an object (or NULL if missing).
+#' @concept convenience
+#' @export
+#' @examplesIf interactive()
+#' ids <- ohvbd.ids(c(1,2,3), "vd")
+#' get_db(ids)
+#'
+get_db <- function(x, ...) {
+  UseMethod("get_db")
+}
+
+#' @export
+get_db.default <- function(x, ...) {
+  attr(x, "db", exact = TRUE)
+}
+
+#' @title Test whether an object has provenance information
+#'
+#' @description
+#' This function tests whether an object has the provenance information expected by `ohvbd`.
+#'
+#' @author Francis Windram
+#'
+#' @param x An object to test.
+#' @param ... Any arguments to be passed to the underlying functions (unused).
+#'
+#' @returns Whether the data has a provenance tag (as a boolean).
+#' @concept convenience
+#' @export
+#' @examplesIf interactive()
+#' ids <- ohvbd.ids(c(1,2,3), "vd")
+#' has_db(ids)
+#'
+has_db <- function(x, ...) {
+  UseMethod("has_db")
+}
+
+#' @export
+has_db.default <- function(x, ...) {
+  !is.null(get_db(x))
+}
+
+#' @title Test whether an object is considered to be from a particular database.
+#'
+#' @description
+#' This function tests whether an object is considered (by `ohvbd`) to be from a given database.
+#'
+#' This is a fairly coarse check, and so cannot "work out" data provenance from its structure.
+#' @author Francis Windram
+#'
+#' @param x An object to test.
+#' @param db The db to test against.
+#' @param ... Any arguments to be passed to the underlying functions (unused).
+#'
+#' @returns Whether the data is from a given database (as a boolean).
+#' @concept convenience
+#' @export
+#' @examplesIf interactive()
+#' ids <- ohvbd.ids(c(1,2,3), "vd")
+#' is_from(ids, "vd")
+#'
+is_from <- function(x, db, ...) {
+  UseMethod("is_from")
+}
+
+#' @export
+is_from.default <- function(x, db, ...) {
+  get_db(x) == db
 }
 
 # nolint end

@@ -35,7 +35,7 @@ assoc_gadm <- function(
   basereq = NA
 ) {
   # Remember db attr of input data
-  datatype <- attr(df, "db")
+  datatype <- get_db(df)
 
   # Always load gid level 2 as it's quickest AND a complete superset of GID1 and 0
   gid <- 2

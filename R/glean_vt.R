@@ -24,12 +24,12 @@
 #'
 
 glean_vt <- function(res, cols = NA, returnunique = FALSE) {
-  if (is.null(attr(res, "db"))) {
+  if (!has_db(res)) {
     cli::cli_alert_warning("Responses not necessarily from VecTraits.")
-  } else if (attr(res, "db") != "vt") {
+  } else if (!is_from(res, "vt")) {
     cli::cli_abort(c(
-      "x" = "Responses not from VecTraits, Please use the appropriate {.fn glean_{attr(res, 'db')}} function.",
-      "!" = "Detected db = {.val {attr(res, 'db')}}"
+      "x" = "Responses not from VecTraits, Please use the appropriate {.fn glean_{get_db(res)}} function.",
+      "!" = "Detected db = {.val {get_db(res)}}"
     ))
   }
 
@@ -53,6 +53,10 @@ glean_vt <- function(res, cols = NA, returnunique = FALSE) {
 
   if (!any(is.na(cols))) {
     # Filter cols from each sublist
+    if (!("DatasetID" %in% cols)){
+      cli::cli_alert_info("Added {.val DatasetID} column to requested columns.")
+      cols <- c("DatasetID", cols)
+    }
     out_list <- lapply(out_list, select, any_of(cols))
   }
   # Finally explode the list into a df

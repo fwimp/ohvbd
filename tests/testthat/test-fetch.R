@@ -2,14 +2,14 @@ test_that("fetch_vt returns vt ohvbd.responses object", {
   vcr::local_cassette("fetch_vt")
   out <- suppressMessages(ohvbd.ids(1, "vt") |> fetch_vt())
   expect_s3_class(out, "ohvbd.responses")
-  expect_equal(attr(out, "db"), "vt")
+  expect_true(is_from(out, "vt"))
 })
 
 test_that("fetch_vd returns vd ohvbd.responses object", {
   vcr::local_cassette("fetch_vd")
   out <- suppressMessages(ohvbd.ids(364, "vd") |> fetch_vd())
   expect_s3_class(out, "ohvbd.responses")
-  expect_equal(attr(out, "db"), "vd")
+  expect_true(is_from(out, "vd"))
 })
 
 test_that("fetch generic route correctly dispatches", {
@@ -26,8 +26,8 @@ test_that("fetch generic route correctly dispatches", {
     }
   )
 
-  expect_equal(attr(out_vt, "db"), "vt")
-  expect_equal(attr(out_vd, "db"), "vd")
+  expect_true(is_from(out_vt, "vt"))
+  expect_true(is_from(out_vd, "vd"))
 })
 
 test_that("fetch_* functions reject incompatible ids", {

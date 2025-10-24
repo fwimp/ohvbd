@@ -25,12 +25,12 @@
 fetch_vd <- function(ids, rate = 5, connections = 2, basereq = NA) {
   max_conns <- 8
 
-  if (is.null(attr(ids, "db"))) {
+  if (!has_db(ids)) {
     cli::cli_alert_warning("IDs not necessarily from VecDyn.")
-  } else if (attr(ids, "db") != "vd") {
+  } else if (!is_from(ids, "vd")) {
     cli::cli_abort(c(
-      "x" = "IDs not from VecDyn, Please use the {.fn fetch_{attr(ids, 'db')}} function.",
-      "!" = "Detected db = {.val {attr(ids, 'db')}}"
+      "x" = "IDs not from VecDyn, Please use the {.fn fetch_{get_db(ids)}} function.",
+      "!" = "Detected db = {.val {get_db(ids)}}"
     ))
   }
 

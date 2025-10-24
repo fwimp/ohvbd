@@ -3,7 +3,7 @@
 #' @author Francis Windram
 #'
 #' @param res a list of responses from VecDyn as an `ohvbd.responses` object.
-#' @param cols a character vector of columns to extract from the dataset.
+#' @param cols a character vector of columns to extract from the dataset. If specified, this will be adjusted to always include the "dataset_id" column.
 #' @param returnunique whether to return only the unique rows within each dataset according to the filtered columns.
 #'
 #' @return An `ohvbd.data.frame` containing the requested data.
@@ -25,13 +25,20 @@
 #'
 
 glean_vd <- function(res, cols = NA, returnunique = FALSE) {
-  if (is.null(attr(res, "db"))) {
+  if (!has_db(res)) {
     cli::cli_alert_warning("Responses not necessarily from VecDyn.")
-  } else if (attr(res, "db") != "vd") {
+  } else if (!is_from(res, "vd")) {
     cli::cli_abort(c(
-      "x" = "Responses not from VecDyn, Please use the appropriate {.fn glean_{attr(res, 'db')}} function.",
-      "!" = "Detected db = {.val {attr(res, 'db')}}"
+      "x" = "Responses not from VecDyn, Please use the appropriate {.fn glean_{get_db(res)}} function.",
+      "!" = "Detected db = {.val {get_db(res)}}"
     ))
+  }
+
+  if (!any(is.na(cols))) {
+    if (!("dataset_id" %in% cols)){
+      cli::cli_alert_info("Added {.val dataset_id} column to requested columns.")
+      cols <- c("dataset_id", cols)
+    }
   }
 
   if (any(class(res) == "httr2_response")) {

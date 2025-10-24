@@ -31,12 +31,12 @@ fetch_glean_vt_chunked <- function(
   connections = 2,
   basereq = NA
 ) {
-  if (is.null(attr(ids, "db"))) {
+  if (!has_db(ids)) {
     cli::cli_alert_warning("IDs not necessarily from VecTraits.")
-  } else if (attr(ids, "db") != "vt") {
+  } else if (!is_from(ids, "vt")) {
     cli::cli_abort(c(
-      "x" = "IDs not from VecTraits, Please use the appropriate {.fn fetch_glean_{attr(ids, 'db')}} function.",
-      "!" = "Detected db = {.val {attr(ids, 'db')}}"
+      "x" = "IDs not from VecTraits, Please use the appropriate {.fn fetch_glean_{get_db(ids)}} function.",
+      "!" = "Detected db = {.val {get_db(ids)}}"
     ))
   }
 

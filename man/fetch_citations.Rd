@@ -16,10 +16,14 @@ and containing data from one of the supported databases.}
 The extracted data, either as an \code{ohvbd.data.frame} or \code{ohvbd.ad.matrix} object.
 }
 \description{
-This tries to extract and simplify
+This tries to extract and simplify the citations from a dataset downloaded using \code{ohvbd}.
 }
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+search_hub("Ixodes", "vt") |>
+  fetch() |>
+  glean() |>
+  fetch_citations()
 \dontshow{\}) # examplesIf}
 }
 \author{

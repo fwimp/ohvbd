@@ -61,17 +61,17 @@ assoc_ad <- function(
   basereq = NA
 ) {
   # Remember db attr of input data
-  datatype <- attr(data, "db")
+  datatype <- get_db(data)
 
   # Cast data to a df
   data <- as.data.frame(data)
 
-  if (is.null(attr(areadata, "db"))) {
+  if (!has_db(areadata)) {
     cli::cli_alert_warning("{.arg areadata} not necessarily from AREAdata.")
-  } else if (attr(areadata, "db") != "ad") {
+  } else if (!is_from(areadata, "ad")) {
     cli::cli_abort(c(
       "x" = "{.arg areadata} not from AREAdata!",
-      "!" = "Detected db = {.val {attr(areadata, 'db')}}"
+      "!" = "Detected db = {.val {get_db(areadata)}}"
     ))
   }
 

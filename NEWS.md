@@ -29,6 +29,7 @@ New functions & arguments:
 * New `force_db()` function enables one to force `ohvbd` to consider a particular object has having a particular provenance.
 * New `simplify` argument to `search_hub()` makes hub searches return an `ohvbd.ids` object if only one database was searched for. This behaviour is on by default.
   * To match this, `filter_db()` will now transparently return `ohvbd.ids` objects if it gets them.
+* New `is_from()`, `has_db()`, and `get_db()` functions allows for quick testing of object provenance (according to `ohvbd`).
 
 Other:
 
@@ -42,6 +43,8 @@ Other:
   * Occasionally users would use forget a `fetch()` command and run `search_hub() |> glean()` which didn't previously give an interpretable error.
 * Vignettes now use `vcr` to massively reduce their build time. This should only matter to developers of `ohvbd`, or users who download from github and build the vignettes themselves.
 * `ohvbd.ids()` now warns you and fixes the problem if you provide ids with duplicate values.
+* `glean_vt()` and `glean_vd()` now force the inclusion of the dataset ID when filtering columns (using the `cols` argument).
+  * This is intended to encourage you to preserve at least one means of retrieving citation data later.
 
 # ohvbd 0.6.1
 

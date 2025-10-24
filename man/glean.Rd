@@ -10,7 +10,7 @@ glean(res, ...)
 \item{res}{An object of type \code{ohvbd.responses} or \code{ohvbd.ad.matrix} generated from \code{\link[=fetch]{fetch()}}
 and containing data from one of the supported databases.}
 
-\item{...}{Any arguments to be passed to the underlying extractors (unused)}
+\item{...}{Any arguments to be passed to the underlying extractors (unused).}
 }
 \value{
 The extracted data, either as an \code{ohvbd.data.frame} or \code{ohvbd.ad.matrix} object.

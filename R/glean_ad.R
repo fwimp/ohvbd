@@ -75,12 +75,12 @@ glean_ad <- function(
 ) {
   # Enddate SHOULD BE EXCLUSIVE
 
-  if (is.null(attr(ad_matrix, "db"))) {
+  if (!has_db(ad_matrix)) {
     cli::cli_alert_warning("Data not necessarily from AREAdata.")
-  } else if (attr(ad_matrix, "db") != "ad") {
+  } else if (!is_from(ad_matrix, "ad")) {
     cli::cli_abort(c(
-      "x" = "Data not from AREAdata, Please use the appropriate {.fn glean_{attr(ad_matrix, 'db')}} function.",
-      "!" = "Detected db = {.val {attr(ad_matrix, 'db')}}"
+      "x" = "Data not from AREAdata, Please use the appropriate {.fn glean_{get_db(ad_matrix)}} function.",
+      "!" = "Detected db = {.val {get_db(ad_matrix)}}"
     ))
   }
 

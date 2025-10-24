@@ -103,14 +103,13 @@ test_that("filter_db correctly filters from hub searches", {
   expect_warning({
     search_return |> filter_db(c("vt", "vd"))
   })
-  expect_equal(
-    suppressWarnings(attr(
+  expect_true(
+    suppressWarnings(is_from(
       {
         search_return |> filter_db(c("vt", "vd"))
       },
-      "db"
-    )),
-    "vt"
+      "vt"
+    ))
   )
 
   # Check filter_db returns an ohvbd.ids vector of correct db
@@ -120,13 +119,12 @@ test_that("filter_db correctly filters from hub searches", {
     },
     "ohvbd.ids"
   )
-  expect_equal(
-    attr(
+  expect_true(
+    suppressWarnings(is_from(
       {
-        search_return |> filter_db("vt")
+        search_return |> filter_db(c("vt"))
       },
-      "db"
-    ),
-    "vt"
+      "vt"
+    ))
   )
 })

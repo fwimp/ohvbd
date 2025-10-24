@@ -192,9 +192,9 @@ search_hub <- function(
 filter_db <- function(ids, db) {
   # If filter_db recieves an ohvbd.ids object, return as is.
   if (inherits(ids, "ohvbd.ids")) {
-    if (attr(ids, "db") != db) {
+    if (!is_from(ids, db)) {
       cli::cli_warn(c(
-        "!" = "{.arg ids} is an {.cls ohvbd.ids} object from {.val {attr(ids, 'db')}}, not {.val {db}}!",
+        "!" = "{.arg ids} is an {.cls ohvbd.ids} object from {.val {get_db(ids)}}, not {.val {db}}!",
         "i" = "Leaving {.arg ids} unchanged."
       ))
     }

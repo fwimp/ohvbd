@@ -16,12 +16,12 @@
 #'
 
 fetch_citations_vt <- function(dataset, redownload = TRUE, minimise=FALSE) {
-  if (is.null(attr(dataset, "db"))) {
+  if (!has_db(dataset)) {
     cli::cli_alert_warning("IDs not necessarily from VecTraits.")
-  } else if (attr(dataset, "db") != "vt") {
+  } else if (!is_from(dataset, "vt")) {
     cli::cli_abort(c(
-      "x" = "IDs not from VecTraits, Please use the {.fn fetch_citations_{attr(dataset, 'db')}} function.",
-      "!" = "Detected db = {.val {attr(dataset, 'db')}}"
+      "x" = "IDs not from VecTraits, Please use the {.fn fetch_citations_{get_db(dataset)}} function.",
+      "!" = "Detected db = {.val {get_db(dataset)}}"
     ))
   }
 
@@ -102,12 +102,12 @@ fetch_citations_vt <- function(dataset, redownload = TRUE, minimise=FALSE) {
 #'
 
 fetch_citations_vd <- function(dataset, redownload = TRUE, minimise = FALSE) {
-  if (is.null(attr(dataset, "db"))) {
+  if (!has_db(dataset)) {
     cli::cli_alert_warning("IDs not necessarily from VecDyn.")
-  } else if (attr(dataset, "db") != "vd") {
+  } else if (!is_from(dataset, "vd")) {
     cli::cli_abort(c(
-      "x" = "IDs not from VecDyn, Please use the {.fn fetch_citations_{attr(dataset, 'db')}} function.",
-      "!" = "Detected db = {.val {attr(dataset, 'db')}}"
+      "x" = "IDs not from VecDyn, Please use the {.fn fetch_citations_{get_db(dataset)}} function.",
+      "!" = "Detected db = {.val {get_db(dataset)}}"
     ))
   }
 

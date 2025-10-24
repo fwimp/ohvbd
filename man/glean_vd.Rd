@@ -9,7 +9,7 @@ glean_vd(res, cols = NA, returnunique = FALSE)
 \arguments{
 \item{res}{a list of responses from VecDyn as an \code{ohvbd.responses} object.}
 
-\item{cols}{a character vector of columns to extract from the dataset.}
+\item{cols}{a character vector of columns to extract from the dataset. If specified, this will be adjusted to always include the "dataset_id" column.}
 
 \item{returnunique}{whether to return only the unique rows within each dataset according to the filtered columns.}
 }
