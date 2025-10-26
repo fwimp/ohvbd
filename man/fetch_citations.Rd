@@ -7,7 +7,7 @@
 fetch_citations(dataset, ...)
 }
 \arguments{
-\item{dataset}{An object of type \code{ohvbd.data.frame} generated from \code{\link[=glean]{glean()}}
+\item{dataset}{An object of type \code{ohvbd.data.frame} (generated from \code{\link[=glean]{glean()}}, preferred) or of type \code{ohvbd.ids}
 and containing data from one of the supported databases.}
 
 \item{...}{Any arguments to be passed to the underlying funcs.}
