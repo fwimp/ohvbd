@@ -2,7 +2,7 @@
 % Please edit documentation in R/class_methods.R
 \name{is_from}
 \alias{is_from}
-\title{Test whether an object is considered to be from a particular database.}
+\title{Test whether an object is considered to be from a particular database}
 \usage{
 is_from(x, db, ...)
 }
@@ -22,10 +22,9 @@ This function tests whether an object is considered (by \code{ohvbd}) to be from
 This is a fairly coarse check, and so cannot "work out" data provenance from its structure.
 }
 \examples{
-\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 ids <- ohvbd.ids(c(1,2,3), "vd")
 is_from(ids, "vd")
-\dontshow{\}) # examplesIf}
+
 }
 \author{
 Francis Windram

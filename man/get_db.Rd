@@ -18,10 +18,9 @@ The database identifier associated with an object (or NULL if missing).
 This function retrieves the provenance information expected by \code{ohvbd} from an object. If there is no provenance then this returns \code{NULL}.
 }
 \examples{
-\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 ids <- ohvbd.ids(c(1,2,3), "vd")
 get_db(ids)
-\dontshow{\}) # examplesIf}
+
 }
 \author{
 Francis Windram

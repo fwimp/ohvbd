@@ -311,7 +311,7 @@ fetch_citations.ohvbd.data.frame <- function(
 #' @returns The database identifier associated with an object (or NULL if missing).
 #' @concept convenience
 #' @export
-#' @examplesIf interactive()
+#' @examples
 #' ids <- ohvbd.ids(c(1,2,3), "vd")
 #' get_db(ids)
 #'
@@ -337,7 +337,7 @@ get_db.default <- function(x, ...) {
 #' @returns Whether the data has a provenance tag (as a boolean).
 #' @concept convenience
 #' @export
-#' @examplesIf interactive()
+#' @examples
 #' ids <- ohvbd.ids(c(1,2,3), "vd")
 #' has_db(ids)
 #'
@@ -350,7 +350,7 @@ has_db.default <- function(x, ...) {
   !is.null(get_db(x))
 }
 
-#' @title Test whether an object is considered to be from a particular database.
+#' @title Test whether an object is considered to be from a particular database
 #'
 #' @description
 #' This function tests whether an object is considered (by `ohvbd`) to be from a given database.
@@ -365,7 +365,7 @@ has_db.default <- function(x, ...) {
 #' @returns Whether the data is from a given database (as a boolean).
 #' @concept convenience
 #' @export
-#' @examplesIf interactive()
+#' @examples
 #' ids <- ohvbd.ids(c(1,2,3), "vd")
 #' is_from(ids, "vd")
 #'

@@ -18,10 +18,9 @@ Whether the data has a provenance tag (as a boolean).
 This function tests whether an object has the provenance information expected by \code{ohvbd}.
 }
 \examples{
-\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 ids <- ohvbd.ids(c(1,2,3), "vd")
 has_db(ids)
-\dontshow{\}) # examplesIf}
+
 }
 \author{
 Francis Windram
