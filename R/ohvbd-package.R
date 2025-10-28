@@ -36,6 +36,7 @@
 #' @importFrom lubridate days
 #' @importFrom lubridate interval
 #' @importFrom lubridate period
+# %||% is base R as of 4.4.0, however until that's more commonly used, we should export from rlang
 #' @importFrom rlang %||%
 #' @importFrom rlang .data
 #' @importFrom rlang is_bool

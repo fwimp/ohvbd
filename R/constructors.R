@@ -14,12 +14,12 @@ new_ohvbd.ids <- function(v, db = NULL) {
 #' be useful to package these data up in the form that ohvbd would expect to
 #' come out of a search.
 #'
-#' To do this, create an `ohvbd.ids` object, specifying the db that the ids refer to.
+#' To do this, create an `ohvbd.ids` object, specifying the database that the ids refer to.
 #'
 #' @author Francis Windram
 #'
 #' @param ids A numeric vector of ids referring to datasets within the specified database.
-#' @param db A string specifying the db that these ids refer to.
+#' @param db A string specifying the database that these ids refer to.
 #' @returns An id vector: an S3 vector with class `ohvbd.ids`.
 #' @export
 #' @examples
@@ -41,7 +41,7 @@ ohvbd.ids <- function(ids, db) {
     cli::cli_abort("IDs must be numeric!")
   }
   if (!(db %in% allowed_dbs)) {
-    cli::cli_abort("DB must be one of {.val {allowed_dbs}}.")
+    cli::cli_abort("database must be one of {.val {allowed_dbs}}.")
   }
   uniq_ids <- unique(ids)
   if (length(uniq_ids) < length(ids)) {

@@ -9,7 +9,7 @@ is_from(x, db, ...)
 \arguments{
 \item{x}{An object to test.}
 
-\item{db}{The db to test against.}
+\item{db}{The database to test against.}
 
 \item{...}{Any arguments to be passed to the underlying functions (unused).}
 }

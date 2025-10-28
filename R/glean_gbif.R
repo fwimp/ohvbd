@@ -26,8 +26,8 @@ glean_gbif <- function(res, cols = NA, returnunique = FALSE) {
     cli::cli_alert_warning("Responses not necessarily from GBIF.")
   } else if (!is_from(res, "gbif")) {
     cli::cli_abort(c(
-      "x" = "Responses not from GBIF, Please use the appropriate {.fn glean_{get_db(res)}} function.",
-      "!" = "Detected db = {.val {get_db(res)}}"
+      "x" = "Responses not from GBIF, Please use the appropriate {.fn glean_{ohvbd_db(res)}} function.",
+      "!" = "Detected database = {.val {ohvbd_db(res)}}"
     ))
   }
 

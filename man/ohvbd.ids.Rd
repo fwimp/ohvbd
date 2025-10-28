@@ -9,7 +9,7 @@ ohvbd.ids(ids, db)
 \arguments{
 \item{ids}{A numeric vector of ids referring to datasets within the specified database.}
 
-\item{db}{A string specifying the db that these ids refer to.}
+\item{db}{A string specifying the database that these ids refer to.}
 }
 \value{
 An id vector: an S3 vector with class \code{ohvbd.ids}.
@@ -19,7 +19,7 @@ When retrieving data from previous searches (or saved lists of IDs), it can
 be useful to package these data up in the form that ohvbd would expect to
 come out of a search.
 
-To do this, create an \code{ohvbd.ids} object, specifying the db that the ids refer to.
+To do this, create an \code{ohvbd.ids} object, specifying the database that the ids refer to.
 }
 \examples{
 ohvbd.ids(c(1,2,3,4,5), db="vt")

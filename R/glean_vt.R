@@ -28,8 +28,8 @@ glean_vt <- function(res, cols = NA, returnunique = FALSE) {
     cli::cli_alert_warning("Responses not necessarily from VecTraits.")
   } else if (!is_from(res, "vt")) {
     cli::cli_abort(c(
-      "x" = "Responses not from VecTraits, Please use the appropriate {.fn glean_{get_db(res)}} function.",
-      "!" = "Detected db = {.val {get_db(res)}}"
+      "x" = "Responses not from VecTraits, Please use the appropriate {.fn glean_{ohvbd_db(res)}} function.",
+      "!" = "Detected database = {.val {ohvbd_db(res)}}"
     ))
   }
 

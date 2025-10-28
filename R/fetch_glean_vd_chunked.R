@@ -35,8 +35,8 @@ fetch_glean_vd_chunked <- function(
     cli::cli_alert_warning("IDs not necessarily from VecDyn.")
   } else if (!is_from(ids, "vd")) {
     cli::cli_abort(c(
-      "x" = "IDs not from VecDyn, Please use the appropriate {.fn fetch_glean_{get_db(ids)}} function.",
-      "!" = "Detected db = {.val {get_db(ids)}}"
+      "x" = "IDs not from VecDyn, Please use the appropriate {.fn fetch_glean_{ohvbd_db(ids)}} function.",
+      "!" = "Detected database = {.val {ohvbd_db(ids)}}"
     ))
   }
 

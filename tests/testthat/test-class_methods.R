@@ -1,3 +1,27 @@
+test_that("db field checking methods correctly detect a set db", {
+  x <- c(1,2,3)
+  attr(x, "db") <- "vt"  # Set db manually for testing
+  expect_true(has_db(x))
+  expect_true(is_from(x, "vt"))
+  expect_false(is_from(x, "vd"))
+  expect_equal(ohvbd_db(x), "vt")
+})
+
+test_that("db field checking methods correctly detect an unset db", {
+  x <- c(1,2,3)
+  expect_false(has_db(x))
+  expect_false(is_from(x, "vt"))
+  expect_null(ohvbd_db(x))
+})
+
+test_that("db field setting correctly sets db", {
+  x <- c(1,2,3)
+  ohvbd_db(x) <- "vt"
+  expect_true(has_db(x))
+  expect_true(is_from(x, "vt"))
+  expect_equal(ohvbd_db(x), "vt")
+})
+
 test_that("ohvbd.ids indexing creates an ohvbd.ids object", {
   expect_s3_class(ohvbd.ids(c(1, 2, 3), db = "vt")[1], "ohvbd.ids")
 })

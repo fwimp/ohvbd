@@ -61,7 +61,7 @@ assoc_ad <- function(
   basereq = NA
 ) {
   # Remember db attr of input data
-  datatype <- get_db(data)
+  datatype <- ohvbd_db(data)
 
   # Cast data to a df
   data <- as.data.frame(data)
@@ -71,7 +71,7 @@ assoc_ad <- function(
   } else if (!is_from(areadata, "ad")) {
     cli::cli_abort(c(
       "x" = "{.arg areadata} not from AREAdata!",
-      "!" = "Detected db = {.val {get_db(areadata)}}"
+      "!" = "Detected database = {.val {ohvbd_db(areadata)}}"
     ))
   }
 

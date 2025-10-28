@@ -2,7 +2,7 @@
 % Please edit documentation in R/search_hub.R
 \name{filter_db}
 \alias{filter_db}
-\title{Filter hub search results by db}
+\title{Filter hub search results by database}
 \usage{
 filter_db(ids, db)
 }
@@ -15,7 +15,7 @@ filter_db(ids, db)
 An \code{ohvbd.ids} vector of dataset IDs.
 }
 \description{
-Retrieve the IDs for any datasets matching the given db.
+Retrieve the IDs for any datasets matching the given database.
 }
 \note{
 If \code{\link[=filter_db]{filter_db()}} recieves an \code{ohvbd.ids} object by mistake, it will transparently return it if the source database matches \code{db}.

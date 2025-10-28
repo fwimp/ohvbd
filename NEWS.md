@@ -29,7 +29,7 @@ New functions & arguments:
 * New `force_db()` function enables one to force `ohvbd` to consider a particular object has having a particular provenance.
 * New `simplify` argument to `search_hub()` makes hub searches return an `ohvbd.ids` object if only one database was searched for. This behaviour is on by default.
   * To match this, `filter_db()` will now transparently return `ohvbd.ids` objects if it gets them.
-* New `is_from()`, `has_db()`, and `get_db()` functions allows for quick testing of object provenance (according to `ohvbd`).
+* New `ohvbd_db()`,  `has_db()`, and `is_from()`, functions allow for quick testing of object provenance (according to `ohvbd`).
 
 Other:
 

@@ -29,8 +29,8 @@ glean_vd <- function(res, cols = NA, returnunique = FALSE) {
     cli::cli_alert_warning("Responses not necessarily from VecDyn.")
   } else if (!is_from(res, "vd")) {
     cli::cli_abort(c(
-      "x" = "Responses not from VecDyn, Please use the appropriate {.fn glean_{get_db(res)}} function.",
-      "!" = "Detected db = {.val {get_db(res)}}"
+      "x" = "Responses not from VecDyn, Please use the appropriate {.fn glean_{ohvbd_db(res)}} function.",
+      "!" = "Detected database = {.val {ohvbd_db(res)}}"
     ))
   }
 

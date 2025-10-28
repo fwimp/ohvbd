@@ -79,8 +79,8 @@ glean_ad <- function(
     cli::cli_alert_warning("Data not necessarily from AREAdata.")
   } else if (!is_from(ad_matrix, "ad")) {
     cli::cli_abort(c(
-      "x" = "Data not from AREAdata, Please use the appropriate {.fn glean_{get_db(ad_matrix)}} function.",
-      "!" = "Detected db = {.val {get_db(ad_matrix)}}"
+      "x" = "Data not from AREAdata, Please use the appropriate {.fn glean_{ohvbd_db(ad_matrix)}} function.",
+      "!" = "Detected database = {.val {ohvbd_db(ad_matrix)}}"
     ))
   }
 
@@ -259,7 +259,7 @@ glean_ad <- function(
       db = "ad"
     )
   } else {
-    attr(outmat, "db") <- "ad"
+    ohvbd_db(outmat) <- "ad"
   }
   return(outmat)
 }

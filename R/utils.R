@@ -254,7 +254,7 @@ spatvect_to_hubwkt <- function(v) {
 #' force_db(c(1,2,3), "vt")
 #'
 force_db <- function(x, db) {
-  attr(x, "db") <- db
+  ohvbd_db(x) <- db
   x
 }
 

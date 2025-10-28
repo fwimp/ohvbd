@@ -165,8 +165,8 @@ search_hub <- function(
 }
 
 
-#' @title Filter hub search results by db
-#' @description Retrieve the IDs for any datasets matching the given db.
+#' @title Filter hub search results by database
+#' @description Retrieve the IDs for any datasets matching the given database.
 #'
 #' @author Francis Windram
 #'
@@ -194,7 +194,7 @@ filter_db <- function(ids, db) {
   if (inherits(ids, "ohvbd.ids")) {
     if (!is_from(ids, db)) {
       cli::cli_warn(c(
-        "!" = "{.arg ids} is an {.cls ohvbd.ids} object from {.val {get_db(ids)}}, not {.val {db}}!",
+        "!" = "{.arg ids} is an {.cls ohvbd.ids} object from {.val {ohvbd_db(ids)}}, not {.val {db}}!",
         "i" = "Leaving {.arg ids} unchanged."
       ))
     }

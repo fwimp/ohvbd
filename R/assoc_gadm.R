@@ -35,7 +35,7 @@ assoc_gadm <- function(
   basereq = NA
 ) {
   # Remember db attr of input data
-  datatype <- get_db(df)
+  datatype <- ohvbd_db(df)
 
   # Always load gid level 2 as it's quickest AND a complete superset of GID1 and 0
   gid <- 2
@@ -115,7 +115,7 @@ assoc_gadm <- function(
   cli::cli_alert_success("Merge complete.")
   cli::cli_progress_done()
 
-  attr(outdata, "db") <- datatype
+  ohvbd_db(outdata) <- datatype
 
   return(outdata)
 }
