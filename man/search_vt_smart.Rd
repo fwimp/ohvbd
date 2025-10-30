@@ -40,6 +40,7 @@ The following field names are valid (shortcut names are listed in brackets):
 \item \code{DOI}
 \item \code{CuratedByDOI}
 \item \code{SubmittedBy} (\emph{who})
+\item \code{Tags}
 }
 }
 

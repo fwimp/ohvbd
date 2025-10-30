@@ -30,6 +30,7 @@ The following field names are valid (shortcut names are listed in brackets):
 \item \code{Collections}
 \item \code{Years} (\emph{yrs})
 \item \code{CollectionMethods} (\emph{methods})
+\item \code{Tags}
 }
 }
 

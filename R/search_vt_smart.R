@@ -25,6 +25,7 @@
 #' - `DOI`
 #' - `CuratedByDOI`
 #' - `SubmittedBy` (*who*)
+#' - `Tags`
 #'
 #' @section Valid operators:
 #' The following operators are valid (alternative names are listed in brackets):
@@ -158,7 +159,9 @@ search_vt_smart <- function(field, operator, value, basereq = NA) {
     "doi" = 13,
     "curatedbydoi" = 14,
     "submittedby" = 15,
-    "who" = 15
+    "who" = 15,
+    "tags" = 16,
+    "tag" = 16
   )
   final_fields <- c(
     "DatasetID",
@@ -175,7 +178,8 @@ search_vt_smart <- function(field, operator, value, basereq = NA) {
     "Citation",
     "DOI",
     "CuratedByDOI",
-    "SubmittedBy"
+    "SubmittedBy",
+    "Tags"
   )
 
   # Translate field to proper field name

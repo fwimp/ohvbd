@@ -15,6 +15,7 @@
 #' - `Collections`
 #' - `Years` (*yrs*)
 #' - `CollectionMethods` (*methods*)
+#' - `Tags`
 #'
 #' @section Valid operators:
 #' The following operators are valid (alternative names are listed in brackets):
@@ -141,14 +142,17 @@ search_vd_smart <- function(field, operator, value, basereq = NA) {
     "years" = 4,
     "yrs" = 4,
     "collectionmethods" = 5,
-    "methods" = 5
+    "methods" = 5,
+    "tags" = 6,
+    "tag" = 6
   )
   final_fields <- c(
     "SpeciesName",
     "Title",
     "Collections",
     "Years",
-    "CollectionMethods"
+    "CollectionMethods",
+    "Tags"
   )
 
   # Translate field to proper field name
