@@ -23,7 +23,7 @@
 #' - `Interactor2Species` (*species2, spp2*)
 #' - `Citation` (*cite*)
 #' - `DOI`
-#' - `CuratedByDOI`
+#' - `CuratedByDOI` (*curateddoi*)
 #' - `SubmittedBy` (*who*)
 #' - `Tags`
 #'
@@ -158,6 +158,7 @@ search_vt_smart <- function(field, operator, value, basereq = NA) {
     "cite" = 12,
     "doi" = 13,
     "curatedbydoi" = 14,
+    "curateddoi" = 14,
     "submittedby" = 15,
     "who" = 15,
     "tags" = 16,

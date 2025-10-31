@@ -38,7 +38,7 @@ The following field names are valid (shortcut names are listed in brackets):
 \item \code{Interactor2Species} (\emph{species2, spp2})
 \item \code{Citation} (\emph{cite})
 \item \code{DOI}
-\item \code{CuratedByDOI}
+\item \code{CuratedByDOI} (\emph{curateddoi})
 \item \code{SubmittedBy} (\emph{who})
 \item \code{Tags}
 }
