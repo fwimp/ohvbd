@@ -1,0 +1,214 @@
+http_interactions:
+- request:
+    method: GET
+    uri: https://api.vbdhub.org/search?query=Ixodes+ricinus&database=vd&limit=1&page=1&withoutPublished=true
+  response:
+    status: 200
+    headers:
+      date: Fri, 31 Oct 2025 15:35:08 GMT
+      content-type: application/json; charset=utf-8
+      content-security-policy: 'default-src ''self'';base-uri ''self'';font-src ''self''
+        https: data:;form-action ''self'';frame-ancestors ''self'';img-src ''self''
+        data:;object-src ''none'';script-src ''self'';script-src-attr ''none'';style-src
+        ''self'' https: ''unsafe-inline'';upgrade-insecure-requests'
+      cross-origin-opener-policy: same-origin
+      cross-origin-resource-policy: same-origin
+      origin-agent-cluster: ?1
+      referrer-policy: no-referrer-when-downgrade
+      strict-transport-security: max-age=31536000; includeSubDomains
+      x-content-type-options: nosniff
+      x-dns-prefetch-control: 'off'
+      x-download-options: noopen
+      x-frame-options: SAMEORIGIN
+      x-permitted-cross-domain-policies: none
+      x-xss-protection: 1; mode=block
+      access-control-allow-origin: '*'
+      x-cache: HIT
+      cf-cache-status: DYNAMIC
+      expect-ct: max-age=86400, enforce
+      speculation-rules: '"/cdn-cgi/speculation"'
+      report-to: '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=ddIIFNyoDvpY3OmFO7iv3X59mA26zf9Rp2tMm4DGEw5WfrJC9D0kkHqpTy%2Bn%2BQRUtvh%2Bs0%2BfEAn%2B%2FWcwqit4yeaOTTxZq7yuezRH6tX1"}]}'
+      nel: '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      content-encoding: gzip
+      server: cloudflare
+      cf-ray: 99743877cbe9c616-LHR
+      alt-svc: h3=":443"; ma=86400
+    body:
+      string: '{"count":4,"hits":[{"id":"961","title":"Prevalence of tick-borne pathogens
+        in feeding and questing Ixodes ricinus ticks from Southern Sweden","doi":"10.1016/j.ttbdis.2025.102453","type":"abundance","citation":"Chiara
+        Cialini, Alessandra Cafiso, Mattias Waldeck, Asa Lundgren, Johan Falt, Bo
+        Settergren, Phimphanit Choklikitumnuey, Giulia Chiappa, Eleonora Rosso, Laura
+        Roveri, Elisa Fesce, Nicola Ferrari, Per-Eric Lindgren, Chiara Bazzocchi,
+        Giulio Grandi, Prevalence of tick-borne pathogens in feeding and questing
+        Ixodes ricinus ticks from Southern Sweden, Ticks and Tick-borne Diseases,
+        Volume 16, Issue 2, 2025, 102453, ISSN 1877-959X","kingdom":[],"phylum":[],"class":[],"order":[],"family":[],"genus":[],"species":[],"unknown":[],"db":"vd"}]}'
+  recorded_at: 2025-10-31 15:35:08
+- request:
+    method: GET
+    uri: https://api.vbdhub.org/search?query=Ixodes+ricinus&database=vd&limit=50&page=1&withoutPublished=true
+  response:
+    status: 200
+    headers:
+      date: Fri, 31 Oct 2025 15:35:09 GMT
+      content-type: application/json; charset=utf-8
+      content-security-policy: 'default-src ''self'';base-uri ''self'';font-src ''self''
+        https: data:;form-action ''self'';frame-ancestors ''self'';img-src ''self''
+        data:;object-src ''none'';script-src ''self'';script-src-attr ''none'';style-src
+        ''self'' https: ''unsafe-inline'';upgrade-insecure-requests'
+      cross-origin-opener-policy: same-origin
+      cross-origin-resource-policy: same-origin
+      origin-agent-cluster: ?1
+      referrer-policy: no-referrer-when-downgrade
+      strict-transport-security: max-age=31536000; includeSubDomains
+      x-content-type-options: nosniff
+      x-dns-prefetch-control: 'off'
+      x-download-options: noopen
+      x-frame-options: SAMEORIGIN
+      x-permitted-cross-domain-policies: none
+      x-xss-protection: 1; mode=block
+      access-control-allow-origin: '*'
+      x-cache: HIT
+      cf-cache-status: DYNAMIC
+      expect-ct: max-age=86400, enforce
+      speculation-rules: '"/cdn-cgi/speculation"'
+      report-to: '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=R6qmNEz8A7kRI9Nnc%2BXVSVu6bPC8T7TPpOiX7xszjwrZf4aDH5HP%2B9Wix%2By28y5R56u%2FbIpNv%2BwZOZUniGH9ZyPMxndAJdRdGelkPUFC"}]}'
+      nel: '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      content-encoding: gzip
+      server: cloudflare
+      cf-ray: 997438786d3fc616-LHR
+      alt-svc: h3=":443"; ma=86400
+    body:
+      string: '{"count":4,"hits":[{"id":"961","title":"Prevalence of tick-borne pathogens
+        in feeding and questing Ixodes ricinus ticks from Southern Sweden","doi":"10.1016/j.ttbdis.2025.102453","type":"abundance","citation":"Chiara
+        Cialini, Alessandra Cafiso, Mattias Waldeck, Asa Lundgren, Johan Falt, Bo
+        Settergren, Phimphanit Choklikitumnuey, Giulia Chiappa, Eleonora Rosso, Laura
+        Roveri, Elisa Fesce, Nicola Ferrari, Per-Eric Lindgren, Chiara Bazzocchi,
+        Giulio Grandi, Prevalence of tick-borne pathogens in feeding and questing
+        Ixodes ricinus ticks from Southern Sweden, Ticks and Tick-borne Diseases,
+        Volume 16, Issue 2, 2025, 102453, ISSN 1877-959X","kingdom":[],"phylum":[],"class":[],"order":[],"family":[],"genus":[],"species":[],"unknown":[],"db":"vd"},{"id":"955","title":"Temporal
+        Changes in Tick-Borne Pathogen Prevalence in Questing Ixodes ricinus Across
+        Different Habitats in the North-Eastern Italian Alps","doi":"10.1002/mbo3.70010","type":"abundance","citation":"Rosso
+        F, Ferrari G, Weil T, Tagliapietra V, Marini G, Dagostin F, Arnoldi D, Girardi
+        M, Rizzoli A. Temporal Changes in Tick-Borne Pathogen Prevalence in Questing
+        Ixodes ricinus Across Different Habitats in the North-Eastern Italian Alps.
+        Microbiologyopen. 2024 Dec;13(6):e010","kingdom":[],"phylum":[],"class":[],"order":[],"family":[],"genus":[],"species":[],"unknown":[],"db":"vd"},{"id":"552","title":"Ticks
+        and Tick-Borne Pathogens in Popular Recreational Areas in Tallinn, Estonia:
+        The Underestimated Risk of Tick-Borne Diseases","doi":"10.3390/microorganisms12091918","type":"abundance","citation":"Vikentjeva
+        M, Geller J, Bragina O. Ticks and Tick-Borne Pathogens in Popular Recreational
+        Areas in Tallinn, Estonia: The Underestimated Risk of Tick-Borne Diseases.
+        Microorganisms. 2024; 12(9):1918","kingdom":["Animalia"],"phylum":["Arthropoda"],"class":["Arachnida"],"order":["Ixodida"],"family":["Ixodidae"],"genus":["Ixodes"],"species":["Ixodes
+        persulcatus","Ixodes ricinus"],"unknown":[],"db":"vd"},{"id":"557","title":"Ticks
+        and tick-borne pathogens on Belle-Ile-en-Mer: An exploratory study in a western
+        French island environment","doi":"10.1016/j.ttbdis.2024.102399","type":"abundance","citation":"A.
+        Haidar-Ahmad et al., Ticks and tick-borne pathogens on Belle-Ile-en-Mer: An
+        exploratory study in a western French island environment, Ticks and Tick-borne
+        Diseases, Volume 16, Issue 1, 2025, 102399, ISSN 1877-959X","kingdom":["Animalia"],"phylum":["Arthropoda"],"class":["Arachnida"],"order":["Ixodida"],"family":["Ixodidae"],"genus":["Haemaphysalis","Dermacentor","Ixodes"],"species":["Haemaphysalis
+        punctata","Dermacentor marginatus","Dermacentor reticulatus","Ixodes ricinus"],"unknown":[],"db":"vd"}]}'
+  recorded_at: 2025-10-31 15:35:08
+- request:
+    method: GET
+    uri: https://api.vbdhub.org/search?query=Ixodes+ricinus&database=vd&limit=1&page=1&withoutPublished=true
+  response:
+    status: 200
+    headers:
+      date: Fri, 31 Oct 2025 15:35:09 GMT
+      content-type: application/json; charset=utf-8
+      content-security-policy: 'default-src ''self'';base-uri ''self'';font-src ''self''
+        https: data:;form-action ''self'';frame-ancestors ''self'';img-src ''self''
+        data:;object-src ''none'';script-src ''self'';script-src-attr ''none'';style-src
+        ''self'' https: ''unsafe-inline'';upgrade-insecure-requests'
+      cross-origin-opener-policy: same-origin
+      cross-origin-resource-policy: same-origin
+      origin-agent-cluster: ?1
+      referrer-policy: no-referrer-when-downgrade
+      strict-transport-security: max-age=31536000; includeSubDomains
+      x-content-type-options: nosniff
+      x-dns-prefetch-control: 'off'
+      x-download-options: noopen
+      x-frame-options: SAMEORIGIN
+      x-permitted-cross-domain-policies: none
+      x-xss-protection: 1; mode=block
+      access-control-allow-origin: '*'
+      x-cache: HIT
+      cf-cache-status: DYNAMIC
+      expect-ct: max-age=86400, enforce
+      speculation-rules: '"/cdn-cgi/speculation"'
+      report-to: '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=t9Jdp2j2Lf0c8bgenN55l771DbFe4aPJSVFDCZB6GlrPTuJ46%2B66ixrPy%2F5%2By9elNamSNeTYZfvYMCv5pYrRn5RRaaSnT867Rc5agVDd"}]}'
+      nel: '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      content-encoding: gzip
+      server: cloudflare
+      cf-ray: 99743879affec616-LHR
+      alt-svc: h3=":443"; ma=86400
+    body:
+      string: '{"count":4,"hits":[{"id":"961","title":"Prevalence of tick-borne pathogens
+        in feeding and questing Ixodes ricinus ticks from Southern Sweden","doi":"10.1016/j.ttbdis.2025.102453","type":"abundance","citation":"Chiara
+        Cialini, Alessandra Cafiso, Mattias Waldeck, Asa Lundgren, Johan Falt, Bo
+        Settergren, Phimphanit Choklikitumnuey, Giulia Chiappa, Eleonora Rosso, Laura
+        Roveri, Elisa Fesce, Nicola Ferrari, Per-Eric Lindgren, Chiara Bazzocchi,
+        Giulio Grandi, Prevalence of tick-borne pathogens in feeding and questing
+        Ixodes ricinus ticks from Southern Sweden, Ticks and Tick-borne Diseases,
+        Volume 16, Issue 2, 2025, 102453, ISSN 1877-959X","kingdom":[],"phylum":[],"class":[],"order":[],"family":[],"genus":[],"species":[],"unknown":[],"db":"vd"}]}'
+  recorded_at: 2025-10-31 15:35:09
+- request:
+    method: GET
+    uri: https://api.vbdhub.org/search?query=Ixodes+ricinus&database=vd&limit=50&page=1&withoutPublished=true
+  response:
+    status: 200
+    headers:
+      date: Fri, 31 Oct 2025 15:35:09 GMT
+      content-type: application/json; charset=utf-8
+      content-security-policy: 'default-src ''self'';base-uri ''self'';font-src ''self''
+        https: data:;form-action ''self'';frame-ancestors ''self'';img-src ''self''
+        data:;object-src ''none'';script-src ''self'';script-src-attr ''none'';style-src
+        ''self'' https: ''unsafe-inline'';upgrade-insecure-requests'
+      cross-origin-opener-policy: same-origin
+      cross-origin-resource-policy: same-origin
+      origin-agent-cluster: ?1
+      referrer-policy: no-referrer-when-downgrade
+      strict-transport-security: max-age=31536000; includeSubDomains
+      x-content-type-options: nosniff
+      x-dns-prefetch-control: 'off'
+      x-download-options: noopen
+      x-frame-options: SAMEORIGIN
+      x-permitted-cross-domain-policies: none
+      x-xss-protection: 1; mode=block
+      access-control-allow-origin: '*'
+      x-cache: HIT
+      cf-cache-status: DYNAMIC
+      expect-ct: max-age=86400, enforce
+      speculation-rules: '"/cdn-cgi/speculation"'
+      report-to: '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=duViWGwwPj7%2B5x7m5txmWeekK8aoLIq%2Fpuz95EEmVO35LO31eFPfvVpYXqvQdkSAMd6X6gJf2P6iOMtiO5QhrwPuhvwkVRlaQkblwarU"}]}'
+      nel: '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      content-encoding: gzip
+      server: cloudflare
+      cf-ray: 9974387aeaffc616-LHR
+      alt-svc: h3=":443"; ma=86400
+    body:
+      string: '{"count":4,"hits":[{"id":"961","title":"Prevalence of tick-borne pathogens
+        in feeding and questing Ixodes ricinus ticks from Southern Sweden","doi":"10.1016/j.ttbdis.2025.102453","type":"abundance","citation":"Chiara
+        Cialini, Alessandra Cafiso, Mattias Waldeck, Asa Lundgren, Johan Falt, Bo
+        Settergren, Phimphanit Choklikitumnuey, Giulia Chiappa, Eleonora Rosso, Laura
+        Roveri, Elisa Fesce, Nicola Ferrari, Per-Eric Lindgren, Chiara Bazzocchi,
+        Giulio Grandi, Prevalence of tick-borne pathogens in feeding and questing
+        Ixodes ricinus ticks from Southern Sweden, Ticks and Tick-borne Diseases,
+        Volume 16, Issue 2, 2025, 102453, ISSN 1877-959X","kingdom":[],"phylum":[],"class":[],"order":[],"family":[],"genus":[],"species":[],"unknown":[],"db":"vd"},{"id":"955","title":"Temporal
+        Changes in Tick-Borne Pathogen Prevalence in Questing Ixodes ricinus Across
+        Different Habitats in the North-Eastern Italian Alps","doi":"10.1002/mbo3.70010","type":"abundance","citation":"Rosso
+        F, Ferrari G, Weil T, Tagliapietra V, Marini G, Dagostin F, Arnoldi D, Girardi
+        M, Rizzoli A. Temporal Changes in Tick-Borne Pathogen Prevalence in Questing
+        Ixodes ricinus Across Different Habitats in the North-Eastern Italian Alps.
+        Microbiologyopen. 2024 Dec;13(6):e010","kingdom":[],"phylum":[],"class":[],"order":[],"family":[],"genus":[],"species":[],"unknown":[],"db":"vd"},{"id":"552","title":"Ticks
+        and Tick-Borne Pathogens in Popular Recreational Areas in Tallinn, Estonia:
+        The Underestimated Risk of Tick-Borne Diseases","doi":"10.3390/microorganisms12091918","type":"abundance","citation":"Vikentjeva
+        M, Geller J, Bragina O. Ticks and Tick-Borne Pathogens in Popular Recreational
+        Areas in Tallinn, Estonia: The Underestimated Risk of Tick-Borne Diseases.
+        Microorganisms. 2024; 12(9):1918","kingdom":["Animalia"],"phylum":["Arthropoda"],"class":["Arachnida"],"order":["Ixodida"],"family":["Ixodidae"],"genus":["Ixodes"],"species":["Ixodes
+        persulcatus","Ixodes ricinus"],"unknown":[],"db":"vd"},{"id":"557","title":"Ticks
+        and tick-borne pathogens on Belle-Ile-en-Mer: An exploratory study in a western
+        French island environment","doi":"10.1016/j.ttbdis.2024.102399","type":"abundance","citation":"A.
+        Haidar-Ahmad et al., Ticks and tick-borne pathogens on Belle-Ile-en-Mer: An
+        exploratory study in a western French island environment, Ticks and Tick-borne
+        Diseases, Volume 16, Issue 1, 2025, 102399, ISSN 1877-959X","kingdom":["Animalia"],"phylum":["Arthropoda"],"class":["Arachnida"],"order":["Ixodida"],"family":["Ixodidae"],"genus":["Haemaphysalis","Dermacentor","Ixodes"],"species":["Haemaphysalis
+        punctata","Dermacentor marginatus","Dermacentor reticulatus","Ixodes ricinus"],"unknown":[],"db":"vd"}]}'
+  recorded_at: 2025-10-31 15:35:09
+recorded_with: VCR-vcr/2.0.0

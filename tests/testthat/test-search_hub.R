@@ -1,3 +1,19 @@
+test_that("search_hub creates correct requests", {
+  withr::local_options(list(ohvbd_dryrun = TRUE))
+  expect_equal(
+    suppressMessages(search_hub("Ixodes ricinus", db="vt"))[["url"]],
+    "https://api.vbdhub.org/search?query=Ixodes%20ricinus&database=vt&limit=1&page=1&withoutPublished=true"
+  )
+  expect_equal(
+    suppressMessages(search_hub("Ixodes ricinus", "vd"))[["url"]],
+    "https://api.vbdhub.org/search?query=Ixodes%20ricinus&database=vd&limit=1&page=1&withoutPublished=true"
+  )
+  expect_equal(
+    suppressMessages(search_hub("Ixodes ricinus", "vt", exact = TRUE, withoutpublished = FALSE))[["url"]],
+    "https://api.vbdhub.org/search?query=Ixodes%20ricinus&database=vt&limit=1&page=1&exact=true"
+  )
+})
+
 test_that("search_hub works and returns ohvbd.hub.search objects", {
   testwkt <- gsub(
     "\n",
@@ -29,6 +45,19 @@ test_that("search_hub works and returns ohvbd.hub.search objects", {
 
   expect_s3_class(aedes_uk_results, "ohvbd.hub.search")
   expect_s3_class(tyrnava_results, "ohvbd.hub.search")
+})
+
+test_that("search_hub returns ohvbd.ids object when simplify is TRUE", {
+  vcr::local_cassette("search_hub_simplify")
+  ixodes_vd_results <- suppressMessages(
+    search_hub("Ixodes ricinus", "vd", simplify = TRUE)
+    )
+  ixodes_vd_results_nonsimple <- suppressMessages(
+    search_hub("Ixodes ricinus", "vd", simplify = FALSE)
+  )
+
+  expect_s3_class(ixodes_vd_results, "ohvbd.ids")
+  expect_s3_class(ixodes_vd_results_nonsimple, "ohvbd.hub.search")
 })
 
 test_that("filter_db correctly filters from hub searches", {
