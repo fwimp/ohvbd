@@ -8,6 +8,7 @@
 #' @param fromdate the date from which to search (ISO format: yyyy-mm-dd).
 #' @param todate the date up to which to search (ISO format: yyyy-mm-dd).
 #' @param locationpoly a polygon or set of polygons in `terra::SpatVector` or WKT MULTIPOLYGON format within which to search.
+#' @param taxonomy a numeric vector containing the gbif ids of taxa to search for (found using [rgbif::name_suggest] or similar functions).
 #' @param exact whether to return exact matches only.
 #' @param withoutpublished whether to return results without a publishing date when filtering by date.
 #' @param returnlist return the raw output list rather than a formatted dataframe.
@@ -25,11 +26,12 @@
 #'
 
 search_hub <- function(
-  query,
+  query = "",
   db = c("vt", "vd", "gbif", "px"),
   fromdate = NULL,
   todate = NULL,
   locationpoly = NULL,
+  taxonomy = NULL,
   exact = FALSE,
   withoutpublished = TRUE,
   returnlist = FALSE,
@@ -72,6 +74,8 @@ search_hub <- function(
     }
   }
 
+  taxonomy <- paste(taxonomy, collapse = ",")
+
   cli::cli_progress_step("Finding number of results...")
 
   # Find num of results
@@ -94,6 +98,9 @@ search_hub <- function(
   }
   if (!(is.null(locationpoly))) {
     req <- req |> req_url_query(geometry = locationpoly)
+  }
+  if (!(is.null(taxonomy))) {
+    req <- req |> req_url_query(taxonomy = taxonomy)
   }
 
   if (getOption("ohvbd_dryrun", default = FALSE)) {
@@ -137,6 +144,9 @@ search_hub <- function(
       }
       if (!(is.null(locationpoly))) {
         req <- req |> req_url_query(geometry = locationpoly)
+      }
+      if (!(is.null(taxonomy))) {
+        req <- req |> req_url_query(taxonomy = taxonomy)
       }
       req
     })
