@@ -96,6 +96,12 @@ search_hub <- function(
     req <- req |> req_url_query(geometry = locationpoly)
   }
 
+  if (getOption("ohvbd_dryrun", default = FALSE)) {
+    cli::cli_alert_warning("Debug option {.val ohvbd_dryrun} is TRUE.")
+    cli::cli_alert_info("Returning request object...")
+    return(req)
+  }
+
   resp <- req |> req_perform()
 
   resp <- resp |> resp_body_json()

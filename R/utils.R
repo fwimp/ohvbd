@@ -248,6 +248,8 @@ spatvect_to_hubwkt <- function(v) {
 #' Objects created in this way may lack vital underlying data required later.
 #' Instead use [ohvbd.ids()] for this purpose.
 #'
+#' @concept convenience
+#'
 #' @export
 #'
 #' @examples
@@ -257,6 +259,25 @@ force_db <- function(x, db) {
   ohvbd_db(x) <- db
   x
 }
+
+#' @title Option: dry runs of ohvbd searches
+#'
+#' @description
+#' Set this option to make ohvbd terminate searches before execution and return the request object instead.
+#'
+#' @note
+#' This is usually only useful when debugging, testing, or developing `ohvbd`.
+#'
+#' @author Francis Windram
+#'
+#' @examplesIf interactive()
+#' options(ohvbd_dryrun = TRUE)
+#' search_hub("Ixodes ricinus")
+#'
+#' options(ohvbd_dryrun = NULL)  # Unset dryrun
+#'
+#' @name ohvbd_dryrun
+NULL
 
 # Only used for internal testing and doesnt need to be checked.
 #

@@ -196,14 +196,22 @@ search_vt_smart <- function(field, operator, value, basereq = NA) {
     cli::cli_abort(c("x" = "Invalid field: {.val {field}}"))
   }
 
+  req <- basereq |>
+    req_url_path_append("vectraits-explorer") |>
+    req_url_query("format" = "json") |>
+    req_url_query("field" = final_field) |>
+    req_url_query("operator" = final_operator) |>
+    req_url_query("term" = value)
+
+  if (getOption("ohvbd_dryrun", default = FALSE)) {
+    cli::cli_alert_warning("Debug option {.val ohvbd_dryrun} is TRUE.")
+    cli::cli_alert_info("Returning request object...")
+    return(req)
+  }
+
   resplist <- tryCatch(
     {
-      resp <- basereq |>
-        req_url_path_append("vectraits-explorer") |>
-        req_url_query("format" = "json") |>
-        req_url_query("field" = final_field) |>
-        req_url_query("operator" = final_operator) |>
-        req_url_query("term" = value) |>
+      resp <- req |>
         req_perform()
       list("resp" = resp, "err_code" = 0, "err_obj" = NULL)
     },

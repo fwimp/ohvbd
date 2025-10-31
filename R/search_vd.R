@@ -24,12 +24,20 @@ search_vd <- function(keywords, basereq = NA) {
     basereq <- vb_basereq()
   }
 
+  req <- basereq |>
+    req_url_path_append("vecdynbyprovider") |>
+    req_url_query("format" = "json") |>
+    req_url_query("keywords" = keywords, .multi = space_collapse)
+
+  if (getOption("ohvbd_dryrun", default = FALSE)) {
+    cli::cli_alert_warning("Debug option {.val ohvbd_dryrun} is TRUE.")
+    cli::cli_alert_info("Returning request object...")
+    return(req)
+  }
+
   resplist <- tryCatch(
     {
-      resp <- basereq |>
-        req_url_path_append("vecdynbyprovider") |>
-        req_url_query("format" = "json") |>
-        req_url_query("keywords" = keywords, .multi = space_collapse) |>
+      resp <- req |>
         req_perform()
       list("resp" = resp, "err_code" = 0, "err_obj" = NULL)
     },
