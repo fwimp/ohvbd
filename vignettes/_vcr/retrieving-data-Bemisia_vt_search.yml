@@ -7,9 +7,9 @@ http_interactions:
     headers:
       Allow: GET, HEAD, OPTIONS
       Connection: keep-alive
-      Content-Length: '4221'
+      Content-Length: '4296'
       Content-Type: application/json
-      Date: Mon, 13 Oct 2025 15:19:41 GMT
+      Date: Sat, 01 Nov 2025 00:44:58 GMT
       Referrer-Policy: same-origin
       Server: nginx
       Strict-Transport-Security: max-age=31536000
@@ -20,33 +20,33 @@ http_interactions:
       X-Frame-Options: DENY
       X-XSS-Protection: 1; mode=block
     body:
-      string: '{"data":{"count":7,"next":null,"previous":null,"results":[{"url":"vectorbyte.crc.nd.edu/portal/api/vectraits-dataset/14/","DatasetID":"14","OriginalTraitName":"survival","Variables":["Interactor1Temp","LocationText"],"Interactor1Stage":"juvenile","Interactor1Sex":null,"Interactor1Genus":"Bemisia","Interactor1Species":"tabaci","Interactor2Genus":null,"Interactor2Species":null,"Citation":"Aregbesola
+      string: '{"data":{"count":7,"next":null,"previous":null,"results":[{"url":"vectorbyte.crc.nd.edu/portal/api/vectraits-dataset/14/","DatasetID":"14","OriginalTraitName":"survival","Variables":["Interactor1Temp","LocationText"],"Tags":[],"Interactor1Stage":"juvenile","Interactor1Sex":null,"Interactor1Genus":"Bemisia","Interactor1Species":"tabaci","Interactor2Genus":null,"Interactor2Species":null,"Citation":"Aregbesola
         et al. 2020. Life history and temperature dependence of cassava colonising
         populations of Bemisia tabaci. J. Pest. Sci 93: 4","DOI":"10.1007/s10340-020-01249-z","CuratedByDOI":null,"SubmittedBy":"Paul
         Huxley","EmbargoReleaseDate":"2020-01-01"},{"url":"vectorbyte.crc.nd.edu/portal/api/vectraits-dataset/15/","DatasetID":"15","OriginalTraitName":"development
-        time","Variables":["Interactor1Temp",null],"Interactor1Stage":"juvenile","Interactor1Sex":null,"Interactor1Genus":"Bemisia","Interactor1Species":"tabaci","Interactor2Genus":null,"Interactor2Species":null,"Citation":"Aregbesola
+        time","Variables":["Interactor1Temp",null],"Tags":[],"Interactor1Stage":"juvenile","Interactor1Sex":null,"Interactor1Genus":"Bemisia","Interactor1Species":"tabaci","Interactor2Genus":null,"Interactor2Species":null,"Citation":"Aregbesola
         et al. 2020. Life history and temperature dependence of cassava colonising
         populations of Bemisia tabaci. J. Pest. Sci 93: 4","DOI":"10.1007/s10340-020-01249-z","CuratedByDOI":null,"SubmittedBy":"Paul
-        Huxley","EmbargoReleaseDate":"2020-01-01"},{"url":"vectorbyte.crc.nd.edu/portal/api/vectraits-dataset/16/","DatasetID":"16","OriginalTraitName":"longevity","Variables":["Interactor1Temp",null],"Interactor1Stage":"adult","Interactor1Sex":"male","Interactor1Genus":"Bemisia","Interactor1Species":"tabaci","Interactor2Genus":null,"Interactor2Species":null,"Citation":"Aregbesola
+        Huxley","EmbargoReleaseDate":"2020-01-01"},{"url":"vectorbyte.crc.nd.edu/portal/api/vectraits-dataset/16/","DatasetID":"16","OriginalTraitName":"longevity","Variables":["Interactor1Temp",null],"Tags":[],"Interactor1Stage":"adult","Interactor1Sex":"female","Interactor1Genus":"Bemisia","Interactor1Species":"tabaci","Interactor2Genus":null,"Interactor2Species":null,"Citation":"Aregbesola
         et al. 2020. Life history and temperature dependence of cassava colonising
         populations of Bemisia tabaci. J. Pest. Sci 93: 4","DOI":"10.1007/s10340-020-01249-z","CuratedByDOI":null,"SubmittedBy":"Paul
-        Huxley","EmbargoReleaseDate":"2020-01-01"},{"url":"vectorbyte.crc.nd.edu/portal/api/vectraits-dataset/17/","DatasetID":"17","OriginalTraitName":"fecundity","Variables":["Interactor1Temp",null],"Interactor1Stage":"adult","Interactor1Sex":"female","Interactor1Genus":"Bemisia","Interactor1Species":"tabaci","Interactor2Genus":null,"Interactor2Species":null,"Citation":"Aregbesola
+        Huxley","EmbargoReleaseDate":"2020-01-01"},{"url":"vectorbyte.crc.nd.edu/portal/api/vectraits-dataset/17/","DatasetID":"17","OriginalTraitName":"fecundity","Variables":["Interactor1Temp",null],"Tags":[],"Interactor1Stage":"adult","Interactor1Sex":"female","Interactor1Genus":"Bemisia","Interactor1Species":"tabaci","Interactor2Genus":null,"Interactor2Species":null,"Citation":"Aregbesola
         et al. 2020. Life history and temperature dependence of cassava colonising
         populations of Bemisia tabaci. J. Pest. Sci 93: 4","DOI":"10.1007/s10340-020-01249-z","CuratedByDOI":null,"SubmittedBy":"Paul
         Huxley","EmbargoReleaseDate":"2020-01-01"},{"url":"vectorbyte.crc.nd.edu/portal/api/vectraits-dataset/18/","DatasetID":"18","OriginalTraitName":"ovipositional
-        period","Variables":["Interactor1Temp",null],"Interactor1Stage":"adult","Interactor1Sex":"female","Interactor1Genus":"Bemisia","Interactor1Species":"tabaci","Interactor2Genus":null,"Interactor2Species":null,"Citation":"Aregbesola
+        period","Variables":["Interactor1Temp",null],"Tags":[],"Interactor1Stage":"adult","Interactor1Sex":"female","Interactor1Genus":"Bemisia","Interactor1Species":"tabaci","Interactor2Genus":null,"Interactor2Species":null,"Citation":"Aregbesola
         et al. 2020. Life history and temperature dependence of cassava colonising
         populations of Bemisia tabaci. J. Pest. Sci 93: 4","DOI":"10.1007/s10340-020-01249-z","CuratedByDOI":null,"SubmittedBy":"Paul
         Huxley","EmbargoReleaseDate":"2020-01-01"},{"url":"vectorbyte.crc.nd.edu/portal/api/vectraits-dataset/345/","DatasetID":"345","OriginalTraitName":"body
-        size","Variables":["Unplottable",null],"Interactor1Stage":"adult","Interactor1Sex":"female","Interactor1Genus":"Bemisia","Interactor1Species":"tabaci","Interactor2Genus":null,"Interactor2Species":null,"Citation":"Park
+        size","Variables":["Unplottable",null],"Tags":[],"Interactor1Stage":"adult","Interactor1Sex":"female","Interactor1Genus":"Bemisia","Interactor1Species":"tabaci","Interactor2Genus":null,"Interactor2Species":null,"Citation":"Park
         et al. 2021. Comparison of life history parameters of two different genetic
         clusters of Bemisia tabaci MED (Hemiptera: Aleyrodidae) through single and
         cross mating. PloS ONE 16(3): e0248819","DOI":"10.1371/journal.pone.0248819","CuratedByDOI":null,"SubmittedBy":"Paul
-        Huxley","EmbargoReleaseDate":"2021-01-01"},{"url":"vectorbyte.crc.nd.edu/portal/api/vectraits-dataset/523/","DatasetID":"523","OriginalTraitName":"mortality","Variables":["Interactor1Temp",null],"Interactor1Stage":"N3","Interactor1Sex":null,"Interactor1Genus":"Bemisia","Interactor1Species":"tabaci","Interactor2Genus":null,"Interactor2Species":null,"Citation":"Aregbesola
+        Huxley","EmbargoReleaseDate":"2021-01-01"},{"url":"vectorbyte.crc.nd.edu/portal/api/vectraits-dataset/523/","DatasetID":"523","OriginalTraitName":"mortality","Variables":["Interactor1Temp",null],"Tags":[],"Interactor1Stage":"pupal","Interactor1Sex":null,"Interactor1Genus":"Bemisia","Interactor1Species":"tabaci","Interactor2Genus":null,"Interactor2Species":null,"Citation":"Aregbesola
         et al. 2020. Life history and temperature dependence of cassava colonising
         populations of Bemisia tabaci. J. Pest. Sci 93: 4","DOI":"10.1007/s10340-020-01249-z","CuratedByDOI":null,"SubmittedBy":"Paul
         Huxley","EmbargoReleaseDate":"2020-01-01"}]},"ids":[14,15,16,17,18,345,523]}'
-  recorded_at: 2025-10-13 15:19:41
+  recorded_at: 2025-11-01 00:44:58
 - request:
     method: GET
     uri: https://vectorbyte.crc.nd.edu/portal/api/vectraits-dataset/14?format=json
@@ -57,7 +57,7 @@ http_interactions:
       Connection: keep-alive
       Content-Length: '26047'
       Content-Type: application/json
-      Date: Mon, 13 Oct 2025 15:19:42 GMT
+      Date: Sat, 01 Nov 2025 00:44:58 GMT
       Referrer-Policy: same-origin
       Server: nginx
       Strict-Transport-Security: max-age=31536000
@@ -117,7 +117,7 @@ http_interactions:
         et al. 2020. Life history and temperature dependence of cassava colonising
         populations of Bemisia tabaci. J. Pest. Sci 93: 4","CuratedByCitation":null,"CuratedByDOI":null,"DOI":"10.1007/s10340-020-01249-z","SubmittedBy":"Paul
         Huxley","ContributorEmail":"phuxly@gmail.com","Notes":null,"DefaultChartXaxis":"Interactor1Temp","DefaultChartCategory":"LocationText"}]}'
-  recorded_at: 2025-10-13 15:19:42
+  recorded_at: 2025-11-01 00:44:58
 - request:
     method: GET
     uri: https://vectorbyte.crc.nd.edu/portal/api/vectraits-dataset/15?format=json
@@ -128,7 +128,7 @@ http_interactions:
       Connection: keep-alive
       Content-Length: '26100'
       Content-Type: application/json
-      Date: Mon, 13 Oct 2025 15:19:42 GMT
+      Date: Sat, 01 Nov 2025 00:44:58 GMT
       Referrer-Policy: same-origin
       Server: nginx
       Strict-Transport-Security: max-age=31536000
@@ -188,7 +188,7 @@ http_interactions:
         et al. 2020. Life history and temperature dependence of cassava colonising
         populations of Bemisia tabaci. J. Pest. Sci 93: 4","CuratedByCitation":null,"CuratedByDOI":null,"DOI":"10.1007/s10340-020-01249-z","SubmittedBy":"Paul
         Huxley","ContributorEmail":"phuxly@gmail.com","Notes":null,"DefaultChartXaxis":"Interactor1Temp","DefaultChartCategory":"LocationText"}]}'
-  recorded_at: 2025-10-13 15:19:42
+  recorded_at: 2025-11-01 00:44:58
 - request:
     method: GET
     uri: https://vectorbyte.crc.nd.edu/portal/api/vectraits-dataset/16?format=json
@@ -199,7 +199,7 @@ http_interactions:
       Connection: keep-alive
       Content-Length: '52134'
       Content-Type: application/json
-      Date: Mon, 13 Oct 2025 15:19:42 GMT
+      Date: Sat, 01 Nov 2025 00:44:59 GMT
       Referrer-Policy: same-origin
       Server: nginx
       Strict-Transport-Security: max-age=31536000
@@ -307,7 +307,7 @@ http_interactions:
         4","Citation":"Aregbesola et al. 2020. Life history and temperature dependence
         of cassava colonising populations of Bemisia tabaci. J. Pest. Sci 93: 4","CuratedByCitation":null,"CuratedByDOI":null,"DOI":"10.1007/s10340-020-01249-z","SubmittedBy":"Paul
         Huxley","ContributorEmail":"phuxly@gmail.com","Notes":null,"DefaultChartXaxis":"Interactor1Temp","DefaultChartCategory":"LocationText"}]}'
-  recorded_at: 2025-10-13 15:19:42
+  recorded_at: 2025-11-01 00:44:58
 - request:
     method: GET
     uri: https://vectorbyte.crc.nd.edu/portal/api/vectraits-dataset/17?format=json
@@ -318,7 +318,7 @@ http_interactions:
       Connection: keep-alive
       Content-Length: '26110'
       Content-Type: application/json
-      Date: Mon, 13 Oct 2025 15:19:43 GMT
+      Date: Sat, 01 Nov 2025 00:44:59 GMT
       Referrer-Policy: same-origin
       Server: nginx
       Strict-Transport-Security: max-age=31536000
@@ -378,7 +378,7 @@ http_interactions:
         4","Citation":"Aregbesola et al. 2020. Life history and temperature dependence
         of cassava colonising populations of Bemisia tabaci. J. Pest. Sci 93: 4","CuratedByCitation":null,"CuratedByDOI":null,"DOI":"10.1007/s10340-020-01249-z","SubmittedBy":"Paul
         Huxley","ContributorEmail":"phuxly@gmail.com","Notes":null,"DefaultChartXaxis":"Interactor1Temp","DefaultChartCategory":"LocationText"}]}'
-  recorded_at: 2025-10-13 15:19:43
+  recorded_at: 2025-11-01 00:44:59
 - request:
     method: GET
     uri: https://vectorbyte.crc.nd.edu/portal/api/vectraits-dataset/18?format=json
@@ -389,7 +389,7 @@ http_interactions:
       Connection: keep-alive
       Content-Length: '26129'
       Content-Type: application/json
-      Date: Mon, 13 Oct 2025 15:19:43 GMT
+      Date: Sat, 01 Nov 2025 00:44:59 GMT
       Referrer-Policy: same-origin
       Server: nginx
       Strict-Transport-Security: max-age=31536000
@@ -449,7 +449,7 @@ http_interactions:
         4","Citation":"Aregbesola et al. 2020. Life history and temperature dependence
         of cassava colonising populations of Bemisia tabaci. J. Pest. Sci 93: 4","CuratedByCitation":null,"CuratedByDOI":null,"DOI":"10.1007/s10340-020-01249-z","SubmittedBy":"Paul
         Huxley","ContributorEmail":"phuxly@gmail.com","Notes":null,"DefaultChartXaxis":"Interactor1Temp","DefaultChartCategory":"LocationText"}]}'
-  recorded_at: 2025-10-13 15:19:43
+  recorded_at: 2025-11-01 00:44:59
 - request:
     method: GET
     uri: https://vectorbyte.crc.nd.edu/portal/api/vectraits-dataset/345?format=json
@@ -460,7 +460,7 @@ http_interactions:
       Connection: keep-alive
       Content-Length: '35138'
       Content-Type: application/json
-      Date: Mon, 13 Oct 2025 15:19:43 GMT
+      Date: Sat, 01 Nov 2025 00:44:59 GMT
       Referrer-Policy: same-origin
       Server: nginx
       Strict-Transport-Security: max-age=31536000
@@ -536,5 +536,5 @@ http_interactions:
         two different genetic clusters of Bemisia tabaci MED (Hemiptera: Aleyrodidae)
         through single and cross mating. PloS ONE 16(3): e0248819","CuratedByCitation":null,"CuratedByDOI":null,"DOI":"10.1371/journal.pone.0248819","SubmittedBy":"Paul
         Huxley","ContributorEmail":"phuxly@gmail.com","Notes":null,"DefaultChartXaxis":"Unplottable","DefaultChartCategory":null}]}'
-  recorded_at: 2025-10-13 15:19:43
+  recorded_at: 2025-11-01 00:44:59
 recorded_with: VCR-vcr/2.0.0

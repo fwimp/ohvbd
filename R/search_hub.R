@@ -74,7 +74,7 @@ search_hub <- function(
     }
   }
 
-  taxonomy <- paste(taxonomy, collapse = ",")
+  taxonomy_str <- paste(taxonomy, collapse = ",")
 
   cli::cli_progress_step("Finding number of results...")
 
@@ -100,7 +100,7 @@ search_hub <- function(
     req <- req |> req_url_query(geometry = locationpoly)
   }
   if (!(is.null(taxonomy))) {
-    req <- req |> req_url_query(taxonomy = taxonomy)
+    req <- req |> req_url_query(taxonomy = taxonomy_str)
   }
 
   if (getOption("ohvbd_dryrun", default = FALSE)) {
@@ -146,7 +146,7 @@ search_hub <- function(
         req <- req |> req_url_query(geometry = locationpoly)
       }
       if (!(is.null(taxonomy))) {
-        req <- req |> req_url_query(taxonomy = taxonomy)
+        req <- req |> req_url_query(taxonomy = taxonomy_str)
       }
       req
     })
