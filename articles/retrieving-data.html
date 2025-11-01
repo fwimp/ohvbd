@@ -133,11 +133,11 @@ approach.</p>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/fwimp/ohvbd" class="external-link">ohvbd</a></span><span class="op">)</span></span>
 <span><span class="va">aedes_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/search_hub.html">search_hub</a></span><span class="op">(</span><span class="st">"Aedes aegypti"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">aedes_results</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Rows: 143, Query: Aedes aegypti</span></span>
+<pre><code><span><span class="co">## Rows: 145, Query: Aedes aegypti</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Split by database:</span></span>
 <span><span class="co">## gbif   px   vd   vt </span></span>
-<span><span class="co">##   20   42   10   71</span></span></code></pre>
+<span><span class="co">##   20   44   10   71</span></span></code></pre>
 <p>You can see here there are 20 GBIF datasets, 10 VecDyn datasets, and
 71 VecTraits datasets.</p>
 <p>However right now we only have the ids of the data, not the data
@@ -161,10 +161,10 @@ best) get garbage.</p>
 <span><span class="va">aedes_vt</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #0000BB;">&lt;ohvbd.ids&gt;</span></span></span>
 <span><span class="co">## Database: vt</span></span>
-<span><span class="co">##  [1]  474  475  148  578  144  142  126  556  169  580  577  285  287  357  863</span></span>
-<span><span class="co">## [16]  865  149  473  476  565  573  576  555  841  842  356  146  864  170  214</span></span>
-<span><span class="co">## [31]  579  147  143  355  359  354  564  574  575  124  125  346  553  554  853</span></span>
-<span><span class="co">## [46]  825  826  286  901  145  906  358  892  893  854  855  911  828  860  910</span></span>
+<span><span class="co">##  [1]  474  475  148  578  556  126  142  144  285  287  169  580  577  865  863</span></span>
+<span><span class="co">## [16]  357  149  476  473  573  576  565  555  841  842  356  146  864  170  214</span></span>
+<span><span class="co">## [31]  579  359  355  143  147  564  574  575  124  125  346  553  554  354  853</span></span>
+<span><span class="co">## [46]  286  825  826  901  145  906  892  893  358  854  855  911  860  828  910</span></span>
 <span><span class="co">## [61]  572  557  558  571 1506 1510 1511 1512 1507 1508 1509</span></span></code></pre>
 <p>If you only searched the hub for one database, by default
 <code><a href="../reference/search_hub.html">search_hub()</a></code> will automatically perform the
@@ -173,10 +173,10 @@ best) get garbage.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/search_hub.html">search_hub</a></span><span class="op">(</span><span class="st">"Aedes aegypti"</span>, db <span class="op">=</span> <span class="st">"vt"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #0000BB;">&lt;ohvbd.ids&gt;</span></span></span>
 <span><span class="co">## Database: vt</span></span>
-<span><span class="co">##  [1]  474  475  148  578  144  142  126  556  169  580  577  285  287  357  863</span></span>
-<span><span class="co">## [16]  865  149  473  476  565  573  576  555  841  842  356  146  864  170  214</span></span>
-<span><span class="co">## [31]  579  147  143  355  359  354  564  574  575  124  125  346  553  554  853</span></span>
-<span><span class="co">## [46]  825  826  286  901  145  906  358  892  893  854  855  911  828  860  910</span></span>
+<span><span class="co">##  [1]  474  475  148  578  556  126  142  144  285  287  169  580  577  865  863</span></span>
+<span><span class="co">## [16]  357  149  476  473  573  576  565  555  841  842  356  146  864  170  214</span></span>
+<span><span class="co">## [31]  579  359  355  143  147  564  574  575  124  125  346  553  554  354  853</span></span>
+<span><span class="co">## [46]  286  825  826  901  145  906  892  893  358  854  855  911  860  828  910</span></span>
 <span><span class="co">## [61]  572  557  558  571 1506 1510 1511 1512 1507 1508 1509</span></span></code></pre>
 </div>
 <div class="section level2">
@@ -221,7 +221,7 @@ from them using the <code><a href="../reference/glean.html">glean()</a></code> f
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">aedes_data</span> <span class="op">&lt;-</span> <span class="va">aedes_responses</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/glean.html">glean</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Data dimensions: "</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">aedes_data</span><span class="op">)</span>, <span class="st">" cols x "</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">aedes_data</span><span class="op">)</span>, <span class="st">" rows"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Data dimensions:  157  cols x  725  rows</span></span></code></pre>
+<pre><code><span><span class="co">## Data dimensions:  157  cols x  874  rows</span></span></code></pre>
 <p>This dataset is a bit too large to print here, and often you may only
 want a few columns of data rather than the whole dataset.</p>
 <p>Fortunately the <code>cols</code> argument allows us to filter this
@@ -238,12 +238,12 @@ from our data using the same command as before:</p>
 <span><span class="va">aedes_data_filtered</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #0000BB;">&lt;ohvbd.data.frame&gt;</span></span></span>
 <span><span class="co">## Database: vt</span></span>
-<span><span class="co">##   DatasetID                 Location OriginalTraitName</span></span>
-<span><span class="co">## 1       474           Marilia Brazil    fecundity rate</span></span>
-<span><span class="co">## 2       475           Marilia Brazil         longevity</span></span>
-<span><span class="co">## 3       148 Unversity of Georgia USA  glycogen content</span></span>
-<span><span class="co">## 4       578       Fort Myers Florida  development time</span></span>
-<span><span class="co">## 5       144 Unversity of Georgia USA     lipid content</span></span></code></pre>
+<span><span class="co">##   DatasetID                      Location OriginalTraitName</span></span>
+<span><span class="co">## 1       474                Marilia Brazil    fecundity rate</span></span>
+<span><span class="co">## 2       475                Marilia Brazil         longevity</span></span>
+<span><span class="co">## 3       148      Unversity of Georgia USA  glycogen content</span></span>
+<span><span class="co">## 4       578            Fort Myers Florida  development time</span></span>
+<span><span class="co">## 5       556 Guadeloupe French West Indies gonotrophic cycle</span></span></code></pre>
 <div class="section level3">
 <h3 id="specific-glean-functions">Specific glean functions<a class="anchor" aria-label="anchor" href="#specific-glean-functions"></a>
 </h3>
@@ -276,7 +276,7 @@ functions together to create small pipelines.</p>
 <span><span class="co">## 2       475            Aedes            aegypti -22.21389 -49.94583</span></span>
 <span><span class="co">## 3       148            Aedes            aegypti        NA        NA</span></span>
 <span><span class="co">## 4       578            Aedes            aegypti  26.61667 -81.83333</span></span>
-<span><span class="co">## 5       144            Aedes            aegypti        NA        NA</span></span></code></pre>
+<span><span class="co">## 5       556            Aedes            aegypti  16.25000 -61.58333</span></span></code></pre>
 <p>A similar pipeline taking advantage of the autofiltering in
 <code><a href="../reference/search_hub.html">search_hub()</a></code> might look like this:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
@@ -383,7 +383,7 @@ every time you run your script. This is as easy as running
 <code><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv()</a></code> on your dataframe, then reading it in later
 with <code><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv()</a></code></p>
 <p><span style="opacity: 0.1;font-size: small;">Built in
-5.0632613s</span></p>
+5.2269428s</span></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
