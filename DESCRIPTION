@@ -12,13 +12,13 @@ RoxygenNote: 7.3.3
 URL: https://github.com/fwimp/ohvbd, https://ohvbd.vbdhub.org
 BugReports: https://github.com/fwimp/ohvbd/issues
 Imports: 
-    cli,
-    curl,
+    cli (>= 3.0.0),
+    curl (>= 6.4.0),
     data.table,
     dplyr,
     httr2 (>= 1.1.1),
     lubridate,
-    rlang,
+    rlang (>= 1.1.0),
     stats,
     terra,
     tibble,
