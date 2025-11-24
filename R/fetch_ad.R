@@ -52,10 +52,7 @@ fetch_ad <- function(
 
   if (tolower(cache_location) == "user") {
     # Have to do some horrible path substitution to make this work nicely on windows. It may cause errors later in which case another solution may be better.
-    cache_location <- file.path(
-      gsub("\\\\", "/", tools::R_user_dir("ohvbd", which = "cache")),
-      "adcache"
-    )
+    cache_location <- get_default_ohvbd_cache("adcache")
   }
 
   loaded_cache <- FALSE

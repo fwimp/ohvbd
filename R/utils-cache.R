@@ -91,10 +91,7 @@ read_ad_cache <- function(path, metric, gid, warn = TRUE) {
 clean_ad_cache <- function(cache_location = "user") {
   if (tolower(cache_location) == "user") {
     # Have to do some horrible path substitution to make this work nicely on windows. It may cause errors later in which case another solution may be better.
-    cache_location <- file.path(
-      gsub("\\\\", "/", tools::R_user_dir("ohvbd", which = "cache")),
-      "adcache"
-    )
+    cache_location <- get_default_ohvbd_cache("adcache")
   }
 
   cli::cli_alert_warning(
@@ -108,6 +105,36 @@ clean_ad_cache <- function(cache_location = "user") {
   num_removed <- length(to_remove) - length(remaining_files) # nolint: object_usage_linter
   cli::cli_alert_success("Removed {num_removed} file{?s}")
   invisible(NULL)
+}
+
+#' @title Get ohvbd cache locations
+#' @author Francis Windram
+#'
+#' @param subdir The subdirectory within the cache to find/create (optional).
+#' @param create Whether to create the cache location if it does not already exist (defaults to TRUE).
+#'
+#' @return ohvbd cache path as a string
+#'
+#' @examplesIf interactive()
+#' get_default_ohvbd_cache()
+#'
+#' @export
+get_default_ohvbd_cache <- function(subdir = NULL, create = TRUE) {
+  outpath <- tools::R_user_dir("ohvbd", which="cache")
+  if (!is.null(subdir)) {
+    outpath <- file.path(outpath, subdir)
+  }
+  # Convert windows-style paths to forward slash paths
+  outpath <- gsub("\\\\","/", outpath)
+  if (create && !dir.exists(outpath)) {
+    success <- dir.create(outpath, recursive=TRUE)
+    if (!success) {
+      cli::cli_abort(c("x" = "Failed to create cache directory at {.path {outpath}}"))
+    } else {
+      cli::cli_alert_success("Created new cache at {.path {outpath}}")
+    }
+  }
+  outpath
 }
 
 #' @title Check whether an object has been loaded from cache by ohvbd
