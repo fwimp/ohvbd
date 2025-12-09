@@ -110,6 +110,7 @@ Other:
   the `cols` argument).
   - This is intended to encourage you to preserve at least one means of
     retrieving citation data later.
+- WKT parsing and formatting is now significantly more robust.
 
 ## ohvbd 0.6.1
 
