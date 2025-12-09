@@ -65,13 +65,14 @@
 <url><loc>https://ohvbd.vbdhub.org/reference/search_vt_smart.html</loc></url>
 <url><loc>https://ohvbd.vbdhub.org/reference/set_ohvbd_compat.html</loc></url>
 <url><loc>https://ohvbd.vbdhub.org/reference/space_collapse.html</loc></url>
-<url><loc>https://ohvbd.vbdhub.org/reference/spatvect_to_hubwkt.html</loc></url>
+<url><loc>https://ohvbd.vbdhub.org/reference/spatvect_to_multipolygon.html</loc></url>
 <url><loc>https://ohvbd.vbdhub.org/reference/tee.html</loc></url>
 <url><loc>https://ohvbd.vbdhub.org/reference/vb_basereq.html</loc></url>
 <url><loc>https://ohvbd.vbdhub.org/reference/vd_error_body.html</loc></url>
 <url><loc>https://ohvbd.vbdhub.org/reference/vd_extraction_helper.html</loc></url>
 <url><loc>https://ohvbd.vbdhub.org/reference/vd_make_req.html</loc></url>
 <url><loc>https://ohvbd.vbdhub.org/reference/vt_error_body.html</loc></url>
+<url><loc>https://ohvbd.vbdhub.org/reference/wkt_to_multipolygon.html</loc></url>
 <url><loc>https://ohvbd.vbdhub.org/reference/write_ad_cache.html</loc></url>
 </urlset>
 
