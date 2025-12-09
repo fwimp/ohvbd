@@ -48,6 +48,7 @@ Other:
 * `ohvbd.ids()` now warns you and fixes the problem if you provide ids with duplicate values.
 * `glean_vt()` and `glean_vd()` now force the inclusion of the dataset ID when filtering columns (using the `cols` argument).
   * This is intended to encourage you to preserve at least one means of retrieving citation data later.
+* WKT parsing and formatting is now significantly more robust.
 
 # ohvbd 0.6.1
 
