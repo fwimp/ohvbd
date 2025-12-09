@@ -20,6 +20,7 @@ Imports:
     lubridate,
     rlang (>= 1.1.0),
     stats,
+    stringr,
     terra,
     tibble,
     tidyr,

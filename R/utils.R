@@ -229,10 +229,35 @@ force_multipolygon <- function(wkt) {
 #' @param v The spatvector to format.
 #' @return The formatted wkt.
 #' @keywords internal
-spatvect_to_hubwkt <- function(v) {
+spatvect_to_multipolygon <- function(v) {
   wkt <- terra::geom(v, wkt = TRUE)
-  wkt <- force_multipolygon(wkt)
+  wkt <- wkt_to_multipolygon(wkt)
   return(wkt)
+}
+
+
+#' @title wkt_to_multipolygon
+#' @param v The WKT to convert into a multipolygon.
+#' @return The multipolygon equivalent of wkt.
+#' @keywords internal
+wkt_to_multipolygon <- function(v) {
+  if (!all(stringr::str_detect(v, pattern = stringr::fixed("POLYGON")))) {
+    cli::cli_abort(c(
+      "x" = "Must be a vector or single POLYGON or MULTIPOLYGON wkt!"
+    ))
+  }
+  v_vec <- v |>
+    # Replace all ((( with (( etc. to just isolate the internal array
+    stringr::str_replace_all(c("\\(\\(\\("), "((") |>
+    stringr::str_replace_all(c("\\)\\)\\)"), "))") |>
+    # Replace add semicolons between array members for extraction later
+    stringr::str_replace_all(c("\\)\\)\\,\\(\\("), "));((") |>
+    # Extract everything within (())
+    stringr::str_extract_all("\\(\\(([^}]+)\\)\\)") |>
+    # Split any multi-poly arrays by the new delim
+    stringr::str_split(stringr::fixed(";")) |>
+    unlist()
+  return(paste0("MULTIPOLYGON (", paste(v_vec, collapse = ","), ")"))
 }
 
 

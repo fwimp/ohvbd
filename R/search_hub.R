@@ -63,9 +63,9 @@ search_hub <- function(
   # TODO: Check that WKT is well-formatted
   if (!(is.null(locationpoly))) {
     if (inherits(locationpoly, "SpatVector")) {
-      locationpoly <- spatvect_to_hubwkt(locationpoly)
+      locationpoly <- spatvect_to_multipolygon(locationpoly)
     } else if (is.character(locationpoly)) {
-      locationpoly <- force_multipolygon(locationpoly)
+      locationpoly <- wkt_to_multipolygon(locationpoly)
     } else {
       cli::cli_alert_warning(
         "{.arg locationpoly} must be of class {.cls SpatVector}... ignoring."
