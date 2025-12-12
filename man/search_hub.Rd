@@ -27,9 +27,9 @@ search_hub(
 
 \item{todate}{the date up to which to search (ISO format: yyyy-mm-dd).}
 
-\item{locationpoly}{a polygon or set of polygons in \code{terra::SpatVector} or WKT MULTIPOLYGON format within which to search.}
+\item{locationpoly}{a polygon or set of polygons in \code{terra::SpatVector} or WKT MULTIPOLYGON format within which to search. Easily generated using \code{\link[=match_countries]{match_countries()}}}
 
-\item{taxonomy}{a numeric vector containing the gbif ids of taxa to search for (found using \link[rgbif:name_suggest]{rgbif::name_suggest} or similar functions).}
+\item{taxonomy}{a numeric vector containing the gbif ids of taxa to search for (found using \code{\link[=match_species]{match_species()}} or similar functions).}
 
 \item{exact}{whether to return exact matches only.}
 

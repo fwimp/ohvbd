@@ -30,6 +30,7 @@ Suggests:
     parsermd,
     rgbif,
     rmarkdown,
+    rnaturalearth,
     testthat (>= 3.0.0),
     vcr,
     withr

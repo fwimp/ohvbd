@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils-validation.R
 \name{match_species}
 \alias{match_species}
-\title{Tee a pipeline to extract the data at a given point}
+\title{Match species names to their GBIF backbone ids}
 \usage{
 match_species(speciesnames, exact = FALSE, returnids = TRUE, omit = TRUE)
 }
@@ -19,7 +19,7 @@ match_species(speciesnames, exact = FALSE, returnids = TRUE, omit = TRUE)
 The GBIF taxonids associated with \code{speciesnames} or the full GBIF lookup dataframe if \code{returnids = TRUE}.
 }
 \description{
-Add a tee to a pipeline to get the data coming in through the pipe.
+Match species names to their GBIF backbone ids using \code{\link[rgbif:name_backbone_checklist]{rgbif::name_backbone_checklist()}}.
 }
 \note{
 If \code{exact = TRUE} and you search for a genus name, this will not be returned.
@@ -32,3 +32,4 @@ match_species(c("Araneus diadematus", "Aedes aegypti"))
 \author{
 Francis Windram
 }
+\concept{convenience}

@@ -22,6 +22,8 @@ Force an object to appear to come from a specific database
 
 Objects created in this way may lack vital underlying data required later.
 Instead use \code{\link[=ohvbd.ids]{ohvbd.ids()}} for this purpose.
+
+This is a synonym for \code{ohvbd_db(x) <- db} that's easier to work with in pipelines.
 }
 \examples{
 force_db(c(1,2,3), "vt")

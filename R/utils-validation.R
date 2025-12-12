@@ -1,7 +1,8 @@
-#' @title Tee a pipeline to extract the data at a given point
+#' @title Match species names to their GBIF backbone ids
 #'
 #' @description
-#' Add a tee to a pipeline to get the data coming in through the pipe.
+#'
+#' Match species names to their GBIF backbone ids using [rgbif::name_backbone_checklist()].
 #'
 #' @author Francis Windram
 #'
@@ -15,6 +16,8 @@
 #' If you want more control over id filtering, use `returnids = FALSE` to get the source dataframe.
 #'
 #' @returns The GBIF taxonids associated with `speciesnames` or the full GBIF lookup dataframe if `returnids = TRUE`.
+#'
+#' @concept convenience
 #'
 #' @export
 #'
@@ -53,4 +56,57 @@ match_species <- function(speciesnames, exact = FALSE, returnids = TRUE, omit = 
     taxonids <- taxonids[which(!is.na(taxonids))]
   }
   return(taxonids)
+}
+
+#' @title Match country names to their equivalent naturalearth WKT polygons
+#'
+#' @description
+#' Match country names to their equivalent naturalearth WKT polygons using [rnaturalearth::ne_countries()].
+#'
+#'
+#' @author Francis Windram
+#'
+#' @param countrynames a vector of country names to match to naturalearth.
+#' @param returnmulti return the GBIF taxon ids only (otherwise return the full lookup dataframe).
+#' @param onlywkt only return location_wkt (see note for more details).
+#'
+#' @returns A list containing:
+#' - `$location_wkt`: a multipolygon containing all locations (or a named vector of individual country polygons).
+#' - `$missing_locs`: any provided countries not found in naturalearth.
+#' - `$found_locs`: any provided countries that were found in naturalearth.
+#'
+#' @concept convenience
+#'
+#' @export
+#'
+#' @examples
+#' match_countries(c("United Kingdom", "Germany"))
+#'
+match_countries <- function(countrynames, returnmulti = TRUE, onlywkt = FALSE) {
+  rlang::check_installed("rnaturalearth")
+
+  location_out <- tryCatch(expr = {
+    # Get countries from naturalearth and convert to a spatvect
+    world <- rnaturalearth::ne_countries(country = countrynames)
+    lookup_countries <- terra::vect(world)
+    # Find missing locations
+    missing_locs <- setdiff(countrynames, lookup_countries$sovereignt)
+    # Format location_wkt for return
+    if (returnmulti) {
+      location_wkt <- spatvect_to_multipolygon(lookup_countries)
+    } else {
+      location_wkt <- terra::geom(lookup_countries, wkt = TRUE)
+      names(location_wkt) <- lookup_countries$sovereignt
+    }
+    list(location_wkt = location_wkt, missing_locs = missing_locs, found_locs = lookup_countries$sovereignt)
+  }, error = \(e) {
+    cli::cli_alert_danger(cli::col_red("Could not resolve any locations!"))
+    list(location_wkt = NULL, missing_locs = countrynames, found_locs = NULL)
+  })
+
+  if (onlywkt) {
+    return(location_out$location_wkt)
+  } else {
+    return(location_out)
+  }
 }

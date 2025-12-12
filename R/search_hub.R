@@ -7,8 +7,8 @@
 #' @param db the databases to search.
 #' @param fromdate the date from which to search (ISO format: yyyy-mm-dd).
 #' @param todate the date up to which to search (ISO format: yyyy-mm-dd).
-#' @param locationpoly a polygon or set of polygons in `terra::SpatVector` or WKT MULTIPOLYGON format within which to search.
-#' @param taxonomy a numeric vector containing the gbif ids of taxa to search for (found using [rgbif::name_suggest] or similar functions).
+#' @param locationpoly a polygon or set of polygons in `terra::SpatVector` or WKT MULTIPOLYGON format within which to search. Easily generated using [ohvbd::match_countries()]
+#' @param taxonomy a numeric vector containing the gbif ids of taxa to search for (found using [ohvbd::match_species()] or similar functions).
 #' @param exact whether to return exact matches only.
 #' @param withoutpublished whether to return results without a publishing date when filtering by date.
 #' @param returnlist return the raw output list rather than a formatted dataframe.

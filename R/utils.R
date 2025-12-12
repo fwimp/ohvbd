@@ -273,6 +273,8 @@ wkt_to_multipolygon <- function(v) {
 #' Objects created in this way may lack vital underlying data required later.
 #' Instead use [ohvbd.ids()] for this purpose.
 #'
+#' This is a synonym for `ohvbd_db(x) <- db` that's easier to work with in pipelines.
+#'
 #' @concept convenience
 #'
 #' @export
