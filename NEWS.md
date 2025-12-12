@@ -26,13 +26,14 @@ New functions & arguments:
 * `check_db_status()` now returns (invisibly) whether all databases are up or not.
 * New `fetch_citation()` and `fetch_citation_*` commands provide an interface to attempt to retrieve citations from a vectorbyte dataset.
   * This will (by default) possibly redownload parts or all of the data if the columns are not currently present.
-* New `force_db()` function enables one to force `ohvbd` to consider a particular object has having a particular provenance.
+* New `force_db()` function enables one to force `ohvbd` to consider a particular object as having a particular provenance.
 * New `simplify` argument to `search_hub()` makes hub searches return an `ohvbd.ids` object if only one database was searched for. This behaviour is on by default.
   * To match this, `filter_db()` will now transparently return `ohvbd.ids` objects if it gets them.
-* New `taxonomy` argument to `search_hub()` allows for filtering searches by gbif taxonomic ID.
+* New `taxonomy` argument to `search_hub()` allows for filtering searches by GBIF backbone IDs.
+* New `match_species()` function allows for quick and flexible matching of species names to their GBIF backbone IDs.
 * New `ohvbd_db()`,  `has_db()`, and `is_from()` functions allow for quick testing of object provenance (according to `ohvbd`).
 * New `get_default_ohvbd_cache()` function allows for custom functions that interface with cached `ohvbd` data files.
-* New `list_ohvbd_cache()` and `clean_ohvbd_cache()` functions to enable better cache management.
+* New `list_ohvbd_cache()` and `clean_ohvbd_cache()` functions enable better interactive cache management.
   * As a result, `clean_ad_cache()` has been removed as it is now unnecessary.
 * `search_x_smart()` functions can now take `"tags"` as a search field, enabling support for tagged datasets.
 
@@ -68,9 +69,9 @@ Other:
 
 # ohvbd 0.5.2
 
-* `fetch_ad()` now searches for a retrieves the most up-to-date GID2 files from AREAdata.
+* `fetch_ad()` now searches for and retrieves the most up-to-date GID2 files from AREAdata.
 * New `timeout` parameter of `fetch_ad()` to control timeouts of AD downloads. Defaults to 4 minutes.
-* `assoc_ad()` now correctly extracts data (this functionality regressed in 0.5.0 as a consequence of the new method dispatch approach to data retrieval)
+* `assoc_ad()` now correctly extracts data (this functionality regressed in 0.5.0 as a consequence of the new dynamic method dispatch approach to data retrieval).
 * `assoc_ad()` also gives now consistent output even when a 1-dimensional output is returned from `extract_ad()`
 * All `fetch_` functions now have a default `connections` argument of 2, leading to faster retrieval across the board.
 * `check_src` argument has been removed from all functions. It no longer serves much of a purpose due to the sanity checking changes implemented in 0.5.0.
@@ -90,7 +91,7 @@ Other:
   * `fetch_` functions retrieve actual datasets.
 * New set of S3 classes (`ohvbd.ids`, `ohvbd.responses`, `ohvbd.data.frame`, `ohvbd.ad.matrix`) to allow for nicer checks of data integrity.
   * This has the side effect of no longer falsely triggering the data continuity checks of `fetch_` functions when indexing the output of `find_x_ids()` functions.
-* New convenience functions `fetch()` and `extract()` leverage method dispatch along with the above classes to infer the correct underlying `fetch_` and `extract_` functions to use.
+* New convenience functions `fetch()` and `extract()` leverage dynamic method dispatch along with the above classes to infer the correct underlying `fetch_` and `extract_` functions to use.
   * As such you can now write code such as `find_vt_ids() |> fetch() |> extract()` without having to remember the correct extractor to use.
   * You can still use the specific extractor functions as before should you desire.
 * All major functions interfacing with AD, VD, and VT output one of these classes.
