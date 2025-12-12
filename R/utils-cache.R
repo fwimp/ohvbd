@@ -76,10 +76,12 @@ read_ad_cache <- function(path, metric, gid, warn = TRUE) {
   return(d)
 }
 
-#' @title Delete all rda files from ohvbd AREAdata cache
+#' @title Delete files from ohvbd cache directories
 #' @author Francis Windram
 #'
-#' @param cache_location location within which to remove rda files.
+#' @param cache_location location within which to remove rda files. (Defaults to the standard ohvbd cache location).
+#' @param subdir a subdirectory or list of subdirectories to clean.
+#' @param dryrun if `TRUE` list files that would be deleted, but do not remove.
 #'
 #' @return NULL
 #'
@@ -87,24 +89,99 @@ read_ad_cache <- function(path, metric, gid, warn = TRUE) {
 #' clean_ad_cache()
 #'
 #' @export
-#'
-clean_ad_cache <- function(cache_location = "user") {
-  if (tolower(cache_location) == "user") {
-    # Have to do some horrible path substitution to make this work nicely on windows. It may cause errors later in which case another solution may be better.
-    cache_location <- get_default_ohvbd_cache("adcache")
+clean_ohvbd_cache <- function(cache_location = NULL, subdir = NULL, dryrun = FALSE) {
+  if (is.null(cache_location)) {
+    cache_location <- get_default_ohvbd_cache()
+  }
+  if (!dryrun) {
+    cli::cli_alert_info(paste("This will", cli::col_red("permanently delete"), "files from your computer!"))
+    cli::cli_alert_info("Are you sure? [y/N]")
+    confirmation <- readline(">>")
+    if (tolower(confirmation) != "y") {
+      cli::cli_alert_danger("Aborting.")
+      return(invisible(NULL))
+    }
   }
 
-  cli::cli_alert_warning(
-    "Removing all rda files from {.path {cache_location}}:"
-  )
-  to_remove <- list.files(cache_location, "*.rda")
-  cli::cli_ul(to_remove)
-  remove_path <- file.path(cache_location, "*.rda")
-  unlink(remove_path)
-  remaining_files <- list.files(cache_location, "*.rda")
-  num_removed <- length(to_remove) - length(remaining_files) # nolint: object_usage_linter
+  if (length(list.files(cache_location, include.dirs = FALSE, recursive = TRUE)) < 1) {
+    cli::cli_alert_success("Cache is clear")
+    return(invisible(NULL))
+  }
+
+  list_ohvbd_cache(cache_location, subdir = subdir)
+
+  if (dryrun) {
+    cli::cli_alert_info("Dry run, so deleting nothing.")
+    return(invisible(NULL))
+  }
+  prev_files <- 0
+  removed_files <- 0
+  if (!is.null(subdir)) {
+    # Clean only the specified dirs
+    for (d in subdir) {
+      working_path <- file.path(cache_location, d)
+      prev_files <- prev_files + length(list.files(file.path(working_path), recursive = TRUE))
+      cli::cli_alert_info("Clearing files from {.path {working_path}}")
+      unlink(file.path(working_path, "*"), recursive = TRUE)
+      removed_files <- removed_files + length(list.files(file.path(working_path), recursive = TRUE))
+    }
+  } else {
+    # Clean the whole cache
+    remove_path <- file.path(cache_location, "*")
+    prev_files <- prev_files + length(list.files(file.path(cache_location), recursive = TRUE))
+    cli::cli_alert_info("Clearing files from {.path {cache_location}}")
+    unlink(remove_path, recursive = TRUE)
+    removed_files <- removed_files + length(list.files(file.path(cache_location), recursive = TRUE))
+  }
+  num_removed <- prev_files - removed_files # nolint: object_usage_linter
   cli::cli_alert_success("Removed {num_removed} file{?s}")
   invisible(NULL)
+}
+
+#' @title List all ohvbd cached files
+#' @author Francis Windram
+#'
+#' @param cache_location location within which to list files. (Defaults to the standard ohvbd cache location).
+#' @param subdir a subdirectory or list of subdirectories to list.
+#' @return NULL
+#'
+#' @examplesIf interactive()
+#' list_ohvbd_cache()
+#'
+#' @export
+list_ohvbd_cache <- function(cache_location = NULL, subdir = NULL) {
+  if (is.null(cache_location)) {
+    cache_location <- get_default_ohvbd_cache()
+  }
+  cache_dirs_tmp <- list.dirs(cache_location, full.names = FALSE)
+  if (!is.null(subdir)) {
+    cache_dirs <- cache_dirs_tmp[which(cache_dirs_tmp %in% subdir)]
+    if (length(cache_dirs) < 1) {
+      cli::cli_abort(c("x" = "Dir{?s} {.val {subdir}} not found in cache location."))
+    } else if (length(cache_dirs) < length(subdir)) {
+
+      cli::cli_warn(c("!" = "Dir{?s} {.val {setdiff(subdir, cache_dirs)}} not found in cache location."))
+    }
+  } else {
+    cache_dirs <- cache_dirs_tmp
+  }
+  cli::cli_h1("Cached files")
+  cli::cli_text("Cache location: {.path {cache_location}}")
+  for (x in cache_dirs) {
+    subdir_files <- list.files(file.path(cache_location, x), recursive = FALSE)
+    subdir_files <- subdir_files[which(!(subdir_files %in% cache_dirs))]
+    if (x == "") {
+      cli::cli_h2("<root>: {length(subdir_files)} file{?s}")
+    } else {
+      cli::cli_h2("{x}: {length(subdir_files)} file{?s}")
+    }
+    if (length(subdir_files) < 1) {
+      cli::cli_text("{.emph {'none'}}")
+    } else {
+      cli::cli_ul(subdir_files)
+    }
+  }
+  invisible()
 }
 
 #' @title Get ohvbd cache locations
@@ -120,14 +197,14 @@ clean_ad_cache <- function(cache_location = "user") {
 #'
 #' @export
 get_default_ohvbd_cache <- function(subdir = NULL, create = TRUE) {
-  outpath <- tools::R_user_dir("ohvbd", which="cache")
+  outpath <- tools::R_user_dir("ohvbd", which = "cache")
   if (!is.null(subdir)) {
     outpath <- file.path(outpath, subdir)
   }
   # Convert windows-style paths to forward slash paths
-  outpath <- gsub("\\\\","/", outpath)
+  outpath <- gsub("\\\\", "/", outpath)
   if (create && !dir.exists(outpath)) {
-    success <- dir.create(outpath, recursive=TRUE)
+    success <- dir.create(outpath, recursive = TRUE)
     if (!success) {
       cli::cli_abort(c("x" = "Failed to create cache directory at {.path {outpath}}"))
     } else {

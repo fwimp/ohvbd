@@ -32,6 +32,8 @@ New functions & arguments:
 * New `taxonomy` argument to `search_hub()` allows for filtering searches by gbif taxonomic ID.
 * New `ohvbd_db()`,  `has_db()`, and `is_from()` functions allow for quick testing of object provenance (according to `ohvbd`).
 * New `get_default_ohvbd_cache()` function allows for custom functions that interface with cached `ohvbd` data files.
+* New `list_ohvbd_cache()` and `clean_ohvbd_cache()` functions to enable better cache management.
+  * As a result, `clean_ad_cache()` has been removed as it is now unnecessary.
 * `search_x_smart()` functions can now take `"tags"` as a search field, enabling support for tagged datasets.
 
 Other:

@@ -34,7 +34,7 @@ fetch_ad <- function(
   metric = "temp",
   gid = 0,
   use_cache = FALSE,
-  cache_location = "user",
+  cache_location = NULL,
   refresh_cache = FALSE,
   timeout = 240,
   basereq = NA
@@ -50,7 +50,7 @@ fetch_ad <- function(
     )
   }
 
-  if (tolower(cache_location) == "user") {
+  if (is.null(cache_location)) {
     # Have to do some horrible path substitution to make this work nicely on windows. It may cause errors later in which case another solution may be better.
     cache_location <- get_default_ohvbd_cache("adcache")
   }

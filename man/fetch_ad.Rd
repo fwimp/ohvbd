@@ -8,7 +8,7 @@ fetch_ad(
   metric = "temp",
   gid = 0,
   use_cache = FALSE,
-  cache_location = "user",
+  cache_location = NULL,
   refresh_cache = FALSE,
   timeout = 240,
   basereq = NA

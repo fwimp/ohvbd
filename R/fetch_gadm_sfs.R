@@ -19,7 +19,7 @@
 # TODO: Check to make sure cache location is actually in the correct spot.
 fetch_gadm_sfs <- function(
   gid = 0,
-  cache_location = "user",
+  cache_location = NULL,
   refresh_cache = FALSE,
   basereq = NA
 ) {
@@ -27,9 +27,8 @@ fetch_gadm_sfs <- function(
     basereq <- ad_basereq()
   }
 
-  if (tolower(cache_location) == "user") {
-    # Have to do some horrible path substitution to make this work nicely on windows. It may cause errors later in which case another solution may be better.
-    cache_location <- get_default_ohvbd_cache("adcache")
+  if (is.null(cache_location)) {
+    cache_location <- get_default_ohvbd_cache("gadmcache")
   }
 
   cachefiles <- c("gadm-countries", "gadm-states", "gadm-counties")

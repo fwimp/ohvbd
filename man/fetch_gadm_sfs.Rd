@@ -6,7 +6,7 @@
 \usage{
 fetch_gadm_sfs(
   gid = 0,
-  cache_location = "user",
+  cache_location = NULL,
   refresh_cache = FALSE,
   basereq = NA
 )
