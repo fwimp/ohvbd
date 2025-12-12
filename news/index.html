@@ -87,14 +87,15 @@
 <li>New <code>fetch_citation()</code> and <code>fetch_citation_*</code> commands provide an interface to attempt to retrieve citations from a vectorbyte dataset.
 <ul><li>This will (by default) possibly redownload parts or all of the data if the columns are not currently present.</li>
 </ul></li>
-<li>New <code><a href="../reference/force_db.html">force_db()</a></code> function enables one to force <code>ohvbd</code> to consider a particular object has having a particular provenance.</li>
+<li>New <code><a href="../reference/force_db.html">force_db()</a></code> function enables one to force <code>ohvbd</code> to consider a particular object as having a particular provenance.</li>
 <li>New <code>simplify</code> argument to <code><a href="../reference/search_hub.html">search_hub()</a></code> makes hub searches return an <code>ohvbd.ids</code> object if only one database was searched for. This behaviour is on by default.
 <ul><li>To match this, <code><a href="../reference/filter_db.html">filter_db()</a></code> will now transparently return <code>ohvbd.ids</code> objects if it gets them.</li>
 </ul></li>
-<li>New <code>taxonomy</code> argument to <code><a href="../reference/search_hub.html">search_hub()</a></code> allows for filtering searches by gbif taxonomic ID.</li>
+<li>New <code>taxonomy</code> argument to <code><a href="../reference/search_hub.html">search_hub()</a></code> allows for filtering searches by GBIF backbone IDs.</li>
+<li>New <code><a href="../reference/match_species.html">match_species()</a></code> function allows for quick and flexible matching of species names to their GBIF backbone IDs.</li>
 <li>New <code><a href="../reference/ohvbd_db.html">ohvbd_db()</a></code>, <code><a href="../reference/has_db.html">has_db()</a></code>, and <code><a href="../reference/is_from.html">is_from()</a></code> functions allow for quick testing of object provenance (according to <code>ohvbd</code>).</li>
 <li>New <code><a href="../reference/get_default_ohvbd_cache.html">get_default_ohvbd_cache()</a></code> function allows for custom functions that interface with cached <code>ohvbd</code> data files.</li>
-<li>New <code><a href="../reference/list_ohvbd_cache.html">list_ohvbd_cache()</a></code> and <code><a href="../reference/clean_ohvbd_cache.html">clean_ohvbd_cache()</a></code> functions to enable better cache management.
+<li>New <code><a href="../reference/list_ohvbd_cache.html">list_ohvbd_cache()</a></code> and <code><a href="../reference/clean_ohvbd_cache.html">clean_ohvbd_cache()</a></code> functions enable better interactive cache management.
 <ul><li>As a result, <code>clean_ad_cache()</code> has been removed as it is now unnecessary.</li>
 </ul></li>
 <li>
@@ -139,10 +140,10 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.2" id="ohvbd-052">ohvbd 0.5.2<a class="anchor" aria-label="anchor" href="#ohvbd-052"></a></h2>
 <ul><li>
-<code><a href="../reference/fetch_ad.html">fetch_ad()</a></code> now searches for a retrieves the most up-to-date GID2 files from AREAdata.</li>
+<code><a href="../reference/fetch_ad.html">fetch_ad()</a></code> now searches for and retrieves the most up-to-date GID2 files from AREAdata.</li>
 <li>New <code>timeout</code> parameter of <code><a href="../reference/fetch_ad.html">fetch_ad()</a></code> to control timeouts of AD downloads. Defaults to 4 minutes.</li>
 <li>
-<code><a href="../reference/assoc_ad.html">assoc_ad()</a></code> now correctly extracts data (this functionality regressed in 0.5.0 as a consequence of the new method dispatch approach to data retrieval)</li>
+<code><a href="../reference/assoc_ad.html">assoc_ad()</a></code> now correctly extracts data (this functionality regressed in 0.5.0 as a consequence of the new dynamic method dispatch approach to data retrieval).</li>
 <li>
 <code><a href="../reference/assoc_ad.html">assoc_ad()</a></code> also gives now consistent output even when a 1-dimensional output is returned from <code>extract_ad()</code>
 </li>
@@ -173,7 +174,7 @@
 <li>New set of S3 classes (<code>ohvbd.ids</code>, <code>ohvbd.responses</code>, <code>ohvbd.data.frame</code>, <code>ohvbd.ad.matrix</code>) to allow for nicer checks of data integrity.
 <ul><li>This has the side effect of no longer falsely triggering the data continuity checks of <code>fetch_</code> functions when indexing the output of <code>find_x_ids()</code> functions.</li>
 </ul></li>
-<li>New convenience functions <code><a href="../reference/fetch.html">fetch()</a></code> and <code><a href="../reference/extract.html">extract()</a></code> leverage method dispatch along with the above classes to infer the correct underlying <code>fetch_</code> and <code>extract_</code> functions to use.
+<li>New convenience functions <code><a href="../reference/fetch.html">fetch()</a></code> and <code><a href="../reference/extract.html">extract()</a></code> leverage dynamic method dispatch along with the above classes to infer the correct underlying <code>fetch_</code> and <code>extract_</code> functions to use.
 <ul><li>As such you can now write code such as <code>find_vt_ids() |&gt; fetch() |&gt; extract()</code> without having to remember the correct extractor to use.</li>
 <li>You can still use the specific extractor functions as before should you desire.</li>
 </ul></li>

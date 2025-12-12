@@ -52,7 +52,7 @@ New functions & arguments:
     if the columns are not currently present.
 - New [`force_db()`](https://ohvbd.vbdhub.org/reference/force_db.md)
   function enables one to force `ohvbd` to consider a particular object
-  has having a particular provenance.
+  as having a particular provenance.
 - New `simplify` argument to
   [`search_hub()`](https://ohvbd.vbdhub.org/reference/search_hub.md)
   makes hub searches return an `ohvbd.ids` object if only one database
@@ -62,7 +62,11 @@ New functions & arguments:
     will now transparently return `ohvbd.ids` objects if it gets them.
 - New `taxonomy` argument to
   [`search_hub()`](https://ohvbd.vbdhub.org/reference/search_hub.md)
-  allows for filtering searches by gbif taxonomic ID.
+  allows for filtering searches by GBIF backbone IDs.
+- New
+  [`match_species()`](https://ohvbd.vbdhub.org/reference/match_species.md)
+  function allows for quick and flexible matching of species names to
+  their GBIF backbone IDs.
 - New [`ohvbd_db()`](https://ohvbd.vbdhub.org/reference/ohvbd_db.md),
   [`has_db()`](https://ohvbd.vbdhub.org/reference/has_db.md), and
   [`is_from()`](https://ohvbd.vbdhub.org/reference/is_from.md) functions
@@ -75,7 +79,7 @@ New functions & arguments:
   [`list_ohvbd_cache()`](https://ohvbd.vbdhub.org/reference/list_ohvbd_cache.md)
   and
   [`clean_ohvbd_cache()`](https://ohvbd.vbdhub.org/reference/clean_ohvbd_cache.md)
-  functions to enable better cache management.
+  functions enable better interactive cache management.
   - As a result, `clean_ad_cache()` has been removed as it is now
     unnecessary.
 - `search_x_smart()` functions can now take `"tags"` as a search field,
@@ -147,13 +151,15 @@ Other:
 ## ohvbd 0.5.2
 
 - [`fetch_ad()`](https://ohvbd.vbdhub.org/reference/fetch_ad.md) now
-  searches for a retrieves the most up-to-date GID2 files from AREAdata.
+  searches for and retrieves the most up-to-date GID2 files from
+  AREAdata.
 - New `timeout` parameter of
   [`fetch_ad()`](https://ohvbd.vbdhub.org/reference/fetch_ad.md) to
   control timeouts of AD downloads. Defaults to 4 minutes.
 - [`assoc_ad()`](https://ohvbd.vbdhub.org/reference/assoc_ad.md) now
   correctly extracts data (this functionality regressed in 0.5.0 as a
-  consequence of the new method dispatch approach to data retrieval)
+  consequence of the new dynamic method dispatch approach to data
+  retrieval).
 - [`assoc_ad()`](https://ohvbd.vbdhub.org/reference/assoc_ad.md) also
   gives now consistent output even when a 1-dimensional output is
   returned from `extract_ad()`
@@ -197,8 +203,8 @@ Other:
 - New convenience functions
   [`fetch()`](https://ohvbd.vbdhub.org/reference/fetch.md) and
   [`extract()`](https://ohvbd.vbdhub.org/reference/extract.md) leverage
-  method dispatch along with the above classes to infer the correct
-  underlying `fetch_` and `extract_` functions to use.
+  dynamic method dispatch along with the above classes to infer the
+  correct underlying `fetch_` and `extract_` functions to use.
   - As such you can now write code such as
     `find_vt_ids() |> fetch() |> extract()` without having to remember
     the correct extractor to use.

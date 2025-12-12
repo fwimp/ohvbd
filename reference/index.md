@@ -117,6 +117,8 @@ Miscellaneous functions.
   Check whether an object has been loaded from cache by ohvbd
 - [`list_ohvbd_cache()`](https://ohvbd.vbdhub.org/reference/list_ohvbd_cache.md)
   : List all ohvbd cached files
+- [`match_species()`](https://ohvbd.vbdhub.org/reference/match_species.md)
+  : Tee a pipeline to extract the data at a given point
 - [`ohvbd.ids()`](https://ohvbd.vbdhub.org/reference/ohvbd.ids.md) :
   Create a new ohvbd ID vector
 - [`ohvbd_dryrun`](https://ohvbd.vbdhub.org/reference/ohvbd_dryrun.md) :
