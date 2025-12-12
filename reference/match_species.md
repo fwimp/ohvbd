@@ -1,6 +1,7 @@
-# Tee a pipeline to extract the data at a given point
+# Match species names to their GBIF backbone ids
 
-Add a tee to a pipeline to get the data coming in through the pipe.
+Match species names to their GBIF backbone ids using
+[`rgbif::name_backbone_checklist()`](https://docs.ropensci.org/rgbif/reference/name_backbone_checklist.html).
 
 ## Usage
 

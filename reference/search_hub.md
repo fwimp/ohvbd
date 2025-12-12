@@ -42,13 +42,15 @@ search_hub(
 
   a polygon or set of polygons in
   [`terra::SpatVector`](https://rspatial.github.io/terra/reference/SpatVector-class.html)
-  or WKT MULTIPOLYGON format within which to search.
+  or WKT MULTIPOLYGON format within which to search. Easily generated
+  using
+  [`match_countries()`](https://ohvbd.vbdhub.org/reference/match_countries.md)
 
 - taxonomy:
 
   a numeric vector containing the gbif ids of taxa to search for (found
   using
-  [rgbif::name_suggest](https://docs.ropensci.org/rgbif/reference/name_suggest.html)
+  [`match_species()`](https://ohvbd.vbdhub.org/reference/match_species.md)
   or similar functions).
 
 - exact:

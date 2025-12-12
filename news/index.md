@@ -67,6 +67,8 @@ New functions & arguments:
   [`match_species()`](https://ohvbd.vbdhub.org/reference/match_species.md)
   function allows for quick and flexible matching of species names to
   their GBIF backbone IDs.
+- New `match_country()` function allows for matching of country names to
+  WKT polygons via naturalearth.
 - New [`ohvbd_db()`](https://ohvbd.vbdhub.org/reference/ohvbd_db.md),
   [`has_db()`](https://ohvbd.vbdhub.org/reference/has_db.md), and
   [`is_from()`](https://ohvbd.vbdhub.org/reference/is_from.md) functions

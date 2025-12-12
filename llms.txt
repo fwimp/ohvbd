@@ -165,6 +165,10 @@ Convenient generalised functions for working with a range of data.
   whether an object has provenance information
 - [`is_from()`](https://ohvbd.vbdhub.org/reference/is_from.md) : Test
   whether an object is considered to be from a particular database
+- [`match_countries()`](https://ohvbd.vbdhub.org/reference/match_countries.md)
+  : Match country names to their equivalent naturalearth WKT polygons
+- [`match_species()`](https://ohvbd.vbdhub.org/reference/match_species.md)
+  : Match species names to their GBIF backbone ids
 - [`ohvbd_db()`](https://ohvbd.vbdhub.org/reference/ohvbd_db.md)
   [`` `ohvbd_db<-`() ``](https://ohvbd.vbdhub.org/reference/ohvbd_db.md)
   : Database provenance
@@ -191,8 +195,6 @@ Miscellaneous functions.
   Check whether an object has been loaded from cache by ohvbd
 - [`list_ohvbd_cache()`](https://ohvbd.vbdhub.org/reference/list_ohvbd_cache.md)
   : List all ohvbd cached files
-- [`match_species()`](https://ohvbd.vbdhub.org/reference/match_species.md)
-  : Tee a pipeline to extract the data at a given point
 - [`ohvbd.ids()`](https://ohvbd.vbdhub.org/reference/ohvbd.ids.md) :
   Create a new ohvbd ID vector
 - [`ohvbd_dryrun`](https://ohvbd.vbdhub.org/reference/ohvbd_dryrun.md) :

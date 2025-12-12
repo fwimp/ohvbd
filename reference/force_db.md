@@ -32,6 +32,9 @@ later. Instead use
 [`ohvbd.ids()`](https://ohvbd.vbdhub.org/reference/ohvbd.ids.md) for
 this purpose.
 
+This is a synonym for `ohvbd_db(x) <- db` that's easier to work with in
+pipelines.
+
 ## Author
 
 Francis Windram
