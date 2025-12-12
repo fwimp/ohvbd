@@ -71,6 +71,13 @@ New functions & arguments:
   [`get_default_ohvbd_cache()`](https://ohvbd.vbdhub.org/reference/get_default_ohvbd_cache.md)
   function allows for custom functions that interface with cached
   `ohvbd` data files.
+- New
+  [`list_ohvbd_cache()`](https://ohvbd.vbdhub.org/reference/list_ohvbd_cache.md)
+  and
+  [`clean_ohvbd_cache()`](https://ohvbd.vbdhub.org/reference/clean_ohvbd_cache.md)
+  functions to enable better cache management.
+  - As a result, `clean_ad_cache()` has been removed as it is now
+    unnecessary.
 - `search_x_smart()` functions can now take `"tags"` as a search field,
   enabling support for tagged datasets.
 
@@ -236,9 +243,8 @@ Other:
 - New function
   [`check_ohvbd_config()`](https://ohvbd.vbdhub.org/reference/check_ohvbd_config.md)
   allows easy printing of the current status of ohvbd’s options.
-- New
-  [`clean_ad_cache()`](https://ohvbd.vbdhub.org/reference/clean_ad_cache.md)
-  function enables users to clean their cached AREAdata files easily.
+- New `clean_ad_cache()` function enables users to clean their cached
+  AREAdata files easily.
 - Build timings now appear in all vignettes.
 - Cli outputs are now suppressed when running vignettes in
   non-interactive mode (e.g. while knitting).

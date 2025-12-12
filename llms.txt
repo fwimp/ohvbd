@@ -179,8 +179,8 @@ Miscellaneous functions.
   : Check whether databases are currently online
 - [`check_ohvbd_config()`](https://ohvbd.vbdhub.org/reference/check_ohvbd_config.md)
   : Print current ohvbd configuration variables
-- [`clean_ad_cache()`](https://ohvbd.vbdhub.org/reference/clean_ad_cache.md)
-  : Delete all rda files from ohvbd AREAdata cache
+- [`clean_ohvbd_cache()`](https://ohvbd.vbdhub.org/reference/clean_ohvbd_cache.md)
+  : Delete files from ohvbd cache directories
 - [`extract()`](https://ohvbd.vbdhub.org/reference/extract.md) : Extract
   specified data from a set of responses (Deprecated)
 - [`format_time_overlap_bar()`](https://ohvbd.vbdhub.org/reference/format_time_overlap_bar.md)
@@ -189,6 +189,8 @@ Miscellaneous functions.
   : Get ohvbd cache locations
 - [`is_cached()`](https://ohvbd.vbdhub.org/reference/is_cached.md) :
   Check whether an object has been loaded from cache by ohvbd
+- [`list_ohvbd_cache()`](https://ohvbd.vbdhub.org/reference/list_ohvbd_cache.md)
+  : List all ohvbd cached files
 - [`ohvbd.ids()`](https://ohvbd.vbdhub.org/reference/ohvbd.ids.md) :
   Create a new ohvbd ID vector
 - [`ohvbd_dryrun`](https://ohvbd.vbdhub.org/reference/ohvbd_dryrun.md) :
