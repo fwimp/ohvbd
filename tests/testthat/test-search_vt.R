@@ -4,7 +4,7 @@ test_that("search_vt creates correct request", {
     expect_equal(
       suppressMessages(search_vt("Ixodes ricinus"))[["url"]],
       "https://vectorbyte.crc.nd.edu/portal/api/vectraits-explorer?format=json&keywords=Ixodes%20ricinus"
-      )
+    )
   )
 })
 

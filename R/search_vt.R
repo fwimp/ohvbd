@@ -54,7 +54,7 @@ search_vt <- function(keywords, basereq = NA) {
     cli::cli_alert_warning("Debug option {.val ohvbd_dryrun} is TRUE.")
     cli::cli_alert_info("Returning request object...")
     return(req)
-    }
+  }
 
   resplist <- tryCatch(
     {

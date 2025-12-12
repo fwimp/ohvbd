@@ -53,7 +53,7 @@ glean_vt <- function(res, cols = NA, returnunique = FALSE) {
 
   if (!any(is.na(cols))) {
     # Filter cols from each sublist
-    if (!("DatasetID" %in% cols)){
+    if (!("DatasetID" %in% cols)) {
       cli::cli_alert_info("Added {.val DatasetID} column to requested columns.")
       cols <- c("DatasetID", cols)
     }

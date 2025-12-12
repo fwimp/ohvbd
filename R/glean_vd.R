@@ -35,7 +35,7 @@ glean_vd <- function(res, cols = NA, returnunique = FALSE) {
   }
 
   if (!any(is.na(cols))) {
-    if (!("dataset_id" %in% cols)){
+    if (!("dataset_id" %in% cols)) {
       cli::cli_alert_info("Added {.val dataset_id} column to requested columns.")
       cols <- c("dataset_id", cols)
     }

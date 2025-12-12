@@ -1,7 +1,7 @@
 test_that("search_hub creates correct requests", {
   withr::local_options(list(ohvbd_dryrun = TRUE))
   expect_equal(
-    suppressMessages(search_hub("Ixodes ricinus", db="vt"))[["url"]],
+    suppressMessages(search_hub("Ixodes ricinus", db = "vt"))[["url"]],
     "https://api.vbdhub.org/search?query=Ixodes%20ricinus&database=vt&limit=1&page=1&withoutPublished=true"
   )
   expect_equal(
@@ -51,7 +51,7 @@ test_that("search_hub returns ohvbd.ids object when simplify is TRUE", {
   vcr::local_cassette("search_hub_simplify")
   ixodes_vd_results <- suppressMessages(
     search_hub("Ixodes ricinus", "vd", simplify = TRUE)
-    )
+  )
   ixodes_vd_results_nonsimple <- suppressMessages(
     search_hub("Ixodes ricinus", "vd", simplify = FALSE)
   )

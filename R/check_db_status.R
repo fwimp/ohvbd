@@ -24,18 +24,18 @@ check_db_status <- function() {
   cli::cli_rule(left = "Database Status Check")
 
   for (i in seq_along(db_list)) {
-      statuscode <- tryCatch(
-        {
-          out <- request(db_list[i]) |>
-            req_user_agent("ROHVBD") |>
-            req_perform()
-          out$status_code
-        },
-        error = function(cnd) {
-          out <- last_response()
-          out$status_code
-        }
-      )
+    statuscode <- tryCatch(
+      {
+        out <- request(db_list[i]) |>
+          req_user_agent("ROHVBD") |>
+          req_perform()
+        out$status_code
+      },
+      error = function(cnd) {
+        out <- last_response()
+        out$status_code
+      }
+    )
     if (!is.null(statuscode)) {
       if (200 <= statuscode && statuscode < 300) {
         cli::cli_alert_success("{names(db_list)[i]}")

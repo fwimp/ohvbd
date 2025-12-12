@@ -15,7 +15,7 @@
 #' @export
 #'
 
-fetch_citations_vt <- function(dataset, redownload = TRUE, minimise=FALSE) {
+fetch_citations_vt <- function(dataset, redownload = TRUE, minimise = FALSE) {
   if (!has_db(dataset)) {
     cli::cli_alert_warning("IDs not necessarily from VecTraits.")
   } else if (!is_from(dataset, "vt")) {
