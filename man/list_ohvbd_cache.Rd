@@ -4,7 +4,7 @@
 \alias{list_ohvbd_cache}
 \title{List all ohvbd cached files}
 \usage{
-list_ohvbd_cache(cache_location = NULL, subdir = NULL)
+list_ohvbd_cache(cache_location = NULL, subdir = NULL, treemode = TRUE)
 }
 \arguments{
 \item{cache_location}{location within which to list files. (Defaults to the standard ohvbd cache location).}

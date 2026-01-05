@@ -93,16 +93,6 @@ clean_ohvbd_cache <- function(cache_location = NULL, subdir = NULL, dryrun = FAL
   if (is.null(cache_location)) {
     cache_location <- get_default_ohvbd_cache()
   }
-  if (!dryrun) {
-    cli::cli_alert_info(paste("This will", cli::col_red("permanently delete"), "files from your computer!"))
-    cli::cli_alert_info("Are you sure? [y/N]")
-    confirmation <- readline(">>")
-    if (tolower(confirmation) != "y") {
-      cli::cli_alert_danger("Aborting.")
-      return(invisible(NULL))
-    }
-  }
-
   if (length(list.files(cache_location, include.dirs = FALSE, recursive = TRUE)) < 1) {
     cli::cli_alert_success("Cache is clear")
     return(invisible(NULL))
@@ -113,7 +103,17 @@ clean_ohvbd_cache <- function(cache_location = NULL, subdir = NULL, dryrun = FAL
   if (dryrun) {
     cli::cli_alert_info("Dry run, so deleting nothing.")
     return(invisible(NULL))
+  } else {
+    cli::cli_text("")
+    cli::cli_alert_warning(paste("This will", cli::col_red("permanently delete"), "files from your computer!"))
+    cli::cli_alert_info("Are you sure? [y/N]")
+    confirmation <- readline(">>")
+    if (tolower(confirmation) != "y") {
+      cli::cli_alert_danger("Aborting.")
+      return(invisible(NULL))
+    }
   }
+
   prev_files <- 0
   removed_files <- 0
   if (!is.null(subdir)) {
@@ -138,6 +138,25 @@ clean_ohvbd_cache <- function(cache_location = NULL, subdir = NULL, dryrun = FAL
   invisible(NULL)
 }
 
+
+#' @title Format directory as df ready for tree plotting
+#'
+#' @param d directory to format
+#'
+#' @return data.frame of file sytem nodes and children
+#' @keywords internal
+.format_dir_as_tree <- function(d) {
+  d_members <- c(d, list.files(d, full.names = TRUE, recursive = TRUE, include.dirs = TRUE))
+  d_members_short <- c(d, list.files(d, full.names = FALSE, recursive = TRUE, include.dirs = TRUE))
+  d_members_short <- lapply(d_members_short, \(x) {tail(strsplit(x, "/")[[1]], 1)})
+  d_members_children <- lapply(d_members, list.files)
+  outdf <- data.frame(
+    stringsAsFactors = FALSE,
+    files = as.character(d_members_short),
+    children = I(d_members_children))
+  return(outdf)
+}
+
 #' @title List all ohvbd cached files
 #' @author Francis Windram
 #'
@@ -149,7 +168,7 @@ clean_ohvbd_cache <- function(cache_location = NULL, subdir = NULL, dryrun = FAL
 #' list_ohvbd_cache()
 #'
 #' @export
-list_ohvbd_cache <- function(cache_location = NULL, subdir = NULL) {
+list_ohvbd_cache <- function(cache_location = NULL, subdir = NULL, treemode = TRUE) {
   if (is.null(cache_location)) {
     cache_location <- get_default_ohvbd_cache()
   }
@@ -167,18 +186,24 @@ list_ohvbd_cache <- function(cache_location = NULL, subdir = NULL) {
   }
   cli::cli_h1("Cached files")
   cli::cli_text("Cache location: {.path {cache_location}}")
-  for (x in cache_dirs) {
-    subdir_files <- list.files(file.path(cache_location, x), recursive = FALSE)
-    subdir_files <- subdir_files[which(!(subdir_files %in% cache_dirs))]
-    if (x == "") {
-      cli::cli_h2("<root>: {length(subdir_files)} file{?s}")
-    } else {
-      cli::cli_h2("{x}: {length(subdir_files)} file{?s}")
-    }
-    if (length(subdir_files) < 1) {
-      cli::cli_text("{.emph {'none'}}")
-    } else {
-      cli::cli_ul(subdir_files)
+  if (treemode) {
+    cli::cli_text("")
+    cli::cli_verbatim(cli::tree(.format_dir_as_tree(cache_location)))
+    cli::cli_text("")
+  } else {
+    for (x in cache_dirs) {
+      subdir_files <- list.files(file.path(cache_location, x), recursive = FALSE)
+      subdir_files <- subdir_files[which(!(subdir_files %in% cache_dirs))]
+      if (x == "") {
+        cli::cli_h2("<root>: {length(subdir_files)} file{?s}")
+      } else {
+        cli::cli_h2("{x}: {length(subdir_files)} file{?s}")
+      }
+      if (length(subdir_files) < 1) {
+        cli::cli_text("{.emph {'none'}}")
+      } else {
+        cli::cli_ul(subdir_files)
+      }
     }
   }
   invisible()
