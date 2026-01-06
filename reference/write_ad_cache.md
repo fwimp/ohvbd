@@ -7,9 +7,9 @@ write data from AREAdata to cache file
 ``` r
 write_ad_cache(
   d,
-  path,
-  metric = NA,
-  gid = NA,
+  metric = NULL,
+  gid = NULL,
+  path = NULL,
   format = "rda",
   compression_type = "bzip2",
   compression_level = 9
@@ -22,10 +22,6 @@ write_ad_cache(
 
   data to write.
 
-- path:
-
-  cache path.
-
 - metric:
 
   metric downloaded (inferred if not provided).
@@ -33,6 +29,10 @@ write_ad_cache(
 - gid:
 
   gid of data (inferred if not provided).
+
+- path:
+
+  cache path.
 
 - format:
 
@@ -45,3 +45,7 @@ write_ad_cache(
 - compression_level:
 
   level of compression to use while caching.
+
+## Value
+
+Path of cached file (invisibly)

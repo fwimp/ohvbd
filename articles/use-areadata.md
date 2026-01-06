@@ -148,9 +148,11 @@ temperature in Angola on 2020-01-01:
 
 ``` r
 ad_df |> glean_ad(targetdate = "2020-01-01", places = "Angola")
-#> [1] 29.33611
-#> attr(,"db")
-#> [1] "ad"
+#> <ohvbd.ad.matrix>
+#> Areadata matrix for temp at gid level 0 .
+#> Cached: FALSE 
+#> Dates: 2020-01-01 -> 2020-01-01 (1)
+#> Locations: 1
 ```
 
 *Note: ignore the `attr` part of the output, this data just allows
@@ -177,26 +179,20 @@ ad_df |> glean_ad(
   targetdate = c("2020-01-01", "2020-01-02", "2020-01-05"),
   places = "Angola"
 )
-#> 2020-01-01 2020-01-02 2020-01-05 
-#>   29.33611   28.77514   28.13407 
-#> attr(,"db")
-#> [1] "ad"
+#> <ohvbd.ad.matrix>
+#> Areadata matrix for temp at gid level 0 .
+#> Cached: FALSE 
+#> Dates: 2020-01-01 -> 2020-01-05 (3)
+#> Locations: 1
 ```
 
 ``` r
 ad_df |> glean_ad(targetdate = "2020-01", places = "Angola")
-#> 2020-01-01 2020-01-02 2020-01-03 2020-01-04 2020-01-05 2020-01-06 2020-01-07 
-#>   29.33611   28.77514   28.88312   27.43250   28.13407   28.64046   28.09983 
-#> 2020-01-08 2020-01-09 2020-01-10 2020-01-11 2020-01-12 2020-01-13 2020-01-14 
-#>   28.40937   28.71222   27.21757   26.85815   28.92744   29.53750   28.88849 
-#> 2020-01-15 2020-01-16 2020-01-17 2020-01-18 2020-01-19 2020-01-20 2020-01-21 
-#>   28.81174   29.81402   29.89741   29.59390   29.87222   30.28832   30.18386 
-#> 2020-01-22 2020-01-23 2020-01-24 2020-01-25 2020-01-26 2020-01-27 2020-01-28 
-#>   29.98904   29.97556   29.63855   29.53917   29.00056   28.81855   29.47186 
-#> 2020-01-29 2020-01-30 2020-01-31 
-#>   28.44818   28.64745   28.34594 
-#> attr(,"db")
-#> [1] "ad"
+#> <ohvbd.ad.matrix>
+#> Areadata matrix for temp at gid level 0 .
+#> Cached: FALSE 
+#> Dates: 2020-01-01 -> 2020-01-31 (31)
+#> Locations: 1
 ```
 
 ``` r
@@ -217,10 +213,11 @@ ad_df |> glean_ad(
   enddate = "2020-01-04",
   places = "Angola"
 )
-#> 2020-01-01 2020-01-02 2020-01-03 
-#>   29.33611   28.77514   28.88312 
-#> attr(,"db")
-#> [1] "ad"
+#> <ohvbd.ad.matrix>
+#> Areadata matrix for temp at gid level 0 .
+#> Cached: FALSE 
+#> Dates: 2020-01-01 -> 2020-01-03 (3)
+#> Locations: 1
 ```
 
 ### Places
@@ -233,10 +230,11 @@ ad_df |> glean_ad(
   targetdate = "2020-01-01",
   places = c("Angola", "Latvia", "United Kingdom")
 )
-#>         Angola         Latvia United_Kingdom 
-#>      29.336107       1.765062       5.113141 
-#> attr(,"db")
-#> [1] "ad"
+#> <ohvbd.ad.matrix>
+#> Areadata matrix for temp at gid level 0 .
+#> Cached: FALSE 
+#> Dates: 2020-01-01 -> 2020-01-01 (1)
+#> Locations: 3
 ```
 
 This can be combined with the date filters above to create a more
@@ -276,4 +274,4 @@ ad_df |> glean_ad(
 
 ## To be completed
 
-Built in 1.9965315s
+Built in 1.9287333s

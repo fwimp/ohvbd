@@ -5,19 +5,23 @@ List all ohvbd cached files
 ## Usage
 
 ``` r
-list_ohvbd_cache(cache_location = NULL, subdir = NULL)
+list_ohvbd_cache(subdir = NULL, path = NULL, treeview = FALSE)
 ```
 
 ## Arguments
 
-- cache_location:
+- subdir:
+
+  a subdirectory or list of subdirectories to list.
+
+- path:
 
   location within which to list files. (Defaults to the standard ohvbd
   cache location).
 
-- subdir:
+- treeview:
 
-  a subdirectory or list of subdirectories to list.
+  display the full cache in a tree structure
 
 ## Author
 

@@ -5,14 +5,10 @@ Read AREAdata from cache file
 ## Usage
 
 ``` r
-read_ad_cache(path, metric, gid, warn = TRUE)
+read_ad_cache(metric, gid, path = NULL, warn = TRUE)
 ```
 
 ## Arguments
-
-- path:
-
-  cache path.
 
 - metric:
 
@@ -21,6 +17,10 @@ read_ad_cache(path, metric, gid, warn = TRUE)
 - gid:
 
   gid to retrieve.
+
+- path:
+
+  cache path.
 
 - warn:
 
