@@ -68,14 +68,14 @@ read_ad_cache <- function(metric, gid, path=NULL, warn = TRUE) {
   path <- path %||% get_default_ohvbd_cache("adcache")
 
   load(file.path(path, paste0(metric, "-", gid, ".rda")))
-  gid <- attr(d, "writetime") %||% lubridate::now()
+  writetime <- attr(d, "writetime") %||% lubridate::now()
   readtime <- lubridate::now()
   if (warn) {
     timediff <- readtime - writetime
     if (timediff > months(6)) {
-      cli::cli_warn(
+      cli::cli_warn(c(
         "!" = "Cached data older than 6 months!\nConsider deleting or recreating the cache."
-      )
+      ))
     }
   }
   # Return file hash if desired
@@ -86,9 +86,10 @@ read_ad_cache <- function(metric, gid, path=NULL, warn = TRUE) {
 #' @title Delete files from ohvbd cache directories
 #' @author Francis Windram
 #'
-#' @param cache_location location within which to remove rda files. (Defaults to the standard ohvbd cache location).
 #' @param subdir a subdirectory or list of subdirectories to clean.
+#' @param path location within which to remove rda files. (Defaults to the standard ohvbd cache location).
 #' @param dryrun if `TRUE` list files that would be deleted, but do not remove.
+#' @param force do not ask for confirmation before cleaning.
 #'
 #' @return NULL
 #'
@@ -96,28 +97,31 @@ read_ad_cache <- function(metric, gid, path=NULL, warn = TRUE) {
 #' clean_ad_cache()
 #'
 #' @export
-clean_ohvbd_cache <- function(cache_location = NULL, subdir = NULL, dryrun = FALSE) {
-  if (is.null(cache_location)) {
-    cache_location <- get_default_ohvbd_cache()
+clean_ohvbd_cache <- function(subdir = NULL, path = NULL, dryrun = FALSE, force = FALSE) {
+  if (is.null(path)) {
+    path <- get_default_ohvbd_cache()
   }
-  if (length(list.files(cache_location, include.dirs = FALSE, recursive = TRUE)) < 1) {
+  if (length(list.files(path, include.dirs = FALSE, recursive = TRUE)) < 1) {
     cli::cli_alert_success("Cache is clear")
     return(invisible(NULL))
   }
 
-  list_ohvbd_cache(cache_location, subdir = subdir)
+  list_ohvbd_cache(subdir, path = path, treeview = FALSE)
 
   if (dryrun) {
     cli::cli_alert_info("Dry run, so deleting nothing.")
     return(invisible(NULL))
   } else {
-    cli::cli_text("")
-    cli::cli_alert_warning(paste("This will", cli::col_red("permanently delete"), "files from your computer!"))
-    cli::cli_alert_info("Are you sure? [y/N]")
-    confirmation <- readline(">>")
-    if (tolower(confirmation) != "y") {
-      cli::cli_alert_danger("Aborting.")
-      return(invisible(NULL))
+    if (!force) {
+      cli::cli_text("")
+      delete_loc <- subdir %||% "your computer"
+      cli::cli_alert_warning(paste("This will", cli::col_red("permanently delete"), "files from {.emph {delete_loc}}"))
+      cli::cli_alert_info("Are you sure? [y/N]")
+      confirmation <- readline(">>")
+      if (tolower(confirmation) != "y") {
+        cli::cli_alert_danger("Aborting.")
+        return(invisible(NULL))
+      }
     }
   }
 
@@ -126,7 +130,7 @@ clean_ohvbd_cache <- function(cache_location = NULL, subdir = NULL, dryrun = FAL
   if (!is.null(subdir)) {
     # Clean only the specified dirs
     for (d in subdir) {
-      working_path <- file.path(cache_location, d)
+      working_path <- file.path(path, d)
       prev_files <- prev_files + length(list.files(file.path(working_path), recursive = TRUE))
       cli::cli_alert_info("Clearing files from {.path {working_path}}")
       unlink(file.path(working_path, "*"), recursive = TRUE)
@@ -134,11 +138,11 @@ clean_ohvbd_cache <- function(cache_location = NULL, subdir = NULL, dryrun = FAL
     }
   } else {
     # Clean the whole cache
-    remove_path <- file.path(cache_location, "*")
-    prev_files <- prev_files + length(list.files(file.path(cache_location), recursive = TRUE))
+    remove_path <- file.path(path, "*")
+    prev_files <- prev_files + length(list.files(file.path(path), recursive = TRUE))
     cli::cli_alert_info("Clearing files from {.path {cache_location}}")
     unlink(remove_path, recursive = TRUE)
-    removed_files <- removed_files + length(list.files(file.path(cache_location), recursive = TRUE))
+    removed_files <- removed_files + length(list.files(file.path(path), recursive = TRUE))
   }
   num_removed <- prev_files - removed_files # nolint: object_usage_linter
   cli::cli_alert_success("Removed {num_removed} file{?s}")
@@ -167,19 +171,20 @@ clean_ohvbd_cache <- function(cache_location = NULL, subdir = NULL, dryrun = FAL
 #' @title List all ohvbd cached files
 #' @author Francis Windram
 #'
-#' @param cache_location location within which to list files. (Defaults to the standard ohvbd cache location).
 #' @param subdir a subdirectory or list of subdirectories to list.
+#' @param path location within which to list files. (Defaults to the standard ohvbd cache location).
+#' @param treeview display the full cache in a tree structure
 #' @return NULL
 #'
 #' @examplesIf interactive()
 #' list_ohvbd_cache()
 #'
 #' @export
-list_ohvbd_cache <- function(cache_location = NULL, subdir = NULL, treemode = TRUE) {
-  if (is.null(cache_location)) {
-    cache_location <- get_default_ohvbd_cache()
+list_ohvbd_cache <- function(subdir = NULL, path = NULL, treeview = FALSE) {
+  if (is.null(path)) {
+    path <- get_default_ohvbd_cache()
   }
-  cache_dirs_tmp <- list.dirs(cache_location, full.names = FALSE)
+  cache_dirs_tmp <- list.dirs(path, full.names = FALSE)
   if (!is.null(subdir)) {
     cache_dirs <- cache_dirs_tmp[which(cache_dirs_tmp %in% subdir)]
     if (length(cache_dirs) < 1) {
@@ -192,14 +197,14 @@ list_ohvbd_cache <- function(cache_location = NULL, subdir = NULL, treemode = TR
     cache_dirs <- cache_dirs_tmp
   }
   cli::cli_h1("Cached files")
-  cli::cli_text("Cache location: {.path {cache_location}}")
-  if (treemode) {
+  cli::cli_text("Cache location: {.path {path}}")
+  if (treeview) {
     cli::cli_text("")
-    cli::cli_verbatim(cli::tree(.format_dir_as_tree(cache_location)))
+    cli::cli_verbatim(cli::tree(.format_dir_as_tree(path)))
     cli::cli_text("")
   } else {
     for (x in cache_dirs) {
-      subdir_files <- list.files(file.path(cache_location, x), recursive = FALSE)
+      subdir_files <- list.files(file.path(path, x), recursive = FALSE)
       subdir_files <- subdir_files[which(!(subdir_files %in% cache_dirs))]
       if (x == "") {
         cli::cli_h2("<root>: {length(subdir_files)} file{?s}")

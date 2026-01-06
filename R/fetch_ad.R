@@ -109,7 +109,7 @@ fetch_ad <- function(
         cli::cli_progress_message(
           "{cli::symbol$pointer} Loading AREAdata cache: {final_metric}-{gid} ..."
         )
-        suppressWarnings(read_ad_cache(cache_location, final_metric, gid))
+        suppressWarnings(read_ad_cache(final_metric, gid, cache_location))
       },
       error = function(e) {
         cli::cli_alert_danger("Failed to load AREAdata cache: {final_metric}-{gid}!")
@@ -237,9 +237,9 @@ fetch_ad <- function(
       )
       write_ad_cache(
         outmat,
-        path = cache_location,
         metric = final_metric,
         gid = gid,
+        path = cache_location,
         format = "rda"
       )
       cli::cli_alert_success(

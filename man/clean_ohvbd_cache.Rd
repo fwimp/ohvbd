@@ -4,14 +4,16 @@
 \alias{clean_ohvbd_cache}
 \title{Delete files from ohvbd cache directories}
 \usage{
-clean_ohvbd_cache(cache_location = NULL, subdir = NULL, dryrun = FALSE)
+clean_ohvbd_cache(subdir = NULL, path = NULL, dryrun = FALSE, force = FALSE)
 }
 \arguments{
-\item{cache_location}{location within which to remove rda files. (Defaults to the standard ohvbd cache location).}
-
 \item{subdir}{a subdirectory or list of subdirectories to clean.}
 
+\item{path}{location within which to remove rda files. (Defaults to the standard ohvbd cache location).}
+
 \item{dryrun}{if \code{TRUE} list files that would be deleted, but do not remove.}
+
+\item{force}{do not ask for confirmation before cleaning.}
 }
 \description{
 Delete files from ohvbd cache directories

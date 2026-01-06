@@ -111,8 +111,11 @@ glean_ad <- function(
   targetdate_final <- NA
   enddate_final <- NA
   date_filterlevel <- "days"
+  init_ncol <- ncol(ad_matrix)
+  init_nrow <- nrow(ad_matrix)
   selected_cols <- seq_len(ncol(ad_matrix))
   selected_rows <- seq_len(nrow(ad_matrix))
+
 
   # All this is just trying to intelligently process possible date searches
 
@@ -250,6 +253,26 @@ glean_ad <- function(
   }
 
   outmat <- ad_matrix[selected_rows, selected_cols]
+  # Detect if single row or single column and reformat as appropriate
+  if (length(selected_rows) == 1 && length(selected_cols) > 1) {
+    # One loc, multiple dates
+    datenames <- colnames(ad_matrix)[selected_cols]
+    outmat <- matrix(outmat, nrow = 1)
+    rownames(outmat) <- selected_rows
+    colnames(outmat) <- datenames
+  } else if (length(selected_cols) == 1 && length(selected_rows) > 1) {
+    # One date, multiple locs
+    datenames <- colnames(ad_matrix)[selected_cols]
+    outmat <- matrix(outmat, ncol = 1)
+    rownames(outmat) <- selected_rows
+    colnames(outmat) <- datenames
+  } else if (length(selected_rows) == 1 && length(selected_cols) == 1) {
+    # One loc, one date
+    datenames <- colnames(ad_matrix)[selected_cols]
+    outmat <- matrix(outmat, ncol = 1)
+    rownames(outmat) <- selected_rows
+    colnames(outmat) <- datenames
+  }
   if (inherits(outmat, "matrix")) {
     outmat <- new_ohvbd.ad.matrix(
       m = outmat,
@@ -259,7 +282,15 @@ glean_ad <- function(
       db = "ad"
     )
   } else {
+    # Should never happen now
+    cli::cli_warn(c(
+      "!" = "Outmat not a matrix (class: {.cls {class(outmat)}})",
+      "i" = "This is an internal error, please report it to the package authors."
+      ))
     ohvbd_db(outmat) <- "ad"
+    attr(outmat, "cached") <- attr(ad_matrix, "cached")
+    attr(outmat, "metric") <- metric
+    attr(outmat, "gid") <- gid
   }
   return(outmat)
 }

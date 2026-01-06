@@ -16,7 +16,7 @@
 #'
 #' @export
 #'
-# TODO: Check to make sure cache location is actually in the correct spot.
+
 fetch_gadm_sfs <- function(
   gid = 0,
   cache_location = NULL,
@@ -40,7 +40,7 @@ fetch_gadm_sfs <- function(
     outshp <- tryCatch(
       {
         cli::cli_progress_message("{cli::symbol$pointer} Loading gadm cache...")
-        vect(file.path(cache_location, paste0(target_file, ".shp")))
+        terra::vect(file.path(cache_location, paste0(target_file, ".shp")))
       },
       error = function(e) {
         cli::cli_alert_warning("Loading failed.")
@@ -79,7 +79,7 @@ fetch_gadm_sfs <- function(
         cli::cli_progress_message(
           "{cli::symbol$pointer} Loading gadm cached data..."
         )
-        vect(file.path(cache_location, paste0(target_file, ".shp")))
+        terra::vect(file.path(cache_location, paste0(target_file, ".shp")))
       },
       error = function(e) {
         cli::cli_abort(c("x" = "Failed to load recently cached gadm data!"))

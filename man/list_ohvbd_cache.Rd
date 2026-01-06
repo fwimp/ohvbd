@@ -4,12 +4,14 @@
 \alias{list_ohvbd_cache}
 \title{List all ohvbd cached files}
 \usage{
-list_ohvbd_cache(cache_location = NULL, subdir = NULL, treemode = TRUE)
+list_ohvbd_cache(subdir = NULL, path = NULL, treeview = FALSE)
 }
 \arguments{
-\item{cache_location}{location within which to list files. (Defaults to the standard ohvbd cache location).}
-
 \item{subdir}{a subdirectory or list of subdirectories to list.}
+
+\item{path}{location within which to list files. (Defaults to the standard ohvbd cache location).}
+
+\item{treeview}{display the full cache in a tree structure}
 }
 \description{
 List all ohvbd cached files
