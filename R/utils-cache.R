@@ -1,56 +1,59 @@
 #' @title write data from AREAdata to cache file
 #'
 #' @param d data to write.
-#' @param path cache path.
 #' @param metric metric downloaded (inferred if not provided).
 #' @param gid gid of data (inferred if not provided).
+#' @param path cache path.
 #' @param format format to store data in (currenly unused).
 #' @param compression_type type of compression to use when caching.
 #' @param compression_level level of compression to use while caching.
 #'
-#' @return NULL
+#' @return Path of cached file (invisibly)
 #' @keywords internal
 #'
 
 write_ad_cache <- function(
   d,
-  path,
-  metric = NA,
-  gid = NA,
+  metric = NULL,
+  gid = NULL,
+  path = NULL,
   format = "rda",
   compression_type = "bzip2",
   compression_level = 9
 ) {
-  if (is.na(metric)) {
-    metric <- attr(d, "metric")
-  }
 
-  if (is.na(gid)) {
-    gid <- attr(d, "gid")
-  }
+  metric <- metric %||% attr(d, "metric")
+  gid <- gid %||% attr(d, "gid")
+
 
   # Log that this is a cached version of the file.
   attr(d, "cached") <- TRUE
 
+  # Log the write time of this cached object
+  attr(d, "writetime") <- lubridate::now()
+
+  # Default cache if path is not defined
+  path <- path %||% get_default_ohvbd_cache("adcache")
+
   # Make cache path if necessary
   ifelse(!dir.exists(path), dir.create(path, recursive = TRUE), FALSE)
-  writetime <- lubridate::now()
+  outpath <- file.path(path, paste0(metric, "-", gid, ".rda"))
   save(
     d,
-    writetime,
-    file = file.path(path, paste0(metric, "-", gid, ".rda")),
+    file = outpath,
     compress = compression_type,
     compression_level = compression_level
   )
+  invisible(outpath)
   # Return file hash if desired
   # cli::cli_alert_info(cli::hash_obj_emoji(d)$emojis)  # nolint: commented_code_linter
 }
 
 #' @title Read AREAdata from cache file
 #'
-#' @param path cache path.
 #' @param metric metric to retrieve.
 #' @param gid gid to retrieve.
+#' @param path cache path.
 #' @param warn Whether to warn if a cached file is older than 6 months.
 #'
 #' @return cached data.
@@ -58,16 +61,20 @@ write_ad_cache <- function(
 #' @keywords internal
 #'
 
-read_ad_cache <- function(path, metric, gid, warn = TRUE) {
-  writetime <- 0
+read_ad_cache <- function(metric, gid, path=NULL, warn = TRUE) {
   d <- NA
+
+  # Default cache if path is not defined
+  path <- path %||% get_default_ohvbd_cache("adcache")
+
   load(file.path(path, paste0(metric, "-", gid, ".rda")))
+  gid <- attr(d, "writetime") %||% lubridate::now()
   readtime <- lubridate::now()
   if (warn) {
     timediff <- readtime - writetime
     if (timediff > months(6)) {
-      warning(
-        "Cached data older than 6 months!\nConsider deleting or recreating the cache."
+      cli::cli_warn(
+        "!" = "Cached data older than 6 months!\nConsider deleting or recreating the cache."
       )
     }
   }

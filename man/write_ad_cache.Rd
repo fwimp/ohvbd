@@ -6,9 +6,9 @@
 \usage{
 write_ad_cache(
   d,
-  path,
-  metric = NA,
-  gid = NA,
+  metric = NULL,
+  gid = NULL,
+  path = NULL,
   format = "rda",
   compression_type = "bzip2",
   compression_level = 9
@@ -17,17 +17,20 @@ write_ad_cache(
 \arguments{
 \item{d}{data to write.}
 
-\item{path}{cache path.}
-
 \item{metric}{metric downloaded (inferred if not provided).}
 
 \item{gid}{gid of data (inferred if not provided).}
+
+\item{path}{cache path.}
 
 \item{format}{format to store data in (currenly unused).}
 
 \item{compression_type}{type of compression to use when caching.}
 
 \item{compression_level}{level of compression to use while caching.}
+}
+\value{
+Path of cached file (invisibly)
 }
 \description{
 write data from AREAdata to cache file

@@ -4,14 +4,14 @@
 \alias{read_ad_cache}
 \title{Read AREAdata from cache file}
 \usage{
-read_ad_cache(path, metric, gid, warn = TRUE)
+read_ad_cache(metric, gid, path = NULL, warn = TRUE)
 }
 \arguments{
-\item{path}{cache path.}
-
 \item{metric}{metric to retrieve.}
 
 \item{gid}{gid to retrieve.}
+
+\item{path}{cache path.}
 
 \item{warn}{Whether to warn if a cached file is older than 6 months.}
 }
