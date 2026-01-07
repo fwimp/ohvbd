@@ -124,6 +124,10 @@ Other:
   - This is intended to encourage you to preserve at least one means of
     retrieving citation data later.
 - WKT parsing and formatting is now significantly more robust.
+- Cached AREAData now includes the cache timestamp as an attribute
+  rather than a separate variable in the cache file.
+- [`glean_ad()`](https://ohvbd.vbdhub.org/reference/glean_ad.md) now
+  correctly returns a matrix even when there is only 1 row or column.
 
 ## ohvbd 0.6.1
 

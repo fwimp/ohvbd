@@ -116,6 +116,8 @@ Functions for interfacing with VecDyn.
   VecDyn dataset/s by ID
 - [`fetch_vd_counts()`](https://ohvbd.vbdhub.org/reference/fetch_vd_counts.md)
   : Fetch VecDyn dataset length by ID
+- [`fetch_vd_meta_table()`](https://ohvbd.vbdhub.org/reference/fetch_vd_meta_table.md)
+  : Fetch VecDyn metadata table
 - [`find_vd_columns()`](https://ohvbd.vbdhub.org/reference/find_vd_columns.md)
   : Get current columns in VecDyn datasets
 - [`find_vd_ids()`](https://ohvbd.vbdhub.org/reference/find_vd_ids.md) :

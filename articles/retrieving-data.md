@@ -375,4 +375,4 @@ time you run your script. This is as easy as running
 dataframe, then reading it in later with
 [`read.csv()`](https://rdrr.io/r/utils/read.table.html)
 
-Built in 5.2641718s
+Built in 5.0162392s
