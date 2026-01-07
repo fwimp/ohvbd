@@ -13,6 +13,7 @@ assoc_ad(
   enddate = NA,
   gid = 0,
   lonlat_names = c("Longitude", "Latitude"),
+  cache_location = NULL,
   basereq = NA
 )
 ```
@@ -49,12 +50,18 @@ assoc_ad(
 - gid:
 
   the spatial scale to retrieve (0 = country-level,
-  1=province-level...).
+  1=province-level...). (Note: this will preferentially use the gid
+  level of `areadata` if present.)
 
 - lonlat_names:
 
   a vector containing the column names of the longitude and latitude
   columns **IN THAT ORDER**!
+
+- cache_location:
+
+  path to cache location (defaults to user directory obtained from
+  [`tools::R_user_dir()`](https://rdrr.io/r/tools/userdir.html)).
 
 - basereq:
 

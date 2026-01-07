@@ -5,7 +5,12 @@ Intelligently bind together data with gadm IDs at all scales.
 ## Usage
 
 ``` r
-assoc_gadm(df, lonlat_names = c("Longitude", "Latitude"), basereq = NA)
+assoc_gadm(
+  df,
+  lonlat_names = c("Longitude", "Latitude"),
+  cache_location = NULL,
+  basereq = NA
+)
 ```
 
 ## Arguments
@@ -19,6 +24,11 @@ assoc_gadm(df, lonlat_names = c("Longitude", "Latitude"), basereq = NA)
 
   a vector containing the column names of the longitude and latitude
   columns **IN THAT ORDER**!
+
+- cache_location:
+
+  path to cache location (defaults to user directory obtained from
+  [`tools::R_user_dir()`](https://rdrr.io/r/tools/userdir.html)).
 
 - basereq:
 
