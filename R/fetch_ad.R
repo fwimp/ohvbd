@@ -50,10 +50,7 @@ fetch_ad <- function(
     )
   }
 
-  if (is.null(cache_location)) {
-    # Have to do some horrible path substitution to make this work nicely on windows. It may cause errors later in which case another solution may be better.
-    cache_location <- get_default_ohvbd_cache("adcache")
-  }
+  cache_location <- cache_location %||% get_default_ohvbd_cache("adcache")
 
   loaded_cache <- FALSE
   final_url <- paste0(basereq, "output/")
@@ -148,28 +145,25 @@ fetch_ad <- function(
       if (metricid <= 5) {
         # Retrieve AD article from figshare
         # fmt: skip
-        figshare_data <- httr2::request("https://api.figshare.com/v2/articles/") |>
+        figshare_resp <- httr2::request("https://api.figshare.com/v2/articles/") |>
           httr2::req_user_agent("ROHVBD") |>
           httr2::req_url_path_append(16587311) |>
-          httr2::req_perform() |>
-          httr2::resp_body_json()
+          httr2::req_perform()
+        # browser()
+        figshare_data <- figshare_resp |> httr2::resp_body_json()
         figshare_df <- data.table::rbindlist(figshare_data$files)
-        # Extract file list
+        # Filter only rds files
+        figshare_df <- figshare_df[which(stringr::str_detect(figshare_df$name, stringr::fixed(".RDS"))), ]
+        figshare_df <- figshare_df[which(stringr::str_detect(figshare_df$name, "GID|countries")), ]
         figshare_df <- figshare_df |>
-          dplyr::filter(grepl(".RDS", .data$name, fixed = TRUE)) |> # Get only RDS files
-          dplyr::group_by(.data$name) |> # Group by name
-          dplyr::slice_max(.data$id, with_ties = FALSE) |> # Get max id (assuming ids monotonically increase!)
-          dplyr::ungroup() |> # Ungroup as we don't need that any more, should now be 1 row per file
           tidyr::separate_wider_delim(
             .data$name,
             delim = "-",
-            names = c("metric", "agg", "gid", "cleaned")
-          ) |> # Split name into cols
+            names = c("metric", "agg", "gid", "cleaned")) |>
           tidyr::separate_wider_delim(
-            .data$cleaned,
+            .data$cleaned, # TODO: Check this works
             delim = ".",
-            names = c("cleaned", "fileext")
-          ) |> # Further split out file extension
+            names = c("cleaned", "fileext")) |>
           dplyr::select(-one_of(c("agg", "cleaned"))) |> # Drop unnecessary columns
           dplyr::filter(gid == "GID2") # Get only GID2
 
@@ -191,6 +185,10 @@ fetch_ad <- function(
           "annual-mean-temperature-forecast-GID1.RDS"
         )
       }
+    }
+
+    if (is.na(final_url)) {
+      cli::cli_abort("Final AD download url is blank!", .internal = TRUE)
     }
 
     # Handle download timeout

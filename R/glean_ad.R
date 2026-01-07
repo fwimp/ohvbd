@@ -139,9 +139,7 @@ glean_ad <- function(
         if (any(is.na(targetdate_final))) {
           # Dunno, stop filtering date
           filter_date <- FALSE
-          cli::cli_alert_warning(
-            "Could not make {.val {targetdate}} into a usable date."
-          )
+          cli::cli_warn("Could not make {.val {targetdate}} into a usable date.")
           cli::cli_alert_warning("Not filtering by date.")
           cli::cli_alert_info("Try ISO 8601 {.val yyyy-mm-dd} format")
         }
@@ -164,9 +162,7 @@ glean_ad <- function(
             if (is.na(enddate_final)) {
               # Dunno, infer enddate
               infer_enddate <- TRUE
-              cli::cli_alert_warning(
-                "Could not make {.val targetdate} into a usable date."
-              )
+              cli::cli_warn("Could not make {.val targetdate} into a usable date.")
               cli::cli_alert_warning("Inferring end date from {.arg targetdate}.")
               cli::cli_alert_info("Try ISO 8601 {.val yyyy-mm-dd} format")
             }

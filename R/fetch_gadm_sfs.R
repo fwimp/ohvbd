@@ -39,6 +39,7 @@ fetch_gadm_sfs <- function(
   if (!refresh_cache) {
     outshp <- tryCatch(
       {
+        # "@ {.path {file.path(cache_location, paste0(target_file, '.shp'))}}"
         cli::cli_progress_message("{cli::symbol$pointer} Loading gadm cache...")
         terra::vect(file.path(cache_location, paste0(target_file, ".shp")))
       },
