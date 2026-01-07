@@ -131,11 +131,12 @@ fetch_vd_meta_table <- function(cache_location = NULL, refresh_cache = FALSE, no
 
   cache_location <- cache_location %||% get_default_ohvbd_cache("vecdyn")
   file_location <- file.path(cache_location, "vd_meta_table.rds")
-  # Check cache
 
+  # Check cache
   if (file.exists(file_location) && !refresh_cache) {
     meta_table <- readRDS(file_location)
     cached_writetime <- attr(meta_table, "writetime", exact = TRUE)
+    # If timestamp is present and data is not stale then load and call it a day
     if (!is.null(cached_writetime) && lubridate::now() - cached_writetime < days(1)) {
       cache_loaded <- TRUE
       if (!noprogress) {
@@ -146,21 +147,25 @@ fetch_vd_meta_table <- function(cache_location = NULL, refresh_cache = FALSE, no
     }
   }
 
+  # If we didn't load (or decided not to use) cached data, download it fresh!
   if (!cache_loaded) {
     progress_format <- list(format = "{cli::pb_spin} Downloading VecDyn metadata table...")
     if (noprogress) {
       progress_format <- FALSE
     }
 
+    # Download metadata table from vecdyn
     res <- basereq |>
       httr2::req_url_path_append("vecdynbyprovider") |>
       httr2::req_throttle(5) |>
       httr2::req_perform_iterative(
         httr2::iterate_with_offset("page", resp_complete = \(resp) {
+          # Check to make sure there's not another page to find.
           httr2::resp_body_json(resp)$data["next"] == "NULL"
         }),
         progress = progress_format)
 
+    # Extract and parse multi-element lists
     meta_table <- res |>
       resps_successes() |>
       resps_data(\(resp) resp_body_json(resp)$data$results)
@@ -179,10 +184,8 @@ fetch_vd_meta_table <- function(cache_location = NULL, refresh_cache = FALSE, no
     attr(meta_table, "writetime") <- lubridate::now()
   }
 
-
-  # Cache
-
-  if (!cache_loaded || refresh_cache) {
+  # Save to cache if we performed a download
+  if (!cache_loaded) {
     saveRDS(meta_table, file_location)
     if (!noprogress) {
       cli::cli_alert_success("Saved to cache.")
