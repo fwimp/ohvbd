@@ -38,7 +38,7 @@ fetch_ad(
 
 - refresh_cache:
 
-  force a refresh of the relevant cached data.
+  force a refresh of the relevant cached data (and enables use_cache).
 
 - timeout:
 
