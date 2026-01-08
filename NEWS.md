@@ -32,7 +32,7 @@ New functions & arguments:
 * New `taxonomy` argument to `search_hub()` allows for filtering searches by GBIF backbone IDs.
 * New `match_species()` function allows for quick and flexible matching of species names to their GBIF backbone IDs.
 * New `match_country()` function allows for matching of country names to WKT polygons via naturalearth.
-* New `ohvbd_db()`,  `has_db()`, and `is_from()` functions allow for quick testing of object provenance (according to `ohvbd`).
+* New `ohvbd_db()`, `has_db()`, and `is_from()` functions allow for quick testing of object provenance (according to `ohvbd`).
 * New `get_default_ohvbd_cache()` function allows for custom functions that interface with cached `ohvbd` data files.
 * New `list_ohvbd_cache()` and `clean_ohvbd_cache()` functions enable better interactive cache management.
   * As a result, `clean_ad_cache()` has been removed as it is now unnecessary.

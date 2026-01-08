@@ -23,7 +23,7 @@ fetch_ad(
 
 \item{cache_location}{path to cache location (defaults to user directory obtained from \code{\link[tools:userdir]{tools::R_user_dir()}}).}
 
-\item{refresh_cache}{force a refresh of the relevant cached data.}
+\item{refresh_cache}{force a refresh of the relevant cached data (and enables use_cache).}
 
 \item{timeout}{timeout for data download from figshare/github in seconds.}
 

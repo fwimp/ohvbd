@@ -44,7 +44,7 @@ fetch_gadm_sfs <- function(
         terra::vect(file.path(cache_location, paste0(target_file, ".shp")))
       },
       error = function(e) {
-        cli::cli_alert_warning("Loading failed.")
+        cli::cli_alert_warning("Loading cache failed.")
         NA
       }
     )
