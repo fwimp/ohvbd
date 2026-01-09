@@ -69,6 +69,16 @@
     <p>An <code>ohvbd.ids</code> vector of VecDyn dataset IDs.</p>
     </div>
     <div class="section level2">
+    <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
+    <p><code><a href="search_hub.html">search_hub()</a></code> is now preferred for keyword searches:</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># old style</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">search_vd</span>(<span class="fu">c</span>(<span class="st">"Ixodes"</span>, <span class="st">"ricinus"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co"># new style</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="fu">search_hub</span>(<span class="st">"Ixodes ricinus"</span>, <span class="at">db =</span> <span class="st">"vd"</span>)</span></code></pre><p></p></div>
+<p><code>search_vd()</code> may be deprecated in the future.</p>
+    </div>
+    <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
     <p>Francis Windram</p>
     </div>

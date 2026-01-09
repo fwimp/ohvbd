@@ -69,11 +69,21 @@
     <p>An <code>ohvbd.ids</code> vector of VecTraits dataset IDs.</p>
     </div>
     <div class="section level2">
+    <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
+    <p><code><a href="search_hub.html">search_hub()</a></code> is now preferred for keyword searches:</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># old style</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">search_vt</span>(<span class="fu">c</span>(<span class="st">"Ixodes"</span>, <span class="st">"ricinus"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co"># new style</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="fu">search_hub</span>(<span class="st">"Ixodes ricinus"</span>, <span class="at">db =</span> <span class="st">"vt"</span>)</span></code></pre><p></p></div>
+<p><code>search_vt()</code> may be deprecated in the future.</p>
+    </div>
+    <div class="section level2">
     <h2 id="warning">Warning<a class="anchor" aria-label="anchor" href="#warning"></a></h2>
 
 
 <p>The ids returned from the server (and thus this function) do not necessarily precisely match the keywords that were requested.</p>
-<p>For example search_vt("United Kingdom") does not return only items found in the United Kingdom. Instead it returns items where some part of the string "United Kingdom" appears in one of the indexed columns.</p>
+<p>For example <code>search_vt("United Kingdom")</code> does not return only items found in the United Kingdom. Instead it returns items where some part of the string "United Kingdom" appears in one of the indexed columns.</p>
 <p>The indexed columns of VecTraits are:</p><ul><li><p><code>DatasetID</code></p></li>
 <li><p><code>OriginalTraitName</code></p></li>
 <li><p><code>Variables</code></p></li>

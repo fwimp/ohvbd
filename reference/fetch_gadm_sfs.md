@@ -1,7 +1,7 @@
 # Fetch gadm mapping shapefiles
 
 Retrieve AREAdata gadm mapping shapefiles specified by spatial scale
-(GID).
+(GID). These vectors are cached as GeoPackage files.
 
 ## Usage
 

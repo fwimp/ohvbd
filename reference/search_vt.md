@@ -26,14 +26,27 @@ search_vt(keywords, basereq = NA)
 
 An `ohvbd.ids` vector of VecTraits dataset IDs.
 
+## Note
+
+[`search_hub()`](https://ohvbd.vbdhub.org/reference/search_hub.md) is
+now preferred for keyword searches:
+
+    # old style
+    search_vt(c("Ixodes", "ricinus")
+
+    # new style
+    search_hub("Ixodes ricinus", db = "vt")
+
+`search_vt()` may be deprecated in the future.
+
 ## Warning
 
 The ids returned from the server (and thus this function) do not
 necessarily precisely match the keywords that were requested.
 
-For example search_vt("United Kingdom") does not return only items found
-in the United Kingdom. Instead it returns items where some part of the
-string "United Kingdom" appears in one of the indexed columns.
+For example `search_vt("United Kingdom")` does not return only items
+found in the United Kingdom. Instead it returns items where some part of
+the string "United Kingdom" appears in one of the indexed columns.
 
 The indexed columns of VecTraits are:
 

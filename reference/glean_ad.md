@@ -10,7 +10,14 @@ however the other 5 metrics are handled natively.
 ## Usage
 
 ``` r
-glean_ad(ad_matrix, targetdate = NA, enddate = NA, places = NA, gid = NA)
+glean_ad(
+  ad_matrix,
+  targetdate = NA,
+  enddate = NA,
+  places = NA,
+  gid = NA,
+  printbars = TRUE
+)
 ```
 
 ## Arguments
@@ -46,6 +53,11 @@ glean_ad(ad_matrix, targetdate = NA, enddate = NA, places = NA, gid = NA)
   The spatial scale of the AREAdata matrix (this is not needed if the
   matrix has been supplied by
   [`fetch_ad()`](https://ohvbd.vbdhub.org/reference/fetch_ad.md)).
+
+- printbars:
+
+  Whether to print time overlap bars in the case of dates outside the
+  data range.
 
 ## Value
 

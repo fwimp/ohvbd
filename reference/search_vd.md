@@ -26,6 +26,19 @@ search_vd(keywords, basereq = NA)
 
 An `ohvbd.ids` vector of VecDyn dataset IDs.
 
+## Note
+
+[`search_hub()`](https://ohvbd.vbdhub.org/reference/search_hub.md) is
+now preferred for keyword searches:
+
+    # old style
+    search_vd(c("Ixodes", "ricinus")
+
+    # new style
+    search_hub("Ixodes ricinus", db = "vd")
+
+`search_vd()` may be deprecated in the future.
+
 ## Author
 
 Francis Windram
