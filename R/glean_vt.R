@@ -24,14 +24,7 @@
 #'
 
 glean_vt <- function(res, cols = NA, returnunique = FALSE) {
-  if (!has_db(res)) {
-    cli::cli_alert_warning("Responses not necessarily from VecTraits.")
-  } else if (!is_from(res, "vt")) {
-    cli::cli_abort(c(
-      "x" = "Responses not from VecTraits, Please use the appropriate {.fn glean_{ohvbd_db(res)}} function.",
-      "!" = "Detected database = {.val {ohvbd_db(res)}}"
-    ))
-  }
+  check_provenance(res, "vt", altfunc = "glean", objtype = "Responses")
 
   if (any(class(res) == "httr2_response")) {
     # Detect if this is a single request

@@ -17,15 +17,7 @@ fetch_vd_meta <- function(
   basereq = NA
 ) {
   max_conns <- 8
-
-  if (!has_db(ids)) {
-    cli::cli_alert_warning("IDs not necessarily from VecDyn.")
-  } else if (!is_from(ids, "vd")) {
-    cli::cli_abort(c(
-      "x" = "IDs not from VecDyn, Please use the {.fn fetch_{ohvbd_db(ids)}} function.",
-      "!" = "Detected database = {.val {ohvbd_db(ids)}}"
-    ))
-  }
+  check_provenance(ids, "vd", altfunc = "fetch", altfunc_suffix = "meta")
 
   if (all(is.na(basereq))) {
     basereq <- vb_basereq()
@@ -128,6 +120,8 @@ fetch_vd_meta_table <- function(cache_location = NULL, refresh_cache = FALSE, no
   if (all(is.na(basereq))) {
     basereq <- vb_basereq()
   }
+
+  check_provenance(ids, "vd", altfunc = "fetch", altfunc_suffix = "meta_table")
 
   cache_location <- cache_location %||% get_default_ohvbd_cache("vecdyn")
   file_location <- file.path(cache_location, "vd_meta_table.rds")

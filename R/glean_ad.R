@@ -77,14 +77,7 @@ glean_ad <- function(
 ) {
   # Enddate SHOULD BE EXCLUSIVE
 
-  if (!has_db(ad_matrix)) {
-    cli::cli_alert_warning("Data not necessarily from AREAdata.")
-  } else if (!is_from(ad_matrix, "ad")) {
-    cli::cli_abort(c(
-      "x" = "Data not from AREAdata, Please use the appropriate {.fn glean_{ohvbd_db(ad_matrix)}} function.",
-      "!" = "Detected database = {.val {ohvbd_db(ad_matrix)}}"
-    ))
-  }
+  check_provenance(ad_matrix, "ad", altfunc = "glean", objtype = "Data")
 
   # try to infer gid from ad_matrix
   # This will allow us to automagically fill or filter by countries even when we only have GID codes.

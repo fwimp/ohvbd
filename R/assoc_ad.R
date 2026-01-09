@@ -68,14 +68,7 @@ assoc_ad <- function(
   # Cast data to a df
   data <- as.data.frame(data)
 
-  if (!has_db(areadata)) {
-    cli::cli_alert_warning("{.arg areadata} not necessarily from AREAdata.")
-  } else if (!is_from(areadata, "ad")) {
-    cli::cli_abort(c(
-      "x" = "{.arg areadata} not from AREAdata!",
-      "!" = "Detected database = {.val {ohvbd_db(areadata)}}"
-    ))
-  }
+  check_provenance(areadata, "ad", altfunc = NULL, objtype = "Argument {.arg areadata}")
 
   # TODO: Rework this to use assoc_gadm under the hood.
 

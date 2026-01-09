@@ -24,14 +24,7 @@
 fetch_vt <- function(ids, rate = 5, connections = 2, basereq = NA) {
   max_conns <- 8
 
-  if (!has_db(ids)) {
-    cli::cli_alert_warning("IDs not necessarily from VecTraits.")
-  } else if (!is_from(ids, "vt")) {
-    cli::cli_abort(c(
-      "x" = "IDs not from VecTraits, Please use the {.fn fetch_{ohvbd_db(ids)}} function.",
-      "!" = "Detected database = {.val {ohvbd_db(ids)}}"
-    ))
-  }
+  check_provenance(ids, "vt", altfunc = "fetch")
 
   if (all(is.na(basereq))) {
     basereq <- vb_basereq()

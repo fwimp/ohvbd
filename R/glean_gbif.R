@@ -22,14 +22,7 @@
 #'
 
 glean_gbif <- function(res, cols = NA, returnunique = FALSE) {
-  if (!has_db(res)) {
-    cli::cli_alert_warning("Responses not necessarily from GBIF.")
-  } else if (!is_from(res, "gbif")) {
-    cli::cli_abort(c(
-      "x" = "Responses not from GBIF, Please use the appropriate {.fn glean_{ohvbd_db(res)}} function.",
-      "!" = "Detected database = {.val {ohvbd_db(res)}}"
-    ))
-  }
+  check_provenance(res, "gbif", altfunc = "glean", objtype = "Responses")
 
   if (!rlang::is_installed("rgbif")) {
     cli::cli_abort(c(

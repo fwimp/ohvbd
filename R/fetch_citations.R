@@ -16,14 +16,7 @@
 #'
 
 fetch_citations_vt <- function(dataset, redownload = TRUE, minimise = FALSE) {
-  if (!has_db(dataset)) {
-    cli::cli_alert_warning("IDs not necessarily from VecTraits.")
-  } else if (!is_from(dataset, "vt")) {
-    cli::cli_abort(c(
-      "x" = "IDs not from VecTraits, Please use the {.fn fetch_citations_{ohvbd_db(dataset)}} function.",
-      "!" = "Detected database = {.val {ohvbd_db(dataset)}}"
-    ))
-  }
+  check_provenance(dataset, "vt", altfunc = "fetch_citations")
 
   if (missing(redownload)) {
     redownload <- TRUE
@@ -102,14 +95,7 @@ fetch_citations_vt <- function(dataset, redownload = TRUE, minimise = FALSE) {
 #'
 
 fetch_citations_vd <- function(dataset, redownload = TRUE, minimise = FALSE) {
-  if (!has_db(dataset)) {
-    cli::cli_alert_warning("IDs not necessarily from VecDyn.")
-  } else if (!is_from(dataset, "vd")) {
-    cli::cli_abort(c(
-      "x" = "IDs not from VecDyn, Please use the {.fn fetch_citations_{ohvbd_db(dataset)}} function.",
-      "!" = "Detected database = {.val {ohvbd_db(dataset)}}"
-    ))
-  }
+  check_provenance(dataset, "vd", altfunc = "fetch_citations")
 
   cite_cols <- c(
     "contact_name",

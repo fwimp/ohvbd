@@ -86,7 +86,7 @@ fetch_gadm_sfs <- function(
     cli::cli_alert_success("Loaded gadm data.")
 
     cli::cli_progress_message(
-      "{cli::symbol$pointer} Caching {.file {paste0(target_file, '.fgb')}} in {.path {cache_location}}..."
+      "{cli::symbol$pointer} Caching {.file {paste0(target_file, '.gpkg')}} in {.path {cache_location}}..."
     )
 
     # Write to cache as GeoPackage (FlatGeobuf/.fgb is also a good alternative)
@@ -94,7 +94,7 @@ fetch_gadm_sfs <- function(
                        file.path(cache_location, paste0(target_file, ".gpkg")),
                        filetype = "GPKG",
                        overwrite = TRUE)
-    cli::cli_alert_success("Cached {.file {paste0(target_file, '.fgb')}} in {.path {cache_location}}.")
+    cli::cli_alert_success("Cached {.file {paste0(target_file, '.gpkg')}} in {.path {cache_location}}.")
 
     # Remove temp files
     for (ext in c(".shp", ".shx", ".dbf", ".prj")) {

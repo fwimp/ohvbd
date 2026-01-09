@@ -31,14 +31,7 @@ fetch_glean_vt_chunked <- function(
   connections = 2,
   basereq = NA
 ) {
-  if (!has_db(ids)) {
-    cli::cli_alert_warning("IDs not necessarily from VecTraits.")
-  } else if (!is_from(ids, "vt")) {
-    cli::cli_abort(c(
-      "x" = "IDs not from VecTraits, Please use the appropriate {.fn fetch_glean_{ohvbd_db(ids)}} function.",
-      "!" = "Detected database = {.val {ohvbd_db(ids)}}"
-    ))
-  }
+  check_provenance(ids, "vt", altfunc = "fetch_glean", altfunc_suffix = "chunked")
 
   if (all(is.na(basereq))) {
     basereq <- vb_basereq()

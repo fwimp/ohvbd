@@ -1,3 +1,58 @@
+#' @title Check whether an object is from a given database and complete appropriate messaging
+#' @param obj The object to check.
+#' @param db The database which the object should be from.
+#' @param altfunc The function name stub (e.g. "fetch", used for messaging). If `NULL`, suppresses alternate function suggestion.
+#' @param altfunc_suffix The function name suffix (e.g. "chunked", used for messaging).
+#' @param objtype The type of object (used for messaging).
+#' @param call The env from which this was called (defaults to the direct caller).
+#' @return NULL
+#' @keywords internal
+#'
+check_provenance <- function(obj, db, altfunc="fetch", altfunc_suffix = NULL, objtype = "IDs", call = rlang::caller_env()) {
+
+  db_lookup <- c(
+    "vt" = "VecTraits",
+    "vd" = "VecDyn",
+    "ad" = "AREAdata",
+    "gbif" = "GBIF"
+  )
+
+  if (!(db %in% names(db_lookup))) {
+    cli::cli_abort("{.val {db}} is not a known database!", .internal = TRUE, call = call)
+  }
+
+  db_fullname <- db_lookup[db]
+
+  if (!has_db(obj)) {
+    # TODO: Should this be a real warning signal?
+    cli::cli_alert_warning(paste(objtype, "not necessarily from {db_fullname}."))
+  } else if (!is_from(obj, db)) {
+    if (is.null(altfunc_suffix)) {
+      altfunc_suffix <- ""
+    } else {
+      altfunc_suffix <- paste0("_", altfunc_suffix)
+    }
+    # Check if the alternative suggestion exists
+    altfunc_present <- tryCatch({
+      paste0(altfunc, "_", ohvbd_db(obj), altfunc_suffix) %in% ls("package:ohvbd")
+      }, error = \(e) {
+        FALSE
+      })
+
+    if (is.null(altfunc) || !altfunc_present) {
+      altfunc_suggestion <- "!"
+    } else {
+      altfunc_suggestion <- ", Please use the {.fn ohvbd::{altfunc}_{ohvbd_db(obj)}{altfunc_suffix}} function."
+    }
+    cli::cli_abort(c(
+      "x" = paste0(objtype, " not from {db_fullname}", altfunc_suggestion),
+      "!" = "Detected database = {.val {ohvbd_db(obj)}}"
+    ), call = call)
+  }
+
+  invisible(NULL)
+}
+
 #' @title Extract request ids from httr2 response objects
 #' @param r A response object.
 #' @return the id requested from the call.

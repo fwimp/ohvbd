@@ -25,14 +25,7 @@
 #'
 
 glean_vd <- function(res, cols = NA, returnunique = FALSE) {
-  if (!has_db(res)) {
-    cli::cli_alert_warning("Responses not necessarily from VecDyn.")
-  } else if (!is_from(res, "vd")) {
-    cli::cli_abort(c(
-      "x" = "Responses not from VecDyn, Please use the appropriate {.fn glean_{ohvbd_db(res)}} function.",
-      "!" = "Detected database = {.val {ohvbd_db(res)}}"
-    ))
-  }
+  check_provenance(res, "vd", altfunc = "glean", objtype = "Responses")
 
   if (!any(is.na(cols))) {
     if (!("dataset_id" %in% cols)) {
