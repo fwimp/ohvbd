@@ -4,7 +4,14 @@
 \alias{glean_ad}
 \title{Extract data from AREAdata datasets}
 \usage{
-glean_ad(ad_matrix, targetdate = NA, enddate = NA, places = NA, gid = NA)
+glean_ad(
+  ad_matrix,
+  targetdate = NA,
+  enddate = NA,
+  places = NA,
+  gid = NA,
+  printbars = TRUE
+)
 }
 \arguments{
 \item{ad_matrix}{A matrix or \code{ohvbd.ad.matrix} of data from AREAdata.}
@@ -21,6 +28,8 @@ glean_ad(ad_matrix, targetdate = NA, enddate = NA, places = NA, gid = NA)
 \item{places}{A character vector or single string describing what locality to search for in the dataset.}
 
 \item{gid}{The spatial scale of the AREAdata matrix (this is not needed if the matrix has been supplied by \code{\link[=fetch_ad]{fetch_ad()}}).}
+
+\item{printbars}{Whether to print time overlap bars in the case of dates outside the data range.}
 }
 \value{
 An \code{ohvbd.ad.matrix} or a named vector containing the extracted data.

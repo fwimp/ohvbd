@@ -12,6 +12,7 @@
 #' @param enddate The (exclusive) end of the range of dates to search for. If this is unfilled, only the `targetdate` is searched for.
 #' @param places A character vector or single string describing what locality to search for in the dataset.
 #' @param gid The spatial scale of the AREAdata matrix (this is not needed if the matrix has been supplied by [fetch_ad()]).
+#' @param printbars Whether to print time overlap bars in the case of dates outside the data range.
 #'
 #' @return An `ohvbd.ad.matrix` or a named vector containing the extracted data.
 #'
@@ -71,7 +72,8 @@ glean_ad <- function(
   targetdate = NA,
   enddate = NA,
   places = NA,
-  gid = NA
+  gid = NA,
+  printbars = TRUE
 ) {
   # Enddate SHOULD BE EXCLUSIVE
 
@@ -187,24 +189,28 @@ glean_ad <- function(
 
       if (length(selected_cols) <= 0) {
         if (targetdate_final == enddate_final) {
-          format_time_overlap_bar(
-            min(present_dates),
-            max(present_dates),
-            targetdate_final,
-            targetrange = FALSE,
-            twobar = TRUE
-          )
+          if (printbars) {
+            format_time_overlap_bar(
+              min(present_dates),
+              max(present_dates),
+              targetdate_final,
+              targetrange = FALSE,
+              twobar = TRUE
+            )
+          }
           cli::cli_abort(c(
             "x" = "Date {.val {targetdate_final}} outside of data range {.val {min(present_dates)}} -> {.val {max(present_dates)}}!"
           ))
         } else {
-          format_time_overlap_bar(
-            min(present_dates),
-            max(present_dates),
-            c(targetdate_final, enddate_final),
-            targetrange = TRUE,
-            twobar = TRUE
-          )
+          if (printbars) {
+            format_time_overlap_bar(
+              min(present_dates),
+              max(present_dates),
+              c(targetdate_final, enddate_final),
+              targetrange = TRUE,
+              twobar = TRUE
+            )
+          }
           cli::cli_abort(c(
             "x" = "Inclusive interval {.val {targetdate_final}} -> {.val {enddate_final}} outside of data range {.val {min(present_dates)}} -> {.val {max(present_dates)}}!"
           ))
@@ -216,13 +222,15 @@ glean_ad <- function(
         selected_cols <- which(present_dates %in% targetdate_final)
         # Check if anything was selected. If not then throw error as none of the selected cols are in the AD data
         if (length(selected_cols) <= 0) {
-          format_time_overlap_bar(
-            min(present_dates),
-            max(present_dates),
-            targetdate_final,
-            targetrange = FALSE,
-            twobar = TRUE
-          )
+          if (printbars) {
+            format_time_overlap_bar(
+              min(present_dates),
+              max(present_dates),
+              targetdate_final,
+              targetrange = FALSE,
+              twobar = TRUE
+            )
+          }
           cli::cli_abort(c(
             "x" = "Dates {.val {targetdate_final}} entirely outside of data range {.val {min(present_dates)}} -> {.val {max(present_dates)}}!"
           ))
