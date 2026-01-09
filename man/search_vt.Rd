@@ -17,11 +17,23 @@ An \code{ohvbd.ids} vector of VecTraits dataset IDs.
 \description{
 Retrieve the IDs for any VecTraits datasets matching the given keywords.
 }
+\note{
+\code{\link[=search_hub]{search_hub()}} is now preferred for keyword searches:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{# old style
+search_vt(c("Ixodes", "ricinus")
+
+# new style
+search_hub("Ixodes ricinus", db = "vt")
+}\if{html}{\out{</div>}}
+
+\code{search_vt()} may be deprecated in the future.
+}
 \section{Warning}{
 
 The ids returned from the server (and thus this function) do not necessarily precisely match the keywords that were requested.
 
-For example search_vt("United Kingdom") does not return only items found in the United Kingdom. Instead it returns items where some part of the string "United Kingdom" appears in one of the indexed columns.
+For example \code{search_vt("United Kingdom")} does not return only items found in the United Kingdom. Instead it returns items where some part of the string "United Kingdom" appears in one of the indexed columns.
 
 The indexed columns of VecTraits are:
 \itemize{

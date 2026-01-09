@@ -12,7 +12,19 @@
 #' search_vd("Aedes aegypti")
 #'
 #' search_vd(c("Aedes", "aegypti"))
-
+#'
+#' @note
+#' [search_hub()] is now preferred for keyword searches:
+#'
+#' ```
+#' # old style
+#' search_vd(c("Ixodes", "ricinus")
+#'
+#' # new style
+#' search_hub("Ixodes ricinus", db = "vd")
+#' ```
+#'
+#' `search_vd()` may be deprecated in the future.
 #'
 #' @concept vecdyn
 #'
@@ -20,6 +32,15 @@
 #'
 
 search_vd <- function(keywords, basereq = NA) {
+  cli::cli_inform(c(
+    "i" = "{.fn ohvbd::search_hub} is now preferred for keyword searches:",
+    "",
+    '{.code search_hub("{paste(keywords, collapse = " ")}", db = "vd")}',
+    "",
+    "!" = "{.fn search_vd} may be deprecated in the future."),
+    .frequency = "regularly",
+    .frequency_id = "search_vd_deprecation_info")
+
   if (all(is.na(basereq))) {
     basereq <- vb_basereq()
   }

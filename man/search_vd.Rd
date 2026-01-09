@@ -17,6 +17,18 @@ An \code{ohvbd.ids} vector of VecDyn dataset IDs.
 \description{
 Retrieve the IDs for any VecDyn datasets matching the given keywords
 }
+\note{
+\code{\link[=search_hub]{search_hub()}} is now preferred for keyword searches:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{# old style
+search_vd(c("Ixodes", "ricinus")
+
+# new style
+search_hub("Ixodes ricinus", db = "vd")
+}\if{html}{\out{</div>}}
+
+\code{search_vd()} may be deprecated in the future.
+}
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 search_vd("Aedes aegypti")

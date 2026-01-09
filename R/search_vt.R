@@ -13,10 +13,23 @@
 #'
 #' search_vt(c("Aedes", "aegypti"))
 #'
+#' @note
+#' [search_hub()] is now preferred for keyword searches:
+#'
+#' ```
+#' # old style
+#' search_vt(c("Ixodes", "ricinus")
+#'
+#' # new style
+#' search_hub("Ixodes ricinus", db = "vt")
+#' ```
+#'
+#' `search_vt()` may be deprecated in the future.
+#'
 #' @section Warning:
 #' The ids returned from the server (and thus this function) do not necessarily precisely match the keywords that were requested.
 #'
-#' For example search_vt("United Kingdom") does not return only items found in the United Kingdom. Instead it returns items where some part of the string "United Kingdom" appears in one of the indexed columns.
+#' For example `search_vt("United Kingdom")` does not return only items found in the United Kingdom. Instead it returns items where some part of the string "United Kingdom" appears in one of the indexed columns.
 #'
 #' The indexed columns of VecTraits are:
 #' - `DatasetID`
@@ -41,6 +54,15 @@
 #'
 
 search_vt <- function(keywords, basereq = NA) {
+  cli::cli_inform(c(
+    "i" = "{.fn ohvbd::search_hub} is now preferred for keyword searches:",
+    "",
+    '{.code search_hub("{paste(keywords, collapse = " ")}", db = "vt")}',
+    "",
+    "!" = "{.fn search_vt} may be deprecated in the future."),
+    .frequency = "regularly",
+    .frequency_id = "search_vt_deprecation_info")
+
   if (all(is.na(basereq))) {
     basereq <- vb_basereq()
   }
