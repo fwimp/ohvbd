@@ -10,7 +10,8 @@ regenerated at any time.
 vb_basereq(
   baseurl = "https://vectorbyte.crc.nd.edu/portal/api/",
   useragent = "ROHVBD",
-  unsafe = FALSE
+  unsafe = FALSE,
+  .qa = FALSE
 )
 ```
 
@@ -28,6 +29,10 @@ vb_basereq(
 
   disable ssl verification (shouldn't ever be required unless you are
   otherwise experiencing SSL issues!)
+
+- .qa:
+
+  switch to the vb qa server (only useful for testing).
 
 ## Value
 

@@ -129,8 +129,10 @@ Other:
 - [`glean_ad()`](https://ohvbd.vbdhub.org/reference/glean_ad.md) now
   correctly returns a matrix even when there is only 1 row or column.
 - gadm spatial files are now cached as GeoPackage rather than
-  (shapefiles)\[<http://switchfromshapefile.org/>\], leading to a \>50%
-  speedup in loading!
+  [shapefiles](http://switchfromshapefile.org/), leading to a \>50%
+  speedup in loading! (Thanks to
+  [@josiah.rs](https://bsky.app/profile/josiah.rs) on bluesky for the
+  suggestion!)
 
 ## ohvbd 0.6.1
 

@@ -55,7 +55,8 @@ It does not contain any tokens or session ids, and thus can be regenerated at an
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">vb_basereq</span><span class="op">(</span></span>
 <span>  baseurl <span class="op">=</span> <span class="st">"https://vectorbyte.crc.nd.edu/portal/api/"</span>,</span>
 <span>  useragent <span class="op">=</span> <span class="st">"ROHVBD"</span>,</span>
-<span>  unsafe <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  unsafe <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  .qa <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -73,6 +74,10 @@ It does not contain any tokens or session ids, and thus can be regenerated at an
 
 <dt id="arg-unsafe">unsafe<a class="anchor" aria-label="anchor" href="#arg-unsafe"></a></dt>
 <dd><p>disable ssl verification (shouldn't ever be required unless you are otherwise experiencing SSL issues!)</p></dd>
+
+
+<dt id="arg--qa">.qa<a class="anchor" aria-label="anchor" href="#arg--qa"></a></dt>
+<dd><p>switch to the vb qa server (only useful for testing).</p></dd>
 
 </dl></div>
     <div class="section level2">
