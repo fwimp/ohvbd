@@ -42,8 +42,6 @@ Functions for interfacing with VecDyn.
   VecDyn dataset/s by ID
 - [`fetch_vd_counts()`](https://ohvbd.vbdhub.org/reference/fetch_vd_counts.md)
   : Fetch VecDyn dataset length by ID
-- [`fetch_vd_meta_table()`](https://ohvbd.vbdhub.org/reference/fetch_vd_meta_table.md)
-  : Fetch VecDyn metadata table
 - [`find_vd_columns()`](https://ohvbd.vbdhub.org/reference/find_vd_columns.md)
   : Get current columns in VecDyn datasets
 - [`find_vd_ids()`](https://ohvbd.vbdhub.org/reference/find_vd_ids.md) :
@@ -115,6 +113,8 @@ Miscellaneous functions.
   : Delete files from ohvbd cache directories
 - [`extract()`](https://ohvbd.vbdhub.org/reference/extract.md) : Extract
   specified data from a set of responses (Deprecated)
+- [`fetch_vd_meta()`](https://ohvbd.vbdhub.org/reference/fetch_vd_meta.md)
+  : Fetch VecDyn metadata table
 - [`format_time_overlap_bar()`](https://ohvbd.vbdhub.org/reference/format_time_overlap_bar.md)
   : Format and print date overlaps
 - [`get_default_ohvbd_cache()`](https://ohvbd.vbdhub.org/reference/get_default_ohvbd_cache.md)

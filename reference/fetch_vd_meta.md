@@ -1,15 +1,16 @@
-# Find vecdyn metadata
+# Fetch VecDyn metadata table
 
-Find vecdyn metadata
+Fetch VecDyn metadata table (downloading if necessary) and cache if
+fresh.
 
 ## Usage
 
 ``` r
 fetch_vd_meta(
-  ids,
-  rate = 5,
-  connections = 2,
-  pb_name = "data",
+  ids = NULL,
+  cache_location = NULL,
+  refresh_cache = FALSE,
+  noprogress = FALSE,
   basereq = vb_basereq()
 )
 ```
@@ -21,19 +22,18 @@ fetch_vd_meta(
   a numeric ID or numeric vector of ids (preferably in an `ohvbd.ids`
   object) indicating the particular dataset/s to download.
 
-- rate:
+- cache_location:
 
-  maximum number of calls to the API per second.
+  path to cache location (defaults to user directory obtained from
+  [`tools::R_user_dir()`](https://rdrr.io/r/tools/userdir.html)).
 
-- connections:
+- refresh_cache:
 
-  number of simultaneous connections to the server at once. Maximum 8.
-  **Do not enable unless you really need to** as this hits the server
-  significantly harder than usual.
+  force a refresh of the relevant cached data.
 
-- pb_name:
+- noprogress:
 
-  the name of the download progress bar
+  disable non-essential messaging (progress bars etc.).
 
 - basereq:
 
@@ -44,6 +44,16 @@ fetch_vd_meta(
 
 ## Value
 
-list of
-[`httr2::response`](https://httr2.r-lib.org/reference/response.html)
-object
+A dataframe describing the current VecDyn metadata.
+
+## Author
+
+Francis Windram
+
+## Examples
+
+``` r
+if (FALSE) { # interactive()
+fetch_vd_meta_table()
+}
+```

@@ -274,4 +274,4 @@ ad_df |> glean_ad(
 
 ## To be completed
 
-Built in 2.1987357s
+Built in 2.3932936s

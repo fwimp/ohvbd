@@ -133,6 +133,15 @@ Other:
   speedup in loading! (Thanks to
   [@josiah.rs](https://bsky.app/profile/josiah.rs) on bluesky for the
   suggestion!)
+- [`fetch_vd_counts()`](https://ohvbd.vbdhub.org/reference/fetch_vd_counts.md)
+  is now significantly faster, more robust, and temporarily caches data.
+  - You will see particular improvements if you are trying to retrieve
+    more than about 10 ids in one go or if you are repeatedly running
+    the same download code in the same day.
+  - This speedup also applies to
+    [`fetch_vd()`](https://ohvbd.vbdhub.org/reference/fetch_vd.md) under
+    the hood, particularly if you are running it multiple times in a
+    day.
 
 ## ohvbd 0.6.1
 

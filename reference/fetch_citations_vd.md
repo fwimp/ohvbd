@@ -6,7 +6,12 @@ by redownloading the appropriate data.
 ## Usage
 
 ``` r
-fetch_citations_vd(dataset, redownload = TRUE, minimise = FALSE)
+fetch_citations_vd(
+  dataset,
+  redownload = TRUE,
+  minimise = FALSE,
+  collapse_cols = TRUE
+)
 ```
 
 ## Arguments
@@ -23,6 +28,10 @@ fetch_citations_vd(dataset, redownload = TRUE, minimise = FALSE)
 
   Whether to return one row per citation (rather than one per dataset
   ID).
+
+- collapse_cols:
+
+  Whether to remove completely empty columns.
 
 ## Value
 

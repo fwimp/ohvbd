@@ -7,9 +7,10 @@ Retrieve length of VecDyn dataset/s specified by their dataset ID.
 ``` r
 fetch_vd_counts(
   ids,
-  rate = 5,
-  connections = 2,
   page_size = 50,
+  cache_location = NULL,
+  refresh_cache = FALSE,
+  noprogress = FALSE,
   basereq = vb_basereq()
 )
 ```
@@ -21,19 +22,22 @@ fetch_vd_counts(
   a numeric ID or numeric vector of ids (preferably in an `ohvbd.ids`
   object) indicating the particular dataset/s to download.
 
-- rate:
-
-  maximum number of calls to the API per second.
-
-- connections:
-
-  number of simultaneous connections to the server at once. Maximum 8.
-  **Do not enable unless you really need to** as this hits the server
-  significantly harder than usual.
-
 - page_size:
 
   the page size returned by VecDyn (default is 50).
+
+- cache_location:
+
+  path to cache location (defaults to user directory obtained from
+  [`tools::R_user_dir()`](https://rdrr.io/r/tools/userdir.html)).
+
+- refresh_cache:
+
+  force a refresh of the relevant cached data.
+
+- noprogress:
+
+  disable non-essential messaging (progress bars etc.).
 
 - basereq:
 
