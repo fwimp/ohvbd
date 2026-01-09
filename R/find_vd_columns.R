@@ -14,10 +14,7 @@
 #' @export
 #'
 
-find_vd_columns <- function(full = FALSE, basereq = NA) {
-  if (all(is.na(basereq))) {
-    basereq <- vb_basereq()
-  }
+find_vd_columns <- function(full = FALSE, basereq = vb_basereq()) {
 
   resplist <- tryCatch(
     {

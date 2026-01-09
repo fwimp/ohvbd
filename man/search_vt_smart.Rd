@@ -4,7 +4,7 @@
 \alias{search_vt_smart}
 \title{Search VecTraits using the explorer's filters}
 \usage{
-search_vt_smart(field, operator, value, basereq = NA)
+search_vt_smart(field, operator, value, basereq = vb_basereq())
 }
 \arguments{
 \item{field}{a field of VecTraits to search.}

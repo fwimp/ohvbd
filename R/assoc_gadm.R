@@ -34,7 +34,7 @@ assoc_gadm <- function(
   df,
   lonlat_names = c("Longitude", "Latitude"),
   cache_location = NULL,
-  basereq = NA
+  basereq = ad_basereq()
 ) {
   # Remember db attr of input data
   datatype <- ohvbd_db(df)
@@ -44,10 +44,6 @@ assoc_gadm <- function(
 
   if ("gbif" %in% class(df)) {
     df <- df$data
-  }
-
-  if (all(is.na(basereq))) {
-    basereq <- ad_basereq()
   }
 
   # Use LonLats to find an appropriate gadm id

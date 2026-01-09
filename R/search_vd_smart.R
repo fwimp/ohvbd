@@ -40,10 +40,7 @@
 #' @export
 #'
 
-search_vd_smart <- function(field, operator, value, basereq = NA) {
-  if (all(is.na(basereq))) {
-    basereq <- vb_basereq()
-  }
+search_vd_smart <- function(field, operator, value, basereq = vb_basereq()) {
 
   # Operator lookup table.
   poss_operators <- c(

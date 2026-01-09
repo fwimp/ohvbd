@@ -22,15 +22,12 @@
 #' @export
 #'
 
-fetch_vd <- function(ids, rate = 5, connections = 2, basereq = NA) {
+fetch_vd <- function(ids, rate = 5, connections = 2, basereq = vb_basereq()) {
   max_conns <- 8
 
   check_provenance(ids, "vd", altfunc = "fetch")
 
-  if (all(is.na(basereq))) {
-    basereq <- vb_basereq()
-  }
-
+  # TODO: Replace with new fetch_vd_counts approach
   resp_parsed <- fetch_vd_counts(ids, rate, connections, 50, basereq)
 
   missing <- resp_parsed |> dplyr::filter(.data$pages == 0)

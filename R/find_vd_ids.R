@@ -13,10 +13,7 @@
 #' @export
 #'
 
-find_vd_ids <- function(basereq = NA) {
-  if (all(is.na(basereq))) {
-    basereq <- vb_basereq()
-  }
+find_vd_ids <- function(basereq = vb_basereq()) {
 
   resplist <- tryCatch(
     {

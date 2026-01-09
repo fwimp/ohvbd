@@ -21,14 +21,10 @@
 #' @export
 #'
 
-fetch_vt <- function(ids, rate = 5, connections = 2, basereq = NA) {
+fetch_vt <- function(ids, rate = 5, connections = 2, basereq = vb_basereq()) {
   max_conns <- 8
 
   check_provenance(ids, "vt", altfunc = "fetch")
-
-  if (all(is.na(basereq))) {
-    basereq <- vb_basereq()
-  }
 
   # ids_to_find can be a single number or a vector and this works just fine!
   reqs <- ids |>

@@ -60,7 +60,7 @@ assoc_ad <- function(
   gid = 0,
   lonlat_names = c("Longitude", "Latitude"),
   cache_location = NULL,
-  basereq = NA
+  basereq = ad_basereq()
 ) {
   # Remember db attr of input data
   datatype <- ohvbd_db(data)
@@ -71,10 +71,6 @@ assoc_ad <- function(
   check_provenance(areadata, "ad", altfunc = NULL, objtype = "Argument {.arg areadata}")
 
   # TODO: Rework this to use assoc_gadm under the hood.
-
-  if (all(is.na(basereq))) {
-    basereq <- ad_basereq()
-  }
 
   # TODO: Implement way of either looking up latlon_names in a table, or inferring from attr
 

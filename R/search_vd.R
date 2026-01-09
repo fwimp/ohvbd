@@ -31,7 +31,7 @@
 #' @export
 #'
 
-search_vd <- function(keywords, basereq = NA) {
+search_vd <- function(keywords, basereq = vb_basereq()) {
   cli::cli_inform(c(
     "i" = "{.fn ohvbd::search_hub} is now preferred for keyword searches:",
     "",
@@ -40,10 +40,6 @@ search_vd <- function(keywords, basereq = NA) {
     "!" = "{.fn search_vd} may be deprecated in the future."),
     .frequency = "regularly",
     .frequency_id = "search_vd_deprecation_info")
-
-  if (all(is.na(basereq))) {
-    basereq <- vb_basereq()
-  }
 
   req <- basereq |>
     req_url_path_append("vecdynbyprovider") |>

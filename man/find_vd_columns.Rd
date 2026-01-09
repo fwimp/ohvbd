@@ -4,7 +4,7 @@
 \alias{find_vd_columns}
 \title{Get current columns in VecDyn datasets}
 \usage{
-find_vd_columns(full = FALSE, basereq = NA)
+find_vd_columns(full = FALSE, basereq = vb_basereq())
 }
 \arguments{
 \item{full}{whether to return all the data about current fields, or else just return the names}

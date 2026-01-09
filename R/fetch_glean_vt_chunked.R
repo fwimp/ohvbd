@@ -29,13 +29,9 @@ fetch_glean_vt_chunked <- function(
   returnunique = FALSE,
   rate = 5,
   connections = 2,
-  basereq = NA
+  basereq = vb_basereq()
 ) {
   check_provenance(ids, "vt", altfunc = "fetch_glean", altfunc_suffix = "chunked")
-
-  if (all(is.na(basereq))) {
-    basereq <- vb_basereq()
-  }
 
   # Get and extract vt data by ID in chunks (to save memory)
   # Split into chunks

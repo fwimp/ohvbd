@@ -11,7 +11,7 @@ fetch_ad(
   cache_location = NULL,
   refresh_cache = FALSE,
   timeout = 240,
-  basereq = NA
+  basereq = ad_basereq()
 )
 }
 \arguments{

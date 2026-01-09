@@ -4,7 +4,7 @@
 \alias{search_vd}
 \title{Search VecDyn by keyword}
 \usage{
-search_vd(keywords, basereq = NA)
+search_vd(keywords, basereq = vb_basereq())
 }
 \arguments{
 \item{keywords}{either a string of search terms separated by spaces, or a vector of keywords.}

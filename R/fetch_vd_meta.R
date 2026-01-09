@@ -14,14 +14,10 @@ fetch_vd_meta <- function(
   rate = 5,
   connections = 2,
   pb_name = "data",
-  basereq = NA
+  basereq = vb_basereq()
 ) {
   max_conns <- 8
   check_provenance(ids, "vd", altfunc = "fetch", altfunc_suffix = "meta")
-
-  if (all(is.na(basereq))) {
-    basereq <- vb_basereq()
-  }
 
   reqs <- ids |>
     lapply(\(id) {
@@ -79,7 +75,7 @@ fetch_vd_counts <- function(
   rate = 5,
   connections = 2,
   page_size = 50,
-  basereq = NA
+  basereq = vb_basereq()
 ) {
   count_resps <- fetch_vd_meta(
     ids,
@@ -102,6 +98,7 @@ fetch_vd_counts <- function(
 #' @description Fetch VecDyn metadata table (downloading if necessary) and cache if fresh.
 #' @author Francis Windram
 #'
+#' @param ids a numeric ID or numeric vector of ids (preferably in an `ohvbd.ids` object) indicating the particular dataset/s to download.
 #' @param cache_location path to cache location (defaults to user directory obtained from [tools::R_user_dir()][tools::R_user_dir()]).
 #' @param refresh_cache force a refresh of the relevant cached data.
 #' @param noprogress disable non-essential messaging (progress bars etc.).
@@ -113,15 +110,13 @@ fetch_vd_counts <- function(
 #' fetch_vd_meta_table()
 #'
 #' @concept vecdyn
-fetch_vd_meta_table <- function(cache_location = NULL, refresh_cache = FALSE, noprogress = FALSE, basereq = NA) {
+fetch_vd_meta_table <- function(ids = NULL, cache_location = NULL, refresh_cache = FALSE, noprogress = FALSE, basereq = vb_basereq()) {
 
   cache_loaded <- FALSE
 
-  if (all(is.na(basereq))) {
-    basereq <- vb_basereq()
+  if (!is.null(ids)) {
+    check_provenance(ids, "vd", altfunc = "fetch", altfunc_suffix = "meta_table")
   }
-
-  check_provenance(ids, "vd", altfunc = "fetch", altfunc_suffix = "meta_table")
 
   cache_location <- cache_location %||% get_default_ohvbd_cache("vecdyn")
   file_location <- file.path(cache_location, "vd_meta_table.rds")
@@ -134,7 +129,7 @@ fetch_vd_meta_table <- function(cache_location = NULL, refresh_cache = FALSE, no
     if (!is.null(cached_writetime) && lubridate::now() - cached_writetime < days(1)) {
       cache_loaded <- TRUE
       if (!noprogress) {
-        cli::cli_alert_success("Loaded from cache.")
+        cli::cli_alert_success("Loaded vd metadata from cache.")
       }
     } else {
       cli::cli_alert_warning("Cached metadata table is stale and must be re-downloaded. Download timestamp: {cached_writetime}.")
@@ -174,7 +169,18 @@ fetch_vd_meta_table <- function(cache_location = NULL, refresh_cache = FALSE, no
     })
 
     meta_table <- as.data.frame(t(meta_table))
-
+    # Convert all columns to vectors
+    numeric_cols <- c("Id", "Collections", "row_count")
+    for (cname in colnames(meta_table)) {
+      if (cname %in% numeric_cols) {
+        meta_table[,cname] <- suppressWarnings(as.numeric(as.character(meta_table[,cname])))
+      } else {
+        meta_table[,cname] <- as.character(meta_table[,cname])
+        # Just make sure "null" and "" are represented as NA
+        meta_table[which(tolower(meta_table[,cname]) == "null") ,cname] <- NA
+        meta_table[which(tolower(meta_table[,cname]) == "") ,cname] <- NA
+      }
+    }
     attr(meta_table, "writetime") <- lubridate::now()
   }
 
@@ -184,6 +190,10 @@ fetch_vd_meta_table <- function(cache_location = NULL, refresh_cache = FALSE, no
     if (!noprogress) {
       cli::cli_alert_success("Saved to cache.")
     }
+  }
+
+  if (!is.null(ids)) {
+    meta_table <- subset(meta_table, meta_table$Id %in% ids)
   }
 
   return(meta_table)

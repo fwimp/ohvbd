@@ -37,11 +37,8 @@ fetch_ad <- function(
   cache_location = NULL,
   refresh_cache = FALSE,
   timeout = 240,
-  basereq = NA
+  basereq = ad_basereq()
 ) {
-  if (all(is.na(basereq))) {
-    basereq <- ad_basereq()
-  }
 
   if (refresh_cache) {
     use_cache <- TRUE

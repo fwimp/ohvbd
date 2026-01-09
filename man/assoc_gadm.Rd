@@ -8,7 +8,7 @@ assoc_gadm(
   df,
   lonlat_names = c("Longitude", "Latitude"),
   cache_location = NULL,
-  basereq = NA
+  basereq = ad_basereq()
 )
 }
 \arguments{

@@ -53,7 +53,7 @@
 #' @export
 #'
 
-search_vt <- function(keywords, basereq = NA) {
+search_vt <- function(keywords, basereq = vb_basereq()) {
   cli::cli_inform(c(
     "i" = "{.fn ohvbd::search_hub} is now preferred for keyword searches:",
     "",
@@ -62,10 +62,6 @@ search_vt <- function(keywords, basereq = NA) {
     "!" = "{.fn search_vt} may be deprecated in the future."),
     .frequency = "regularly",
     .frequency_id = "search_vt_deprecation_info")
-
-  if (all(is.na(basereq))) {
-    basereq <- vb_basereq()
-  }
 
   req <- basereq |>
     req_url_path_append("vectraits-explorer") |>

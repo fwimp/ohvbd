@@ -5,13 +5,16 @@
 \title{Fetch VecDyn metadata table}
 \usage{
 fetch_vd_meta_table(
+  ids = NULL,
   cache_location = NULL,
   refresh_cache = FALSE,
   noprogress = FALSE,
-  basereq = NA
+  basereq = vb_basereq()
 )
 }
 \arguments{
+\item{ids}{a numeric ID or numeric vector of ids (preferably in an \code{ohvbd.ids} object) indicating the particular dataset/s to download.}
+
 \item{cache_location}{path to cache location (defaults to user directory obtained from \code{\link[tools:userdir]{tools::R_user_dir()}}).}
 
 \item{refresh_cache}{force a refresh of the relevant cached data.}

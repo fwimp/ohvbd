@@ -21,11 +21,8 @@ fetch_gadm_sfs <- function(
   gid = 0,
   cache_location = NULL,
   refresh_cache = FALSE,
-  basereq = NA
+  basereq = ad_basereq()
 ) {
-  if (all(is.na(basereq))) {
-    basereq <- ad_basereq()
-  }
 
   if (is.null(cache_location)) {
     cache_location <- get_default_ohvbd_cache("gadmcache")

@@ -4,7 +4,13 @@
 \alias{fetch_vd_meta}
 \title{Find vecdyn metadata}
 \usage{
-fetch_vd_meta(ids, rate = 5, connections = 2, pb_name = "data", basereq = NA)
+fetch_vd_meta(
+  ids,
+  rate = 5,
+  connections = 2,
+  pb_name = "data",
+  basereq = vb_basereq()
+)
 }
 \arguments{
 \item{ids}{a numeric ID or numeric vector of ids (preferably in an \code{ohvbd.ids} object) indicating the particular dataset/s to download.}

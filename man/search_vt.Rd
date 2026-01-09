@@ -4,7 +4,7 @@
 \alias{search_vt}
 \title{Search VecTraits by keyword}
 \usage{
-search_vt(keywords, basereq = NA)
+search_vt(keywords, basereq = vb_basereq())
 }
 \arguments{
 \item{keywords}{either a string of search terms separated by spaces, or a vector of keywords.}

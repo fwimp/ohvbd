@@ -4,7 +4,7 @@
 \alias{search_vd_smart}
 \title{Search VecDyn using the explorer's filters}
 \usage{
-search_vd_smart(field, operator, value, basereq = NA)
+search_vd_smart(field, operator, value, basereq = vb_basereq())
 }
 \arguments{
 \item{field}{a field of VecDyn to search.}

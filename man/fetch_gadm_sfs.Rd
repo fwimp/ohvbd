@@ -8,7 +8,7 @@ fetch_gadm_sfs(
   gid = 0,
   cache_location = NULL,
   refresh_cache = FALSE,
-  basereq = NA
+  basereq = ad_basereq()
 )
 }
 \arguments{

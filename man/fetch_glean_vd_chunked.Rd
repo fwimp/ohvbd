@@ -11,7 +11,7 @@ fetch_glean_vd_chunked(
   returnunique = FALSE,
   rate = 5,
   connections = 2,
-  basereq = NA
+  basereq = vb_basereq()
 )
 }
 \arguments{
