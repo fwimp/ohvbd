@@ -1,5 +1,5 @@
 #' @title Fetch gadm mapping shapefiles
-#' @description Retrieve AREAdata gadm mapping shapefiles specified by spatial scale (GID).
+#' @description Retrieve AREAdata gadm mapping shapefiles specified by spatial scale (GID). These vectors are cached as GeoPackage files.
 #' @author Francis Windram
 #'
 #' @param gid the spatial scale to retrieve (0 = country-level, 1=province-level...).
@@ -39,9 +39,8 @@ fetch_gadm_sfs <- function(
   if (!refresh_cache) {
     outshp <- tryCatch(
       {
-        # "@ {.path {file.path(cache_location, paste0(target_file, '.shp'))}}"
         cli::cli_progress_message("{cli::symbol$pointer} Loading gadm cache...")
-        terra::vect(file.path(cache_location, paste0(target_file, ".shp")))
+        terra::vect(file.path(cache_location, paste0(target_file, ".gpkg")))
       },
       error = function(e) {
         cli::cli_alert_warning("Loading cache failed.")
@@ -64,15 +63,12 @@ fetch_gadm_sfs <- function(
     # If not, try to retrieve from AD
     for (ext in c(".shp", ".shx", ".dbf", ".prj")) {
       cli::cli_progress_message(
-        "{cli::symbol$pointer} Caching {.file {paste0(target_file, ext)}} in {.path {cache_location}}..."
+        "{cli::symbol$pointer} Downloading {.file {paste0(target_file, ext)}}..."
       )
       curl::curl_download(
         paste0(final_url, target_file, ext),
         file.path(cache_location, paste0(target_file, ext)),
         quiet = TRUE
-      )
-      cli::cli_alert_success(
-        "Cached {.file {paste0(target_file, ext)}} in {.path {cache_location}}."
       )
     }
     outshp <- tryCatch(
@@ -83,11 +79,33 @@ fetch_gadm_sfs <- function(
         terra::vect(file.path(cache_location, paste0(target_file, ".shp")))
       },
       error = function(e) {
-        cli::cli_abort(c("x" = "Failed to load recently cached gadm data!"))
+        cli::cli_abort(c("x" = "Failed to load shapefile!"))
       }
     )
-    cli::cli_alert_success("Loaded gadm cache.")
+
+    cli::cli_alert_success("Loaded gadm data.")
+
+    cli::cli_progress_message(
+      "{cli::symbol$pointer} Caching {.file {paste0(target_file, '.fgb')}} in {.path {cache_location}}..."
+    )
+
+    # Write to cache as GeoPackage (FlatGeobuf/.fgb is also a good alternative)
+    terra::writeVector(outshp,
+                       file.path(cache_location, paste0(target_file, ".gpkg")),
+                       filetype = "GPKG",
+                       overwrite = TRUE)
+    cli::cli_alert_success("Cached {.file {paste0(target_file, '.fgb')}} in {.path {cache_location}}.")
+
+    # Remove temp files
+    for (ext in c(".shp", ".shx", ".dbf", ".prj")) {
+      cli::cli_progress_message(
+        "{cli::symbol$pointer} Removing  {.file {paste0(target_file, ext)}}..."
+      )
+      unlink(file.path(cache_location, paste0(target_file, ext)))
+    }
+    cli::cli_alert_success("Removed temporary shapefiles.")
   }
+
   cli::cli_progress_done()
   return(outshp)
 }

@@ -24,7 +24,7 @@ fetch_gadm_sfs(
 A SpatVector (from \code{\link[terra:vect]{terra::vect()}}) of the requested shapefile.
 }
 \description{
-Retrieve AREAdata gadm mapping shapefiles specified by spatial scale (GID).
+Retrieve AREAdata gadm mapping shapefiles specified by spatial scale (GID). These vectors are cached as GeoPackage files.
 }
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}

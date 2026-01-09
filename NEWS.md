@@ -55,6 +55,7 @@ Other:
 * WKT parsing and formatting is now significantly more robust.
 * Cached AREAData now includes the cache timestamp as an attribute rather than a separate variable in the cache file.
 * `glean_ad()` now correctly returns a matrix even when there is only 1 row or column.
+* gadm spatial files are now cached as GeoPackage rather than (shapefiles)[http://switchfromshapefile.org/], leading to a >50% speedup in loading!
 
 # ohvbd 0.6.1
 
