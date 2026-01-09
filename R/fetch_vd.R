@@ -27,13 +27,8 @@ fetch_vd <- function(ids, rate = 5, connections = 2, basereq = vb_basereq()) {
 
   check_provenance(ids, "vd", altfunc = "fetch")
 
-  # TODO: Replace with new fetch_vd_counts approach
-  resp_parsed <- fetch_vd_counts(ids, rate, connections, 50, basereq)
-
-  missing <- resp_parsed |> dplyr::filter(.data$pages == 0)
-  missing <- missing$id
-
-  resp_parsed <- resp_parsed |> dplyr::filter(.data$pages != 0)
+  resp_parsed <- fetch_vd_counts(ids, 50, noprogress = TRUE, basereq = basereq)
+  missing <- setdiff(ids, resp_parsed$id)
 
   if (nrow(resp_parsed) <= 0) {
     # Short-circuit to return cases where no id is correct

@@ -56,6 +56,9 @@ Other:
 * Cached AREAData now includes the cache timestamp as an attribute rather than a separate variable in the cache file.
 * `glean_ad()` now correctly returns a matrix even when there is only 1 row or column.
 * gadm spatial files are now cached as GeoPackage rather than [shapefiles](http://switchfromshapefile.org/), leading to a >50% speedup in loading! (Thanks to [@josiah.rs](https://bsky.app/profile/josiah.rs) on bluesky for the suggestion!)
+* `fetch_vd_counts()` is now significantly faster, more robust, and temporarily caches data.
+  * You will see particular improvements if you are trying to retrieve more than about 10 ids in one go or if you are repeatedly running the same download code in the same day.
+  * This speedup also applies to `fetch_vd()` under the hood, particularly if you are running it multiple times in a day.
 
 # ohvbd 0.6.1
 

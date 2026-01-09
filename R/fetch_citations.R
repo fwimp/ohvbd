@@ -87,6 +87,7 @@ fetch_citations_vt <- function(dataset, redownload = TRUE, minimise = FALSE) {
 #' @param dataset The dataset from which you wish to retrieve citations.
 #' @param redownload Redownload data if citation columns are missing.
 #' @param minimise Whether to return one row per citation (rather than one per dataset ID).
+#' @param collapse_cols Whether to remove completely empty columns.
 #'
 #' @returns `ohvbd.data.frame` of citation data
 #'
@@ -94,7 +95,7 @@ fetch_citations_vt <- function(dataset, redownload = TRUE, minimise = FALSE) {
 #' @export
 #'
 
-fetch_citations_vd <- function(dataset, redownload = TRUE, minimise = FALSE) {
+fetch_citations_vd <- function(dataset, redownload = TRUE, minimise = FALSE, collapse_cols = TRUE) {
   check_provenance(dataset, "vd", altfunc = "fetch_citations")
 
   cite_cols <- c(
@@ -122,23 +123,24 @@ fetch_citations_vd <- function(dataset, redownload = TRUE, minimise = FALSE) {
         )
         cli::cli_ul(missing_cols)
         cli::cli_alert_info(
-          "Redownloading data to get these cols (if they exist)."
+          "Redownloading metadata to get these cols (if they exist)."
         )
-        # Redownload data
-        citations_resps <- ohvbd.ids(unique(dataset$dataset_id), "vd") |>
-          fetch_vd_meta(pb_name = "VecDyn citations")
 
-        resp_parsed <- citations_resps |>
-          lapply(\(resp) {
-            resp_data <- resp_body_json(resp)$consistent_data
-            present_cols <- intersect(cite_cols, names(resp_data))
-            resp_data[present_cols]
-          })
+        meta_table <- fetch_vd_meta(ohvbd.ids(unique(dataset$dataset_id), "vd"))
+        # Filter to only be cite_cols
+        citations <- meta_table |> dplyr::select(c("Id", cite_cols))
+        colnames(citations) <- c("dataset_id", cite_cols)
 
-        citations <- cbind(
-          data.frame(dataset_id = unique(dataset$dataset_id)),
-          rbindlist(resp_parsed, fill = TRUE)
-        )
+        if (collapse_cols) {
+          to_remove <- c()
+          for (column in colnames(citations)) {
+            if (all(is.na(citations[,column]))) {
+              to_remove <- c(to_remove, column)
+            }
+          }
+          citations <- citations |> dplyr::select(-to_remove)
+        }
+
       } else {
         cli::cli_abort(c(
           "x" = "Cannot retrieve citation",
