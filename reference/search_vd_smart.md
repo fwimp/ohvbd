@@ -5,7 +5,7 @@ Retrieve the IDs for any VecDyn datasets matching the given filter.
 ## Usage
 
 ``` r
-search_vd_smart(field, operator, value, basereq = NA)
+search_vd_smart(field, operator, value, basereq = vb_basereq())
 ```
 
 ## Arguments

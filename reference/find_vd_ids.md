@@ -5,7 +5,7 @@ Get all the current dataset IDs in VecDyn, as a numeric vector.
 ## Usage
 
 ``` r
-find_vd_ids(basereq = NA)
+find_vd_ids(basereq = vb_basereq())
 ```
 
 ## Arguments

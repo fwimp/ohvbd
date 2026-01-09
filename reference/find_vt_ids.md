@@ -5,7 +5,7 @@ Get all the current dataset IDs in VecTraits, as a numeric vector.
 ## Usage
 
 ``` r
-find_vt_ids(basereq = NA)
+find_vt_ids(basereq = vb_basereq())
 ```
 
 ## Arguments

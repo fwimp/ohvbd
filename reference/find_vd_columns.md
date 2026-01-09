@@ -6,7 +6,7 @@ desired.
 ## Usage
 
 ``` r
-find_vd_columns(full = FALSE, basereq = NA)
+find_vd_columns(full = FALSE, basereq = vb_basereq())
 ```
 
 ## Arguments

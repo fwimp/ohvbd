@@ -5,7 +5,13 @@ Retrieve length of VecDyn dataset/s specified by their dataset ID.
 ## Usage
 
 ``` r
-fetch_vd_counts(ids, rate = 5, connections = 2, page_size = 50, basereq = NA)
+fetch_vd_counts(
+  ids,
+  rate = 5,
+  connections = 2,
+  page_size = 50,
+  basereq = vb_basereq()
+)
 ```
 
 ## Arguments

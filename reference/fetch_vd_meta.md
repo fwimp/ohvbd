@@ -5,7 +5,13 @@ Find vecdyn metadata
 ## Usage
 
 ``` r
-fetch_vd_meta(ids, rate = 5, connections = 2, pb_name = "data", basereq = NA)
+fetch_vd_meta(
+  ids,
+  rate = 5,
+  connections = 2,
+  pb_name = "data",
+  basereq = vb_basereq()
+)
 ```
 
 ## Arguments

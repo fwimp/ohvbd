@@ -5,7 +5,7 @@ Retrieve the IDs for any VecTraits datasets matching the given filter.
 ## Usage
 
 ``` r
-search_vt_smart(field, operator, value, basereq = NA)
+search_vt_smart(field, operator, value, basereq = vb_basereq())
 ```
 
 ## Arguments

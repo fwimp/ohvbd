@@ -5,7 +5,7 @@ Retrieve the IDs for any VecTraits datasets matching the given keywords.
 ## Usage
 
 ``` r
-search_vt(keywords, basereq = NA)
+search_vt(keywords, basereq = vb_basereq())
 ```
 
 ## Arguments

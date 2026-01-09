@@ -5,7 +5,7 @@ Retrieve the IDs for any VecDyn datasets matching the given keywords
 ## Usage
 
 ``` r
-search_vd(keywords, basereq = NA)
+search_vd(keywords, basereq = vb_basereq())
 ```
 
 ## Arguments

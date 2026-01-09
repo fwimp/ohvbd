@@ -21,7 +21,7 @@ fetch_glean_vt_chunked(
   returnunique = FALSE,
   rate = 5,
   connections = 2,
-  basereq = NA
+  basereq = vb_basereq()
 )
 ```
 

@@ -7,14 +7,20 @@ fresh.
 
 ``` r
 fetch_vd_meta_table(
+  ids = NULL,
   cache_location = NULL,
   refresh_cache = FALSE,
   noprogress = FALSE,
-  basereq = NA
+  basereq = vb_basereq()
 )
 ```
 
 ## Arguments
+
+- ids:
+
+  a numeric ID or numeric vector of ids (preferably in an `ohvbd.ids`
+  object) indicating the particular dataset/s to download.
 
 - cache_location:
 

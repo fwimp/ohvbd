@@ -5,7 +5,7 @@ Retrieve VecTraits dataset/s specified by their dataset ID.
 ## Usage
 
 ``` r
-fetch_vt(ids, rate = 5, connections = 2, basereq = NA)
+fetch_vt(ids, rate = 5, connections = 2, basereq = vb_basereq())
 ```
 
 ## Arguments

@@ -50,10 +50,11 @@
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fetch_vd_meta_table</span><span class="op">(</span></span>
+<span>  ids <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  cache_location <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  refresh_cache <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  noprogress <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  basereq <span class="op">=</span> <span class="cn">NA</span></span>
+<span>  basereq <span class="op">=</span> <span class="fu"><a href="vb_basereq.html">vb_basereq</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -61,7 +62,11 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg-cache-location">cache_location<a class="anchor" aria-label="anchor" href="#arg-cache-location"></a></dt>
+<dl><dt id="arg-ids">ids<a class="anchor" aria-label="anchor" href="#arg-ids"></a></dt>
+<dd><p>a numeric ID or numeric vector of ids (preferably in an <code>ohvbd.ids</code> object) indicating the particular dataset/s to download.</p></dd>
+
+
+<dt id="arg-cache-location">cache_location<a class="anchor" aria-label="anchor" href="#arg-cache-location"></a></dt>
 <dd><p>path to cache location (defaults to user directory obtained from <code><a href="https://rdrr.io/r/tools/userdir.html" class="external-link">tools::R_user_dir()</a></code>).</p></dd>
 
 
