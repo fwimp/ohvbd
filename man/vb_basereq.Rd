@@ -7,7 +7,8 @@
 vb_basereq(
   baseurl = "https://vectorbyte.crc.nd.edu/portal/api/",
   useragent = "ROHVBD",
-  unsafe = FALSE
+  unsafe = FALSE,
+  .qa = FALSE
 )
 }
 \arguments{
@@ -16,6 +17,8 @@ vb_basereq(
 \item{useragent}{the user agent string used when contacting vectorbyte.}
 
 \item{unsafe}{disable ssl verification (shouldn't ever be required unless you are otherwise experiencing SSL issues!)}
+
+\item{.qa}{switch to the vb qa server (only useful for testing).}
 }
 \value{
 Returns an httr2 request object, pointing at baseurl using useragent.

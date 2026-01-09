@@ -5,6 +5,7 @@
 #' @param baseurl the base url for the vectorbyte API.
 #' @param useragent the user agent string used when contacting vectorbyte.
 #' @param unsafe disable ssl verification (shouldn't ever be required unless you are otherwise experiencing SSL issues!)
+#' @param .qa switch to the vb qa server (only useful for testing).
 #' @author Francis Windram
 #' @return Returns an httr2 request object, pointing at baseurl using useragent.
 #'
@@ -21,10 +22,15 @@
 vb_basereq <- function(
   baseurl = "https://vectorbyte.crc.nd.edu/portal/api/",
   useragent = "ROHVBD",
-  unsafe = FALSE
+  unsafe = FALSE,
+  .qa = FALSE
 ) {
   if (getOption("ohvbd_compat", default = FALSE) && isFALSE(unsafe)) {
     unsafe <- TRUE
+  }
+
+  if (.qa) {
+    baseurl <- "https://vectorbyte-qa.crc.nd.edu/portal/api/"
   }
 
   req <- request(baseurl) |> req_user_agent(useragent)
