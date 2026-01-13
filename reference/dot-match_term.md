@@ -54,7 +54,8 @@ translation enum.
 
 - call:
 
-  The env from which this was called (defaults to the direct caller).
+  The env from which this was called (defaults to the direct calling
+  environment).
 
 ## Value
 

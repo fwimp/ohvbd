@@ -148,6 +148,8 @@ Other:
   [`search_vt_smart()`](https://ohvbd.vbdhub.org/reference/search_vt_smart.md)
   for operators and fields) is now fuzzy, allowing for a small amount of
   deviation from the actual term name.
+- Errors in internal functions now make it more clear which user-facing
+  functions they originate from.
 
 ## ohvbd 0.6.1
 
