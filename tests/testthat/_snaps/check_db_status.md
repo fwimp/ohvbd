@@ -7,6 +7,7 @@
       v VectorByte
       v Areadata
       v GBIF
+      v Figshare
       -- Summary ---------------------------------------------------------------------
-      v All databases UP (3/3).
+      v All databases UP (4/4).
 

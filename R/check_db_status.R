@@ -14,9 +14,9 @@
 check_db_status <- function() {
   db_list <- c(
     VectorByte = "https://vectorbyte.crc.nd.edu/portal/api/",
-    Areadata = "https://github.com/pearselab/areadata/raw/main/output/",
-    GBIF = "https://api.gbif.org/v1/"
-    # TODO: Add figshare
+    Areadata = "https://github.com/pearselab/areadata/raw/main/output/", # Could replace with https://api.github.com/ if the vcr bloat is too much to handle.
+    GBIF = "https://api.gbif.org/v1/",
+    Figshare = "https://api.figshare.com"
   )
 
   successes <- 0
