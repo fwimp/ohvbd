@@ -148,6 +148,9 @@ Other:
   [`search_vt_smart()`](https://ohvbd.vbdhub.org/reference/search_vt_smart.md)
   for operators and fields) is now fuzzy, allowing for a small amount of
   deviation from the actual term name.
+- [`assoc_ad()`](https://ohvbd.vbdhub.org/reference/assoc_ad.md) now
+  tries to guess LatLong column names if none (or the wrong ones) are
+  provided.
 - Errors in internal functions now make it more clear which user-facing
   functions they originate from.
 

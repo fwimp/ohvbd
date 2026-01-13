@@ -131,6 +131,8 @@
 <li>This speedup also applies to <code><a href="../reference/fetch_vd.html">fetch_vd()</a></code> under the hood, particularly if you are running it multiple times in a day.</li>
 </ul></li>
 <li>Explicit term checking (such as in <code><a href="../reference/fetch_ad.html">fetch_ad()</a></code> for metrics and <code><a href="../reference/search_vt_smart.html">search_vt_smart()</a></code> for operators and fields) is now fuzzy, allowing for a small amount of deviation from the actual term name.</li>
+<li>
+<code><a href="../reference/assoc_ad.html">assoc_ad()</a></code> now tries to guess LatLong column names if none (or the wrong ones) are provided.</li>
 <li>Errors in internal functions now make it more clear which user-facing functions they originate from.</li>
 </ul></div>
     <div class="section level2">
