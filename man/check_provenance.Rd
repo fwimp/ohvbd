@@ -24,7 +24,7 @@ check_provenance(
 
 \item{objtype}{The type of object (used for messaging).}
 
-\item{call}{The env from which this was called (defaults to the direct caller).}
+\item{call}{The env from which this was called (defaults to the direct calling environment).}
 }
 \description{
 Check whether an object is from a given database and complete appropriate messaging

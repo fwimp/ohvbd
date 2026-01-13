@@ -4,10 +4,12 @@
 \alias{wkt_to_multipolygon}
 \title{wkt_to_multipolygon}
 \usage{
-wkt_to_multipolygon(v)
+wkt_to_multipolygon(v, call = rlang::caller_env())
 }
 \arguments{
 \item{v}{The WKT to convert into a multipolygon.}
+
+\item{call}{The env from which this was called (defaults to the direct calling environment).}
 }
 \value{
 The multipolygon equivalent of wkt.

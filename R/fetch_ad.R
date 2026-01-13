@@ -55,7 +55,6 @@ fetch_ad <- function(
 
   loaded_cache <- FALSE
   final_url <- paste0(basereq, "output/")
-  # TODO: Consider using match.arg() to do fuzzy matching because that'd be super cool
   poss_metrics <- c(
     "temp" = 1,
     "temperature" = 1,

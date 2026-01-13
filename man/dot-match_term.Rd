@@ -30,7 +30,7 @@
 
 \item{named_options}{Whether term_options has been provided as a named vector or merely a normal character vector. (Liable to be removed)}
 
-\item{call}{The env from which this was called (defaults to the direct caller).}
+\item{call}{The env from which this was called (defaults to the direct calling environment).}
 }
 \value{
 list where term = matched term & id = index in final_terms

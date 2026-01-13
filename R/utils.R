@@ -4,7 +4,7 @@
 #' @param altfunc The function name stub (e.g. "fetch", used for messaging). If `NULL`, suppresses alternate function suggestion.
 #' @param altfunc_suffix The function name suffix (e.g. "chunked", used for messaging).
 #' @param objtype The type of object (used for messaging).
-#' @param call The env from which this was called (defaults to the direct caller).
+#' @param call The env from which this was called (defaults to the direct calling environment).
 #' @return NULL
 #' @keywords internal
 #'
@@ -24,7 +24,7 @@ check_provenance <- function(obj, db, altfunc="fetch", altfunc_suffix = NULL, ob
   db_fullname <- db_lookup[db]
 
   if (!has_db(obj)) {
-    # TODO: Should this be a real warning signal?
+    # TODO: Should this be a real warning signal? Will temporarily break snapshot tests if changed...
     cli::cli_alert_warning(paste(objtype, "not necessarily from {db_fullname}."))
   } else if (!is_from(obj, db)) {
     if (is.null(altfunc_suffix)) {
@@ -61,7 +61,7 @@ check_provenance <- function(obj, db, altfunc="fetch", altfunc_suffix = NULL, ob
 #' @param term_name The human name of the term (e.g. metric, operator...).
 #' @param human_terms An optional list of acceptable terms for humans to use (may differ from final terms but should be present in term_options)
 #' @param named_options Whether term_options has been provided as a named vector or merely a normal character vector. (Liable to be removed)
-#' @param call The env from which this was called (defaults to the direct caller).
+#' @param call The env from which this was called (defaults to the direct calling environment).
 #' @return list where term = matched term & id = index in final_terms
 #' @keywords internal
 #'
@@ -327,9 +327,10 @@ coercedate <- function(dates, return_iso = FALSE, nulliferror = FALSE) {
 
 #' @title Force a polygon WKT into multipolygon form
 #' @param wkt The WKT to convert into a multipolygon.
+#' @param call The env from which this was called (defaults to the direct calling environment).
 #' @return The multipolygon equivalent of wkt.
 #' @keywords internal
-force_multipolygon <- function(wkt) {
+force_multipolygon <- function(wkt, call = rlang::caller_env()) {
   # TODO: Verify wkt intergrity (using approach here: https://github.com/ropensci/rgbif/blob/ac4e2fff8a7501956ce8a1be3e7429810bb64e2b/R/check_wkt.r)
   if (toupper(substr(wkt, 1, 7)) != "POLYGON") {
     if (toupper(substr(wkt, 1, 12)) == "MULTIPOLYGON") {
@@ -337,7 +338,7 @@ force_multipolygon <- function(wkt) {
     } else {
       cli::cli_abort(c(
         "x" = "Must be a POLYGON wkt! Got {toupper(substr(wkt, 1, 7))}"
-      ))
+      ), call = call)
     }
   }
   return(paste0(gsub("POLYGON", "MULTIPOLYGON(", wkt), ")"))
@@ -356,13 +357,14 @@ spatvect_to_multipolygon <- function(v) {
 
 #' @title wkt_to_multipolygon
 #' @param v The WKT to convert into a multipolygon.
+#' @param call The env from which this was called (defaults to the direct calling environment).
 #' @return The multipolygon equivalent of wkt.
 #' @keywords internal
-wkt_to_multipolygon <- function(v) {
+wkt_to_multipolygon <- function(v, call = rlang::caller_env()) {
   if (!all(stringr::str_detect(v, pattern = stringr::fixed("POLYGON")))) {
     cli::cli_abort(c(
       "x" = "Must be a vector or single POLYGON or MULTIPOLYGON wkt!"
-    ))
+    ), call = call)
   }
   v_vec <- v |>
     # Replace all ((( with (( etc. to just isolate the internal array

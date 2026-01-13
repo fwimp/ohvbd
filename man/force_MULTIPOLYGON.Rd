@@ -4,10 +4,12 @@
 \alias{force_multipolygon}
 \title{Force a polygon WKT into multipolygon form}
 \usage{
-force_multipolygon(wkt)
+force_multipolygon(wkt, call = rlang::caller_env())
 }
 \arguments{
 \item{wkt}{The WKT to convert into a multipolygon.}
+
+\item{call}{The env from which this was called (defaults to the direct calling environment).}
 }
 \value{
 The multipolygon equivalent of wkt.
