@@ -142,6 +142,12 @@ Other:
     [`fetch_vd()`](https://ohvbd.vbdhub.org/reference/fetch_vd.md) under
     the hood, particularly if you are running it multiple times in a
     day.
+- Explicit term checking (such as in
+  [`fetch_ad()`](https://ohvbd.vbdhub.org/reference/fetch_ad.md) for
+  metrics and
+  [`search_vt_smart()`](https://ohvbd.vbdhub.org/reference/search_vt_smart.md)
+  for operators and fields) is now fuzzy, allowing for a small amount of
+  deviation from the actual term name.
 
 ## ohvbd 0.6.1
 

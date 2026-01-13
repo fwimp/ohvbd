@@ -34,12 +34,12 @@ print(ad_df)
 #> <ohvbd.ad.matrix>
 #> Areadata matrix for temp at gid level 0 .
 #> Cached: FALSE 
-#> Dates: 2020-01-01 -> 2025-11-30 (2161)
+#> Dates: 2020-01-01 -> 2025-12-31 (2192)
 #> Locations: 256
 ```
 
 So that is quite a lot of data! Way too much to print here, given that
-it’s 553216 entries, however if you want to print all the data rather
+it’s 561152 entries, however if you want to print all the data rather
 than just a summary, you can add the argument `full = TRUE` to the print
 command:
 
@@ -274,4 +274,4 @@ ad_df |> glean_ad(
 
 ## To be completed
 
-Built in 2.1780491s
+Built in 2.015579s
