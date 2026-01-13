@@ -24,7 +24,6 @@ check_provenance <- function(obj, db, altfunc="fetch", altfunc_suffix = NULL, ob
   db_fullname <- db_lookup[db]
 
   if (!has_db(obj)) {
-    # TODO: Should this be a real warning signal? Will temporarily break snapshot tests if changed...
     cli::cli_alert_warning(paste(objtype, "not necessarily from {db_fullname}."))
   } else if (!is_from(obj, db)) {
     if (is.null(altfunc_suffix)) {
@@ -331,6 +330,7 @@ coercedate <- function(dates, return_iso = FALSE, nulliferror = FALSE) {
 #' @return The multipolygon equivalent of wkt.
 #' @keywords internal
 force_multipolygon <- function(wkt, call = rlang::caller_env()) {
+  .Deprecated("wkt_to_multipolygon")
   # TODO: Verify wkt intergrity (using approach here: https://github.com/ropensci/rgbif/blob/ac4e2fff8a7501956ce8a1be3e7429810bb64e2b/R/check_wkt.r)
   if (toupper(substr(wkt, 1, 7)) != "POLYGON") {
     if (toupper(substr(wkt, 1, 12)) == "MULTIPOLYGON") {

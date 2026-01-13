@@ -76,9 +76,28 @@ assoc_ad <- function(
 
   if (length(lonlat_names) != 2) {
     cli::cli_abort(c(
-      "x" = "Longitude and Latitude column names must be provided as vector of length 2!",
-      "i" = "You provided {.val {lonlat_names}} (detected length = {col_red(length(lonlat_names))})."
-    ))
+        "x" = "Longitude and Latitude column names must be provided as vector of length 2!",
+        "i" = "You provided {.val {lonlat_names}} (detected length = {col_red(length(lonlat_names))})."
+      ))
+  }
+
+  data_colnames <- colnames(data)
+
+  if (!all(lonlat_names %in% data_colnames)) {
+    cli::cli_alert_warning("{.arg lonlat_names} {.val {lonlat_names}} not found in {.arg data}!")
+    cli::cli_alert_info("Attempting to infer from column names...")
+    lon_options <- c("longitude", "lon", "long", "sample_long_dd", "decimallongitude")
+    lat_options <- c("latitude", "lat", "sample_lat_dd", "decimallatitude")
+    lon_matched <- data_colnames[which(tolower(data_colnames) %in% lon_options)]
+    lat_matched <- data_colnames[which(tolower(data_colnames) %in% lat_options)]
+    if (length(lon_matched) > 0 && length(lat_matched) > 0) {
+      lonlat_names <- c(lon_matched[1], lat_matched[1])
+      cli::cli_alert_success("Found {.val {lonlat_names}}!")
+    } else {
+      cli::cli_abort(
+        c("x" = "Could not infer Longitude/Latitude columns.",
+          "!" = "Please provide these as a vector of length 2."))
+    }
   }
 
   metric <- attr(areadata, "metric") %||% "metric"
