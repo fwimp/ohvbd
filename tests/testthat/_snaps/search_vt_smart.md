@@ -13,6 +13,8 @@
       * !starts
       * in
       * !in
+      * greater
+      * less
       --------------------------------------------------------------------------------
       ! Defaulting to "contains"
       ! Debug option "ohvbd_dryrun" is TRUE.

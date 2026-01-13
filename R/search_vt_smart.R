@@ -90,6 +90,7 @@ search_vt_smart <- function(field, operator, value, basereq = vb_basereq()) {
     "!within" = 8,
     "nin" = 8
   )
+
   final_operators <- c(
     "contains",
     "ncontains",
@@ -101,30 +102,30 @@ search_vt_smart <- function(field, operator, value, basereq = vb_basereq()) {
     "nin"
   )
 
+  human_operators <- c(
+    "contains",
+    "!contains",
+    "equals",
+    "!equals",
+    "starts",
+    "!starts",
+    "in",
+    "!in",
+    "greater",
+    "less"
+  )
+
   # Translate operator to proper operator name
-  operator <- tolower(operator)
-  if (operator %in% names(poss_operators)) {
-    final_operator <- final_operators[poss_operators[operator]]
-  } else {
-    # Just for warning message
-    human_operators <- c(
-      "contains",
-      "!contains",
-      "equals",
-      "!equals",
-      "starts",
-      "!starts",
-      "in",
-      "!in"
-    )
-    cli::cli_alert_warning("Operator {.val {operator}} not an allowed operator!")
-    cli::cli_rule(left = "Allowed operators")
-    cli::cli_ul(human_operators)
-    cli::cli_rule()
-    final_operator <- "contains"
-    cli::cli_alert_warning("Defaulting to {.val {final_operator}}")
-    # TODO: Could add fuzzy matching using stringdist if that seems necessary
-  }
+  matched_operator_list <- .match_term(
+    operator,
+    poss_operators,
+    final_operators,
+    default_term = "contains",
+    term_name = "operator",
+    human_terms = human_operators
+  )
+
+  final_operator <- matched_operator_list$term
 
   # Fields lookup table
   poss_fields <- c(
@@ -181,17 +182,15 @@ search_vt_smart <- function(field, operator, value, basereq = vb_basereq()) {
   )
 
   # Translate field to proper field name
-  field <- tolower(field)
-  if (field %in% names(poss_fields)) {
-    final_field <- final_fields[poss_fields[field]]
-  } else {
-    cli::cli_alert_danger("Field {.val {field}} not an allowed field!")
-    cli::cli_rule(left = "Allowed fields")
-    cli::cli_ul(final_fields)
-    cli::cli_rule()
-    cli::cli_alert_warning("Halting execution.")
-    cli::cli_abort(c("x" = "Invalid field: {.val {field}}"))
-  }
+  matched_field_list <- .match_term(
+    field,
+    poss_fields,
+    final_fields,
+    default_term = NULL,
+    term_name = "field"
+  )
+
+  final_field <- matched_field_list$term
 
   req <- basereq |>
     req_url_path_append("vectraits-explorer") |>

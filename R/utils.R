@@ -53,6 +53,69 @@ check_provenance <- function(obj, db, altfunc="fetch", altfunc_suffix = NULL, ob
   invisible(NULL)
 }
 
+#' @title Fuzzy match a term (case-insensitive) to a list of final terms through a translation enum.
+#' @param term A string to match
+#' @param term_options A named vector to map input terms to final terms in the form c("term1" = <index in final_terms>). Indices can be duplicated.
+#' @param final_terms A vector of final acceptable terms.
+#' @param default_term A default term to use if nothing is found. If NULL, errors on no match.
+#' @param term_name The human name of the term (e.g. metric, operator...).
+#' @param human_terms An optional list of acceptable terms for humans to use (may differ from final terms but should be present in term_options)
+#' @param named_options Whether term_options has been provided as a named vector or merely a normal character vector. (Liable to be removed)
+#' @param call The env from which this was called (defaults to the direct caller).
+#' @return list where term = matched term & id = index in final_terms
+#' @keywords internal
+#'
+.match_term <- function(term, term_options, final_terms, default_term = NULL, term_name = "metric", human_terms = NULL, named_options = TRUE, call = rlang::caller_env()) {
+  term <- tolower(term)
+  human_terms <- human_terms %||% final_terms
+
+  if (named_options) {
+    matchterms <- names(term_options)
+  } else {
+    matchterms <- term_options
+  }
+
+  if (term %in% matchterms) {
+    if (named_options) {
+      term_id <- term_options[term]
+      final_term <- final_terms[term_id]
+    } else {
+      final_term <- term
+      term_id <- which(final_terms == final_term)
+    }
+  } else {
+    matched <- tryCatch({
+      match.arg(term, matchterms)
+    }, error = \(e) {
+      NA
+    })
+    # Just for warning message
+    if (is.na(matched)) {
+      cli::cli_alert_warning("{stringr::str_to_sentence(term_name)} {.val {term}} not an allowed {term_name}!")
+      cli::cli_rule(left = "Allowed {term_name}s")
+      cli::cli_ul(human_terms)
+      cli::cli_rule()
+      if (!is.null(default_term)) {
+        final_term <- default_term
+        term_id <- which(final_terms == final_term)
+        cli::cli_alert_warning("Defaulting to {.val {final_term}}")
+      } else {
+        cli::cli_abort(c("x" = "Invalid {term_name}: {.val {term}}"), call = call)
+      }
+    } else {
+        if (named_options) {
+          term_id <- term_options[matched]
+          final_term <- final_terms[term_id]
+        } else {
+          final_term <- term
+          term_id <- which(final_terms == final_term)
+        }
+      cli::cli_alert_warning('Matched "{cli::col_red(term)}" ({cli::col_yellow(matched)}) -> "{cli::col_green(final_term)}".')
+    }
+  }
+  return(list(term = final_term, id = as.numeric(term_id)))
+}
+
 #' @title Extract request ids from httr2 response objects
 #' @param r A response object.
 #' @return the id requested from the call.

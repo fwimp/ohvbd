@@ -72,8 +72,8 @@ fetch_ad <- function(
     "population density" = 6,
     "population" = 6,
     "forecast" = 7,
-    "future climate" = 7,
-    "future" = 7
+    "future" = 7,
+    "future climate" = 7
   )
   final_metrics <- c(
     "temp",
@@ -85,20 +85,10 @@ fetch_ad <- function(
     "forecast"
   )
 
-  metric <- tolower(metric)
-  if (metric %in% names(poss_metrics)) {
-    metricid <- poss_metrics[metric]
-    final_metric <- final_metrics[metricid]
-  } else {
-    # Just for warning message
-    cli::cli_alert_warning("Metric {.val {metric}} not an allowed metric!")
-    cli::cli_rule(left = "Allowed metrics")
-    cli::cli_ul(final_metrics)
-    cli::cli_rule()
-    final_metric <- "temp"
-    metricid <- 1
-    cli::cli_alert_warning("Defaulting to {.val {final_metric}}")
-  }
+  matched_metric_list <- .match_term(metric, poss_metrics, final_metrics, default_term = "temp", term_name = "metric", named_options = TRUE)
+  final_metric <- matched_metric_list$term
+  metricid <- matched_metric_list$id
+
   outmat <- NA
   # Try to load cache
   if (use_cache && !refresh_cache) {

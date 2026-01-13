@@ -59,6 +59,7 @@ Other:
 * `fetch_vd_counts()` is now significantly faster, more robust, and temporarily caches data.
   * You will see particular improvements if you are trying to retrieve more than about 10 ids in one go or if you are repeatedly running the same download code in the same day.
   * This speedup also applies to `fetch_vd()` under the hood, particularly if you are running it multiple times in a day.
+* Explicit term checking (such as in `fetch_ad()` for metrics and `search_vt_smart()` for operators and fields) is now fuzzy, allowing for a small amount of deviation from the actual term name.
 
 # ohvbd 0.6.1
 
