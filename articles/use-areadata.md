@@ -30,7 +30,8 @@ deconstruct this command properly in a bit):
 library(ohvbd)
 
 ad_df <- fetch_ad(metric = "temp", gid = 0, use_cache = TRUE)
-print(ad_df)
+# Display only a brief summary of the data
+summary(ad_df)
 #> <ohvbd.ad.matrix>
 #> Areadata matrix for temp at gid level 0 .
 #> Cached: FALSE 
@@ -40,11 +41,10 @@ print(ad_df)
 
 So that is quite a lot of data! Way too much to print here, given that
 it’s 561152 entries, however if you want to print all the data rather
-than just a summary, you can add the argument `full = TRUE` to the print
-command:
+than just a summary, you can use the print command:
 
 ``` r
-print(ad_df, full = TRUE)
+print(ad_df)
 ```
 
 AREAdata outputs are formatted as matrices. Here the rows correspond to
@@ -152,7 +152,20 @@ ad_df |> glean_ad(targetdate = "2020-01-01", places = "Angola")
 #> Areadata matrix for temp at gid level 0 .
 #> Cached: FALSE 
 #> Dates: 2020-01-01 -> 2020-01-01 (1)
-#> Locations: 1
+#> Locations: 1 
+#> Data:
+#>        2020-01-01
+#> Angola   29.33611
+#> attr(,"metric")
+#> [1] "temp"
+#> attr(,"gid")
+#> [1] 0
+#> attr(,"cached")
+#> [1] FALSE
+#> attr(,"db")
+#> [1] "ad"
+#> attr(,"class")
+#> [1] "ohvbd.ad.matrix" "matrix"          "array"
 ```
 
 *Note: ignore the `attr` part of the output, this data just allows
@@ -183,7 +196,20 @@ ad_df |> glean_ad(
 #> Areadata matrix for temp at gid level 0 .
 #> Cached: FALSE 
 #> Dates: 2020-01-01 -> 2020-01-05 (3)
-#> Locations: 1
+#> Locations: 1 
+#> Data:
+#>        2020-01-01 2020-01-02 2020-01-05
+#> Angola   29.33611   28.77514   28.13407
+#> attr(,"metric")
+#> [1] "temp"
+#> attr(,"gid")
+#> [1] 0
+#> attr(,"cached")
+#> [1] FALSE
+#> attr(,"db")
+#> [1] "ad"
+#> attr(,"class")
+#> [1] "ohvbd.ad.matrix" "matrix"          "array"
 ```
 
 ``` r
@@ -192,7 +218,30 @@ ad_df |> glean_ad(targetdate = "2020-01", places = "Angola")
 #> Areadata matrix for temp at gid level 0 .
 #> Cached: FALSE 
 #> Dates: 2020-01-01 -> 2020-01-31 (31)
-#> Locations: 1
+#> Locations: 1 
+#> Data:
+#>        2020-01-01 2020-01-02 2020-01-03 2020-01-04 2020-01-05 2020-01-06
+#> Angola   29.33611   28.77514   28.88312    27.4325   28.13407   28.64046
+#>        2020-01-07 2020-01-08 2020-01-09 2020-01-10 2020-01-11 2020-01-12
+#> Angola   28.09983   28.40937   28.71222   27.21757   26.85815   28.92744
+#>        2020-01-13 2020-01-14 2020-01-15 2020-01-16 2020-01-17 2020-01-18
+#> Angola    29.5375   28.88849   28.81174   29.81402   29.89741    29.5939
+#>        2020-01-19 2020-01-20 2020-01-21 2020-01-22 2020-01-23 2020-01-24
+#> Angola   29.87222   30.28832   30.18386   29.98904   29.97556   29.63855
+#>        2020-01-25 2020-01-26 2020-01-27 2020-01-28 2020-01-29 2020-01-30
+#> Angola   29.53917   29.00056   28.81855   29.47186   28.44818   28.64745
+#>        2020-01-31
+#> Angola   28.34594
+#> attr(,"metric")
+#> [1] "temp"
+#> attr(,"gid")
+#> [1] 0
+#> attr(,"cached")
+#> [1] FALSE
+#> attr(,"db")
+#> [1] "ad"
+#> attr(,"class")
+#> [1] "ohvbd.ad.matrix" "matrix"          "array"
 ```
 
 ``` r
@@ -217,7 +266,20 @@ ad_df |> glean_ad(
 #> Areadata matrix for temp at gid level 0 .
 #> Cached: FALSE 
 #> Dates: 2020-01-01 -> 2020-01-03 (3)
-#> Locations: 1
+#> Locations: 1 
+#> Data:
+#>        2020-01-01 2020-01-02 2020-01-03
+#> Angola   29.33611   28.77514   28.88312
+#> attr(,"metric")
+#> [1] "temp"
+#> attr(,"gid")
+#> [1] 0
+#> attr(,"cached")
+#> [1] FALSE
+#> attr(,"db")
+#> [1] "ad"
+#> attr(,"class")
+#> [1] "ohvbd.ad.matrix" "matrix"          "array"
 ```
 
 ### Places
@@ -234,7 +296,22 @@ ad_df |> glean_ad(
 #> Areadata matrix for temp at gid level 0 .
 #> Cached: FALSE 
 #> Dates: 2020-01-01 -> 2020-01-01 (1)
-#> Locations: 3
+#> Locations: 3 
+#> Data:
+#>                2020-01-01
+#> Angola          29.336107
+#> Latvia           1.765062
+#> United_Kingdom   5.113141
+#> attr(,"metric")
+#> [1] "temp"
+#> attr(,"gid")
+#> [1] 0
+#> attr(,"cached")
+#> [1] FALSE
+#> attr(,"db")
+#> [1] "ad"
+#> attr(,"class")
+#> [1] "ohvbd.ad.matrix" "matrix"          "array"
 ```
 
 This can be combined with the date filters above to create a more
@@ -250,7 +327,22 @@ ad_df |> glean_ad(
 #> Areadata matrix for temp at gid level 0 .
 #> Cached: FALSE 
 #> Dates: 2020-01-01 -> 2020-01-03 (3)
-#> Locations: 3
+#> Locations: 3 
+#> Data:
+#>                2020-01-01 2020-01-02 2020-01-03
+#> Angola          29.336107  28.775145  28.883123
+#> Latvia           1.765062   3.268600   2.733880
+#> United_Kingdom   5.113141   8.206171   6.198989
+#> attr(,"metric")
+#> [1] "temp"
+#> attr(,"gid")
+#> [1] 0
+#> attr(,"cached")
+#> [1] FALSE
+#> attr(,"db")
+#> [1] "ad"
+#> attr(,"class")
+#> [1] "ohvbd.ad.matrix" "matrix"          "array"
 ```
 
 ### Resiliance
@@ -269,9 +361,23 @@ ad_df |> glean_ad(
 #> Areadata matrix for temp at gid level 0 .
 #> Cached: FALSE 
 #> Dates: 2023-12-30 -> 2024-01-01 (3)
-#> Locations: 2
+#> Locations: 2 
+#> Data:
+#>                2023-12-30 2023-12-31 2024-01-01
+#> United_Kingdom   7.007509   7.715774   7.124182
+#> Latvia           4.098629  -2.789258  -7.665634
+#> attr(,"metric")
+#> [1] "temp"
+#> attr(,"gid")
+#> [1] 0
+#> attr(,"cached")
+#> [1] FALSE
+#> attr(,"db")
+#> [1] "ad"
+#> attr(,"class")
+#> [1] "ohvbd.ad.matrix" "matrix"          "array"
 ```
 
 ## To be completed
 
-Built in 1.9199412s
+Built in 2.3020833s

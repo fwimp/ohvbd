@@ -105,7 +105,8 @@ will deconstruct this command properly in a bit):</p>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/fwimp/ohvbd" class="external-link">ohvbd</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">ad_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_ad.html">fetch_ad</a></span><span class="op">(</span>metric <span class="op">=</span> <span class="st">"temp"</span>, gid <span class="op">=</span> <span class="fl">0</span>, use_cache <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">ad_df</span><span class="op">)</span></span>
+<span><span class="co"># Display only a brief summary of the data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">ad_df</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #0000BB;">&lt;ohvbd.ad.matrix&gt;</span></span></span>
 <span><span class="co">#&gt; Areadata matrix for temp at gid level 0 .</span></span>
 <span><span class="co">#&gt; Cached: FALSE </span></span>
@@ -113,10 +114,9 @@ will deconstruct this command properly in a bit):</p>
 <span><span class="co">#&gt; Locations: 256</span></span></code></pre></div>
 <p>So that is quite a lot of data! Way too much to print here, given
 that it’s 561152 entries, however if you want to print all the data
-rather than just a summary, you can add the argument
-<code>full = TRUE</code> to the print command:</p>
+rather than just a summary, you can use the print command:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">ad_df</span>, full <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">ad_df</span><span class="op">)</span></span></code></pre></div>
 <p>AREAdata outputs are formatted as matrices. Here the rows correspond
 to locations (identified by GADM codes):</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -209,7 +209,20 @@ temperature in Angola on 2020-01-01:</p>
 <span><span class="co">#&gt; Areadata matrix for temp at gid level 0 .</span></span>
 <span><span class="co">#&gt; Cached: FALSE </span></span>
 <span><span class="co">#&gt; Dates: 2020-01-01 -&gt; 2020-01-01 (1)</span></span>
-<span><span class="co">#&gt; Locations: 1</span></span></code></pre></div>
+<span><span class="co">#&gt; Locations: 1 </span></span>
+<span><span class="co">#&gt; Data:</span></span>
+<span><span class="co">#&gt;        2020-01-01</span></span>
+<span><span class="co">#&gt; Angola   29.33611</span></span>
+<span><span class="co">#&gt; attr(,"metric")</span></span>
+<span><span class="co">#&gt; [1] "temp"</span></span>
+<span><span class="co">#&gt; attr(,"gid")</span></span>
+<span><span class="co">#&gt; [1] 0</span></span>
+<span><span class="co">#&gt; attr(,"cached")</span></span>
+<span><span class="co">#&gt; [1] FALSE</span></span>
+<span><span class="co">#&gt; attr(,"db")</span></span>
+<span><span class="co">#&gt; [1] "ad"</span></span>
+<span><span class="co">#&gt; attr(,"class")</span></span>
+<span><span class="co">#&gt; [1] "ohvbd.ad.matrix" "matrix"          "array"</span></span></code></pre></div>
 <p><em>Note: ignore the <code>attr</code> part of the output, this data
 just allows <code>ohvbd</code> to ensure consistency between its
 functions.</em></p>
@@ -233,14 +246,50 @@ vector of dates, or a less exact date as <code>targetdate</code></p>
 <span><span class="co">#&gt; Areadata matrix for temp at gid level 0 .</span></span>
 <span><span class="co">#&gt; Cached: FALSE </span></span>
 <span><span class="co">#&gt; Dates: 2020-01-01 -&gt; 2020-01-05 (3)</span></span>
-<span><span class="co">#&gt; Locations: 1</span></span></code></pre></div>
+<span><span class="co">#&gt; Locations: 1 </span></span>
+<span><span class="co">#&gt; Data:</span></span>
+<span><span class="co">#&gt;        2020-01-01 2020-01-02 2020-01-05</span></span>
+<span><span class="co">#&gt; Angola   29.33611   28.77514   28.13407</span></span>
+<span><span class="co">#&gt; attr(,"metric")</span></span>
+<span><span class="co">#&gt; [1] "temp"</span></span>
+<span><span class="co">#&gt; attr(,"gid")</span></span>
+<span><span class="co">#&gt; [1] 0</span></span>
+<span><span class="co">#&gt; attr(,"cached")</span></span>
+<span><span class="co">#&gt; [1] FALSE</span></span>
+<span><span class="co">#&gt; attr(,"db")</span></span>
+<span><span class="co">#&gt; [1] "ad"</span></span>
+<span><span class="co">#&gt; attr(,"class")</span></span>
+<span><span class="co">#&gt; [1] "ohvbd.ad.matrix" "matrix"          "array"</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ad_df</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/glean_ad.html">glean_ad</a></span><span class="op">(</span>targetdate <span class="op">=</span> <span class="st">"2020-01"</span>, places <span class="op">=</span> <span class="st">"Angola"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #0000BB;">&lt;ohvbd.ad.matrix&gt;</span></span></span>
 <span><span class="co">#&gt; Areadata matrix for temp at gid level 0 .</span></span>
 <span><span class="co">#&gt; Cached: FALSE </span></span>
 <span><span class="co">#&gt; Dates: 2020-01-01 -&gt; 2020-01-31 (31)</span></span>
-<span><span class="co">#&gt; Locations: 1</span></span></code></pre></div>
+<span><span class="co">#&gt; Locations: 1 </span></span>
+<span><span class="co">#&gt; Data:</span></span>
+<span><span class="co">#&gt;        2020-01-01 2020-01-02 2020-01-03 2020-01-04 2020-01-05 2020-01-06</span></span>
+<span><span class="co">#&gt; Angola   29.33611   28.77514   28.88312    27.4325   28.13407   28.64046</span></span>
+<span><span class="co">#&gt;        2020-01-07 2020-01-08 2020-01-09 2020-01-10 2020-01-11 2020-01-12</span></span>
+<span><span class="co">#&gt; Angola   28.09983   28.40937   28.71222   27.21757   26.85815   28.92744</span></span>
+<span><span class="co">#&gt;        2020-01-13 2020-01-14 2020-01-15 2020-01-16 2020-01-17 2020-01-18</span></span>
+<span><span class="co">#&gt; Angola    29.5375   28.88849   28.81174   29.81402   29.89741    29.5939</span></span>
+<span><span class="co">#&gt;        2020-01-19 2020-01-20 2020-01-21 2020-01-22 2020-01-23 2020-01-24</span></span>
+<span><span class="co">#&gt; Angola   29.87222   30.28832   30.18386   29.98904   29.97556   29.63855</span></span>
+<span><span class="co">#&gt;        2020-01-25 2020-01-26 2020-01-27 2020-01-28 2020-01-29 2020-01-30</span></span>
+<span><span class="co">#&gt; Angola   29.53917   29.00056   28.81855   29.47186   28.44818   28.64745</span></span>
+<span><span class="co">#&gt;        2020-01-31</span></span>
+<span><span class="co">#&gt; Angola   28.34594</span></span>
+<span><span class="co">#&gt; attr(,"metric")</span></span>
+<span><span class="co">#&gt; [1] "temp"</span></span>
+<span><span class="co">#&gt; attr(,"gid")</span></span>
+<span><span class="co">#&gt; [1] 0</span></span>
+<span><span class="co">#&gt; attr(,"cached")</span></span>
+<span><span class="co">#&gt; [1] FALSE</span></span>
+<span><span class="co">#&gt; attr(,"db")</span></span>
+<span><span class="co">#&gt; [1] "ad"</span></span>
+<span><span class="co">#&gt; attr(,"class")</span></span>
+<span><span class="co">#&gt; [1] "ohvbd.ad.matrix" "matrix"          "array"</span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 366 days of data return as 2020 is a leap year</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">ad_df</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/glean_ad.html">glean_ad</a></span><span class="op">(</span>targetdate <span class="op">=</span> <span class="st">"2020"</span>, places <span class="op">=</span> <span class="st">"Angola"</span><span class="op">)</span><span class="op">)</span></span>
@@ -260,7 +309,20 @@ considered to be “in”.</em></p>
 <span><span class="co">#&gt; Areadata matrix for temp at gid level 0 .</span></span>
 <span><span class="co">#&gt; Cached: FALSE </span></span>
 <span><span class="co">#&gt; Dates: 2020-01-01 -&gt; 2020-01-03 (3)</span></span>
-<span><span class="co">#&gt; Locations: 1</span></span></code></pre></div>
+<span><span class="co">#&gt; Locations: 1 </span></span>
+<span><span class="co">#&gt; Data:</span></span>
+<span><span class="co">#&gt;        2020-01-01 2020-01-02 2020-01-03</span></span>
+<span><span class="co">#&gt; Angola   29.33611   28.77514   28.88312</span></span>
+<span><span class="co">#&gt; attr(,"metric")</span></span>
+<span><span class="co">#&gt; [1] "temp"</span></span>
+<span><span class="co">#&gt; attr(,"gid")</span></span>
+<span><span class="co">#&gt; [1] 0</span></span>
+<span><span class="co">#&gt; attr(,"cached")</span></span>
+<span><span class="co">#&gt; [1] FALSE</span></span>
+<span><span class="co">#&gt; attr(,"db")</span></span>
+<span><span class="co">#&gt; [1] "ad"</span></span>
+<span><span class="co">#&gt; attr(,"class")</span></span>
+<span><span class="co">#&gt; [1] "ohvbd.ad.matrix" "matrix"          "array"</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="places">Places<a class="anchor" aria-label="anchor" href="#places"></a>
@@ -276,7 +338,22 @@ of places:</p>
 <span><span class="co">#&gt; Areadata matrix for temp at gid level 0 .</span></span>
 <span><span class="co">#&gt; Cached: FALSE </span></span>
 <span><span class="co">#&gt; Dates: 2020-01-01 -&gt; 2020-01-01 (1)</span></span>
-<span><span class="co">#&gt; Locations: 3</span></span></code></pre></div>
+<span><span class="co">#&gt; Locations: 3 </span></span>
+<span><span class="co">#&gt; Data:</span></span>
+<span><span class="co">#&gt;                2020-01-01</span></span>
+<span><span class="co">#&gt; Angola          29.336107</span></span>
+<span><span class="co">#&gt; Latvia           1.765062</span></span>
+<span><span class="co">#&gt; United_Kingdom   5.113141</span></span>
+<span><span class="co">#&gt; attr(,"metric")</span></span>
+<span><span class="co">#&gt; [1] "temp"</span></span>
+<span><span class="co">#&gt; attr(,"gid")</span></span>
+<span><span class="co">#&gt; [1] 0</span></span>
+<span><span class="co">#&gt; attr(,"cached")</span></span>
+<span><span class="co">#&gt; [1] FALSE</span></span>
+<span><span class="co">#&gt; attr(,"db")</span></span>
+<span><span class="co">#&gt; [1] "ad"</span></span>
+<span><span class="co">#&gt; attr(,"class")</span></span>
+<span><span class="co">#&gt; [1] "ohvbd.ad.matrix" "matrix"          "array"</span></span></code></pre></div>
 <p>This can be combined with the date filters above to create a more
 restrictive extraction:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
@@ -289,7 +366,22 @@ restrictive extraction:</p>
 <span><span class="co">#&gt; Areadata matrix for temp at gid level 0 .</span></span>
 <span><span class="co">#&gt; Cached: FALSE </span></span>
 <span><span class="co">#&gt; Dates: 2020-01-01 -&gt; 2020-01-03 (3)</span></span>
-<span><span class="co">#&gt; Locations: 3</span></span></code></pre></div>
+<span><span class="co">#&gt; Locations: 3 </span></span>
+<span><span class="co">#&gt; Data:</span></span>
+<span><span class="co">#&gt;                2020-01-01 2020-01-02 2020-01-03</span></span>
+<span><span class="co">#&gt; Angola          29.336107  28.775145  28.883123</span></span>
+<span><span class="co">#&gt; Latvia           1.765062   3.268600   2.733880</span></span>
+<span><span class="co">#&gt; United_Kingdom   5.113141   8.206171   6.198989</span></span>
+<span><span class="co">#&gt; attr(,"metric")</span></span>
+<span><span class="co">#&gt; [1] "temp"</span></span>
+<span><span class="co">#&gt; attr(,"gid")</span></span>
+<span><span class="co">#&gt; [1] 0</span></span>
+<span><span class="co">#&gt; attr(,"cached")</span></span>
+<span><span class="co">#&gt; [1] FALSE</span></span>
+<span><span class="co">#&gt; attr(,"db")</span></span>
+<span><span class="co">#&gt; [1] "ad"</span></span>
+<span><span class="co">#&gt; attr(,"class")</span></span>
+<span><span class="co">#&gt; [1] "ohvbd.ad.matrix" "matrix"          "array"</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="resiliance">Resiliance<a class="anchor" aria-label="anchor" href="#resiliance"></a>
@@ -306,14 +398,28 @@ the use of dates or places that are not in AREAdata:</p>
 <span><span class="co">#&gt; Areadata matrix for temp at gid level 0 .</span></span>
 <span><span class="co">#&gt; Cached: FALSE </span></span>
 <span><span class="co">#&gt; Dates: 2023-12-30 -&gt; 2024-01-01 (3)</span></span>
-<span><span class="co">#&gt; Locations: 2</span></span></code></pre></div>
+<span><span class="co">#&gt; Locations: 2 </span></span>
+<span><span class="co">#&gt; Data:</span></span>
+<span><span class="co">#&gt;                2023-12-30 2023-12-31 2024-01-01</span></span>
+<span><span class="co">#&gt; United_Kingdom   7.007509   7.715774   7.124182</span></span>
+<span><span class="co">#&gt; Latvia           4.098629  -2.789258  -7.665634</span></span>
+<span><span class="co">#&gt; attr(,"metric")</span></span>
+<span><span class="co">#&gt; [1] "temp"</span></span>
+<span><span class="co">#&gt; attr(,"gid")</span></span>
+<span><span class="co">#&gt; [1] 0</span></span>
+<span><span class="co">#&gt; attr(,"cached")</span></span>
+<span><span class="co">#&gt; [1] FALSE</span></span>
+<span><span class="co">#&gt; attr(,"db")</span></span>
+<span><span class="co">#&gt; [1] "ad"</span></span>
+<span><span class="co">#&gt; attr(,"class")</span></span>
+<span><span class="co">#&gt; [1] "ohvbd.ad.matrix" "matrix"          "array"</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
 <h2 id="to-be-completed">To be completed<a class="anchor" aria-label="anchor" href="#to-be-completed"></a>
 </h2>
 <p><span style="opacity: 0.1;font-size: small;">Built in
-1.9199412s</span></p>
+2.3020833s</span></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

@@ -25,6 +25,10 @@ ohvbd_db(x) <- value
 The database identifier associated with an object (or `NULL` if
 missing).
 
+## See also
+
+[Internal attributes](https://ohvbd.vbdhub.org/reference/ohvbd_attrs.md)
+
 ## Author
 
 Francis Windram

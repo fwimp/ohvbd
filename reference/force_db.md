@@ -35,6 +35,10 @@ this purpose.
 This is a synonym for `ohvbd_db(x) <- db` that's easier to work with in
 pipelines.
 
+## See also
+
+[Internal attributes](https://ohvbd.vbdhub.org/reference/ohvbd_attrs.md)
+
 ## Author
 
 Francis Windram

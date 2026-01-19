@@ -125,6 +125,8 @@ Miscellaneous functions.
   : List all ohvbd cached files
 - [`ohvbd.ids()`](https://ohvbd.vbdhub.org/reference/ohvbd.ids.md) :
   Create a new ohvbd ID vector
+- [`ohvbd_attrs`](https://ohvbd.vbdhub.org/reference/ohvbd_attrs.md) :
+  Internal attributes
 - [`ohvbd_dryrun`](https://ohvbd.vbdhub.org/reference/ohvbd_dryrun.md) :
   Option: dry runs of ohvbd searches
 - [`set_ohvbd_compat()`](https://ohvbd.vbdhub.org/reference/set_ohvbd_compat.md)
