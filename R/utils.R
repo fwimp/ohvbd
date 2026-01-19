@@ -402,6 +402,8 @@ wkt_to_multipolygon <- function(v, call = rlang::caller_env()) {
 #' @examples
 #' force_db(c(1,2,3), "vt")
 #'
+#' @seealso [Internal attributes][ohvbd_attrs]
+#'
 force_db <- function(x, db) {
   ohvbd_db(x) <- db
   x

@@ -29,6 +29,9 @@ This is a synonym for \code{ohvbd_db(x) <- db} that's easier to work with in pip
 force_db(c(1,2,3), "vt")
 
 }
+\seealso{
+\link[=ohvbd_attrs]{Internal attributes}
+}
 \author{
 Francis Windram
 }

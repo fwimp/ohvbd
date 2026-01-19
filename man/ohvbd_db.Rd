@@ -28,6 +28,9 @@ ohvbd_db(ids) <- "vt"
 ohvbd_db(ids)
 
 }
+\seealso{
+\link[=ohvbd_attrs]{Internal attributes}
+}
 \author{
 Francis Windram
 }

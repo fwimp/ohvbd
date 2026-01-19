@@ -170,7 +170,7 @@ search_hub <- function(
     hub_search <- new_ohvbd.hub.search(
       hits,
       query = query,
-      searchparams = list(fromdate = fromdate, todate = todate, exact = exact)
+      searchparams = list(fromdate = fromdate, todate = todate, exact = exact, withoutpublished = withoutpublished, locationpoly = locationpoly, taxonomy = taxonomy)
     )
     if (simplify && length(db) == 1) {
       return(filter_db(hub_search, db[1]))

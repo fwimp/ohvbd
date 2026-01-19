@@ -23,9 +23,8 @@ print.ohvbd.data.frame <- function(x, ...) {
 }
 
 #' @export
-print.ohvbd.ad.matrix <- function(x, ..., full = FALSE) {
+print.ohvbd.ad.matrix <- function(x, ..., full = TRUE) {
   cli::cat_line(cli::format_inline("{.cls {class(x)[1]}}"))
-  # TODO: Possibly worthwhile moving most of this to a new summary.ohvbd.ad.matrix function?
   # If attr is null, default to <missing>
   metric <- attr(x, 'metric') %||% '<missing>'
   gid <- attr(x, 'gid') %||% '<missing>'
@@ -33,6 +32,7 @@ print.ohvbd.ad.matrix <- function(x, ..., full = FALSE) {
   startdate <- head(colnames(x), 1) %||% 'unknown'
   enddate <- tail(colnames(x), 1) %||% 'unknown'
   if (!is.null(options("cli.default_handler"))) {
+    # If default handler is null, cli output is being suppressed
     cat(paste("Areadata matrix for", metric, "at gid level", gid, ".\n"))
     cat(paste("Cached:", cached, "\n"))
     cat(paste("Dates:", startdate, "->", enddate, paste0("(", ncol(x), ")\n")))
@@ -56,6 +56,13 @@ print.ohvbd.ad.matrix <- function(x, ..., full = FALSE) {
     }
   }
   invisible(x)
+}
+
+#' @export
+summary.ohvbd.ad.matrix <- function(object, ...) {
+  # Shortcut to just print AD header
+  print.ohvbd.ad.matrix(object, ..., full = FALSE)
+  invisible(object)
 }
 
 #' @export
@@ -316,6 +323,8 @@ fetch_citations.ohvbd.data.frame <- function(
 #'
 #' ohvbd_db(ids) <- "vt"
 #' ohvbd_db(ids)
+#'
+#' @seealso [Internal attributes][ohvbd_attrs]
 #'
 #' @name ohvbd_db
 NULL
