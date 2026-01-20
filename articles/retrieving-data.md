@@ -69,11 +69,11 @@ aedes_results <- search_hub("Aedes aegypti")
 summary(aedes_results)
 ```
 
-    ## Rows: 145, Query: Aedes aegypti
+    ## Rows: 150, Query: Aedes aegypti
     ## 
     ## Split by database:
     ## gbif   px   vd   vt 
-    ##   20   44   10   71
+    ##   21   46   12   71
 
 You can see here there are 20 GBIF datasets, 10 VecDyn datasets, and 71
 VecTraits datasets.
@@ -102,11 +102,8 @@ aedes_vt
 
     ## <ohvbd.ids>
     ## Database: vt
-    ##  [1]  474  475  148  578  556  126  142  144  285  287  169  580  577  865  863
-    ## [16]  357  149  476  473  573  576  565  555  841  842  356  146  864  170  214
-    ## [31]  579  359  355  143  147  564  574  575  124  125  346  553  554  354  853
-    ## [46]  286  825  826  901  145  906  892  893  358  854  855  911  860  828  910
-    ## [61]  572  557  558  571 1506 1510 1511 1512 1507 1508 1509
+    ##  [1]  474  475  148  578  126  556  142  144  169  577  580  287  285  865  863  473  476  357  149  573  576  565  555  146  841  842  356  170  214  579  359  355  864  143  147  564  574  575  124
+    ## [40]  125  346  553  554  354  286  853  901  145  825  826  906  892  893  358  854  855  860  828  911  910  572  557  558  571 1506 1510 1511 1512 1507 1508 1509
 
 If you only searched the hub for one database, by default
 [`search_hub()`](https://ohvbd.vbdhub.org/reference/search_hub.md) will
@@ -120,11 +117,8 @@ search_hub("Aedes aegypti", db = "vt")
 
     ## <ohvbd.ids>
     ## Database: vt
-    ##  [1]  474  475  148  578  556  126  142  144  285  287  169  580  577  865  863
-    ## [16]  357  149  476  473  573  576  565  555  841  842  356  146  864  170  214
-    ## [31]  579  359  355  143  147  564  574  575  124  125  346  553  554  354  853
-    ## [46]  286  825  826  901  145  906  892  893  358  854  855  911  860  828  910
-    ## [61]  572  557  558  571 1506 1510 1511 1512 1507 1508 1509
+    ##  [1]  474  475  148  578  126  556  142  144  169  577  580  287  285  865  863  473  476  357  149  573  576  565  555  146  841  842  356  170  214  579  359  355  864  143  147  564  574  575  124
+    ## [40]  125  346  553  554  354  286  853  901  145  825  826  906  892  893  358  854  855  860  828  911  910  572  557  558  571 1506 1510 1511 1512 1507 1508 1509
 
 ## Getting data
 
@@ -145,7 +139,7 @@ aedes_responses[[1]]
     ## GET https://vectorbyte.crc.nd.edu/portal/api/vectraits-dataset/474/?format=json
     ## Status: 200 OK
     ## Content-Type: application/json
-    ## Body: In memory (52292 bytes)
+    ## Body: In memory (54992 bytes)
 
 The [`fetch()`](https://ohvbd.vbdhub.org/reference/fetch.md) function
 returns a list of the data in the form of the original `httr2`
@@ -179,7 +173,7 @@ aedes_data <- aedes_responses |> glean()
 cat("Data dimensions: ", ncol(aedes_data), " cols x ", nrow(aedes_data), " rows")
 ```
 
-    ## Data dimensions:  157  cols x  874  rows
+    ## Data dimensions:  157  cols x  727  rows
 
 This dataset is a bit too large to print here, and often you may only
 want a few columns of data rather than the whole dataset.
@@ -202,12 +196,12 @@ aedes_data_filtered
 
     ## <ohvbd.data.frame>
     ## Database: vt
-    ##   DatasetID                      Location OriginalTraitName
-    ## 1       474                Marilia Brazil    fecundity rate
-    ## 2       475                Marilia Brazil         longevity
-    ## 3       148      Unversity of Georgia USA  glycogen content
-    ## 4       578            Fort Myers Florida  development time
-    ## 5       556 Guadeloupe French West Indies gonotrophic cycle
+    ##   DatasetID                      Location      OriginalTraitName
+    ## 1       474                Marilia Brazil         fecundity rate
+    ## 2       475                Marilia Brazil              longevity
+    ## 3       148      Unversity of Georgia USA       glycogen content
+    ## 4       578            Fort Myers Florida       development time
+    ## 5       126 Guadeloupe French West Indies transmission potential
 
 ### Specific glean functions
 
@@ -245,7 +239,7 @@ head(df)
     ## 2       475            Aedes            aegypti -22.21389 -49.94583
     ## 3       148            Aedes            aegypti        NA        NA
     ## 4       578            Aedes            aegypti  26.61667 -81.83333
-    ## 5       556            Aedes            aegypti  16.25000 -61.58333
+    ## 5       126            Aedes            aegypti  16.25000 -61.58333
 
 A similar pipeline taking advantage of the autofiltering in
 [`search_hub()`](https://ohvbd.vbdhub.org/reference/search_hub.md) might
@@ -303,20 +297,13 @@ df |> dplyr::filter(Interactor1Genus == "Axinoscymnus") |> head()
 
     ## <ohvbd.data.frame>
     ## Database: vt
-    ##   DatasetID Interactor1Genus Interactor1Species Interactor2Genus
-    ## 1       160     Axinoscymnus         cardilobus          Bemisia
-    ## 2       160     Axinoscymnus         cardilobus          Bemisia
-    ## 3       160     Axinoscymnus         cardilobus          Bemisia
-    ## 4       160     Axinoscymnus         cardilobus          Bemisia
-    ## 5       160     Axinoscymnus         cardilobus          Bemisia
-    ## 6       160     Axinoscymnus         cardilobus          Bemisia
-    ##   Interactor2Species
-    ## 1             tabaci
-    ## 2             tabaci
-    ## 3             tabaci
-    ## 4             tabaci
-    ## 5             tabaci
-    ## 6             tabaci
+    ##   DatasetID Interactor1Genus Interactor1Species Interactor2Genus Interactor2Species
+    ## 1       160     Axinoscymnus         cardilobus          Bemisia             tabaci
+    ## 2       160     Axinoscymnus         cardilobus          Bemisia             tabaci
+    ## 3       160     Axinoscymnus         cardilobus          Bemisia             tabaci
+    ## 4       160     Axinoscymnus         cardilobus          Bemisia             tabaci
+    ## 5       160     Axinoscymnus         cardilobus          Bemisia             tabaci
+    ## 6       160     Axinoscymnus         cardilobus          Bemisia             tabaci
 
 In this scenario, *Bemisia* is present in the dataset, but it is as the
 “target” rather than the animal that the trait is referring to.
@@ -375,4 +362,4 @@ time you run your script. This is as easy as running
 dataframe, then reading it in later with
 [`read.csv()`](https://rdrr.io/r/utils/read.table.html)
 
-Built in 4.7076824s
+Built in 14.8074338s

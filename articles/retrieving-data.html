@@ -38,7 +38,8 @@
 <li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/retrieving-data.html">Retrieving data from VectorByte</a></li>
+<li><a class="dropdown-item" href="../articles/citations.html">Citing data retrieved using ohvbd</a></li>
+    <li><a class="dropdown-item" href="../articles/retrieving-data.html">Retrieving data from VectorByte</a></li>
     <li><a class="dropdown-item" href="../articles/use-areadata.html">Sourcing climatic data from AREAdata</a></li>
   </ul>
 </li>
@@ -133,11 +134,11 @@ approach.</p>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/fwimp/ohvbd" class="external-link">ohvbd</a></span><span class="op">)</span></span>
 <span><span class="va">aedes_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/search_hub.html">search_hub</a></span><span class="op">(</span><span class="st">"Aedes aegypti"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">aedes_results</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Rows: 145, Query: Aedes aegypti</span></span>
+<pre><code><span><span class="co">## Rows: 150, Query: Aedes aegypti</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Split by database:</span></span>
 <span><span class="co">## gbif   px   vd   vt </span></span>
-<span><span class="co">##   20   44   10   71</span></span></code></pre>
+<span><span class="co">##   21   46   12   71</span></span></code></pre>
 <p>You can see here there are 20 GBIF datasets, 10 VecDyn datasets, and
 71 VecTraits datasets.</p>
 <p>However right now we only have the ids of the data, not the data
@@ -159,25 +160,19 @@ best) get garbage.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">aedes_vt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/filter_db.html">filter_db</a></span><span class="op">(</span><span class="va">aedes_results</span>, <span class="st">"vt"</span><span class="op">)</span></span>
 <span><span class="va">aedes_vt</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #0000BB;">&lt;ohvbd.ids&gt;</span></span></span>
+<pre><code><span><span class="co">## &lt;ohvbd.ids&gt;</span></span>
 <span><span class="co">## Database: vt</span></span>
-<span><span class="co">##  [1]  474  475  148  578  556  126  142  144  285  287  169  580  577  865  863</span></span>
-<span><span class="co">## [16]  357  149  476  473  573  576  565  555  841  842  356  146  864  170  214</span></span>
-<span><span class="co">## [31]  579  359  355  143  147  564  574  575  124  125  346  553  554  354  853</span></span>
-<span><span class="co">## [46]  286  825  826  901  145  906  892  893  358  854  855  911  860  828  910</span></span>
-<span><span class="co">## [61]  572  557  558  571 1506 1510 1511 1512 1507 1508 1509</span></span></code></pre>
+<span><span class="co">##  [1]  474  475  148  578  126  556  142  144  169  577  580  287  285  865  863  473  476  357  149  573  576  565  555  146  841  842  356  170  214  579  359  355  864  143  147  564  574  575  124</span></span>
+<span><span class="co">## [40]  125  346  553  554  354  286  853  901  145  825  826  906  892  893  358  854  855  860  828  911  910  572  557  558  571 1506 1510 1511 1512 1507 1508 1509</span></span></code></pre>
 <p>If you only searched the hub for one database, by default
 <code><a href="../reference/search_hub.html">search_hub()</a></code> will automatically perform the
 <code><a href="../reference/filter_db.html">filter_db()</a></code> operation for you!</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/search_hub.html">search_hub</a></span><span class="op">(</span><span class="st">"Aedes aegypti"</span>, db <span class="op">=</span> <span class="st">"vt"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #0000BB;">&lt;ohvbd.ids&gt;</span></span></span>
+<pre><code><span><span class="co">## &lt;ohvbd.ids&gt;</span></span>
 <span><span class="co">## Database: vt</span></span>
-<span><span class="co">##  [1]  474  475  148  578  556  126  142  144  285  287  169  580  577  865  863</span></span>
-<span><span class="co">## [16]  357  149  476  473  573  576  565  555  841  842  356  146  864  170  214</span></span>
-<span><span class="co">## [31]  579  359  355  143  147  564  574  575  124  125  346  553  554  354  853</span></span>
-<span><span class="co">## [46]  286  825  826  901  145  906  892  893  358  854  855  911  860  828  910</span></span>
-<span><span class="co">## [61]  572  557  558  571 1506 1510 1511 1512 1507 1508 1509</span></span></code></pre>
+<span><span class="co">##  [1]  474  475  148  578  126  556  142  144  169  577  580  287  285  865  863  473  476  357  149  573  576  565  555  146  841  842  356  170  214  579  359  355  864  143  147  564  574  575  124</span></span>
+<span><span class="co">## [40]  125  346  553  554  354  286  853  901  145  825  826  906  892  893  358  854  855  860  828  911  910  572  557  558  571 1506 1510 1511 1512 1507 1508 1509</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="getting-data">Getting data<a class="anchor" aria-label="anchor" href="#getting-data"></a>
@@ -194,7 +189,7 @@ let’s get the first 5 <em>Aedes aegypti</em> datasets:</p>
 <span><span class="co">## GET https://vectorbyte.crc.nd.edu/portal/api/vectraits-dataset/474/?format=json</span></span>
 <span><span class="co">## Status: 200 OK</span></span>
 <span><span class="co">## Content-Type: application/json</span></span>
-<span><span class="co">## Body: In memory (52292 bytes)</span></span></code></pre>
+<span><span class="co">## Body: In memory (54992 bytes)</span></span></code></pre>
 <p>The <code><a href="../reference/fetch.html">fetch()</a></code> function returns a list of the data in the
 form of the original <code>httr2</code> responses. These are useful if
 you want to know specifics about how the server sent data back, but for
@@ -221,7 +216,7 @@ from them using the <code><a href="../reference/glean.html">glean()</a></code> f
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">aedes_data</span> <span class="op">&lt;-</span> <span class="va">aedes_responses</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/glean.html">glean</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Data dimensions: "</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">aedes_data</span><span class="op">)</span>, <span class="st">" cols x "</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">aedes_data</span><span class="op">)</span>, <span class="st">" rows"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Data dimensions:  157  cols x  874  rows</span></span></code></pre>
+<pre><code><span><span class="co">## Data dimensions:  157  cols x  727  rows</span></span></code></pre>
 <p>This dataset is a bit too large to print here, and often you may only
 want a few columns of data rather than the whole dataset.</p>
 <p>Fortunately the <code>cols</code> argument allows us to filter this
@@ -236,14 +231,14 @@ from our data using the same command as before:</p>
 <span>    returnunique <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="va">aedes_data_filtered</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #0000BB;">&lt;ohvbd.data.frame&gt;</span></span></span>
+<pre><code><span><span class="co">## &lt;ohvbd.data.frame&gt;</span></span>
 <span><span class="co">## Database: vt</span></span>
-<span><span class="co">##   DatasetID                      Location OriginalTraitName</span></span>
-<span><span class="co">## 1       474                Marilia Brazil    fecundity rate</span></span>
-<span><span class="co">## 2       475                Marilia Brazil         longevity</span></span>
-<span><span class="co">## 3       148      Unversity of Georgia USA  glycogen content</span></span>
-<span><span class="co">## 4       578            Fort Myers Florida  development time</span></span>
-<span><span class="co">## 5       556 Guadeloupe French West Indies gonotrophic cycle</span></span></code></pre>
+<span><span class="co">##   DatasetID                      Location      OriginalTraitName</span></span>
+<span><span class="co">## 1       474                Marilia Brazil         fecundity rate</span></span>
+<span><span class="co">## 2       475                Marilia Brazil              longevity</span></span>
+<span><span class="co">## 3       148      Unversity of Georgia USA       glycogen content</span></span>
+<span><span class="co">## 4       578            Fort Myers Florida       development time</span></span>
+<span><span class="co">## 5       126 Guadeloupe French West Indies transmission potential</span></span></code></pre>
 <div class="section level3">
 <h3 id="specific-glean-functions">Specific glean functions<a class="anchor" aria-label="anchor" href="#specific-glean-functions"></a>
 </h3>
@@ -269,14 +264,14 @@ functions together to create small pipelines.</p>
 <span>    returnunique <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #0000BB;">&lt;ohvbd.data.frame&gt;</span></span></span>
+<pre><code><span><span class="co">## &lt;ohvbd.data.frame&gt;</span></span>
 <span><span class="co">## Database: vt</span></span>
 <span><span class="co">##   DatasetID Interactor1Genus Interactor1Species  Latitude Longitude</span></span>
 <span><span class="co">## 1       474            Aedes            aegypti -22.21389 -49.94583</span></span>
 <span><span class="co">## 2       475            Aedes            aegypti -22.21389 -49.94583</span></span>
 <span><span class="co">## 3       148            Aedes            aegypti        NA        NA</span></span>
 <span><span class="co">## 4       578            Aedes            aegypti  26.61667 -81.83333</span></span>
-<span><span class="co">## 5       556            Aedes            aegypti  16.25000 -61.58333</span></span></code></pre>
+<span><span class="co">## 5       126            Aedes            aegypti  16.25000 -61.58333</span></span></code></pre>
 <p>A similar pipeline taking advantage of the autofiltering in
 <code><a href="../reference/search_hub.html">search_hub()</a></code> might look like this:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
@@ -319,22 +314,15 @@ something a touch odd:</p>
 look at only rows containing <em>Axinoscymnus</em>:</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Interactor1Genus</span> <span class="op">==</span> <span class="st">"Axinoscymnus"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #0000BB;">&lt;ohvbd.data.frame&gt;</span></span></span>
+<pre><code><span><span class="co">## &lt;ohvbd.data.frame&gt;</span></span>
 <span><span class="co">## Database: vt</span></span>
-<span><span class="co">##   DatasetID Interactor1Genus Interactor1Species Interactor2Genus</span></span>
-<span><span class="co">## 1       160     Axinoscymnus         cardilobus          Bemisia</span></span>
-<span><span class="co">## 2       160     Axinoscymnus         cardilobus          Bemisia</span></span>
-<span><span class="co">## 3       160     Axinoscymnus         cardilobus          Bemisia</span></span>
-<span><span class="co">## 4       160     Axinoscymnus         cardilobus          Bemisia</span></span>
-<span><span class="co">## 5       160     Axinoscymnus         cardilobus          Bemisia</span></span>
-<span><span class="co">## 6       160     Axinoscymnus         cardilobus          Bemisia</span></span>
-<span><span class="co">##   Interactor2Species</span></span>
-<span><span class="co">## 1             tabaci</span></span>
-<span><span class="co">## 2             tabaci</span></span>
-<span><span class="co">## 3             tabaci</span></span>
-<span><span class="co">## 4             tabaci</span></span>
-<span><span class="co">## 5             tabaci</span></span>
-<span><span class="co">## 6             tabaci</span></span></code></pre>
+<span><span class="co">##   DatasetID Interactor1Genus Interactor1Species Interactor2Genus Interactor2Species</span></span>
+<span><span class="co">## 1       160     Axinoscymnus         cardilobus          Bemisia             tabaci</span></span>
+<span><span class="co">## 2       160     Axinoscymnus         cardilobus          Bemisia             tabaci</span></span>
+<span><span class="co">## 3       160     Axinoscymnus         cardilobus          Bemisia             tabaci</span></span>
+<span><span class="co">## 4       160     Axinoscymnus         cardilobus          Bemisia             tabaci</span></span>
+<span><span class="co">## 5       160     Axinoscymnus         cardilobus          Bemisia             tabaci</span></span>
+<span><span class="co">## 6       160     Axinoscymnus         cardilobus          Bemisia             tabaci</span></span></code></pre>
 <p>In this scenario, <em>Bemisia</em> is present in the dataset, but it
 is as the “target” rather than the animal that the trait is referring
 to.</p>
@@ -383,7 +371,7 @@ every time you run your script. This is as easy as running
 <code><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv()</a></code> on your dataframe, then reading it in later
 with <code><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv()</a></code></p>
 <p><span style="opacity: 0.1;font-size: small;">Built in
-4.7076824s</span></p>
+14.8074338s</span></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
