@@ -1,0 +1,262 @@
+---
+title: "Retrieving data from VectorByte"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Retrieving data from VectorByte}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Introduction
+
+The ohvbd package allows you to retrieve data from many different databases directly.
+
+Currently these databases include the [VecTraits](https://vectorbyte.crc.nd.edu/vectraits-explorer) and [VecDyn](https://vectorbyte.crc.nd.edu/vecdyn-datasets) projects from [VectorByte](https://www.vectorbyte.org/), and [GBIF](https://gbif.org).
+
+Let's imagine you wanted to figure out where there is trait data for a particular vector species - _Aedes aegypti_, for example. Here's how you'd use `ohvbd` to do that:
+
+```{r exemplar, echo=TRUE, eval=FALSE}
+df <- search_hub("Aedes aegypti", "vt") |>
+  fetch() |>
+  glean(
+    cols = c("Interactor1Genus", "Interactor1Species", "Latitude", "Longitude"),
+    returnunique = TRUE
+  )
+df
+```
+
+Great, lovely. But now... what does that all mean? And how can you build up your own data request? Read on to find out...
+
+## A note before we begin
+
+```{r starttimer, include=FALSE}
+runstart <- lubridate::now()
+```
+
+```{r option, include=FALSE}
+# Suppress cli output in non-interactive mode
+if (!rlang::is_interactive()) {
+  options(cli.default_handler = function(msg) invisible(NULL))
+} else {
+  options(cli.default_handler = NULL)
+}
+```
+
+For users who are familiar with base R pipes (`|>`), this approach is generally usable in ohvbd as well.
+
+For users who are not familiar, pipes take the output of one command and feed it forward to the next command as the first argument:
+
+
+```{r nonpipedemo}
+# Find mean of a vector normally
+x <- c(1, 2, 3)
+mean(x)
+```
+
+```{r pipedemo}
+# Find mean of a vector using pipes
+c(1, 2, 3) |> mean()
+```
+
+For the rest of this vignette we will be using a piped-style approach.
+
+## Finding IDs
+
+Datasets in VecTraits and VecDyn, and GBIF are organised by id.
+
+You can search for ids related to a particular query using the `vbdhub.org` (aka "the hub") search functionality via `search_hub()`.
+
+In this case let's search the hub for *Aedes aegypti*, the "Yellow Fever mosquito":
+
+```{r search_hub}
+library(ohvbd)
+aedes_results <- search_hub("Aedes aegypti")
+summary(aedes_results)
+```
+
+You can see here there are 20 GBIF datasets, 10 VecDyn datasets, and 71 VecTraits datasets.
+
+However right now we only have the ids of the data, not the data themselves. In order to get that, we must fetch the data from a given database.
+
+## Filtering dbs
+
+Before fetching data, we must extract only the ids relevant to our database from our search.
+
+> GBIF, VecTraits, and VecDyn do not have unified ids between datasets, so if you attempted to get VT ids from another database you would (at best) get garbage.
+
+Filtering database results from searches can be performed using the `filter_db()` command:
+
+```{r filter_search}
+aedes_vt <- filter_db(aedes_results, "vt")
+aedes_vt
+```
+
+If you only searched the hub for one database, by default `search_hub()` will automatically perform the `filter_db()` operation for you!
+
+```{r autofilter}
+search_hub("Aedes aegypti", db = "vt")
+```
+
+## Getting data
+
+Now you have a vector of datasets from vectraits, we need to actually retrieve the data of these datasets through the API.
+
+To do this we can use the `fetch()` function. In this case let's get the first 5 *Aedes aegypti* datasets:
+
+```{r fetch_vt}
+aedes_vt <- aedes_vt |> head(5)
+aedes_responses <- aedes_vt |> fetch()
+aedes_responses[[1]]
+```
+
+The `fetch()` function returns a list of the data in the form of the original `httr2` responses. These are useful if you want to know specifics about how the server sent data back, but for most usecases it is more useful to extract the data into a dataframe.
+
+### Specific fetch functions
+
+`fetch()` retrieves data from the appropriate database for your data. Under the hood it farms out this work to the `fetch_x()` series of functions.
+
+You can use these yourself for extra piece of mind, though we do not really recommend it.
+
+So the above code could also be written as:
+
+```{r fetch_vt_specific, eval=FALSE, echo=TRUE}
+aedes_responses <- aedes_vt |> fetch_vt()
+```
+
+## Extracting data
+
+Now we have a list of responses, we can extract the relevant data from them using the `glean()` function.
+
+```{r extract_all_vt}
+aedes_data <- aedes_responses |> glean()
+cat("Data dimensions: ", ncol(aedes_data), " cols x ", nrow(aedes_data), " rows")
+```
+
+This dataset is a bit too large to print here, and often you may only want a few columns of data rather than the whole dataset.
+
+Fortunately the `cols` argument allows us to filter this data out easily. We can also use the argument `returnunique` to instruct ohvbd to return only unique rows.
+
+So let's get just the unique locations and trait name combinations from our data using the same command as before:
+
+```{r extract_filtered_vt}
+aedes_data_filtered <- aedes_responses |>
+  glean(
+    cols = c("Location", "OriginalTraitName"),
+    returnunique = TRUE
+  )
+aedes_data_filtered
+```
+
+### Specific glean functions
+
+Like `fetch()`, `glean()` has database-specific variants:
+
+```{r glean_vt_specific, eval=FALSE, echo=TRUE}
+aedes_data <- aedes_responses |> glean_vt()
+```
+
+## Putting it all together
+
+In day-to-day use, you will mostly find yourself using all these functions together to create small pipelines.
+
+A typical pipeline would likely only contain a few lines of code:
+
+```{r vt_pipeline_hub}
+df <- search_hub("Aedes aegypti") |>
+  filter_db("vt") |>
+  head(5) |>
+  fetch() |>
+  glean(
+    cols = c("Interactor1Genus", "Interactor1Species", "Latitude", "Longitude"),
+    returnunique = TRUE
+  )
+head(df)
+```
+
+A similar pipeline taking advantage of the autofiltering in `search_hub()` might look like this:
+
+```{r vt_pipeline_hub_autofilter, eval=FALSE, echo=TRUE}
+df <- search_hub("Aedes aegypti", db = "vt") |>
+  head(5) |>
+  fetch() |>
+  glean(
+    cols = c("Interactor1Genus", "Interactor1Species", "Latitude", "Longitude"),
+    returnunique = TRUE
+  )
+```
+
+## Smart searching of VectorByte databases
+
+One subtlety of VectorByte (in particular) is to do with field collisions.
+
+Let's imagine that we are looking for traits of whitefly species (*Bemisia*). We can just construct a query to investigate this as follows:
+
+```{r demo_searcherror}
+df <- search_hub("Bemisia", "vt") |>
+  head(6) |>
+  fetch() |>
+  glean(
+    cols = c(
+      "DatasetID",
+      "Interactor1Genus",
+      "Interactor1Species",
+      "Interactor2Genus",
+      "Interactor2Species"
+      )
+    )
+```
+Now we would expect this to be traits of *Bemisia* spp, however when we look at the `Interactor1Genus` column we see something a touch odd:
+
+```{r unique_genus}
+unique(df$Interactor1Genus)
+```
+
+*Axinoscymnus* is a ladybird, but why is it appearing? Let's look at only rows containing *Axinoscymnus*:
+
+```{r filter_ladybirds}
+df |> dplyr::filter(Interactor1Genus == "Axinoscymnus") |> head()
+```
+
+In this scenario, *Bemisia* is present in the dataset, but it is as the "target" rather than the animal that the trait is referring to.
+
+As such we might want to be more specific about precisely which data to retrieve. Enter the `search_x_smart()` family of functions.
+
+These allow you to construct a more specific search.
+
+So let's construct the same search as we were wanting to do before, but with the smart search.
+
+```{r searcherror_fixed}
+df <- search_vt_smart("Interactor1Genus", "contains", "Bemisia") |>
+  head(6) |>
+  fetch() |>
+  glean(
+    cols = c(
+      "DatasetID",
+      "Interactor1Genus",
+      "Interactor1Species",
+      "Interactor2Genus",
+      "Interactor2Species"
+      )
+    )
+unique(df$Interactor1Genus)
+```
+
+Here we have made sure to only search the `Interactor1Genus` column. As such we have only gotten back *Bemisia* traits!
+
+This same sort of collision is particularly common in the "Citation" column, where papers may mention multiple trait names.
+
+The `search_x_smart()` functions have many different operators and columns that they can work upon. For full details, run `?search_vt_smart` or `?search_vd_smart` in your console.
+
+In general it is always worthwhile inspecting the data you retrieve to make sure that your query returned the data that you thought it did.
+
+## Futher steps
+
+From here you now have all the data you might need for further analysis, so now it's down to you!
+
+One final note to end on: it can be advisable to save any output data in a csv or parquet format so that you do not need to re-download it every time you run your script. This is as easy as running `write.csv()` on your dataframe, then reading it in later with `read.csv()`
+
+```{r tot_time, include=FALSE}
+tot_time <- lubridate::as.duration(lubridate::now() - runstart)
+```
+
+<span style="opacity: 0.1;font-size: small;">Built in `r tot_time`s</span>
