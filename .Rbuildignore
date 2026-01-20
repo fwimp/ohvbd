@@ -12,3 +12,4 @@ pkg_dev_notes.md
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+R/ohvbd-internal-devtools.R
