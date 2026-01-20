@@ -1,27 +1,25 @@
-# Delete all rda files from ohvbd AREAdata cache
+# Delete all rda files from ohvbd AREAdata cache (Deprecated)
 
-Delete all rda files from ohvbd AREAdata cache
+Delete all rda files from ohvbd AREAdata cache (Deprecated)
 
 ## Usage
 
 ``` r
-clean_ad_cache(cache_location = "user")
+clean_ad_cache(cache_location = NULL)
 ```
 
 ## Arguments
 
 - cache_location:
 
-  location within which to remove rda files.
+  location of the cache.
+
+## Note
+
+`clean_ad_cache()` is now deprecated and should not be used. Please use
+[`clean_ohvbd_cache()`](https://ohvbd.vbdhub.org/reference/clean_ohvbd_cache.md)
+instead.
 
 ## Author
 
 Francis Windram
-
-## Examples
-
-``` r
-if (FALSE) { # interactive()
-clean_ad_cache()
-}
-```

@@ -97,7 +97,7 @@
 <li>New <code><a href="../reference/ohvbd_db.html">ohvbd_db()</a></code>, <code><a href="../reference/has_db.html">has_db()</a></code>, and <code><a href="../reference/is_from.html">is_from()</a></code> functions allow for quick testing of object provenance (according to <code>ohvbd</code>).</li>
 <li>New <code><a href="../reference/get_default_ohvbd_cache.html">get_default_ohvbd_cache()</a></code> function allows for custom functions that interface with cached <code>ohvbd</code> data files.</li>
 <li>New <code><a href="../reference/list_ohvbd_cache.html">list_ohvbd_cache()</a></code> and <code><a href="../reference/clean_ohvbd_cache.html">clean_ohvbd_cache()</a></code> functions enable better interactive cache management.
-<ul><li>As a result, <code>clean_ad_cache()</code> has been removed as it is now unnecessary.</li>
+<ul><li>As a result, <code><a href="../reference/clean_ad_cache.html">clean_ad_cache()</a></code> has been removed as it is now unnecessary.</li>
 </ul></li>
 <li>
 <code>search_x_smart()</code> functions can now take <code>"tags"</code> as a search field, enabling support for tagged datasets.</li>
@@ -147,9 +147,10 @@
 <ul><li>Internally <code>ohvbd</code> now only uses base R pipes (<code>|&gt;</code>).</li>
 <li>The magrittr pipe (<code>%&gt;%</code>) is no longer used internally, nor is it exported for use.</li>
 <li>
-<code>httr2</code> v1.1.1 deprecated the <code>pool</code> argument of <code>req_perform_parallel()</code> which broke <code><a href="../reference/fetch.html">fetch()</a></code> commands across <code>ohvbd</code>.</li>
-<li>These have now been rewritten using the new <code>max_active</code> argument, which does simplify everything a bit.</li>
+<code>httr2</code> v1.1.1 deprecated the <code>pool</code> argument of <code>req_perform_parallel()</code> which broke <code><a href="../reference/fetch.html">fetch()</a></code> commands across <code>ohvbd</code>.
+<ul><li>These have now been rewritten using the new <code>max_active</code> argument, which does simplify everything a bit.</li>
 <li>This change does bump the required version of <code>httr2</code> to be v1.1.1.</li>
+</ul></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.2" id="ohvbd-052">ohvbd 0.5.2<a class="anchor" aria-label="anchor" href="#ohvbd-052"></a></h2>
@@ -232,7 +233,7 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.4" id="ohvbd-044">ohvbd 0.4.4<a class="anchor" aria-label="anchor" href="#ohvbd-044"></a></h2>
 <ul><li>New function <code><a href="../reference/check_ohvbd_config.html">check_ohvbd_config()</a></code> allows easy printing of the current status of ohvbd’s options.</li>
-<li>New <code>clean_ad_cache()</code> function enables users to clean their cached AREAdata files easily.</li>
+<li>New <code><a href="../reference/clean_ad_cache.html">clean_ad_cache()</a></code> function enables users to clean their cached AREAdata files easily.</li>
 <li>Build timings now appear in all vignettes.</li>
 <li>Cli outputs are now suppressed when running vignettes in non-interactive mode (e.g. while knitting).</li>
 <li>Default cache path is now in the user directory (obtained from <code><a href="https://rdrr.io/r/tools/userdir.html" class="external-link">tools::R_user_dir()</a></code>).</li>

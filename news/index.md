@@ -82,8 +82,9 @@ New functions & arguments:
   and
   [`clean_ohvbd_cache()`](https://ohvbd.vbdhub.org/reference/clean_ohvbd_cache.md)
   functions enable better interactive cache management.
-  - As a result, `clean_ad_cache()` has been removed as it is now
-    unnecessary.
+  - As a result,
+    [`clean_ad_cache()`](https://ohvbd.vbdhub.org/reference/clean_ad_cache.md)
+    has been removed as it is now unnecessary.
 - `search_x_smart()` functions can now take `"tags"` as a search field,
   enabling support for tagged datasets.
 
@@ -175,9 +176,9 @@ Other:
   `req_perform_parallel()` which broke
   [`fetch()`](https://ohvbd.vbdhub.org/reference/fetch.md) commands
   across `ohvbd`.
-- These have now been rewritten using the new `max_active` argument,
-  which does simplify everything a bit.
-- This change does bump the required version of `httr2` to be v1.1.1.
+  - These have now been rewritten using the new `max_active` argument,
+    which does simplify everything a bit.
+  - This change does bump the required version of `httr2` to be v1.1.1.
 
 ## ohvbd 0.5.2
 
@@ -280,8 +281,9 @@ Other:
 - New function
   [`check_ohvbd_config()`](https://ohvbd.vbdhub.org/reference/check_ohvbd_config.md)
   allows easy printing of the current status of ohvbd’s options.
-- New `clean_ad_cache()` function enables users to clean their cached
-  AREAdata files easily.
+- New
+  [`clean_ad_cache()`](https://ohvbd.vbdhub.org/reference/clean_ad_cache.md)
+  function enables users to clean their cached AREAdata files easily.
 - Build timings now appear in all vignettes.
 - Cli outputs are now suppressed when running vignettes in
   non-interactive mode (e.g. while knitting).
