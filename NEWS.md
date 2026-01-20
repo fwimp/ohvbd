@@ -74,8 +74,8 @@ Other:
 * Internally `ohvbd` now only uses base R pipes (`|>`).
 * The magrittr pipe (`%>%`) is no longer used internally, nor is it exported for use.
 * `httr2` v1.1.1 deprecated the `pool` argument of `req_perform_parallel()` which broke `fetch()` commands across `ohvbd`.
-* These have now been rewritten using the new `max_active` argument, which does simplify everything a bit.
-* This change does bump the required version of `httr2` to be v1.1.1.
+  * These have now been rewritten using the new `max_active` argument, which does simplify everything a bit.
+  * This change does bump the required version of `httr2` to be v1.1.1.
 
 # ohvbd 0.5.2
 
