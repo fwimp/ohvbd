@@ -1,6 +1,6 @@
 # Changelog
 
-## ohvbd (development version)
+## ohvbd 1.0.0
 
 **Major API change**
 
@@ -154,6 +154,18 @@ Other:
   provided.
 - Errors in internal functions now make it more clear which user-facing
   functions they originate from.
+- Multiple functions now default to `NULL` rather than `NA` for default
+  missing values (except date arguments to AD-related functions, where
+  NA is more reasonable in the grand scheme).
+- [`fetch_ad()`](https://ohvbd.vbdhub.org/reference/fetch_ad.md) now
+  caches and tries to read from cache by default.
+  - Generally speaking unless exceedingly up-to-date data is required,
+    this will be the best for most people.
+  - If you *do* require guaranteed new data, it’s worth setting
+    `refresh_cache = TRUE` or `use_cache = FALSE` (depending on if you
+    want to replace your existing cache or not).
+- All downloaders that can potentially cache data also attach the
+  download time if not loading from cache.
 
 ## ohvbd 0.6.1
 

@@ -10,13 +10,13 @@
 Source:
 [`DESCRIPTION`](https://github.com/fwimp/ohvbd/blob/master/DESCRIPTION)
 
-Windram F (2026). *ohvbd: One Health VBD Hub*. R package version
-0.6.1.9000, <https://github.com/fwimp/ohvbd>.
+Windram F (2026). *ohvbd: One Health VBD Hub*. R package version 1.0.0,
+<https://github.com/fwimp/ohvbd>.
 
     @Manual{,
       title = {ohvbd: One Health VBD Hub},
       author = {Francis Windram},
       year = {2026},
-      note = {R package version 0.6.1.9000},
+      note = {R package version 1.0.0},
       url = {https://github.com/fwimp/ohvbd},
     }

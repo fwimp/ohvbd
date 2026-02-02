@@ -8,7 +8,8 @@ databases directly.
 Currently these databases include the
 [VecTraits](https://vectorbyte.crc.nd.edu/vectraits-explorer) and
 [VecDyn](https://vectorbyte.crc.nd.edu/vecdyn-datasets) projects from
-[VectorByte](https://www.vectorbyte.org/), and [GBIF](https://gbif.org).
+[VectorByte](https://www.vectorbyte.org/), and
+[GBIF](https://www.gbif.org).
 
 Let’s imagine you wanted to figure out where there is trait data for a
 particular vector species - *Aedes aegypti*, for example. Here’s how

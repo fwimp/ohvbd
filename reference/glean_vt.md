@@ -7,7 +7,7 @@ columns of interest, and find unique rows if required.
 ## Usage
 
 ``` r
-glean_vt(res, cols = NA, returnunique = FALSE)
+glean_vt(res, cols = NULL, returnunique = FALSE)
 ```
 
 ## Arguments

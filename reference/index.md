@@ -99,6 +99,15 @@ Convenient generalised functions for working with a range of data.
   [`` `ohvbd_db<-`() ``](https://ohvbd.vbdhub.org/reference/ohvbd_db.md)
   : Database provenance
 
+## Deprecated
+
+Functions that are deprecated and will be removed in future versions.
+
+- [`clean_ad_cache()`](https://ohvbd.vbdhub.org/reference/clean_ad_cache.md)
+  : Delete all rda files from ohvbd AREAdata cache (Deprecated)
+- [`extract()`](https://ohvbd.vbdhub.org/reference/extract.md) : Extract
+  specified data from a set of responses (Deprecated)
+
 ## Other
 
 Miscellaneous functions.
@@ -109,12 +118,8 @@ Miscellaneous functions.
   : Check whether databases are currently online
 - [`check_ohvbd_config()`](https://ohvbd.vbdhub.org/reference/check_ohvbd_config.md)
   : Print current ohvbd configuration variables
-- [`clean_ad_cache()`](https://ohvbd.vbdhub.org/reference/clean_ad_cache.md)
-  : Delete all rda files from ohvbd AREAdata cache (Deprecated)
 - [`clean_ohvbd_cache()`](https://ohvbd.vbdhub.org/reference/clean_ohvbd_cache.md)
   : Delete files from ohvbd cache directories
-- [`extract()`](https://ohvbd.vbdhub.org/reference/extract.md) : Extract
-  specified data from a set of responses (Deprecated)
 - [`fetch_vd_meta()`](https://ohvbd.vbdhub.org/reference/fetch_vd_meta.md)
   : Fetch VecDyn metadata table
 - [`format_time_overlap_bar()`](https://ohvbd.vbdhub.org/reference/format_time_overlap_bar.md)

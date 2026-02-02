@@ -8,7 +8,7 @@ Retrieve AREAdata dataset/s specified by metric and spatial scale (GID).
 fetch_ad(
   metric = "temp",
   gid = 0,
-  use_cache = FALSE,
+  use_cache = TRUE,
   cache_location = NULL,
   refresh_cache = FALSE,
   timeout = 240,

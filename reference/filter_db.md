@@ -41,6 +41,6 @@ search_hub("Ixodes ricinus")
 search_hub("Ixodes ricinus") |>
   filter_db("vt") |>
   fetch() |>
-  extract()
+  glean()
 }
 ```

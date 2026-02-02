@@ -27,7 +27,7 @@ translation enum.
 - term_options:
 
   A named vector to map input terms to final terms in the form c("term1"
-  = ). Indices can be duplicated.
+  = index in final_terms). Indices can be duplicated.
 
 - final_terms:
 

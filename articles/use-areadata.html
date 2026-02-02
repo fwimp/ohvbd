@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ohvbd</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.1.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -110,11 +110,11 @@ will deconstruct this command properly in a bit):</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">ad_df</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## &lt;ohvbd.ad.matrix&gt;</span></span>
 <span><span class="co">## Areadata matrix for temp at gid level 0 .</span></span>
-<span><span class="co">## Cached: TRUE </span></span>
-<span><span class="co">## Dates: 2020-01-01 -&gt; 2025-11-30 (2161)</span></span>
+<span><span class="co">## Cached: FALSE </span></span>
+<span><span class="co">## Dates: 2020-01-01 -&gt; 2025-12-31 (2192)</span></span>
 <span><span class="co">## Locations: 256</span></span></code></pre>
 <p>So that is quite a lot of data! Way too much to print here, given
-that it’s 553216 entries, however if you want to print all the data
+that it’s 561152 entries, however if you want to print all the data
 rather than just a summary, you can use the print command:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">ad_df</span><span class="op">)</span></span></code></pre></div>
@@ -204,7 +204,7 @@ temperature in Angola on 2020-01-01:</p>
 <code class="sourceCode R"><span><span class="va">ad_df</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/glean_ad.html">glean_ad</a></span><span class="op">(</span>targetdate <span class="op">=</span> <span class="st">"2020-01-01"</span>, places <span class="op">=</span> <span class="st">"Angola"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## &lt;ohvbd.ad.matrix&gt;</span></span>
 <span><span class="co">## Areadata matrix for temp at gid level 0 .</span></span>
-<span><span class="co">## Cached: TRUE </span></span>
+<span><span class="co">## Cached: FALSE </span></span>
 <span><span class="co">## Dates: 2020-01-01 -&gt; 2020-01-01 (1)</span></span>
 <span><span class="co">## Locations: 1 </span></span>
 <span><span class="co">## Data:</span></span>
@@ -215,9 +215,11 @@ temperature in Angola on 2020-01-01:</p>
 <span><span class="co">## attr(,"gid")</span></span>
 <span><span class="co">## [1] 0</span></span>
 <span><span class="co">## attr(,"cached")</span></span>
-<span><span class="co">## [1] TRUE</span></span>
+<span><span class="co">## [1] FALSE</span></span>
 <span><span class="co">## attr(,"db")</span></span>
 <span><span class="co">## [1] "ad"</span></span>
+<span><span class="co">## attr(,"writetime")</span></span>
+<span><span class="co">## [1] "2026-02-02 15:14:51 GMT"</span></span>
 <span><span class="co">## attr(,"class")</span></span>
 <span><span class="co">## [1] "ohvbd.ad.matrix" "matrix"          "array"</span></span></code></pre>
 <p><em>Note: ignore the <code>attr</code> part of the output, this data
@@ -241,7 +243,7 @@ vector of dates, or a less exact date as <code>targetdate</code></p>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## &lt;ohvbd.ad.matrix&gt;</span></span>
 <span><span class="co">## Areadata matrix for temp at gid level 0 .</span></span>
-<span><span class="co">## Cached: TRUE </span></span>
+<span><span class="co">## Cached: FALSE </span></span>
 <span><span class="co">## Dates: 2020-01-01 -&gt; 2020-01-05 (3)</span></span>
 <span><span class="co">## Locations: 1 </span></span>
 <span><span class="co">## Data:</span></span>
@@ -252,16 +254,18 @@ vector of dates, or a less exact date as <code>targetdate</code></p>
 <span><span class="co">## attr(,"gid")</span></span>
 <span><span class="co">## [1] 0</span></span>
 <span><span class="co">## attr(,"cached")</span></span>
-<span><span class="co">## [1] TRUE</span></span>
+<span><span class="co">## [1] FALSE</span></span>
 <span><span class="co">## attr(,"db")</span></span>
 <span><span class="co">## [1] "ad"</span></span>
+<span><span class="co">## attr(,"writetime")</span></span>
+<span><span class="co">## [1] "2026-02-02 15:14:51 GMT"</span></span>
 <span><span class="co">## attr(,"class")</span></span>
 <span><span class="co">## [1] "ohvbd.ad.matrix" "matrix"          "array"</span></span></code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ad_df</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/glean_ad.html">glean_ad</a></span><span class="op">(</span>targetdate <span class="op">=</span> <span class="st">"2020-01"</span>, places <span class="op">=</span> <span class="st">"Angola"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## &lt;ohvbd.ad.matrix&gt;</span></span>
 <span><span class="co">## Areadata matrix for temp at gid level 0 .</span></span>
-<span><span class="co">## Cached: TRUE </span></span>
+<span><span class="co">## Cached: FALSE </span></span>
 <span><span class="co">## Dates: 2020-01-01 -&gt; 2020-01-31 (31)</span></span>
 <span><span class="co">## Locations: 1 </span></span>
 <span><span class="co">## Data:</span></span>
@@ -274,9 +278,11 @@ vector of dates, or a less exact date as <code>targetdate</code></p>
 <span><span class="co">## attr(,"gid")</span></span>
 <span><span class="co">## [1] 0</span></span>
 <span><span class="co">## attr(,"cached")</span></span>
-<span><span class="co">## [1] TRUE</span></span>
+<span><span class="co">## [1] FALSE</span></span>
 <span><span class="co">## attr(,"db")</span></span>
 <span><span class="co">## [1] "ad"</span></span>
+<span><span class="co">## attr(,"writetime")</span></span>
+<span><span class="co">## [1] "2026-02-02 15:14:51 GMT"</span></span>
 <span><span class="co">## attr(,"class")</span></span>
 <span><span class="co">## [1] "ohvbd.ad.matrix" "matrix"          "array"</span></span></code></pre>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
@@ -296,7 +302,7 @@ considered to be “in”.</em></p>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## &lt;ohvbd.ad.matrix&gt;</span></span>
 <span><span class="co">## Areadata matrix for temp at gid level 0 .</span></span>
-<span><span class="co">## Cached: TRUE </span></span>
+<span><span class="co">## Cached: FALSE </span></span>
 <span><span class="co">## Dates: 2020-01-01 -&gt; 2020-01-03 (3)</span></span>
 <span><span class="co">## Locations: 1 </span></span>
 <span><span class="co">## Data:</span></span>
@@ -307,9 +313,11 @@ considered to be “in”.</em></p>
 <span><span class="co">## attr(,"gid")</span></span>
 <span><span class="co">## [1] 0</span></span>
 <span><span class="co">## attr(,"cached")</span></span>
-<span><span class="co">## [1] TRUE</span></span>
+<span><span class="co">## [1] FALSE</span></span>
 <span><span class="co">## attr(,"db")</span></span>
 <span><span class="co">## [1] "ad"</span></span>
+<span><span class="co">## attr(,"writetime")</span></span>
+<span><span class="co">## [1] "2026-02-02 15:14:51 GMT"</span></span>
 <span><span class="co">## attr(,"class")</span></span>
 <span><span class="co">## [1] "ohvbd.ad.matrix" "matrix"          "array"</span></span></code></pre>
 </div>
@@ -325,7 +333,7 @@ of places:</p>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## &lt;ohvbd.ad.matrix&gt;</span></span>
 <span><span class="co">## Areadata matrix for temp at gid level 0 .</span></span>
-<span><span class="co">## Cached: TRUE </span></span>
+<span><span class="co">## Cached: FALSE </span></span>
 <span><span class="co">## Dates: 2020-01-01 -&gt; 2020-01-01 (1)</span></span>
 <span><span class="co">## Locations: 3 </span></span>
 <span><span class="co">## Data:</span></span>
@@ -338,9 +346,11 @@ of places:</p>
 <span><span class="co">## attr(,"gid")</span></span>
 <span><span class="co">## [1] 0</span></span>
 <span><span class="co">## attr(,"cached")</span></span>
-<span><span class="co">## [1] TRUE</span></span>
+<span><span class="co">## [1] FALSE</span></span>
 <span><span class="co">## attr(,"db")</span></span>
 <span><span class="co">## [1] "ad"</span></span>
+<span><span class="co">## attr(,"writetime")</span></span>
+<span><span class="co">## [1] "2026-02-02 15:14:51 GMT"</span></span>
 <span><span class="co">## attr(,"class")</span></span>
 <span><span class="co">## [1] "ohvbd.ad.matrix" "matrix"          "array"</span></span></code></pre>
 <p>This can be combined with the date filters above to create a more
@@ -353,7 +363,7 @@ restrictive extraction:</p>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## &lt;ohvbd.ad.matrix&gt;</span></span>
 <span><span class="co">## Areadata matrix for temp at gid level 0 .</span></span>
-<span><span class="co">## Cached: TRUE </span></span>
+<span><span class="co">## Cached: FALSE </span></span>
 <span><span class="co">## Dates: 2020-01-01 -&gt; 2020-01-03 (3)</span></span>
 <span><span class="co">## Locations: 3 </span></span>
 <span><span class="co">## Data:</span></span>
@@ -366,9 +376,11 @@ restrictive extraction:</p>
 <span><span class="co">## attr(,"gid")</span></span>
 <span><span class="co">## [1] 0</span></span>
 <span><span class="co">## attr(,"cached")</span></span>
-<span><span class="co">## [1] TRUE</span></span>
+<span><span class="co">## [1] FALSE</span></span>
 <span><span class="co">## attr(,"db")</span></span>
 <span><span class="co">## [1] "ad"</span></span>
+<span><span class="co">## attr(,"writetime")</span></span>
+<span><span class="co">## [1] "2026-02-02 15:14:51 GMT"</span></span>
 <span><span class="co">## attr(,"class")</span></span>
 <span><span class="co">## [1] "ohvbd.ad.matrix" "matrix"          "array"</span></span></code></pre>
 </div>
@@ -385,7 +397,7 @@ the use of dates or places that are not in AREAdata:</p>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## &lt;ohvbd.ad.matrix&gt;</span></span>
 <span><span class="co">## Areadata matrix for temp at gid level 0 .</span></span>
-<span><span class="co">## Cached: TRUE </span></span>
+<span><span class="co">## Cached: FALSE </span></span>
 <span><span class="co">## Dates: 2023-12-30 -&gt; 2024-01-01 (3)</span></span>
 <span><span class="co">## Locations: 2 </span></span>
 <span><span class="co">## Data:</span></span>
@@ -397,18 +409,179 @@ the use of dates or places that are not in AREAdata:</p>
 <span><span class="co">## attr(,"gid")</span></span>
 <span><span class="co">## [1] 0</span></span>
 <span><span class="co">## attr(,"cached")</span></span>
-<span><span class="co">## [1] TRUE</span></span>
+<span><span class="co">## [1] FALSE</span></span>
 <span><span class="co">## attr(,"db")</span></span>
 <span><span class="co">## [1] "ad"</span></span>
+<span><span class="co">## attr(,"writetime")</span></span>
+<span><span class="co">## [1] "2026-02-02 15:14:51 GMT"</span></span>
 <span><span class="co">## attr(,"class")</span></span>
 <span><span class="co">## [1] "ohvbd.ad.matrix" "matrix"          "array"</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">
-<h2 id="to-be-completed">To be completed<a class="anchor" aria-label="anchor" href="#to-be-completed"></a>
+<h2 id="associating-areadata-climatic-variables-with-other-data">Associating AREAData climatic variables with other data<a class="anchor" aria-label="anchor" href="#associating-areadata-climatic-variables-with-other-data"></a>
 </h2>
+<p>On top of providing a download interface for AREAData,
+<code>ohvbd</code> provides tools for easing the process of associating
+your own data with data from AREAData.</p>
+<p>This is performed through the use of the <code><a href="../reference/assoc_ad.html">assoc_ad()</a></code>
+function.</p>
+<p>For example, let’s imagine we have some data and their associate
+locations:</p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span>  <span class="va">lonlatdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>    Country <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"UK"</span>, <span class="st">"DE"</span>, <span class="st">"US"</span>, <span class="st">"ES"</span>, <span class="st">"IT"</span>, <span class="st">"BG"</span>, <span class="st">"US"</span><span class="op">)</span>,</span>
+<span>    Latitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>      <span class="fl">53.813727033336384</span>, <span class="fl">50.94133730102917</span>, <span class="fl">41.502614374776414</span>, <span class="fl">37.09584576240546</span>,</span>
+<span>      <span class="fl">46.190816816324634</span>, <span class="fl">43.40408987260468</span>, <span class="fl">34.02921305111613</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    Longitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>      <span class="op">-</span><span class="fl">1.5631510640531983</span>, <span class="fl">6.95792487354786</span>, <span class="op">-</span><span class="fl">73.96228644647785</span>,</span>
+<span>      <span class="op">-</span><span class="fl">2.0967211553577694</span>, <span class="fl">11.135228310071971</span>, <span class="fl">28.148385835241964</span>,</span>
+<span>      <span class="op">-</span><span class="fl">84.36091597146886</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    count <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">36</span>, <span class="fl">340</span>, <span class="fl">202</span>, <span class="fl">802</span>, <span class="fl">541</span>, <span class="fl">325</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="va">lonlatdf</span></span></code></pre></div>
+<pre><code><span><span class="co">##   Country Latitude  Longitude count</span></span>
+<span><span class="co">## 1      UK 53.81373  -1.563151     6</span></span>
+<span><span class="co">## 2      DE 50.94134   6.957925    36</span></span>
+<span><span class="co">## 3      US 41.50261 -73.962286   340</span></span>
+<span><span class="co">## 4      ES 37.09585  -2.096721   202</span></span>
+<span><span class="co">## 5      IT 46.19082  11.135228   802</span></span>
+<span><span class="co">## 6      BG 43.40409  28.148386   541</span></span>
+<span><span class="co">## 7      US 34.02921 -84.360916   325</span></span></code></pre>
+<p>If we know that we collected samples between the 4th and 5th of
+August 2021, we can associate the temperature values from these regions
+on these days at a given spatial scale.</p>
+<p>Let’s do this at the country scale:</p>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">areadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_ad.html">fetch_ad</a></span><span class="op">(</span>metric<span class="op">=</span><span class="st">"temp"</span>, gid<span class="op">=</span><span class="fl">0</span>, use_cache<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">ad_extract_working</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/assoc_ad.html">assoc_ad</a></span><span class="op">(</span><span class="va">lonlatdf</span>, <span class="va">areadata</span>,</span>
+<span>                                    targetdate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2021-08-04"</span><span class="op">)</span>, enddate<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2021-08-06"</span><span class="op">)</span>,</span>
+<span>                                    gid<span class="op">=</span><span class="fl">0</span>, lonlat_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Longitude"</span>, <span class="st">"Latitude"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Suppress lonlat just to make the output easier to read</span></span>
+<span><span class="va">ad_extract_working</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Longitude"</span>, <span class="st">"Latitude"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##   Country count temp_2021.08.04 temp_2021.08.05</span></span>
+<span><span class="co">## 1      UK     6        15.98993        16.09847</span></span>
+<span><span class="co">## 2      DE    36        17.17353        18.25541</span></span>
+<span><span class="co">## 3      US   340        26.12418        26.02746</span></span>
+<span><span class="co">## 4      ES   202        26.00963        27.42062</span></span>
+<span><span class="co">## 5      IT   802        26.21531        24.99068</span></span>
+<span><span class="co">## 6      BG   541        29.31433        31.18788</span></span>
+<span><span class="co">## 7      US   325        26.12418        26.02746</span></span></code></pre>
+<p>If we prefer a finer resolution (e.g. county-level), we could change
+the <code>gid</code> argument to a higher number (indicating a finer
+scale, up to <code>2</code>):</p>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">areadata_gid2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_ad.html">fetch_ad</a></span><span class="op">(</span>metric<span class="op">=</span><span class="st">"temp"</span>, gid<span class="op">=</span><span class="fl">2</span>, use_cache<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">ad_extract_working_gid2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/assoc_ad.html">assoc_ad</a></span><span class="op">(</span><span class="va">lonlatdf</span>, <span class="va">areadata_gid2</span>,</span>
+<span>                                    targetdate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2021-08-04"</span><span class="op">)</span>, enddate<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2021-08-06"</span><span class="op">)</span>,</span>
+<span>                                    gid<span class="op">=</span><span class="fl">2</span>, lonlat_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Longitude"</span>, <span class="st">"Latitude"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">ad_extract_working_gid2</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Longitude"</span>, <span class="st">"Latitude"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##   Country count temp_2021.08.04 temp_2021.08.05</span></span>
+<span><span class="co">## 1      UK     6        16.35346        16.46636</span></span>
+<span><span class="co">## 2      DE    36        16.62339        18.94270</span></span>
+<span><span class="co">## 3      US   340        20.59405        20.87954</span></span>
+<span><span class="co">## 4      ES   202        29.42114        31.26401</span></span>
+<span><span class="co">## 5      IT   802        20.82837        23.16447</span></span>
+<span><span class="co">## 6      BG   541        25.01201        25.38486</span></span>
+<span><span class="co">## 7      US   325        23.69151        24.70063</span></span></code></pre>
+<p>We can see here that by using a finer spatial scale, the two entries
+from the US now have different associated temperatures.</p>
+</div>
+<div class="section level2">
+<h2 id="managing-the-areadata-cache">Managing the AREAdata cache<a class="anchor" aria-label="anchor" href="#managing-the-areadata-cache"></a>
+</h2>
+<p>Interacting with AREAdata requires the caching of a significant
+amount of data.</p>
+<p>This is generally managed by <code>ohvbd</code> itself, and in most
+cases you should not need to worry about it.</p>
+<p>However if you want to free up some space, use guaranteed new data,
+or see what data <code>ohvbd</code> has currently stored on your
+computer, you have a few options available to you.</p>
+<div class="section level3">
+<h3 id="refresh_cache-for-fetch_ad">
+<code>refresh_cache</code> for <code>fetch_ad()</code><a class="anchor" aria-label="anchor" href="#refresh_cache-for-fetch_ad"></a>
+</h3>
+<p>The <code><a href="../reference/fetch_ad.html">fetch_ad()</a></code> function has an argument called
+<code>refresh_cache</code>. If this is set to <code>TRUE</code>, this
+will force a refresh of the cache at download time (and suppress loading
+from said cache):</p>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">test_ad</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_ad.html">fetch_ad</a></span><span class="op">(</span><span class="st">"temp"</span>, gid <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">test_ad</span>, <span class="st">"writetime"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "2026-02-02 15:14:51 GMT"</span></span></code></pre>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">test_ad</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_ad.html">fetch_ad</a></span><span class="op">(</span><span class="st">"temp"</span>, gid <span class="op">=</span> <span class="fl">0</span>, refresh_cache <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">test_ad</span>, <span class="st">"writetime"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "2026-02-02 15:15:18 GMT"</span></span></code></pre>
+</div>
+<div class="section level3">
+<h3 id="cache-management-tools">Cache management tools<a class="anchor" aria-label="anchor" href="#cache-management-tools"></a>
+</h3>
+<p>Alternatively you can use the provided tools
+<code><a href="../reference/list_ohvbd_cache.html">list_ohvbd_cache()</a></code> and <code><a href="../reference/clean_ohvbd_cache.html">clean_ohvbd_cache()</a></code> to
+explore and delete files within the ohvbd cache:</p>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/list_ohvbd_cache.html">list_ohvbd_cache</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code>── Cached files ────────────────────────
+Cache location: ../cache/R/ohvbd
+
+── &lt;root&gt;: 0 files ──
+
+none
+
+── adcache: 3 files ──
+
+• relhumid-1.rda
+• temp-0.rda
+• temp-2.rda
+
+── gadmcache: 6 files ──
+
+• gadm-counties.gpkg
+• gadm-countries.gpkg
+• gadm-states.gpkg
+
+── vecdyn: 1 file ──
+
+• vd_meta_table.rds</code></pre>
+<p>You can filter this by subdirectory, so let’s just look at the data
+downloaded from AREAdata (in <code>adcache</code>):</p>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/list_ohvbd_cache.html">list_ohvbd_cache</a></span><span class="op">(</span>subdir <span class="op">=</span> <span class="st">"adcache"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>── Cached files ────────────────────────
+Cache location: ../cache/R/ohvbd
+
+── adcache: 3 files ────────────────────
+
+• relhumid-1.rda
+• temp-0.rda
+• temp-2.rda</code></pre>
+<p>If we wished to delete these files, we could simply run the
+following:</p>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/clean_ohvbd_cache.html">clean_ohvbd_cache</a></span><span class="op">(</span>subdir <span class="op">=</span> <span class="st">"adcache"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>── Cached files  ────────────────────────
+Cache location: ../cache/R/ohvbd
+
+── adcache: 3 files ──
+
+• relhumid-1.rda
+• temp-0.rda
+• temp-2.rda
+
+! This will permanently delete files from adcache
+ℹ Are you sure? [y/N]
+&gt;&gt; y
+
+ℹ Clearing files from ../cache/R/ohvbd/adcache
+✔ Removed 3 files</code></pre>
 <p><span style="opacity: 0.1;font-size: small;">Built in
-2.07005s</span></p>
+28.4432349s</span></p>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

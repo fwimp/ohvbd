@@ -16,8 +16,8 @@
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="One Health VBD Hub">
-<meta name="description" content="Interface with the One Health VBD Hub and related repositories directly.">
-<meta property="og:description" content="Interface with the One Health VBD Hub and related repositories directly.">
+<meta name="description" content="Interface with the One Health VBD (vector-borne disease) Hub and related repositories directly to find, download, and subset vector-borne disease data.">
+<meta property="og:description" content="Interface with the One Health VBD (vector-borne disease) Hub and related repositories directly to find, download, and subset vector-borne disease data.">
 <meta property="og:image" content="https://ohvbd.vbdhub.org/logo.svg">
 </head>
 <body>
@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="index.html">ohvbd</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.1.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -92,15 +92,18 @@
 <a href="https://vbdhub.org" class="external-link">vbdhub</a> (search only)</li>
 <li><a href="https://vectorbyte.crc.nd.edu/vectraits-explorer" class="external-link">VecTraits</a></li>
 <li><a href="https://vectorbyte.crc.nd.edu/vecdyn-datasets" class="external-link">VecDyn</a></li>
-<li><a href="https://www.gbif.org/" class="external-link">GBIF</a></li>
+<li><a href="https://www.gbif.org" class="external-link">GBIF</a></li>
 <li><a href="https://pearselab.github.io/areadata/" class="external-link">AreaData</a></li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of ohvbd from <a href="https://github.com/fwimp/ohvbd" class="external-link">GitHub</a> with:</p>
+<p>You can install the stable version of ohvbd from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ohvbd"</span><span class="op">)</span></span></code></pre></div>
+<p>You can alternatively install the development version of ohvbd from <a href="https://github.com/fwimp/ohvbd" class="external-link">GitHub</a> including any new or experimental features:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"fwimp/ohvbd"</span><span class="op">)</span></span></code></pre></div>
 <p>The vignettes are all available online, but if you would like to build them locally, add <code>build_vignettes = TRUE</code> into your <code>install_github()</code> command. However, we do not recommend doing this due to the number of extra R packages utilised in the vignettes.</p>
@@ -111,7 +114,7 @@
 <p><code>ohvbd</code> has been designed to make finding and retrieving data on disease vectors simple and straightforward.</p>
 <p>Typically it uses a “piped”-style approach to find, get, and filter data from the supported databases, however it aims to provide the data to you “as-is”, leaving further downstream analysis and filtering down to you.</p>
 <p>A basic pipeline for finding and retrieving data on <em>Ixodes ricinus</em> from the VecTraits database looks something like this:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/fwimp/ohvbd" class="external-link">ohvbd</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/search_hub.html">search_hub</a></span><span class="op">(</span><span class="st">"Ixodes ricinus"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -124,17 +127,136 @@
 </h2>
 <!-- These are auto-pulled from NEWS.md  -->
 <div class="section level3">
-<h3 id="ohvbd-061">ohvbd 0.6.1<a class="anchor" aria-label="anchor" href="#ohvbd-061"></a>
+<h3 id="ohvbd-100">ohvbd 1.0.0<a class="anchor" aria-label="anchor" href="#ohvbd-100"></a>
 </h3>
+<p><strong>Major API change</strong></p>
 <ul>
-<li>New <code><a href="reference/search_hub.html">search_hub()</a></code> function enables searching across multiple databases at once via <a href="https://vbdhub.org" class="external-link">vbdhub</a>.
+<li>
+<code>extract_</code> functions are now <code>glean_</code>.
 <ul>
-<li>This includes new functionality for specifying searches using spatial extent polygons and generally more intelligent search behaviour.</li>
+<li>This means that if <code>tidyverse</code> is loaded after <code>ohvbd</code>, there are no direct namespace collisions.</li>
 </ul>
 </li>
-<li>New function <code><a href="reference/generate_vt_template.html">generate_vt_template()</a></code> which quickly generates a VecTraits template for later upload.</li>
 </ul>
-<p>See <a href="https://fwimp.github.io/ohvbd/news/index.html" class="external-link">changelog</a> for patch notes for all versions.</p>
+<p>Full list of function name changes:</p>
+<ul>
+<li>
+<code><a href="reference/extract.html">extract()</a></code> -&gt; <code><a href="reference/glean.html">glean()</a></code>
+</li>
+<li>
+<code>extract_ad()</code> -&gt; <code><a href="reference/glean_ad.html">glean_ad()</a></code>
+</li>
+<li>
+<code>extract_gbif()</code> -&gt; <code><a href="reference/glean_gbif.html">glean_gbif()</a></code>
+</li>
+<li>
+<code>extract_vd()</code> -&gt; <code><a href="reference/glean_vd.html">glean_vd()</a></code>
+</li>
+<li>
+<code>extract_vt()</code> -&gt; <code><a href="reference/glean_vt.html">glean_vt()</a></code>
+</li>
+<li>
+<code>fetch_extract_vd_chunked()</code> -&gt; <code><a href="reference/fetch_glean_vd_chunked.html">fetch_glean_vd_chunked()</a></code>
+</li>
+<li>
+<code>fetch_extract_vt_chunked()</code> -&gt; <code><a href="reference/fetch_glean_vt_chunked.html">fetch_glean_vt_chunked()</a></code>
+</li>
+</ul>
+<p>New functions &amp; arguments:</p>
+<ul>
+<li>
+<code>ohvbd</code> now interfaces with GBIF for occurrence data.
+<ul>
+<li>New <code>*_gbif</code> functions (e.g. <code><a href="reference/fetch_gbif.html">fetch_gbif()</a></code>) allow for retrieving and extracting data from GBIF.</li>
+<li>A GBIF account and the <code>rgbif</code> package are required to retrieve data from GBIF.</li>
+<li>The account details must also be set up as shown in <a href="https://docs.ropensci.org/rgbif/articles/gbif_credentials.html" class="external-link">the rgbif documentation</a>.</li>
+</ul>
+</li>
+<li>New <code><a href="reference/tee.html">tee()</a></code> command allows one to extract data from the middle of a pipeline and save it to an environment.
+<ul>
+<li>This is definitely not only useful for <code>ohvbd</code> workflows, and can be used in any base R pipeline (<code>|&gt;</code>). It has not been tested in magrittr pipelines but should work as-is.</li>
+</ul>
+</li>
+<li>New <code><a href="reference/filter_db.html">filter_db()</a></code> command allows for filtering out of only one database’s results from hub searches.</li>
+<li>
+<code><a href="reference/check_db_status.html">check_db_status()</a></code> now returns (invisibly) whether all databases are up or not.</li>
+<li>New <code>fetch_citation()</code> and <code>fetch_citation_*</code> commands provide an interface to attempt to retrieve citations from a vectorbyte dataset.
+<ul>
+<li>This will (by default) possibly redownload parts or all of the data if the columns are not currently present.</li>
+</ul>
+</li>
+<li>New <code><a href="reference/force_db.html">force_db()</a></code> function enables one to force <code>ohvbd</code> to consider a particular object as having a particular provenance.</li>
+<li>New <code>simplify</code> argument to <code><a href="reference/search_hub.html">search_hub()</a></code> makes hub searches return an <code>ohvbd.ids</code> object if only one database was searched for. This behaviour is on by default.
+<ul>
+<li>To match this, <code><a href="reference/filter_db.html">filter_db()</a></code> will now transparently return <code>ohvbd.ids</code> objects if it gets them.</li>
+</ul>
+</li>
+<li>New <code>taxonomy</code> argument to <code><a href="reference/search_hub.html">search_hub()</a></code> allows for filtering searches by GBIF backbone IDs.</li>
+<li>New <code><a href="reference/match_species.html">match_species()</a></code> function allows for quick and flexible matching of species names to their GBIF backbone IDs.</li>
+<li>New <code>match_country()</code> function allows for matching of country names to WKT polygons via naturalearth.</li>
+<li>New <code><a href="reference/ohvbd_db.html">ohvbd_db()</a></code>, <code><a href="reference/has_db.html">has_db()</a></code>, and <code><a href="reference/is_from.html">is_from()</a></code> functions allow for quick testing of object provenance (according to <code>ohvbd</code>).</li>
+<li>New <code><a href="reference/get_default_ohvbd_cache.html">get_default_ohvbd_cache()</a></code> function allows for custom functions that interface with cached <code>ohvbd</code> data files.</li>
+<li>New <code><a href="reference/list_ohvbd_cache.html">list_ohvbd_cache()</a></code> and <code><a href="reference/clean_ohvbd_cache.html">clean_ohvbd_cache()</a></code> functions enable better interactive cache management.
+<ul>
+<li>As a result, <code><a href="reference/clean_ad_cache.html">clean_ad_cache()</a></code> has been removed as it is now unnecessary.</li>
+</ul>
+</li>
+<li>
+<code>search_x_smart()</code> functions can now take <code>"tags"</code> as a search field, enabling support for tagged datasets.</li>
+</ul>
+<p>Other:</p>
+<ul>
+<li>Entire code base is now continuously formatted using Air v0.7.1.</li>
+<li>Examples are no longer wrapped in <code>\dontrun{}</code> so they should be runnable from an installed version of the package.</li>
+<li>A good chunk of the functional logic of <code>ohvbd</code> is now covered with unit tests (using the <code>vcr</code> package).</li>
+<li>
+<code><a href="reference/fetch_vd.html">fetch_vd()</a></code> no longer tries to retrieve ids with no pages of data.</li>
+<li>Functions that interface with vectorbyte databases no longer recommend using <code><a href="reference/set_ohvbd_compat.html">set_ohvbd_compat()</a></code> as <em>unexpected</em> SSL errors <strong>should</strong> break pipelines by default.
+<ul>
+<li>These errors are no longer <em>expected</em> to occur when interfacing with vectorbyte.</li>
+</ul>
+</li>
+<li>Running <code><a href="reference/fetch.html">fetch()</a></code> on an <code>ohvbd.hub.search</code> or <code><a href="reference/glean.html">glean()</a></code> on an <code>ohvbd.ids</code> object now provides a hint that you may have forgotten something.
+<ul>
+<li>Occasionally users would use forget a <code><a href="reference/fetch.html">fetch()</a></code> command and run <code>search_hub() |&gt; glean()</code> which didn’t previously give an interpretable error.</li>
+</ul>
+</li>
+<li>Vignettes now use <code>vcr</code> to massively reduce their build time. This should only matter to developers of <code>ohvbd</code>, or users who download from github and build the vignettes themselves.</li>
+<li>
+<code><a href="reference/ohvbd.ids.html">ohvbd.ids()</a></code> now warns you and fixes the problem if you provide ids with duplicate values.</li>
+<li>
+<code><a href="reference/glean_vt.html">glean_vt()</a></code> and <code><a href="reference/glean_vd.html">glean_vd()</a></code> now force the inclusion of the dataset ID when filtering columns (using the <code>cols</code> argument).
+<ul>
+<li>This is intended to encourage you to preserve at least one means of retrieving citation data later.</li>
+</ul>
+</li>
+<li>WKT parsing and formatting is now significantly more robust.</li>
+<li>Cached AREAData now includes the cache timestamp as an attribute rather than a separate variable in the cache file.</li>
+<li>
+<code><a href="reference/glean_ad.html">glean_ad()</a></code> now correctly returns a matrix even when there is only 1 row or column.</li>
+<li>gadm spatial files are now cached as GeoPackage rather than <a href="http://switchfromshapefile.org/" class="external-link">shapefiles</a>, leading to a &gt;50% speedup in loading! (Thanks to <a href="https://bsky.app/profile/josiah.rs" class="external-link">@josiah.rs</a> on bluesky for the suggestion!)</li>
+<li>
+<code><a href="reference/fetch_vd_counts.html">fetch_vd_counts()</a></code> is now significantly faster, more robust, and temporarily caches data.
+<ul>
+<li>You will see particular improvements if you are trying to retrieve more than about 10 ids in one go or if you are repeatedly running the same download code in the same day.</li>
+<li>This speedup also applies to <code><a href="reference/fetch_vd.html">fetch_vd()</a></code> under the hood, particularly if you are running it multiple times in a day.</li>
+</ul>
+</li>
+<li>Explicit term checking (such as in <code><a href="reference/fetch_ad.html">fetch_ad()</a></code> for metrics and <code><a href="reference/search_vt_smart.html">search_vt_smart()</a></code> for operators and fields) is now fuzzy, allowing for a small amount of deviation from the actual term name.</li>
+<li>
+<code><a href="reference/assoc_ad.html">assoc_ad()</a></code> now tries to guess LatLong column names if none (or the wrong ones) are provided.</li>
+<li>Errors in internal functions now make it more clear which user-facing functions they originate from.</li>
+<li>Multiple functions now default to <code>NULL</code> rather than <code>NA</code> for default missing values (except date arguments to AD-related functions, where NA is more reasonable in the grand scheme).</li>
+<li>
+<code><a href="reference/fetch_ad.html">fetch_ad()</a></code> now caches and tries to read from cache by default.
+<ul>
+<li>Generally speaking unless exceedingly up-to-date data is required, this will be the best for most people.</li>
+<li>If you <em>do</em> require guaranteed new data, it’s worth setting <code>refresh_cache = TRUE</code> or <code>use_cache = FALSE</code> (depending on if you want to replace your existing cache or not).</li>
+</ul>
+</li>
+<li>All downloaders that can potentially cache data also attach the download time if not loading from cache.</li>
+</ul>
+<p>See <a href="https://ohvbd.vbdhub.org/news/index.html">changelog</a> for patch notes for all versions.</p>
 </div>
 </div>
 </div>
@@ -173,7 +295,7 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/" class="external-link"><img src="https://img.shields.io/badge/R%3E%3D-4.1.0-6666ff.svg?style=for-the-badge" alt="R"></a></li>
-<li><a href="commits/master"><img src="https://img.shields.io/badge/Package%20version-0.6.1.9000-orange.svg?style=for-the-badge" alt="packageversion"></a></li>
+<li><a href="https://github.com/fwimp/ohvbd/commits/master/" class="external-link"><img src="https://img.shields.io/badge/Package%20version-1.0.0-orange.svg?style=for-the-badge" alt="packageversion"></a></li>
 <li><a href="https://www.gnu.org/licenses/gpl-3.0.en.html" class="external-link"><img src="https://img.shields.io/badge/license-GPL--3-blue.svg?style=for-the-badge" alt="license"></a></li>
 <li><a href="https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/fwimp/ohvbd/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>

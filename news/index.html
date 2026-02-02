@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ohvbd</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.1.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,7 +44,7 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="development version" id="ohvbd-development-version">ohvbd (development version)<a class="anchor" aria-label="anchor" href="#ohvbd-development-version"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.0.0" id="ohvbd-100">ohvbd 1.0.0<a class="anchor" aria-label="anchor" href="#ohvbd-100"></a></h2>
 <p><strong>Major API change</strong></p>
 <ul><li>
 <code>extract_</code> functions are now <code>glean_</code>.
@@ -135,6 +135,13 @@
 <li>
 <code><a href="../reference/assoc_ad.html">assoc_ad()</a></code> now tries to guess LatLong column names if none (or the wrong ones) are provided.</li>
 <li>Errors in internal functions now make it more clear which user-facing functions they originate from.</li>
+<li>Multiple functions now default to <code>NULL</code> rather than <code>NA</code> for default missing values (except date arguments to AD-related functions, where NA is more reasonable in the grand scheme).</li>
+<li>
+<code><a href="../reference/fetch_ad.html">fetch_ad()</a></code> now caches and tries to read from cache by default.
+<ul><li>Generally speaking unless exceedingly up-to-date data is required, this will be the best for most people.</li>
+<li>If you <em>do</em> require guaranteed new data, it’s worth setting <code>refresh_cache = TRUE</code> or <code>use_cache = FALSE</code> (depending on if you want to replace your existing cache or not).</li>
+</ul></li>
+<li>All downloaders that can potentially cache data also attach the download time if not loading from cache.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.6.1" id="ohvbd-061">ohvbd 0.6.1<a class="anchor" aria-label="anchor" href="#ohvbd-061"></a></h2>

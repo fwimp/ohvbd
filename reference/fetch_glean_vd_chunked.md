@@ -17,7 +17,7 @@ own chunker instead.
 fetch_glean_vd_chunked(
   ids,
   chunksize = 20,
-  cols = NA,
+  cols = NULL,
   returnunique = FALSE,
   rate = 5,
   connections = 2,

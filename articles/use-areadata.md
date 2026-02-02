@@ -36,12 +36,12 @@ summary(ad_df)
 
     ## <ohvbd.ad.matrix>
     ## Areadata matrix for temp at gid level 0 .
-    ## Cached: TRUE 
-    ## Dates: 2020-01-01 -> 2025-11-30 (2161)
+    ## Cached: FALSE 
+    ## Dates: 2020-01-01 -> 2025-12-31 (2192)
     ## Locations: 256
 
 So that is quite a lot of data! Way too much to print here, given that
-it’s 553216 entries, however if you want to print all the data rather
+it’s 561152 entries, however if you want to print all the data rather
 than just a summary, you can use the print command:
 
 ``` r
@@ -151,7 +151,7 @@ ad_df |> glean_ad(targetdate = "2020-01-01", places = "Angola")
 
     ## <ohvbd.ad.matrix>
     ## Areadata matrix for temp at gid level 0 .
-    ## Cached: TRUE 
+    ## Cached: FALSE 
     ## Dates: 2020-01-01 -> 2020-01-01 (1)
     ## Locations: 1 
     ## Data:
@@ -162,9 +162,11 @@ ad_df |> glean_ad(targetdate = "2020-01-01", places = "Angola")
     ## attr(,"gid")
     ## [1] 0
     ## attr(,"cached")
-    ## [1] TRUE
+    ## [1] FALSE
     ## attr(,"db")
     ## [1] "ad"
+    ## attr(,"writetime")
+    ## [1] "2026-02-02 15:14:51 GMT"
     ## attr(,"class")
     ## [1] "ohvbd.ad.matrix" "matrix"          "array"
 
@@ -196,7 +198,7 @@ ad_df |> glean_ad(
 
     ## <ohvbd.ad.matrix>
     ## Areadata matrix for temp at gid level 0 .
-    ## Cached: TRUE 
+    ## Cached: FALSE 
     ## Dates: 2020-01-01 -> 2020-01-05 (3)
     ## Locations: 1 
     ## Data:
@@ -207,9 +209,11 @@ ad_df |> glean_ad(
     ## attr(,"gid")
     ## [1] 0
     ## attr(,"cached")
-    ## [1] TRUE
+    ## [1] FALSE
     ## attr(,"db")
     ## [1] "ad"
+    ## attr(,"writetime")
+    ## [1] "2026-02-02 15:14:51 GMT"
     ## attr(,"class")
     ## [1] "ohvbd.ad.matrix" "matrix"          "array"
 
@@ -219,7 +223,7 @@ ad_df |> glean_ad(targetdate = "2020-01", places = "Angola")
 
     ## <ohvbd.ad.matrix>
     ## Areadata matrix for temp at gid level 0 .
-    ## Cached: TRUE 
+    ## Cached: FALSE 
     ## Dates: 2020-01-01 -> 2020-01-31 (31)
     ## Locations: 1 
     ## Data:
@@ -232,9 +236,11 @@ ad_df |> glean_ad(targetdate = "2020-01", places = "Angola")
     ## attr(,"gid")
     ## [1] 0
     ## attr(,"cached")
-    ## [1] TRUE
+    ## [1] FALSE
     ## attr(,"db")
     ## [1] "ad"
+    ## attr(,"writetime")
+    ## [1] "2026-02-02 15:14:51 GMT"
     ## attr(,"class")
     ## [1] "ohvbd.ad.matrix" "matrix"          "array"
 
@@ -261,7 +267,7 @@ ad_df |> glean_ad(
 
     ## <ohvbd.ad.matrix>
     ## Areadata matrix for temp at gid level 0 .
-    ## Cached: TRUE 
+    ## Cached: FALSE 
     ## Dates: 2020-01-01 -> 2020-01-03 (3)
     ## Locations: 1 
     ## Data:
@@ -272,9 +278,11 @@ ad_df |> glean_ad(
     ## attr(,"gid")
     ## [1] 0
     ## attr(,"cached")
-    ## [1] TRUE
+    ## [1] FALSE
     ## attr(,"db")
     ## [1] "ad"
+    ## attr(,"writetime")
+    ## [1] "2026-02-02 15:14:51 GMT"
     ## attr(,"class")
     ## [1] "ohvbd.ad.matrix" "matrix"          "array"
 
@@ -292,7 +300,7 @@ ad_df |> glean_ad(
 
     ## <ohvbd.ad.matrix>
     ## Areadata matrix for temp at gid level 0 .
-    ## Cached: TRUE 
+    ## Cached: FALSE 
     ## Dates: 2020-01-01 -> 2020-01-01 (1)
     ## Locations: 3 
     ## Data:
@@ -305,9 +313,11 @@ ad_df |> glean_ad(
     ## attr(,"gid")
     ## [1] 0
     ## attr(,"cached")
-    ## [1] TRUE
+    ## [1] FALSE
     ## attr(,"db")
     ## [1] "ad"
+    ## attr(,"writetime")
+    ## [1] "2026-02-02 15:14:51 GMT"
     ## attr(,"class")
     ## [1] "ohvbd.ad.matrix" "matrix"          "array"
 
@@ -324,7 +334,7 @@ ad_df |> glean_ad(
 
     ## <ohvbd.ad.matrix>
     ## Areadata matrix for temp at gid level 0 .
-    ## Cached: TRUE 
+    ## Cached: FALSE 
     ## Dates: 2020-01-01 -> 2020-01-03 (3)
     ## Locations: 3 
     ## Data:
@@ -337,9 +347,11 @@ ad_df |> glean_ad(
     ## attr(,"gid")
     ## [1] 0
     ## attr(,"cached")
-    ## [1] TRUE
+    ## [1] FALSE
     ## attr(,"db")
     ## [1] "ad"
+    ## attr(,"writetime")
+    ## [1] "2026-02-02 15:14:51 GMT"
     ## attr(,"class")
     ## [1] "ohvbd.ad.matrix" "matrix"          "array"
 
@@ -359,7 +371,7 @@ ad_df |> glean_ad(
 
     ## <ohvbd.ad.matrix>
     ## Areadata matrix for temp at gid level 0 .
-    ## Cached: TRUE 
+    ## Cached: FALSE 
     ## Dates: 2023-12-30 -> 2024-01-01 (3)
     ## Locations: 2 
     ## Data:
@@ -371,12 +383,204 @@ ad_df |> glean_ad(
     ## attr(,"gid")
     ## [1] 0
     ## attr(,"cached")
-    ## [1] TRUE
+    ## [1] FALSE
     ## attr(,"db")
     ## [1] "ad"
+    ## attr(,"writetime")
+    ## [1] "2026-02-02 15:14:51 GMT"
     ## attr(,"class")
     ## [1] "ohvbd.ad.matrix" "matrix"          "array"
 
-## To be completed
+## Associating AREAData climatic variables with other data
 
-Built in 2.07005s
+On top of providing a download interface for AREAData, `ohvbd` provides
+tools for easing the process of associating your own data with data from
+AREAData.
+
+This is performed through the use of the
+[`assoc_ad()`](https://ohvbd.vbdhub.org/reference/assoc_ad.md) function.
+
+For example, let’s imagine we have some data and their associate
+locations:
+
+``` r
+  lonlatdf <- data.frame(
+    Country = c("UK", "DE", "US", "ES", "IT", "BG", "US"),
+    Latitude = c(
+      53.813727033336384, 50.94133730102917, 41.502614374776414, 37.09584576240546,
+      46.190816816324634, 43.40408987260468, 34.02921305111613
+    ),
+    Longitude = c(
+      -1.5631510640531983, 6.95792487354786, -73.96228644647785,
+      -2.0967211553577694, 11.135228310071971, 28.148385835241964,
+      -84.36091597146886
+    ),
+    count = c(6, 36, 340, 202, 802, 541, 325)
+  )
+
+lonlatdf
+```
+
+    ##   Country Latitude  Longitude count
+    ## 1      UK 53.81373  -1.563151     6
+    ## 2      DE 50.94134   6.957925    36
+    ## 3      US 41.50261 -73.962286   340
+    ## 4      ES 37.09585  -2.096721   202
+    ## 5      IT 46.19082  11.135228   802
+    ## 6      BG 43.40409  28.148386   541
+    ## 7      US 34.02921 -84.360916   325
+
+If we know that we collected samples between the 4th and 5th of August
+2021, we can associate the temperature values from these regions on
+these days at a given spatial scale.
+
+Let’s do this at the country scale:
+
+``` r
+areadata <- fetch_ad(metric="temp", gid=0, use_cache=TRUE)
+ad_extract_working <- assoc_ad(lonlatdf, areadata,
+                                    targetdate = c("2021-08-04"), enddate=c("2021-08-06"),
+                                    gid=0, lonlat_names = c("Longitude", "Latitude"))
+# Suppress lonlat just to make the output easier to read
+ad_extract_working |> dplyr::select(!c("Longitude", "Latitude"))
+```
+
+    ##   Country count temp_2021.08.04 temp_2021.08.05
+    ## 1      UK     6        15.98993        16.09847
+    ## 2      DE    36        17.17353        18.25541
+    ## 3      US   340        26.12418        26.02746
+    ## 4      ES   202        26.00963        27.42062
+    ## 5      IT   802        26.21531        24.99068
+    ## 6      BG   541        29.31433        31.18788
+    ## 7      US   325        26.12418        26.02746
+
+If we prefer a finer resolution (e.g. county-level), we could change the
+`gid` argument to a higher number (indicating a finer scale, up to `2`):
+
+``` r
+areadata_gid2 <- fetch_ad(metric="temp", gid=2, use_cache=TRUE)
+ad_extract_working_gid2 <- assoc_ad(lonlatdf, areadata_gid2,
+                                    targetdate = c("2021-08-04"), enddate=c("2021-08-06"),
+                                    gid=2, lonlat_names = c("Longitude", "Latitude"))
+ad_extract_working_gid2 |> dplyr::select(!c("Longitude", "Latitude"))
+```
+
+    ##   Country count temp_2021.08.04 temp_2021.08.05
+    ## 1      UK     6        16.35346        16.46636
+    ## 2      DE    36        16.62339        18.94270
+    ## 3      US   340        20.59405        20.87954
+    ## 4      ES   202        29.42114        31.26401
+    ## 5      IT   802        20.82837        23.16447
+    ## 6      BG   541        25.01201        25.38486
+    ## 7      US   325        23.69151        24.70063
+
+We can see here that by using a finer spatial scale, the two entries
+from the US now have different associated temperatures.
+
+## Managing the AREAdata cache
+
+Interacting with AREAdata requires the caching of a significant amount
+of data.
+
+This is generally managed by `ohvbd` itself, and in most cases you
+should not need to worry about it.
+
+However if you want to free up some space, use guaranteed new data, or
+see what data `ohvbd` has currently stored on your computer, you have a
+few options available to you.
+
+### `refresh_cache` for `fetch_ad()`
+
+The [`fetch_ad()`](https://ohvbd.vbdhub.org/reference/fetch_ad.md)
+function has an argument called `refresh_cache`. If this is set to
+`TRUE`, this will force a refresh of the cache at download time (and
+suppress loading from said cache):
+
+``` r
+test_ad <- fetch_ad("temp", gid = 0)
+attr(test_ad, "writetime")
+```
+
+    ## [1] "2026-02-02 15:14:51 GMT"
+
+``` r
+test_ad <- fetch_ad("temp", gid = 0, refresh_cache = TRUE)
+attr(test_ad, "writetime")
+```
+
+    ## [1] "2026-02-02 15:15:18 GMT"
+
+### Cache management tools
+
+Alternatively you can use the provided tools
+[`list_ohvbd_cache()`](https://ohvbd.vbdhub.org/reference/list_ohvbd_cache.md)
+and
+[`clean_ohvbd_cache()`](https://ohvbd.vbdhub.org/reference/clean_ohvbd_cache.md)
+to explore and delete files within the ohvbd cache:
+
+``` r
+list_ohvbd_cache()
+```
+
+    ── Cached files ────────────────────────
+    Cache location: ../cache/R/ohvbd
+
+    ── <root>: 0 files ──
+
+    none
+
+    ── adcache: 3 files ──
+
+    • relhumid-1.rda
+    • temp-0.rda
+    • temp-2.rda
+
+    ── gadmcache: 6 files ──
+
+    • gadm-counties.gpkg
+    • gadm-countries.gpkg
+    • gadm-states.gpkg
+
+    ── vecdyn: 1 file ──
+
+    • vd_meta_table.rds
+
+You can filter this by subdirectory, so let’s just look at the data
+downloaded from AREAdata (in `adcache`):
+
+``` r
+list_ohvbd_cache(subdir = "adcache")
+```
+
+    ── Cached files ────────────────────────
+    Cache location: ../cache/R/ohvbd
+
+    ── adcache: 3 files ────────────────────
+
+    • relhumid-1.rda
+    • temp-0.rda
+    • temp-2.rda
+
+If we wished to delete these files, we could simply run the following:
+
+``` r
+clean_ohvbd_cache(subdir = "adcache")
+```
+
+    ── Cached files  ────────────────────────
+    Cache location: ../cache/R/ohvbd
+
+    ── adcache: 3 files ──
+
+    • relhumid-1.rda
+    • temp-0.rda
+    • temp-2.rda
+
+    ! This will permanently delete files from adcache
+    ℹ Are you sure? [y/N]
+    >> y
+
+    ℹ Clearing files from ../cache/R/ohvbd/adcache
+    ✔ Removed 3 files
+
+Built in 28.4432349s

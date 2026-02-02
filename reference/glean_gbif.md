@@ -7,7 +7,7 @@ filter columns of interest, and find unique rows if required.
 ## Usage
 
 ``` r
-glean_gbif(res, cols = NA, returnunique = FALSE)
+glean_gbif(res, cols = NULL, returnunique = FALSE)
 ```
 
 ## Arguments

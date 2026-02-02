@@ -17,7 +17,7 @@ format_time_overlap_bar(
   targets,
   targetrange = FALSE,
   twobar = FALSE,
-  width = NA,
+  width = NULL,
   style = list()
 )
 ```
