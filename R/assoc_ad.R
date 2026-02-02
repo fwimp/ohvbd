@@ -72,8 +72,6 @@ assoc_ad <- function(
 
   # TODO: Rework this to use assoc_gadm under the hood.
 
-  # TODO: Implement way of either looking up latlon_names in a table, or inferring from attr
-
   if (length(lonlat_names) != 2) {
     cli::cli_abort(c(
         "x" = "Longitude and Latitude column names must be provided as vector of length 2!",

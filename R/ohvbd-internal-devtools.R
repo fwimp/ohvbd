@@ -334,13 +334,10 @@
   }
   called_funcs <- func_calls$func[which(func_calls$caller == name)]
   new_called_funcs <- called_funcs
-  while (TRUE) {
+  while (length(new_called_funcs) >= 1) {
     new_called_funcs <- func_calls$func[which(func_calls$caller %in% new_called_funcs)]
     new_called_funcs <- setdiff(new_called_funcs, called_funcs)
     called_funcs <- union(new_called_funcs, called_funcs)
-    if (length(new_called_funcs) < 1) {
-      break
-    }
   }
   pkgs <- func_calls$package[match(called_funcs, func_calls$func)]
   outdf <- data.frame(package = pkgs, func = called_funcs)
