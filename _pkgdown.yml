@@ -27,6 +27,10 @@ reference:
   desc: Convenient generalised functions for working with a range of data.
 - contents:
   - has_concept("convenience")
+- title: Deprecated
+  desc: Functions that are deprecated and will be removed in future versions.
+- contents:
+  - has_concept("deprecated")
 - title: Other
   desc: Miscellaneous functions.
 - contents:
