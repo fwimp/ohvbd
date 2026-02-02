@@ -339,7 +339,7 @@ gbif_data <- search_hub("Ixodes", "gbif") |>
 ```
 
 Now, given that
-\`[`fetch_gbif()`](https://ohvbd.vbdhub.org/reference/fetch_gbif.md)
+[`fetch_gbif()`](https://ohvbd.vbdhub.org/reference/fetch_gbif.md)
 returns a list, depending on the number of datasets returned we have
 multiple options on how to proceed.
 
