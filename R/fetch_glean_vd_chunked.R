@@ -51,7 +51,7 @@ fetch_glean_vd_chunked <- function(
         glean_vd(cols = cols, returnunique = returnunique)
     })
 
-  out_df <- suppressWarnings(rbindlist(out_list, fill = TRUE))
+  out_df <- suppressWarnings(data.table::rbindlist(out_list, fill = TRUE))
 
   out_final <- as.data.frame(out_df)
   out_final <- new_ohvbd.data.frame(df = out_final, db = "vd")

@@ -76,7 +76,8 @@ new_ohvbd.ad.matrix <- function(
   metric = NULL,
   gid = NULL,
   cached = NULL,
-  db = NULL
+  db = NULL,
+  writetime = NULL
 ) {
   if (is.null(attr(m, "metric"))) {
     stopifnot(is.character(metric))
@@ -93,6 +94,10 @@ new_ohvbd.ad.matrix <- function(
   if (is.null(attr(m, "db"))) {
     stopifnot(is.character(db))
     attr(m, "db") <- db
+  }
+  if (is.null(attr(m, "writetime"))) {
+    stopifnot(lubridate::is.POSIXct(writetime))
+    attr(m, "writetime") <- writetime
   }
   structure(m, class = c("ohvbd.ad.matrix", class(m)))
 }

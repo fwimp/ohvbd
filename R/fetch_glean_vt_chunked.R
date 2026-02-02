@@ -51,7 +51,7 @@ fetch_glean_vt_chunked <- function(
         glean_vt(cols = cols, returnunique = returnunique)
     })
 
-  out_df <- suppressWarnings(rbindlist(out_list))
+  out_df <- suppressWarnings(data.table::rbindlist(out_list))
 
   out_final <- as.data.frame(out_df)
   out_final <- new_ohvbd.data.frame(df = out_final, db = "vt")

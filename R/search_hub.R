@@ -200,7 +200,7 @@ search_hub <- function(
 #' search_hub("Ixodes ricinus") |>
 #'   filter_db("vt") |>
 #'   fetch() |>
-#'   extract()
+#'   glean()
 #'
 #' @concept hub
 #'

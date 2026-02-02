@@ -29,7 +29,7 @@ write_ad_cache <- function(
   # Log that this is a cached version of the file.
   attr(d, "cached") <- TRUE
 
-  # Log the write time of this cached object
+  # Adjust the write time of this cached object to match the cache time.
   attr(d, "writetime") <- lubridate::now()
 
   # Default cache if path is not defined

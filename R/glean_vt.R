@@ -41,7 +41,7 @@ glean_vt <- function(res, cols = NULL, returnunique = FALSE) {
 
   # Parse each request in the list
   suppressWarnings({
-    out_list <- lapply(out_data, rbindlist)
+    out_list <- lapply(out_data, data.table::rbindlist)
   })
 
   if (!any(is.null(cols))) {
@@ -53,7 +53,7 @@ glean_vt <- function(res, cols = NULL, returnunique = FALSE) {
     out_list <- lapply(out_list, select, any_of(cols))
   }
   # Finally explode the list into a df
-  out_df <- suppressWarnings(rbindlist(out_list))
+  out_df <- suppressWarnings(data.table::rbindlist(out_list))
 
   if (returnunique) {
     out_df <- unique(out_df)

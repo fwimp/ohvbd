@@ -196,7 +196,153 @@ ad_df |> glean_ad(
 )
 ```
 
-## To be completed
+## Associating AREAData climatic variables with other data
+
+On top of providing a download interface for AREAData, `ohvbd` provides tools for easing the process of associating your own data with data from AREAData.
+
+This is performed through the use of the `assoc_ad()` function.
+
+For example, let's imagine we have some data and their associate locations:
+
+```{r}
+  lonlatdf <- data.frame(
+    Country = c("UK", "DE", "US", "ES", "IT", "BG", "US"),
+    Latitude = c(
+      53.813727033336384, 50.94133730102917, 41.502614374776414, 37.09584576240546,
+      46.190816816324634, 43.40408987260468, 34.02921305111613
+    ),
+    Longitude = c(
+      -1.5631510640531983, 6.95792487354786, -73.96228644647785,
+      -2.0967211553577694, 11.135228310071971, 28.148385835241964,
+      -84.36091597146886
+    ),
+    count = c(6, 36, 340, 202, 802, 541, 325)
+  )
+
+lonlatdf
+```
+
+If we know that we collected samples between the 4th and 5th of August 2021, we can associate the temperature values from these regions on these days at a given spatial scale.
+
+Let's do this at the country scale:
+
+```{r}
+areadata <- fetch_ad(metric="temp", gid=0, use_cache=TRUE)
+ad_extract_working <- assoc_ad(lonlatdf, areadata,
+                                    targetdate = c("2021-08-04"), enddate=c("2021-08-06"),
+                                    gid=0, lonlat_names = c("Longitude", "Latitude"))
+# Suppress lonlat just to make the output easier to read
+ad_extract_working |> dplyr::select(!c("Longitude", "Latitude"))
+```
+
+If we prefer a finer resolution (e.g. county-level), we could change the `gid` argument to a higher number (indicating a finer scale, up to `2`):
+
+```{r}
+areadata_gid2 <- fetch_ad(metric="temp", gid=2, use_cache=TRUE)
+ad_extract_working_gid2 <- assoc_ad(lonlatdf, areadata_gid2,
+                                    targetdate = c("2021-08-04"), enddate=c("2021-08-06"),
+                                    gid=2, lonlat_names = c("Longitude", "Latitude"))
+ad_extract_working_gid2 |> dplyr::select(!c("Longitude", "Latitude"))
+```
+
+We can see here that by using a finer spatial scale, the two entries from the US now have different associated temperatures.
+
+## Managing the AREAdata cache
+
+Interacting with AREAdata requires the caching of a significant amount of data.
+
+This is generally managed by `ohvbd` itself, and in most cases you should not need to worry about it.
+
+However if you want to free up some space, use guaranteed new data, or see what data `ohvbd` has currently stored on your computer, you have a few options available to you.
+
+### `refresh_cache` for `fetch_ad()`
+
+The `fetch_ad()` function has an argument called `refresh_cache`. If this is set to `TRUE`, this will force a refresh of the cache at download time (and suppress loading from said cache):
+
+```{r}
+test_ad <- fetch_ad("temp", gid = 0)
+attr(test_ad, "writetime")
+```
+
+```{r}
+test_ad <- fetch_ad("temp", gid = 0, refresh_cache = TRUE)
+attr(test_ad, "writetime")
+```
+
+### Cache management tools
+
+Alternatively you can use the provided tools `list_ohvbd_cache()` and `clean_ohvbd_cache()` to explore and delete files within the ohvbd cache:
+
+```{r eval=FALSE, echo=TRUE}
+list_ohvbd_cache()
+```
+
+```
+── Cached files ────────────────────────
+Cache location: ../cache/R/ohvbd
+
+── <root>: 0 files ──
+
+none
+
+── adcache: 3 files ──
+
+• relhumid-1.rda
+• temp-0.rda
+• temp-2.rda
+
+── gadmcache: 6 files ──
+
+• gadm-counties.gpkg
+• gadm-countries.gpkg
+• gadm-states.gpkg
+
+── vecdyn: 1 file ──
+
+• vd_meta_table.rds
+```
+
+You can filter this by subdirectory, so let's just look at the data downloaded from AREAdata (in `adcache`):
+
+```{r eval=FALSE, echo=TRUE}
+list_ohvbd_cache(subdir = "adcache")
+```
+
+```
+── Cached files ────────────────────────
+Cache location: ../cache/R/ohvbd
+
+── adcache: 3 files ────────────────────
+
+• relhumid-1.rda
+• temp-0.rda
+• temp-2.rda
+```
+
+If we wished to delete these files, we could simply run the following:
+
+```{r eval=FALSE, echo=TRUE}
+clean_ohvbd_cache(subdir = "adcache")
+```
+
+```
+── Cached files  ────────────────────────
+Cache location: ../cache/R/ohvbd
+
+── adcache: 3 files ──
+
+• relhumid-1.rda
+• temp-0.rda
+• temp-2.rda
+
+! This will permanently delete files from adcache
+ℹ Are you sure? [y/N]
+>> y
+
+ℹ Clearing files from ../cache/R/ohvbd/adcache
+✔ Removed 3 files
+```
+
 ```{r tot_time, include=FALSE}
 tot_time <- lubridate::as.duration(lubridate::now() - runstart)
 ```

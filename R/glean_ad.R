@@ -276,7 +276,8 @@ glean_ad <- function(
       metric = metric,
       gid = gid,
       cached = attr(ad_matrix, "cached"),
-      db = "ad"
+      db = "ad",
+      writetime = attr(ad_matrix, "writetime")
     )
   } else {
     # Should never happen now
@@ -288,6 +289,7 @@ glean_ad <- function(
     attr(outmat, "cached") <- attr(ad_matrix, "cached")
     attr(outmat, "metric") <- metric
     attr(outmat, "gid") <- gid
+    attr(outmat, "writetime") <- attr(ad_matrix, "writetime")
   }
   return(outmat)
 }

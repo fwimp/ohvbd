@@ -33,7 +33,7 @@ glean_gbif <- function(res, cols = NULL, returnunique = FALSE) {
 
   # Extract data and put together as one df
   out_data <- lapply(res, rgbif::occ_download_import)
-  out_df <- rbindlist(out_data)
+  out_df <- data.table::rbindlist(out_data)
 
   if (!any(is.null(cols))) {
     # Filter cols if required

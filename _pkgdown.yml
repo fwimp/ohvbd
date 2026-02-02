@@ -34,7 +34,7 @@ reference:
 - title: Other
   desc: Miscellaneous functions.
 - contents:
-  - lacks_concepts(c("hub", "vectraits", "vecdyn", "gbif", "areadata", "basereq", "convenience"))
+  - lacks_concepts(c("hub", "vectraits", "vecdyn", "gbif", "areadata", "basereq", "convenience", "deprecated"))
 - subtitle: Base requests
   desc: Functions for modifying the basic targets of data API requests
 - contents:

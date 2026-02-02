@@ -79,7 +79,6 @@
 "_PACKAGE"
 
 ## usethis namespace: start
-#' @importFrom data.table rbindlist
 #' @importFrom dplyr all_of
 #' @importFrom dplyr any_of
 #' @importFrom dplyr any_vars
@@ -118,8 +117,6 @@
 #' @importFrom rlang .data
 #' @importFrom rlang is_bool
 #' @importFrom stats na.omit
-#' @importFrom terra extract
-#' @importFrom terra vect
 #' @importFrom tibble rownames_to_column
 #' @importFrom utils head
 #' @importFrom utils tail

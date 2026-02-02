@@ -37,7 +37,8 @@ test_that("All S3 print/summary methods create output", {
     gid = 2,
     metric = "temp",
     cached = TRUE,
-    db = "vt"
+    db = "vt",
+    writetime = lubridate::now()
   )))
   expect_output(print(new_ohvbd.hub.search(
     list(list(

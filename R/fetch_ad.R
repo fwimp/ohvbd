@@ -33,7 +33,7 @@
 fetch_ad <- function(
   metric = "temp",
   gid = 0,
-  use_cache = FALSE,
+  use_cache = TRUE,
   cache_location = NULL,
   refresh_cache = FALSE,
   timeout = 240,
@@ -209,13 +209,14 @@ fetch_ad <- function(
       ))
     }
 
-    # Add gid attribute to matrix to allow easier parsing later down the line
+    # Add attributes to matrix to allow easier parsing later down the line
     outmat <- new_ohvbd.ad.matrix(
       m = outmat,
       metric = final_metric,
       gid = gid,
       cached = FALSE,
-      db = "ad"
+      db = "ad",
+      writetime = lubridate::now()
     )
   }
 

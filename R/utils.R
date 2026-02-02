@@ -213,7 +213,7 @@ vd_extraction_helper <- function(resp, cols = NULL) {
   df_out <- tryCatch(
     {
       resp_parse <- resp |> resp_body_json()
-      df <- suppressWarnings(rbindlist(resp_parse$results))
+      df <- suppressWarnings(data.table::rbindlist(resp_parse$results))
       df2 <- as.data.frame(resp_parse$consistent_data)
 
       # Handle missing data in results (or consistent data, not that it's missing often)
