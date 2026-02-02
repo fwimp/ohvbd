@@ -13,3 +13,4 @@ pkg_dev_notes.md
 ^docs$
 ^pkgdown$
 R/ohvbd-internal-devtools.R
+^cran-comments\.md$

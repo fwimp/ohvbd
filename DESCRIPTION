@@ -1,10 +1,10 @@
 Package: ohvbd
 Title: One Health VBD Hub
-Version: 0.6.1.9000
+Version: 1.0.0
 Authors@R: 
     person("Francis", "Windram", , "francis.windram17@imperial.ac.uk", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0002-2129-826X"))
-Description: Interface with the One Health VBD Hub and related repositories directly.
+Description: Interface with the One Health VBD (vector-borne disease) Hub and related repositories directly to find, download, and subset vector-borne disease data.
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

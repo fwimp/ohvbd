@@ -18,7 +18,7 @@
 \arguments{
 \item{term}{A string to match}
 
-\item{term_options}{A named vector to map input terms to final terms in the form c("term1" = \if{html}{\out{<index in final_terms>}}). Indices can be duplicated.}
+\item{term_options}{A named vector to map input terms to final terms in the form c("term1" = index in final_terms). Indices can be duplicated.}
 
 \item{final_terms}{A vector of final acceptable terms.}
 

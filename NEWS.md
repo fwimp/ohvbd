@@ -1,4 +1,4 @@
-# ohvbd (development version)
+# ohvbd 1.0.0
 **Major API change**
 
 * `extract_` functions are now `glean_`.
@@ -66,7 +66,7 @@ Other:
 * `fetch_ad()` now caches and tries to read from cache by default.
   * Generally speaking unless exceedingly up-to-date data is required, this will be the best for most people.
   * If you _do_ require guaranteed new data, it's worth setting `refresh_cache = TRUE` or `use_cache = FALSE` (depending on if you want to replace your existing cache or not).
-* All downloaders that can potentially cache data, also attach the download time if not loading from cache.
+* All downloaders that can potentially cache data also attach the download time if not loading from cache.
 
 # ohvbd 0.6.1
 

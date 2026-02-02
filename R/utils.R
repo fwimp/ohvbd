@@ -54,7 +54,7 @@ check_provenance <- function(obj, db, altfunc="fetch", altfunc_suffix = NULL, ob
 
 #' @title Fuzzy match a term (case-insensitive) to a list of final terms through a translation enum.
 #' @param term A string to match
-#' @param term_options A named vector to map input terms to final terms in the form c("term1" = <index in final_terms>). Indices can be duplicated.
+#' @param term_options A named vector to map input terms to final terms in the form c("term1" = index in final_terms). Indices can be duplicated.
 #' @param final_terms A vector of final acceptable terms.
 #' @param default_term A default term to use if nothing is found. If NULL, errors on no match.
 #' @param term_name The human name of the term (e.g. metric, operator...).
