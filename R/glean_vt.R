@@ -23,7 +23,7 @@
 #' @export
 #'
 
-glean_vt <- function(res, cols = NA, returnunique = FALSE) {
+glean_vt <- function(res, cols = NULL, returnunique = FALSE) {
   check_provenance(res, "vt", altfunc = "glean", objtype = "Responses")
 
   if (any(class(res) == "httr2_response")) {
@@ -44,7 +44,7 @@ glean_vt <- function(res, cols = NA, returnunique = FALSE) {
     out_list <- lapply(out_data, rbindlist)
   })
 
-  if (!any(is.na(cols))) {
+  if (!any(is.null(cols))) {
     # Filter cols from each sublist
     if (!("DatasetID" %in% cols)) {
       cli::cli_alert_info("Added {.val DatasetID} column to requested columns.")

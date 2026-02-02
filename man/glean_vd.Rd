@@ -4,7 +4,7 @@
 \alias{glean_vd}
 \title{Parse data from requests to VecDyn}
 \usage{
-glean_vd(res, cols = NA, returnunique = FALSE)
+glean_vd(res, cols = NULL, returnunique = FALSE)
 }
 \arguments{
 \item{res}{a list of responses from VecDyn as an \code{ohvbd.responses} object.}

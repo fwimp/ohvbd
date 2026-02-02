@@ -84,10 +84,10 @@ format_time_overlap_bar <- function(
   targets,
   targetrange = FALSE,
   twobar = FALSE,
-  width = NA,
+  width = NULL,
   style = list()
 ) {
-  if (is.na(width)) {
+  if (is.null(width)) {
     width <- round(cli::console_width() * 0.5)
   }
 

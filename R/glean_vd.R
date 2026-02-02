@@ -24,10 +24,10 @@
 #' @export
 #'
 
-glean_vd <- function(res, cols = NA, returnunique = FALSE) {
+glean_vd <- function(res, cols = NULL, returnunique = FALSE) {
   check_provenance(res, "vd", altfunc = "glean", objtype = "Responses")
 
-  if (!any(is.na(cols))) {
+  if (!any(is.null(cols))) {
     if (!("dataset_id" %in% cols)) {
       cli::cli_alert_info("Added {.val dataset_id} column to requested columns.")
       cols <- c("dataset_id", cols)

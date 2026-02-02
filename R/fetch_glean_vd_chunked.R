@@ -25,7 +25,7 @@
 fetch_glean_vd_chunked <- function(
   ids,
   chunksize = 20,
-  cols = NA,
+  cols = NULL,
   returnunique = FALSE,
   rate = 5,
   connections = 2,

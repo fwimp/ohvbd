@@ -4,7 +4,7 @@
 \alias{glean_vt}
 \title{Parse data from requests to VecTraits}
 \usage{
-glean_vt(res, cols = NA, returnunique = FALSE)
+glean_vt(res, cols = NULL, returnunique = FALSE)
 }
 \arguments{
 \item{res}{a list of responses from VecTraits as an \code{ohvbd.responses} object.}

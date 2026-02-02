@@ -175,7 +175,7 @@ glean <- function(res, ...) {
 glean.ohvbd.responses <- function(
   res,
   ...,
-  cols = NA,
+  cols = NULL,
   returnunique = FALSE,
   db = NULL
 ) {
@@ -207,8 +207,8 @@ glean.ohvbd.ad.matrix <- function(
   ...,
   targetdate = NA,
   enddate = NA,
-  places = NA,
-  gid = NA
+  places = NULL,
+  gid = NULL
 ) {
   db <- ohvbd_db(res)
   return(glean_ad(res, targetdate, enddate, places, gid))

@@ -62,6 +62,7 @@ Other:
 * Explicit term checking (such as in `fetch_ad()` for metrics and `search_vt_smart()` for operators and fields) is now fuzzy, allowing for a small amount of deviation from the actual term name.
 * `assoc_ad()` now tries to guess LatLong column names if none (or the wrong ones) are provided.
 * Errors in internal functions now make it more clear which user-facing functions they originate from.
+* Multiple functions now default to `NULL` rather than `NA` for default missing values (except date arguments to AD-related functions, where NA is more reasonable in the grand scheme).
 
 # ohvbd 0.6.1
 

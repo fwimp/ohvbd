@@ -8,8 +8,8 @@ glean_ad(
   ad_matrix,
   targetdate = NA,
   enddate = NA,
-  places = NA,
-  gid = NA,
+  places = NULL,
+  gid = NULL,
   printbars = TRUE
 )
 }

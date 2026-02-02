@@ -4,7 +4,7 @@
 \alias{glean_gbif}
 \title{Parse data from requests to GBIF}
 \usage{
-glean_gbif(res, cols = NA, returnunique = FALSE)
+glean_gbif(res, cols = NULL, returnunique = FALSE)
 }
 \arguments{
 \item{res}{a list of responses from GBIF as an \code{ohvbd.responses} object.}

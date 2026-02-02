@@ -71,8 +71,8 @@ glean_ad <- function(
   ad_matrix,
   targetdate = NA,
   enddate = NA,
-  places = NA,
-  gid = NA,
+  places = NULL,
+  gid = NULL,
   printbars = TRUE
 ) {
   # Enddate SHOULD BE EXCLUSIVE
@@ -81,7 +81,7 @@ glean_ad <- function(
 
   # try to infer gid from ad_matrix
   # This will allow us to automagically fill or filter by countries even when we only have GID codes.
-  if (is.na(gid)) {
+  if (is.null(gid)) {
     pot_gid <- attr(ad_matrix, "gid")
     if (!is.null(pot_gid)) {
       gid <- pot_gid
@@ -236,13 +236,13 @@ glean_ad <- function(
     }
   }
 
-  if (!any(is.na(places))) {
+  if (!any(is.null(places))) {
     # Convert places to underscore format
     places <- gsub(" ", "_", places)
     if (!all(places %in% rownames(ad_matrix))) {
       # If any listed places are not in df
       # Try to convert places to equivalents in the correct GID system
-      if (!is.na(gid)) {
+      if (!is.null(gid)) {
         places <- convert_place_togid(places, gid)
       }
     }

@@ -4,7 +4,7 @@
 \alias{vd_extraction_helper}
 \title{Extract a single vd response, including consistent data}
 \usage{
-vd_extraction_helper(resp, cols = NA)
+vd_extraction_helper(resp, cols = NULL)
 }
 \arguments{
 \item{resp}{A response to extract from.}

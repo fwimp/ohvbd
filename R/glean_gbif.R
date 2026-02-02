@@ -21,7 +21,7 @@
 #' @export
 #'
 
-glean_gbif <- function(res, cols = NA, returnunique = FALSE) {
+glean_gbif <- function(res, cols = NULL, returnunique = FALSE) {
   check_provenance(res, "gbif", altfunc = "glean", objtype = "Responses")
 
   if (!rlang::is_installed("rgbif")) {
@@ -35,7 +35,7 @@ glean_gbif <- function(res, cols = NA, returnunique = FALSE) {
   out_data <- lapply(res, rgbif::occ_download_import)
   out_df <- rbindlist(out_data)
 
-  if (!any(is.na(cols))) {
+  if (!any(is.null(cols))) {
     # Filter cols if required
     out_df <- out_df |> select(any_of(cols))
   }

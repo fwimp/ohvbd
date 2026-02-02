@@ -209,7 +209,7 @@ space_collapse <- function(v) {
 #' @keywords internal
 #'
 
-vd_extraction_helper <- function(resp, cols = NA) {
+vd_extraction_helper <- function(resp, cols = NULL) {
   df_out <- tryCatch(
     {
       resp_parse <- resp |> resp_body_json()
@@ -228,7 +228,7 @@ vd_extraction_helper <- function(resp, cols = NA) {
       if (resp_parse$count > 0) {
         df_out$dataset_id <- .get_vb_req_id(resp)
       }
-      if (!any(is.na(cols))) {
+      if (!any(is.null(cols))) {
         # Filter cols from each sublist
         df_out <- df_out |> select(any_of(cols))
       }
