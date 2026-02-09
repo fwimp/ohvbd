@@ -23,12 +23,34 @@ An alternative method for gathering this data is through the AREAdata
 project, which provides historical and forecast data aggregated at
 different spatial scales.
 
-Let’s take a look at the format of data retrieved from AREAdata (we will
-deconstruct this command properly in a bit):
+### Setting up the cache
+
+The downloads for AREAdata are generally quite large, but rarely
+updated. As such it’s worthwhile keeping these files around if you’ll
+use them regularly.
+
+To do this let’s run a command to set up a local cache.
 
 ``` r
 library(ohvbd)
+set_default_ohvbd_cache()
+```
 
+Now you’ve done this, your cached data will not be deleted when you
+close R (though you must run this command once per session).
+
+When you run this on your own computer, you will receive a message
+giving instructions on how to permanently set this using your
+[.Rprofile](https://docs.posit.co/ide/user/ide/guide/environments/r/managing-r.html#rprofile)
+file.
+
+### Data
+
+Now you have set up your cache, let’s take a look at the format of data
+retrieved from AREAdata (we will deconstruct this command properly in a
+bit):
+
+``` r
 ad_df <- fetch_ad(metric = "temp", gid = 0, use_cache = TRUE)
 # Display only a brief summary of the data
 summary(ad_df)
@@ -55,7 +77,8 @@ locations (identified by GADM codes):
 head(rownames(ad_df))
 ```
 
-    ## [1] "Aruba"       "Afghanistan" "Angola"      "Anguilla"    "Åland"       "Albania"
+    ## [1] "Aruba"       "Afghanistan" "Angola"      "Anguilla"    "Åland"      
+    ## [6] "Albania"
 
 Meanwhile the column names correspond to the day that the data refers
 to:
@@ -64,7 +87,8 @@ to:
 head(colnames(ad_df))
 ```
 
-    ## [1] "2020-01-01" "2020-01-02" "2020-01-03" "2020-01-04" "2020-01-05" "2020-01-06"
+    ## [1] "2020-01-01" "2020-01-02" "2020-01-03" "2020-01-04" "2020-01-05"
+    ## [6] "2020-01-06"
 
 So the value at `ad_df["Angola", "2020-01-01"]` corresponds to the value
 of the metric (in this case temperature) in Angola on 2020-01-01:
@@ -166,7 +190,7 @@ ad_df |> glean_ad(targetdate = "2020-01-01", places = "Angola")
     ## attr(,"db")
     ## [1] "ad"
     ## attr(,"writetime")
-    ## [1] "2026-02-02 15:14:51 GMT"
+    ## [1] "2026-02-05 15:31:57 GMT"
     ## attr(,"class")
     ## [1] "ohvbd.ad.matrix" "matrix"          "array"
 
@@ -213,7 +237,7 @@ ad_df |> glean_ad(
     ## attr(,"db")
     ## [1] "ad"
     ## attr(,"writetime")
-    ## [1] "2026-02-02 15:14:51 GMT"
+    ## [1] "2026-02-05 15:31:57 GMT"
     ## attr(,"class")
     ## [1] "ohvbd.ad.matrix" "matrix"          "array"
 
@@ -227,10 +251,18 @@ ad_df |> glean_ad(targetdate = "2020-01", places = "Angola")
     ## Dates: 2020-01-01 -> 2020-01-31 (31)
     ## Locations: 1 
     ## Data:
-    ##        2020-01-01 2020-01-02 2020-01-03 2020-01-04 2020-01-05 2020-01-06 2020-01-07 2020-01-08 2020-01-09 2020-01-10 2020-01-11 2020-01-12 2020-01-13 2020-01-14 2020-01-15 2020-01-16 2020-01-17
-    ## Angola   29.33611   28.77514   28.88312    27.4325   28.13407   28.64046   28.09983   28.40937   28.71222   27.21757   26.85815   28.92744    29.5375   28.88849   28.81174   29.81402   29.89741
-    ##        2020-01-18 2020-01-19 2020-01-20 2020-01-21 2020-01-22 2020-01-23 2020-01-24 2020-01-25 2020-01-26 2020-01-27 2020-01-28 2020-01-29 2020-01-30 2020-01-31
-    ## Angola    29.5939   29.87222   30.28832   30.18386   29.98904   29.97556   29.63855   29.53917   29.00056   28.81855   29.47186   28.44818   28.64745   28.34594
+    ##        2020-01-01 2020-01-02 2020-01-03 2020-01-04 2020-01-05 2020-01-06
+    ## Angola   29.33611   28.77514   28.88312    27.4325   28.13407   28.64046
+    ##        2020-01-07 2020-01-08 2020-01-09 2020-01-10 2020-01-11 2020-01-12
+    ## Angola   28.09983   28.40937   28.71222   27.21757   26.85815   28.92744
+    ##        2020-01-13 2020-01-14 2020-01-15 2020-01-16 2020-01-17 2020-01-18
+    ## Angola    29.5375   28.88849   28.81174   29.81402   29.89741    29.5939
+    ##        2020-01-19 2020-01-20 2020-01-21 2020-01-22 2020-01-23 2020-01-24
+    ## Angola   29.87222   30.28832   30.18386   29.98904   29.97556   29.63855
+    ##        2020-01-25 2020-01-26 2020-01-27 2020-01-28 2020-01-29 2020-01-30
+    ## Angola   29.53917   29.00056   28.81855   29.47186   28.44818   28.64745
+    ##        2020-01-31
+    ## Angola   28.34594
     ## attr(,"metric")
     ## [1] "temp"
     ## attr(,"gid")
@@ -240,7 +272,7 @@ ad_df |> glean_ad(targetdate = "2020-01", places = "Angola")
     ## attr(,"db")
     ## [1] "ad"
     ## attr(,"writetime")
-    ## [1] "2026-02-02 15:14:51 GMT"
+    ## [1] "2026-02-05 15:31:57 GMT"
     ## attr(,"class")
     ## [1] "ohvbd.ad.matrix" "matrix"          "array"
 
@@ -282,7 +314,7 @@ ad_df |> glean_ad(
     ## attr(,"db")
     ## [1] "ad"
     ## attr(,"writetime")
-    ## [1] "2026-02-02 15:14:51 GMT"
+    ## [1] "2026-02-05 15:31:57 GMT"
     ## attr(,"class")
     ## [1] "ohvbd.ad.matrix" "matrix"          "array"
 
@@ -317,7 +349,7 @@ ad_df |> glean_ad(
     ## attr(,"db")
     ## [1] "ad"
     ## attr(,"writetime")
-    ## [1] "2026-02-02 15:14:51 GMT"
+    ## [1] "2026-02-05 15:31:57 GMT"
     ## attr(,"class")
     ## [1] "ohvbd.ad.matrix" "matrix"          "array"
 
@@ -351,7 +383,7 @@ ad_df |> glean_ad(
     ## attr(,"db")
     ## [1] "ad"
     ## attr(,"writetime")
-    ## [1] "2026-02-02 15:14:51 GMT"
+    ## [1] "2026-02-05 15:31:57 GMT"
     ## attr(,"class")
     ## [1] "ohvbd.ad.matrix" "matrix"          "array"
 
@@ -387,15 +419,15 @@ ad_df |> glean_ad(
     ## attr(,"db")
     ## [1] "ad"
     ## attr(,"writetime")
-    ## [1] "2026-02-02 15:14:51 GMT"
+    ## [1] "2026-02-05 15:31:57 GMT"
     ## attr(,"class")
     ## [1] "ohvbd.ad.matrix" "matrix"          "array"
 
-## Associating AREAData climatic variables with other data
+## Associating AREAdata climatic variables with other data
 
-On top of providing a download interface for AREAData, `ohvbd` provides
+On top of providing a download interface for AREAdata, `ohvbd` provides
 tools for easing the process of associating your own data with data from
-AREAData.
+AREAdata.
 
 This is performed through the use of the
 [`assoc_ad()`](https://ohvbd.vbdhub.org/reference/assoc_ad.md) function.
@@ -501,14 +533,14 @@ test_ad <- fetch_ad("temp", gid = 0)
 attr(test_ad, "writetime")
 ```
 
-    ## [1] "2026-02-02 15:14:51 GMT"
+    ## [1] "2026-02-05 15:31:57 GMT"
 
 ``` r
 test_ad <- fetch_ad("temp", gid = 0, refresh_cache = TRUE)
 attr(test_ad, "writetime")
 ```
 
-    ## [1] "2026-02-02 15:15:18 GMT"
+    ## [1] "2026-02-05 15:32:46 GMT"
 
 ### Cache management tools
 
@@ -583,4 +615,4 @@ clean_ohvbd_cache(subdir = "adcache")
     ℹ Clearing files from ../cache/R/ohvbd/adcache
     ✔ Removed 3 files
 
-Built in 28.4432349s
+Built in 50.4761159s

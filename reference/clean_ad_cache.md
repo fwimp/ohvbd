@@ -14,6 +14,10 @@ clean_ad_cache(cache_location = NULL)
 
   location of the cache.
 
+## Value
+
+No return value, called for side effects
+
 ## Note
 
 `clean_ad_cache()` is now deprecated and should not be used. Please use

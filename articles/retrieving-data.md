@@ -53,6 +53,27 @@ c(1, 2, 3) |> mean()
 
 For the rest of this vignette we will be using a piped-style approach.
 
+## Setting up the cache
+
+Some supporting downloads such as those from AREAdata are large, but
+rarely updated. As such it’s worthwhile keeping these files around if
+you’ll use them regularly.
+
+To do this let’s run a command to set up a local cache.
+
+``` r
+library(ohvbd)
+set_default_ohvbd_cache()
+```
+
+Now you’ve done this, your cached data will not be deleted when you
+close R (though you must run this command once per session).
+
+When you run this on your own computer, you will receive a message
+giving instructions on how to permanently set this using your
+[.Rprofile](https://docs.posit.co/ide/user/ide/guide/environments/r/managing-r.html#rprofile)
+file.
+
 ## Finding IDs
 
 Datasets in VecTraits and VecDyn, and GBIF are organised by id.
@@ -65,7 +86,6 @@ In this case let’s search the hub for *Aedes aegypti*, the “Yellow Fever
 mosquito”:
 
 ``` r
-library(ohvbd)
 aedes_results <- search_hub("Aedes aegypti")
 summary(aedes_results)
 ```
@@ -103,8 +123,11 @@ aedes_vt
 
     ## <ohvbd.ids>
     ## Database: vt
-    ##  [1]  474  475  148  578  126  556  142  144  169  577  580  287  285  865  863  473  476  357  149  573  576  565  555  146  841  842  356  170  214  579  359  355  864  143  147  564  574  575  124
-    ## [40]  125  346  553  554  354  286  853  901  145  825  826  906  892  893  358  854  855  860  828  911  910  572  557  558  571 1506 1510 1511 1512 1507 1508 1509
+    ##  [1]  474  475  148  578  126  556  142  144  169  580  577  285  287  863  865
+    ## [16]  357  473  476  149  573  576  565  555  146  841  842  356  170  214  579
+    ## [31]  864  359  355  143  147  564  574  575  124  125  346  553  554  354  853
+    ## [46]  286  901  825  826  145  906  892  893  358  854  855  911  860  828  910
+    ## [61]  572  557  558  571 1506 1510 1511 1512 1507 1508 1509
 
 If you only searched the hub for one database, by default
 [`search_hub()`](https://ohvbd.vbdhub.org/reference/search_hub.md) will
@@ -118,8 +141,11 @@ search_hub("Aedes aegypti", db = "vt")
 
     ## <ohvbd.ids>
     ## Database: vt
-    ##  [1]  474  475  148  578  126  556  142  144  169  577  580  287  285  865  863  473  476  357  149  573  576  565  555  146  841  842  356  170  214  579  359  355  864  143  147  564  574  575  124
-    ## [40]  125  346  553  554  354  286  853  901  145  825  826  906  892  893  358  854  855  860  828  911  910  572  557  558  571 1506 1510 1511 1512 1507 1508 1509
+    ##  [1]  474  475  148  578  126  556  142  144  169  580  577  285  287  863  865
+    ## [16]  357  473  476  149  573  576  565  555  146  841  842  356  170  214  579
+    ## [31]  864  359  355  143  147  564  574  575  124  125  346  553  554  354  853
+    ## [46]  286  901  825  826  145  906  892  893  358  854  855  911  860  828  910
+    ## [61]  572  557  558  571 1506 1510 1511 1512 1507 1508 1509
 
 ## Getting data
 
@@ -298,13 +324,20 @@ df |> dplyr::filter(Interactor1Genus == "Axinoscymnus") |> head()
 
     ## <ohvbd.data.frame>
     ## Database: vt
-    ##   DatasetID Interactor1Genus Interactor1Species Interactor2Genus Interactor2Species
-    ## 1       160     Axinoscymnus         cardilobus          Bemisia             tabaci
-    ## 2       160     Axinoscymnus         cardilobus          Bemisia             tabaci
-    ## 3       160     Axinoscymnus         cardilobus          Bemisia             tabaci
-    ## 4       160     Axinoscymnus         cardilobus          Bemisia             tabaci
-    ## 5       160     Axinoscymnus         cardilobus          Bemisia             tabaci
-    ## 6       160     Axinoscymnus         cardilobus          Bemisia             tabaci
+    ##   DatasetID Interactor1Genus Interactor1Species Interactor2Genus
+    ## 1       160     Axinoscymnus         cardilobus          Bemisia
+    ## 2       160     Axinoscymnus         cardilobus          Bemisia
+    ## 3       160     Axinoscymnus         cardilobus          Bemisia
+    ## 4       160     Axinoscymnus         cardilobus          Bemisia
+    ## 5       160     Axinoscymnus         cardilobus          Bemisia
+    ## 6       160     Axinoscymnus         cardilobus          Bemisia
+    ##   Interactor2Species
+    ## 1             tabaci
+    ## 2             tabaci
+    ## 3             tabaci
+    ## 4             tabaci
+    ## 5             tabaci
+    ## 6             tabaci
 
 In this scenario, *Bemisia* is present in the dataset, but it is as the
 “target” rather than the animal that the trait is referring to.
@@ -363,4 +396,4 @@ time you run your script. This is as easy as running
 dataframe, then reading it in later with
 [`read.csv()`](https://rdrr.io/r/utils/read.table.html)
 
-Built in 14.8074338s
+Built in 18.0008059s

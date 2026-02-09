@@ -27,6 +27,10 @@ clean_ohvbd_cache(subdir = NULL, path = NULL, dryrun = FALSE, force = FALSE)
 
   do not ask for confirmation before cleaning.
 
+## Value
+
+No return value, called for side effects
+
 ## Author
 
 Francis Windram

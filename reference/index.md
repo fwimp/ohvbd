@@ -98,6 +98,8 @@ Convenient generalised functions for working with a range of data.
 - [`ohvbd_db()`](https://ohvbd.vbdhub.org/reference/ohvbd_db.md)
   [`` `ohvbd_db<-`() ``](https://ohvbd.vbdhub.org/reference/ohvbd_db.md)
   : Database provenance
+- [`set_default_ohvbd_cache()`](https://ohvbd.vbdhub.org/reference/set_default_ohvbd_cache.md)
+  : Set the default ohvbd cache location
 
 ## Deprecated
 

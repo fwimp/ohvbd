@@ -27,8 +27,9 @@ assoc_gadm(
 
 - cache_location:
 
-  path to cache location (defaults to user directory obtained from
-  [`tools::R_user_dir()`](https://rdrr.io/r/tools/userdir.html)).
+  path to cache location (defaults to a temporary user directory, or one
+  set by
+  [`set_default_ohvbd_cache()`](https://ohvbd.vbdhub.org/reference/set_default_ohvbd_cache.md)).
 
 - basereq:
 

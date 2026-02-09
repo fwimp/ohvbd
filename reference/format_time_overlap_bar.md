@@ -56,6 +56,10 @@ format_time_overlap_bar(
   [`cli::cli_progress_styles()`](https://cli.r-lib.org/reference/cli_progress_styles.html)
   to use as a format.
 
+## Value
+
+No return value
+
 ## Author
 
 Francis Windram

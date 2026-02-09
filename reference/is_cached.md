@@ -14,6 +14,10 @@ is_cached(x)
 
   The object to check.
 
+## Value
+
+A boolean indicating whether an object has been loaded from the cache.
+
 ## Author
 
 Francis Windram

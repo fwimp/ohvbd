@@ -19,6 +19,10 @@ set_ohvbd_compat(value = TRUE)
 
   The boolean value to set ohvbd_compat to.
 
+## Value
+
+No return value, called for side effects
+
 ## Author
 
 Francis Windram

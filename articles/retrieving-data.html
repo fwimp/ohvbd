@@ -122,6 +122,22 @@ and feed it forward to the next command as the first argument:</p>
 approach.</p>
 </div>
 <div class="section level2">
+<h2 id="setting-up-the-cache">Setting up the cache<a class="anchor" aria-label="anchor" href="#setting-up-the-cache"></a>
+</h2>
+<p>Some supporting downloads such as those from AREAdata are large, but
+rarely updated. As such it’s worthwhile keeping these files around if
+you’ll use them regularly.</p>
+<p>To do this let’s run a command to set up a local cache.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/fwimp/ohvbd" class="external-link">ohvbd</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/set_default_ohvbd_cache.html">set_default_ohvbd_cache</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>Now you’ve done this, your cached data will not be deleted when you
+close R (though you must run this command once per session).</p>
+<p>When you run this on your own computer, you will receive a message
+giving instructions on how to permanently set this using your <a href="https://docs.posit.co/ide/user/ide/guide/environments/r/managing-r.html#rprofile" class="external-link">.Rprofile</a>
+file.</p>
+</div>
+<div class="section level2">
 <h2 id="finding-ids">Finding IDs<a class="anchor" aria-label="anchor" href="#finding-ids"></a>
 </h2>
 <p>Datasets in VecTraits and VecDyn, and GBIF are organised by id.</p>
@@ -130,9 +146,8 @@ approach.</p>
 <code><a href="../reference/search_hub.html">search_hub()</a></code>.</p>
 <p>In this case let’s search the hub for <em>Aedes aegypti</em>, the
 “Yellow Fever mosquito”:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/fwimp/ohvbd" class="external-link">ohvbd</a></span><span class="op">)</span></span>
-<span><span class="va">aedes_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/search_hub.html">search_hub</a></span><span class="op">(</span><span class="st">"Aedes aegypti"</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">aedes_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/search_hub.html">search_hub</a></span><span class="op">(</span><span class="st">"Aedes aegypti"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">aedes_results</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 150, Query: Aedes aegypti</span></span>
 <span><span class="co">## </span></span>
@@ -157,22 +172,28 @@ best) get garbage.</p>
 </blockquote>
 <p>Filtering database results from searches can be performed using the
 <code><a href="../reference/filter_db.html">filter_db()</a></code> command:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">aedes_vt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/filter_db.html">filter_db</a></span><span class="op">(</span><span class="va">aedes_results</span>, <span class="st">"vt"</span><span class="op">)</span></span>
 <span><span class="va">aedes_vt</span></span></code></pre></div>
 <pre><code><span><span class="co">## &lt;ohvbd.ids&gt;</span></span>
 <span><span class="co">## Database: vt</span></span>
-<span><span class="co">##  [1]  474  475  148  578  126  556  142  144  169  577  580  287  285  865  863  473  476  357  149  573  576  565  555  146  841  842  356  170  214  579  359  355  864  143  147  564  574  575  124</span></span>
-<span><span class="co">## [40]  125  346  553  554  354  286  853  901  145  825  826  906  892  893  358  854  855  860  828  911  910  572  557  558  571 1506 1510 1511 1512 1507 1508 1509</span></span></code></pre>
+<span><span class="co">##  [1]  474  475  148  578  126  556  142  144  169  580  577  285  287  863  865</span></span>
+<span><span class="co">## [16]  357  473  476  149  573  576  565  555  146  841  842  356  170  214  579</span></span>
+<span><span class="co">## [31]  864  359  355  143  147  564  574  575  124  125  346  553  554  354  853</span></span>
+<span><span class="co">## [46]  286  901  825  826  145  906  892  893  358  854  855  911  860  828  910</span></span>
+<span><span class="co">## [61]  572  557  558  571 1506 1510 1511 1512 1507 1508 1509</span></span></code></pre>
 <p>If you only searched the hub for one database, by default
 <code><a href="../reference/search_hub.html">search_hub()</a></code> will automatically perform the
 <code><a href="../reference/filter_db.html">filter_db()</a></code> operation for you!</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/search_hub.html">search_hub</a></span><span class="op">(</span><span class="st">"Aedes aegypti"</span>, db <span class="op">=</span> <span class="st">"vt"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## &lt;ohvbd.ids&gt;</span></span>
 <span><span class="co">## Database: vt</span></span>
-<span><span class="co">##  [1]  474  475  148  578  126  556  142  144  169  577  580  287  285  865  863  473  476  357  149  573  576  565  555  146  841  842  356  170  214  579  359  355  864  143  147  564  574  575  124</span></span>
-<span><span class="co">## [40]  125  346  553  554  354  286  853  901  145  825  826  906  892  893  358  854  855  860  828  911  910  572  557  558  571 1506 1510 1511 1512 1507 1508 1509</span></span></code></pre>
+<span><span class="co">##  [1]  474  475  148  578  126  556  142  144  169  580  577  285  287  863  865</span></span>
+<span><span class="co">## [16]  357  473  476  149  573  576  565  555  146  841  842  356  170  214  579</span></span>
+<span><span class="co">## [31]  864  359  355  143  147  564  574  575  124  125  346  553  554  354  853</span></span>
+<span><span class="co">## [46]  286  901  825  826  145  906  892  893  358  854  855  911  860  828  910</span></span>
+<span><span class="co">## [61]  572  557  558  571 1506 1510 1511 1512 1507 1508 1509</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="getting-data">Getting data<a class="anchor" aria-label="anchor" href="#getting-data"></a>
@@ -181,7 +202,7 @@ best) get garbage.</p>
 retrieve the data of these datasets through the API.</p>
 <p>To do this we can use the <code><a href="../reference/fetch.html">fetch()</a></code> function. In this case
 let’s get the first 5 <em>Aedes aegypti</em> datasets:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">aedes_vt</span> <span class="op">&lt;-</span> <span class="va">aedes_vt</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">aedes_responses</span> <span class="op">&lt;-</span> <span class="va">aedes_vt</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/fetch.html">fetch</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">aedes_responses</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
@@ -204,7 +225,7 @@ your data. Under the hood it farms out this work to the
 <p>You can use these yourself for extra piece of mind, though we do not
 really recommend it.</p>
 <p>So the above code could also be written as:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">aedes_responses</span> <span class="op">&lt;-</span> <span class="va">aedes_vt</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/fetch_vt.html">fetch_vt</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
@@ -213,7 +234,7 @@ really recommend it.</p>
 </h2>
 <p>Now we have a list of responses, we can extract the relevant data
 from them using the <code><a href="../reference/glean.html">glean()</a></code> function.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">aedes_data</span> <span class="op">&lt;-</span> <span class="va">aedes_responses</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/glean.html">glean</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Data dimensions: "</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">aedes_data</span><span class="op">)</span>, <span class="st">" cols x "</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">aedes_data</span><span class="op">)</span>, <span class="st">" rows"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Data dimensions:  157  cols x  727  rows</span></span></code></pre>
@@ -224,7 +245,7 @@ data out easily. We can also use the argument <code>returnunique</code>
 to instruct ohvbd to return only unique rows.</p>
 <p>So let’s get just the unique locations and trait name combinations
 from our data using the same command as before:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">aedes_data_filtered</span> <span class="op">&lt;-</span> <span class="va">aedes_responses</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/glean.html">glean</a></span><span class="op">(</span></span>
 <span>    cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Location"</span>, <span class="st">"OriginalTraitName"</span><span class="op">)</span>,</span>
@@ -244,7 +265,7 @@ from our data using the same command as before:</p>
 </h3>
 <p>Like <code><a href="../reference/fetch.html">fetch()</a></code>, <code><a href="../reference/glean.html">glean()</a></code> has database-specific
 variants:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">aedes_data</span> <span class="op">&lt;-</span> <span class="va">aedes_responses</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/glean_vt.html">glean_vt</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
@@ -254,7 +275,7 @@ variants:</p>
 <p>In day-to-day use, you will mostly find yourself using all these
 functions together to create small pipelines.</p>
 <p>A typical pipeline would likely only contain a few lines of code:</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/search_hub.html">search_hub</a></span><span class="op">(</span><span class="st">"Aedes aegypti"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/filter_db.html">filter_db</a></span><span class="op">(</span><span class="st">"vt"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -274,7 +295,7 @@ functions together to create small pipelines.</p>
 <span><span class="co">## 5       126            Aedes            aegypti  16.25000 -61.58333</span></span></code></pre>
 <p>A similar pipeline taking advantage of the autofiltering in
 <code><a href="../reference/search_hub.html">search_hub()</a></code> might look like this:</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/search_hub.html">search_hub</a></span><span class="op">(</span><span class="st">"Aedes aegypti"</span>, db <span class="op">=</span> <span class="st">"vt"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/fetch.html">fetch</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -291,7 +312,7 @@ collisions.</p>
 <p>Let’s imagine that we are looking for traits of whitefly species
 (<em>Bemisia</em>). We can just construct a query to investigate this as
 follows:</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/search_hub.html">search_hub</a></span><span class="op">(</span><span class="st">"Bemisia"</span>, <span class="st">"vt"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">6</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/fetch.html">fetch</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -307,22 +328,29 @@ follows:</p>
 <p>Now we would expect this to be traits of <em>Bemisia</em> spp,
 however when we look at the <code>Interactor1Genus</code> column we see
 something a touch odd:</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Interactor1Genus</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "Axinoscymnus" "Bemisia"</span></span></code></pre>
 <p><em>Axinoscymnus</em> is a ladybird, but why is it appearing? Let’s
 look at only rows containing <em>Axinoscymnus</em>:</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Interactor1Genus</span> <span class="op">==</span> <span class="st">"Axinoscymnus"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## &lt;ohvbd.data.frame&gt;</span></span>
 <span><span class="co">## Database: vt</span></span>
-<span><span class="co">##   DatasetID Interactor1Genus Interactor1Species Interactor2Genus Interactor2Species</span></span>
-<span><span class="co">## 1       160     Axinoscymnus         cardilobus          Bemisia             tabaci</span></span>
-<span><span class="co">## 2       160     Axinoscymnus         cardilobus          Bemisia             tabaci</span></span>
-<span><span class="co">## 3       160     Axinoscymnus         cardilobus          Bemisia             tabaci</span></span>
-<span><span class="co">## 4       160     Axinoscymnus         cardilobus          Bemisia             tabaci</span></span>
-<span><span class="co">## 5       160     Axinoscymnus         cardilobus          Bemisia             tabaci</span></span>
-<span><span class="co">## 6       160     Axinoscymnus         cardilobus          Bemisia             tabaci</span></span></code></pre>
+<span><span class="co">##   DatasetID Interactor1Genus Interactor1Species Interactor2Genus</span></span>
+<span><span class="co">## 1       160     Axinoscymnus         cardilobus          Bemisia</span></span>
+<span><span class="co">## 2       160     Axinoscymnus         cardilobus          Bemisia</span></span>
+<span><span class="co">## 3       160     Axinoscymnus         cardilobus          Bemisia</span></span>
+<span><span class="co">## 4       160     Axinoscymnus         cardilobus          Bemisia</span></span>
+<span><span class="co">## 5       160     Axinoscymnus         cardilobus          Bemisia</span></span>
+<span><span class="co">## 6       160     Axinoscymnus         cardilobus          Bemisia</span></span>
+<span><span class="co">##   Interactor2Species</span></span>
+<span><span class="co">## 1             tabaci</span></span>
+<span><span class="co">## 2             tabaci</span></span>
+<span><span class="co">## 3             tabaci</span></span>
+<span><span class="co">## 4             tabaci</span></span>
+<span><span class="co">## 5             tabaci</span></span>
+<span><span class="co">## 6             tabaci</span></span></code></pre>
 <p>In this scenario, <em>Bemisia</em> is present in the dataset, but it
 is as the “target” rather than the animal that the trait is referring
 to.</p>
@@ -332,7 +360,7 @@ functions.</p>
 <p>These allow you to construct a more specific search.</p>
 <p>So let’s construct the same search as we were wanting to do before,
 but with the smart search.</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/search_vt_smart.html">search_vt_smart</a></span><span class="op">(</span><span class="st">"Interactor1Genus"</span>, <span class="st">"contains"</span>, <span class="st">"Bemisia"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">6</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/fetch.html">fetch</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -371,7 +399,7 @@ every time you run your script. This is as easy as running
 <code><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv()</a></code> on your dataframe, then reading it in later
 with <code><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv()</a></code></p>
 <p><span style="opacity: 0.1;font-size: small;">Built in
-14.8074338s</span></p>
+18.0008059s</span></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
