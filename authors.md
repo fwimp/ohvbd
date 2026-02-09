@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/fwimp/ohvbd/blob/master/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/fwimp/ohvbd/blob/v1.0.0/DESCRIPTION)
 
 Windram F (2026). *ohvbd: One Health VBD Hub*. R package version 1.0.0,
 <https://github.com/fwimp/ohvbd>.
