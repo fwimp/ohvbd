@@ -1,4 +1,7 @@
 # ohvbd 1.0.0
+
+*First CRAN release*
+
 **Major API change**
 
 * `extract_` functions are now `glean_`.
