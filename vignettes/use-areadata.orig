@@ -37,11 +37,26 @@ These can be retrieved from raster files provided by projects such as the ERA5 d
 
 An alternative method for gathering this data is through the AREAdata project, which provides historical and forecast data aggregated at different spatial scales.
 
-Let's take a look at the format of data retrieved from AREAdata (we will deconstruct this command properly in a bit):
+### Setting up the cache
+
+The downloads for AREAdata are generally quite large, but rarely updated. As such it's worthwhile keeping these files around if you'll use them regularly.
+
+To do this let's run a command to set up a local cache.
+
+```{r setup_cache}
+library(ohvbd)
+set_default_ohvbd_cache()
+```
+
+Now you've done this, your cached data will not be deleted when you close R (though you must run this command once per session).
+
+When you run this on your own computer, you will receive a message giving instructions on how to permanently set this using your [.Rprofile](https://docs.posit.co/ide/user/ide/guide/environments/r/managing-r.html#rprofile) file.
+
+### Data
+
+Now you have set up your cache, let's take a look at the format of data retrieved from AREAdata (we will deconstruct this command properly in a bit):
 
 ```{r example_ad}
-library(ohvbd)
-
 ad_df <- fetch_ad(metric = "temp", gid = 0, use_cache = TRUE)
 # Display only a brief summary of the data
 summary(ad_df)
@@ -196,9 +211,9 @@ ad_df |> glean_ad(
 )
 ```
 
-## Associating AREAData climatic variables with other data
+## Associating AREAdata climatic variables with other data
 
-On top of providing a download interface for AREAData, `ohvbd` provides tools for easing the process of associating your own data with data from AREAData.
+On top of providing a download interface for AREAdata, `ohvbd` provides tools for easing the process of associating your own data with data from AREAdata.
 
 This is performed through the use of the `assoc_ad()` function.
 

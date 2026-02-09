@@ -29,6 +29,9 @@ format_time_overlap_bar(
 
 \item{style}{a style from \code{\link[cli:cli_progress_styles]{cli::cli_progress_styles()}} to use as a format.}
 }
+\value{
+No return value
+}
 \description{
 Format and output to the terminal a visualisation of the overlaps between a given period and another set of dates.
 This is mostly used in the error handling of \code{\link[=glean_ad]{glean_ad()}} however it can also be used independently.

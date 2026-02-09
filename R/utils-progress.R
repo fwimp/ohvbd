@@ -64,7 +64,7 @@ progress_style <- function(x) {
 #' @param style a style from [cli::cli_progress_styles()] to use as a format.
 #'
 #'
-#' @return NULL
+#' @return No return value
 #'
 #' @examples
 #' format_time_overlap_bar(

@@ -9,8 +9,13 @@ if (!getOption("ohvbd_devmode", default = FALSE)) {
 # Check caching
   # get_default_ohvbd_cache
 test_that("Default ohvbd cache location is correctly found", {
-  expect_equal(get_default_ohvbd_cache(), gsub("\\\\", "/", tools::R_user_dir("ohvbd", which = "cache")))
-  expect_equal(get_default_ohvbd_cache("test"), file.path(gsub("\\\\", "/", tools::R_user_dir("ohvbd", which = "cache")), "test"))
+  expected_dir <- getOption("ohvbd_cache")
+  if (is.null(expected_dir)) {
+    expected_dir <- file.path(tempdir(), "ohvbd")
+  }
+  expected_dir <- gsub("\\\\", "/", expected_dir)
+  expect_equal(get_default_ohvbd_cache(), expected_dir)
+  expect_equal(get_default_ohvbd_cache("test"), file.path(expected_dir, "test"))
 })
 
 # Set up test cache for rest of testing (once we know that the function works)

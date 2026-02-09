@@ -15,7 +15,7 @@ fetch_vd_meta(
 \arguments{
 \item{ids}{a numeric ID or numeric vector of ids (preferably in an \code{ohvbd.ids} object) indicating the particular dataset/s to download.}
 
-\item{cache_location}{path to cache location (defaults to user directory obtained from \code{\link[tools:userdir]{tools::R_user_dir()}}).}
+\item{cache_location}{path to cache location (defaults to a temporary user directory, or one set by \code{\link[=set_default_ohvbd_cache]{set_default_ohvbd_cache()}}).}
 
 \item{refresh_cache}{force a refresh of the relevant cached data.}
 

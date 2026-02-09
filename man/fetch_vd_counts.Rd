@@ -18,7 +18,7 @@ fetch_vd_counts(
 
 \item{page_size}{the page size returned by VecDyn (default is 50).}
 
-\item{cache_location}{path to cache location (defaults to user directory obtained from \code{\link[tools:userdir]{tools::R_user_dir()}}).}
+\item{cache_location}{path to cache location (defaults to a temporary user directory, or one set by \code{\link[=set_default_ohvbd_cache]{set_default_ohvbd_cache()}}).}
 
 \item{refresh_cache}{force a refresh of the relevant cached data.}
 

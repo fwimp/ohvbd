@@ -14,3 +14,5 @@ pkg_dev_notes.md
 ^pkgdown$
 R/ohvbd-internal-devtools.R
 ^cran-comments\.md$
+^CRAN-SUBMISSION$
+^paper$

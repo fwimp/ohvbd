@@ -9,6 +9,9 @@ is_cached(x)
 \arguments{
 \item{x}{The object to check.}
 }
+\value{
+A boolean indicating whether an object has been loaded from the cache.
+}
 \description{
 Check whether an object has been loaded from cache by ohvbd
 }

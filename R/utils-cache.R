@@ -91,7 +91,7 @@ read_ad_cache <- function(metric, gid, path=NULL, warn = TRUE) {
 #' @param dryrun if `TRUE` list files that would be deleted, but do not remove.
 #' @param force do not ask for confirmation before cleaning.
 #'
-#' @return NULL
+#' @return No return value, called for side effects
 #'
 #' @examplesIf interactive()
 #' clean_ad_cache()
@@ -140,7 +140,7 @@ clean_ohvbd_cache <- function(subdir = NULL, path = NULL, dryrun = FALSE, force 
     # Clean the whole cache
     remove_path <- file.path(path, "*")
     prev_files <- prev_files + length(list.files(file.path(path), recursive = TRUE))
-    cli::cli_alert_info("Clearing files from {.path {cache_location}}")
+    cli::cli_alert_info("Clearing files from {.path {path}}")
     unlink(remove_path, recursive = TRUE)
     removed_files <- removed_files + length(list.files(file.path(path), recursive = TRUE))
   }
@@ -174,7 +174,7 @@ clean_ohvbd_cache <- function(subdir = NULL, path = NULL, dryrun = FALSE, force 
 #' @param subdir a subdirectory or list of subdirectories to list.
 #' @param path location within which to list files. (Defaults to the standard ohvbd cache location).
 #' @param treeview display the full cache in a tree structure
-#' @return NULL
+#' @return No return value
 #'
 #' @examplesIf interactive()
 #' list_ohvbd_cache()
@@ -221,6 +221,43 @@ list_ohvbd_cache <- function(subdir = NULL, path = NULL, treeview = FALSE) {
   invisible()
 }
 
+#' @title Set the default ohvbd cache location
+#' @author Francis Windram
+#'
+#' @param d The directory to set the cache path to (or NULL to use a default location).
+#' @return The path of the cache (invisibly)
+#'
+#' @note
+#' To permanently set a path to use, add the following to your `.Rprofile` file:
+#'
+#' ```
+#' options(ohvbd_cache = "path/to/directory")
+#' ```
+#'
+#' Where `path/to/directory` is the directory in which you wish to cache ohvbd files.
+#'
+#' You can find a good default path by running [set_default_ohvbd_cache()] with no arguments.
+#'
+#' @concept convenience
+#'
+#' @examples
+#' set_default_ohvbd_cache()
+#'
+#' @export
+ set_default_ohvbd_cache <- function(d = NULL) {
+   d <- d %||% tools::R_user_dir("ohvbd", which = "cache")
+   d <- gsub("\\\\", "/", d)
+   options(ohvbd_cache = d)
+
+   cli::cli_alert_success("Set {.arg ohvbd_cache} option to {.path {d}}.")
+   cli::cli_h1("")
+   cli::cli_alert_info("To set this permanently, add the following code to your .Rprofile file:")
+   cli::cli_verbatim("\n")
+   cli::cli_code(paste0('options(ohvbd_cache = "', d, '")'))
+
+   return(invisible(d))
+ }
+
 #' @title Get ohvbd cache locations
 #' @author Francis Windram
 #'
@@ -234,7 +271,24 @@ list_ohvbd_cache <- function(subdir = NULL, path = NULL, treeview = FALSE) {
 #'
 #' @export
 get_default_ohvbd_cache <- function(subdir = NULL, create = TRUE) {
-  outpath <- tools::R_user_dir("ohvbd", which = "cache")
+
+  outpath <- getOption("ohvbd_cache")
+
+  if (is.null(outpath)) {
+    cli::cli_warn(c(
+      "!" = "Caching to a temporary directory.",
+      "!" = "This will be deleted when the R session is done.",
+      "",
+      "To use a permanent cache, run {.fn ohvbd::set_default_ohvbd_cache}",
+      "",
+      "i" = "You only need to do this once per session."),
+      .frequency = "regularly",
+      .frequency_id = "ohvbd_temp_cache_warning"
+      )
+
+    outpath <- file.path(tempdir(), "ohvbd")
+  }
+
   if (!is.null(subdir)) {
     outpath <- file.path(outpath, subdir)
   }
@@ -256,7 +310,7 @@ get_default_ohvbd_cache <- function(subdir = NULL, create = TRUE) {
 #'
 #' @param x The object to check.
 #'
-#' @return NULL
+#' @return A boolean indicating whether an object has been loaded from the cache.
 #'
 #' @examplesIf interactive()
 #' is.cached(c(1,2,3))

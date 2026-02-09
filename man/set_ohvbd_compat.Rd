@@ -9,6 +9,9 @@ set_ohvbd_compat(value = TRUE)
 \arguments{
 \item{value}{The boolean value to set ohvbd_compat to.}
 }
+\value{
+No return value, called for side effects
+}
 \description{
 Set ohvbd to disable ssl verification for calls to external APIs.
 This should not be needed (and not be performed) unless you are otherwise experiencing SSL issues when using the package!

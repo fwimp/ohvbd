@@ -30,9 +30,8 @@
 #'
 #' @examplesIf interactive()
 #' .precompute_vignettes("vignettes")
-
-
-.precompute_vignettes <- function(d, cores = 8, pkgpath = ".", onlymodified = TRUE, fileext = ".orig") {
+#'
+.precompute_vignettes <- function(d = "vignettes", cores = 8, pkgpath = ".", onlymodified = TRUE, fileext = ".orig") {
   rlang::check_installed(c("cli", "withr", "devtools", "knitr"))
   parmode <- rlang::is_installed(c("stringr", "knitr", "doParallel", "foreach", "parallel"))
   if (!getOption("ohvbd_devmode", default = FALSE)) {
@@ -343,6 +342,33 @@
   outdf <- data.frame(package = pkgs, func = called_funcs)
   outdf <- outdf |> dplyr::arrange(package, func)
   return(outdf)
+}
+
+#' @title Find the functions that depend upon a given function
+#'
+#' @param name The name of a function in `func_calls` to evaluate.
+#' @param func_calls A data.frame of functions called, the packages these functions are from, and the caller (as created by `.parse_folder_function_calls()`)
+#'
+#' @returns A vector of package functions that depend directly or indirectly on `name`.
+#'
+#' @examples
+#' func_calls <- .parse_folder_function_calls("./R", packagepath = ".")
+#' .find_function_revdeps("get_default_ohvbd_cache", func_calls)
+.find_function_revdeps <- function(name, func_calls) {
+  if (!(name %in% func_calls$func)) {
+    cli::cli_abort(c("x" = "Function not called by anything."))
+  }
+
+  calling_funcs <- func_calls$caller[which(func_calls$func == name)]
+  new_calling_funcs <- calling_funcs
+
+  while (length(new_calling_funcs) >= 1) {
+    new_calling_funcs <- func_calls$caller[which(func_calls$func %in% new_calling_funcs)]
+    new_calling_funcs <- setdiff(new_calling_funcs, calling_funcs)
+    calling_funcs <- union(new_calling_funcs, calling_funcs)
+  }
+
+  return(calling_funcs)
 }
 
 # Only used for internal testing and doesnt need to be checked.

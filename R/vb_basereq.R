@@ -49,7 +49,7 @@ vb_basereq <- function(
 #'
 #' @param value The boolean value to set ohvbd_compat to.
 #' @author Francis Windram
-#' @return NULL
+#' @return No return value, called for side effects
 #'
 #'
 #' @export

@@ -60,6 +60,21 @@ c(1, 2, 3) |> mean()
 
 For the rest of this vignette we will be using a piped-style approach.
 
+## Setting up the cache
+
+Some supporting downloads such as those from AREAdata are large, but rarely updated. As such it's worthwhile keeping these files around if you'll use them regularly.
+
+To do this let's run a command to set up a local cache.
+
+```{r setup_cache}
+library(ohvbd)
+set_default_ohvbd_cache()
+```
+
+Now you've done this, your cached data will not be deleted when you close R (though you must run this command once per session).
+
+When you run this on your own computer, you will receive a message giving instructions on how to permanently set this using your [.Rprofile](https://docs.posit.co/ide/user/ide/guide/environments/r/managing-r.html#rprofile) file.
+
 ## Finding IDs
 
 Datasets in VecTraits and VecDyn, and GBIF are organised by id.
@@ -69,7 +84,6 @@ You can search for ids related to a particular query using the `vbdhub.org` (aka
 In this case let's search the hub for *Aedes aegypti*, the "Yellow Fever mosquito":
 
 ```{r search_hub}
-library(ohvbd)
 aedes_results <- search_hub("Aedes aegypti")
 summary(aedes_results)
 ```

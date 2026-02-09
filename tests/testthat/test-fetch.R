@@ -7,7 +7,7 @@ test_that("fetch_vt returns vt ohvbd.responses object", {
 
 test_that("fetch_vd returns vd ohvbd.responses object", {
   vcr::local_cassette("fetch_vd")
-  out <- suppressMessages(ohvbd.ids(364, "vd") |> fetch_vd())
+  out <- suppressWarnings(suppressMessages(ohvbd.ids(364, "vd") |> fetch_vd())) # Will warn due to unset cache path which is fine.
   expect_s3_class(out, "ohvbd.responses")
   expect_true(is_from(out, "vd"))
 })

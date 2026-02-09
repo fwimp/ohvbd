@@ -236,3 +236,18 @@ filter_db <- function(ids, db) {
     return(selectedids$id)
   }
 }
+
+parse_hub_query_dsl <- function(q, call = rlang::caller_env()) {
+  if (!rlang::is_installed(c("rgbif", "stringr"))) {
+    cli::cli_abort(c(
+      "x" = "Using the hub query DSL requires the {.pkg rgbif} and {.pkg stringr} packages.",
+      "i" = "Please ensure {.pkg rgbif} and {.pkg stringr} are installed."
+    ), call = call)
+  }
+
+  # Extract any terms in curly braces, trim braces and ws, and squish ws between words
+  taxon_terms <- stringr::str_squish(stringr::str_replace_all(stringr::str_extract_all(q, "\\{([^}]+)\\}")[[1]], "\\{|\\}", ""))
+  # Remove any terms in curly braces from query, trim ws, and squish ws between words
+  filtered_query <- stringr::str_squish(stringr::str_replace_all(q, "\\{([^}]+)\\}", ""))
+  return(list(taxon_terms = taxon_terms, query = filtered_query))
+}

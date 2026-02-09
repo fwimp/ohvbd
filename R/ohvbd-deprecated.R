@@ -26,7 +26,7 @@ extract <- function(res, ...) {
 #'
 #' @param cache_location location of the cache.
 #'
-#' @return NULL
+#' @return No return value, called for side effects
 #'
 #' @concept deprecated
 #' @export

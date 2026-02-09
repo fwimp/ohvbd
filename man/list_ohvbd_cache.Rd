@@ -13,6 +13,9 @@ list_ohvbd_cache(subdir = NULL, path = NULL, treeview = FALSE)
 
 \item{treeview}{display the full cache in a tree structure}
 }
+\value{
+No return value
+}
 \description{
 List all ohvbd cached files
 }

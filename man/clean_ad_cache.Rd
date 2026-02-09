@@ -9,6 +9,9 @@ clean_ad_cache(cache_location = NULL)
 \arguments{
 \item{cache_location}{location of the cache.}
 }
+\value{
+No return value, called for side effects
+}
 \description{
 Delete all rda files from ohvbd AREAdata cache (Deprecated)
 }

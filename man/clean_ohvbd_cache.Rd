@@ -15,6 +15,9 @@ clean_ohvbd_cache(subdir = NULL, path = NULL, dryrun = FALSE, force = FALSE)
 
 \item{force}{do not ask for confirmation before cleaning.}
 }
+\value{
+No return value, called for side effects
+}
 \description{
 Delete files from ohvbd cache directories
 }
