@@ -9,7 +9,7 @@ authors:
     orcid: 0000-0002-2129-826X
     corresponding: true
     affiliation: 1 # (Multiple affiliations must be quoted)
-  - name: Robert Jones
+  - name: Robert T. Jones
     orcid: 0000-0001-6421-0881 
     affiliation: 2
   - name: Stanislav Modrak
@@ -102,7 +102,7 @@ Messages are provided by `ohvbd` through the `cli` and `rlang` packages to ensur
 
 Often, data can lose its associated citations during data analysis. This can make it hard or impossible to cite data generators appropriately. `ohvbd` uses a combination of automated metadata retrieval and coding guardrails to ensure that citations can be rediscovered using the minimum possible source data. Citation columns are automatically added to data filtering operations within `ohvbd`, and provenance data is kept within attributes of internal data structures to ensure that citations can be retrieved when required.
 
-## Tradeoffs and Choices
+## Tradeoffs and choices
 
 A common issue during R package development is namespace collision: where two functions from different packages share the same name or generic. During the testing of early versions of `ohvbd`, the `glean()` family of functions was originally named `extract()`. This sometimes led to significant issues when other packages were loaded after `ohvbd`. The extract generic function could be overloaded by various packages (particularly `tidyr`, a commonly used data manipulation package), which led to major parts of `ohvbd` becoming nonfunctional. Given that it is not possible (or desirable) to control the order in which a user loads a package, we chose to rename the function to an alternative: `glean()`.
 
@@ -134,7 +134,7 @@ Figure sizes can be customized by adding an optional second parameter:
 
 We would like to acknowledge the other members of the One Health VBD Hub team (Sarah Kelly, Marion England, Hannah Vineer, & Christopher Sanders) for their feedback on both the paper and package, the steering committee (Helen Roberts, Simon Smith, Jolyon Medlock, Samuel Rund, George Christophides, Frederik Seelig, & Marieta Braks), the One Health Approaches to Vector-Borne Disease Research Consortia and the wider One Health VBD Hub community for their input, advice, and testing throughout the development of ohvbd. Finally, we would like to recognise the funding provided by BBSRC and Defra (BB/Y008766/1).
 
-# Data Availability Statement
+# Data availability statement
 
 No new data were created during the development of this package. All code is available at https://www.github.com/fwimp/ohvbd.
 
