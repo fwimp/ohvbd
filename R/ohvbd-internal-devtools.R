@@ -371,6 +371,95 @@
   return(calling_funcs)
 }
 
+#' Basic vbdhub ggplot2 theme
+#'
+#' @returns a theme object
+theme_vbdhub <- function() {
+  theme_obj <- ggplot2::theme_minimal(base_family = "sans")
+  theme_obj <- theme_obj +
+    ggplot2::theme(
+      plot.title = ggplot2::element_text(
+        size = 18,
+        face = "bold",
+        color = "#333333", # dark gray
+        margin = ggplot2::margin(b = 10)
+      ),
+      plot.subtitle = ggplot2::element_text(
+        size = 14,
+        color = "#999999", # medium gray
+        margin = ggplot2::margin(b = 10)
+      ),
+      plot.caption = ggplot2::element_text(
+        size = 13,
+        color = "#777777", # light gray
+        margin = ggplot2::margin(t = 15),
+        hjust = 0
+      ),
+      axis.text = ggplot2::element_text(
+        size = 11,
+        color = "#333333" # dark gray
+      )
+    )
+  theme_obj <- theme_obj +
+    ggplot2::theme(
+      panel.grid.minor = ggplot2::element_blank(),
+      panel.grid.major = ggplot2::element_line(
+        linetype = "dashed",
+        linewidth = 0.15,
+        color = "#ddd"
+      ),
+      panel.grid.major.x = ggplot2::element_blank(),
+      axis.ticks.x = ggplot2::element_line(
+        linetype = "solid",
+        linewidth = 0.25,
+        color = "#999999"
+      ),
+      axis.ticks.length.x = ggplot2::unit(4, units = "pt")
+    )
+}
+
+#' Plot downloads of a package from the Rstudio CRAN mirror
+#'
+#' @param pkg The name of the package to plot.
+#' @param timeframe The timeframe of downloads to retrieve.
+#' @param cumulative Whether to show the cumulative downloads.
+#'
+#' @returns a ggplot2 plot object
+#'
+#' @examples
+#' plot_pkg_downloads(pkg = "rlang", timeframe = 365, cumulative = TRUE)
+plot_pkg_downloads <- function(pkg = "ohvbd", timeframe = NULL, cumulative = FALSE) {
+  if (is.null(timeframe)) {
+    from <- "2026-02-09"
+    timeframe <- -1
+  } else {
+    from <- format(lubridate::now() - lubridate::days(timeframe), format = "%Y-%m-%d")
+  }
+  to <- format(lubridate::now(), format = "%Y-%m-%d")
+  dls <- cranlogs::cran_downloads(pkg, from = from, to = to)
+  # TODO: Detect whether missing tail end points and predict them?
+  dls$cumcount <- cumsum(dls$count)
+  if (cumulative) {
+    p <- ggplot2::ggplot(dls, ggplot2::aes(x = date, y = cumcount)) +
+      ggplot2::labs(x = NULL, y = NULL, title = glue::glue("Cumulative Downloads of {{{pkg}}}"), caption = "Data source: RStudio CRAN mirror via {cranlogs}") +
+      ggplot2::scale_y_continuous(limits = c(0, max(dls$cumcount)))
+  } else {
+    p <- ggplot2::ggplot(dls, ggplot2::aes(x = date, y = count)) +
+      ggplot2::labs(x = NULL, y = NULL, title = glue::glue("Downloads of {{{pkg}}} by Day"), caption = "Data source: RStudio CRAN mirror via {cranlogs}") +
+      ggplot2::scale_y_continuous(limits = c(0, max(dls$count)))
+  }
+  p <- p + ggplot2::geom_line(linewidth = 0.75, colour = "#ff7f2f")
+
+  if (timeframe <= 30) {
+    p <- p + ggplot2::geom_point(colour = "#ff7f2f", size = 3)
+  }
+
+  p <- p + theme_vbdhub()
+
+
+  return(p)
+}
+
 # Only used for internal testing and doesnt need to be checked.
 #
 # nolint start
