@@ -24,9 +24,12 @@ authors:
   - name: Marta S. Shocket
     orcid: 0000-0002-8995-4446
     affiliation: 3
+  - name: Hannah R. Vineer
+    orcid: 0000-0002-1488-0315
+    affiliation: 4
   - name: Steven M. White
     orcid: 0000-0002-3192-9969
-    affiliation: 4
+    affiliation: 5
   - name: Lauren J. Cator
     orcid: 0000-0002-6627-1490
     affiliation: 1
@@ -40,8 +43,11 @@ affiliations:
  - name: Lancaster Environment Centre, Lancaster University, Bailrigg, Lancaster, Lancashire, UK
    index: 3
    ror: 04f2nsd36
- - name: UK Centre for Ecology & Hydrology, Benson Lane, Wallingford, Oxfordshire, UK
+ - name: Department of Infection Biology and Microbiomes, Institute of Infection, Veterinary and Ecological Sciences, University of Liverpool, Liverpool, UK
    index: 4
+   ror: 04xs57h96
+ - name: UK Centre for Ecology & Hydrology, Benson Lane, Wallingford, Oxfordshire, UK
+   index: 5
    ror: 00pggkr55
 date: 16 January 2026
 bibliography: paper.bib
