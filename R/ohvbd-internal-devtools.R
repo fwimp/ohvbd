@@ -47,7 +47,7 @@
 
   # Set up for run
   pkg <- devtools::as.package(pkgpath)
-  vs <- list.files("vignettes", pattern = paste0("*", fileext), full.names = TRUE)
+  vs <- list.files(d, pattern = paste0("*", fileext), full.names = TRUE)
   outfiles <- stringr::str_replace(vs, stringr::fixed(fileext), ".Rmd")
 
   # Check for a lack of files!
