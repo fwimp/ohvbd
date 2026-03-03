@@ -1,12 +1,25 @@
 # Internal dev functions
 
+#' Traverse up a directory on a path/vector of paths
+#'
+#' @param v A vector of paths to traverse.
+#' @param n The number of directories to traverse each path upwards.
+#'
+#' @returns A vector of traversed paths.
+#'
+#' @examples
+#' path_traverse_up(getwd(), 1)
+path_traverse_up <- function(v, n = 1) {
+  sapply(strsplit(v, split = "/"), \(x) {paste(head(x, length(x)-min(length(x), n)), collapse = "/")})
+}
+
 #' @title Precompute package vignettes (INTERNAL ONLY)
 #'
 #' @description
-#' Precompute all ".orig" package vignettes within the vignettes folder.
+#' Precompute all ".Rmd" package vignettes within the prerender_vignettes folder (or another specified folder).
 #'
 #' @param inpath Directory of vignettes.
-#' @param outpath Directory within which to put computed vignettes.
+#' @param outpath Directory within which to put computed vignettes. If NULL, defaults to a sister folder to `inpath` named "vignettes".
 #' @param cores Number of cores to use in parallel mode, set to 1 for sequential mode.
 #' @param pkgpath The path of the package (if not in the current dir).
 #' @param onlynodified Only re-compute modified readmes (defaults to TRUE).
@@ -28,17 +41,20 @@
 #' - devtools
 #' - withr
 #'
+#' @section Setup:
+#' Generally this function expects that you have a folder `inpath` at the top level of your package (such as "prerender_vignettes"). This folder should be ignored in your .Rbuildignore file.
+#'
 #' @section Small protections:
 #' By default this function renders vignettes into `outpath` and makes them READ-ONLY.
 #' This is trivial to undo, but should just add a step to make sure you really want to change the precomputed vignette rather than the source.
+#'
 #'
 #' @author Francis Windram
 #'
 #' @examplesIf interactive()
 #' .precompute_vignettes("vignettes")
 #'
-.precompute_vignettes <- function(inpath = "vignettes", outpath = NULL, cores = 8, pkgpath = ".", onlymodified = TRUE, fileext = ".Rmd", protect = TRUE) {
-  browser()
+.precompute_vignettes <- function(inpath = "prerender_vignettes", outpath = NULL, cores = 8, pkgpath = ".", onlymodified = TRUE, fileext = ".Rmd", protect = TRUE) {
   rlang::check_installed(c("cli", "withr", "devtools", "knitr"))
   parmode <- rlang::is_installed(c("stringr", "knitr", "doParallel", "foreach", "parallel"))
   if (!getOption("ohvbd_devmode", default = FALSE)) {
@@ -53,7 +69,12 @@
   }
 
   if (is.null(outpath)) {
-    outpath <- path_traverse_up(inpath, 1)
+    outtmp <- path_traverse_up(inpath, 1)
+    if (nchar(outtmp) == 0) {
+      outpath <- "vignettes"
+    } else {
+      outpath <- file.path(outtmp, "vignettes")
+    }
   }
 
   if (inpath == outpath && tolower(fileext) == ".rmd") {
@@ -139,20 +160,6 @@
     cli::cli_alert_success("Made {length(vs)} vignette{?s} read-only.")
   }
   invisible(NULL)
-}
-
-
-#' Traverse up a directory on a path/vector of paths
-#'
-#' @param v A vector of paths to traverse.
-#' @param n The number of directories to traverse each path upwards.
-#'
-#' @returns A vector of traversed paths.
-#'
-#' @examples
-#' path_traverse_up(getwd(), 1)
-path_traverse_up <- function(v, n = 1) {
-  sapply(strsplit(v, split = "/"), \(x) {paste(head(x, length(x)-min(length(x), n)), collapse = "/")})
 }
 
 #' @title Find the functions called in an R file
