@@ -149,11 +149,11 @@ file.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">aedes_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/search_hub.html">search_hub</a></span><span class="op">(</span><span class="st">"Aedes aegypti"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">aedes_results</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Rows: 150, Query: Aedes aegypti</span></span>
+<pre><code><span><span class="co">## Rows: 159, Query: Aedes aegypti</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Split by database:</span></span>
 <span><span class="co">## gbif   px   vd   vt </span></span>
-<span><span class="co">##   21   46   12   71</span></span></code></pre>
+<span><span class="co">##   21   49   18   71</span></span></code></pre>
 <p>You can see here there are 20 GBIF datasets, 10 VecDyn datasets, and
 71 VecTraits datasets.</p>
 <p>However right now we only have the ids of the data, not the data
@@ -177,11 +177,8 @@ best) get garbage.</p>
 <span><span class="va">aedes_vt</span></span></code></pre></div>
 <pre><code><span><span class="co">## &lt;ohvbd.ids&gt;</span></span>
 <span><span class="co">## Database: vt</span></span>
-<span><span class="co">##  [1]  474  475  148  578  126  556  142  144  169  580  577  285  287  863  865</span></span>
-<span><span class="co">## [16]  357  473  476  149  573  576  565  555  146  841  842  356  170  214  579</span></span>
-<span><span class="co">## [31]  864  359  355  143  147  564  574  575  124  125  346  553  554  354  853</span></span>
-<span><span class="co">## [46]  286  901  825  826  145  906  892  893  358  854  855  911  860  828  910</span></span>
-<span><span class="co">## [61]  572  557  558  571 1506 1510 1511 1512 1507 1508 1509</span></span></code></pre>
+<span><span class="co">##  [1]  474  475  148  578  126  556  142  144  169  580  577  285  287  863  865  357  476  473  149  573  576  565  555  146  841  842  356  170  214  579  864  359  355  143  147  564  574  575  124</span></span>
+<span><span class="co">## [40]  125  346  553  554  354  853  286  901  825  826  145  906  892  893  358  854  855  911  828  860  910  572  557  558  571 1506 1510 1511 1512 1508 1509 1507</span></span></code></pre>
 <p>If you only searched the hub for one database, by default
 <code><a href="../reference/search_hub.html">search_hub()</a></code> will automatically perform the
 <code><a href="../reference/filter_db.html">filter_db()</a></code> operation for you!</p>
@@ -189,11 +186,8 @@ best) get garbage.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/search_hub.html">search_hub</a></span><span class="op">(</span><span class="st">"Aedes aegypti"</span>, db <span class="op">=</span> <span class="st">"vt"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## &lt;ohvbd.ids&gt;</span></span>
 <span><span class="co">## Database: vt</span></span>
-<span><span class="co">##  [1]  474  475  148  578  126  556  142  144  169  580  577  285  287  863  865</span></span>
-<span><span class="co">## [16]  357  473  476  149  573  576  565  555  146  841  842  356  170  214  579</span></span>
-<span><span class="co">## [31]  864  359  355  143  147  564  574  575  124  125  346  553  554  354  853</span></span>
-<span><span class="co">## [46]  286  901  825  826  145  906  892  893  358  854  855  911  860  828  910</span></span>
-<span><span class="co">## [61]  572  557  558  571 1506 1510 1511 1512 1507 1508 1509</span></span></code></pre>
+<span><span class="co">##  [1]  474  475  148  578  126  556  142  144  169  580  577  285  287  863  865  357  476  473  149  573  576  565  555  146  841  842  356  170  214  579  864  359  355  143  147  564  574  575  124</span></span>
+<span><span class="co">## [40]  125  346  553  554  354  853  286  901  825  826  145  906  892  893  358  854  855  911  828  860  910  572  557  558  571 1506 1510 1511 1512 1508 1509 1507</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="getting-data">Getting data<a class="anchor" aria-label="anchor" href="#getting-data"></a>
@@ -337,20 +331,13 @@ look at only rows containing <em>Axinoscymnus</em>:</p>
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Interactor1Genus</span> <span class="op">==</span> <span class="st">"Axinoscymnus"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## &lt;ohvbd.data.frame&gt;</span></span>
 <span><span class="co">## Database: vt</span></span>
-<span><span class="co">##   DatasetID Interactor1Genus Interactor1Species Interactor2Genus</span></span>
-<span><span class="co">## 1       160     Axinoscymnus         cardilobus          Bemisia</span></span>
-<span><span class="co">## 2       160     Axinoscymnus         cardilobus          Bemisia</span></span>
-<span><span class="co">## 3       160     Axinoscymnus         cardilobus          Bemisia</span></span>
-<span><span class="co">## 4       160     Axinoscymnus         cardilobus          Bemisia</span></span>
-<span><span class="co">## 5       160     Axinoscymnus         cardilobus          Bemisia</span></span>
-<span><span class="co">## 6       160     Axinoscymnus         cardilobus          Bemisia</span></span>
-<span><span class="co">##   Interactor2Species</span></span>
-<span><span class="co">## 1             tabaci</span></span>
-<span><span class="co">## 2             tabaci</span></span>
-<span><span class="co">## 3             tabaci</span></span>
-<span><span class="co">## 4             tabaci</span></span>
-<span><span class="co">## 5             tabaci</span></span>
-<span><span class="co">## 6             tabaci</span></span></code></pre>
+<span><span class="co">##   DatasetID Interactor1Genus Interactor1Species Interactor2Genus Interactor2Species</span></span>
+<span><span class="co">## 1       160     Axinoscymnus         cardilobus          Bemisia             tabaci</span></span>
+<span><span class="co">## 2       160     Axinoscymnus         cardilobus          Bemisia             tabaci</span></span>
+<span><span class="co">## 3       160     Axinoscymnus         cardilobus          Bemisia             tabaci</span></span>
+<span><span class="co">## 4       160     Axinoscymnus         cardilobus          Bemisia             tabaci</span></span>
+<span><span class="co">## 5       160     Axinoscymnus         cardilobus          Bemisia             tabaci</span></span>
+<span><span class="co">## 6       160     Axinoscymnus         cardilobus          Bemisia             tabaci</span></span></code></pre>
 <p>In this scenario, <em>Bemisia</em> is present in the dataset, but it
 is as the “target” rather than the animal that the trait is referring
 to.</p>
@@ -399,7 +386,7 @@ every time you run your script. This is as easy as running
 <code><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv()</a></code> on your dataframe, then reading it in later
 with <code><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv()</a></code></p>
 <p><span style="opacity: 0.1;font-size: small;">Built in
-18.0008059s</span></p>
+13.9313612s</span></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

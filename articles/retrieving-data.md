@@ -90,11 +90,11 @@ aedes_results <- search_hub("Aedes aegypti")
 summary(aedes_results)
 ```
 
-    ## Rows: 150, Query: Aedes aegypti
+    ## Rows: 159, Query: Aedes aegypti
     ## 
     ## Split by database:
     ## gbif   px   vd   vt 
-    ##   21   46   12   71
+    ##   21   49   18   71
 
 You can see here there are 20 GBIF datasets, 10 VecDyn datasets, and 71
 VecTraits datasets.
@@ -123,11 +123,8 @@ aedes_vt
 
     ## <ohvbd.ids>
     ## Database: vt
-    ##  [1]  474  475  148  578  126  556  142  144  169  580  577  285  287  863  865
-    ## [16]  357  473  476  149  573  576  565  555  146  841  842  356  170  214  579
-    ## [31]  864  359  355  143  147  564  574  575  124  125  346  553  554  354  853
-    ## [46]  286  901  825  826  145  906  892  893  358  854  855  911  860  828  910
-    ## [61]  572  557  558  571 1506 1510 1511 1512 1507 1508 1509
+    ##  [1]  474  475  148  578  126  556  142  144  169  580  577  285  287  863  865  357  476  473  149  573  576  565  555  146  841  842  356  170  214  579  864  359  355  143  147  564  574  575  124
+    ## [40]  125  346  553  554  354  853  286  901  825  826  145  906  892  893  358  854  855  911  828  860  910  572  557  558  571 1506 1510 1511 1512 1508 1509 1507
 
 If you only searched the hub for one database, by default
 [`search_hub()`](https://ohvbd.vbdhub.org/reference/search_hub.md) will
@@ -141,11 +138,8 @@ search_hub("Aedes aegypti", db = "vt")
 
     ## <ohvbd.ids>
     ## Database: vt
-    ##  [1]  474  475  148  578  126  556  142  144  169  580  577  285  287  863  865
-    ## [16]  357  473  476  149  573  576  565  555  146  841  842  356  170  214  579
-    ## [31]  864  359  355  143  147  564  574  575  124  125  346  553  554  354  853
-    ## [46]  286  901  825  826  145  906  892  893  358  854  855  911  860  828  910
-    ## [61]  572  557  558  571 1506 1510 1511 1512 1507 1508 1509
+    ##  [1]  474  475  148  578  126  556  142  144  169  580  577  285  287  863  865  357  476  473  149  573  576  565  555  146  841  842  356  170  214  579  864  359  355  143  147  564  574  575  124
+    ## [40]  125  346  553  554  354  853  286  901  825  826  145  906  892  893  358  854  855  911  828  860  910  572  557  558  571 1506 1510 1511 1512 1508 1509 1507
 
 ## Getting data
 
@@ -324,20 +318,13 @@ df |> dplyr::filter(Interactor1Genus == "Axinoscymnus") |> head()
 
     ## <ohvbd.data.frame>
     ## Database: vt
-    ##   DatasetID Interactor1Genus Interactor1Species Interactor2Genus
-    ## 1       160     Axinoscymnus         cardilobus          Bemisia
-    ## 2       160     Axinoscymnus         cardilobus          Bemisia
-    ## 3       160     Axinoscymnus         cardilobus          Bemisia
-    ## 4       160     Axinoscymnus         cardilobus          Bemisia
-    ## 5       160     Axinoscymnus         cardilobus          Bemisia
-    ## 6       160     Axinoscymnus         cardilobus          Bemisia
-    ##   Interactor2Species
-    ## 1             tabaci
-    ## 2             tabaci
-    ## 3             tabaci
-    ## 4             tabaci
-    ## 5             tabaci
-    ## 6             tabaci
+    ##   DatasetID Interactor1Genus Interactor1Species Interactor2Genus Interactor2Species
+    ## 1       160     Axinoscymnus         cardilobus          Bemisia             tabaci
+    ## 2       160     Axinoscymnus         cardilobus          Bemisia             tabaci
+    ## 3       160     Axinoscymnus         cardilobus          Bemisia             tabaci
+    ## 4       160     Axinoscymnus         cardilobus          Bemisia             tabaci
+    ## 5       160     Axinoscymnus         cardilobus          Bemisia             tabaci
+    ## 6       160     Axinoscymnus         cardilobus          Bemisia             tabaci
 
 In this scenario, *Bemisia* is present in the dataset, but it is as the
 “target” rather than the animal that the trait is referring to.
@@ -396,4 +383,4 @@ time you run your script. This is as easy as running
 dataframe, then reading it in later with
 [`read.csv()`](https://rdrr.io/r/utils/read.table.html)
 
-Built in 18.0008059s
+Built in 13.9313612s
