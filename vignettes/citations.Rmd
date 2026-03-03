@@ -65,14 +65,14 @@ df |> fetch_citations()
 ## 1 Pawar, S., Huxley, P.J., Smallwood, T.R.C. et al. Variation in temperature of peak trait performance constrains adaptation of arthropod populations to climatic warming. Nat Ecol Evol 8, 500–510 (2024).
 ## 2 Pawar, S., Huxley, P.J., Smallwood, T.R.C. et al. Variation in temperature of peak trait performance constrains adaptation of arthropod populations to climatic warming. Nat Ecol Evol 8, 500–510 (2024).
 ## 3 Pawar, S., Huxley, P.J., Smallwood, T.R.C. et al. Variation in temperature of peak trait performance constrains adaptation of arthropod populations to climatic warming. Nat Ecol Evol 8, 500–510 (2024).
-## 4                                                                                                                                                                                                      <NA>
-## 5                                                                                                                                                                                                      <NA>
+## 4                                      Da Re, D., Andreo, V., San Miguel, T.V. et al. AedesTraits: A global dataset of temperature–dependent trait responses in Aedes mosquitoes. Sci Data 12, 2033 (2025).
+## 5                                      Da Re, D., Andreo, V., San Miguel, T.V. et al. AedesTraits: A global dataset of temperature–dependent trait responses in Aedes mosquitoes. Sci Data 12, 2033 (2025).
 ##                 CuratedByDOI                            DOI SubmittedBy ContributorEmail
 ## 1 10.1038/s41559-023-02301-8      10.1017/S0950268809002040 Paul Huxley phuxly@gmail.com
 ## 2 10.1038/s41559-023-02301-8      10.1017/S0950268809002040 Paul Huxley phuxly@gmail.com
 ## 3 10.1038/s41559-023-02301-8 10.1016/j.jinsphys.2015.08.001 Paul Huxley phuxly@gmail.com
-## 4                       <NA>     10.1038/s42003-022-03030-7 Paul Huxley phuxly@gmail.com
-## 5                       <NA>   10.1371/journal.pone.0135489 Paul Huxley phuxly@gmail.com
+## 4 10.1038/s41597-025-06461-z     10.1038/s42003-022-03030-7 Paul Huxley phuxly@gmail.com
+## 5 10.1038/s41597-025-06461-z   10.1371/journal.pone.0135489 Paul Huxley phuxly@gmail.com
 ```
 
 If you look closely at the output, you should see that a couple of these datasets are derived from the same paper.
@@ -95,13 +95,13 @@ df |> fetch_citations(minimise = TRUE)
 ##                                                                                                                                                                                           CuratedByCitation
 ## 1 Pawar, S., Huxley, P.J., Smallwood, T.R.C. et al. Variation in temperature of peak trait performance constrains adaptation of arthropod populations to climatic warming. Nat Ecol Evol 8, 500–510 (2024).
 ## 2 Pawar, S., Huxley, P.J., Smallwood, T.R.C. et al. Variation in temperature of peak trait performance constrains adaptation of arthropod populations to climatic warming. Nat Ecol Evol 8, 500–510 (2024).
-## 3                                                                                                                                                                                                      <NA>
-## 4                                                                                                                                                                                                      <NA>
+## 3                                      Da Re, D., Andreo, V., San Miguel, T.V. et al. AedesTraits: A global dataset of temperature–dependent trait responses in Aedes mosquitoes. Sci Data 12, 2033 (2025).
+## 4                                      Da Re, D., Andreo, V., San Miguel, T.V. et al. AedesTraits: A global dataset of temperature–dependent trait responses in Aedes mosquitoes. Sci Data 12, 2033 (2025).
 ##                 CuratedByDOI                            DOI SubmittedBy ContributorEmail
 ## 1 10.1038/s41559-023-02301-8      10.1017/S0950268809002040 Paul Huxley phuxly@gmail.com
 ## 2 10.1038/s41559-023-02301-8 10.1016/j.jinsphys.2015.08.001 Paul Huxley phuxly@gmail.com
-## 3                       <NA>     10.1038/s42003-022-03030-7 Paul Huxley phuxly@gmail.com
-## 4                       <NA>   10.1371/journal.pone.0135489 Paul Huxley phuxly@gmail.com
+## 3 10.1038/s41597-025-06461-z     10.1038/s42003-022-03030-7 Paul Huxley phuxly@gmail.com
+## 4 10.1038/s41597-025-06461-z   10.1371/journal.pone.0135489 Paul Huxley phuxly@gmail.com
 ```
 
 ### Missing columns
@@ -153,13 +153,13 @@ df2 |> fetch_citations(minimise = TRUE)
 ##                                                                                                                                                                                           CuratedByCitation
 ## 1 Pawar, S., Huxley, P.J., Smallwood, T.R.C. et al. Variation in temperature of peak trait performance constrains adaptation of arthropod populations to climatic warming. Nat Ecol Evol 8, 500–510 (2024).
 ## 2 Pawar, S., Huxley, P.J., Smallwood, T.R.C. et al. Variation in temperature of peak trait performance constrains adaptation of arthropod populations to climatic warming. Nat Ecol Evol 8, 500–510 (2024).
-## 3                                                                                                                                                                                                      <NA>
-## 4                                                                                                                                                                                                      <NA>
+## 3                                      Da Re, D., Andreo, V., San Miguel, T.V. et al. AedesTraits: A global dataset of temperature–dependent trait responses in Aedes mosquitoes. Sci Data 12, 2033 (2025).
+## 4                                      Da Re, D., Andreo, V., San Miguel, T.V. et al. AedesTraits: A global dataset of temperature–dependent trait responses in Aedes mosquitoes. Sci Data 12, 2033 (2025).
 ##                 CuratedByDOI                            DOI SubmittedBy ContributorEmail
 ## 1 10.1038/s41559-023-02301-8      10.1017/S0950268809002040 Paul Huxley phuxly@gmail.com
 ## 2 10.1038/s41559-023-02301-8 10.1016/j.jinsphys.2015.08.001 Paul Huxley phuxly@gmail.com
-## 3                       <NA>     10.1038/s42003-022-03030-7 Paul Huxley phuxly@gmail.com
-## 4                       <NA>   10.1371/journal.pone.0135489 Paul Huxley phuxly@gmail.com
+## 3 10.1038/s41597-025-06461-z     10.1038/s42003-022-03030-7 Paul Huxley phuxly@gmail.com
+## 4 10.1038/s41597-025-06461-z   10.1371/journal.pone.0135489 Paul Huxley phuxly@gmail.com
 ```
 
 ### Orphaned data
@@ -237,14 +237,14 @@ ohvbd.ids(unique(df_filtered$DatasetID), "vt") |>
 ## 1 Pawar, S., Huxley, P.J., Smallwood, T.R.C. et al. Variation in temperature of peak trait performance constrains adaptation of arthropod populations to climatic warming. Nat Ecol Evol 8, 500–510 (2024).
 ## 2 Pawar, S., Huxley, P.J., Smallwood, T.R.C. et al. Variation in temperature of peak trait performance constrains adaptation of arthropod populations to climatic warming. Nat Ecol Evol 8, 500–510 (2024).
 ## 3 Pawar, S., Huxley, P.J., Smallwood, T.R.C. et al. Variation in temperature of peak trait performance constrains adaptation of arthropod populations to climatic warming. Nat Ecol Evol 8, 500–510 (2024).
-## 4                                                                                                                                                                                                      <NA>
-## 5                                                                                                                                                                                                      <NA>
+## 4                                      Da Re, D., Andreo, V., San Miguel, T.V. et al. AedesTraits: A global dataset of temperature–dependent trait responses in Aedes mosquitoes. Sci Data 12, 2033 (2025).
+## 5                                      Da Re, D., Andreo, V., San Miguel, T.V. et al. AedesTraits: A global dataset of temperature–dependent trait responses in Aedes mosquitoes. Sci Data 12, 2033 (2025).
 ##                 CuratedByDOI                            DOI SubmittedBy ContributorEmail
 ## 1 10.1038/s41559-023-02301-8      10.1017/S0950268809002040 Paul Huxley phuxly@gmail.com
 ## 2 10.1038/s41559-023-02301-8      10.1017/S0950268809002040 Paul Huxley phuxly@gmail.com
 ## 3 10.1038/s41559-023-02301-8 10.1016/j.jinsphys.2015.08.001 Paul Huxley phuxly@gmail.com
-## 4                       <NA>     10.1038/s42003-022-03030-7 Paul Huxley phuxly@gmail.com
-## 5                       <NA>   10.1371/journal.pone.0135489 Paul Huxley phuxly@gmail.com
+## 4 10.1038/s41597-025-06461-z     10.1038/s42003-022-03030-7 Paul Huxley phuxly@gmail.com
+## 5 10.1038/s41597-025-06461-z   10.1371/journal.pone.0135489 Paul Huxley phuxly@gmail.com
 ```
 
 To make this easier, `fetch_citations()` will (grumblingly) accept an `ohvbd.ids` object:
@@ -269,14 +269,14 @@ ohvbd.ids(unique(df_filtered$DatasetID), "vt") |>
 ## 1 Pawar, S., Huxley, P.J., Smallwood, T.R.C. et al. Variation in temperature of peak trait performance constrains adaptation of arthropod populations to climatic warming. Nat Ecol Evol 8, 500–510 (2024).
 ## 2 Pawar, S., Huxley, P.J., Smallwood, T.R.C. et al. Variation in temperature of peak trait performance constrains adaptation of arthropod populations to climatic warming. Nat Ecol Evol 8, 500–510 (2024).
 ## 3 Pawar, S., Huxley, P.J., Smallwood, T.R.C. et al. Variation in temperature of peak trait performance constrains adaptation of arthropod populations to climatic warming. Nat Ecol Evol 8, 500–510 (2024).
-## 4                                                                                                                                                                                                      <NA>
-## 5                                                                                                                                                                                                      <NA>
+## 4                                      Da Re, D., Andreo, V., San Miguel, T.V. et al. AedesTraits: A global dataset of temperature–dependent trait responses in Aedes mosquitoes. Sci Data 12, 2033 (2025).
+## 5                                      Da Re, D., Andreo, V., San Miguel, T.V. et al. AedesTraits: A global dataset of temperature–dependent trait responses in Aedes mosquitoes. Sci Data 12, 2033 (2025).
 ##                 CuratedByDOI                            DOI SubmittedBy ContributorEmail
 ## 1 10.1038/s41559-023-02301-8      10.1017/S0950268809002040 Paul Huxley phuxly@gmail.com
 ## 2 10.1038/s41559-023-02301-8      10.1017/S0950268809002040 Paul Huxley phuxly@gmail.com
 ## 3 10.1038/s41559-023-02301-8 10.1016/j.jinsphys.2015.08.001 Paul Huxley phuxly@gmail.com
-## 4                       <NA>     10.1038/s42003-022-03030-7 Paul Huxley phuxly@gmail.com
-## 5                       <NA>   10.1371/journal.pone.0135489 Paul Huxley phuxly@gmail.com
+## 4 10.1038/s41597-025-06461-z     10.1038/s42003-022-03030-7 Paul Huxley phuxly@gmail.com
+## 5 10.1038/s41597-025-06461-z   10.1371/journal.pone.0135489 Paul Huxley phuxly@gmail.com
 ```
 
 #### Forcing the db
@@ -304,14 +304,14 @@ df_filtered |>
 ## 1 Pawar, S., Huxley, P.J., Smallwood, T.R.C. et al. Variation in temperature of peak trait performance constrains adaptation of arthropod populations to climatic warming. Nat Ecol Evol 8, 500–510 (2024).
 ## 2 Pawar, S., Huxley, P.J., Smallwood, T.R.C. et al. Variation in temperature of peak trait performance constrains adaptation of arthropod populations to climatic warming. Nat Ecol Evol 8, 500–510 (2024).
 ## 3 Pawar, S., Huxley, P.J., Smallwood, T.R.C. et al. Variation in temperature of peak trait performance constrains adaptation of arthropod populations to climatic warming. Nat Ecol Evol 8, 500–510 (2024).
-## 4                                                                                                                                                                                                      <NA>
-## 5                                                                                                                                                                                                      <NA>
+## 4                                      Da Re, D., Andreo, V., San Miguel, T.V. et al. AedesTraits: A global dataset of temperature–dependent trait responses in Aedes mosquitoes. Sci Data 12, 2033 (2025).
+## 5                                      Da Re, D., Andreo, V., San Miguel, T.V. et al. AedesTraits: A global dataset of temperature–dependent trait responses in Aedes mosquitoes. Sci Data 12, 2033 (2025).
 ##                 CuratedByDOI                            DOI SubmittedBy ContributorEmail
 ## 1 10.1038/s41559-023-02301-8      10.1017/S0950268809002040 Paul Huxley phuxly@gmail.com
 ## 2 10.1038/s41559-023-02301-8      10.1017/S0950268809002040 Paul Huxley phuxly@gmail.com
 ## 3 10.1038/s41559-023-02301-8 10.1016/j.jinsphys.2015.08.001 Paul Huxley phuxly@gmail.com
-## 4                       <NA>     10.1038/s42003-022-03030-7 Paul Huxley phuxly@gmail.com
-## 5                       <NA>   10.1371/journal.pone.0135489 Paul Huxley phuxly@gmail.com
+## 4 10.1038/s41597-025-06461-z     10.1038/s42003-022-03030-7 Paul Huxley phuxly@gmail.com
+## 5 10.1038/s41597-025-06461-z   10.1371/journal.pone.0135489 Paul Huxley phuxly@gmail.com
 ```
 
 ### Missing Dataset IDs
@@ -376,4 +376,4 @@ lapply(gbif_cite, rgbif::gbif_citation)
 
 
 
-<span style="opacity: 0.1;font-size: small;">Built in 15.3356099s</span>
+<span style="opacity: 0.1;font-size: small;">Built in 15.390538s</span>

@@ -5,11 +5,13 @@
 #' @description
 #' Precompute all ".orig" package vignettes within the vignettes folder.
 #'
-#' @param d Directory of vignettes.
-#' @param cores Number of cores to use in parallel mode.
+#' @param inpath Directory of vignettes.
+#' @param outpath Directory within which to put computed vignettes.
+#' @param cores Number of cores to use in parallel mode, set to 1 for sequential mode.
 #' @param pkgpath The path of the package (if not in the current dir).
 #' @param onlynodified Only re-compute modified readmes (defaults to TRUE).
-#' @param fileext The file extension of the file (with the ".", defaults to .orig).
+#' @param fileext The file extension of the file (with the ".", defaults to .Rmd).
+#' @param protect Whether to make output files read-only. This defaults to TRUE.
 #'
 #' @note
 #' This is only useful when developing `ohvbd` (or other packages I suppose).
@@ -26,12 +28,17 @@
 #' - devtools
 #' - withr
 #'
+#' @section Small protections:
+#' By default this function renders vignettes into `outpath` and makes them READ-ONLY.
+#' This is trivial to undo, but should just add a step to make sure you really want to change the precomputed vignette rather than the source.
+#'
 #' @author Francis Windram
 #'
 #' @examplesIf interactive()
 #' .precompute_vignettes("vignettes")
 #'
-.precompute_vignettes <- function(d = "vignettes", cores = 8, pkgpath = ".", onlymodified = TRUE, fileext = ".orig") {
+.precompute_vignettes <- function(inpath = "vignettes", outpath = NULL, cores = 8, pkgpath = ".", onlymodified = TRUE, fileext = ".Rmd", protect = TRUE) {
+  browser()
   rlang::check_installed(c("cli", "withr", "devtools", "knitr"))
   parmode <- rlang::is_installed(c("stringr", "knitr", "doParallel", "foreach", "parallel"))
   if (!getOption("ohvbd_devmode", default = FALSE)) {
@@ -45,14 +52,25 @@
     knitr::knit(inpath, output = outpath, quiet = TRUE)
   }
 
+  if (is.null(outpath)) {
+    outpath <- path_traverse_up(inpath, 1)
+  }
+
+  if (inpath == outpath && tolower(fileext) == ".rmd") {
+    cli::cli_abort(c("x" = "{.arg inpath} and {.arg outpath} are the same place and {.arg fileext} = {.val .rmd}!",
+                     "!" = "This would lead to the source files being overwritten, which is probably not what you want!"))
+  }
+
   # Set up for run
   pkg <- devtools::as.package(pkgpath)
-  vs <- list.files(d, pattern = paste0("*", fileext), full.names = TRUE)
-  outfiles <- stringr::str_replace(vs, stringr::fixed(fileext), ".Rmd")
+
+  vs <- list.files(inpath, pattern = paste0("*", fileext), full.names = TRUE)
+  basenames <- stringr::str_replace(basename(vs), stringr::fixed(fileext), ".Rmd")
+  outfiles <- file.path(outpath, basenames)
 
   # Check for a lack of files!
   if (length(vs) < 1) {
-    cli::cli_abort(c("x" = 'No "{fileext}" files detected in {.path {d}}!'))
+    cli::cli_abort(c("x" = 'No "{fileext}" files detected in {.path {inpath}}!'))
   }
 
   if (onlymodified) {
@@ -74,7 +92,7 @@
 
   # Check for a lack of files again!
   if (length(vs) < 1) {
-    cli::cli_alert_success('No modified "{fileext}" files detected in {.path {d}}!')
+    cli::cli_alert_success('No modified "{fileext}" files detected in {.path {inpath}}!')
     return(invisible(NULL))
   }
 
@@ -116,7 +134,25 @@
     cli::cli_progress_done()
   }
   cli::cli_alert_success("Rendered {length(vs)} vignette{?s}.")
+  if (protect) {
+    Sys.chmod(outfiles, mode = "444")
+    cli::cli_alert_success("Made {length(vs)} vignette{?s} read-only.")
+  }
   invisible(NULL)
+}
+
+
+#' Traverse up a directory on a path/vector of paths
+#'
+#' @param v A vector of paths to traverse.
+#' @param n The number of directories to traverse each path upwards.
+#'
+#' @returns A vector of traversed paths.
+#'
+#' @examples
+#' path_traverse_up(getwd(), 1)
+path_traverse_up <- function(v, n = 1) {
+  sapply(strsplit(v, split = "/"), \(x) {paste(head(x, length(x)-min(length(x), n)), collapse = "/")})
 }
 
 #' @title Find the functions called in an R file
