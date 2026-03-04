@@ -362,4 +362,4 @@ Cache location: ../cache/R/ohvbd
 tot_time <- lubridate::as.duration(lubridate::now() - runstart)
 ```
 
-<span style="opacity: 0.1;font-size: small;">Built in `r tot_time`s</span>
+[Built in `r tot_time`s]{style="opacity: 0.1;font-size: small;"}

@@ -273,4 +273,4 @@ One final note to end on: it can be advisable to save any output data in a csv o
 tot_time <- lubridate::as.duration(lubridate::now() - runstart)
 ```
 
-<span style="opacity: 0.1;font-size: small;">Built in `r tot_time`s</span>
+[Built in `r tot_time`s]{style="opacity: 0.1;font-size: small;"}

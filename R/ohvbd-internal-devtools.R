@@ -60,12 +60,14 @@ path_traverse_up <- function(v, n = 1) {
   if (!getOption("ohvbd_devmode", default = FALSE)) {
     cli::cli_alert_warning("This function is only intended to be used for development and should not be used otherwise!")
   }
-  local_knit <- function(inpath, outpath, pkg) {
+  local_knit <- function(inpath, outpath, pkg, expath) {
     # Force packages to be built in their own local env
     withr::local_environment(new.env())
     # Triple dots are generally very bad form, but this is only for dev work
     devtools:::local_install(pkg, quiet = TRUE)
-    knitr::knit(inpath, output = outpath, quiet = TRUE)
+    withr::with_path(expath, {
+      knitr::knit(inpath, output = outpath, quiet = TRUE)
+    })
   }
 
   if (is.null(outpath)) {
@@ -88,6 +90,8 @@ path_traverse_up <- function(v, n = 1) {
   vs <- list.files(inpath, pattern = paste0("*", fileext), full.names = TRUE)
   basenames <- stringr::str_replace(basename(vs), stringr::fixed(fileext), ".Rmd")
   outfiles <- file.path(outpath, basenames)
+  vs <- normalizePath(vs, winslash = "/")
+  outfiles <- suppressWarnings(normalizePath(outfiles, winslash = "/"))
 
   # Check for a lack of files!
   if (length(vs) < 1) {
@@ -117,8 +121,11 @@ path_traverse_up <- function(v, n = 1) {
     return(invisible(NULL))
   }
 
-  cli::cli_alert("{length(vs)} vignette{?s} to render!")
+  # Make all destination files open again so they can be deleted
+  Sys.chmod(outfiles, mode = "777")
 
+
+  cli::cli_alert("{length(vs)} vignette{?s} to render!")
   if (parmode && (cores > 1) && (length(vs) > 1)) {
     # Set up parallel cluster
     n_cores <- parallel::detectCores()
@@ -132,7 +139,7 @@ path_traverse_up <- function(v, n = 1) {
     # Run job in parallel
     done <- tryCatch({
       foreach::`%dopar%`(foreach::foreach(i=1:length(vs), .combine = c), {
-        local_knit(vs[i], outfiles[i], pkg)
+        local_knit(vs[i], outfiles[i], pkg, expath = outpath)
       })
     }, error = function(e) {
       cli::cli_abort(c("x" = "Failed for some reason (try with {.arg {cores = 1}})"), parent = e)
@@ -146,9 +153,11 @@ path_traverse_up <- function(v, n = 1) {
   } else {
     for (i in 1:length(vs)) {
       withr::with_environment(new.env(), {
-        knitr::knit(vs[i], output = outfiles[i], quiet = TRUE)
-        # Just in case this is turned off in the session
-        options("cli.default_handler" = NULL)
+        withr::with_dir(outpath, {
+          knitr::knit(vs[i], output = outfiles[i], quiet = TRUE)
+          # Just in case this is turned off in the session
+          options("cli.default_handler" = NULL)
+        })
       })
       cli::cli_alert_success("Rendered {.path {outfiles[i]}}.")
     }
