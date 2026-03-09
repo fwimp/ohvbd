@@ -16,6 +16,7 @@ Imports:
     curl (>= 6.4.0),
     data.table,
     dplyr,
+    generics,
     httr2 (>= 1.1.1),
     lubridate,
     rlang (>= 1.1.0),
