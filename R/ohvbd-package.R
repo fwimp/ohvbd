@@ -122,3 +122,15 @@
 #' @importFrom utils tail
 ## usethis namespace: end
 NULL
+
+#' @title Force R CMD CHECK to treat packages as imported.
+#'
+#' @note
+#' This allows us to force subdependencies to effectively be resolved at install time.
+#' @return Nothing
+#' @keywords internal
+#'
+.ignore_unused_imports <- function() {
+  generics::union(c(),c())
+  invisible()
+}

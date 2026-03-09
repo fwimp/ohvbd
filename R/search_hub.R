@@ -62,6 +62,9 @@ search_hub <- function(
   # Parse location
   # TODO: Check that WKT is well-formatted
   if (!(is.null(locationpoly))) {
+    if (inherits(locationpoly, "list")) {
+      locationpoly <- locationpoly$location_wkt
+    }
     if (inherits(locationpoly, "SpatVector")) {
       locationpoly <- spatvect_to_multipolygon(locationpoly)
     } else if (is.character(locationpoly)) {
