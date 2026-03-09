@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ohvbd</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,8 +44,12 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="development version" id="ohvbd-development-version">ohvbd (development version)<a class="anchor" aria-label="anchor" href="#ohvbd-development-version"></a></h2>
-</div>
+<h2 class="pkg-version" data-toc-text="1.0.1" id="ohvbd-101">ohvbd 1.0.1<a class="anchor" aria-label="anchor" href="#ohvbd-101"></a></h2>
+<ul><li>
+<code>ohvbd</code> now explicitly depends on <code>generics</code> (as it does anyway via <code>lubridate</code>). This should stop issues loading the package after install.</li>
+<li>
+<code><a href="../reference/search_hub.html">search_hub()</a></code> now correctly interfaces with the output of <code><a href="../reference/match_countries.html">match_countries()</a></code> even when <code>onlywkt</code> is not provided.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.0" id="ohvbd-100">ohvbd 1.0.0<a class="anchor" aria-label="anchor" href="#ohvbd-100"></a></h2><p class="text-muted">CRAN release: 2026-02-09</p>
 <p><em>First CRAN release</em></p>

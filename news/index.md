@@ -1,6 +1,14 @@
 # Changelog
 
-## ohvbd (development version)
+## ohvbd 1.0.1
+
+- `ohvbd` now explicitly depends on `generics` (as it does anyway via
+  `lubridate`). This should stop issues loading the package after
+  install.
+- [`search_hub()`](https://ohvbd.vbdhub.org/reference/search_hub.md) now
+  correctly interfaces with the output of
+  [`match_countries()`](https://ohvbd.vbdhub.org/reference/match_countries.md)
+  even when `onlywkt` is not provided.
 
 ## ohvbd 1.0.0
 
