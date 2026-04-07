@@ -4,6 +4,8 @@
 
 ## ohvbd 1.0.1
 
+CRAN release: 2026-03-09
+
 - `ohvbd` now explicitly depends on `generics` (as it does anyway via
   `lubridate`). This should stop issues loading the package after
   install.
