@@ -116,7 +116,7 @@ Similarly, when piping between functions it is hard to know the class and state 
 
 # Research impact statement
 
-Since its initial development releases, `ohvbd` has been used both in retrieving data for research projects at UK universities, and for bespoke training provided by the One Health VBD Hub. This exposure to the wider research community led to multiple changes to the early internal API, and to increased hardening and sanity-checking throughout the package.
+Since its initial development releases, `ohvbd` has been used both in retrieving data for research projects at UK universities, and for bespoke training provided by the One Health VBD Hub [@coxshall_chapter_2026; @windram_introduction_2025]. This exposure to the wider research community led to multiple changes to the early internal API, and to increased hardening and sanity-checking throughout the package.
 
 In the future, research that aims to interface with any of the supported databases can leverage the programmatic nature of `ohvbd` to minimise the risk of manual-input errors and increase reproducibility at the data-searching and retrieval stage of modelling tasks.
 
