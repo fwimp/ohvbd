@@ -24,6 +24,7 @@ following data sources:
 You can install the stable version of ohvbd from CRAN:
 
 ``` r
+
 install.packages("ohvbd")
 ```
 
@@ -32,6 +33,7 @@ You can alternatively install the development version of ohvbd from
 experimental features:
 
 ``` r
+
 # install.packages("devtools")
 devtools::install_github("fwimp/ohvbd")
 ```
@@ -54,6 +56,7 @@ A basic pipeline for finding and retrieving data on *Ixodes ricinus*
 from the VecTraits database looks something like this:
 
 ``` r
+
 library(ohvbd)
 
 df <- search_hub("Ixodes ricinus") |>

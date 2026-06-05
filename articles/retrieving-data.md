@@ -16,6 +16,7 @@ particular vector species - *Aedes aegypti*, for example. Here’s how
 you’d use `ohvbd` to do that:
 
 ``` r
+
 df <- search_hub("Aedes aegypti", "vt") |>
   fetch() |>
   glean(
@@ -37,6 +38,7 @@ For users who are not familiar, pipes take the output of one command and
 feed it forward to the next command as the first argument:
 
 ``` r
+
 # Find mean of a vector normally
 x <- c(1, 2, 3)
 mean(x)
@@ -45,6 +47,7 @@ mean(x)
     ## [1] 2
 
 ``` r
+
 # Find mean of a vector using pipes
 c(1, 2, 3) |> mean()
 ```
@@ -62,6 +65,7 @@ you’ll use them regularly.
 To do this let’s run a command to set up a local cache.
 
 ``` r
+
 library(ohvbd)
 set_default_ohvbd_cache()
 ```
@@ -86,6 +90,7 @@ In this case let’s search the hub for *Aedes aegypti*, the “Yellow Fever
 mosquito”:
 
 ``` r
+
 aedes_results <- search_hub("Aedes aegypti")
 summary(aedes_results)
 ```
@@ -117,6 +122,7 @@ Filtering database results from searches can be performed using the
 command:
 
 ``` r
+
 aedes_vt <- filter_db(aedes_results, "vt")
 aedes_vt
 ```
@@ -133,6 +139,7 @@ automatically perform the
 operation for you!
 
 ``` r
+
 search_hub("Aedes aegypti", db = "vt")
 ```
 
@@ -151,6 +158,7 @@ To do this we can use the
 this case let’s get the first 5 *Aedes aegypti* datasets:
 
 ``` r
+
 aedes_vt <- aedes_vt |> head(5)
 aedes_responses <- aedes_vt |> fetch()
 aedes_responses[[1]]
@@ -180,6 +188,7 @@ really recommend it.
 So the above code could also be written as:
 
 ``` r
+
 aedes_responses <- aedes_vt |> fetch_vt()
 ```
 
@@ -190,6 +199,7 @@ them using the [`glean()`](https://ohvbd.vbdhub.org/reference/glean.md)
 function.
 
 ``` r
+
 aedes_data <- aedes_responses |> glean()
 cat("Data dimensions: ", ncol(aedes_data), " cols x ", nrow(aedes_data), " rows")
 ```
@@ -207,6 +217,7 @@ So let’s get just the unique locations and trait name combinations from
 our data using the same command as before:
 
 ``` r
+
 aedes_data_filtered <- aedes_responses |>
   glean(
     cols = c("Location", "OriginalTraitName"),
@@ -231,6 +242,7 @@ Like [`fetch()`](https://ohvbd.vbdhub.org/reference/fetch.md),
 database-specific variants:
 
 ``` r
+
 aedes_data <- aedes_responses |> glean_vt()
 ```
 
@@ -242,6 +254,7 @@ functions together to create small pipelines.
 A typical pipeline would likely only contain a few lines of code:
 
 ``` r
+
 df <- search_hub("Aedes aegypti") |>
   filter_db("vt") |>
   head(5) |>
@@ -267,6 +280,7 @@ A similar pipeline taking advantage of the autofiltering in
 look like this:
 
 ``` r
+
 df <- search_hub("Aedes aegypti", db = "vt") |>
   head(5) |>
   fetch() |>
@@ -286,6 +300,7 @@ Let’s imagine that we are looking for traits of whitefly species
 follows:
 
 ``` r
+
 df <- search_hub("Bemisia", "vt") |>
   head(6) |>
   fetch() |>
@@ -304,6 +319,7 @@ Now we would expect this to be traits of *Bemisia* spp, however when we
 look at the `Interactor1Genus` column we see something a touch odd:
 
 ``` r
+
 unique(df$Interactor1Genus)
 ```
 
@@ -313,6 +329,7 @@ unique(df$Interactor1Genus)
 only rows containing *Axinoscymnus*:
 
 ``` r
+
 df |> dplyr::filter(Interactor1Genus == "Axinoscymnus") |> head()
 ```
 
@@ -338,6 +355,7 @@ So let’s construct the same search as we were wanting to do before, but
 with the smart search.
 
 ``` r
+
 df <- search_vt_smart("Interactor1Genus", "contains", "Bemisia") |>
   head(6) |>
   fetch() |>

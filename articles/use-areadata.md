@@ -32,6 +32,7 @@ use them regularly.
 To do this let’s run a command to set up a local cache.
 
 ``` r
+
 library(ohvbd)
 set_default_ohvbd_cache()
 ```
@@ -51,6 +52,7 @@ retrieved from AREAdata (we will deconstruct this command properly in a
 bit):
 
 ``` r
+
 ad_df <- fetch_ad(metric = "temp", gid = 0, use_cache = TRUE)
 # Display only a brief summary of the data
 summary(ad_df)
@@ -67,6 +69,7 @@ it’s 561152 entries, however if you want to print all the data rather
 than just a summary, you can use the print command:
 
 ``` r
+
 print(ad_df)
 ```
 
@@ -74,6 +77,7 @@ AREAdata outputs are formatted as matrices. Here the rows correspond to
 locations (identified by GADM codes):
 
 ``` r
+
 head(rownames(ad_df))
 ```
 
@@ -84,6 +88,7 @@ Meanwhile the column names correspond to the day that the data refers
 to:
 
 ``` r
+
 head(colnames(ad_df))
 ```
 
@@ -94,6 +99,7 @@ So the value at `ad_df["Angola", "2020-01-01"]` corresponds to the value
 of the metric (in this case temperature) in Angola on 2020-01-01:
 
 ``` r
+
 ad_df["Angola", "2020-01-01"]
 ```
 
@@ -157,6 +163,7 @@ relative humidity data at the province level (gid 1), caching in the
 same folder.
 
 ``` r
+
 temp_gid1<- fetch_ad(metric = "relhumid", gid = 1, use_cache = TRUE)
 ```
 
@@ -170,6 +177,7 @@ So let’s again try to extract the same data as previously, the
 temperature in Angola on 2020-01-01:
 
 ``` r
+
 ad_df |> glean_ad(targetdate = "2020-01-01", places = "Angola")
 ```
 
@@ -214,6 +222,7 @@ If we (for example) want not just one day, we can specify either a
 vector of dates, or a less exact date as `targetdate`
 
 ``` r
+
 ad_df |> glean_ad(
   targetdate = c("2020-01-01", "2020-01-02", "2020-01-05"),
   places = "Angola"
@@ -242,6 +251,7 @@ ad_df |> glean_ad(
     ## [1] "ohvbd.ad.matrix" "matrix"          "array"
 
 ``` r
+
 ad_df |> glean_ad(targetdate = "2020-01", places = "Angola")
 ```
 
@@ -277,6 +287,7 @@ ad_df |> glean_ad(targetdate = "2020-01", places = "Angola")
     ## [1] "ohvbd.ad.matrix" "matrix"          "array"
 
 ``` r
+
 # 366 days of data return as 2020 is a leap year
 length(ad_df |> glean_ad(targetdate = "2020", places = "Angola"))
 ```
@@ -290,6 +301,7 @@ argument `enddate`.
 before it (and on or after the target date) is considered to be “in”.*
 
 ``` r
+
 ad_df |> glean_ad(
   targetdate = "2020-01-01",
   enddate = "2020-01-04",
@@ -324,6 +336,7 @@ Multiple places to extract data for can also be provided as a vector of
 places:
 
 ``` r
+
 ad_df |> glean_ad(
   targetdate = "2020-01-01",
   places = c("Angola", "Latvia", "United Kingdom")
@@ -357,6 +370,7 @@ This can be combined with the date filters above to create a more
 restrictive extraction:
 
 ``` r
+
 ad_df |> glean_ad(
   targetdate = "2020-01-01",
   enddate = "2020-01-04",
@@ -394,6 +408,7 @@ function is also relatively resilient to the use of dates or places that
 are not in AREAdata:
 
 ``` r
+
 ad_df |> glean_ad(
   targetdate = "2023-12-30",
   enddate = "2024-01-02",
@@ -436,6 +451,7 @@ For example, let’s imagine we have some data and their associate
 locations:
 
 ``` r
+
   lonlatdf <- data.frame(
     Country = c("UK", "DE", "US", "ES", "IT", "BG", "US"),
     Latitude = c(
@@ -469,6 +485,7 @@ these days at a given spatial scale.
 Let’s do this at the country scale:
 
 ``` r
+
 areadata <- fetch_ad(metric="temp", gid=0, use_cache=TRUE)
 ad_extract_working <- assoc_ad(lonlatdf, areadata,
                                     targetdate = c("2021-08-04"), enddate=c("2021-08-06"),
@@ -490,6 +507,7 @@ If we prefer a finer resolution (e.g. county-level), we could change the
 `gid` argument to a higher number (indicating a finer scale, up to `2`):
 
 ``` r
+
 areadata_gid2 <- fetch_ad(metric="temp", gid=2, use_cache=TRUE)
 ad_extract_working_gid2 <- assoc_ad(lonlatdf, areadata_gid2,
                                     targetdate = c("2021-08-04"), enddate=c("2021-08-06"),
@@ -529,6 +547,7 @@ function has an argument called `refresh_cache`. If this is set to
 suppress loading from said cache):
 
 ``` r
+
 test_ad <- fetch_ad("temp", gid = 0)
 attr(test_ad, "writetime")
 ```
@@ -536,6 +555,7 @@ attr(test_ad, "writetime")
     ## [1] "2026-02-05 15:31:57 GMT"
 
 ``` r
+
 test_ad <- fetch_ad("temp", gid = 0, refresh_cache = TRUE)
 attr(test_ad, "writetime")
 ```
@@ -551,6 +571,7 @@ and
 to explore and delete files within the ohvbd cache:
 
 ``` r
+
 list_ohvbd_cache()
 ```
 
@@ -581,6 +602,7 @@ You can filter this by subdirectory, so let’s just look at the data
 downloaded from AREAdata (in `adcache`):
 
 ``` r
+
 list_ohvbd_cache(subdir = "adcache")
 ```
 
@@ -596,6 +618,7 @@ list_ohvbd_cache(subdir = "adcache")
 If we wished to delete these files, we could simply run the following:
 
 ``` r
+
 clean_ohvbd_cache(subdir = "adcache")
 ```
 

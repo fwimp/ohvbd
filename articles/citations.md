@@ -27,6 +27,7 @@ As a simple example, let’s imagine that previously we downloaded data
 from vectraits with the following code:
 
 ``` r
+
 library(ohvbd)
 
 df <- search_hub("Aedes aegypti") |>
@@ -47,6 +48,7 @@ As such we can simply extract these columns as is using the
 function. This is by far the simplest scenario.
 
 ``` r
+
 df |> fetch_citations()
 ```
 
@@ -80,6 +82,7 @@ in which case the `minimise` argument to
 can be used:
 
 ``` r
+
 df |> fetch_citations(minimise = TRUE)
 ```
 
@@ -107,6 +110,7 @@ At some point during the download process, or during later steps, you
 may have filtered out some of the citation columns:
 
 ``` r
+
 df2 <- search_hub("Aedes aegypti") |>
   filter_db("vt") |>
   head(5) |>
@@ -135,6 +139,7 @@ the *“DatasetID”* column intact, `ohvbd` can use this to retrieve the
 citations again!
 
 ``` r
+
 df2 |> fetch_citations(minimise = TRUE)
 ```
 
@@ -167,6 +172,7 @@ For example, let’s take a our `df` dataset and run the select function
 from dplyr on it:
 
 ``` r
+
 df_filtered <- df |>
   dplyr::select(c(
     "DatasetID",
@@ -192,12 +198,14 @@ If we inspect the resultant object using the
 can see that it has lost its database marker:
 
 ``` r
+
 has_db(df)
 ```
 
     ## [1] TRUE
 
 ``` r
+
 has_db(df_filtered)
 ```
 
@@ -209,6 +217,7 @@ The first option would be to just redownload the specific datasets as
 they were downloaded before:
 
 ``` r
+
 ohvbd.ids(unique(df_filtered$DatasetID), "vt") |>
   fetch() |>
   glean() |>
@@ -242,6 +251,7 @@ To make this easier,
 will (grumblingly) accept an `ohvbd.ids` object:
 
 ``` r
+
 ohvbd.ids(unique(df_filtered$DatasetID), "vt") |>
   fetch_citations() |>
   head(5)
@@ -275,6 +285,7 @@ database tag, you can force-apply that tag again using the
 [`force_db()`](https://ohvbd.vbdhub.org/reference/force_db.md) function!
 
 ``` r
+
 df_filtered |>
   force_db("vt") |>
   fetch_citations() |>
@@ -331,6 +342,7 @@ pipeline for later use. In this case let’s extract the output of
 called “gbif_cite”.
 
 ``` r
+
 gbif_data <- search_hub("Ixodes", "gbif") |>
   head(1) |>
   fetch() |>
@@ -347,6 +359,7 @@ For a single dataset (which will nearly always be the case) we can just
 access the first entry of the list by indexing:
 
 ``` r
+
 library(rgbif)
 
 rgbif::gbif_citation(gbif_cite[[1]])
@@ -364,6 +377,7 @@ lapply instead to run
 on every entry:
 
 ``` r
+
 lapply(gbif_cite, rgbif::gbif_citation)
 ```
 

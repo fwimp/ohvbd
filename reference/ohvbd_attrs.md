@@ -18,16 +18,16 @@ known to ohvbd.
 
 ## Summary table of attributes
 
-|                  |     |                                                        |                                                                       |
-|------------------|-----|--------------------------------------------------------|-----------------------------------------------------------------------|
-| Attribute        |     | Description                                            | Object/s                                                              |
-| **db**           |     | The database from which the object has been retrieved. | `ohvbd.ids`, `ohvbd.responses`, `ohvbd.data.frame`, `ohvbd.ad.matrix` |
-| **metric**       |     | The AD metric.                                         | `ohvbd.ad.matrix`                                                     |
-| **gid**          |     | The AD aggregation level.                              | `ohvbd.ad.matrix`                                                     |
-| **cached**       |     | Whether the data was loaded from a cache.              | Any                                                                   |
-| **writetime**    |     | The time at which a data file was originally cached.   | Any                                                                   |
-| **query**        |     | The search query sent to the Hub.                      | `ohvbd.hub.search`                                                    |
-| **searchparams** |     | Any extra parameters sent to the Hub.                  | `ohvbd.hub.search`                                                    |
+|  |  |  |  |
+|----|----|----|----|
+| Attribute |  | Description | Object/s |
+| **db** |  | The database from which the object has been retrieved. | `ohvbd.ids`, `ohvbd.responses`, `ohvbd.data.frame`, `ohvbd.ad.matrix` |
+| **metric** |  | The AD metric. | `ohvbd.ad.matrix` |
+| **gid** |  | The AD aggregation level. | `ohvbd.ad.matrix` |
+| **cached** |  | Whether the data was loaded from a cache. | Any |
+| **writetime** |  | The time at which a data file was originally cached. | Any |
+| **query** |  | The search query sent to the Hub. | `ohvbd.hub.search` |
+| **searchparams** |  | Any extra parameters sent to the Hub. | `ohvbd.hub.search` |
 
 *Note: (AD = AREAdata)*
 
