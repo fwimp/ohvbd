@@ -67,10 +67,9 @@ Worldwide, vector-borne diseases (VBDs) cause over 700,000 human deaths annually
 
 # State of the field
 
-The VectorByte databases (VecTraits and VecDyn) are increasingly being adopted as the standard repositories for vector trait and population dynamics data, and predominantly accessed through a flexible web interface. APIs for these databases are available, and there are R packages to access some of the data (e.g., `BayesTPC`, [@sorek_bayestpc_2025]), but there is no single R package that allows for search and download across these resources. `BayesTPC` provides VecTraits access as a secondary feature rather than its primary purpose (Bayesian fitting of thermal performance curves). As such, extended data access functionality fits better in its own separate package rather than overexpanding the scope of BayesTPC.
+The VectorByte databases (VecTraits and VecDyn) are increasingly being adopted as the standard repositories for vector trait and population dynamics data, and predominantly accessed through a flexible web interface, and web APIs for these databases are also available. `BayesTPC` [@sorek_bayestpc_2025] provides the ability to run keyword searches (equivalent to only the `search_vt()` function within `ohvbd`), and download data iteratively. `ohvbd` has greatly expanded functionality and allows users to download in parallel sessions and to extract data easily. VecDyn, AREAdata, and the One Health VBD Hub itself have had no programmatic access options prior to the development of `ohvbd`.
 
 `ohvbd` was built out of a need to interface with these databases and associate them with climate data during modelling research. We designed `ohvbd` to be intuitive for users familiar with the “piped” approach to API design common in R [@wickham_welcome_2019], and to provide user-friendly messaging and error handling throughout use. It is intended to minimise repeated data downloading by caching invariant data and using dedicated metadata endpoints. It can also speed up data download through the use of parallel and batched downloads. The package provides a unified search interface (via the vbdhub.org API, [@cator_vbd_2026]) to discover data across a variety of data platforms (\autoref{fig:dataflow}), and allows for easy association of climatic variables to spatial data through integration with the AREAdata aggregation project [@smith_areadata_2022].
-
 
 # Software design
 
@@ -116,7 +115,7 @@ Similarly, when piping between functions it is hard to know the class and state 
 
 # Research impact statement
 
-Since its initial development releases, `ohvbd` has been used both in retrieving data for research projects at UK universities, and for bespoke training provided by the One Health VBD Hub [@coxshall_chapter_2026; @windram_introduction_2025]. This exposure to the wider research community led to multiple changes to the early internal API, and to increased hardening and sanity-checking throughout the package.
+Since its initial development releases, `ohvbd` has been used in education. For example: the training sessions provided by the One Health VBD Hub [@coxshall_chapter_2026; @windram_introduction_2025]. This exposure to the wider research community led to multiple changes to the early internal API, and to increased hardening and sanity-checking throughout the package.
 
 In the future, research that aims to interface with any of the supported databases can leverage the programmatic nature of `ohvbd` to minimise the risk of manual-input errors and increase reproducibility at the data-searching and retrieval stage of modelling tasks.
 
