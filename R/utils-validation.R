@@ -27,7 +27,10 @@
 match_species <- function(speciesnames, exact = FALSE, returnids = TRUE, omit = TRUE) {
   rlang::check_installed("rgbif")
   # TODO: Possibly filter based on confidence?
-  matched_names <- rgbif::name_backbone_checklist(speciesnames)
+  matched_names <- rgbif::name_backbone_checklist(
+    speciesnames,
+    checklistKey = "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c"
+  )
 
   # Detect if all missing
   if (all(matched_names$matchType == "NONE")) {
